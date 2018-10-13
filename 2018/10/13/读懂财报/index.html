@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+          读懂财报 - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://stone16.github.io/blog/blog/2018/10/13/读懂财报/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/blog/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/blog/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/blog/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/blog/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/blog/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/blog/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://stone16.github.io/blog/blog/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/blog/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/blog/tags/#reading" title="reading">reading</a>
+                        
+                    </div>
+                    <h1>读懂财报</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-10-13
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="1-资产负债表"><a href="#1-资产负债表" class="headerlink" title="1 资产负债表"></a>1 资产负债表</h1><h2 id="1-1-资产负债表-分类"><a href="#1-1-资产负债表-分类" class="headerlink" title="1.1 资产负债表 分类"></a>1.1 资产负债表 分类</h2><p>企业需要做三张报表，分别是</p>
+<ul>
+<li>资产负债表</li>
+<li>利润表</li>
+<li>现金流</li>
+</ul>
+<h2 id="1-2-财务报表是用来做什么的？"><a href="#1-2-财务报表是用来做什么的？" class="headerlink" title="1.2 财务报表是用来做什么的？"></a>1.2 财务报表是用来做什么的？</h2><p>企业从事的经营活动的种类有：</p>
+<ul>
+<li>经营活动</li>
+</ul>
+<p>比如一个企业需要生产产品、销售产品、回收货款等等</p>
+<ul>
+<li>投资活动</li>
+</ul>
+<p>如果一个企业想要到一个新的地区去开展业务，想进入一个新的业务领域，或者想设计生产一个新的产品</p>
+<ul>
+<li>融资活动</li>
+</ul>
+<p>在经营和投资的过程中，当缺钱了的时候，需要去银行借钱，或者找别人来投资自己</p>
+<p>可以这样子说，企业一辈子只做这三件事，经营，投资以及融资。在这整个过程中，无论其处在什么发展阶段，其日常经济活动都可以抽象成这样一个过程，从现金开始，转了一圈再搞到现金的过程。</p>
+<h2 id="1-3-资产负债表详解"><a href="#1-3-资产负债表详解" class="headerlink" title="1.3 资产负债表详解"></a>1.3 资产负债表详解</h2><p>分为如下几个部分： </p>
+<ul>
+<li>资产 - 流动资产</li>
+<li>资产 - 非流动资产</li>
+<li>负债 - 流动负债</li>
+<li>负债 - 非流动负债</li>
+<li>股东权益</li>
+</ul>
+<h3 id="1-3-1-流动资产"><a href="#1-3-1-流动资产" class="headerlink" title="1.3.1 流动资产"></a>1.3.1 流动资产</h3><ul>
+<li>货币资金</li>
+</ul>
+<p>放在银行里面或者放在公司里面的钱。包括库存现金，银行贷款，和其他货币资金三个项目的期末余额。</p>
+<ul>
+<li>应收账款</li>
+</ul>
+<p>销售产品的时候，发生的卖掉产品但是收不到钱的情况。<br>即需要核算的企业因为销售商品、提供劳务等经营活动应收取的款项。</p>
+<ul>
+<li>其他应收款</li>
+</ul>
+<p>企业除了存出保证金（租房子时交付的未来将退回的保证金、押金等）、买入返售的金融资产、应收票据、应收账款、预付账款、应收股利、应收利息、应收代位追偿款、应收分保账款、应收分包合同准备金、长期应收款等以外的其他各种应收及暂付款项。</p>
+<ul>
+<li>预付账款</li>
+</ul>
+<p>基本发生在货品很紧缺，带了一种向卖方收款的权利。预付账款也是一种资产。</p>
+<ul>
+<li>存货</li>
+</ul>
+<p>生产产品所需的原材料，生产出来的产成品，以及尚且处在生产过程中的没有完成的在产品</p>
+<ul>
+<li>待摊费用</li>
+</ul>
+<p>资产 vs 费用。 如果这笔钱可以换来对将来有用的东西，就是资产。如果画完就完了，就是费用。</p>
+<p>各项流动资产在资产负债表中是按照<strong>各自转换为现金的速度</strong>来排序的。</p>
+<h3 id="1-3-2-非流动资产"><a href="#1-3-2-非流动资产" class="headerlink" title="1.3.2 非流动资产"></a>1.3.2 非流动资产</h3><p>返回现金的时间长度，无法在一个循环内完成的。</p>
+<ul>
+<li>长期投资</li>
+</ul>
+<p>指不满足短期投资条件的投资，即不准备在一年或长于一年的经营周期之内转变为现金的投资。可以分为长期股票投资，长期债券投资，其他长期投资</p>
+<ul>
+<li>固定资产</li>
+</ul>
+<p>指同时具有以下特征的有形资产： （1）为生产商品、提供劳务、出租或经营管理而持有的； （2）使用寿命超过了一个会计年度</p>
+<ul>
+<li>无形资产</li>
+</ul>
+<p>专利权，版权等，还有土地使用权</p>
+<p>指企业拥有或者控制的没有实物形态的可辨认的非货币性的资产。包括专利权、非专利技术、商标权、著作权、土地使用权等。</p>
+<h3 id="1-3-3-资产-gt-企业"><a href="#1-3-3-资产-gt-企业" class="headerlink" title="1.3.3 资产 -&gt; 企业"></a>1.3.3 资产 -&gt; 企业</h3><p> 固定资产多，应收账款多，可能是有经营压力的传统企业</p>
+<p> 生物资产，指有生命的动物和植物，生物资产分为消耗性生物资产，生产性生物资产和公益性生物资产。</p>
+<p> 资产的结构会告诉你这家公司是什么样子的。 </p>
+<h3 id="1-3-4-资产如何计价？"><a href="#1-3-4-资产如何计价？" class="headerlink" title="1.3.4 资产如何计价？"></a>1.3.4 资产如何计价？</h3><p> 会计们会用原来购买的资产价格当做这个资产的价值。</p>
+<blockquote>
+<p>历史成本</p>
+</blockquote>
+<blockquote>
+<p>资产在其取得时为其所支付的现金或现金等价物的金额。负债在正常经营活动中为交换而收到或为偿付将要支付的现金或现金等价物的金额。</p>
+</blockquote>
+<blockquote>
+<p>Bug: 历史成本无法体现出资产的变化。故解决方案为： 如果资产价值减小了，就把减值记下来。因为资产计价体系是一个历史成本的体系，一定要在历史成本的基础上扣除这个资产的减值。 </p>
+</blockquote>
+<ul>
+<li>历史成本的含义</li>
+</ul>
+<ol>
+<li>只有花了的钱才能记在账上。</li>
+<li>在历史成本的计价体系下，增加资产价值的唯一途径是发生一个新的交易。</li>
+</ol>
+<h3 id="1-3-5-负债"><a href="#1-3-5-负债" class="headerlink" title="1.3.5 负债"></a>1.3.5 负债</h3><blockquote>
+<p>负债：由于过去的交易或事务所引起的公司企业的现有债务，这种债务需要企业在将来以转移资产或提供劳务加以清偿，从而引起未来经济利益的流出。<br>其他：是为了简化，欠员工的工资，因为是月底发钱； 欠税务局的钱。这些都是流动负债。非流动负债： 应付债券。</p>
+</blockquote>
+<blockquote>
+<p>应付债券：企业为了筹集资金而对外发行的期限在一年以上的长期借款性质的书面证明，约定在一定期限内还本付息的一种书面承诺。</p>
+</blockquote>
+<h3 id="1-3-6-股东权益"><a href="#1-3-6-股东权益" class="headerlink" title="1.3.6 股东权益"></a>1.3.6 股东权益</h3><blockquote>
+<p>股东权益： 公司总资产中扣除负债剩余的部分，也成为净资产，反映了公司的自有资本。</p>
+</blockquote>
+<blockquote>
+<p>股本： 股本金额相当于公司的注册资本。股本的总额体现了这个公司对外承担法律责任的上限。股本的组成则确定了多个股东之间的权利义务关系。</p>
+</blockquote>
+<blockquote>
+<p>资本公积： 企业收到的投资者的超出其在企业注册资本所占份额，以及直接计入所有者权益的利得和损失等。</p>
+</blockquote>
+<blockquote>
+<p>股东权益 + 负债 = 资产</p>
+</blockquote>
+<p>注意资产负债表是一个时间点的概念，是状态，不是过程。</p>
+<h1 id="2-利润表"><a href="#2-利润表" class="headerlink" title="2. 利润表"></a>2. 利润表</h1><p>资产负债表： 可以看到投入的本金是否得到保障。利润表，则能得知投入的本金有没有赚钱。</p>
+<p>毛利 = 营业收入 - 营业成本</p>
+<h2 id="2-1-税种"><a href="#2-1-税种" class="headerlink" title="2.1 税种"></a>2.1 税种</h2><ul>
+<li>营业税</li>
+</ul>
+<p>国家对工商营利事业按照营业额征收的税</p>
+<ul>
+<li>营业税金及附加</li>
+</ul>
+<p>企业经营活动应负担的相关税费，包括营业税、消费税、城市维护建设税、资源税、教育费附加等。不是所得税，是流转税，只要是有业务的企业就得缴纳流转税。</p>
+<ul>
+<li>常见的流转税： 营业税（价内税） + 增值税（价外税）</li>
+<li>价内税： 税金包含在商品价值或价格之内</li>
+<li>价外税： 税款不包括在价格内</li>
+<li>增值税： 一种销售税，是消费者承担的税费，属于累退税，是基于商品或服务的增值而增税的一种间接税</li>
+</ul>
+<h2 id="2-2-其他项目"><a href="#2-2-其他项目" class="headerlink" title="2.2 其他项目"></a>2.2 其他项目</h2><ul>
+<li>补贴收入<br>中国特色： 政府为一些企业提供的补贴。</li>
+</ul>
+<h2 id="2-3-利润表的分析"><a href="#2-3-利润表的分析" class="headerlink" title="2.3 利润表的分析"></a>2.3 利润表的分析</h2><p>告诉了是否赚钱，在哪些方面赚钱的基本信息。同时因为将可持续的和不可持续的营业收入分开，就可以帮助企业推断出自己未来一段时间以内的收益。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/blog/2018/10/11/unix-linux-note/" data-toggle="tooltip" data-placement="top" title="Example Post With Default Header Image">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/blog/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/blog/tags/#reading" title="reading">reading</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "chen_leilei";
+    var disqus_identifier = "https://stone16.github.io/blog/2018/10/13/读懂财报/";
+    var disqus_url = "https://stone16.github.io/blog/2018/10/13/读懂财报/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/blog/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/blog/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/blog/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://stone16.github.io/blog/blog/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://stone16.github.io/blog/blog/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
