@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          React初探 - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2018/10/16/React初探/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#React" title="React">React</a>
+                        
+                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                        
+                    </div>
+                    <h1>React初探</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-10-16
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>初探React,很喜欢Component这种方式，很大程度提高了复用性，如果抛除C/S的区别，感觉有点像mason，毕竟刚刚弃掉mason的坑，很有意思的React。</p>
+<h1 id="1-Hello-World"><a href="#1-Hello-World" class="headerlink" title="1. Hello World"></a>1. Hello World</h1><p>React.Component   A component takes in parameters, called props and returns a hierarchy of views to display via the render method. </p>
+<p>To collect data from multiple children, or to have two child components communicate with each other, you need to declare the shared state in their parent component instead. <strong>The parent component can pass the state back down to the children by using props; this keeps the child components in sync with each other and with the parent component.</strong> </p>
+<pre><code>ReactDOM.render(
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;,
+    document.getElementById(&apos;root&apos;)
+);
+</code></pre><h1 id="2-JSX"><a href="#2-JSX" class="headerlink" title="2. JSX"></a>2. JSX</h1><p>jsx, 一种JavaScript的语法扩展。用来声明React当中的元素。可以任意在<strong>大括号{}</strong>里面使用<strong>JS表达式</strong>.</p>
+<h2 id="2-1-JS表达式"><a href="#2-1-JS表达式" class="headerlink" title="2.1 JS表达式"></a>2.1 JS表达式</h2><blockquote>
+<p>Any valid unit of code that resolves to a value. </p>
+</blockquote>
+<h3 id="2-1-1-分类"><a href="#2-1-1-分类" class="headerlink" title="2.1.1 分类"></a>2.1.1 分类</h3><ul>
+<li><p>Arithmetic</p>
+</li>
+<li><p>String </p>
+</li>
+<li><p>Logical</p>
+</li>
+<li><p>Primary Expressions</p>
+</li>
+</ul>
+<p>Basic keywords and general expressions in JS.</p>
+<ol>
+<li>this: refer to the current object.</li>
+<li>grouping operator() : controls the precedence of evaluation in expressions. </li>
+<li>new: to create an instance of a user-defined object type </li>
+<li>super: call functions on an object’s parent.</li>
+<li><p>spread operator: allow an expression to be expanded in places where multiple arguments or multiple elements are expected. </p>
+<pre><code> function f(x, y, z) { }
+var args = [0, 1, 2];
+f(...args);
+</code></pre></li>
+</ol>
+<ul>
+<li>Left hand side expressions</li>
+</ul>
+<h2 id="2-2-JSX-属性"><a href="#2-2-JSX-属性" class="headerlink" title="2.2 JSX 属性"></a>2.2 JSX 属性</h2><p>编译之后，会被转化为普通的JS对象。这意味着可以在if 或者for语句里使用JSX，将其赋值给变量，当做参数传入或者作为返回值都可以。</p>
+<pre><code>// 使用引号定义以字符串为值得属性
+const element = &lt;div tabIndex=&quot;0&quot;&gt;&lt;/div&gt;;
+// 使用大括号来定义以js表达式为值得属性
+const element = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;
+</code></pre><p>JSX代表Objects, Babel转译器会把JSX转换成一个名为React.createEliment()的方法来调用</p>
+<h2 id="2-3-嵌套与防注入攻击"><a href="#2-3-嵌套与防注入攻击" class="headerlink" title="2.3 嵌套与防注入攻击"></a>2.3 嵌套与防注入攻击</h2><pre><code>const element = (
+  &lt;div&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+    &lt;h2&gt;Good to see you here.&lt;/h2&gt;
+  &lt;/div&gt;
+);
+
+React DOM在渲染之前会过滤所有传入的值，可以确保应用不会被注入攻击，因为所有内容渲染之前都已经被转化为了字符串，有效防止XSS。 
+</code></pre><h1 id="3-元素渲染"><a href="#3-元素渲染" class="headerlink" title="3. 元素渲染"></a>3. 元素渲染</h1><p>React中的元素实际上是普通的对象，React DOM可以确保浏览器DOM的数据内容与React元素保持一致。<br>寻找React 根节点，渲染在根节点上</p>
+<pre><code>const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
+ReactDOM.render(element, document.getElementById(&apos;root&apos;));
+</code></pre><h2 id="3-1-更新元素渲染"><a href="#3-1-更新元素渲染" class="headerlink" title="3.1 更新元素渲染"></a>3.1 更新元素渲染</h2><p>React 元素都是immutable的，更新界面的方式就是创建一个新的元素，然后将其传入<code>ReactDOM.render()</code> </p>
+<p>React DOM 会比较元素的内容的先后的不同，而在渲染过程中只会更新改变了的部分。</p>
+<h1 id="4-组件-amp-props"><a href="#4-组件-amp-props" class="headerlink" title="4. 组件 &amp; props"></a>4. 组件 &amp; props</h1><p>组件将UI切分成一些独立的，可复用的部件，这样就可以专注于构建每一个单独的部件。概念上像<strong>函数</strong>一样，可以接受任意的输入值(props)，并返回一个在页面上展示的React元素。</p>
+<h2 id="4-1-函数定义组件"><a href="#4-1-函数定义组件" class="headerlink" title="4.1 函数定义组件"></a>4.1 函数定义组件</h2><pre><code>function Welcome(props) {
+    return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+</code></pre><h2 id="4-2-ES6-class-定义组件"><a href="#4-2-ES6-class-定义组件" class="headerlink" title="4.2 ES6 class 定义组件"></a>4.2 ES6 class 定义组件</h2><pre><code>class Welcome extends React.Component {
+    render() {
+        return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
+    }
+}
+</code></pre><h2 id="4-3-组件渲染"><a href="#4-3-组件渲染" class="headerlink" title="4.3 组件渲染"></a>4.3 组件渲染</h2><pre><code>// React 元素可以使用户自定义的组件
+const element = &lt;Welcome name=&quot;Sara&quot; /&gt;;
+</code></pre><p><strong>当React遇到的元素是用户自定义的组件，它会将JSX属性作为单个对象传递给该组件，这个对象被称为”props”</strong></p>
+<blockquote>
+<p>组件名称必须大写</p>
+</blockquote>
+<h2 id="4-4-组合组件"><a href="#4-4-组合组件" class="headerlink" title="4.4 组合组件"></a>4.4 组合组件</h2><p>组件可以在它的输出中引用其他组件，这样我们就可以用同一组件来抽象出任意层次的细节。</p>
+<blockquote>
+<p>一个新的React应用程序的顶部是一个App组件。但是，如果要将React集成到现有应用程序中，则可以从下而上使用像Button这样的小组件作为开始，并逐渐运用到视图层的顶部。</p>
+</blockquote>
+<blockquote>
+<p>组件的返回值只能有一个根元素。这也是我们要用一个<div>来包裹所有<welcome>元素的原因。</welcome></div></p>
+</blockquote>
+<h2 id="4-5-提取组件"><a href="#4-5-提取组件" class="headerlink" title="4.5 提取组件"></a>4.5 提取组件</h2><p>分割组件，</p>
+<h2 id="4-6-Props的只读性"><a href="#4-6-Props的只读性" class="headerlink" title="4.6 Props的只读性"></a>4.6 Props的只读性</h2><p>所有的React组件必须像纯函数那样使用它们的props</p>
+<h1 id="5-State-amp-生命周期"><a href="#5-State-amp-生命周期" class="headerlink" title="5. State &amp; 生命周期"></a>5. State &amp; 生命周期</h1><p>更新UI的方法： <code>ReactDOM.render()</code></p>
+<p>还可以通过更新状态来更新UI，<strong>状态是私有的，完全受控于当前组件</strong></p>
+<h2 id="5-1-将函数转换为类"><a href="#5-1-将函数转换为类" class="headerlink" title="5.1 将函数转换为类"></a>5.1 将函数转换为类</h2><p>定义为类的组件有状态这个特性，还有生命周期钩子。</p>
+<p>函数转换为类的步骤： </p>
+<ol>
+<li>创建一个名称扩展为<code>React.Component</code>的类</li>
+<li>创建一个<code>render()</code>空方法</li>
+<li>将函数体移动到render()方法中</li>
+<li>在render()方法中，使用this.props替换props</li>
+<li>删除剩余的空函数声明</li>
+</ol>
+<h2 id="5-2-为类添加局部状态"><a href="#5-2-为类添加局部状态" class="headerlink" title="5.2 为类添加局部状态"></a>5.2 为类添加局部状态</h2><pre><code>Class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Hello, world!&lt;/h1&gt;
+                &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+ReactDOM.render(
+    &lt;Clock/&gt;
+    document.getElementById(&apos;root&apos;)
+);
+</code></pre><h2 id="5-3-添加生命周期方法到类中"><a href="#5-3-添加生命周期方法到类中" class="headerlink" title="5.3 添加生命周期方法到类中"></a>5.3 添加生命周期方法到类中</h2><p>当组件第一次加载到DOM中时，生成定时器，挂载</p>
+<pre><code>componentDidMount() {
+
+}
+</code></pre><p>当Clock生成的这个DOM被移除时，清除定时器，卸载</p>
+<pre><code>componentWillUnmount() {
+
+}
+</code></pre><p>一个完整的Clock的例子： </p>
+<pre><code>class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    // 3. Called when Clock&apos;s output is injected into DOM 
+    componentDidMount() {
+        this.timerID = setInterval(
+            () =&gt; this.tick(),
+                1000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    // 4. when setState() is being called, render() is called 
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    // 2. Call render(), react know what need to be shown on screen. Update DOM 
+    render() {
+        return (
+          &lt;div&gt;
+            &lt;h1&gt;Hello, world!&lt;/h1&gt;
+            &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+          &lt;/div&gt;
+        );
+    }
+}
+
+ReactDOM.render(
+// 1. call Clock&apos;s constructor
+  &lt;Clock /&gt;,
+  document.getElementById(&apos;root&apos;)
+);
+</code></pre><h2 id="5-4-如何使用状态"><a href="#5-4-如何使用状态" class="headerlink" title="5.4 如何使用状态"></a>5.4 如何使用状态</h2><ol>
+<li><p>不要直接更新状态</p>
+<p> use: this.setState({comment: ‘hi’});</p>
+</li>
+</ol>
+<blockquote>
+<p>构造函数是唯一能够初始化this.state的地方</p>
+</blockquote>
+<ol start="2">
+<li>状态更新可能是异步的</li>
+</ol>
+<p>React可以将多个<code>setState()</code>调用合并成一个来提高性能</p>
+<pre><code>// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+
+// Correct
+this.setState((prevState, props) =&gt; ({
+  counter: prevState.counter + props.increment
+}));
+
+// Correct
+this.setState(function(prevState, props) {
+  return {
+    counter: prevState.counter + props.increment
+  };
+});
+</code></pre><ol start="3">
+<li>当调用<code>setState()</code>的时候，React会将你提供的对象合并到当前状态。可以只提供state的一部分。</li>
+</ol>
+<h2 id="5-5-数据流动方向：-自顶向下"><a href="#5-5-数据流动方向：-自顶向下" class="headerlink" title="5.5 数据流动方向： 自顶向下"></a>5.5 数据流动方向： 自顶向下</h2><p>父组件或子组件都不知道某个组件是否有状态，组件可以选择将其状态作为属性传递给其子组件。</p>
+<h1 id="6-事件处理"><a href="#6-事件处理" class="headerlink" title="6. 事件处理"></a>6. 事件处理</h1><p>React事件绑定属性的命名采用驼峰式写法</p>
+<p>采用jsx的语法你需要传入一个函数作为事件处理函数，而不是一个字符串。</p>
+<pre><code>&lt;button onClick={activateLasers}&gt;
+    Activate Lasers
+&lt;/button&gt;
+</code></pre><h2 id="6-1-Toggle"><a href="#6-1-Toggle" class="headerlink" title="6.1 Toggle"></a>6.1 Toggle</h2><pre><code>class Toggle extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(prevState =&gt; ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    }
+
+    render() {
+        return (
+        // &lt;button onClick={(e) =&gt; this.handleClick(e)}&gt; 
+        // 问题L每次渲染的时候都会创建一个不同的回调函数
+            &lt;button onClick={this.handleClick}&gt;
+                {this.state.isToggleOn ? &apos;ON&apos; : &apos;OFF&apos;}
+            &lt;/button&gt;
+        );
+    }
+}
+
+ReactDOM.render(
+    &lt;Toggle /&gt;,
+    document.getElementById(&apos;root&apos;)
+);
+</code></pre><p>必须谨慎对待JSX回调函数中的this，类的方法默认不会绑定this的。如果你忘记绑定 <code>this.handleClick</code> 并把它传入 <code>onClick</code>, 当你调用这个函数的时候 <code>this</code> 的值会是 <code>undefined</code>。</p>
+<h2 id="6-2-Todolist"><a href="#6-2-Todolist" class="headerlink" title="6.2 Todolist"></a>6.2 Todolist</h2><pre><code>class TodoApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { items: [], text: &apos;&apos; };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;h3&gt;TODO&lt;/h3&gt;
+                &lt;TodoList items={this.state.items} /&gt;
+                &lt;form onSubmit={this.handleSubmit}&gt;
+                  &lt;input
+                    onChange={this.handleChange}
+                    value={this.state.text}
+                  /&gt;
+                  &lt;button&gt;
+                    Add #{this.state.items.length + 1}
+                  &lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+
+    handleChange(e) {
+        this.setState({ text: e.target.value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        if (!this.state.text.length) {
+            return;
+        }
+        const newItem = {
+            text: this.state.text,
+            id: Date.now()
+        };
+        this.setState(prevState =&gt; ({
+            items: prevState.items.concat(newItem),
+            text: &apos;&apos;
+        }));
+    }
+}
+
+class TodoList extends React.Component {
+    render() {
+        return (
+            &lt;ul&gt;
+                {this.props.items.map(item =&gt; (
+                  &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        );
+    }
+}
+
+ReactDOM.render(&lt;TodoApp /&gt;, mountNode);
+</code></pre><h2 id="6-3-向事件处理程序传递参数"><a href="#6-3-向事件处理程序传递参数" class="headerlink" title="6.3 向事件处理程序传递参数"></a>6.3 向事件处理程序传递参数</h2><pre><code>&lt;button onClick={(e) =&gt; this.deleteRow(id, e)}&gt;Delete Row&lt;/button&gt;
+&lt;button onClick={this.deleteRow.bind(this, id)}&gt;Delete Row&lt;/button&gt;
+</code></pre><p>参数 e 作为 React 事件对象将会被作为第二个参数进行传递。通过箭头函数的方式，事件对象必须显式的进行传递，但是通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。</p>
+<h2 id="6-4-bind-向监听函数传参，-事件对象e需要放在最后"><a href="#6-4-bind-向监听函数传参，-事件对象e需要放在最后" class="headerlink" title="6.4 bind 向监听函数传参， 事件对象e需要放在最后"></a>6.4 bind 向监听函数传参， 事件对象e需要放在最后</h2><pre><code>class Popper extends React.Component{
+    constructor(){
+        super();
+        this.state = {name:&apos;Hello world!&apos;};
+    }
+
+    preventPop(name, e){    //事件对象e要放在最后
+        e.preventDefault();
+        alert(name);
+    }
+
+    render(){
+        return (
+            &lt;div&gt;
+                &lt;p&gt;hello&lt;/p&gt;
+                {/* Pass params via bind() method. */}
+                &lt;a href=&quot;https://reactjs.org&quot; onClick={this.preventPop.bind(this,this.state.name)}&gt;Click&lt;/a&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+</code></pre><h1 id="7-条件渲染"><a href="#7-条件渲染" class="headerlink" title="7. 条件渲染"></a>7. 条件渲染</h1><p>可以创建不同的组件来封装各种你需要的行为。然后根据应用的状态变化只渲染其中的一部分。(if)</p>
+<pre><code>function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return &lt;UserGreeting /&gt;;
+    }
+    return &lt;GuestGreeting /&gt;;
+}
+
+ReactDOM.render(
+  // Try changing to isLoggedIn={true}:
+  &lt;Greeting isLoggedIn={false} /&gt;,
+  document.getElementById(&apos;root&apos;)
+);
+</code></pre><h2 id="7-1-与运算符-amp-amp"><a href="#7-1-与运算符-amp-amp" class="headerlink" title="7.1 与运算符 &amp;&amp;"></a>7.1 与运算符 &amp;&amp;</h2><pre><code>function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+        &lt;div&gt;
+          &lt;h1&gt;Hello!&lt;/h1&gt;
+          {unreadMessages.length &gt; 0 &amp;&amp;
+            &lt;h2&gt;
+              You have {unreadMessages.length} unread messages.
+            &lt;/h2&gt;
+          }
+        &lt;/div&gt;
+    );
+}
+
+const messages = [&apos;React&apos;, &apos;Re: React&apos;, &apos;Re:Re: React&apos;];
+ReactDOM.render(
+  &lt;Mailbox unreadMessages={messages} /&gt;,
+  document.getElementById(&apos;root&apos;)
+);
+</code></pre><p><strong>在 JavaScript 中，true &amp;&amp; expression 总是返回 expression，而 false &amp;&amp; expression 总是返回 false。</strong></p>
+<h2 id="7-2-阻止组件渲染"><a href="#7-2-阻止组件渲染" class="headerlink" title="7.2 阻止组件渲染"></a>7.2 阻止组件渲染</h2><pre><code>function WarningBanner(props) {
+    if (!props.warn) {
+        return null;
+    }
+
+    return (
+        &lt;div className=&quot;warning&quot;&gt;
+            Warning!
+        &lt;/div&gt;
+    );
+}
+
+class Page extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {showWarning: true}
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick() {
+        this.setState(prevState =&gt; ({
+            showWarning: !prevState.showWarning
+        }));
+    }
+
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;WarningBanner warn={this.state.showWarning} /&gt;
+                &lt;button onClick={this.handleToggleClick}&gt;
+                {this.state.showWarning ? &apos;Hide&apos; : &apos;Show&apos;}
+                &lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+ReactDOM.render(
+  &lt;Page /&gt;,
+  document.getElementById(&apos;root&apos;)
+);
+</code></pre><h1 id="8-列表-amp-Keys"><a href="#8-列表-amp-Keys" class="headerlink" title="8. 列表 &amp; Keys"></a>8. 列表 &amp; Keys</h1><h2 id="8-1-渲染多个组件"><a href="#8-1-渲染多个组件" class="headerlink" title="8.1 渲染多个组件"></a>8.1 渲染多个组件</h2><pre><code>const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map(
+    (number) =&gt; &lt;li&gt;{number}&lt;/li&gt;
+);
+
+ReactDOM.render(
+    &lt;ul&gt;{listItems}&lt;/ul&gt;
+    documnet.getElementById(&apos;root&apos;)
+);
+</code></pre><h2 id="8-2-基础列表组件"><a href="#8-2-基础列表组件" class="headerlink" title="8.2 基础列表组件"></a>8.2 基础列表组件</h2><pre><code>function NumberList(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =&gt;
+        &lt;li key={number.toString()}&gt;
+            {number}
+        &lt;/li&gt;
+    );
+    return (
+        &lt;ul&gt;{listItems}&lt;/ul&gt;
+    );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  &lt;NumberList numbers={numbers} /&gt;,
+  document.getElementById(&apos;root&apos;)
+);
+</code></pre><h2 id="8-3-Keys"><a href="#8-3-Keys" class="headerlink" title="8.3 Keys"></a>8.3 Keys</h2><p>Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。最好是该元素在列表中拥有的独一无二的字符串。使用来自数据的id作为元素的key</p>
+<p>元素的key只有在它和它的兄弟节点对比时才有意义。</p>
+<h1 id="9-表单"><a href="#9-表单" class="headerlink" title="9.表单"></a>9.表单</h1><p>HTML 表单元素与React中其他DOM元素有所不同，因为表单元素本来就保留一些内部状态了。会构造一个处理提交表单并可访问用户输入表单数据的函数。标准方法是使用受控组件。</p>
+<h2 id="9-1-受控组件"><a href="#9-1-受控组件" class="headerlink" title="9.1 受控组件"></a>9.1 受控组件</h2><p>在HTML当中，像<input>,<textarea>, 和 </textarea><select>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。</select></p>
+<pre><code>class NameForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: &apos;&apos;};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert(&apos;A name was submitted: &apos; + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit}&gt;
+                &lt;label&gt;
+                  Name:
+                  &lt;input type=&quot;text&quot; value={this.state.value} onChange={this.handleChange} /&gt;
+                &lt;/label&gt;
+                &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+            &lt;/form&gt;
+        );
+    }
+}
+</code></pre><h2 id="9-2-textarea标签"><a href="#9-2-textarea标签" class="headerlink" title="9.2 textarea标签"></a>9.2 textarea标签</h2><pre><code>class EssayForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: &apos;Please write an essay about your favorite DOM element.&apos;
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert(&apos;An essay was submitted: &apos; + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit}&gt;
+                &lt;label&gt;
+                Name:
+                &lt;textarea value={this.state.value} onChange={this.handleChange} /&gt;
+                &lt;/label&gt;
+                &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+            &lt;/form&gt;
+        );
+    }
+}
+</code></pre><h2 id="9-3-select标签"><a href="#9-3-select标签" class="headerlink" title="9.3 select标签"></a>9.3 select标签</h2><p>React中，不适用selected属性表明选中项，而是在根select标签上用value属性来表示选中项。这在受控组件中更方便，因为只需要在一个地方更新组件。</p>
+<pre><code>class FlavorForm extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {value: &apos;coconut&apos;};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+handleChange(event) {
+    this.setState({value: event.target.value});
+}
+
+handleSubmit(event) {
+    alert(&apos;Your favorite flavor is: &apos; + this.state.value);
+    event.preventDefault();
+}
+
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit}&gt;
+                &lt;label&gt;
+                    Pick your favorite La Croix flavor:
+                    &lt;select value={this.state.value} onChange={this.handleChange}&gt;
+                    &lt;option value=&quot;grapefruit&quot;&gt;Grapefruit&lt;/option&gt;
+                    &lt;option value=&quot;lime&quot;&gt;Lime&lt;/option&gt;
+                    &lt;option value=&quot;coconut&quot;&gt;Coconut&lt;/option&gt;
+                    &lt;option value=&quot;mango&quot;&gt;Mango&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/label&gt;
+                &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+            &lt;/form&gt;
+        );
+    }
+}
+</code></pre><h2 id="9-4-多个输入的解决方法"><a href="#9-4-多个输入的解决方法" class="headerlink" title="9.4 多个输入的解决方法"></a>9.4 多个输入的解决方法</h2><p>通过给每个元素添加一个name属性，来让处理函数根据event.target.name的值来选择做什么</p>
+<pre><code>class Reservation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isGoing: true,
+            numberOfGuests: 2
+        };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === &apos;checkbox&apos; ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    render() {
+        return (
+            &lt;form&gt;
+                &lt;label&gt;
+                    Is going:
+                    &lt;input
+                        name=&quot;isGoing&quot;
+                        type=&quot;checkbox&quot;
+                        checked={this.state.isGoing}
+                        onChange={this.handleInputChange} /&gt;
+                &lt;/label&gt;
+                &lt;br /&gt;
+                &lt;label&gt;
+                    Number of guests:
+                    &lt;input
+                        name=&quot;numberOfGuests&quot;
+                        type=&quot;number&quot;
+                        value={this.state.numberOfGuests}
+                        onChange={this.handleInputChange} /&gt;
+                &lt;/label&gt;
+            &lt;/form&gt;
+        );
+    }
+}
+</code></pre><h1 id="10-状态提升"><a href="#10-状态提升" class="headerlink" title="10. 状态提升"></a>10. 状态提升</h1><h2 id="10-1-摄氏度华氏度的例子"><a href="#10-1-摄氏度华氏度的例子" class="headerlink" title="10.1 摄氏度华氏度的例子"></a>10.1 摄氏度华氏度的例子</h2><p>状态分享是通过将state数据提升至离需要这些数据的组件最近的父组件来完成的</p>
+<pre><code>class Calculator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+        this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+        this.state = {temperature: &apos;&apos;, scale: &apos;c&apos;};
+    }
+
+    handleCelsiusChange(temperature) {
+        this.setState({scale: &apos;c&apos;, temperature});
+    }
+
+    handleFahrenheitChange(temperature) {
+        this.setState({scale: &apos;f&apos;, temperature});
+    }
+
+    render() {
+        const scale = this.state.scale;
+        const temperature = this.state.temperature;
+        const celsius = scale === &apos;f&apos; ? tryConvert(temperature, toCelsius) : temperature;
+        const fahrenheit = scale === &apos;c&apos; ? tryConvert(temperature, toFahrenheit) : temperature;
+
+        return (
+          &lt;div&gt;
+            &lt;TemperatureInput
+              scale=&quot;c&quot;
+              temperature={celsius}
+              onTemperatureChange={this.handleCelsiusChange} /&gt;
+
+            &lt;TemperatureInput
+              scale=&quot;f&quot;
+              temperature={fahrenheit}
+              onTemperatureChange={this.handleFahrenheitChange} /&gt;
+
+            &lt;BoilingVerdict
+              celsius={parseFloat(celsius)} /&gt;
+
+          &lt;/div&gt;
+        );
+    }
+}
+</code></pre>
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/10/14/二战时间线/" data-toggle="tooltip" data-placement="top" title="二战时间线">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#React" title="React">React</a>
+                        
+                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "chen_leilei";
+    var disqus_identifier = "https://llchen60.com/2018/10/16/React初探/";
+    var disqus_url = "https://llchen60.com/2018/10/16/React初探/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
