@@ -608,7 +608,7 @@ ReactDOM.render(
 </code></pre><h2 id="8-3-Keys"><a href="#8-3-Keys" class="headerlink" title="8.3 Keys"></a>8.3 Keys</h2><p>Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。最好是该元素在列表中拥有的独一无二的字符串。使用来自数据的id作为元素的key</p>
 <p>元素的key只有在它和它的兄弟节点对比时才有意义。</p>
 <h1 id="9-表单"><a href="#9-表单" class="headerlink" title="9.表单"></a>9.表单</h1><p>HTML 表单元素与React中其他DOM元素有所不同，因为表单元素本来就保留一些内部状态了。会构造一个处理提交表单并可访问用户输入表单数据的函数。标准方法是使用受控组件。</p>
-<h2 id="9-1-受控组件"><a href="#9-1-受控组件" class="headerlink" title="9.1 受控组件"></a>9.1 受控组件</h2><p>在HTML当中，像<input>,<textarea>, 和 </textarea><select>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。</select></p>
+<h2 id="9-1-受控组件"><a href="#9-1-受控组件" class="headerlink" title="9.1 受控组件"></a>9.1 受控组件</h2><p>在HTML当中，像<code>&lt;input&gt;,&lt;textarea&gt;, 和 &lt;select&gt;</code>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。</p>
 <pre><code>class NameForm extends React.Component {
     constructor(props) {
         super(props);
@@ -802,6 +802,10 @@ handleSubmit(event) {
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/10/21/浏览器输入url以后都发生了什么/" data-toggle="tooltip" data-placement="top" title="浏览器输入url以后都发生了什么">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
