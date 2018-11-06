@@ -13,11 +13,11 @@
 
     <title>
         
-          About - Leilei | 磊磊的博客
+          volatile关键字 - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/about/">
+    <link rel="canonical" href="https://llchen60.com/2018/11/05/volatile关键字/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,195 +147,125 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Leilei.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
+                        
+                    </div>
+                    <h1>volatile关键字</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-11-05
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <blockquote>
-<p>Code Change World<br>世界那么大，要去看啊！ </p>
-</blockquote>
-<p>新晋工程师</p>
-<p>想做点什么试试看，改变这个世界</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-                <!-- 如果开启评论功能 -->
-                
-                    <hr>
-
-                    
-
-                    
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
-                    
-
-
-                    
-
-                    
+                <h1 id="1-Synchronized-vs-volatile"><a href="#1-Synchronized-vs-volatile" class="headerlink" title="1. Synchronized vs volatile"></a>1. Synchronized vs volatile</h1><p>synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。而volatile是java虚拟机提供的最轻量级的同步机制。而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。</p>
+<p><strong>被volatile修饰的变量能够保证每个线程能够获取该变量的最新值，从而避免出现数据脏读的现象。</strong></p>
+<h1 id="2-实现原理"><a href="#2-实现原理" class="headerlink" title="2. 实现原理"></a>2. 实现原理</h1><p>生成汇编代码时会在Volatile修饰的共享变量进行写操作的时候多出lock前缀的指令：<strong>该指令会将当前处理器缓存行的数据写会系统内存；这个写回内存的操作会使得其他CPU里缓存了该内存地址的数据无效</strong></p>
+<p>为了提高处理速度，处理器不直接和内存进行通信，而是先将系统内存的数据读到<strong>内部缓存（L1，L2或其他</strong>）后再进行操作，但操作完不知道何时会写到内存。如果对声明了volatile的变量进行写操作，JVM就会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写回到系统内存。但是，就算写回到内存，如果其他处理器缓存的值还是旧的，再执行计算操作就会有问题。所以，在多处理器下，为了保证各个处理器的缓存是一致的，就会实现<strong>缓存一致性协</strong>议，<strong>每个处理器通过嗅探在总线上传播的数据来检查自己缓存的值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。</strong>因此，经过分析我们可以得出如下结论：</p>
+<ol>
+<li>lock前缀的指令会引起处理器缓存写回内存</li>
+<li>一个处理器的缓存回写到内存会导致其他处理器的缓存失效</li>
+<li>当处理器发现本地缓存失效后，就会从内存中重读该变量数据，即可以获得当前最新值</li>
+</ol>
+<h1 id="3-volatile的happen-before关系"><a href="#3-volatile的happen-before关系" class="headerlink" title="3. volatile的happen before关系"></a>3. volatile的happen before关系</h1><p>写后读，线程A改本地内存的变量，同步到主内存，线程B的本地内存废弃，到主内存中拿到更新的数据。</p>
+<h1 id="4-volatile的内存语义实现"><a href="#4-volatile的内存语义实现" class="headerlink" title="4. volatile的内存语义实现"></a>4. volatile的内存语义实现</h1><p>为了性能优化，JMM在不改变正确语义的前提下，会允许编译器和处理器对指令序列进行重排序，那如果想阻止重排序要怎么办了？答案是可以添加内存屏障。</p>
+<p>内存屏障类型： </p>
+<p><img src="内存屏障.png" alt="内存屏障"></p>
+<p><img src="重排序.png" alt="重排序"></p>
+<p>“NO”表示禁止重排序。为了实现volatile内存语义时，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎是不可能的，为此，JMM采取了保守策略：</p>
+<ol>
+<li>在每个volatile写操作的前面插入一个StoreStore屏障；</li>
+<li>在每个volatile写操作的后面插入一个StoreLoad屏障；</li>
+<li>在每个volatile读操作的后面插入一个LoadLoad屏障；</li>
+<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
+</ol>
+<p><img src="volatile内存屏障.png" alt="volatile内存屏障.png"><br><img src="volatile读插入内存屏障示意图.png" alt="volatile读插入内存屏障示意图.png"></p>
+<p><div id="disqus_thread"></div></p>
 <script>
-  var disqus_shortname = 'leilei-blog';
-  
-  var disqus_url = 'https://llchen60.com/about/index.html';
-  
-  (function(){
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
 
+<p>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><p></p>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 
+                <hr>
 
+                
 
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/04/Java并发图谱/" data-toggle="tooltip" data-placement="top" title="Java并发图谱">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#backend" title="backend" rel="5">backend</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#编程思维" title="编程思维" rel="2">编程思维</a>
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.jpg" />
-                        
-
-                        
-                            <p>Magic happens!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.facebook.com/llchen60">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/stone16">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -350,9 +280,65 @@
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2018/11/05/volatile关键字/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
