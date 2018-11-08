@@ -13,11 +13,11 @@
 
     <title>
         
-          Leilei | 磊磊的博客
+          Java是如何工作的 - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/tags/Linux/">
+    <link rel="canonical" href="https://llchen60.com/2018/11/07/Java是如何工作的/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,194 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                    <h1>Java是如何工作的</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-11-07
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="1-编程语言是如何工作的"><a href="#1-编程语言是如何工作的" class="headerlink" title="1. 编程语言是如何工作的"></a>1. 编程语言是如何工作的</h1><p>我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。</p>
+<p>对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为<code>Object</code> 文件。一系列的<code>Object</code>文件可以被链接起来，并创建一个可执行文件。操作系统可以加载这个可执行文件到内存中，并运行程序。</p>
+<p>还有一部分语言是解释性的，比如Lisp, Schema。他会针对每一个高层次的语句来做低层次的翻译，然后顺序执行他们。这个过程相当于我遇到一个语句，翻译成计算机能看懂的语言以后，再看下一句…</p>
+<h1 id="2-Java是如何工作的"><a href="#2-Java是如何工作的" class="headerlink" title="2. Java是如何工作的"></a>2. Java是如何工作的</h1><p>Java是个平台独立的语言，那他是怎么做到的呢？</p>
+<p>首先我们要理解一下什么叫做平台独立？</p>
+<blockquote>
+<p>对于很多编程语言来说，编译器会生成可以在特定计算机上执行的代码。比如你在windows机器上编译一段c++代码，那么生成的可执行文件可以在任何其他的windows电脑上运行，但无法在Mac或者Linux机器上运行。</p>
+</blockquote>
+<p>对于早期的语言来说，设计者需要针对每一个平台专门设计一个编译器。而作为一个程序员，如果你想自己的代码在多个平台上都可以工作，你也需要针对性的做很多修改。</p>
+<p>Java重新组织了编译-链接-执行这个循环，它将和平台相关的代码给抽象出来，和其他代码分开。这样子，编译的时候不会生成一个Object文件，反之，会生成字节码文件，这个字节码文件是平台独立的，即它可以在任何平台运行。那么刚才说的和平台相关的代码放到哪里了呢？为了执行字节码，我们需要唤醒java解释器。每个平台都会有自己的解释器，来解决和平台相关的问题。</p>
+<p>对于其他语言来说，执行的过程是 编译，链接然后执行。对于Java来说，更应该说是编译然后链接，执行。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cs.cmu.edu/~jcarroll/15-100-s05/supps/basics/history.html" target="_blank" rel="noopener">CMU Class Notes</a></p>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/05/volatile关键字/" data-toggle="tooltip" data-placement="top" title="volatile关键字">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2018/11/07/Java是如何工作的/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
