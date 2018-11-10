@@ -184,6 +184,29 @@
 
 <div class="post-preview">
 
+    <a href="/2018/11/10/为什么要合并HTTP请求？/">
+        <h2 class="post-title">
+            为什么要合并HTTP请求？
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            思考路径：为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ 
+本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。
+1. Client发出请求1.1 HTTP 1.1可以保持长连接，但是每个不同的请求之间，client要向s......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/11/07/Java是如何工作的/">
         <h2 class="post-title">
             Java是如何工作的
@@ -412,45 +435,6 @@ Synchronized statements
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/10/13/读懂财报/">
-        <h2 class="post-title">
-            读懂财报
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1 资产负债表1.1 资产负债表 分类企业需要做三张报表，分别是
-
-资产负债表
-利润表
-现金流
-
-1.2 财务报表是用来做什么的？企业从事的经营活动的种类有：
-
-经营活动
-
-比如一个企业需要生产产品、销售产品、回收货款等等
-
-投资活动
-
-如果一个企业想要到一个新的地区去开展业务，想进入一个新的业务领域，或者想设计生产一个新的产品
-
-融资活动
-
-在经营和投资的过程中，当缺钱了的时候，需要去银行......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-13
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -493,6 +477,8 @@ Synchronized statements
                             <a href="/tags/#java" title="java" rel="3">java</a>
                             
                         
+                            
+                            <a href="/tags/#web" title="web" rel="2">web</a>
                             
                         
                             

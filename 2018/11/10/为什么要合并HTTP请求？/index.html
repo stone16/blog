@@ -13,11 +13,11 @@
 
     <title>
         
-          Java是如何工作的 - Leilei | 磊磊的博客
+          为什么要合并HTTP请求？ - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/11/07/Java是如何工作的/">
+    <link rel="canonical" href="https://llchen60.com/2018/11/10/为什么要合并HTTP请求？/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#java" title="java">java</a>
+                          <a class="tag" href="/tags/#web" title="web">web</a>
                         
                     </div>
-                    <h1>Java是如何工作的</h1>
+                    <h1>为什么要合并HTTP请求？</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-11-07
+                        2018-11-10
                     </span>
                 </div>
             </div>
@@ -191,28 +191,38 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="1-编程语言是如何工作的"><a href="#1-编程语言是如何工作的" class="headerlink" title="1. 编程语言是如何工作的"></a>1. 编程语言是如何工作的</h1><p>我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。</p>
-<p>对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为<code>Object</code> 文件。一系列的<code>Object</code>文件可以被链接起来，并创建一个可执行文件。操作系统可以加载这个可执行文件到内存中，并运行程序。</p>
-<p>还有一部分语言是解释性的，比如Lisp, Schema。他会针对每一个高层次的语句来做低层次的翻译，然后顺序执行他们。这个过程相当于我遇到一个语句，翻译成计算机能看懂的语言以后，再看下一句…</p>
-<h1 id="2-Java是如何工作的"><a href="#2-Java是如何工作的" class="headerlink" title="2. Java是如何工作的"></a>2. Java是如何工作的</h1><p>Java是个平台独立的语言，那他是怎么做到的呢？</p>
-<p>首先我们要理解一下什么叫做平台独立？</p>
-<blockquote>
-<p>对于很多编程语言来说，编译器会生成可以在特定计算机上执行的代码。比如你在windows机器上编译一段c++代码，那么生成的可执行文件可以在任何其他的windows电脑上运行，但无法在Mac或者Linux机器上运行。</p>
-</blockquote>
-<p>对于早期的语言来说，设计者需要针对每一个平台专门设计一个编译器。而作为一个程序员，如果你想自己的代码在多个平台上都可以工作，你也需要针对性的做很多修改。</p>
-<p>Java重新组织了编译-链接-执行这个循环，它将和平台相关的代码给抽象出来，和其他代码分开。这样子，编译的时候不会生成一个Object文件，反之，会生成字节码文件，这个字节码文件是平台独立的，即它可以在任何平台运行。那么刚才说的和平台相关的代码放到哪里了呢？为了执行字节码，我们需要唤醒java解释器。每个平台都会有自己的解释器，来解决和平台相关的问题。</p>
-<p>对于其他语言来说，执行的过程是 编译，链接然后执行。对于Java来说，更应该说是编译然后链接，执行。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cs.cmu.edu/~jcarroll/15-100-s05/supps/basics/history.html" target="_blank" rel="noopener">CMU Class Notes</a></p>
+                <p>思考路径：<br>为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ </p>
+<p>本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。</p>
+<h1 id="1-Client发出请求"><a href="#1-Client发出请求" class="headerlink" title="1. Client发出请求"></a>1. Client发出请求</h1><h2 id="1-1-HTTP-1-1"><a href="#1-1-HTTP-1-1" class="headerlink" title="1.1 HTTP 1.1"></a>1.1 HTTP 1.1</h2><p>可以保持长连接，但是每个不同的请求之间，client要向server发一个请求头</p>
+<p>请求无法并行执行的，在一个连接里面</p>
+<p>假设如果不合并的话需要建立N个连接，那么合并就可以省去(N-1)*RTT的时间，RTT指网络延迟（在传输介质中传输所用的时间，即从报文开始进入网络到它开始离开网络之间的时间）。</p>
+<h2 id="1-2-TCP丢包问题"><a href="#1-2-TCP丢包问题" class="headerlink" title="1.2 TCP丢包问题"></a>1.2 TCP丢包问题</h2><p>慢启动，拥塞控制窗口</p>
+<p>TCP报文乱序到达，合并后的文件可以允许队首丢包以后在队中补上来，但是分开资源的时候，前一个资源未加载完成后面的资源是不能加载的，会有更严重的队首阻塞问题，丢包率会严重影响Keep alive情况下多个文件的传输速率。</p>
+<h2 id="1-3-浏览器线程数限制"><a href="#1-3-浏览器线程数限制" class="headerlink" title="1.3 浏览器线程数限制"></a>1.3 浏览器线程数限制</h2><p>多为2-6个线程，会在每个连接上串行发送若干个请求。TCP连接太多，会给服务器造成很大的压力的。</p>
+<h2 id="1-4-DNS缓存问题"><a href="#1-4-DNS缓存问题" class="headerlink" title="1.4 DNS缓存问题"></a>1.4 DNS缓存问题</h2><p> 每次请求都需要找DNS缓存，多个请求就需要查找多次，而且缓存有可能被无故清空</p>
+<h1 id="2-服务器处理请求"><a href="#2-服务器处理请求" class="headerlink" title="2. 服务器处理请求"></a>2. 服务器处理请求</h1><p>每个请求需要使用一个连接，建立一个线程，分配一部分CPU, 对于CPU而言，是种负担，尤其是一般来说建立了连接以后，哪怕发回了请求，这个连接还会保持一段时间才会timeout。这种时候，维持连接是对服务器资源的一种巨大的浪费。</p>
+<h1 id="3-HTTP-2-0"><a href="#3-HTTP-2-0" class="headerlink" title="3. HTTP 2.0"></a>3. HTTP 2.0</h1><p>上面描述的所有都是基于HTTP/1.1的一些特性，或者说弊端，有长连接但是无法并行处理请求，TCP的慢启动和拥塞控制，队首阻塞问题都给整个性能带来很多弊端，因此我们有了HTTP2.0来做针对性的改进。很有意思的东西，直接看图： </p>
+<ul>
+<li><p>HTTP/1.1 network的请求图<br><img src="http1-waterfall.png" alt="http1-waterfall.png"></p>
+</li>
+<li><p>HTTP/2 network的请求图<br><img src="http2-waterfall.png" alt="http2-waterfall.png"></p>
+</li>
+</ul>
+<p>就是这么酷炫，HTTP/2多了很多特性来解决HTTP/1.1的很多问题</p>
+<h2 id="3-1-Fully-multiplexed"><a href="#3-1-Fully-multiplexed" class="headerlink" title="3.1 Fully multiplexed"></a>3.1 Fully multiplexed</h2><p>解决了队首阻塞的问题。对于同一个TCP连接，现在可以发送多个请求，接收多个回应了！在HTTP/1.1里面，如果在一个连接里上一个请求发生了丢包，那么后面的所有请求都必须等第一个请求补上包，收到回应以后才能继续执行。而在HTTP/2里面，可以直接并行处理。</p>
+<h2 id="3-2-Header-Compression"><a href="#3-2-Header-Compression" class="headerlink" title="3.2 Header Compression"></a>3.2 Header Compression</h2><p>所有的HTTP request和response都有header，但是header里很可能包含缓存信息，导致他的大小会迅速增大的。但是在一个连接里大部分请求的请求头其实携带的信息都很类似，所以HTTP/2使用了索引表，存储了第一次出现的请求的请求头，然后后面的类似的请求只需要携带这个索引的数字就好了。头部压缩平均减少了30%的头部大小，加快了整体的网络中传输的速度。</p>
+<p>这两点是和本文关系最大的，有了这两点，实质上合并HTTP请求的好处在HTTP/2的协议下，已经基本上消失了。合并不合并请求，更多的是看业务上的需求，后端的一些配置。</p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>It’s a trade-off. 其实最重要的是看你传输什么东西，因为合并HTTP请求实质上是减少了网络延时，但是如果你在服务器上处理的时间远远大于网络延时的时间的时候，那么合并HTTP请求并不会给你带来很多性能上的提升。而且大数据量的传输一定会降低浏览器的cache hit rate,对于缓存的利用率会降低很多。但是对于HTTP请求携带的数据量比较少的情况，合并请求带来的性能提升会是显而易见的。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.zhihu.com/question/34689035" target="_blank" rel="noopener">1. 网络延迟</a></p>
+<p><a href="https://www.zhihu.com/question/34401250" target="_blank" rel="noopener">2.知乎:合并HTTP请求是否真的有意义？</a></p>
+<p><a href="https://deliciousbrains.com/performance-best-practices-http2/" target="_blank" rel="noopener">3. HTTP/2 Intro</a></p>
+<p><a href="https://www.tutorialdocs.com/article/merge-parallel-http-request.html" target="_blank" rel="noopener">4. Merge parallel htto requests</a></p>
 <p><div id="disqus_thread"></div></p>
 <script>
 
-<p>/**</p>
-<ul>
-<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
-<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
-</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 
-
+<p>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><p></p>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 
                 <hr>
 
@@ -220,13 +230,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/10/为什么要合并HTTP请求？/" data-toggle="tooltip" data-placement="top" title="为什么要合并HTTP请求？">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/05/volatile关键字/" data-toggle="tooltip" data-placement="top" title="volatile关键字">Next Post &rarr;</a>
+                            <a href="/2018/11/07/Java是如何工作的/" data-toggle="tooltip" data-placement="top" title="Java是如何工作的">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -259,7 +265,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
+                          <a class="tag" href="/tags/#web" title="web">web</a>
                         
                     </div>
                 </section>
@@ -290,7 +296,7 @@
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/11/07/Java是如何工作的/';
+  var disqus_url = 'https://llchen60.com/2018/11/10/为什么要合并HTTP请求？/';
   
   (function(){
     var dsq = document.createElement('script');
