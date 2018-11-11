@@ -13,11 +13,11 @@
 
     <title>
         
-          Java并发图谱 - Leilei | 磊磊的博客
+          编程范式系列-基于原型的编程 - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/11/04/Java并发图谱/">
+    <link rel="canonical" href="https://llchen60.com/2018/11/11/编程范式系列-基于原型的编程/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,16 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
-                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
+                          <a class="tag" href="/tags/#编程思维" title="编程思维">编程思维</a>
                         
                     </div>
-                    <h1>Java并发图谱</h1>
+                    <h1>编程范式系列-基于原型的编程</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-11-04
+                        2018-11-11
                     </span>
                 </div>
             </div>
@@ -193,21 +191,58 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>在网上看到的描述Java并发的非常棒的知识图谱，分享/标注一波。</p>
-</blockquote>
-<p>包含： </p>
+                <p>基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 </p>
+<h1 id="1-与传统面向对象编程的比较"><a href="#1-与传统面向对象编程的比较" class="headerlink" title="1. 与传统面向对象编程的比较"></a>1. 与传统面向对象编程的比较</h1><h2 id="1-1-关注对象实例行为，而后对类进行划分"><a href="#1-1-关注对象实例行为，而后对类进行划分" class="headerlink" title="1.1 关注对象实例行为，而后对类进行划分"></a>1.1 关注对象实例行为，而后对类进行划分</h2><p>在基于类的编程当中，对象总共有两种类型。</p>
 <ol>
-<li>并发理论</li>
-<li>并发关键字</li>
-<li>Lock体系</li>
-<li>并发容器</li>
+<li>类</li>
 </ol>
-<p><img src="java.png" alt="Java并发图谱"></p>
-<p><a href="https://github.com/CL0610/Java-concurrency/blob/master/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1.png" target="_blank" rel="noopener">Java并发图谱</a></p>
+<p>定义了对象的基本布局，函数特性。—-&gt; 是行为和结构的集合，对所有的接口来说这些类的行为和结构都是相同的。</p>
+<ol start="2">
+<li>接口</li>
+</ol>
+<p>是可以使用的对象,定义了一些行为，基于特定类的样式。</p>
+<p>在这种模式下，类的划分是基于行为和结构，而不是状态。原型编程的主张者提倡关注一系列对象实例的行为，而后关注将其划分到使用方式相似的原型对象。实际上说，不同之处在于对于状态的看重程度。</p>
+<h2 id="1-2-创建实例的时间"><a href="#1-2-创建实例的时间" class="headerlink" title="1.2 创建实例的时间"></a>1.2 创建实例的时间</h2><p>对于基于类的系统，新的实例是通过类构造器以及参数来构造，实例是由类的行为和结构来定义的。</p>
+<p>对于基于原型的系统，可以通过复制已有的对象或者通过扩展空对象来创建，是在<strong>运行时</strong>对原型进行修改的。</p>
+<h1 id="2-JavaScript-原型的概念"><a href="#2-JavaScript-原型的概念" class="headerlink" title="2. JavaScript 原型的概念"></a>2. JavaScript 原型的概念</h1><pre><code>var foo = {name: &quot;foo&quot;, one: 1, two: 2};
+
+var bar = {three: 3};
+
+bar.__proto__ = foo; // foo is...
+
+// If we try to access foo&apos;s properties from bar 
+// from now on, we&apos;ll succeed. 
+bar.one // Resolves to 1.
+
+// The child object&apos;s properties are also accessible.
+bar.three // Resolves to 3.
+
+// Own properties shadow prototype properties
+bar.name = &quot;bar&quot;;
+foo.name; // unaffected, resolves to &quot;foo&quot;
+bar.name; // Resolves to &quot;bar&quot;
+</code></pre><p>每个对象都有个<code>_proto_</code>属性，通过赋值操作，bar的原型现在是foo了。因此我们可以在bar里面访问foo的属性。</p>
+<h2 id="2-1-区分-proto-以及prototype"><a href="#2-1-区分-proto-以及prototype" class="headerlink" title="2.1 区分_proto_以及prototype"></a>2.1 区分<code>_proto_</code>以及<code>prototype</code></h2><ul>
+<li><p><code>_proto_</code><br>主要安放在一个实际的对象当中，用它来产生一个链接，用于寻找方法名或属性。用于链接原型的一个指针。</p>
+</li>
+<li><p><code>prototype</code><br>当用new来构造一个新的对象的时候构造<code>_proto_</code>的时候用的，是构造函数的一个属性。</p>
+</li>
+</ul>
+<h2 id="2-2-对象的表现形式"><a href="#2-2-对象的表现形式" class="headerlink" title="2.2 对象的表现形式"></a>2.2 对象的表现形式</h2><ul>
+<li>Object </li>
+<li>Function </li>
+</ul>
+<h1 id="3-Conclusion"><a href="#3-Conclusion" class="headerlink" title="3. Conclusion"></a>3. Conclusion</h1><p>其实是一种委托方式，通过一个序列的指针来定位属性，寻找数据。可以带来运行时的灵活性，数据方法都可以进行修改了。 </p>
 <p><div id="disqus_thread"></div></p>
-<p><script><br>(function() {<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script></p>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
 
                 <hr>
 
@@ -216,12 +251,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/11/05/volatile关键字/" data-toggle="tooltip" data-placement="top" title="volatile关键字">&larr; Previous Post</a>
+                            <a href="/2018/11/11/编程范式系列-面向对象编程/" data-toggle="tooltip" data-placement="top" title="编程范式系列-面向对象编程">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2018/10/31/编程范式系列-函数式编程/" data-toggle="tooltip" data-placement="top" title="编程范式系列-函数式编程">Next Post &rarr;</a>
+                            <a href="/2018/11/10/为什么要合并HTTP请求？/" data-toggle="tooltip" data-placement="top" title="为什么要合并HTTP请求？">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -254,9 +289,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
-                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
+                          <a class="tag" href="/tags/#编程思维" title="编程思维">编程思维</a>
                         
                     </div>
                 </section>
@@ -291,7 +324,7 @@
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/11/04/Java并发图谱/';
+  var disqus_url = 'https://llchen60.com/2018/11/11/编程范式系列-基于原型的编程/';
   
   (function(){
     var dsq = document.createElement('script');
