@@ -13,11 +13,11 @@
 
     <title>
         
-          编程范式系列-函数式编程 - Leilei | 磊磊的博客
+          简单工厂模式 - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/10/31/编程范式系列-函数式编程/">
+    <link rel="canonical" href="https://llchen60.com/2018/11/14/简单工厂模式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#编程思维" title="编程思维">编程思维</a>
+                          <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
                         
                     </div>
-                    <h1>编程范式系列-函数式编程</h1>
+                    <h1>简单工厂模式</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-10-31
+                        2018-11-14
                     </span>
                 </div>
             </div>
@@ -191,281 +191,211 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="1-从c-到函数式编程"><a href="#1-从c-到函数式编程" class="headerlink" title="1. 从c++到函数式编程"></a>1. 从c++到函数式编程</h1><p>C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。</p>
-<h1 id="2-函数式编程"><a href="#2-函数式编程" class="headerlink" title="2. 函数式编程"></a>2. 函数式编程</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。</p>
-<h2 id="2-2-特征"><a href="#2-2-特征" class="headerlink" title="2.2 特征"></a>2.2 特征</h2><h3 id="2-2-1-优势"><a href="#2-2-1-优势" class="headerlink" title="2.2.1 优势"></a>2.2.1 优势</h3><ul>
-<li>stateless </li>
-</ul>
-<p>不维护任何状态，给数据，我做处理，然后给你处理完的数据，中间的过程量用完就没了</p>
-<p>无状态的话并行执行无害了，重构代码无伤害</p>
+                <p>静态/简单工厂模式是工厂模式中最简单的一种实现，但是它实现了工厂模式的精髓，即将对象的创建和使用分离开，客户端通过调用工厂来创建具体的产品类。</p>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a>1. 问题描述</h1><pre><code>class Chart {
+    private String type; //图表类型
+
+    public Chart(Object[][] data, String type) {
+        this.type = type;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //初始化柱状图
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //初始化饼状图
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            //初始化折线图
+        }
+    }
+
+    public void display() {
+        if (this.type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //显示柱状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //显示饼状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;line&quot;)) {
+            //显示折线图
+        }    
+    }
+}
+</code></pre><p>问题：</p>
+<ol>
+<li>冗长</li>
+<li>职责太重</li>
+<li>Constructor构建会非常耗时</li>
+</ol>
+<h1 id="2-简单工程模式概述"><a href="#2-简单工程模式概述" class="headerlink" title="2. 简单工程模式概述"></a>2. 简单工程模式概述</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为具体产品类，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是抽象产品类的子类；然后提供一个工厂类用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
 <ul>
-<li>immutable</li>
+<li>具体产品类</li>
+<li>抽象产品类</li>
+<li>工厂类 - 创建产品，工厂方法</li>
+<li>客户端 调用工厂类的工厂方法得到产品对象</li>
 </ul>
-<p>输入数据动了，输出数据也会变，意味着新的数据集会被返回</p>
+<blockquote>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是<strong>静态(static)<em>方法</em></strong>，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</p>
+</blockquote>
+<h2 id="2-2-结构"><a href="#2-2-结构" class="headerlink" title="2.2 结构"></a>2.2 结构</h2><p><img src="sf1.jpeg" alt="sf1.jpeg"></p>
 <ul>
-<li>惰性求值</li>
+<li>Factory</li>
 </ul>
-<p>表达式不在它被绑定到变量之后立即求值，而是在该值被取用的时候求值。</p>
+<p>工厂角色即工厂类，它是简单工厂模式的核心，负责实现创建所有产品实例的内部逻辑；工厂类可以被外界直接调用，创建所需的产品对象；在工厂类中提供了静态的工厂方法factoryMethod()，它的返回类型为抽象产品类型Product。</p>
 <ul>
-<li><p>确定性</p>
-<p>f(x)=y, 这个函数无论在什么场景下，都会得到同样的结果，这个我们称之为函数的确定性。而不是像程序中的很多函数那样，同一个参数，却会在不同的场景下计算出不同的结果。所谓不同的场景，就是我们的函数会根据运行中的状态信息的不同而发生变化。</p>
-<h3 id="2-2-2-劣势"><a href="#2-2-2-劣势" class="headerlink" title="2.2.2 劣势"></a>2.2.2 劣势</h3><ul>
-<li>数据复制很严重</li>
-<li>函数式编程抽象度更高，实现方式上，函数套函数，函数返回函数，函数里定义函数… </li>
+<li>Product 抽象产品</li>
 </ul>
-</li>
-</ul>
-<h2 id="2-3-函数式编程用到的技术"><a href="#2-3-函数式编程用到的技术" class="headerlink" title="2.3 函数式编程用到的技术"></a>2.3 函数式编程用到的技术</h2><ul>
-<li>first class function 头等函数</li>
-</ul>
-<p>把函数当成变量来使用。可以像变量一样被创建、修改，并当成变量一样传递、返回，或者是在函数中嵌套函数 </p>
+<p>它是工厂类所创建的所有对象的父类，封装了各种产品对象的公有方法，它的引入将提高系统的灵活性，使得在工厂类中只需定义一个通用的工厂方法，因为所有创建的具体产品对象都是其子类对象。</p>
 <ul>
-<li>tail recursion optimization 尾递归优化</li>
+<li>ConcreteProduct 具体产品</li>
 </ul>
-<p>如果递归很深的话，stack受不了，会导致性能大幅度下降。因此我们使用尾递归优化技术，每次递归的时候都会重用stack</p>
-<ul>
-<li><p>map &amp; reduce</p>
-</li>
-<li><p>pipeline </p>
-</li>
-</ul>
-<p>将函数实例成一个个action，然后将一组action放到一个数组或列表中，再把数据传给这个action list，数据就被各个函数所操作，最终得到我们想要的结果。</p>
-<ul>
-<li>recursing</li>
-</ul>
-<p>将复杂问题用简单的代码描述出来。</p>
-<ul>
-<li>currying 颗粒化</li>
-</ul>
-<p>将一个函数的多个参数分解成多个函数，然后将函数多层封装起来，每层函数都返回一个函数去接收下一个参数，这可以简化函数的多个参数。</p>
-<ul>
-<li>higher order function 高阶函数</li>
-</ul>
-<p>函数当参数，把传入的函数做一个封装，然后返回这个封装函数</p>
-<h2 id="2-4-函数式编程的理念"><a href="#2-4-函数式编程的理念" class="headerlink" title="2.4 函数式编程的理念"></a>2.4 函数式编程的理念</h2><pre><code>// 非函数式，有状态的
-int cnt;
-void increment() {
-    cnt ++;
+<p>它是简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体类的实例。每一个具体产品角色都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
+<h1 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3 代码实现"></a>3 代码实现</h1><pre><code>abstract class Product {
+    //所有产品类的公共业务方法
+    public void methodSame() {
+        //公共方法的实现
+    }
+
+    //声明抽象业务方法
+    public abstract void methodDiff();
 }
 
-// 函数式， 无状态的
-int increment(int cnt) {
-    return cnt + 1;
+
+class ConcreteProduct extends Product {
+//实现业务方法
+    public void methodDiff() {
+    //业务方法的实现
+    }
 }
-</code></pre><ul>
-<li>把函数当成变量来用，关注描述问题而不是怎么实现的，可以让代码更易读</li>
-<li>因为函数返回里面的这个函数，所以函数关注的是表达式，关注的是描述这个问题，而不是如何实现的</li>
-</ul>
-<h3 id="2-4-1-函数式编程例子"><a href="#2-4-1-函数式编程例子" class="headerlink" title="2.4.1  函数式编程例子"></a>2.4.1  函数式编程例子</h3><p>下面我们看一下相关的示例。比如，我们有 3 辆车比赛，简单起见，我们分别给这 3 辆车有 70% 的概率可以往前走一步，一共有 5 次机会，然后打出每一次这 3 辆车的前行状态。</p>
-<pre><code>// Imperative Programming 
-from random import random
 
-time = 5
-car_positions = [1, 1, 1]
+class Factory {
+    //静态工厂方法
+    public static Product getProduct(String arg) {
+        Product product = null;
+        if (arg.equalsIgnoreCase(&quot;A&quot;)) {
+            product = new ConcreteProductA();
+            //初始化设置product
+        }
+        else if (arg.equalsIgnoreCase(&quot;B&quot;)) {
+            product = new ConcreteProductB();
+            //初始化设置product
+        }
+        return product;
+    }
+}
 
-while time:
-    # decrease time
-    time -= 1
+//客户端代码，直接调用工厂类的工厂方法来得到产品对象
+class Client {
+    public static void main(String args[]) {
+        Product product; 
+        product = Factory.getProduct(&quot;A&quot;); //通过工厂类创建产品对象
+        product.methodSame();
+        product.methodDiff();
+    }
+}
+</code></pre><h2 id="3-1-结构图"><a href="#3-1-结构图" class="headerlink" title="3.1 结构图"></a>3.1 结构图</h2><p><img src="sf2.jpeg" alt="sf2.jpeg"></p>
+<h2 id="3-2-完整方案"><a href="#3-2-完整方案" class="headerlink" title="3.2 完整方案"></a>3.2 完整方案</h2><pre><code>//抽象图表接口：抽象产品类
+interface Chart {
+    public void display();
+}
 
-    print &apos;&apos;
-    for i in range(len(car_positions)):
-        # move car
-        if random() &gt; 0.3:
-            car_positions[i] += 1
+//柱状图类：具体产品类
+class HistogramChart implements Chart {
+    public HistogramChart() {
+        System.out.println(&quot;创建柱状图！&quot;);
+    }
 
-        # draw car
-        print &apos;-&apos; * car_positions[i]
-</code></pre><p>下面这个例子是将循环分成了几个小函数，但是相互之间的参数是共享的，函数是有状态的。</p>
-<pre><code>// make it to some function model 
-from random import random
+    public void display() {
+        System.out.println(&quot;显示柱状图！&quot;);
+    }
+}
 
-def move_cars():
-    for i, _ in enumerate(car_positions):
-        if random() &gt; 0.3:
-            car_positions[i] += 1
+//饼状图类：具体产品类
+class PieChart implements Chart {
+    public PieChart() {
+        System.out.println(&quot;创建饼状图！&quot;);
+    }
 
-def draw_car(car_position):
-    print &apos;-&apos; * car_position
+    public void display() {
+        System.out.println(&quot;显示饼状图！&quot;);
+    }
+}
 
-def run_step_of_race():
-    global time
-    time -= 1
-    move_cars()
+//折线图类：具体产品类
+class LineChart implements Chart {
+    public LineChart() {
+        System.out.println(&quot;创建折线图！&quot;);
+    }
 
-def draw():
-    print &apos;&apos;
-    for car_position in car_positions:
-        draw_car(car_position)
+    public void display() {
+        System.out.println(&quot;显示折线图！&quot;);
+    }
+}
 
-time = 5
-car_positions = [1, 1, 1]
+//图表工厂类：工厂类
+class ChartFactory {
+    //静态工厂方法
+    public static Chart getChart(String type) {
+        Chart chart = null;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            chart = new HistogramChart();
+            System.out.println(&quot;初始化设置柱状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            chart = new PieChart();
+            System.out.println(&quot;初始化设置饼状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            chart = new LineChart();
+            System.out.println(&quot;初始化设置折线图！&quot;);            
+        }
+        return chart;
+    }
+}
+</code></pre><h2 id="3-3-改进"><a href="#3-3-改进" class="headerlink" title="3.3 改进"></a>3.3 改进</h2><p>将选择具体的chart类的代码封装到xml文件里，然后写一个相应的方法去读取XML参数。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;config&gt;
+    &lt;chartType&gt;histogram&lt;/chartType&gt;
+&lt;/config&gt;
+</code></pre><p>写一个工具类，来获取XML文件里的参数</p>
+<pre><code>import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import java.io.*;
 
-while time:
-    run_step_of_race()
-    draw()
-</code></pre><p>函数式写法</p>
-<pre><code>from random import random
+public class XMLUtil {
+    //该方法用于从XML配置文件中提取图表类型，并返回类型名
+    public static String getChartType() {
+        try {
+            //创建文档对象
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dFactory.newDocumentBuilder();
+            Document doc;                            
+            doc = builder.parse(new File(&quot;config.xml&quot;)); 
 
-def move_cars(car_positions):
-    return map(lambda x: x + 1 if random() &gt; 0.3 else x, car_positions)
-
-def output_car(car_position):
-    return &apos;-&apos; * car_position
-
-def run_step_of_race(state):
-    return {&apos;time&apos;: state[&apos;time&apos;] - 1, &apos;car_positions&apos;: move_cars(state[&apos;car_positions&apos;])}
-
-def draw(state):
-    print &apos;&apos;
-    print &apos;\n&apos;.join(map(output_car, state[&apos;car_positions&apos;]))
-
-def race(state):
-    draw(state)
-    if state[&apos;time&apos;]:
-        race(run_step_of_race(state))
-
-race({&apos;time&apos;: 5,
-      &apos;car_positions&apos;: [1, 1, 1]})
-</code></pre><p>上面的代码依然把程序的逻辑分成了函数。不过这些函数都是函数式的，它们有三个特点：它们之间没有共享的变量；函数间通过参数和返回值来传递数据；在函数里没有临时变量。</p>
-<h2 id="2-5-函数式语言常用函数"><a href="#2-5-函数式语言常用函数" class="headerlink" title="2.5 函数式语言常用函数"></a>2.5 函数式语言常用函数</h2><ol>
-<li>map()</li>
-<li>reduce()</li>
-<li>filter()</li>
+            //获取包含图表类型的文本节点
+            NodeList nl = doc.getElementsByTagName(&quot;chartType&quot;);
+            Node classNode = nl.item(0).getFirstChild();
+            String chartType = classNode.getNodeValue().trim();
+            return chartType;
+        }   
+           catch(Exception e) {
+               e.printStackTrace();
+            return null;
+        }
+    }
+}
+</code></pre><h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h1><p><img src="sf3.jpeg" alt="sf3.jpeg"></p>
+<h2 id="4-1-优势"><a href="#4-1-优势" class="headerlink" title="4.1 优势"></a>4.1 优势</h2><ol>
+<li>将对象的创建和使用分离</li>
+<li>客户端不再直接创建产品对象，仅仅消费产品</li>
+<li>配置文件，提高系统灵活性</li>
 </ol>
-<p>好处： </p>
-<ol>
-<li>数据集、对数据的操作和返回值都放在了一起。</li>
-<li>没有了循环体，就可以少了些临时用来控制程序执行逻辑的变量，也少了把数据倒来倒去的控制逻辑。</li>
-<li>代码变成了在描述你要干什么，而不是怎么干</li>
+<h2 id="4-2-缺陷"><a href="#4-2-缺陷" class="headerlink" title="4.2 缺陷"></a>4.2 缺陷</h2><ol>
+<li>工厂类集中了所有的创建逻辑，职责太重。一旦不能正常工作，整个系统都要受影响。</li>
+<li>势必增加类的个数，引入新的工厂类，增加了系统的复杂度和理解程度</li>
+<li>系统扩展困难！！！一旦添加新产品就必须修改工厂逻辑</li>
+<li>使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构</li>
 </ol>
-<h3 id="2-5-1-E-G"><a href="#2-5-1-E-G" class="headerlink" title="2.5.1 E.G"></a>2.5.1 E.G</h3><p>process: </p>
-<ol>
-<li>找出偶数</li>
-<li>乘3</li>
-<li>转成字符串</li>
-</ol>
-<pre><code>def process(num):
-# filter out non-evens
-if num % 2 != 0:
-    return
-num = num * 3
-num = &apos;The Number: %s&apos; % num
-return num
-
-nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-for num in nums:
-    print process(num)
-
-# 输出：
-# None
-# The Number: 6
-# None
-# The Number: 12
-# None
-# The Number: 18
-# None
-# The Number: 24
-# None
-# The Number: 30
-</code></pre><p>pipeline way</p>
-<p>使用了yield关键字，返回generator，一个可迭代对象 ，并没有真正的执行函数。意味着只有其返回的迭代对象被迭代时，yield函数才会真正运行</p>
-<pre><code>def even_filter(nums):
-for num in nums:
-    if num % 2 == 0:
-        yield num
-def multiply_by_three(nums):
-    for num in nums:
-        yield num * 3
-def convert_to_string(nums):
-    for num in nums:
-        yield &apos;The Number: %s&apos; % num
-
-nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-pipeline = convert_to_string(multiply_by_three(even_filter(nums)))
-for num in pipeline:
-    print num
-# 输出：
-# The Number: 6
-# The Number: 12
-# The Number: 18
-# The Number: 24
-# The Number: 30
-</code></pre><p>使用map &amp; reduce</p>
-<pre><code>def even_filter(nums):
-return filter(lambda x: x%2==0, nums)
-
-def multiply_by_three(nums):
-    return map(lambda x: x*3, nums)
-
-def convert_to_string(nums):
-    return map(lambda x: &apos;The Number: %s&apos; % x,  nums)
-
-nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-pipeline = convert_to_string(
-               multiply_by_three(
-                   even_filter(nums)
-               )
-            )
-for num in pipeline:
-    print num
-</code></pre><p>pipeline model </p>
-<pre><code>class Pipe(object):
-def __init__(self, func):
-    self.func = func
-
-def __ror__(self, other):
-    def generator():
-        for obj in other:
-            if obj is not None:
-                yield self.func(obj)
-    return generator()
-
-@Pipe
-def even_filter(num):
-    return num if num % 2 == 0 else None
-
-@Pipe
-def multiply_by_three(num):
-    return num*3
-
-@Pipe
-def convert_to_string(num):
-    return &apos;The Number: %s&apos; % num
-
-@Pipe
-def echo(item):
-    print item
-    return item
-
-def force(sqs):
-    for item in sqs: pass
-
-nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-force(nums | even_filter | multiply_by_three | convert_to_string | echo)
-</code></pre><h2 id="3-修饰器模式-decorator"><a href="#3-修饰器模式-decorator" class="headerlink" title="3. 修饰器模式 decorator"></a>3. 修饰器模式 decorator</h2><p>Python 用一个函数来构造另一个函数</p>
-<pre><code>def hello(fn):
-    def wrapper():
-        print &quot;hello, %s&quot; % fn.__name__
-        fn()
-        print &quot;goodbye, %s&quot; % fn.__name__
-    return wrapper
-
-@hello
-def Hao():
-    print &quot;i am Hao Chen&quot;
-
-Hao()
-
-
-// code result:
-$ python hello.py
-hello, Hao
-i am Hao Chen
-goodbye, Hao
-</code></pre><p>Hello 注解就是我们前面定义的hello函数，hello函数中需要一个参数fn，用来做回调，hello函数中返回了一个inner函数wrapper，回调了传进来的fn</p>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>函数式编程，将运算过程尽量写成一系列嵌套的函数调用，关注的是做什么而不是怎么做，被称为声明式编程。以stateless和immutable为主要特点。</p>
 <p><div id="disqus_thread"></div></p>
 <script>
 
@@ -483,13 +413,9 @@ goodbye, Hao
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/04/Java并发图谱/" data-toggle="tooltip" data-placement="top" title="Java并发图谱">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/10/28/编程范式系列-泛型编程/" data-toggle="tooltip" data-placement="top" title="编程范式系列-泛型编程">Next Post &rarr;</a>
+                            <a href="/2018/11/13/IOC容器和Dependency-Injection模式/" data-toggle="tooltip" data-placement="top" title="IOC容器和Dependency Injection模式">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -522,7 +448,7 @@ goodbye, Hao
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#编程思维" title="编程思维">编程思维</a>
+                          <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
                         
                     </div>
                 </section>
@@ -557,7 +483,7 @@ goodbye, Hao
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/10/31/编程范式系列-函数式编程/';
+  var disqus_url = 'https://llchen60.com/2018/11/14/简单工厂模式/';
   
   (function(){
     var dsq = document.createElement('script');
