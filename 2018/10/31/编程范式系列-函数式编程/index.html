@@ -179,7 +179,7 @@
         </div>
     </div>
 </header>
-
+<!-- toc -->
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -191,9 +191,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="1-从c-到函数式编程"><a href="#1-从c-到函数式编程" class="headerlink" title="1. 从c++到函数式编程"></a>1. 从c++到函数式编程</h1><p>C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。</p>
-<h1 id="2-函数式编程"><a href="#2-函数式编程" class="headerlink" title="2. 函数式编程"></a>2. 函数式编程</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。</p>
-<h2 id="2-2-特征"><a href="#2-2-特征" class="headerlink" title="2.2 特征"></a>2.2 特征</h2><h3 id="2-2-1-优势"><a href="#2-2-1-优势" class="headerlink" title="2.2.1 优势"></a>2.2.1 优势</h3><ul>
+                <h1><span id="1-从c到函数式编程">1. 从c++到函数式编程</span><a href="#1-从c到函数式编程" class="header-anchor">#</a></h1><p>C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。</p>
+<h1><span id="2-函数式编程">2. 函数式编程</span><a href="#2-函数式编程" class="header-anchor">#</a></h1><h2><span id="21-定义">2.1 定义</span><a href="#21-定义" class="header-anchor">#</a></h2><p>函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。</p>
+<h2><span id="22-特征">2.2 特征</span><a href="#22-特征" class="header-anchor">#</a></h2><h3><span id="221-优势">2.2.1 优势</span><a href="#221-优势" class="header-anchor">#</a></h3><ul>
 <li>stateless </li>
 </ul>
 <p>不维护任何状态，给数据，我做处理，然后给你处理完的数据，中间的过程量用完就没了</p>
@@ -209,13 +209,13 @@
 <ul>
 <li><p>确定性</p>
 <p>f(x)=y, 这个函数无论在什么场景下，都会得到同样的结果，这个我们称之为函数的确定性。而不是像程序中的很多函数那样，同一个参数，却会在不同的场景下计算出不同的结果。所谓不同的场景，就是我们的函数会根据运行中的状态信息的不同而发生变化。</p>
-<h3 id="2-2-2-劣势"><a href="#2-2-2-劣势" class="headerlink" title="2.2.2 劣势"></a>2.2.2 劣势</h3><ul>
+<h3><span id="222-劣势">2.2.2 劣势</span><a href="#222-劣势" class="header-anchor">#</a></h3><ul>
 <li>数据复制很严重</li>
 <li>函数式编程抽象度更高，实现方式上，函数套函数，函数返回函数，函数里定义函数… </li>
 </ul>
 </li>
 </ul>
-<h2 id="2-3-函数式编程用到的技术"><a href="#2-3-函数式编程用到的技术" class="headerlink" title="2.3 函数式编程用到的技术"></a>2.3 函数式编程用到的技术</h2><ul>
+<h2><span id="23-函数式编程用到的技术">2.3 函数式编程用到的技术</span><a href="#23-函数式编程用到的技术" class="header-anchor">#</a></h2><ul>
 <li>first class function 头等函数</li>
 </ul>
 <p>把函数当成变量来使用。可以像变量一样被创建、修改，并当成变量一样传递、返回，或者是在函数中嵌套函数 </p>
@@ -242,7 +242,7 @@
 <li>higher order function 高阶函数</li>
 </ul>
 <p>函数当参数，把传入的函数做一个封装，然后返回这个封装函数</p>
-<h2 id="2-4-函数式编程的理念"><a href="#2-4-函数式编程的理念" class="headerlink" title="2.4 函数式编程的理念"></a>2.4 函数式编程的理念</h2><pre><code>// 非函数式，有状态的
+<h2><span id="24-函数式编程的理念">2.4 函数式编程的理念</span><a href="#24-函数式编程的理念" class="header-anchor">#</a></h2><pre><code>// 非函数式，有状态的
 int cnt;
 void increment() {
     cnt ++;
@@ -256,7 +256,7 @@ int increment(int cnt) {
 <li>把函数当成变量来用，关注描述问题而不是怎么实现的，可以让代码更易读</li>
 <li>因为函数返回里面的这个函数，所以函数关注的是表达式，关注的是描述这个问题，而不是如何实现的</li>
 </ul>
-<h3 id="2-4-1-函数式编程例子"><a href="#2-4-1-函数式编程例子" class="headerlink" title="2.4.1  函数式编程例子"></a>2.4.1  函数式编程例子</h3><p>下面我们看一下相关的示例。比如，我们有 3 辆车比赛，简单起见，我们分别给这 3 辆车有 70% 的概率可以往前走一步，一共有 5 次机会，然后打出每一次这 3 辆车的前行状态。</p>
+<h3><span id="241-函数式编程例子">2.4.1  函数式编程例子</span><a href="#241-函数式编程例子" class="header-anchor">#</a></h3><p>下面我们看一下相关的示例。比如，我们有 3 辆车比赛，简单起见，我们分别给这 3 辆车有 70% 的概率可以往前走一步，一共有 5 次机会，然后打出每一次这 3 辆车的前行状态。</p>
 <pre><code>// Imperative Programming 
 from random import random
 
@@ -327,7 +327,7 @@ def race(state):
 race({&apos;time&apos;: 5,
       &apos;car_positions&apos;: [1, 1, 1]})
 </code></pre><p>上面的代码依然把程序的逻辑分成了函数。不过这些函数都是函数式的，它们有三个特点：它们之间没有共享的变量；函数间通过参数和返回值来传递数据；在函数里没有临时变量。</p>
-<h2 id="2-5-函数式语言常用函数"><a href="#2-5-函数式语言常用函数" class="headerlink" title="2.5 函数式语言常用函数"></a>2.5 函数式语言常用函数</h2><ol>
+<h2><span id="25-函数式语言常用函数">2.5 函数式语言常用函数</span><a href="#25-函数式语言常用函数" class="header-anchor">#</a></h2><ol>
 <li>map()</li>
 <li>reduce()</li>
 <li>filter()</li>
@@ -338,7 +338,7 @@ race({&apos;time&apos;: 5,
 <li>没有了循环体，就可以少了些临时用来控制程序执行逻辑的变量，也少了把数据倒来倒去的控制逻辑。</li>
 <li>代码变成了在描述你要干什么，而不是怎么干</li>
 </ol>
-<h3 id="2-5-1-E-G"><a href="#2-5-1-E-G" class="headerlink" title="2.5.1 E.G"></a>2.5.1 E.G</h3><p>process: </p>
+<h3><span id="251-eg">2.5.1 E.G</span><a href="#251-eg" class="header-anchor">#</a></h3><p>process: </p>
 <ol>
 <li>找出偶数</li>
 <li>乘3</li>
@@ -444,7 +444,7 @@ def force(sqs):
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 force(nums | even_filter | multiply_by_three | convert_to_string | echo)
-</code></pre><h2 id="3-修饰器模式-decorator"><a href="#3-修饰器模式-decorator" class="headerlink" title="3. 修饰器模式 decorator"></a>3. 修饰器模式 decorator</h2><p>Python 用一个函数来构造另一个函数</p>
+</code></pre><h2><span id="3-修饰器模式-decorator">3. 修饰器模式 decorator</span><a href="#3-修饰器模式-decorator" class="header-anchor">#</a></h2><p>Python 用一个函数来构造另一个函数</p>
 <pre><code>def hello(fn):
     def wrapper():
         print &quot;hello, %s&quot; % fn.__name__
@@ -465,7 +465,7 @@ hello, Hao
 i am Hao Chen
 goodbye, Hao
 </code></pre><p>Hello 注解就是我们前面定义的hello函数，hello函数中需要一个参数fn，用来做回调，hello函数中返回了一个inner函数wrapper，回调了传进来的fn</p>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>函数式编程，将运算过程尽量写成一系列嵌套的函数调用，关注的是做什么而不是怎么做，被称为声明式编程。以stateless和immutable为主要特点。</p>
+<h2><span id="4-总结">4. 总结</span><a href="#4-总结" class="header-anchor">#</a></h2><p>函数式编程，将运算过程尽量写成一系列嵌套的函数调用，关注的是做什么而不是怎么做，被称为声明式编程。以stateless和immutable为主要特点。</p>
 <p><div id="disqus_thread"></div></p>
 <script>
 

@@ -179,7 +179,7 @@
         </div>
     </div>
 </header>
-
+<!-- toc -->
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -192,7 +192,7 @@
                 post-container">
 
                 <p>基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 </p>
-<h1 id="1-与传统面向对象编程的比较"><a href="#1-与传统面向对象编程的比较" class="headerlink" title="1. 与传统面向对象编程的比较"></a>1. 与传统面向对象编程的比较</h1><h2 id="1-1-关注对象实例行为，而后对类进行划分"><a href="#1-1-关注对象实例行为，而后对类进行划分" class="headerlink" title="1.1 关注对象实例行为，而后对类进行划分"></a>1.1 关注对象实例行为，而后对类进行划分</h2><p>在基于类的编程当中，对象总共有两种类型。</p>
+<h1><span id="1-与传统面向对象编程的比较">1. 与传统面向对象编程的比较</span><a href="#1-与传统面向对象编程的比较" class="header-anchor">#</a></h1><h2><span id="11-关注对象实例行为而后对类进行划分">1.1 关注对象实例行为，而后对类进行划分</span><a href="#11-关注对象实例行为而后对类进行划分" class="header-anchor">#</a></h2><p>在基于类的编程当中，对象总共有两种类型。</p>
 <ol>
 <li>类</li>
 </ol>
@@ -202,9 +202,9 @@
 </ol>
 <p>是可以使用的对象,定义了一些行为，基于特定类的样式。</p>
 <p>在这种模式下，类的划分是基于行为和结构，而不是状态。原型编程的主张者提倡关注一系列对象实例的行为，而后关注将其划分到使用方式相似的原型对象。实际上说，不同之处在于对于状态的看重程度。</p>
-<h2 id="1-2-创建实例的时间"><a href="#1-2-创建实例的时间" class="headerlink" title="1.2 创建实例的时间"></a>1.2 创建实例的时间</h2><p>对于基于类的系统，新的实例是通过类构造器以及参数来构造，实例是由类的行为和结构来定义的。</p>
+<h2><span id="12-创建实例的时间">1.2 创建实例的时间</span><a href="#12-创建实例的时间" class="header-anchor">#</a></h2><p>对于基于类的系统，新的实例是通过类构造器以及参数来构造，实例是由类的行为和结构来定义的。</p>
 <p>对于基于原型的系统，可以通过复制已有的对象或者通过扩展空对象来创建，是在<strong>运行时</strong>对原型进行修改的。</p>
-<h1 id="2-JavaScript-原型的概念"><a href="#2-JavaScript-原型的概念" class="headerlink" title="2. JavaScript 原型的概念"></a>2. JavaScript 原型的概念</h1><pre><code>var foo = {name: &quot;foo&quot;, one: 1, two: 2};
+<h1><span id="2-javascript-原型的概念">2. JavaScript 原型的概念</span><a href="#2-javascript-原型的概念" class="header-anchor">#</a></h1><pre><code>var foo = {name: &quot;foo&quot;, one: 1, two: 2};
 
 var bar = {three: 3};
 
@@ -222,17 +222,17 @@ bar.name = &quot;bar&quot;;
 foo.name; // unaffected, resolves to &quot;foo&quot;
 bar.name; // Resolves to &quot;bar&quot;
 </code></pre><p>每个对象都有个<code>_proto_</code>属性，通过赋值操作，bar的原型现在是foo了。因此我们可以在bar里面访问foo的属性。</p>
-<h2 id="2-1-区分-proto-以及prototype"><a href="#2-1-区分-proto-以及prototype" class="headerlink" title="2.1 区分_proto_以及prototype"></a>2.1 区分<code>_proto_</code>以及<code>prototype</code></h2><ul>
+<h2><span id="21-区分_proto_以及prototype">2.1 区分<code>_proto_</code>以及<code>prototype</code></span><a href="#21-区分_proto_以及prototype" class="header-anchor">#</a></h2><ul>
 <li><p><code>_proto_</code><br>主要安放在一个实际的对象当中，用它来产生一个链接，用于寻找方法名或属性。用于链接原型的一个指针。</p>
 </li>
 <li><p><code>prototype</code><br>当用new来构造一个新的对象的时候构造<code>_proto_</code>的时候用的，是构造函数的一个属性。</p>
 </li>
 </ul>
-<h2 id="2-2-对象的表现形式"><a href="#2-2-对象的表现形式" class="headerlink" title="2.2 对象的表现形式"></a>2.2 对象的表现形式</h2><ul>
+<h2><span id="22-对象的表现形式">2.2 对象的表现形式</span><a href="#22-对象的表现形式" class="header-anchor">#</a></h2><ul>
 <li>Object </li>
 <li>Function </li>
 </ul>
-<h1 id="3-Conclusion"><a href="#3-Conclusion" class="headerlink" title="3. Conclusion"></a>3. Conclusion</h1><p>其实是一种委托方式，通过一个序列的指针来定位属性，寻找数据。可以带来运行时的灵活性，数据方法都可以进行修改了。 </p>
+<h1><span id="3-conclusion">3. Conclusion</span><a href="#3-conclusion" class="header-anchor">#</a></h1><p>其实是一种委托方式，通过一个序列的指针来定位属性，寻找数据。可以带来运行时的灵活性，数据方法都可以进行修改了。 </p>
 <p><div id="disqus_thread"></div></p>
 <script>
 

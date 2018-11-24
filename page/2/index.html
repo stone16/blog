@@ -184,6 +184,28 @@
 
 <div class="post-preview">
 
+    <a href="/2018/11/07/Java是如何工作的/">
+        <h2 class="post-title">
+            Java是如何工作的
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. 编程语言是如何工作的#我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。
+对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为Object 文件。一系列的......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-07
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/11/05/volatile关键字/">
         <h2 class="post-title">
             volatile关键字
@@ -192,8 +214,8 @@
             
         </h3>
         <div class="post-content-preview">
-            1. Synchronized vs volatilesynchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。而volatile是java虚拟机提供的最轻量级的同步机制。而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。
-被volatile修饰的变量能够......
+            1. Synchronized vs volatile#synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。而volatile是java虚拟机提供的最轻量级的同步机制。而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。
+被volatile修饰的变量能......
         </div>
     </a>
     <p class="post-meta">
@@ -248,9 +270,9 @@ Java并发图谱
             
         </h3>
         <div class="post-content-preview">
-            1. 从c++到函数式编程C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。
-2. 函数式编程2.1 定义函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。
-2.2 特征2......
+            1. 从c++到函数式编程#C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。
+2. 函数式编程#2.1 定义#函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。
+2.2 ......
         </div>
     </a>
     <p class="post-meta">
@@ -271,7 +293,7 @@ Java并发图谱
             
         </h3>
         <div class="post-content-preview">
-            1. 起源编程范式, programming paradigm，是一类典型的编程风格。
+            1. 起源#编程范式, programming paradigm，是一类典型的编程风格。
 将主流编程语言分为三部分，加上对于编程本质的理解。共四篇文章。
 
 泛型编程
@@ -279,12 +301,12 @@ Java并发图谱
 面向对象编程
 编程本质和逻辑编程
 
-1.1 C语言
+1.1 C语言#
 几乎现行的所有编程语言都是从c语言拓展来的，简述c语言的特性：
 
 
 静态弱类型语言，使用变量时需要声明变量类型，但类型之间有隐式转换
-typedef 定义类型的别名，......
+typedef 定义类型的别......
         </div>
     </a>
     <p class="post-meta">
@@ -305,12 +327,12 @@ typedef 定义类型的别名，......
             
         </h3>
         <div class="post-content-preview">
-            1. synchronized type
+            1. synchronized type#
 Synchronized methods
 Synchronized statements 
 
-2. Synchronized Methods修饰实例方法，作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁。修饰静态方法，作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁。 
-2.1 不可插入It is not possible for......
+2. Synchronized Methods#修饰实例方法，作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁。修饰静态方法，作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁。 
+2.1 不可插入#It is not possible ......
         </div>
     </a>
     <p class="post-meta">
@@ -332,10 +354,10 @@ Synchronized statements
         </h3>
         <div class="post-content-preview">
             从输入一个网址开始，都调用了哪些服务，经历了哪些步骤，深度解析。以输入www.google.com为例。
-1. Client端一般来说，这里的Client指用户，即browser浏览器。这里我们以输入google.com为例。
-1.1 输入提示浏览器会根据历史访问，书签等信息给出输入建议。
+1. Client端#一般来说，这里的Client指用户，即browser浏览器。这里我们以输入google.com为例。
+1.1 输入提示#浏览器会根据历史访问，书签等信息给出输入建议。
 还会根据默认搜索引擎的搜索记录，去匹配最近的搜索记录。
-1.2 url解析如果是不合法的地址，会转给默......
+1.2 url解析#如果是不合法的地址，会......
         </div>
     </a>
     <p class="post-meta">
@@ -357,7 +379,7 @@ Synchronized statements
         </h3>
         <div class="post-content-preview">
             初探React,很喜欢Component这种方式，很大程度提高了复用性，如果抛除C/S的区别，感觉有点像mason，毕竟刚刚弃掉mason的坑，很有意思的React。
-1. Hello WorldReact.Component   A component takes in parameters, called props and returns a hierarchy of views to......
+1. Hello World#React.Component   A component takes in parameters, called props and returns a hierarchy of views t......
         </div>
     </a>
     <p class="post-meta">
@@ -400,13 +422,13 @@ Synchronized statements
             
         </h3>
         <div class="post-content-preview">
-            1 资产负债表1.1 资产负债表 分类企业需要做三张报表，分别是
+            1 资产负债表#1.1 资产负债表 分类#企业需要做三张报表，分别是
 
 资产负债表
 利润表
 现金流
 
-1.2 财务报表是用来做什么的？企业从事的经营活动的种类有：
+1.2 财务报表是用来做什么的？#企业从事的经营活动的种类有：
 
 经营活动
 
@@ -418,51 +440,12 @@ Synchronized statements
 
 融资活动
 
-在经营和投资的过程中，当缺钱了的时候，需要去银行......
+在经营和投资的过程中，当缺钱了的时候，需要......
         </div>
     </a>
     <p class="post-meta">
         Posted by Leilei on
         2018-10-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/11/unix-linux-note/">
-        <h2 class="post-title">
-            Example Post With Default Header Image
-        </h2>
-        <h3 class="post-subtitle">
-            不适合人类阅读，非常水的自我笔记
-        </h3>
-        <div class="post-content-preview">
-            
-This document is not completed and will be updated anytime.
-
-Catagory
-Unix
-Bell Labs
-Xenix
-BSD
-FreeBSD &amp; Apple
-NeXTStep
-Darwin
-POSIX
-
-
-Unix-like
-Single Unix Specification
-Apple iOS
-XNU Kernel
-......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by leilei on
-        2018-10-11
     </p>
 
 </div>
@@ -478,6 +461,10 @@ XNU Kernel
             <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -503,11 +490,11 @@ XNU Kernel
                     <div class="tags">
                         
                             
-                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
+                            <a href="/tags/#java" title="java" rel="4">java</a>
                             
                         
                             
-                            <a href="/tags/#java" title="java" rel="4">java</a>
+                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
                             
                         
                             
@@ -533,7 +520,11 @@ XNU Kernel
                             
                         
                             
+                            <a href="/tags/#React" title="React" rel="2">React</a>
+                            
                         
+                            
+                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="2">FrontEnd</a>
                             
                         
                     </div>

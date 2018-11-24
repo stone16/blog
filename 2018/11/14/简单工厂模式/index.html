@@ -179,7 +179,7 @@
         </div>
     </div>
 </header>
-
+<!-- toc -->
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -192,7 +192,7 @@
                 post-container">
 
                 <p>静态/简单工厂模式是工厂模式中最简单的一种实现，但是它实现了工厂模式的精髓，即将对象的创建和使用分离开，客户端通过调用工厂来创建具体的产品类。</p>
-<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a>1. 问题描述</h1><pre><code>class Chart {
+<h1><span id="1-问题描述">1. 问题描述</span><a href="#1-问题描述" class="header-anchor">#</a></h1><pre><code>class Chart {
     private String type; //图表类型
 
     public Chart(Object[][] data, String type) {
@@ -226,7 +226,7 @@
 <li>职责太重</li>
 <li>Constructor构建会非常耗时</li>
 </ol>
-<h1 id="2-简单工程模式概述"><a href="#2-简单工程模式概述" class="headerlink" title="2. 简单工程模式概述"></a>2. 简单工程模式概述</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为具体产品类，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是抽象产品类的子类；然后提供一个工厂类用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
+<h1><span id="2-简单工程模式概述">2. 简单工程模式概述</span><a href="#2-简单工程模式概述" class="header-anchor">#</a></h1><h2><span id="21-定义">2.1 定义</span><a href="#21-定义" class="header-anchor">#</a></h2><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为具体产品类，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是抽象产品类的子类；然后提供一个工厂类用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
 <ul>
 <li>具体产品类</li>
 <li>抽象产品类</li>
@@ -236,7 +236,7 @@
 <blockquote>
 <p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是<strong>静态(static)<em>方法</em></strong>，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</p>
 </blockquote>
-<h2 id="2-2-结构"><a href="#2-2-结构" class="headerlink" title="2.2 结构"></a>2.2 结构</h2><p><img src="sf1.jpeg" alt="sf1.jpeg"></p>
+<h2><span id="22-结构">2.2 结构</span><a href="#22-结构" class="header-anchor">#</a></h2><p><img src="sf1.jpeg" alt="sf1.jpeg"></p>
 <ul>
 <li>Factory</li>
 </ul>
@@ -249,7 +249,7 @@
 <li>ConcreteProduct 具体产品</li>
 </ul>
 <p>它是简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体类的实例。每一个具体产品角色都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
-<h1 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3 代码实现"></a>3 代码实现</h1><pre><code>abstract class Product {
+<h1><span id="3-代码实现">3 代码实现</span><a href="#3-代码实现" class="header-anchor">#</a></h1><pre><code>abstract class Product {
     //所有产品类的公共业务方法
     public void methodSame() {
         //公共方法的实现
@@ -292,8 +292,8 @@ class Client {
         product.methodDiff();
     }
 }
-</code></pre><h2 id="3-1-结构图"><a href="#3-1-结构图" class="headerlink" title="3.1 结构图"></a>3.1 结构图</h2><p><img src="sf2.jpeg" alt="sf2.jpeg"></p>
-<h2 id="3-2-完整方案"><a href="#3-2-完整方案" class="headerlink" title="3.2 完整方案"></a>3.2 完整方案</h2><pre><code>//抽象图表接口：抽象产品类
+</code></pre><h2><span id="31-结构图">3.1 结构图</span><a href="#31-结构图" class="header-anchor">#</a></h2><p><img src="sf2.jpeg" alt="sf2.jpeg"></p>
+<h2><span id="32-完整方案">3.2 完整方案</span><a href="#32-完整方案" class="header-anchor">#</a></h2><pre><code>//抽象图表接口：抽象产品类
 interface Chart {
     public void display();
 }
@@ -351,7 +351,7 @@ class ChartFactory {
         return chart;
     }
 }
-</code></pre><h2 id="3-3-改进"><a href="#3-3-改进" class="headerlink" title="3.3 改进"></a>3.3 改进</h2><p>将选择具体的chart类的代码封装到xml文件里，然后写一个相应的方法去读取XML参数。</p>
+</code></pre><h2><span id="33-改进">3.3 改进</span><a href="#33-改进" class="header-anchor">#</a></h2><p>将选择具体的chart类的代码封装到xml文件里，然后写一个相应的方法去读取XML参数。</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;config&gt;
     &lt;chartType&gt;histogram&lt;/chartType&gt;
@@ -384,13 +384,13 @@ public class XMLUtil {
         }
     }
 }
-</code></pre><h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h1><p><img src="sf3.jpeg" alt="sf3.jpeg"></p>
-<h2 id="4-1-优势"><a href="#4-1-优势" class="headerlink" title="4.1 优势"></a>4.1 优势</h2><ol>
+</code></pre><h1><span id="4总结">4.总结</span><a href="#4总结" class="header-anchor">#</a></h1><p><img src="sf3.jpeg" alt="sf3.jpeg"></p>
+<h2><span id="41-优势">4.1 优势</span><a href="#41-优势" class="header-anchor">#</a></h2><ol>
 <li>将对象的创建和使用分离</li>
 <li>客户端不再直接创建产品对象，仅仅消费产品</li>
 <li>配置文件，提高系统灵活性</li>
 </ol>
-<h2 id="4-2-缺陷"><a href="#4-2-缺陷" class="headerlink" title="4.2 缺陷"></a>4.2 缺陷</h2><ol>
+<h2><span id="42-缺陷">4.2 缺陷</span><a href="#42-缺陷" class="header-anchor">#</a></h2><ol>
 <li>工厂类集中了所有的创建逻辑，职责太重。一旦不能正常工作，整个系统都要受影响。</li>
 <li>势必增加类的个数，引入新的工厂类，增加了系统的复杂度和理解程度</li>
 <li>系统扩展困难！！！一旦添加新产品就必须修改工厂逻辑</li>

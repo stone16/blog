@@ -179,7 +179,7 @@
         </div>
     </div>
 </header>
-
+<!-- toc -->
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -191,7 +191,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="1-起源"><a href="#1-起源" class="headerlink" title="1. 起源"></a>1. 起源</h1><p>编程范式, programming paradigm，是一类典型的编程风格。</p>
+                <h1><span id="1-起源">1. 起源</span><a href="#1-起源" class="header-anchor">#</a></h1><p>编程范式, programming paradigm，是一类典型的编程风格。</p>
 <p>将主流编程语言分为三部分，加上对于编程本质的理解。共四篇文章。</p>
 <ul>
 <li>泛型编程</li>
@@ -199,7 +199,7 @@
 <li>面向对象编程</li>
 <li>编程本质和逻辑编程</li>
 </ul>
-<h1 id="1-1-C语言"><a href="#1-1-C语言" class="headerlink" title="1.1 C语言"></a>1.1 C语言</h1><ul>
+<h1><span id="11-c语言">1.1 C语言</span><a href="#11-c语言" class="header-anchor">#</a></h1><ul>
 <li>几乎现行的所有编程语言都是从c语言拓展来的，简述c语言的特性：</li>
 </ul>
 <ol>
@@ -241,7 +241,7 @@
 <li>最后，在实现泛型算法的时候，你会发现自己在纠结哪些东西应该抛给调用者处理，哪些又是可以封装起来。如何平衡和选择，并没有定论，也不好解决。</li>
 </ol>
 <p>比如 C 语言就是过程式的编程语言，像C语言这样的过程式编程语言优点是底层灵活而且高效，特别适合开发运行较快且对系统资源利用率要求较高的程序，但我上面抛出的问题它在后来也没有试图去解决，因为<strong>编程范式</strong>的选择基本已经决定了它的“命运”。</p>
-<h1 id="2-泛型编程"><a href="#2-泛型编程" class="headerlink" title="2. 泛型编程"></a>2. 泛型编程</h1><h2 id="2-1-C-语言"><a href="#2-1-C-语言" class="headerlink" title="2.1 C++ 语言"></a>2.1 C++ 语言</h2><p>C++ 很大程度上是来解决C语言中的各种问题和各种不方便。</p>
+<h1><span id="2-泛型编程">2. 泛型编程</span><a href="#2-泛型编程" class="header-anchor">#</a></h1><h2><span id="21-c-语言">2.1 C++ 语言</span><a href="#21-c-语言" class="header-anchor">#</a></h2><p>C++ 很大程度上是来解决C语言中的各种问题和各种不方便。</p>
 <ul>
 <li>用引用来解决指针的问题。</li>
 <li>用 namespace 来解决名字空间冲突的问题。</li>
@@ -252,9 +252,9 @@
 <li>用 RAII、智能指针的方式，解决了 C 语言中因为需要释放资源而出现的那些非常 ugly 也很容易出错的代码的问题。</li>
 <li>用 STL 解决了 C 语言中算法和数据结构的 N 多种坑。</li>
 </ul>
-<h2 id="2-2-C-语言的泛型编程"><a href="#2-2-C-语言的泛型编程" class="headerlink" title="2.2 C++ 语言的泛型编程"></a>2.2 C++ 语言的泛型编程</h2><p>理想情况下，算法应该与数据结构和类型无关的。各种特殊的数据结构应该能自己做好泛型处理，算法是一个标准的实现。</p>
+<h2><span id="22-c-语言的泛型编程">2.2 C++ 语言的泛型编程</span><a href="#22-c-语言的泛型编程" class="header-anchor">#</a></h2><p>理想情况下，算法应该与数据结构和类型无关的。各种特殊的数据结构应该能自己做好泛型处理，算法是一个标准的实现。</p>
 <p>对于泛型的抽象，<strong>需要回答的问题是： 如果我们的数据类型符合通用算法，那么对数据类型的最小需求是什么？？？</strong></p>
-<h3 id="2-2-1-C-如何解决泛型问题的？"><a href="#2-2-1-C-如何解决泛型问题的？" class="headerlink" title="2.2.1 C++ 如何解决泛型问题的？"></a>2.2.1 C++ 如何解决泛型问题的？</h3><ol>
+<h3><span id="221-c-如何解决泛型问题的">2.2.1 C++ 如何解决泛型问题的？</span><a href="#221-c-如何解决泛型问题的" class="header-anchor">#</a></h3><ol>
 <li>通过类的方式解决</li>
 </ol>
 <ul>
@@ -277,7 +277,7 @@
 <li>运行时类型识别技术可以做到在泛型时对具体类型的特殊处理。</li>
 </ul>
 <p>一个良好的泛型编程需要解决 1） 算法的泛型 2） 类型的泛型  3） 数据结构的泛型</p>
-<h3 id="2-2-2-泛型编程实例"><a href="#2-2-2-泛型编程实例" class="headerlink" title="2.2.2 泛型编程实例"></a>2.2.2 泛型编程实例</h3><ol>
+<h3><span id="222-泛型编程实例">2.2.2 泛型编程实例</span><a href="#222-泛型编程实例" class="header-anchor">#</a></h3><ol>
 <li>Search 函数</li>
 </ol>
 <p>不是所有的数据结构都是顺序型的，不能用 <code>for(int i = 0; i &lt; len; i++)</code> 来做抽象的，比如hashtable，二叉树，图就是非顺序型的。这种写法对他们来说没有意义。</p>
@@ -355,12 +355,12 @@ public:
     }
     return result;
 }
-</code></pre><h2 id="2-2-动态类型语言的泛型编程"><a href="#2-2-动态类型语言的泛型编程" class="headerlink" title="2.2 动态类型语言的泛型编程"></a>2.2 动态类型语言的泛型编程</h2><p>在编程世界，我们需要处理好两件事情： </p>
+</code></pre><h2><span id="22-动态类型语言的泛型编程">2.2 动态类型语言的泛型编程</span><a href="#22-动态类型语言的泛型编程" class="header-anchor">#</a></h2><p>在编程世界，我们需要处理好两件事情： </p>
 <ol>
 <li>编程语言中的类型问题</li>
 <li>对真实世界中业务代码的抽象、重用和拼装</li>
 </ol>
-<h3 id="2-2-1-类型系统"><a href="#2-2-1-类型系统" class="headerlink" title="2.2.1 类型系统"></a>2.2.1 类型系统</h3><p>在计算机科学中，类型系统用于定义如何将编程语言中的数值和表达式归类为许多不同的类型，以及如何操作这些类型，还有这些类型如何互相作用。类型可以确认一个值或者一组值具有特定的意义和目的。</p>
+<h3><span id="221-类型系统">2.2.1 类型系统</span><a href="#221-类型系统" class="header-anchor">#</a></h3><p>在计算机科学中，类型系统用于定义如何将编程语言中的数值和表达式归类为许多不同的类型，以及如何操作这些类型，还有这些类型如何互相作用。类型可以确认一个值或者一组值具有特定的意义和目的。</p>
 <p>类型系统在各种语言之间很不同，存在于编译时期的语法，以及运行时期的操作实现方式。</p>
 <p>程序语言的类型系统主要提供如下功能： </p>
 <ul>
@@ -380,7 +380,7 @@ public:
 </ul>
 <p>类型允许程序设计者对程序以较高层次的方式思考，而不是烦人的低层次实现。例如，我们使用整型或是浮点型来取代底层的字节实现，我们可以将字符串设计成一个值，而不是底层的字节的数组。从高层上来说，类型可以用来定义不同模块间的交互协议，比如函数的入参类型和返回类型，从而可以让接口更有语义，而且不同的模块数据交换更为直观和易懂。</p>
 <p>在动态语言中，一个变量的类型是由运行时的解释器来动态标记的，这样就可以动态地和底层的计算机指令或内存布局对应起来。</p>
-<h1 id="3-泛型的本质"><a href="#3-泛型的本质" class="headerlink" title="3. 泛型的本质"></a>3. 泛型的本质</h1><ul>
+<h1><span id="3-泛型的本质">3. 泛型的本质</span><a href="#3-泛型的本质" class="header-anchor">#</a></h1><ul>
 <li>类型是对内存的一种抽象。不同的类型，会有不同的内存布局和内存分配的策略。</li>
 <li>不同的类型，有不同的操作。所以，对于特定的类型，也有特定的一组操作。</li>
 </ul>
@@ -395,7 +395,7 @@ public:
 <li>标准化掉数据容器的操作。比如：查找算法、过滤算法、聚合算法……</li>
 <li>标准化掉类型上特有的操作。需要有标准化的接口来回调不同类型的具体操作……</li>
 </ul>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://time.geekbang.org/column/48" target="_blank" rel="noopener">左耳听风的极客时间专栏</a></p>
+<h1><span id="reference">reference</span><a href="#reference" class="header-anchor">#</a></h1><p><a href="https://time.geekbang.org/column/48" target="_blank" rel="noopener">左耳听风的极客时间专栏</a></p>
 <p><a href="https://blog.csdn.net/Hackbuteer1/article/details/7558868" target="_blank" rel="noopener">虚函数</a></p>
 <p><a href="https://lxwei.github.io/posts/262.html" target="_blank" rel="noopener">从源代码到可执行文件</a></p>
 <p><div id="disqus_thread"></div></p>

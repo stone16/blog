@@ -181,7 +181,7 @@
         </div>
     </div>
 </header>
-
+<!-- toc -->
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -194,17 +194,17 @@
                 post-container">
 
                 <p>初探React,很喜欢Component这种方式，很大程度提高了复用性，如果抛除C/S的区别，感觉有点像mason，毕竟刚刚弃掉mason的坑，很有意思的React。</p>
-<h1 id="1-Hello-World"><a href="#1-Hello-World" class="headerlink" title="1. Hello World"></a>1. Hello World</h1><p>React.Component   A component takes in parameters, called props and returns a hierarchy of views to display via the render method. </p>
+<h1><span id="1-hello-world">1. Hello World</span><a href="#1-hello-world" class="header-anchor">#</a></h1><p>React.Component   A component takes in parameters, called props and returns a hierarchy of views to display via the render method. </p>
 <p>To collect data from multiple children, or to have two child components communicate with each other, you need to declare the shared state in their parent component instead. <strong>The parent component can pass the state back down to the children by using props; this keeps the child components in sync with each other and with the parent component.</strong> </p>
 <pre><code>ReactDOM.render(
     &lt;h1&gt;Hello, world!&lt;/h1&gt;,
     document.getElementById(&apos;root&apos;)
 );
-</code></pre><h1 id="2-JSX"><a href="#2-JSX" class="headerlink" title="2. JSX"></a>2. JSX</h1><p>jsx, 一种JavaScript的语法扩展。用来声明React当中的元素。可以任意在<strong>大括号{}</strong>里面使用<strong>JS表达式</strong>.</p>
-<h2 id="2-1-JS表达式"><a href="#2-1-JS表达式" class="headerlink" title="2.1 JS表达式"></a>2.1 JS表达式</h2><blockquote>
+</code></pre><h1><span id="2-jsx">2. JSX</span><a href="#2-jsx" class="header-anchor">#</a></h1><p>jsx, 一种JavaScript的语法扩展。用来声明React当中的元素。可以任意在<strong>大括号{}</strong>里面使用<strong>JS表达式</strong>.</p>
+<h2><span id="21-js表达式">2.1 JS表达式</span><a href="#21-js表达式" class="header-anchor">#</a></h2><blockquote>
 <p>Any valid unit of code that resolves to a value. </p>
 </blockquote>
-<h3 id="2-1-1-分类"><a href="#2-1-1-分类" class="headerlink" title="2.1.1 分类"></a>2.1.1 分类</h3><ul>
+<h3><span id="211-分类">2.1.1 分类</span><a href="#211-分类" class="header-anchor">#</a></h3><ul>
 <li><p>Arithmetic</p>
 </li>
 <li><p>String </p>
@@ -229,13 +229,13 @@ f(...args);
 <ul>
 <li>Left hand side expressions</li>
 </ul>
-<h2 id="2-2-JSX-属性"><a href="#2-2-JSX-属性" class="headerlink" title="2.2 JSX 属性"></a>2.2 JSX 属性</h2><p>编译之后，会被转化为普通的JS对象。这意味着可以在if 或者for语句里使用JSX，将其赋值给变量，当做参数传入或者作为返回值都可以。</p>
+<h2><span id="22-jsx-属性">2.2 JSX 属性</span><a href="#22-jsx-属性" class="header-anchor">#</a></h2><p>编译之后，会被转化为普通的JS对象。这意味着可以在if 或者for语句里使用JSX，将其赋值给变量，当做参数传入或者作为返回值都可以。</p>
 <pre><code>// 使用引号定义以字符串为值得属性
 const element = &lt;div tabIndex=&quot;0&quot;&gt;&lt;/div&gt;;
 // 使用大括号来定义以js表达式为值得属性
 const element = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;
 </code></pre><p>JSX代表Objects, Babel转译器会把JSX转换成一个名为React.createEliment()的方法来调用</p>
-<h2 id="2-3-嵌套与防注入攻击"><a href="#2-3-嵌套与防注入攻击" class="headerlink" title="2.3 嵌套与防注入攻击"></a>2.3 嵌套与防注入攻击</h2><pre><code>const element = (
+<h2><span id="23-嵌套与防注入攻击">2.3 嵌套与防注入攻击</span><a href="#23-嵌套与防注入攻击" class="header-anchor">#</a></h2><pre><code>const element = (
   &lt;div&gt;
     &lt;h1&gt;Hello!&lt;/h1&gt;
     &lt;h2&gt;Good to see you here.&lt;/h2&gt;
@@ -243,38 +243,38 @@ const element = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;
 );
 
 React DOM在渲染之前会过滤所有传入的值，可以确保应用不会被注入攻击，因为所有内容渲染之前都已经被转化为了字符串，有效防止XSS。 
-</code></pre><h1 id="3-元素渲染"><a href="#3-元素渲染" class="headerlink" title="3. 元素渲染"></a>3. 元素渲染</h1><p>React中的元素实际上是普通的对象，React DOM可以确保浏览器DOM的数据内容与React元素保持一致。<br>寻找React 根节点，渲染在根节点上</p>
+</code></pre><h1><span id="3-元素渲染">3. 元素渲染</span><a href="#3-元素渲染" class="header-anchor">#</a></h1><p>React中的元素实际上是普通的对象，React DOM可以确保浏览器DOM的数据内容与React元素保持一致。<br>寻找React 根节点，渲染在根节点上</p>
 <pre><code>const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
 ReactDOM.render(element, document.getElementById(&apos;root&apos;));
-</code></pre><h2 id="3-1-更新元素渲染"><a href="#3-1-更新元素渲染" class="headerlink" title="3.1 更新元素渲染"></a>3.1 更新元素渲染</h2><p>React 元素都是immutable的，更新界面的方式就是创建一个新的元素，然后将其传入<code>ReactDOM.render()</code> </p>
+</code></pre><h2><span id="31-更新元素渲染">3.1 更新元素渲染</span><a href="#31-更新元素渲染" class="header-anchor">#</a></h2><p>React 元素都是immutable的，更新界面的方式就是创建一个新的元素，然后将其传入<code>ReactDOM.render()</code> </p>
 <p>React DOM 会比较元素的内容的先后的不同，而在渲染过程中只会更新改变了的部分。</p>
-<h1 id="4-组件-amp-props"><a href="#4-组件-amp-props" class="headerlink" title="4. 组件 &amp; props"></a>4. 组件 &amp; props</h1><p>组件将UI切分成一些独立的，可复用的部件，这样就可以专注于构建每一个单独的部件。概念上像<strong>函数</strong>一样，可以接受任意的输入值(props)，并返回一个在页面上展示的React元素。</p>
-<h2 id="4-1-函数定义组件"><a href="#4-1-函数定义组件" class="headerlink" title="4.1 函数定义组件"></a>4.1 函数定义组件</h2><pre><code>function Welcome(props) {
+<h1><span id="4-组件-amp-props">4. 组件 &amp; props</span><a href="#4-组件-amp-props" class="header-anchor">#</a></h1><p>组件将UI切分成一些独立的，可复用的部件，这样就可以专注于构建每一个单独的部件。概念上像<strong>函数</strong>一样，可以接受任意的输入值(props)，并返回一个在页面上展示的React元素。</p>
+<h2><span id="41-函数定义组件">4.1 函数定义组件</span><a href="#41-函数定义组件" class="header-anchor">#</a></h2><pre><code>function Welcome(props) {
     return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
 }
-</code></pre><h2 id="4-2-ES6-class-定义组件"><a href="#4-2-ES6-class-定义组件" class="headerlink" title="4.2 ES6 class 定义组件"></a>4.2 ES6 class 定义组件</h2><pre><code>class Welcome extends React.Component {
+</code></pre><h2><span id="42-es6-class-定义组件">4.2 ES6 class 定义组件</span><a href="#42-es6-class-定义组件" class="header-anchor">#</a></h2><pre><code>class Welcome extends React.Component {
     render() {
         return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
     }
 }
-</code></pre><h2 id="4-3-组件渲染"><a href="#4-3-组件渲染" class="headerlink" title="4.3 组件渲染"></a>4.3 组件渲染</h2><pre><code>// React 元素可以使用户自定义的组件
+</code></pre><h2><span id="43-组件渲染">4.3 组件渲染</span><a href="#43-组件渲染" class="header-anchor">#</a></h2><pre><code>// React 元素可以使用户自定义的组件
 const element = &lt;Welcome name=&quot;Sara&quot; /&gt;;
 </code></pre><p><strong>当React遇到的元素是用户自定义的组件，它会将JSX属性作为单个对象传递给该组件，这个对象被称为”props”</strong></p>
 <blockquote>
 <p>组件名称必须大写</p>
 </blockquote>
-<h2 id="4-4-组合组件"><a href="#4-4-组合组件" class="headerlink" title="4.4 组合组件"></a>4.4 组合组件</h2><p>组件可以在它的输出中引用其他组件，这样我们就可以用同一组件来抽象出任意层次的细节。</p>
+<h2><span id="44-组合组件">4.4 组合组件</span><a href="#44-组合组件" class="header-anchor">#</a></h2><p>组件可以在它的输出中引用其他组件，这样我们就可以用同一组件来抽象出任意层次的细节。</p>
 <blockquote>
 <p>一个新的React应用程序的顶部是一个App组件。但是，如果要将React集成到现有应用程序中，则可以从下而上使用像Button这样的小组件作为开始，并逐渐运用到视图层的顶部。</p>
 </blockquote>
 <blockquote>
 <p>组件的返回值只能有一个根元素。这也是我们要用一个<div>来包裹所有<welcome>元素的原因。</welcome></div></p>
 </blockquote>
-<h2 id="4-5-提取组件"><a href="#4-5-提取组件" class="headerlink" title="4.5 提取组件"></a>4.5 提取组件</h2><p>分割组件，</p>
-<h2 id="4-6-Props的只读性"><a href="#4-6-Props的只读性" class="headerlink" title="4.6 Props的只读性"></a>4.6 Props的只读性</h2><p>所有的React组件必须像纯函数那样使用它们的props</p>
-<h1 id="5-State-amp-生命周期"><a href="#5-State-amp-生命周期" class="headerlink" title="5. State &amp; 生命周期"></a>5. State &amp; 生命周期</h1><p>更新UI的方法： <code>ReactDOM.render()</code></p>
+<h2><span id="45-提取组件">4.5 提取组件</span><a href="#45-提取组件" class="header-anchor">#</a></h2><p>分割组件，</p>
+<h2><span id="46-props的只读性">4.6 Props的只读性</span><a href="#46-props的只读性" class="header-anchor">#</a></h2><p>所有的React组件必须像纯函数那样使用它们的props</p>
+<h1><span id="5-state-amp-生命周期">5. State &amp; 生命周期</span><a href="#5-state-amp-生命周期" class="header-anchor">#</a></h1><p>更新UI的方法： <code>ReactDOM.render()</code></p>
 <p>还可以通过更新状态来更新UI，<strong>状态是私有的，完全受控于当前组件</strong></p>
-<h2 id="5-1-将函数转换为类"><a href="#5-1-将函数转换为类" class="headerlink" title="5.1 将函数转换为类"></a>5.1 将函数转换为类</h2><p>定义为类的组件有状态这个特性，还有生命周期钩子。</p>
+<h2><span id="51-将函数转换为类">5.1 将函数转换为类</span><a href="#51-将函数转换为类" class="header-anchor">#</a></h2><p>定义为类的组件有状态这个特性，还有生命周期钩子。</p>
 <p>函数转换为类的步骤： </p>
 <ol>
 <li>创建一个名称扩展为<code>React.Component</code>的类</li>
@@ -283,7 +283,7 @@ const element = &lt;Welcome name=&quot;Sara&quot; /&gt;;
 <li>在render()方法中，使用this.props替换props</li>
 <li>删除剩余的空函数声明</li>
 </ol>
-<h2 id="5-2-为类添加局部状态"><a href="#5-2-为类添加局部状态" class="headerlink" title="5.2 为类添加局部状态"></a>5.2 为类添加局部状态</h2><pre><code>Class Clock extends React.Component {
+<h2><span id="52-为类添加局部状态">5.2 为类添加局部状态</span><a href="#52-为类添加局部状态" class="header-anchor">#</a></h2><pre><code>Class Clock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {date: new Date()};
@@ -303,7 +303,7 @@ ReactDOM.render(
     &lt;Clock/&gt;
     document.getElementById(&apos;root&apos;)
 );
-</code></pre><h2 id="5-3-添加生命周期方法到类中"><a href="#5-3-添加生命周期方法到类中" class="headerlink" title="5.3 添加生命周期方法到类中"></a>5.3 添加生命周期方法到类中</h2><p>当组件第一次加载到DOM中时，生成定时器，挂载</p>
+</code></pre><h2><span id="53-添加生命周期方法到类中">5.3 添加生命周期方法到类中</span><a href="#53-添加生命周期方法到类中" class="header-anchor">#</a></h2><p>当组件第一次加载到DOM中时，生成定时器，挂载</p>
 <pre><code>componentDidMount() {
 
 }
@@ -353,7 +353,7 @@ ReactDOM.render(
   &lt;Clock /&gt;,
   document.getElementById(&apos;root&apos;)
 );
-</code></pre><h2 id="5-4-如何使用状态"><a href="#5-4-如何使用状态" class="headerlink" title="5.4 如何使用状态"></a>5.4 如何使用状态</h2><ol>
+</code></pre><h2><span id="54-如何使用状态">5.4 如何使用状态</span><a href="#54-如何使用状态" class="header-anchor">#</a></h2><ol>
 <li><p>不要直接更新状态</p>
 <p> use: this.setState({comment: ‘hi’});</p>
 </li>
@@ -384,13 +384,13 @@ this.setState(function(prevState, props) {
 </code></pre><ol start="3">
 <li>当调用<code>setState()</code>的时候，React会将你提供的对象合并到当前状态。可以只提供state的一部分。</li>
 </ol>
-<h2 id="5-5-数据流动方向：-自顶向下"><a href="#5-5-数据流动方向：-自顶向下" class="headerlink" title="5.5 数据流动方向： 自顶向下"></a>5.5 数据流动方向： 自顶向下</h2><p>父组件或子组件都不知道某个组件是否有状态，组件可以选择将其状态作为属性传递给其子组件。</p>
-<h1 id="6-事件处理"><a href="#6-事件处理" class="headerlink" title="6. 事件处理"></a>6. 事件处理</h1><p>React事件绑定属性的命名采用驼峰式写法</p>
+<h2><span id="55-数据流动方向-自顶向下">5.5 数据流动方向： 自顶向下</span><a href="#55-数据流动方向-自顶向下" class="header-anchor">#</a></h2><p>父组件或子组件都不知道某个组件是否有状态，组件可以选择将其状态作为属性传递给其子组件。</p>
+<h1><span id="6-事件处理">6. 事件处理</span><a href="#6-事件处理" class="header-anchor">#</a></h1><p>React事件绑定属性的命名采用驼峰式写法</p>
 <p>采用jsx的语法你需要传入一个函数作为事件处理函数，而不是一个字符串。</p>
 <pre><code>&lt;button onClick={activateLasers}&gt;
     Activate Lasers
 &lt;/button&gt;
-</code></pre><h2 id="6-1-Toggle"><a href="#6-1-Toggle" class="headerlink" title="6.1 Toggle"></a>6.1 Toggle</h2><pre><code>class Toggle extends React.Component {
+</code></pre><h2><span id="61-toggle">6.1 Toggle</span><a href="#61-toggle" class="header-anchor">#</a></h2><pre><code>class Toggle extends React.Component {
     constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
@@ -421,7 +421,7 @@ ReactDOM.render(
     document.getElementById(&apos;root&apos;)
 );
 </code></pre><p>必须谨慎对待JSX回调函数中的this，类的方法默认不会绑定this的。如果你忘记绑定 <code>this.handleClick</code> 并把它传入 <code>onClick</code>, 当你调用这个函数的时候 <code>this</code> 的值会是 <code>undefined</code>。</p>
-<h2 id="6-2-Todolist"><a href="#6-2-Todolist" class="headerlink" title="6.2 Todolist"></a>6.2 Todolist</h2><pre><code>class TodoApp extends React.Component {
+<h2><span id="62-todolist">6.2 Todolist</span><a href="#62-todolist" class="header-anchor">#</a></h2><pre><code>class TodoApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = { items: [], text: &apos;&apos; };
@@ -480,10 +480,10 @@ class TodoList extends React.Component {
 }
 
 ReactDOM.render(&lt;TodoApp /&gt;, mountNode);
-</code></pre><h2 id="6-3-向事件处理程序传递参数"><a href="#6-3-向事件处理程序传递参数" class="headerlink" title="6.3 向事件处理程序传递参数"></a>6.3 向事件处理程序传递参数</h2><pre><code>&lt;button onClick={(e) =&gt; this.deleteRow(id, e)}&gt;Delete Row&lt;/button&gt;
+</code></pre><h2><span id="63-向事件处理程序传递参数">6.3 向事件处理程序传递参数</span><a href="#63-向事件处理程序传递参数" class="header-anchor">#</a></h2><pre><code>&lt;button onClick={(e) =&gt; this.deleteRow(id, e)}&gt;Delete Row&lt;/button&gt;
 &lt;button onClick={this.deleteRow.bind(this, id)}&gt;Delete Row&lt;/button&gt;
 </code></pre><p>参数 e 作为 React 事件对象将会被作为第二个参数进行传递。通过箭头函数的方式，事件对象必须显式的进行传递，但是通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。</p>
-<h2 id="6-4-bind-向监听函数传参，-事件对象e需要放在最后"><a href="#6-4-bind-向监听函数传参，-事件对象e需要放在最后" class="headerlink" title="6.4 bind 向监听函数传参， 事件对象e需要放在最后"></a>6.4 bind 向监听函数传参， 事件对象e需要放在最后</h2><pre><code>class Popper extends React.Component{
+<h2><span id="64-bind-向监听函数传参-事件对象e需要放在最后">6.4 bind 向监听函数传参， 事件对象e需要放在最后</span><a href="#64-bind-向监听函数传参-事件对象e需要放在最后" class="header-anchor">#</a></h2><pre><code>class Popper extends React.Component{
     constructor(){
         super();
         this.state = {name:&apos;Hello world!&apos;};
@@ -504,7 +504,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, mountNode);
         );
     }
 }
-</code></pre><h1 id="7-条件渲染"><a href="#7-条件渲染" class="headerlink" title="7. 条件渲染"></a>7. 条件渲染</h1><p>可以创建不同的组件来封装各种你需要的行为。然后根据应用的状态变化只渲染其中的一部分。(if)</p>
+</code></pre><h1><span id="7-条件渲染">7. 条件渲染</span><a href="#7-条件渲染" class="header-anchor">#</a></h1><p>可以创建不同的组件来封装各种你需要的行为。然后根据应用的状态变化只渲染其中的一部分。(if)</p>
 <pre><code>function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
@@ -518,7 +518,7 @@ ReactDOM.render(
   &lt;Greeting isLoggedIn={false} /&gt;,
   document.getElementById(&apos;root&apos;)
 );
-</code></pre><h2 id="7-1-与运算符-amp-amp"><a href="#7-1-与运算符-amp-amp" class="headerlink" title="7.1 与运算符 &amp;&amp;"></a>7.1 与运算符 &amp;&amp;</h2><pre><code>function Mailbox(props) {
+</code></pre><h2><span id="71-与运算符-ampamp">7.1 与运算符 &amp;&amp;</span><a href="#71-与运算符-ampamp" class="header-anchor">#</a></h2><pre><code>function Mailbox(props) {
     const unreadMessages = props.unreadMessages;
     return (
         &lt;div&gt;
@@ -538,7 +538,7 @@ ReactDOM.render(
   document.getElementById(&apos;root&apos;)
 );
 </code></pre><p><strong>在 JavaScript 中，true &amp;&amp; expression 总是返回 expression，而 false &amp;&amp; expression 总是返回 false。</strong></p>
-<h2 id="7-2-阻止组件渲染"><a href="#7-2-阻止组件渲染" class="headerlink" title="7.2 阻止组件渲染"></a>7.2 阻止组件渲染</h2><pre><code>function WarningBanner(props) {
+<h2><span id="72-阻止组件渲染">7.2 阻止组件渲染</span><a href="#72-阻止组件渲染" class="header-anchor">#</a></h2><pre><code>function WarningBanner(props) {
     if (!props.warn) {
         return null;
     }
@@ -579,7 +579,7 @@ ReactDOM.render(
   &lt;Page /&gt;,
   document.getElementById(&apos;root&apos;)
 );
-</code></pre><h1 id="8-列表-amp-Keys"><a href="#8-列表-amp-Keys" class="headerlink" title="8. 列表 &amp; Keys"></a>8. 列表 &amp; Keys</h1><h2 id="8-1-渲染多个组件"><a href="#8-1-渲染多个组件" class="headerlink" title="8.1 渲染多个组件"></a>8.1 渲染多个组件</h2><pre><code>const numbers = [1, 2, 3, 4, 5];
+</code></pre><h1><span id="8-列表-amp-keys">8. 列表 &amp; Keys</span><a href="#8-列表-amp-keys" class="header-anchor">#</a></h1><h2><span id="81-渲染多个组件">8.1 渲染多个组件</span><a href="#81-渲染多个组件" class="header-anchor">#</a></h2><pre><code>const numbers = [1, 2, 3, 4, 5];
 const listItems = numbers.map(
     (number) =&gt; &lt;li&gt;{number}&lt;/li&gt;
 );
@@ -588,7 +588,7 @@ ReactDOM.render(
     &lt;ul&gt;{listItems}&lt;/ul&gt;
     documnet.getElementById(&apos;root&apos;)
 );
-</code></pre><h2 id="8-2-基础列表组件"><a href="#8-2-基础列表组件" class="headerlink" title="8.2 基础列表组件"></a>8.2 基础列表组件</h2><pre><code>function NumberList(props) {
+</code></pre><h2><span id="82-基础列表组件">8.2 基础列表组件</span><a href="#82-基础列表组件" class="header-anchor">#</a></h2><pre><code>function NumberList(props) {
     const numbers = props.numbers;
     const listItems = numbers.map((number) =&gt;
         &lt;li key={number.toString()}&gt;
@@ -605,10 +605,10 @@ ReactDOM.render(
   &lt;NumberList numbers={numbers} /&gt;,
   document.getElementById(&apos;root&apos;)
 );
-</code></pre><h2 id="8-3-Keys"><a href="#8-3-Keys" class="headerlink" title="8.3 Keys"></a>8.3 Keys</h2><p>Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。最好是该元素在列表中拥有的独一无二的字符串。使用来自数据的id作为元素的key</p>
+</code></pre><h2><span id="83-keys">8.3 Keys</span><a href="#83-keys" class="header-anchor">#</a></h2><p>Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。最好是该元素在列表中拥有的独一无二的字符串。使用来自数据的id作为元素的key</p>
 <p>元素的key只有在它和它的兄弟节点对比时才有意义。</p>
-<h1 id="9-表单"><a href="#9-表单" class="headerlink" title="9.表单"></a>9.表单</h1><p>HTML 表单元素与React中其他DOM元素有所不同，因为表单元素本来就保留一些内部状态了。会构造一个处理提交表单并可访问用户输入表单数据的函数。标准方法是使用受控组件。</p>
-<h2 id="9-1-受控组件"><a href="#9-1-受控组件" class="headerlink" title="9.1 受控组件"></a>9.1 受控组件</h2><p>在HTML当中，像<code>&lt;input&gt;,&lt;textarea&gt;, 和 &lt;select&gt;</code>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。</p>
+<h1><span id="9表单">9.表单</span><a href="#9表单" class="header-anchor">#</a></h1><p>HTML 表单元素与React中其他DOM元素有所不同，因为表单元素本来就保留一些内部状态了。会构造一个处理提交表单并可访问用户输入表单数据的函数。标准方法是使用受控组件。</p>
+<h2><span id="91-受控组件">9.1 受控组件</span><a href="#91-受控组件" class="header-anchor">#</a></h2><p>在HTML当中，像<code>&lt;input&gt;,&lt;textarea&gt;, 和 &lt;select&gt;</code>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。</p>
 <pre><code>class NameForm extends React.Component {
     constructor(props) {
         super(props);
@@ -639,7 +639,7 @@ ReactDOM.render(
         );
     }
 }
-</code></pre><h2 id="9-2-textarea标签"><a href="#9-2-textarea标签" class="headerlink" title="9.2 textarea标签"></a>9.2 textarea标签</h2><pre><code>class EssayForm extends React.Component {
+</code></pre><h2><span id="92-textarea标签">9.2 textarea标签</span><a href="#92-textarea标签" class="header-anchor">#</a></h2><pre><code>class EssayForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -671,7 +671,7 @@ ReactDOM.render(
         );
     }
 }
-</code></pre><h2 id="9-3-select标签"><a href="#9-3-select标签" class="headerlink" title="9.3 select标签"></a>9.3 select标签</h2><p>React中，不适用selected属性表明选中项，而是在根select标签上用value属性来表示选中项。这在受控组件中更方便，因为只需要在一个地方更新组件。</p>
+</code></pre><h2><span id="93-select标签">9.3 select标签</span><a href="#93-select标签" class="header-anchor">#</a></h2><p>React中，不适用selected属性表明选中项，而是在根select标签上用value属性来表示选中项。这在受控组件中更方便，因为只需要在一个地方更新组件。</p>
 <pre><code>class FlavorForm extends React.Component {
     constructor(props) {
     super(props);
@@ -707,7 +707,7 @@ handleSubmit(event) {
         );
     }
 }
-</code></pre><h2 id="9-4-多个输入的解决方法"><a href="#9-4-多个输入的解决方法" class="headerlink" title="9.4 多个输入的解决方法"></a>9.4 多个输入的解决方法</h2><p>通过给每个元素添加一个name属性，来让处理函数根据event.target.name的值来选择做什么</p>
+</code></pre><h2><span id="94-多个输入的解决方法">9.4 多个输入的解决方法</span><a href="#94-多个输入的解决方法" class="header-anchor">#</a></h2><p>通过给每个元素添加一个name属性，来让处理函数根据event.target.name的值来选择做什么</p>
 <pre><code>class Reservation extends React.Component {
     constructor(props) {
         super(props);
@@ -753,7 +753,7 @@ handleSubmit(event) {
         );
     }
 }
-</code></pre><h1 id="10-状态提升"><a href="#10-状态提升" class="headerlink" title="10. 状态提升"></a>10. 状态提升</h1><h2 id="10-1-摄氏度华氏度的例子"><a href="#10-1-摄氏度华氏度的例子" class="headerlink" title="10.1 摄氏度华氏度的例子"></a>10.1 摄氏度华氏度的例子</h2><p>状态分享是通过将state数据提升至离需要这些数据的组件最近的父组件来完成的</p>
+</code></pre><h1><span id="10-状态提升">10. 状态提升</span><a href="#10-状态提升" class="header-anchor">#</a></h1><h2><span id="101-摄氏度华氏度的例子">10.1 摄氏度华氏度的例子</span><a href="#101-摄氏度华氏度的例子" class="header-anchor">#</a></h2><p>状态分享是通过将state数据提升至离需要这些数据的组件最近的父组件来完成的</p>
 <pre><code>class Calculator extends React.Component {
     constructor(props) {
         super(props);
