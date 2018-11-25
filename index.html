@@ -184,6 +184,43 @@
 
 <div class="post-preview">
 
+    <a href="/2018/11/25/React-Advanced-2/">
+        <h2 class="post-title">
+            React Advanced 2
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+
+1. Accessibility
+1.1 Semantic HTML
+
+
+2 Refs and the DOM
+2.1 When to use Refs
+2.2 How to use Refs
+2.3 Value of the ref
+
+
+3. Code Splitting
+3.1 Bundling
+3.2 Code splitting
+3.3 Dynamic import()
+3.4 ......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-25
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/11/24/React-Advanced-1/">
         <h2 class="post-title">
             React Advanced 1
@@ -224,8 +261,31 @@
             
         </h3>
         <div class="post-content-preview">
-            工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题，但是由于工厂方法模式中的每一个工厂只生产一类产品，可能会导致系统中存在大量的工厂类，势必会增加系统的开销。我们可以考虑将一些相关的产品组成一个产品族，由同一个工厂来统一生产。
-1. 初始设计#  Sunny软件公司欲开发一套界面皮肤库，可以对Java桌面软件进行界面美化。为了保护版权，该皮肤库源代码不打算公开，而只向......
+            
+
+1. 初始设计
+1.1 存在的问题
+
+
+2. 产品等级结构
+2.1 概念
+
+
+3. 抽象工厂模式概述
+3.1 包含的角色
+3.2 具体实现
+
+
+4. 完整方案
+5. 开闭原则的倾斜性
+6. 总结
+6.1 优势
+6.2 劣势
+
+
+
+
+工厂方法模式通过引入工厂等级结构，解决了简单工厂模式中工厂类职责太重的问题，但是由于工厂方法模式中的每一个工厂只生产一类产品，可能会导致系统中存在大量的工厂类......
         </div>
     </a>
     <p class="post-meta">
@@ -247,9 +307,31 @@
         </h3>
         <div class="post-content-preview">
             
-简单工厂模式虽然简单，但存在一个很严重的问题。当系统中需要引入新产品时，由于静态工厂方法通过所传入参数的不同来创建不同的产品，这必定要修改工厂类的源代码，将违背“开闭原则”，如何实现增加新产品而不影响已有代码？工厂方法模式应运而生，本文将介绍第二种工厂模式——工厂方法模式。
 
-1. 日志记录器的设计#Sunny软件公司欲开发一个系统运行日志记录器(Logger)，该记录器可以通过多种途径保......
+1. 日志记录器的设计
+1.1 设计要点
+
+
+2. 工厂方法模式概述
+2.1 定义
+2.2 组成
+2.3 实现
+2.4 完整解决方案
+2.5 反射与配置文件
+2.6 重载的工厂方法
+2.7 工厂方法的隐藏
+
+
+3. 总结
+3.1 优势
+3.2 劣势
+
+
+4. Reference
+
+
+
+简单工厂模式虽然简单，但存在一个很严重的问题。当系统中需要引入新产品时，由于静态工厂方法通过所传入参数的......
         </div>
     </a>
     <p class="post-meta">
@@ -270,12 +352,30 @@
             
         </h3>
         <div class="post-content-preview">
-            静态/简单工厂模式是工厂模式中最简单的一种实现，但是它实现了工厂模式的精髓，即将对象的创建和使用分离开，客户端通过调用工厂来创建具体的产品类。
-1. 问题描述#class Chart {
-    private String type; //图表类型
+            
 
-    public Chart(Object[][] data, String type) {
-        this.type = t......
+1. 问题描述
+2. 简单工程模式概述
+2.1 定义
+2.2 结构
+
+
+3 代码实现
+3.1 结构图
+3.2 完整方案
+3.3 改进
+
+
+4.总结
+4.1 优势
+4.2 缺陷
+
+
+
+
+静态/简单工厂模式是工厂模式中最简单的一种实现，但是它实现了工厂模式的精髓，即将对象的创建和使用分离开，客户端通过调用工厂来创建具体的产品类。
+1. 问题描述#class Chart {
+    priva......
         </div>
     </a>
     <p class="post-meta">
@@ -364,7 +464,19 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
             
         </h3>
         <div class="post-content-preview">
-            1. 函数式编程 vs 面向对象编程#函数式编程主要是把一些功能或逻辑代码通过函数的拼装方式来组织。尽量无状态，但是状态总归是需要一些地方来存放的。
+            
+
+1. 函数式编程 vs 面向对象编程
+2. 面向对象编程
+2.1 面向对象的核心理念
+2.2 tips
+2.3 缺点
+
+
+3. 控制反转
+
+
+1. 函数式编程 vs 面向对象编程#函数式编程主要是把一些功能或逻辑代码通过函数的拼装方式来组织。尽量无状态，但是状态总归是需要一些地方来存放的。
 对于状态和数据的处理，常用面向对象编程这个范式。
 面向对象编程三大特性： 
 
@@ -372,8 +484,7 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
 继承
 多态
 
-2. 面向对象编程#对象是类的实例，将对象作为程序的基本单元。对象里的程序可以访问及修改对象相关联的数据。
-在程序中包含各种独立又相互调用的对象的......
+......
         </div>
     </a>
     <p class="post-meta">
@@ -394,44 +505,28 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
             
         </h3>
         <div class="post-content-preview">
-            基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 
-1. 与传统面向对象编程的比较#1.1 关注对象实例行为，而后对类进行划分#在基于类的编程当中，对象总共有两种类型。
+            
 
-类
+1. 与传统面向对象编程的比较
+1.1 关注对象实例行为，而后对类进行划分
+1.2 创建实例的时间
 
-定义了对象的基本布局，函数特性。—-&gt; 是行为和结构的集合，对所有的接口来说这些类的行为和结构都是相同的。
 
-接口
+2. JavaScript 原型的概念
+2.1 区分_proto_以及prototype
+2.2 对象的表现形式
 
-是可以使用的对象,定义了......
+
+3. Conclusion
+
+
+基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 
+1. 与传统面向......
         </div>
     </a>
     <p class="post-meta">
         Posted by Leilei on
         2018-11-11
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/11/10/为什么要合并HTTP请求？/">
-        <h2 class="post-title">
-            为什么要合并HTTP请求？
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            思考路径：为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ 
-本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。
-1. Client发出请求#1.1 HTTP 1.1#可以保持长连接，但是每个不同的请求之间，client要......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-11-10
     </p>
 
 </div>
@@ -472,11 +567,11 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
                     <div class="tags">
                         
                             
-                            <a href="/tags/#java" title="java" rel="4">java</a>
+                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
                             
                         
                             
-                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
+                            <a href="/tags/#java" title="java" rel="4">java</a>
                             
                         
                             
@@ -494,6 +589,12 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
                             
                         
                             
+                            <a href="/tags/#React" title="React" rel="3">React</a>
+                            
+                        
+                            
+                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="3">FrontEnd</a>
+                            
                         
                             
                         
@@ -501,12 +602,6 @@ CustomerDataChart类包含了与数据库的连接，查询客户信息和创建
                         
                             
                         
-                            
-                            <a href="/tags/#React" title="React" rel="2">React</a>
-                            
-                        
-                            
-                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="2">FrontEnd</a>
                             
                         
                     </div>

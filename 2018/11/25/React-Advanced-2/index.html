@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          React Advanced 2 - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2018/11/25/React-Advanced-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#React" title="React">React</a>
+                        
+                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                        
+                    </div>
+                    <h1>React Advanced 2</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-11-25
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- toc -->
+<ul>
+<li><a href="#1-accessibility">1. Accessibility</a><ul>
+<li><a href="#11-semantic-html">1.1 Semantic HTML</a></li>
+</ul>
+</li>
+<li><a href="#2-refs-and-the-dom">2 Refs and the DOM</a><ul>
+<li><a href="#21-when-to-use-refs">2.1 When to use Refs</a></li>
+<li><a href="#22-how-to-use-refs">2.2 How to use Refs</a></li>
+<li><a href="#23-value-of-the-ref">2.3 Value of the ref</a></li>
+</ul>
+</li>
+<li><a href="#3-code-splitting">3. Code Splitting</a><ul>
+<li><a href="#31-bundling">3.1 Bundling</a></li>
+<li><a href="#32-code-splitting">3.2 Code splitting</a></li>
+<li><a href="#33-dynamic-import">3.3 Dynamic <code>import()</code></a></li>
+<li><a href="#34-reactlazy">3.4 React.lazy</a></li>
+<li><a href="#35-suspense">3.5 Suspense</a></li>
+</ul>
+</li>
+<li><a href="#4-context">4. Context</a><ul>
+<li><a href="#41-when-to-use-context">4.1 When to use Context</a></li>
+<li><a href="#42-before-using-context">4.2 Before using context</a></li>
+<li><a href="#43-api">4.3 API</a></li>
+<li><a href="#44-example">4.4 Example</a></li>
+</ul>
+</li>
+<li><a href="#5-reference">5. Reference</a></li>
+</ul>
+<!-- tocstop -->
+<p>In this part, dive deeper into React. In the previous post, found a lot of new things. Though I can write some jsx code, but I have to admit it’s really ugly…wihout reuse, with some useless states for no reasons, duplicate, boring. That’s why try to write some articles following authoritive docs. There are some of my thoughts inside, hope it can help you. :) </p>
+<h1><span id="1-accessibility">1. Accessibility</span><a href="#1-accessibility" class="header-anchor">#</a></h1><p>Also known as a11y, is the design and creation of websites that can be used by everyone. </p>
+<h2><span id="11-semantic-html">1.1 Semantic HTML</span><a href="#11-semantic-html" class="header-anchor">#</a></h2><p>Sometimes, we break HTML sementics when we add <code>&lt;div&gt;</code> elements to our JSX to make our React code work, especially working with lists and table. In these case, we should use <strong><em>React Fragments</em></strong> to group together multiple elements. </p>
+<pre><code>import React, { Fragment } from &apos;react&apos;;
+
+function ListItem({ item }) {
+  return (
+    &lt;Fragment&gt;
+      &lt;dt&gt;{item.term}&lt;/dt&gt;
+      &lt;dd&gt;{item.description}&lt;/dd&gt;
+    &lt;/Fragment&gt;
+  );
+}
+
+function Glossary(props) {
+  return (
+    &lt;dl&gt;
+      {props.items.map(item =&gt; (
+        &lt;ListItem item={item} key={item.id} /&gt;
+      ))}
+    &lt;/dl&gt;
+  );
+}
+</code></pre><p>Map a collection of items to an array of fragments as you would any other type of elements as well: </p>
+<pre><code>function Glossary(props) {
+  return (
+    &lt;dl&gt;
+      {props.items.map(item =&gt; (
+        // Fragments should also have a `key` prop when mapping collections
+        &lt;Fragment key={item.id}&gt;
+          &lt;dt&gt;{item.term}&lt;/dt&gt;
+          &lt;dd&gt;{item.description}&lt;/dd&gt;
+        &lt;/Fragment&gt;
+      ))}
+    &lt;/dl&gt;
+  );
+}
+</code></pre><h1><span id="2-refs-and-the-dom">2 Refs and the DOM</span><a href="#2-refs-and-the-dom" class="header-anchor">#</a></h1><blockquote>
+<p>Refs provide a way to access DOM nodes or React elements created in the render method. </p>
+</blockquote>
+<p>Refs offer another way to change a child outside of the typical dataflow - use props from parent to child. <strong>The child to be modified could be an instance of a React Component, or it could be a DOM element.</strong> </p>
+<h2><span id="21-when-to-use-refs">2.1 When to use Refs</span><a href="#21-when-to-use-refs" class="header-anchor">#</a></h2><ol>
+<li>Managing focus, text selection, media playback </li>
+<li>triggering imperative animations</li>
+<li>integrating with third party DOM libraries </li>
+</ol>
+<h2><span id="22-how-to-use-refs">2.2 How to use Refs</span><a href="#22-how-to-use-refs" class="header-anchor">#</a></h2><p>Use by <code>React.createRef()</code>, to create a ref</p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return &lt;div ref={this.myRef} /&gt;;
+  }
+}
+</code></pre><p>When a ref is passed to an element in render, a reference to the node becomes accessible at the <strong><em>current</em></strong> attribute of the ref</p>
+<pre><code>const node = this.myRef.current;
+</code></pre><h2><span id="23-value-of-the-ref">2.3 Value of the ref</span><a href="#23-value-of-the-ref" class="header-anchor">#</a></h2><ol>
+<li>When the ref attribute is used on an HTML element, the ref created in the constructor with React.createRef() receives the underlying DOM element as its current property.</li>
+<li><p>When the ref attribute is used on a custom class component, the ref object receives the mounted instance of the component as its current.</p>
+<p> class CustomTextInput extends React.Component {<br>   constructor(props) {</p>
+<pre><code>super(props);
+// create a ref to store the textInput DOM element
+this.textInput = React.createRef();
+this.focusTextInput = this.focusTextInput.bind(this);
+</code></pre><p>   }</p>
+<p>   focusTextInput() {</p>
+<pre><code>// Explicitly focus the text input using the raw DOM API
+// Note: we&apos;re accessing &quot;current&quot; to get the DOM node
+this.textInput.current.focus();
+</code></pre><p>   }</p>
+<p>   render() {</p>
+<pre><code>// tell React that we want to associate the &lt;input&gt; ref
+// with the `textInput` that we created in the constructor
+return (
+  &lt;div&gt;
+    &lt;input
+      type=&quot;text&quot;
+      ref={this.textInput} /&gt;
+    &lt;input
+      type=&quot;button&quot;
+      value=&quot;Focus the text input&quot;
+      onClick={this.focusTextInput}
+    /&gt;
+  &lt;/div&gt;
+);
+</code></pre><p>   }<br> }</p>
+</li>
+</ol>
+<p>Here, React will assign the current property with the DOM element when the component mounts, and assign it back to null when it unmounts. Ref updates happen before componentDidMount or componentDidUpdate lifecycle methods. </p>
+<p><strong><em>!!! We cannot use ref attribute on function componnets because they don’t have instances. </em></strong></p>
+<h1><span id="3-code-splitting">3. Code Splitting</span><a href="#3-code-splitting" class="header-anchor">#</a></h1><h2><span id="31-bundling">3.1 Bundling</span><a href="#31-bundling" class="header-anchor">#</a></h2><p>Most React Apps will have their files bundles using tools like webpack or browserify. Bundling is the process of following imported files and merging them into a single file. This file can then be included on a webpage to load an entire app at once. </p>
+<h2><span id="32-code-splitting">3.2 Code splitting</span><a href="#32-code-splitting" class="header-anchor">#</a></h2><p>Bundling is great, but as your app grows, bundle will grow too. Especially if you are including large third party libraries. </p>
+<p>To void winding up with a large bundle, it’s good to get ahead of the problkem and start splitting your bundle. </p>
+<p>Code-splitting your app can help you “lazy-load” just the things that are currently needed by the user, which can dramatically improve the performance of your app. While you haven’t reduced the overall amount of code in your app, you’ve avoided loading code that the user may never need, and reduced the amount of code needed during the initial load.</p>
+<h2><span id="33-dynamic-import">3.3 Dynamic <code>import()</code></span><a href="#33-dynamic-import" class="header-anchor">#</a></h2><p>The beast way to introduce code-splitting into app is through the dynamic import() syntax. </p>
+<pre><code>import { add } from &apos;./math&apos;;
+
+console.log(add(16, 26));
+</code></pre><p>Before, now with dynamic import: </p>
+<pre><code>import(&quot;./math&quot;).then(math =&gt; {
+  console.log(math.add(16, 26));
+});
+</code></pre><h2><span id="34-reactlazy">3.4 React.lazy</span><a href="#34-reactlazy" class="header-anchor">#</a></h2><p>lets you render a dynamic import as a regular component. </p>
+<pre><code>import OtherComponent from &apos;./OtherComponent&apos;;
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;OtherComponent /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>Switch to: </p>
+<pre><code>const OtherComponent = React.lazy(() =&gt; import(&apos;./OtherComponent&apos;));
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;OtherComponent /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><h2><span id="35-suspense">3.5 Suspense</span><a href="#35-suspense" class="header-anchor">#</a></h2><p>If the modile containing other component is not yet loaded by the time current one renders, we must <strong>show some fallback content</strong> while we are waiting for it to load. </p>
+<pre><code>const OtherComponent = React.lazy(() =&gt; import(&apos;./OtherComponent&apos;));
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;OtherComponent /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>The fallback prop accepts any React elements that you want to render while waiting for the component to load. </p>
+<h1><span id="4-context">4. Context</span><a href="#4-context" class="header-anchor">#</a></h1><p>Context provides a way to pass data through the component tree without having to pass props down manually at every level. </p>
+<p>some props, like locale preference, UI theme, that are required by many components within an application. <strong>Context provides a way to share values like these between components without having to explicitly pass a prop throught every level of the tree.</strong></p>
+<h2><span id="41-when-to-use-context">4.1 When to use Context</span><a href="#41-when-to-use-context" class="header-anchor">#</a></h2><pre><code>class App extends React.Component {
+  render() {
+    return &lt;Toolbar theme=&quot;dark&quot; /&gt;;
+  }
+}
+
+function Toolbar(props) {
+  // The Toolbar component must take an extra &quot;theme&quot; prop
+  // and pass it to the ThemedButton. This can become painful
+  // if every single button in the app needs to know the theme
+  // because it would have to be passed through all components.
+  return (
+    &lt;div&gt;
+      &lt;ThemedButton theme={props.theme} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+class ThemedButton extends React.Component {
+  render() {
+    return &lt;Button theme={this.props.theme} /&gt;;
+  }
+}
+</code></pre><p>With context, we can avoid passing props through intermidiate elements: </p>
+<pre><code>// Context lets us pass a value deep into the component tree
+// without explicitly threading it through every component.
+// Create a context for the current theme (with &quot;light&quot; as the default).
+const ThemeContext = React.createContext(&apos;light&apos;);
+
+class App extends React.Component {
+  render() {
+    // Use a Provider to pass the current theme to the tree below.
+    // Any component can read it, no matter how deep it is.
+    // In this example, we&apos;re passing &quot;dark&quot; as the current value.
+    return (
+      &lt;ThemeContext.Provider value=&quot;dark&quot;&gt;
+        &lt;Toolbar /&gt;
+      &lt;/ThemeContext.Provider&gt;
+    );
+  }
+}
+
+// A component in the middle doesn&apos;t have to
+// pass the theme down explicitly anymore.
+function Toolbar(props) {
+  return (
+    &lt;div&gt;
+      &lt;ThemedButton /&gt;
+    &lt;/div&gt;
+  );
+}
+
+class ThemedButton extends React.Component {
+  // Assign a contextType to read the current theme context.
+  // React will find the closest theme Provider above and use its value.
+  // In this example, the current theme is &quot;dark&quot;.
+  static contextType = ThemeContext;
+  render() {
+    return &lt;Button theme={this.context} /&gt;;
+  }
+}
+</code></pre><p>Notice: </p>
+<ol>
+<li><code>contextType</code></li>
+<li><code>context.provider</code></li>
+</ol>
+<h2><span id="42-before-using-context">4.2 Before using context</span><a href="#42-before-using-context" class="header-anchor">#</a></h2><p>Context is primarily used when some data needs to be accessible by many components at different nesting levels. </p>
+<p>Multiple other choices can be used to resolve similar problems. </p>
+<ol>
+<li>Pass down the combined component itself </li>
+</ol>
+<pre><code>&lt;Page user={user} avatarSize={avatarSize} /&gt;
+// ... which renders ...
+&lt;PageLayout user={user} avatarSize={avatarSize} /&gt;
+// ... which renders ...
+&lt;NavigationBar user={user} avatarSize={avatarSize} /&gt;
+// ... which renders ...
+&lt;Link href={user.permalink}&gt;
+  &lt;Avatar user={user} size={avatarSize} /&gt;
+&lt;/Link&gt;
+
+
+function Page(props) {
+  const user = props.user;
+  const userLink = (
+    &lt;Link href={user.permalink}&gt;
+      &lt;Avatar user={user} size={props.avatarSize} /&gt;
+    &lt;/Link&gt;
+  );
+  return &lt;PageLayout userLink={userLink} /&gt;;
+}
+
+// Now, we have:
+&lt;Page user={user} /&gt;
+// ... which renders ...
+&lt;PageLayout userLink={...} /&gt;
+// ... which renders ...
+&lt;NavigationBar userLink={...} /&gt;
+// ... which renders ...
+{props.userLink}
+</code></pre><h2><span id="43-api">4.3 API</span><a href="#43-api" class="header-anchor">#</a></h2><ol>
+<li><p><code>React.createContext</code></p>
+<p> const MyContext = React.createContext(defaultValue);</p>
+</li>
+</ol>
+<p>Create a context object. When React renders a component that subscribes to this Context object it will read the current context value from the closest matching Provider above it in the tree. <strong>Read context value from provider!</strong></p>
+<p>The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.</p>
+<ol start="2">
+<li><p><code>Context.Provider</code></p>
+<p> &lt;MyContext.Provider value={/<em> some value </em>/}&gt;</p>
+</li>
+</ol>
+<p>Every Context object comes with a Provider React Component that allows consuming components to subscribe to context changes. One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree. All consumers that are descendants of a Provider will re-render whenever the Provider’s value prop changes. The propagation from Provider to its descendant consumers is not subject to the shouldComponentUpdate method, so the consumer is updated even when an ancestor component bails out of the update.</p>
+<ol start="3">
+<li><code>Class.contextType</code></li>
+</ol>
+<p>contextType property on a class can be assigned a context object created by <code>React.createContext()</code>. This lets you consume the nearest current value of that Context type using this.context. You can reference this in any of the lifecycle methods including the render function.</p>
+<ol start="4">
+<li><code>Context.consumer</code></li>
+</ol>
+<pre><code>&lt;MyContext.Consumer&gt;
+  {value =&gt; /* render something based on the context value */}
+&lt;/MyContext.Consumer&gt;
+</code></pre><p>A react component that subscribes to context changes. This lets you subscribe to a context within a function component.</p>
+<h2><span id="44-example">4.4 Example</span><a href="#44-example" class="header-anchor">#</a></h2><p>theme-context.js </p>
+<pre><code>export const themes = {
+  light: {
+    foreground: &apos;#000000&apos;,
+    background: &apos;#eeeeee&apos;,
+  },
+  dark: {
+    foreground: &apos;#ffffff&apos;,
+    background: &apos;#222222&apos;,
+  },
+};
+
+export const ThemeContext = React.createContext(
+  themes.dark // default value
+);
+</code></pre><p>theme-button.js</p>
+<pre><code>import {ThemeContext} from &apos;./theme-context&apos;;
+
+class ThemedButton extends React.Component {
+  render() {
+    let props = this.props;
+    let theme = this.context;
+    return (
+      &lt;button
+        {...props}
+        style={{backgroundColor: theme.background}}
+      /&gt;
+    );
+  }
+}
+ThemedButton.contextType = ThemeContext;
+
+export default ThemedButton;
+</code></pre><p>app.js</p>
+<pre><code>import {ThemeContext, themes} from &apos;./theme-context&apos;;
+import ThemedButton from &apos;./themed-button&apos;;
+
+// An intermediate component that uses the ThemedButton
+function Toolbar(props) {
+  return (
+    &lt;ThemedButton onClick={props.changeTheme}&gt;
+      Change Theme
+    &lt;/ThemedButton&gt;
+  );
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: themes.light,
+    };
+
+    this.toggleTheme = () =&gt; {
+      this.setState(state =&gt; ({
+        theme:
+          state.theme === themes.dark
+            ? themes.light
+            : themes.dark,
+      }));
+    };
+  }
+
+  render() {
+    // The ThemedButton button inside the ThemeProvider
+    // uses the theme from state while the one outside uses
+    // the default dark theme
+    return (
+      &lt;Page&gt;
+        &lt;ThemeContext.Provider value={this.state.theme}&gt;
+          &lt;Toolbar changeTheme={this.toggleTheme} /&gt;
+        &lt;/ThemeContext.Provider&gt;
+        &lt;Section&gt;
+          &lt;ThemedButton /&gt;
+        &lt;/Section&gt;
+      &lt;/Page&gt;
+    );
+  }
+}
+
+ReactDOM.render(&lt;App /&gt;, document.root);
+</code></pre><h1><span id="5-reference">5. Reference</span><a href="#5-reference" class="header-anchor">#</a></h1><ol>
+<li><a href="https://reactjs.org/docs/context.html" target="_blank" rel="noopener">React Doc</a></li>
+</ol>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/24/React-Advanced-1/" data-toggle="tooltip" data-placement="top" title="React Advanced 1">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#React" title="React">React</a>
+                        
+                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="http://Yinwang.org" target="_blank">Yin Wang</a></li>
+                    
+                        <li><a href="https://bideyuanli.com/" target="_blank">比的原理</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2018/11/25/React-Advanced-2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

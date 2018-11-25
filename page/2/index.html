@@ -184,6 +184,29 @@
 
 <div class="post-preview">
 
+    <a href="/2018/11/10/为什么要合并HTTP请求？/">
+        <h2 class="post-title">
+            为什么要合并HTTP请求？
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            思考路径：为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ 
+本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。
+1. Client发出请求#1.1 HTTP 1.1#可以保持长连接，但是每个不同的请求之间，client要......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/11/07/Java是如何工作的/">
         <h2 class="post-title">
             Java是如何工作的
@@ -270,9 +293,32 @@ Java并发图谱
             
         </h3>
         <div class="post-content-preview">
-            1. 从c++到函数式编程#C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。
-2. 函数式编程#2.1 定义#函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。
-2.2 ......
+            
+
+1. 从c++到函数式编程
+2. 函数式编程
+2.1 定义
+2.2 特征
+2.2.1 优势
+2.2.2 劣势
+
+
+2.3 函数式编程用到的技术
+2.4 函数式编程的理念
+2.4.1 函数式编程例子
+
+
+2.5 函数式语言常用函数
+2.5.1 E.G
+
+
+3. 修饰器模式 decorator
+4. 总结
+
+
+
+
+1. 从c++到函数式编程#C++很大程度上解决了C语言中的各种问题和不便，尤......
         </div>
     </a>
     <p class="post-meta">
@@ -293,20 +339,29 @@ Java并发图谱
             
         </h3>
         <div class="post-content-preview">
-            1. 起源#编程范式, programming paradigm，是一类典型的编程风格。
-将主流编程语言分为三部分，加上对于编程本质的理解。共四篇文章。
+            
 
-泛型编程
-函数式编程
-面向对象编程
-编程本质和逻辑编程
+1. 起源
+1.1 C语言
+2. 泛型编程
+2.1 C++ 语言
+2.2 C++ 语言的泛型编程
+2.2.1 C++ 如何解决泛型问题的？
+2.2.2 泛型编程实例
 
-1.1 C语言#
-几乎现行的所有编程语言都是从c语言拓展来的，简述c语言的特性：
+
+2.2 动态类型语言的泛型编程
+2.2.1 类型系统
 
 
-静态弱类型语言，使用变量时需要声明变量类型，但类型之间有隐式转换
-typedef 定义类型的别......
+
+
+3. 泛型的本质
+reference
+
+
+1. 起源#编程范式, programming paradigm，是一类典型的编程风格。
+将主流编程语言分为三部分，......
         </div>
     </a>
     <p class="post-meta">
@@ -412,45 +467,6 @@ Synchronized statements
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/10/13/读懂财报/">
-        <h2 class="post-title">
-            读懂财报
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1 资产负债表#1.1 资产负债表 分类#企业需要做三张报表，分别是
-
-资产负债表
-利润表
-现金流
-
-1.2 财务报表是用来做什么的？#企业从事的经营活动的种类有：
-
-经营活动
-
-比如一个企业需要生产产品、销售产品、回收货款等等
-
-投资活动
-
-如果一个企业想要到一个新的地区去开展业务，想进入一个新的业务领域，或者想设计生产一个新的产品
-
-融资活动
-
-在经营和投资的过程中，当缺钱了的时候，需要......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-13
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -490,11 +506,11 @@ Synchronized statements
                     <div class="tags">
                         
                             
-                            <a href="/tags/#java" title="java" rel="4">java</a>
+                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
                             
                         
                             
-                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
+                            <a href="/tags/#java" title="java" rel="4">java</a>
                             
                         
                             
@@ -512,6 +528,12 @@ Synchronized statements
                             
                         
                             
+                            <a href="/tags/#React" title="React" rel="3">React</a>
+                            
+                        
+                            
+                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="3">FrontEnd</a>
+                            
                         
                             
                         
@@ -519,12 +541,6 @@ Synchronized statements
                         
                             
                         
-                            
-                            <a href="/tags/#React" title="React" rel="2">React</a>
-                            
-                        
-                            
-                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="2">FrontEnd</a>
                             
                         
                     </div>
