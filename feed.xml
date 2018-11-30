@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Leilei&#39;s Blog</title>
+  <icon>https://www.gravatar.com/avatar/177d70d6799ea0f9ee1e463a82face2d</icon>
+  <subtitle>做个中二的疯子</subtitle>
+  <link href="/feed.xml" rel="self"/>
+  
+  <link href="https://llchen60.com/"/>
+  <updated>2018-11-28T06:01:56.084Z</updated>
+  <id>https://llchen60.com/</id>
+  
+  <author>
+    <name>Leilei</name>
+    <email>stone2paul@gmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React Advanced 4</title>
+    <link href="https://llchen60.com/2018/11/27/React-Advanced-4/"/>
+    <id>https://llchen60.com/2018/11/27/React-Advanced-4/</id>
+    <published>2018-11-28T06:01:33.000Z</published>
+    <updated>2018-11-28T06:01:56.084Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-the-component-lifecycle&quot;&gt;1. The component lifecycle&lt;/span&gt;&lt;a href=&quot;#1-the-component-lifecycle&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://llchen60.com/tags/React/"/>
+    
+      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="https://llchen60.com/2018/11/27/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/11/27/正则表达式/</id>
+    <published>2018-11-28T05:24:05.000Z</published>
+    <updated>2018-11-28T05:24:54.507Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-intro&quot;&gt;1. Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-using-simple-patterns&quot;&gt;2. Using simple patterns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React Advanced 3</title>
+    <link href="https://llchen60.com/2018/11/26/React-Advanced-3/"/>
+    <id>https://llchen60.com/2018/11/26/React-Advanced-3/</id>
+    <published>2018-11-27T04:17:20.000Z</published>
+    <updated>2018-11-27T04:18:04.553Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-error-boundaries&quot;&gt;1. Error Boundaries&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-why-need-error-boundaries&quot;&gt;1.1 Why need
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://llchen60.com/tags/React/"/>
+    
+      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React Advanced 2</title>
+    <link href="https://llchen60.com/2018/11/25/React-Advanced-2/"/>
+    <id>https://llchen60.com/2018/11/25/React-Advanced-2/</id>
+    <published>2018-11-25T19:02:26.000Z</published>
+    <updated>2018-11-25T19:03:34.932Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-accessibility&quot;&gt;1. Accessibility&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-semantic-html&quot;&gt;1.1 Semantic
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://llchen60.com/tags/React/"/>
+    
+      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React Advanced 1</title>
+    <link href="https://llchen60.com/2018/11/24/React-Advanced-1/"/>
+    <id>https://llchen60.com/2018/11/24/React-Advanced-1/</id>
+    <published>2018-11-24T20:52:47.000Z</published>
+    <updated>2018-11-24T21:11:13.386Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-main-concepts&quot;&gt;1. Main Concepts&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-jsx&quot;&gt;1.1 JSX&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://llchen60.com/tags/React/"/>
+    
+      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>抽象工厂模式</title>
+    <link href="https://llchen60.com/2018/11/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/11/19/抽象工厂模式/</id>
+    <published>2018-11-20T04:48:06.000Z</published>
+    <updated>2018-11-24T21:14:03.236Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-初始设计&quot;&gt;1. 初始设计&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-存在的问题&quot;&gt;1.1 存在的问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-产品等级结构&quot;&gt;2.
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>工厂方法模式</title>
+    <link href="https://llchen60.com/2018/11/18/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/11/18/工厂方法模式/</id>
+    <published>2018-11-19T05:53:56.000Z</published>
+    <updated>2018-11-24T21:12:19.879Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-日志记录器的设计&quot;&gt;1. 日志记录器的设计&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-设计要点&quot;&gt;1.1 设计要点&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简单工厂模式</title>
+    <link href="https://llchen60.com/2018/11/14/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/11/14/简单工厂模式/</id>
+    <published>2018-11-15T05:17:32.000Z</published>
+    <updated>2018-11-24T21:14:02.561Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-问题描述&quot;&gt;1. 问题描述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-简单工程模式概述&quot;&gt;2. 简单工程模式概述&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#21-定义&quot;&gt;2.1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IOC容器和Dependency Injection模式</title>
+    <link href="https://llchen60.com/2018/11/13/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/11/13/IOC容器和Dependency-Injection模式/</id>
+    <published>2018-11-14T02:25:40.000Z</published>
+    <updated>2018-11-14T02:26:44.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Martin Fowler的文章，在文中深入探索控制反转的的工作原理，给它一个更能描述其特点的名字——”依赖注入”（Dependency Injection），并将其与”服务定位器”（Service
+        
+      
+    
+    </summary>
+    
+    
+      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面向对象设计原则</title>
+    <link href="https://llchen60.com/2018/11/12/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"/>
+    <id>https://llchen60.com/2018/11/12/面向对象设计原则/</id>
+    <published>2018-11-13T04:51:59.000Z</published>
+    <updated>2018-11-13T05:03:54.923Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-概述&quot;&gt;1. 概述&lt;/span&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;支持可维护性，提高系统的可复用性&lt;/p&gt;
+&lt;h1&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式概述</title>
+    <link href="https://llchen60.com/2018/11/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"/>
+    <id>https://llchen60.com/2018/11/12/设计模式概述/</id>
+    <published>2018-11-13T04:51:51.000Z</published>
+    <updated>2018-11-13T04:53:36.164Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-起源&quot;&gt;1. 起源&lt;/span&gt;&lt;a href=&quot;#1-起源&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程范式系列-面向对象编程</title>
+    <link href="https://llchen60.com/2018/11/11/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
+    <id>https://llchen60.com/2018/11/11/编程范式系列-面向对象编程/</id>
+    <published>2018-11-11T22:17:51.000Z</published>
+    <updated>2018-11-24T21:13:59.617Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-函数式编程-vs-面向对象编程&quot;&gt;1. 函数式编程 vs 面向对象编程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-面向对象编程&quot;&gt;2. 面向对象编程&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程范式系列-基于原型的编程</title>
+    <link href="https://llchen60.com/2018/11/11/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"/>
+    <id>https://llchen60.com/2018/11/11/编程范式系列-基于原型的编程/</id>
+    <published>2018-11-11T22:17:36.000Z</published>
+    <updated>2018-11-24T21:14:01.081Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-与传统面向对象编程的比较&quot;&gt;1. 与传统面向对象编程的比较&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-关注对象实例行为而后对类进行划分&quot;&gt;1.1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么要合并HTTP请求？</title>
+    <link href="https://llchen60.com/2018/11/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82%EF%BC%9F/"/>
+    <id>https://llchen60.com/2018/11/10/为什么要合并HTTP请求？/</id>
+    <published>2018-11-10T19:31:12.000Z</published>
+    <updated>2018-11-10T19:33:06.382Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;思考路径：&lt;br&gt;为什么要实现batch call? -&amp;gt; 减少网络中的传输损耗 -&amp;gt; 如何减少的? -&amp;gt; 通过合并HTTP请求 -&amp;gt; 合并HTTP请求是如何减少网络损耗的？
+        
+      
+    
+    </summary>
+    
+    
+      <category term="web" scheme="https://llchen60.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java是如何工作的</title>
+    <link href="https://llchen60.com/2018/11/07/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
+    <id>https://llchen60.com/2018/11/07/Java是如何工作的/</id>
+    <published>2018-11-08T05:19:10.000Z</published>
+    <updated>2018-11-08T05:19:46.699Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-编程语言是如何工作的&quot;&gt;1. 编程语言是如何工作的&lt;/span&gt;&lt;a href=&quot;#1-编程语言是如何工作的&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>volatile关键字</title>
+    <link href="https://llchen60.com/2018/11/05/volatile%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    <id>https://llchen60.com/2018/11/05/volatile关键字/</id>
+    <published>2018-11-06T06:43:44.000Z</published>
+    <updated>2018-11-06T06:46:19.926Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-synchronized-vs-volatile&quot;&gt;1. Synchronized vs volatile&lt;/span&gt;&lt;a href=&quot;#1-synchronized-vs-volatile&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java并发图谱</title>
+    <link href="https://llchen60.com/2018/11/04/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"/>
+    <id>https://llchen60.com/2018/11/04/Java并发图谱/</id>
+    <published>2018-11-04T17:25:14.000Z</published>
+    <updated>2018-11-04T17:52:51.556Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;在网上看到的描述Java并发的非常棒的知识图谱，分享/标注一波。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;包含：
+        
+      
+    
+    </summary>
+    
+    
+      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程范式系列-函数式编程</title>
+    <link href="https://llchen60.com/2018/10/31/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    <id>https://llchen60.com/2018/10/31/编程范式系列-函数式编程/</id>
+    <published>2018-11-01T03:39:37.000Z</published>
+    <updated>2018-11-24T21:14:01.787Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-从c到函数式编程&quot;&gt;1. 从c++到函数式编程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-函数式编程&quot;&gt;2. 函数式编程&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#21-定义&quot;&gt;2.1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程范式系列-泛型编程</title>
+    <link href="https://llchen60.com/2018/10/28/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"/>
+    <id>https://llchen60.com/2018/10/28/编程范式系列-泛型编程/</id>
+    <published>2018-10-28T19:45:43.000Z</published>
+    <updated>2018-11-24T21:14:00.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-起源&quot;&gt;1. 起源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#11-c语言&quot;&gt;1.1 C语言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-泛型编程&quot;&gt;2. 泛型编程&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java-Synchronized方法</title>
+    <link href="https://llchen60.com/2018/10/27/Java-Synchronized%E6%96%B9%E6%B3%95/"/>
+    <id>https://llchen60.com/2018/10/27/Java-Synchronized方法/</id>
+    <published>2018-10-27T19:07:47.000Z</published>
+    <updated>2018-11-08T05:27:48.363Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-synchronized-type&quot;&gt;1. synchronized type&lt;/span&gt;&lt;a href=&quot;#1-synchronized-type&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
+  
+</feed>
