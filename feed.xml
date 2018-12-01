@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-11-28T06:01:56.084Z</updated>
+  <updated>2018-12-01T20:14:51.620Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>说说日本(一)</title>
+    <link href="https://llchen60.com/2018/12/01/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC-%E4%B8%80/"/>
+    <id>https://llchen60.com/2018/12/01/说说日本-一/</id>
+    <published>2018-12-01T20:10:06.000Z</published>
+    <updated>2018-12-01T20:14:51.620Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一衣带水的邻国，看上去像富士山一样，温润如玉，殊不知是座活火山，平静下酝酿着风暴。这是个很神奇的存在啊。有全世界独一无二的审慎与严谨，但也有战斗到死的癫狂。尽量不在这篇文章里输出自己的观点，只想说说关于日本，在自己了解以后，一些神奇的，令人惊叹的点。&lt;/p&gt;
+&lt;h1&gt;&lt;sp
+        
+      
+    
+    </summary>
+    
+    
+      <category term="history" scheme="https://llchen60.com/tags/history/"/>
+    
+  </entry>
   
   <entry>
     <title>React Advanced 4</title>
@@ -531,32 +556,6 @@
     
     
       <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java-Synchronized方法</title>
-    <link href="https://llchen60.com/2018/10/27/Java-Synchronized%E6%96%B9%E6%B3%95/"/>
-    <id>https://llchen60.com/2018/10/27/Java-Synchronized方法/</id>
-    <published>2018-10-27T19:07:47.000Z</published>
-    <updated>2018-11-08T05:27:48.363Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-synchronized-type&quot;&gt;1. synchronized type&lt;/span&gt;&lt;a href=&quot;#1-synchronized-type&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
-    
-      <category term="java" scheme="https://llchen60.com/tags/java/"/>
     
   </entry>
   
