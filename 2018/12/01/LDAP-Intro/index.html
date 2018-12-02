@@ -13,11 +13,11 @@
 
     <title>
         
-          Leilei | 磊磊的博客
+          LDAP Intro - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/page/3/">
+    <link rel="canonical" href="https://llchen60.com/2018/12/01/LDAP-Intro/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,410 +147,128 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Leilei&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">做个中二的疯子</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#web" title="web">web</a>
+                        
+                    </div>
+                    <h1>LDAP Intro</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-12-01
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-<div class="post-preview">
-
-    <a href="/2018/10/28/编程范式系列-泛型编程/">
-        <h2 class="post-title">
-            编程范式系列-泛型编程
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-
-1. 起源
-1.1 C语言
-2. 泛型编程
-2.1 C++ 语言
-2.2 C++ 语言的泛型编程
-2.2.1 C++ 如何解决泛型问题的？
-2.2.2 泛型编程实例
-
-
-2.2 动态类型语言的泛型编程
-2.2.1 类型系统
-
-
-
-
-3. 泛型的本质
-reference
-
-
-1. 起源#编程范式, programming paradigm，是一类典型的编程风格。
-将主流编程语言分为三部分，......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-28
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/27/Java-Synchronized方法/">
-        <h2 class="post-title">
-            Java-Synchronized方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. synchronized type#
-Synchronized methods
-Synchronized statements 
-
-2. Synchronized Methods#修饰实例方法，作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁。修饰静态方法，作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁。 
-2.1 不可插入#It is not possible ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-27
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/21/浏览器输入url以后都发生了什么/">
-        <h2 class="post-title">
-            浏览器输入url以后都发生了什么
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            从输入一个网址开始，都调用了哪些服务，经历了哪些步骤，深度解析。以输入www.google.com为例。
-1. Client端#一般来说，这里的Client指用户，即browser浏览器。这里我们以输入google.com为例。
-1.1 输入提示#浏览器会根据历史访问，书签等信息给出输入建议。
-还会根据默认搜索引擎的搜索记录，去匹配最近的搜索记录。
-1.2 url解析#如果是不合法的地址，会......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-21
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/16/React初探/">
-        <h2 class="post-title">
-            React初探
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            初探React,很喜欢Component这种方式，很大程度提高了复用性，如果抛除C/S的区别，感觉有点像mason，毕竟刚刚弃掉mason的坑，很有意思的React。
-1. Hello World#React.Component   A component takes in parameters, called props and returns a hierarchy of views t......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/14/二战时间线/">
-        <h2 class="post-title">
-            二战时间线
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-对二战很感兴趣，依旧在不断了解中。未了解前完全没想到在不到80年前，我们这个世界因为战争在短短十多年间死去了7000万人。中间有太多的泯灭人性，亦有很多人性的光辉。不知道列宁格勒，如今的圣彼得堡的居民，在两年半的被围城中是如何活下来的，每个人，都真的是挺直了腰背，这一刻，尊严比命重要。有太多的细节可以探寻，也有很多微妙的节点，好多次盟军的胜利是因为一些不期而遇的变化，小人物的选择，天气的突......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-14
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/13/读懂财报/">
-        <h2 class="post-title">
-            读懂财报
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1 资产负债表#1.1 资产负债表 分类#企业需要做三张报表，分别是
-
-资产负债表
-利润表
-现金流
-
-1.2 财务报表是用来做什么的？#企业从事的经营活动的种类有：
-
-经营活动
-
-比如一个企业需要生产产品、销售产品、回收货款等等
-
-投资活动
-
-如果一个企业想要到一个新的地区去开展业务，想进入一个新的业务领域，或者想设计生产一个新的产品
-
-融资活动
-
-在经营和投资的过程中，当缺钱了的时候，需要......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/11/unix-linux-note/">
-        <h2 class="post-title">
-            Example Post With Default Header Image
-        </h2>
-        <h3 class="post-subtitle">
-            不适合人类阅读，非常水的自我笔记
-        </h3>
-        <div class="post-content-preview">
-            
-This document is not completed and will be updated anytime.
-
-Catagory#
-Unix
-Bell Labs
-Xenix
-BSD
-FreeBSD &amp; Apple
-NeXTStep
-Darwin
-POSIX
-
-
-Unix-like
-Single Unix Specification
-Apple iOS
-XNU Kernel......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by leilei on
-        2018-10-11
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/page/2/">&larr; Newer Posts</a>
-        </li>
-    
-    
+                <h1><span id="1-whats-ldap">1. What’s LDAP?</span><a href="#1-whats-ldap" class="header-anchor">#</a></h1><p>LDAP stands for <strong><em>Lightweight Directory Access Protocol</em></strong>. It is a lightweight client-server protocol for accessing directory services. It runs over <strong>TCP/IP or other connection oriented transfer services</strong>. </p>
+<h1><span id="2-whats-directory">2. What’s directory?</span><a href="#2-whats-directory" class="header-anchor">#</a></h1><p>Similar to database, but contain more <strong>descriptive, attibute-based information</strong>. It has some features:</p>
+<ol>
+<li>Read much more often than it is written. </li>
+<li>Directories are tuned to give quick response to high volume look up or search operations.</li>
+<li>Have the ability to replicate information widely in order to increase availability and reliability</li>
+</ol>
+<h1><span id="3-how-does-ldap-work">3. How does LDAP work?</span><a href="#3-how-does-ldap-work" class="header-anchor">#</a></h1><p>LDAP directory serice base on a client-server model. One or more LDAP servers contain the data making up the LDAP directory tree or LDAP backend database. An LDAP client connects to an LDAP server and asks it a question. The server responds with the answer, or with a pointer to where the client can get more information (typically, another LDAP server). No matter what LDAP server a client connects to, it sees the same view of the directory; a name presented to one LDAP server references the same entry it would at another LDAP server. This is an important feature of a global directory service, like LDAP.</p>
+<h1><span id="4-directory-structure">4. Directory Structure</span><a href="#4-directory-structure" class="header-anchor">#</a></h1><p>The protocol provides an interface with directories that follow the x.500 model:</p>
+<ul>
+<li>An entry consists of a set of attributes</li>
+<li>An attribute has a name(an attribute type or attribute description) and one or more values. Attrs are defined in a schema. </li>
+<li><p>Each entry has a unique identifier - distinguished Name(DN).This consists of its Relative Distinguished Name (RDN), constructed from some attribute(s) in the entry, followed by the parent entry’s DN.</p>
+<p>   dn: cn=John Doe,dc=example,dc=com<br>   cn: John Doe<br>   givenName: John<br>   sn: Doe<br>   telephoneNumber: +1 888 555 6789<br>   telephoneNumber: +1 888 555 1232<br>   mail: <a href="mailto:john@example.com" target="_blank" rel="noopener">john@example.com</a><br>   manager: cn=Barbara Doe,dc=example,dc=com<br>   objectClass: inetOrgPerson<br>   objectClass: organizationalPerson<br>   objectClass: person<br>   objectClass: top</p>
+</li>
 </ul>
+<p><code>&quot;dn&quot;</code> is the distinguished name of the entry; it is neither an attribute nor a part of the entry. <code>&quot;cn=John Doe&quot;</code> is the entry’s RDN (Relative Distinguished Name), and <code>&quot;dc=example,dc=com&quot;</code> is the DN of the parent entry, where <code>&quot;dc&quot;</code> denotes <code>&#39;Domain Component&#39;</code>. The other lines show the attributes in the entry. Attribute names are typically mnemonic strings, like <code>&quot;cn&quot;</code> for common name, <code>&quot;dc&quot;</code> for domain component, <code>&quot;mail&quot;</code> for e-mail address, and <code>&quot;sn&quot;</code> for surname.</p>
+<p>A server holds a subtree starting from a specific entry, e.g. <code>&quot;dc=example,dc=com&quot;</code> and its children. Servers may also hold references to other servers, so an attempt to access <code>&quot;ou=department,dc=example,dc=com&quot;</code> could return a referral or continuation reference to a server that holds that part of the directory tree. The client can then contact the other server. Some servers also support chaining, which means the server contacts the other server and returns the results to the client.</p>
+<p>LDAP rarely defines any ordering: The server may return the values of an attribute, the attributes in an entry, and the entries found by a search operation in any order. This follows from the formal definitions - an entry is defined as a set of attributes, and an attribute is a set of values, and sets need not be ordered. </p>
+<h1><span id="5-reference">5. Reference</span><a href="#5-reference" class="header-anchor">#</a></h1><p>1.<a href="https://segmentfault.com/a/1190000002607140" target="_blank" rel="noopener">LDAP服务器的概念和原理简单介绍</a><br>2.<a href="https://www.tldp.org/HOWTO/LDAP-HOWTO/whatisldap.html" target="_blank" rel="noopener">What’s LDAP</a><br>3.<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol" target="_blank" rel="noopener">Wiki: Lightweight_Directory_Access_Protocol</a></p>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
 
 
 
-                <!-- 如果开启评论功能 -->
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/12/01/说说日本-一/" data-toggle="tooltip" data-placement="top" title="说说日本(一)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#backend" title="backend" rel="4">backend</a>
-                            
-                        
-                            
-                            <a href="/tags/#java" title="java" rel="4">java</a>
-                            
-                        
-                            
-                            <a href="/tags/#web" title="web" rel="3">web</a>
-                            
-                        
-                            
-                            <a href="/tags/#React" title="React" rel="5">React</a>
-                            
-                        
-                            
-                            <a href="/tags/#FrontEnd" title="FrontEnd" rel="6">FrontEnd</a>
-                            
-                        
-                            
-                            <a href="/tags/#编程思维" title="编程思维" rel="4">编程思维</a>
-                            
-                        
-                            
-                            <a href="/tags/#Design Pattern" title="Design Pattern" rel="5">Design Pattern</a>
-                            
-                        
-                            
-                            <a href="/tags/#history" title="history" rel="2">history</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#web" title="web">web</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.jpg" />
-                        
-
-                        
-                            <p>Magic happens!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                                <li>
-                                    <a href="/feed.xml">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.facebook.com/llchen60">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/stone16">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -571,9 +289,65 @@ XNU Kernel......
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2018/12/01/LDAP-Intro/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
