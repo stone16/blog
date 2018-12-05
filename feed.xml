@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-04T05:24:12.740Z</updated>
+  <updated>2018-12-05T04:08:27.717Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原型模式</title>
+    <link href="https://llchen60.com/2018/12/04/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/12/04/原型模式/</id>
+    <published>2018-12-05T03:58:57.000Z</published>
+    <updated>2018-12-05T04:08:27.717Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-原型模式概述&quot;&gt;1. 原型模式概述&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-工作原理&quot;&gt;1.1 工作原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#12-包含角色&quot;&gt;1.2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
@@ -522,35 +550,6 @@
     
     
       <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java并发图谱</title>
-    <link href="https://llchen60.com/2018/11/04/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"/>
-    <id>https://llchen60.com/2018/11/04/Java并发图谱/</id>
-    <published>2018-11-04T17:25:14.000Z</published>
-    <updated>2018-11-04T17:52:51.556Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;在网上看到的描述Java并发的非常棒的知识图谱，分享/标注一波。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;包含：
-        
-      
-    
-    </summary>
-    
-    
-      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
-    
-      <category term="java" scheme="https://llchen60.com/tags/java/"/>
     
   </entry>
   

@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          原型模式 - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2018/12/04/原型模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
+                        
+                    </div>
+                    <h1>原型模式</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2018-12-04
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- toc -->
+<ul>
+<li><a href="#1-原型模式概述">1. 原型模式概述</a><ul>
+<li><a href="#11-工作原理">1.1 工作原理</a></li>
+<li><a href="#12-包含角色">1.2 包含角色</a></li>
+</ul>
+</li>
+<li><a href="#2-原型模式的实现">2. 原型模式的实现</a><ul>
+<li><a href="#21-通用实现方法">2.1 通用实现方法</a></li>
+<li><a href="#22-java提供的clone方法">2.2 Java提供的clone()方法</a></li>
+</ul>
+</li>
+<li><a href="#3-原型模式实现工作周报快速创建">3. 原型模式实现工作周报快速创建</a></li>
+<li><a href="#4-浅克隆与深克隆">4. 浅克隆与深克隆</a><ul>
+<li><a href="#41-浅克隆">4.1 浅克隆</a></li>
+<li><a href="#42-深克隆">4.2 深克隆</a></li>
+<li><a href="#43-java中实现深克隆的方法浅析">4.3 Java中实现深克隆的方法浅析</a><ul>
+<li><a href="#431-apache-commons-lang">4.3.1 Apache Commons Lang</a></li>
+<li><a href="#432-json-serialization-with-gson">4.3.2 Json Serialization with Gson</a></li>
+<li><a href="#433-constructor">4.3.3 constructor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-原型管理器">5. 原型管理器</a><ul>
+<li><a href="#51-实例-公文管理器">5.1 实例-公文管理器</a></li>
+</ul>
+</li>
+<li><a href="#6-总结">6. 总结</a><ul>
+<li><a href="#61-优点">6.1 优点</a></li>
+<li><a href="#62-缺点">6.2 缺点</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="1-原型模式概述">1. 原型模式概述</span><a href="#1-原型模式概述" class="header-anchor">#</a></h1><p>原型模式指：通过一个原型对象克隆出多个一模一样的对象。</p>
+<p>在使用原型模式时，首先需要创建一个原型对象，再通过复制这个原型对象来创建更多同类型的对象。</p>
+<blockquote>
+<p>使用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。原型模式时一种对象创建型模式。</p>
+</blockquote>
+<h2><span id="11-工作原理">1.1 工作原理</span><a href="#11-工作原理" class="header-anchor">#</a></h2><p>将一个原型对象传给要发动创建的对象，这个要发动创建的对象通过请求原型对象拷贝自己来实现创建过程。</p>
+<p>通过克隆方法所创建的对象是全新的，在内存中有新的地址，对克隆对象所产生的对象进行修改不会对原型对象产生任何影响。</p>
+<h2><span id="12-包含角色">1.2 包含角色</span><a href="#12-包含角色" class="header-anchor">#</a></h2><p><img src="1.gif" alt="1.gif"></p>
+<ul>
+<li>Prototype (抽象原型类)</li>
+</ul>
+<p>是声明克隆方法的接口，是所有具体类型类的公共父类。抽象类/ 接口/ 具体实现类</p>
+<ul>
+<li>ConcretePrototype (具体原型类)</li>
+</ul>
+<p>实现了抽象原型类中声明的克隆方法，在克隆方法中返回一个自己的克隆对象</p>
+<ul>
+<li>Client</li>
+</ul>
+<p>让一个原型对象克隆自身，从而创建一个新的对象。客户类针对抽象原型类Prototype编程，因此用户可以根据需要选择具体原型类，扩展性加强了。</p>
+<h1><span id="2-原型模式的实现">2. 原型模式的实现</span><a href="#2-原型模式的实现" class="header-anchor">#</a></h1><h2><span id="21-通用实现方法">2.1 通用实现方法</span><a href="#21-通用实现方法" class="header-anchor">#</a></h2><pre><code>class ConcretePrototype implements Prototype {
+
+    private String attr; //成员属性
+
+    public void setAttr(String attr) {
+        this.attr = attr;
+    }
+
+    public String getAttr() {
+        return this.attr;
+    }
+
+    public Prototype clone() //克隆方法
+    {
+        Prototype prototype = new ConcretePrototype(); //创建新对象
+        prototype.setAttr(this.attr);
+        return prototype;
+    }
+}
+</code></pre><h2><span id="22-java提供的clone方法">2.2 Java提供的clone()方法</span><a href="#22-java提供的clone方法" class="header-anchor">#</a></h2><p>所有的Java类都继承自java.lang.Object。事实上，Object提供了clone()方法，可以将一个Java对象复制一份。可以直接使用这个方法来实现克隆的。</p>
+<pre><code>class ConcretePrototype implements Cloneable {
+
+    public Prototype clone() {
+
+    　　Object object = null;
+    　　try {
+    　　　　　object = super.clone();
+    　　} catch (CloneNotSupportedException exception) {
+    　　　　　System.err.println(&quot;Not support cloneable&quot;);
+    　　}
+    　　return (Prototype )object;
+    }
+}
+</code></pre><p>Java中的clone()满足：</p>
+<ol>
+<li>对于任何对象，都有<code>x.clone() != x</code>，即克隆方法创建了新的对象</li>
+<li>对于任何对象，都有<code>x.clone().getClass() == x.getClass()</code>，即克隆对象与原型对象的类型一样</li>
+<li>派生类需要实现Cloneable接口</li>
+</ol>
+<h1><span id="3-原型模式实现工作周报快速创建">3. 原型模式实现工作周报快速创建</span><a href="#3-原型模式实现工作周报快速创建" class="header-anchor">#</a></h1><p><img src="2.gif" alt="2.gif"></p>
+<p>快速创建周报结构图</p>
+<p>//工作周报WeeklyLog：具体原型类，考虑到代码的可读性和易理解性，只列出部分与模式相关的核心代码</p>
+<pre><code>class WeeklyLog implements Cloneable
+{
+    private String name;
+    private String date;
+    private String content;
+
+    public  void setName(String name) {
+        this.name  = name;
+    }
+
+    public  void setDate(String date) {
+        this.date  = date;
+    }
+
+    public  void setContent(String content) {
+        this.content  = content;
+    }
+
+    public  String getName() {
+        return  (this.name);
+    }
+
+    public  String getDate() {
+        return  (this.date);
+    }
+
+    public  String getContent() {
+        return  (this.content);
+    }
+
+     //克隆方法clone()，此处使用Java语言提供的克隆机制
+
+    public WeeklyLog clone()
+    {
+        Object obj = null;
+        try {
+        obj = super.clone();
+        return (WeeklyLog)obj;  
+    } catch(CloneNotSupportedException e) {
+        System.out.println(&quot;不支持复制！&quot;);
+        return null;
+        }
+    }
+}
+</code></pre><p>测试代码:</p>
+<pre><code>class Client
+{
+    public  static void main(String args[])
+    {
+              WeeklyLog log_previous = new WeeklyLog();  //创建原型对象
+              log_previous.setName(&quot;张无忌&quot;);
+              log_previous.setDate(&quot;第12周&quot;);
+              log_previous.setContent(&quot;这周工作很忙，每天加班！&quot;);
+              System.out.println(&quot;****周报****&quot;);
+              System.out.println(&quot;周次：&quot; +  log_previous.getDate());
+              System.out.println(&quot;姓名：&quot; +  log_previous.getName());
+              System.out.println(&quot;内容：&quot; +  log_previous.getContent());
+              System.out.println(&quot;--------------------------------&quot;);
+
+              WeeklyLog  log_new;
+              log_new  = log_previous.clone(); //调用克隆方法创建克隆对象
+              log_new.setDate(&quot;第13周&quot;);
+              System.out.println(&quot;****周报****&quot;);
+              System.out.println(&quot;周次：&quot; + log_new.getDate());
+              System.out.println(&quot;姓名：&quot; + log_new.getName());
+              System.out.println(&quot;内容：&quot; + log_new.getContent());
+       }
+}
+</code></pre><h1><span id="4-浅克隆与深克隆">4. 浅克隆与深克隆</span><a href="#4-浅克隆与深克隆" class="header-anchor">#</a></h1><p>在java中，数据类型分为值类型和引用类型，值类型包括int,double, byte, boolean, char等，引用类型包括类，接口，数组等。浅克隆与深克隆的区别在于是否支持引用类型的成员变量的复制。</p>
+<h2><span id="41-浅克隆">4.1 浅克隆</span><a href="#41-浅克隆" class="header-anchor">#</a></h2><p><img src="3.gif" alt="3.gif"><br>浅克隆示意图</p>
+<p>如果原型对象的成员变量是引用类型，则将引用对象的地址复制一份给克隆对象，也就是说二者的成员变量指向了相同的内存地址。<strong><em>在浅克隆中，当对象被复制时只复制它本身和其中包含的值类型的成员变量，而引用类型的成员对象并没有复制</em></strong>。</p>
+<p><img src="4.gif" alt="4.gif"><br>带附件的周报结构图</p>
+<p>附件类代码：</p>
+<pre><code>//附件类
+class Attachment
+{
+    private String name; //附件名
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public void download() {
+        System.out.println(&quot;下载附件，文件名为&quot; + name);
+    }
+}
+</code></pre><p>工作周报类代码</p>
+<pre><code>//工作周报WeeklyLog
+class WeeklyLog implements Cloneable
+{
+     //为了简化设计和实现，假设一份工作周报中只有一个附件对象，实际情况中可以包含多个附件，可以通过List等集合对象来实现
+
+       private Attachment attachment;
+       private String name;
+       private  String date;
+       private  String content;
+
+       public void setAttachment(Attachment  attachment) {
+              this.attachment = attachment;
+       }
+
+       public  void setName(String name) {
+              this.name  = name;
+       }
+
+       public  void setDate(String date) {
+              this.date  = date;
+       }
+
+       public  void setContent(String content) {
+              this.content  = content;
+       }
+
+       public Attachment  getAttachment(){
+              return (this.attachment);
+       }
+
+       public  String getName() {
+              return  (this.name);
+       }
+
+       public  String getDate() {
+              return  (this.date);
+       }
+
+       public  String getContent() {
+              return  (this.content);
+       }
+
+     //使用clone()方法实现浅克隆
+
+       public WeeklyLog clone()
+       {
+              Object obj = null;
+              try
+              {
+                     obj = super.clone();
+                     return (WeeklyLog)obj;
+              }
+              catch(CloneNotSupportedException  e)
+              {
+                System.out.println(&quot;不支持复制！&quot;);
+                     return null;
+              }
+       }
+}
+</code></pre><p>客户端代码：</p>
+<pre><code>class Client
+{
+       public  static void main(String args[])
+       {
+              WeeklyLog  log_previous, log_new;
+              log_previous  = new WeeklyLog(); //创建原型对象
+              Attachment  attachment = new Attachment(); //创建附件对象
+              log_previous.setAttachment(attachment);  //将附件添加到周报中
+              log_new  = log_previous.clone(); //调用克隆方法创建克隆对象
+
+              //比较周报
+              System.out.println(&quot;周报是否相同？ &quot; + (log_previous ==  log_new));
+              //比较附件
+              System.out.println(&quot;附件是否相同？ &quot; +  (log_previous.getAttachment() == log_new.getAttachment()));
+       }
+}
+</code></pre><h2><span id="42-深克隆">4.2 深克隆</span><a href="#42-深克隆" class="header-anchor">#</a></h2><p>无论原型对象的成员变量是值类型还是引用类型，都将复制一份给克隆对象。即深克隆中，除了对象本身被复制外，对象所包含的所有成员变量也将复制。</p>
+<p><img src="5.gif" alt="5.gif"><br>深克隆示意图</p>
+<p>如果要实现深克隆，在Java中可以通过序列化Serialization等方式来实现。</p>
+<p>序列化，将对象写到流里，通过序列化的拷贝不仅可以复制对象本身，也可以复制其引用的成员对象。因此通过序列化将对象写到一个流中，再从流里将其读出来，可以实现深克隆。需要注意的是能够实现序列化的对象其类必须实现<strong>Serializable接口</strong>，否则无法实现序列化操作。</p>
+<p><img src="6.gif" alt="6.gif"><br>带附件的周报结构图</p>
+<p>附件类：</p>
+<p>import  java.io.*;</p>
+<p>//附件类</p>
+<pre><code>class  Attachment implements Serializable
+{
+       private  String name; //附件名
+
+       public  void setName(String name)
+       {
+              this.name  = name;
+       }
+
+       public  String getName()
+       {
+              return  this.name;
+       }
+
+     public void download()
+     {
+            System.out.println(&quot;下载附件，文件名为&quot; + name);
+     }
+}
+</code></pre><p>工作周报类代码实现：</p>
+<pre><code>import  java.io.*;
+
+//工作周报类
+class  WeeklyLog implements Serializable
+{
+       private  Attachment attachment;
+       private  String name;
+       private  String date;
+       private  String content;
+       public  void setAttachment(Attachment attachment) {
+              this.attachment  = attachment;
+       }
+
+       public  void setName(String name) {
+              this.name  = name
+       }
+
+       public  void setDate(String date) {
+              this.date  = date;
+       }
+
+       public  void setContent(String content) {
+              this.content  = content;
+       }
+
+       public  Attachment getAttachment(){
+              return  (this.attachment);
+       }
+
+       public  String getName() {
+              return  (this.name);
+       }
+
+       public  String getDate() {
+              return  (this.date);
+       }
+
+       public  String getContent() {
+              return  (this.content);
+       }
+
+   //使用序列化技术实现深克隆
+
+       public WeeklyLog deepClone() throws  IOException, ClassNotFoundException, OptionalDataException
+       {
+              //将对象写入流中
+
+              ByteArrayOutputStream bao=new  ByteArrayOutputStream();
+
+              ObjectOutputStream oos=new  ObjectOutputStream(bao);
+
+              oos.writeObject(this);
+
+              //将对象从流中取出
+
+              ByteArrayInputStream bis=new  ByteArrayInputStream(bao.toByteArray());
+
+              ObjectInputStream ois=new  ObjectInputStream(bis);
+
+              return  (WeeklyLog)ois.readObject();
+
+       }
+
+}
+</code></pre><p>客户端代码：</p>
+<pre><code>class Client
+{
+       public  static void main(String args[])
+
+       {
+              WeeklyLog  log_previous, log_new = null;
+              log_previous  = new WeeklyLog(); //创建原型对象
+              Attachment  attachment = new Attachment(); //创建附件对象
+              log_previous.setAttachment(attachment);  //将附件添加到周报中
+              try
+              {
+                     log_new =  log_previous.deepClone(); //调用深克隆方法创建克隆对象                  
+              }
+              catch(Exception e)
+              {
+                  System.err.println(&quot;克隆失败！&quot;);
+              }
+
+              //比较周报
+              System.out.println(&quot;周报是否相同？ &quot; + (log_previous ==  log_new));
+              //比较附件
+              System.out.println(&quot;附件是否相同？ &quot; +  (log_previous.getAttachment() == log_new.getAttachment()));
+       }
+}
+</code></pre><blockquote>
+<p>Tips: java中的Cloneable和Serializable接口的代码很简单，都是空接口，也成为标识接口，其中没有任何方法的定义，其作用是告诉JRE这些接口的实现类是否具有某个功能。</p>
+</blockquote>
+<h2><span id="43-java中实现深克隆的方法浅析">4.3 Java中实现深克隆的方法浅析</span><a href="#43-java中实现深克隆的方法浅析" class="header-anchor">#</a></h2><h3><span id="431-apache-commons-lang">4.3.1 Apache Commons Lang</span><a href="#431-apache-commons-lang" class="header-anchor">#</a></h3><p>SerializationUtils#clone, will perform a deep copy when all classes in the object graph implement the serializable interface. </p>
+<h3><span id="432-json-serialization-with-gson">4.3.2 Json Serialization with Gson</span><a href="#432-json-serialization-with-gson" class="header-anchor">#</a></h3><p>No need for Serializable interface</p>
+<pre><code>gson.fromJson(gson.toJson(userA), User.class);
+</code></pre><h3><span id="433-constructor">4.3.3 constructor</span><a href="#433-constructor" class="header-anchor">#</a></h3><p>直接handmade, 用constructor生成一个新的想要的对象。</p>
+<h1><span id="5-原型管理器">5. 原型管理器</span><a href="#5-原型管理器" class="header-anchor">#</a></h1><p>原型管理器(Prototype Manager)是将多个原型对象存储在一个集合中供客户端使用，它是一个专门负责克隆对象的工厂，其中定义了一个集合用于存储原型对象，如果需要某个原型对象的一个克隆，可以通过复制集合中对应的原型对象来获得。在原型管理器中针对抽象原型类进行编程，以便扩展。</p>
+<p><img src="7.gif" alt="7.gif"><br>带原型管理器的原型模式图 </p>
+<h2><span id="51-实例-公文管理器">5.1 实例-公文管理器</span><a href="#51-实例-公文管理器" class="header-anchor">#</a></h2><p><img src="8.gif" alt="8.gif"><br>公文管理器结构图</p>
+<p>代码实现： </p>
+<pre><code>import java.util.*;
+
+//抽象公文接口，也可定义为抽象类，提供clone()方法的实现，将业务方法声明为抽象方法
+interface OfficialDocument extends  Cloneable
+{
+       public  OfficialDocument clone();
+       public  void display();
+}
+//可行性分析报告(Feasibility Analysis Report)类
+class FAR implements OfficialDocument
+{
+       public  OfficialDocument clone()
+      {
+              OfficialDocument  far = null;
+              try
+              {
+                     far  = (OfficialDocument)super.clone();
+              }
+              catch(CloneNotSupportedException  e)
+              {
+                  System.out.println(&quot;不支持复制！&quot;);
+              }
+              return  far;
+       }
+
+       public  void display()
+       {
+         System.out.println(&quot;《可行性分析报告》&quot;);
+       }
+}
+//软件需求规格说明书(Software Requirements Specification)类
+class SRS implements OfficialDocument
+{
+       public  OfficialDocument clone()
+       {
+              OfficialDocument  srs = null;
+              try
+              {
+                     srs  = (OfficialDocument)super.clone();
+              }
+              catch(CloneNotSupportedException  e)
+              { 
+                System.out.println(&quot;不支持复制！&quot;);
+              }
+              return  srs;
+       }
+
+       public  void display()
+       {
+             System.out.println(&quot;《软件需求规格说明书》&quot;);
+       }
+}
+
+//原型管理器（使用饿汉式单例实现）
+class  PrototypeManager
+{
+       //定义一个Hashtable，用于存储原型对象
+       private Hashtable ht=new Hashtable();
+       private static PrototypeManager pm =  new PrototypeManager();
+
+       //为Hashtable增加公文对象   
+     private  PrototypeManager()
+     {
+              ht.put(&quot;far&quot;,new  FAR());
+              ht.put(&quot;srs&quot;,new  SRS());               
+     }
+
+     //增加新的公文对象
+       public void addOfficialDocument(String  key,OfficialDocument doc)
+       {
+              ht.put(key,doc);
+       }
+
+       //通过浅克隆获取新的公文对象
+       public OfficialDocument  getOfficialDocument(String key)
+       {
+              return  ((OfficialDocument)ht.get(key)).clone();
+       }
+
+       public static PrototypeManager  getPrototypeManager()
+       {
+              return pm;
+       }
+}
+</code></pre><p>客户端代码如下： </p>
+<pre><code>class Client
+{
+       public  static void main(String args[])
+       {
+              //获取原型管理器对象
+              PrototypeManager pm =  PrototypeManager.getPrototypeManager();  
+
+              OfficialDocument  doc1,doc2,doc3,doc4;
+
+              doc1  = pm.getOfficialDocument(&quot;far&quot;);
+              doc1.display();
+              doc2  = pm.getOfficialDocument(&quot;far&quot;);
+              doc2.display();
+              System.out.println(doc1  == doc2);
+
+              doc3  = pm.getOfficialDocument(&quot;srs&quot;);
+              doc3.display();
+              doc4  = pm.getOfficialDocument(&quot;srs&quot;);
+              doc4.display();
+              System.out.println(doc3  == doc4);
+       }
+}
+</code></pre><p> 在PrototypeManager中定义了一个Hashtable类型的集合对象，使用“键值对”来存储原型对象，客户端可以通过Key（如“far”或“srs”）来获取对应原型对象的克隆对象。PrototypeManager类提供了类似工厂方法的getOfficialDocument()方法用于返回一个克隆对象。</p>
+<h1><span id="6-总结">6. 总结</span><a href="#6-总结" class="header-anchor">#</a></h1><h2><span id="61-优点">6.1 优点</span><a href="#61-优点" class="header-anchor">#</a></h2><ol>
+<li>简化对象的创建过程</li>
+<li>客户端可以针对抽象原型类进行编程，具体原型类写在配置文件中</li>
+<li>技工简化的创建结构</li>
+</ol>
+<h2><span id="62-缺点">6.2 缺点</span><a href="#62-缺点" class="header-anchor">#</a></h2><ol>
+<li>每一个类有自己的克隆方法，且位于一个类的内部，对已有类进行改造的时候，需要修改源代码</li>
+<li>深克隆复杂</li>
+</ol>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/12/03/单例模式/" data-toggle="tooltip" data-placement="top" title="单例模式">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="http://Yinwang.org" target="_blank">Yin Wang</a></li>
+                    
+                        <li><a href="https://bideyuanli.com/" target="_blank">比的原理</a></li>
+                    
+                        <li><a href="https://www.fangzhipeng.com/" target="_blank">方志朋的博客</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2018/12/04/原型模式/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
