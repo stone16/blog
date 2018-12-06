@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-05T04:08:27.717Z</updated>
+  <updated>2018-12-05T04:14:16.968Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>建造者模式</title>
+    <link href="https://llchen60.com/2018/12/04/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://llchen60.com/2018/12/04/建造者模式/</id>
+    <published>2018-12-05T04:10:47.000Z</published>
+    <updated>2018-12-05T04:14:16.968Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;建造者模式，又称为生成器模式，为客户端返回一个由多个部件组成的复杂产品。&lt;/p&gt;
+&lt;h1&gt;&lt;span id=&quot;1-建造者模式概述&quot;&gt;1. 建造者模式概述&lt;/span&gt;&lt;a href=&quot;#1-建造者模式概述&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
   
   <entry>
     <title>原型模式</title>
@@ -526,30 +551,6 @@
     
     
       <category term="java" scheme="https://llchen60.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>volatile关键字</title>
-    <link href="https://llchen60.com/2018/11/05/volatile%E5%85%B3%E9%94%AE%E5%AD%97/"/>
-    <id>https://llchen60.com/2018/11/05/volatile关键字/</id>
-    <published>2018-11-06T06:43:44.000Z</published>
-    <updated>2018-11-06T06:46:19.926Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-synchronized-vs-volatile&quot;&gt;1. Synchronized vs volatile&lt;/span&gt;&lt;a href=&quot;#1-synchronized-vs-volatile&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
     
   </entry>
   
