@@ -13,11 +13,11 @@
 
     <title>
         
-          Java并发图谱 - Leilei | 磊磊的博客
+          Linux性能优化-概述(一) - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/11/04/Java并发图谱/">
+    <link rel="canonical" href="https://llchen60.com/2018/12/05/Linux性能优化-概述-一/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,16 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#java" title="java">java</a>
-                        
-                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
+                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
                         
                     </div>
-                    <h1>Java并发图谱</h1>
+                    <h1>Linux性能优化-概述(一)</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-11-04
+                        2018-12-05
                     </span>
                 </div>
             </div>
@@ -193,21 +191,34 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>在网上看到的描述Java并发的非常棒的知识图谱，分享/标注一波。</p>
-</blockquote>
-<p>包含： </p>
+                <h1><span id="1-性能问题">1. 性能问题</span><a href="#1-性能问题" class="header-anchor">#</a></h1><p>性能调优的困难主要在于：其与系统原理相联系，把系统从应用程序、库函数、系统调用、再到内核和硬件等不同的层级贯穿起来。</p>
+<p>这个系列会讲Linux性能的基本指标，工具，相应的观测、分析和调优方法。主要研究CPU性能、磁盘I/O性能、内存性能以及网络性能四个方面的内容。</p>
+<p>对于自己来说，其实遇到过一些性能上的问题了，但是颇有点不求甚解，有stackoverflow这个工具以后，就有点难脱离这个脚手架了。学习方法上有问题，这也是想写这么个系列，学习这样的课程的初衷。需要去了解应用程序和系统的基本原理，进行实战练习，建立一个整体性能的全局观。</p>
+<p>想要调整性能，可能不需要了解每个组件的所有实现细节，只要能理解他们最基本的工作原理和协作方式就可以了。</p>
+<h1><span id="2-性能指标">2. 性能指标</span><a href="#2-性能指标" class="header-anchor">#</a></h1><p>高并发(吞吐)，响应快(延迟)。这两个指标是从应用负载的角度来考察性能的，从系统资源的视角出发的指标，就是资源使用率，饱和度等。</p>
+<p><img src="1.png" alt="1.png"></p>
+<p>随着应用负载的增加，系统资源的使用也会升高，甚至达到极限。而性能问题的本质，就是<strong>系统资源已经达到瓶颈，但请求的处理还不够快，无法支撑更多的请求</strong>。</p>
+<p>性能分析，就是找出应用或者系统的瓶颈，并设法去避免或者缓解它们。包含一系列步骤：</p>
 <ol>
-<li>并发理论</li>
-<li>并发关键字</li>
-<li>Lock体系</li>
-<li>并发容器</li>
+<li>选择指标评估应用程序和系统的性能</li>
+<li>为应用程序和系统设置性能目标</li>
+<li>进行性能基准测试</li>
+<li>性能分析定位瓶颈</li>
+<li>优化系统和应用程序</li>
+<li>性能监控和告警</li>
 </ol>
-<p><img src="java.png" alt="Java并发图谱"></p>
-<p><a href="https://github.com/CL0610/Java-concurrency/blob/master/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1.png" target="_blank" rel="noopener">Java并发图谱</a></p>
+<h1><span id="3-性能工具">3. 性能工具</span><a href="#3-性能工具" class="header-anchor">#</a></h1><p><img src="2.png" alt="2.png"><br>Brendan Greff的性能工具图谱</p>
+<p><img src="3.png" alt="3.png"><br>性能优化思维导图</p>
 <p><div id="disqus_thread"></div></p>
-<p><script><br>(function() {<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script></p>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
 
                 <hr>
 
@@ -215,13 +226,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/05/volatile关键字/" data-toggle="tooltip" data-placement="top" title="volatile关键字">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/10/31/编程范式系列-函数式编程/" data-toggle="tooltip" data-placement="top" title="编程范式系列-函数式编程">Next Post &rarr;</a>
+                            <a href="/2018/12/04/建造者模式/" data-toggle="tooltip" data-placement="top" title="建造者模式">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -254,9 +261,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#java" title="java">java</a>
-                        
-                          <a class="tag" href="/tags/#backend" title="backend">backend</a>
+                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
                         
                     </div>
                 </section>
@@ -293,7 +298,7 @@
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/11/04/Java并发图谱/';
+  var disqus_url = 'https://llchen60.com/2018/12/05/Linux性能优化-概述-一/';
   
   (function(){
     var dsq = document.createElement('script');
