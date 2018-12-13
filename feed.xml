@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-08T20:43:07.763Z</updated>
+  <updated>2018-12-13T05:05:31.844Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HashMap在Java中是如何工作的</title>
+    <link href="https://llchen60.com/2018/12/12/HashMap%E5%9C%A8Java%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
+    <id>https://llchen60.com/2018/12/12/HashMap在Java中是如何工作的/</id>
+    <published>2018-12-13T05:00:32.000Z</published>
+    <updated>2018-12-13T05:05:31.844Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;HashMap是存储以及获取数据的一种简单有效的方式，本文探究Java的HashMap的内部实现。&lt;/p&gt;
+&lt;h1&gt;&lt;span id=&quot;1-内部存储&quot;&gt;1. 内部存储&lt;/span&gt;&lt;a href=&quot;#1-内部存储&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java基础知识</title>
@@ -448,9 +473,9 @@
     </summary>
     
     
-      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
-    
       <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+      <category term="backend" scheme="https://llchen60.com/tags/backend/"/>
     
   </entry>
   
@@ -521,33 +546,6 @@
 &lt;li&gt;&lt;a href=&quot;#1-函数式编程-vs-面向对象编程&quot;&gt;1. 函数式编程 vs 面向对象编程&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#2-面向对象编程&quot;&gt;2. 面向对象编程&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="编程思维" scheme="https://llchen60.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编程范式系列-基于原型的编程</title>
-    <link href="https://llchen60.com/2018/11/11/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"/>
-    <id>https://llchen60.com/2018/11/11/编程范式系列-基于原型的编程/</id>
-    <published>2018-11-11T22:17:36.000Z</published>
-    <updated>2018-11-24T21:14:01.081Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-与传统面向对象编程的比较&quot;&gt;1. 与传统面向对象编程的比较&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#11-关注对象实例行为而后对类进行划分&quot;&gt;1.1
         
       
     
