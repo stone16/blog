@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -181,6 +181,114 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/12/16/网络协议-四-网络层/">
+        <h2 class="post-title">
+            网络协议(四)-网络层
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. IP协议#root@test:~# ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 ......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/12/16/网络协议-三-链路层/">
+        <h2 class="post-title">
+            网络协议(三)-链路层
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            MAC层是用来解决多路访问的堵车问题的，ARP通过在局域网大吼一声的方式来寻找目标MAC地址。交换机有MAC地址学习能力。 
+1. MAC层#在物理层中，我们引入了Hub，集线器，这种设备可以将多个终端连起来，但是它会把所有自己收到的信息都复制到其他端口当中。
+需要在数据链路层解决的问题有：
+
+包的发送方和接收方
+多个包发送的时候的先后顺序的问题
+发生错误了怎么办
+
+这些问题都是在数据链路层......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/12/16/网络协议-二-物理层/">
+        <h2 class="post-title">
+            网络协议(二)-物理层
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. 物理层实现多个终端的交流#网线的1-3, 2-6交叉接法，12，36脚分别起到收发信号的作用。IP层封装了MAC层，然后组成了几个局域网，LAN
+HUB在物理层工作，会将自己收到的每一个字节，都复制到其他端口上去。
+
+
+
+/**
+
+RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO I......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-12-16
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/12/16/网络协议-一-框架/">
+        <h2 class="post-title">
+            网络协议(一) -- 框架
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. 协议#协议是由语法，语义，顺序三部分构成。内容要符合一定的规则和格式。内容要代表某种意义，要有先做再做的先后顺序。
+2.框架#2.1 应用层#DHCP HTTP HTTPS RTMP P2P DNS GTP RPC 
+2.2 传输层#UDP TCP
+2.3 网络层#ICMP IP OSPF BGP IPSec GRE
+2.4 链路层#ARP VLAN STP
+2.5 物理层#网络跳线
+......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-12-16
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -349,131 +457,6 @@ Boolean containsKey(Obj......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/12/04/原型模式/">
-        <h2 class="post-title">
-            原型模式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-
-1. 原型模式概述
-1.1 工作原理
-1.2 包含角色
-
-
-2. 原型模式的实现
-2.1 通用实现方法
-2.2 Java提供的clone()方法
-
-
-3. 原型模式实现工作周报快速创建
-4. 浅克隆与深克隆
-4.1 浅克隆
-4.2 深克隆
-4.3 Java中实现深克隆的方法浅析
-4.3.1 Apache Commons Lang
-4.3.2 Json Serialization with......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-12-04
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/12/03/单例模式/">
-        <h2 class="post-title">
-            单例模式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-
-1. 为什么需要单例模式
-2. 单例模式概述
-2.1 模拟任务管理类
-2.2 定义
-2.3 负载均衡器的设计与实现
-
-
-3. 饿汉式单例模式和懒汉式单例模式
-3.1 饿汉式单例模式
-3.2 懒汉式单例模式
-
-
-4. Initialization Demand Holder 进行单例实现
-5. 优缺点分析
-5.1 优点
-5.2 缺点
-
-
-
-
-1. 为什么需要单例模式#windows系统的任......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-12-03
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/12/01/LDAP-Intro/">
-        <h2 class="post-title">
-            LDAP Intro
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. What’s LDAP?#LDAP stands for Lightweight Directory Access Protocol. It is a lightweight client-server protocol for accessing directory services. It runs over TCP/IP or other connection oriented ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-12-01
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/12/01/说说日本-一/">
-        <h2 class="post-title">
-            说说日本(一)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一衣带水的邻国，看上去像富士山一样，温润如玉，殊不知是座活火山，平静下酝酿着风暴。这是个很神奇的存在啊。有全世界独一无二的审慎与严谨，但也有战斗到死的癫狂。尽量不在这篇文章里输出自己的观点，只想说说关于日本，在自己了解以后，一些神奇的，令人惊叹的点。
-1. 关于日本本身#1.1 地理位置-地理决定论？日本民族性格？#千岛之国，日本国土由6852个小岛构成，四个最大的岛占了整个国土97%的面积......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-12-01
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -540,6 +523,10 @@ Boolean containsKey(Obj......
                         
                             
                             <a href="/tags/#编程思维" title="编程思维" rel="4">编程思维</a>
+                            
+                        
+                            
+                            <a href="/tags/#网络协议" title="网络协议" rel="4">网络协议</a>
                             
                         
                             
