@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-16T01:34:08.945Z</updated>
+  <updated>2018-12-16T04:53:00.798Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Food Rules</title>
+    <link href="https://llchen60.com/2018/12/15/Food-Rules/"/>
+    <id>https://llchen60.com/2018/12/15/Food-Rules/</id>
+    <published>2018-12-16T04:52:22.000Z</published>
+    <updated>2018-12-16T04:53:00.798Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Read a book recommended by Doctor, it tells about some food rules mainly focusing on what should we eat, how much should we eat, pretty
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Reading" scheme="https://llchen60.com/tags/Reading/"/>
+    
+  </entry>
   
   <entry>
     <title>RPC协议</title>
@@ -518,30 +542,6 @@
         
           &lt;h1&gt;&lt;span id=&quot;1-概述&quot;&gt;1. 概述&lt;/span&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;支持可维护性，提高系统的可复用性&lt;/p&gt;
 &lt;h1&gt;&lt;span
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式概述</title>
-    <link href="https://llchen60.com/2018/11/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"/>
-    <id>https://llchen60.com/2018/11/12/设计模式概述/</id>
-    <published>2018-11-13T04:51:51.000Z</published>
-    <updated>2018-11-13T04:53:36.164Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-起源&quot;&gt;1. 起源&lt;/span&gt;&lt;a href=&quot;#1-起源&quot;
         
       
     
