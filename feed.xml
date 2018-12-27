@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-27T02:45:43.950Z</updated>
+  <updated>2018-12-27T17:21:59.028Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于2019</title>
+    <link href="https://llchen60.com/2018/12/27/%E5%85%B3%E4%BA%8E2019/"/>
+    <id>https://llchen60.com/2018/12/27/关于2019/</id>
+    <published>2018-12-27T17:21:00.000Z</published>
+    <updated>2018-12-27T17:21:59.028Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;按照一般的节奏，每年年末总会有对于这一年的反思，哀婉/ 后悔/ 叹息/ 遗憾 或者是 对于闪光点的激动/ 自豪/ 喜悦。然后表一波决心，立一堆flag，期盼在2019年不知道怎么的自己就能够有翻天覆地的变化。
+        
+      
+    
+    </summary>
+    
+    
+      <category term="thought" scheme="https://llchen60.com/tags/thought/"/>
+    
+  </entry>
   
   <entry>
     <title>网络协议(六)-应用层</title>
@@ -498,35 +522,6 @@
     
     </summary>
     
-    
-      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Advanced 3</title>
-    <link href="https://llchen60.com/2018/11/26/React-Advanced-3/"/>
-    <id>https://llchen60.com/2018/11/26/React-Advanced-3/</id>
-    <published>2018-11-27T04:17:20.000Z</published>
-    <updated>2018-11-27T04:18:04.553Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-error-boundaries&quot;&gt;1. Error Boundaries&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#11-why-need-error-boundaries&quot;&gt;1.1 Why need
-        
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://llchen60.com/tags/React/"/>
     
       <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
     
