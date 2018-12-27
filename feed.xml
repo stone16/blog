@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-25T01:14:03.196Z</updated>
+  <updated>2018-12-27T02:45:43.950Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网络协议(六)-应用层</title>
+    <link href="https://llchen60.com/2018/12/26/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    <id>https://llchen60.com/2018/12/26/网络协议-六-应用层/</id>
+    <published>2018-12-27T02:44:34.000Z</published>
+    <updated>2018-12-27T02:45:43.950Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-http协议&quot;&gt;1. HTTP协议&lt;/span&gt;&lt;a href=&quot;#1-http协议&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;以输入一个网址&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="网络协议" scheme="https://llchen60.com/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>网络协议(五)-传输层</title>
@@ -496,35 +520,6 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#1-error-boundaries&quot;&gt;1. Error Boundaries&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#11-why-need-error-boundaries&quot;&gt;1.1 Why need
-        
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://llchen60.com/tags/React/"/>
-    
-      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Advanced 2</title>
-    <link href="https://llchen60.com/2018/11/25/React-Advanced-2/"/>
-    <id>https://llchen60.com/2018/11/25/React-Advanced-2/</id>
-    <published>2018-11-25T19:02:26.000Z</published>
-    <updated>2018-11-25T19:03:34.932Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-accessibility&quot;&gt;1. Accessibility&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#11-semantic-html&quot;&gt;1.1 Semantic
         
       
     
