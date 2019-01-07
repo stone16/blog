@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2018-12-27T17:21:59.028Z</updated>
+  <updated>2019-01-07T02:59:47.341Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</title>
+    <link href="https://llchen60.com/2019/01/06/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"/>
+    <id>https://llchen60.com/2019/01/06/网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题/</id>
+    <published>2019-01-07T02:58:28.000Z</published>
+    <updated>2019-01-07T02:59:47.341Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-视频压缩&quot;&gt;1. 视频压缩&lt;/span&gt;&lt;a href=&quot;#1-视频压缩&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;网络直播,视频压缩是一个很关键的技术，因为假设每一张图片大小为1024 *
+        
+      
+    
+    </summary>
+    
+    
+      <category term="网络协议" scheme="https://llchen60.com/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>关于2019</title>
@@ -494,34 +518,6 @@
     
     
       <category term="React" scheme="https://llchen60.com/tags/React/"/>
-    
-      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>正则表达式</title>
-    <link href="https://llchen60.com/2018/11/27/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://llchen60.com/2018/11/27/正则表达式/</id>
-    <published>2018-11-28T05:24:05.000Z</published>
-    <updated>2018-11-28T05:24:54.507Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-intro&quot;&gt;1. Intro&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#2-using-simple-patterns&quot;&gt;2. Using simple patterns&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a
-        
-      
-    
-    </summary>
-    
     
       <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
     
