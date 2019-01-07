@@ -297,6 +297,9 @@
 <p>证书验证完毕之后，觉得这个外卖网站可信，于是客户端计算产生随机数字 Pre-master，发送 Client Key Exchange，用证书中的公钥加密，再发送给服务器，服务器可以通过私钥解密出来。</p>
 <p>此时无论是客户端还是服务器都有三个随机数：自己的，对端的，以及刚生成的Pre-Master随机数。通过这三个随机数，可以在客户端和服务器产生相同的对称密钥。</p>
 <p>客户端Change Cipher Spec, 开始采用协商的通信密钥和加密算法进行加密通信了。然后发送一个 Encrypted Handshake Message，将已经商定好的参数等，采用协商密钥进行加密，发送给服务器用于数据与握手验证。</p>
+<h1><span id="3-rtmp协议">3. RTMP协议</span><a href="#3-rtmp协议" class="header-anchor">#</a></h1><p>Real Time Messaging </p>
+<p>RTMP协议是应用层协议，是要靠底层可靠的传输层协议（通常是TCP）来保证信息传输的可靠性的。在基于传输层协议的链接建立完成后，RTMP协议也要客户端和服务器通过“握手”来建立基于传输层链接之上的RTMP Connection链接，在Connection链接上会传输一些控制信息，如SetChunkSize,SetACKWindowSize。其中CreateStream命令会创建一个Stream链接，用于传输具体的音视频数据和控制这些信息传输的命令信息。RTMP协议传输时会对数据做自己的格式化，这种格式的消息我们称之为RTMP Message，而实际传输的时候为了更好地实现多路复用、分包和信息的公平性，发送端会把Message划分为带有Message ID的Chunk，每个Chunk可能是一个单独的Message，也可能是Message的一部分，在接受端会根据chunk中包含的data的长度，message id和message的长度把chunk还原成完整的Message，从而实现信息的收发。</p>
+<p>详细应用见<a href="https://www.llchen60.com/2019/01/06/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题</a></p>
 <p><div id="disqus_thread"></div></p>
 <script>
 
