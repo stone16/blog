@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -259,7 +259,26 @@
 <p><img src="fig9.jpg" alt="fig9.jpg"></p>
 <h3><span id="133-拉流">1.3.3 拉流</span><a href="#133-拉流" class="header-anchor">#</a></h3><p>观众的客户端通过RTMP拉流的过程：</p>
 <p><img src="fig10.jpg" alt="fig10.jpg"></p>
-<h1><span id="2-p2p">2. P2P</span><a href="#2-p2p" class="header-anchor">#</a></h1><h1><span id="3-httpdns">3. HTTPDNS</span><a href="#3-httpdns" class="header-anchor">#</a></h1><h1><span id="4-cdn">4. CDN</span><a href="#4-cdn" class="header-anchor">#</a></h1><p><div id="disqus_thread"></div></p>
+<h1><span id="2-p2p">2. P2P</span><a href="#2-p2p" class="header-anchor">#</a></h1><h2><span id="21-传输大文件的现有方式">2.1 传输大文件的现有方式</span><a href="#21-传输大文件的现有方式" class="header-anchor">#</a></h2><h3><span id="211-http方式">2.1.1 HTTP方式</span><a href="#211-http方式" class="header-anchor">#</a></h3><p>最简单的是通过HTTP进行下载，但是通过浏览器下载速度非常慢。</p>
+<h3><span id="212-ftp方式">2.1.2 FTP方式</span><a href="#212-ftp方式" class="header-anchor">#</a></h3><p>还可以通过FTP，即文件传输协议，FTP通过两个TCP连接来传输一个文件。</p>
+<ul>
+<li>控制连接</li>
+</ul>
+<p>服务器以被动的方式，打开用于FTP的端口21，客户端则主动发起连接。该连接将命令从客户端传给服务器，并传回服务器的应答。</p>
+<ul>
+<li>数据连接</li>
+</ul>
+<p>每当一个文件在客户端与服务器之间传输时，就创建一个数据连接</p>
+<p>FTP有两种工作模式</p>
+<ul>
+<li>主动模式 PORT</li>
+</ul>
+<p>客户端随机打开一个大于1024的端口N，向服务器的命令端口21发起连接，同时开放N+1端口监听，并向服务器发出 prot N+1的命令，由服务器从自己的数据端口20主动连接到客户端指定的数据端口N+1 </p>
+<ul>
+<li>被动模式 PASV</li>
+</ul>
+<p>当开启一个FTP连接时，客户端打开两个任意的本地端口N（仍然需要大于1024）和N+1.第一个端口连接服务器的21端口，提交PASV命令。然后，服务器会开启一个任意的端口P（大于1024），返回”227 entering passive mode”信息，其中有FTP服务器开放的用来进行数据传输的端口。客户端收到信息获取端口号以后，会通过N+1号端口连接服务器的端口P，然后在两个端口之间进行数据传输。</p>
+<h2><span id="22-p2p概念">2.2 P2P概念</span><a href="#22-p2p概念" class="header-anchor">#</a></h2><h1><span id="3-httpdns">3. HTTPDNS</span><a href="#3-httpdns" class="header-anchor">#</a></h1><h1><span id="4-cdn">4. CDN</span><a href="#4-cdn" class="header-anchor">#</a></h1><p><div id="disqus_thread"></div></p>
 <script>
 
 <p>/**</p>
