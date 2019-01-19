@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-17T04:55:56.320Z</updated>
+  <updated>2019-01-19T07:26:56.752Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AWS essentials(2) - Cloud Concepts </title>
+    <link href="https://llchen60.com/2019/01/18/AWS-essentials-2-Cloud-Concepts/"/>
+    <id>https://llchen60.com/2019/01/18/AWS-essentials-2-Cloud-Concepts/</id>
+    <published>2019-01-19T07:25:59.000Z</published>
+    <updated>2019-01-19T07:26:56.752Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-cloud-computing&quot;&gt;1. Cloud computing&lt;/span&gt;&lt;a href=&quot;#1-cloud-computing&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Before cloud,
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AWS essentials(1) - introduction</title>
+    <link href="https://llchen60.com/2019/01/18/AWS-essentials-1-introduction/"/>
+    <id>https://llchen60.com/2019/01/18/AWS-essentials-1-introduction/</id>
+    <published>2019-01-19T07:25:39.000Z</published>
+    <updated>2019-01-19T07:26:30.497Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-aws-cloud-concepts&quot;&gt;1. AWS Cloud Concepts&lt;/span&gt;&lt;a href=&quot;#1-aws-cloud-concepts&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
   
   <entry>
     <title>网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</title>
@@ -469,57 +517,6 @@
     
     
       <category term="web" scheme="https://llchen60.com/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>说说日本(一)</title>
-    <link href="https://llchen60.com/2018/12/01/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC-%E4%B8%80/"/>
-    <id>https://llchen60.com/2018/12/01/说说日本-一/</id>
-    <published>2018-12-01T20:10:06.000Z</published>
-    <updated>2018-12-01T20:14:51.620Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;一衣带水的邻国，看上去像富士山一样，温润如玉，殊不知是座活火山，平静下酝酿着风暴。这是个很神奇的存在啊。有全世界独一无二的审慎与严谨，但也有战斗到死的癫狂。尽量不在这篇文章里输出自己的观点，只想说说关于日本，在自己了解以后，一些神奇的，令人惊叹的点。&lt;/p&gt;
-&lt;h1&gt;&lt;sp
-        
-      
-    
-    </summary>
-    
-    
-      <category term="history" scheme="https://llchen60.com/tags/history/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Advanced 4</title>
-    <link href="https://llchen60.com/2018/11/27/React-Advanced-4/"/>
-    <id>https://llchen60.com/2018/11/27/React-Advanced-4/</id>
-    <published>2018-11-28T06:01:33.000Z</published>
-    <updated>2018-11-28T06:01:56.084Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-the-component-lifecycle&quot;&gt;1. The component lifecycle&lt;/span&gt;&lt;a href=&quot;#1-the-component-lifecycle&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://llchen60.com/tags/React/"/>
-    
-      <category term="FrontEnd" scheme="https://llchen60.com/tags/FrontEnd/"/>
     
   </entry>
   
