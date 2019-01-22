@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          AWS essentials(3) - Core Services - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                        
+                    </div>
+                    <h1>AWS essentials(3) - Core Services</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2019-01-21
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="1-aws-global-infrastructure">1. AWS global infrastructure</span><a href="#1-aws-global-infrastructure" class="header-anchor">#</a></h1><h2><span id="11-regions">1.1 Regions</span><a href="#11-regions" class="header-anchor">#</a></h2><p>AWS Regions provide multiple, physically separated and isolated Availability Zones which are connected with low latency, high throughput, and highly redundant networking. </p>
+<p><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=gi&amp;l=emea" target="_blank" rel="noopener">Region table</a></p>
+<h2><span id="12-availability-zones">1.2 Availability Zones</span><a href="#12-availability-zones" class="header-anchor">#</a></h2><p>These Availability Zones offer AWS customers an easier and more effective way to design and operate applications and databases, making them more highly available, fault tolerant, and scalable than traditional single datacenter infrastructures or multi-datacenter infrastructures. </p>
+<p>Collection of data centers within a region. </p>
+<p>isolate - protect from failures </p>
+<p>AZs are pyhsically and logically seperated within a region. Own their own: </p>
+<ol>
+<li>uninterruptible power supply </li>
+<li>cooling equipment </li>
+<li>networking connectivity </li>
+<li>backup generators </li>
+</ol>
+<h2><span id="13-edge-locations">1.3 Edge Locations</span><a href="#13-edge-locations" class="header-anchor">#</a></h2><p>Content Delivery Network  —- Amazon CloudFront </p>
+<p>Deliver content to customers </p>
+<p>When a user requests content that you’re serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.</p>
+<p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html" target="_blank" rel="noopener">CloudFront Developer Guide</a></p>
+<h2><span id="14-local-regions">1.4 Local Regions</span><a href="#14-local-regions" class="header-anchor">#</a></h2><p>An AWS Local Region is a single datacenter designed to complement an existing AWS Region. Like all AWS Regions, AWS Local Regions are completely isolated from other AWS Regions. </p>
+<h1><span id="2-virtual-private-cloud-vpc">2. Virtual Private Cloud (VPC)</span><a href="#2-virtual-private-cloud-vpc" class="header-anchor">#</a></h1><h2><span id="21-introduction">2.1 Introduction</span><a href="#21-introduction" class="header-anchor">#</a></h2><p>Amazon VPC enables you to launch AWS resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.Consists of such features: </p>
+<ul>
+<li>A private, virtual network in the AWS Cloud <ul>
+<li>Uses same concepts as on premise networking </li>
+</ul>
+</li>
+<li>Allows complete control of network configuration<ul>
+<li>Ability to isolate and expose resources inside VPC </li>
+</ul>
+</li>
+<li>Offers several layers of security controls <ul>
+<li>Ability to allow and deny specific internet and internal traffic </li>
+</ul>
+</li>
+<li>Other AWS services deploy into VPC <ul>
+<li>Services inherent security built into network </li>
+</ul>
+</li>
+</ul>
+<h2><span id="22-features">2.2 Features</span><a href="#22-features" class="header-anchor">#</a></h2><ul>
+<li><p>Build upon high availabilty of AWS regions and availability zones </p>
+<ul>
+<li>Amazon VPC lives within a region </li>
+<li>Multiple VPCs per account </li>
+</ul>
+</li>
+<li><p>Subnets   </p>
+<ul>
+<li>Used to divide Amazon VPC </li>
+<li>Allow Amazon VPC to span multiple Azs </li>
+<li>seperate public and private network </li>
+</ul>
+</li>
+<li><p>Route tables </p>
+<ul>
+<li>Control traffic going out of the subnets </li>
+</ul>
+</li>
+<li><p>Internet Gateway (IGW)</p>
+<ul>
+<li>Allows private subnet resources to access internet </li>
+</ul>
+</li>
+<li><p>Network Access Control Lists(NACL)</p>
+<ul>
+<li>Control access to subnets; stateless </li>
+</ul>
+</li>
+</ul>
+<p><img src="fig1.jpg" alt="fig1.jpg"></p>
+<h2><span id="23-subnets">2.3 Subnets</span><a href="#23-subnets" class="header-anchor">#</a></h2><p>A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won’t be connected to the internet. </p>
+<h1><span id="3-aws-security">3. AWS Security</span><a href="#3-aws-security" class="header-anchor">#</a></h1><h2><span id="31-aws-security-groups">3.1 AWS security groups</span><a href="#31-aws-security-groups" class="header-anchor">#</a></h2><p>Filter traffic to your instances </p>
+<p><img src="fig2.jpg" alt="fig2.jpg"></p>
+<p>Can configure the security rules, have multi rules. Web tier - application tier - database tier. </p>
+<p>A security group acts as a virtual firewall for instances to control inbound and outbound traffic. Security group act at the instance level , not the subnet level. For each security group, you add rules that control the inbound traffic to instances, and a separate set of riles that control the outbound traffic. </p>
+<h1><span id="4-compute-services">4. Compute Services</span><a href="#4-compute-services" class="header-anchor">#</a></h1><h2><span id="41-amazon-ec2">4.1 Amazon EC2</span><a href="#41-amazon-ec2" class="header-anchor">#</a></h2><p>Flexible configuration and control </p>
+<p>maintain complete control of envs </p>
+<p>EC2 overview </p>
+<h3><span id="411-what-is-ec2">4.1.1 What is EC2</span><a href="#411-what-is-ec2" class="header-anchor">#</a></h3><p>EC2: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" target="_blank" rel="noopener">Elastic compute cloud</a> </p>
+<p>Compute: different thing you can do with servers </p>
+<ul>
+<li>Application server </li>
+<li>Web server </li>
+<li>Database server </li>
+<li>Game server </li>
+<li>Mail server </li>
+<li>Media server </li>
+<li>Catalog server </li>
+<li>File server </li>
+<li>Computing server </li>
+<li>Proxy server </li>
+</ul>
+<h3><span id="412-amazon-ec2-instances-instructions">4.1.2 Amazon EC2 instances instructions</span><a href="#412-amazon-ec2-instances-instructions" class="header-anchor">#</a></h3><p>need to select AMI(Amazon Machine Image), present for software choices </p>
+<p>Select instance type(hard ware)</p>
+<p>Configure network, storage, key pairs (Use key value pair to access the instance)</p>
+<h3><span id="413-features-of-ec2">4.1.3 Features of EC2</span><a href="#413-features-of-ec2" class="header-anchor">#</a></h3><ol>
+<li>virtual computing env. known as instances </li>
+<li>various comfigurations of CPU, memory, and networking capacity for your instances </li>
+<li>secure login information for your instances using key pairs(AWS stores the public key, and you store the private key)</li>
+<li>Sotrage volumes(temporory) and persistent storage volumes – Amazon Elastic Block Store</li>
+<li>Firewall that enables you to specify the protocols, ports and source IP ranges that can reach your instances using security groups </li>
+<li>static IPv4 addresses for dynamic cloud computing, known as Elastic IP adddresses</li>
+<li>metadata, known as tags, that you can create and assign to your Amazon EC2 resources </li>
+<li>Virtual networks you can create that are logically isolated from the rest of the AWS cloud</li>
+</ol>
+<h3><span id="414-security-best-practices">4.1.4 Security best practices</span><a href="#414-security-best-practices" class="header-anchor">#</a></h3><ol>
+<li>Use AWS identiry and access Management(IAM) to control access to AWS resources, including instances. You can create IAM users and groups under your AWS account, assign security credentials to each, and control the access that each has to resources and services in AWS. </li>
+<li>Restrict access by only allowing trusted hosts or networks to access ports on your instance. For example, you can restrict SSH access by restricting incoming traffic on port 22.</li>
+</ol>
+<h3><span id="415-instance-types">4.1.5 Instance types</span><a href="#415-instance-types" class="header-anchor">#</a></h3><p>Instance type you specify determines the hardware of the host computer used for your instance. Each instance is provided with a consistent and predictable amount of CPU capacity, memory, storage. </p>
+<ul>
+<li>general purpose </li>
+<li>compute optimized </li>
+<li>memory optimized </li>
+<li>storage optimized </li>
+<li>accelerated computing </li>
+</ul>
+<h2><span id="42-lambda">4.2 Lambda</span><a href="#42-lambda" class="header-anchor">#</a></h2><h3><span id="421-overviews">4.2.1 Overviews</span><a href="#421-overviews" class="header-anchor">#</a></h3><p>AWS Lambda is a compute service that lets you run code without provisioning or managing servers. Pay for the compute time you consume. AWS Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, <strong>including server and operating system maintenance, capacity provisioning and automatic scaling</strong>, code monitoring and logging.</p>
+<p>fully managed serverless compute </p>
+<p>event driven execution, respond to event </p>
+<p>sub second metering </p>
+<h3><span id="422-benefits">4.2.2 benefits :</span><a href="#422-benefits" class="header-anchor">#</a></h3><ol>
+<li>Lambda manages the compute fleet that offers a balance of memory, CPU, network and other resources. </li>
+</ol>
+<h3><span id="423-use-cases">4.2.3 Use cases</span><a href="#423-use-cases" class="header-anchor">#</a></h3><ol>
+<li>Run code in response to events, such as changes to data in an Amazon S3 bucket or an DynamoDB table</li>
+<li>Run code in response to HTTP requests using Amazon API gateway</li>
+<li>Invoke code using API calls made using AWS SDKs </li>
+<li>Build serverless applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild. </li>
+</ol>
+<p><img src="fig3.jpg" alt="fig3.jpg"><br><img src="fig4.jpg" alt="fig4.jpg"><br><img src="fig5.jpg" alt="fig5.jpg"></p>
+<h3><span id="424-lambda-applications">4.2.4 Lambda Applications</span><a href="#424-lambda-applications" class="header-anchor">#</a></h3><p>An AWS Lambda application is a combination of Lambda functions, event sources, and other resources that work together to perform tasks. You can use AWS CloudFormation and other tools to collect your application’s components into a single package that can be deployed and managed as one resource. </p>
+<h3><span id="425-work-with-aws-lambda-functions">4.2.5 Work with AWS Lambda Functions</span><a href="#425-work-with-aws-lambda-functions" class="header-anchor">#</a></h3><ol>
+<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html" target="_blank" rel="noopener">Working with AWS Lambda Functions</a></p>
+</li>
+<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html" target="_blank" rel="noopener">AWS Lambda Limits</a></p>
+</li>
+</ol>
+<ul>
+<li>Concurrent Executions limit: 1000 </li>
+<li>function timeout: 15 minutes </li>
+<li>execution threads: 1024 </li>
+</ul>
+<ol start="3">
+<li>[Building Lambda Functions]</li>
+</ol>
+<ul>
+<li>Lifecycle for an AWS lambda-based application<ul>
+<li>authoring code<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html" target="_blank" rel="noopener">programing model</a> - the format of the code    </li>
+</ul>
+</li>
+<li>deploying code<ul>
+<li>Package code and dependencies in a deployment package</li>
+<li>upload the package to AWS Lambda to create Lambda function</li>
+</ul>
+</li>
+<li>monitoring<ul>
+<li>CloudWatch    </li>
+</ul>
+</li>
+<li>troubleshooting</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/use-cases.html" target="_blank" rel="noopener">Using AWS Lambda With Other Services</a></li>
+</ol>
+<h3><span id="426-lambda-concepts">4.2.6 Lambda Concepts</span><a href="#426-lambda-concepts" class="header-anchor">#</a></h3><ul>
+<li>Function - A script or program that runs in AWS Lambda. Lambda passes invocation events to your function. The function processes an event and returns a response. </li>
+<li>Runtimes – Lambda runtimes allow functions in different languages to run in the same base execution environment. You configure your function to use a runtime that matches your programming language. The runtime sits in-between the Lambda service and your function code, relaying invocation events, context information, and responses between the two. You can use runtimes provided by Lambda, or build your own. </li>
+<li>Layers – Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers.</li>
+</ul>
+<p>A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank" rel="noopener">layer</a> is a ZIP archive that contains libraries, a custom runtime or other dependencies. With layers, you can use libraries in your function without needing to include them in your deployment package. Layers let you keep your deployment package small, which makes development easier. </p>
+<ul>
+<li>Event source – An AWS service, such as Amazon SNS, or a custom service, that triggers your function and executes its logic.</li>
+<li>Downstream resources – An AWS service, such as DynamoDB tables or Amazon S3 buckets, that your Lambda function calls once it is triggered.</li>
+<li>Log streams – While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function to ensure it’s working properly.</li>
+<li>AWS SAM – A model to define serverless applications. AWS SAM is natively supported by AWS CloudFormation and defines simplified syntax for expressing serverless resources. </li>
+</ul>
+<h2><span id="43-aws-elastic-beanstalk">4.3 AWS Elastic Beanstalk</span><a href="#43-aws-elastic-beanstalk" class="header-anchor">#</a></h2><h3><span id="431-overview">4.3.1 Overview</span><a href="#431-overview" class="header-anchor">#</a></h3><p>Quick get application into the cloud </p>
+<p>Platform as a service </p>
+<p>You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.</p>
+<p>Allow quick deployment of your applications </p>
+<p>Elastic Beanstalk provides:</p>
+<ul>
+<li>Application service</li>
+<li>HTTP service</li>
+<li>Operating system</li>
+<li>Language interpreter </li>
+<li>Host </li>
+</ul>
+<h1><span id="5-application-load-balancer">5 Application Load Balancer</span><a href="#5-application-load-balancer" class="header-anchor">#</a></h1><h2><span id="51-service-introduction">5.1 Service Introduction</span><a href="#51-service-introduction" class="header-anchor">#</a></h2><p>Part of the elastic load balancer service. Add some important features<br><img src="fig6.jpg" alt="fig6.jpg"></p>
+<ol>
+<li>Support more protocols </li>
+<li>cloudWatch Metrics </li>
+<li>Access logs </li>
+<li>Health Checks </li>
+</ol>
+<h2><span id="52-key-concepts">5.2 Key Concepts</span><a href="#52-key-concepts" class="header-anchor">#</a></h2><ol>
+<li>Listeners: a process that cehcks for connection requests, using the protocol and port that you configure. Rules that you define for a listener determine how the load balancer routes requests to the targets in one or more target groups. </li>
+<li>Target: A target is a destination for traffic based on the established listener rules </li>
+<li>Target group: each target group routes requests to one or more registered targets using the protocol and port number specified. </li>
+</ol>
+<p><img src="fig7.jpg" alt="fig7.jpg"></p>
+<h2><span id="53-use-cases">5.3 Use Cases</span><a href="#53-use-cases" class="header-anchor">#</a></h2><ol>
+<li>route request to different ports within a single instance. </li>
+</ol>
+<p>Demonstration </p>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/01/18/AWS-essentials-2-Cloud-Concepts/" data-toggle="tooltip" data-placement="top" title="AWS essentials(2) - Cloud Concepts ">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="http://Yinwang.org" target="_blank">Yin Wang</a></li>
+                    
+                        <li><a href="https://bideyuanli.com/" target="_blank">比的原理</a></li>
+                    
+                        <li><a href="https://www.fangzhipeng.com/" target="_blank">方志朋的博客</a></li>
+                    
+                        <li><a href="http://coding-geek.com/" target="_blank">coding geek</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

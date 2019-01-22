@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-19T07:26:56.752Z</updated>
+  <updated>2019-01-22T01:44:07.923Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AWS essentials(3) - Core Services</title>
+    <link href="https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/"/>
+    <id>https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/</id>
+    <published>2019-01-22T01:43:28.000Z</published>
+    <updated>2019-01-22T01:44:07.923Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-aws-global-infrastructure&quot;&gt;1. AWS global infrastructure&lt;/span&gt;&lt;a href=&quot;#1-aws-global-infrastructure&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
   
   <entry>
     <title>AWS essentials(2) - Cloud Concepts </title>
@@ -493,30 +517,6 @@
     
     
       <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LDAP Intro</title>
-    <link href="https://llchen60.com/2018/12/01/LDAP-Intro/"/>
-    <id>https://llchen60.com/2018/12/01/LDAP-Intro/</id>
-    <published>2018-12-02T04:34:42.000Z</published>
-    <updated>2018-12-02T04:46:28.093Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-whats-ldap&quot;&gt;1. What’s LDAP?&lt;/span&gt;&lt;a href=&quot;#1-whats-ldap&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;LDAP stands for
-        
-      
-    
-    </summary>
-    
-    
-      <category term="web" scheme="https://llchen60.com/tags/web/"/>
     
   </entry>
   
