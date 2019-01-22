@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-22T05:04:50.382Z</updated>
+  <updated>2019-01-22T05:13:12.337Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>API-重新认识RESTFUL</title>
+    <link href="https://llchen60.com/2019/01/21/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"/>
+    <id>https://llchen60.com/2019/01/21/API-重新认识RESTFUL/</id>
+    <published>2019-01-22T05:12:03.000Z</published>
+    <updated>2019-01-22T05:13:12.337Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本文主要讲如何对接口进行设计，让URL更为合理，指定合理的数据格式，处理错误码的方式&lt;/p&gt;
+&lt;h1&gt;&lt;span id=&quot;1-api-概念&quot;&gt;1. API 概念&lt;/span&gt;&lt;a href=&quot;#1-api-概念&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="web" scheme="https://llchen60.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>AWS essentials(3) - Core Services</title>
     <link href="https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/"/>
     <id>https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/</id>
     <published>2019-01-22T01:43:28.000Z</published>
-    <updated>2019-01-22T05:04:50.382Z</updated>
+    <updated>2019-01-22T05:12:09.008Z</updated>
     
     <summary type="html">
     
@@ -482,34 +507,6 @@
 &lt;li&gt;&lt;a href=&quot;#1-原型模式概述&quot;&gt;1. 原型模式概述&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#11-工作原理&quot;&gt;1.1 工作原理&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#12-包含角色&quot;&gt;1.2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>单例模式</title>
-    <link href="https://llchen60.com/2018/12/03/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://llchen60.com/2018/12/03/单例模式/</id>
-    <published>2018-12-04T05:17:06.000Z</published>
-    <updated>2018-12-04T05:24:12.740Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-为什么需要单例模式&quot;&gt;1. 为什么需要单例模式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#2-单例模式概述&quot;&gt;2. 单例模式概述&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#21-模拟任务管理类&quot;&gt;2.1
         
       
     
