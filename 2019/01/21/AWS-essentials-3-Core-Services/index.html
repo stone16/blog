@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -191,7 +191,138 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="1-aws-global-infrastructure">1. AWS global infrastructure</span><a href="#1-aws-global-infrastructure" class="header-anchor">#</a></h1><h2><span id="11-regions">1.1 Regions</span><a href="#11-regions" class="header-anchor">#</a></h2><p>AWS Regions provide multiple, physically separated and isolated Availability Zones which are connected with low latency, high throughput, and highly redundant networking. </p>
+                <!-- toc -->
+<ul>
+<li><a href="#1-aws-global-infrastructure">1. AWS global infrastructure</a><ul>
+<li><a href="#11-regions">1.1 Regions</a></li>
+<li><a href="#12-availability-zones">1.2 Availability Zones</a></li>
+<li><a href="#13-edge-locations">1.3 Edge Locations</a></li>
+<li><a href="#14-local-regions">1.4 Local Regions</a></li>
+</ul>
+</li>
+<li><a href="#2-virtual-private-cloud-vpc">2. Virtual Private Cloud (VPC)</a><ul>
+<li><a href="#21-introduction">2.1 Introduction</a></li>
+<li><a href="#22-features">2.2 Features</a></li>
+<li><a href="#23-subnets">2.3 Subnets</a></li>
+</ul>
+</li>
+<li><a href="#3-aws-security">3. AWS Security</a><ul>
+<li><a href="#31-aws-security-groups">3.1 AWS security groups</a></li>
+</ul>
+</li>
+<li><a href="#4-compute-services">4. Compute Services</a><ul>
+<li><a href="#41-amazon-ec2">4.1 Amazon EC2</a><ul>
+<li><a href="#411-what-is-ec2">4.1.1 What is EC2</a></li>
+<li><a href="#412-amazon-ec2-instances-instructions">4.1.2 Amazon EC2 instances instructions</a></li>
+<li><a href="#413-features-of-ec2">4.1.3 Features of EC2</a></li>
+<li><a href="#414-security-best-practices">4.1.4 Security best practices</a></li>
+<li><a href="#415-instance-types">4.1.5 Instance types</a></li>
+</ul>
+</li>
+<li><a href="#42-lambda">4.2 Lambda</a><ul>
+<li><a href="#421-overviews">4.2.1 Overviews</a></li>
+<li><a href="#422-benefits">4.2.2 benefits :</a></li>
+<li><a href="#423-use-cases">4.2.3 Use cases</a></li>
+<li><a href="#424-lambda-applications">4.2.4 Lambda Applications</a></li>
+<li><a href="#425-work-with-aws-lambda-functions">4.2.5 Work with AWS Lambda Functions</a></li>
+<li><a href="#426-lambda-concepts">4.2.6 Lambda Concepts</a></li>
+</ul>
+</li>
+<li><a href="#43-aws-elastic-beanstalk">4.3 AWS Elastic Beanstalk</a><ul>
+<li><a href="#431-overview">4.3.1 Overview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-application-load-balancer">5 Application Load Balancer</a><ul>
+<li><a href="#51-service-introduction">5.1 Service Introduction</a></li>
+<li><a href="#52-key-concepts">5.2 Key Concepts</a></li>
+<li><a href="#53-benefits-of-using-application-load-balancer-instead-of-classic-load-balancer">5.3 Benefits of using Application load balancer instead of classic load balancer</a></li>
+<li><a href="#54-use-cases">5.4 Use Cases</a></li>
+</ul>
+</li>
+<li><a href="#6-elastic-load-balancer-classic-load-balancer">6. Elastic Load Balancer - classic load balancer</a><ul>
+<li><a href="#61-overview">6.1 Overview</a></li>
+<li><a href="#62-how-does-it-work">6.2 How does it work?</a><ul>
+<li><a href="#621-cross-zone-load-balancing">6.2.1 Cross zone load balancing</a></li>
+<li><a href="#622-request-routing">6.2.2 Request Routing</a></li>
+<li><a href="#623-http-connections">6.2.3 HTTP Connections</a></li>
+</ul>
+</li>
+<li><a href="#63-use-cases">6.3 Use cases</a></li>
+</ul>
+</li>
+<li><a href="#7-auto-scaling">7. Auto Scaling</a><ul>
+<li><a href="#71-service-introduction">7.1 Service Introduction</a><ul>
+<li><a href="#711-scaling-out-and-scaling-in">7.1.1 Scaling out and scaling in</a></li>
+<li><a href="#712-dynamic-auto-scaling">7.1.2 Dynamic auto scaling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#8-amazon-elastic-block-storeebs">8. Amazon Elastic Block Store(EBS)</a><ul>
+<li><a href="#81-general-purpose-volumes">8.1 General Purpose Volumes</a></li>
+<li><a href="#82-provisioned-iops-ssd-volumes">8.2 Provisioned IOPS (SSD) Volumes</a></li>
+<li><a href="#83-magnetic-volumes">8.3 Magnetic Volumes</a></li>
+</ul>
+</li>
+<li><a href="#9-amazon-simple-storage-service">9. Amazon Simple Storage Service</a><ul>
+<li><a href="#91-introduction">9.1 Introduction</a><ul>
+<li><a href="#911-steps">9.1.1 steps</a></li>
+<li><a href="#912-bucket">9.1.2 bucket</a></li>
+</ul>
+</li>
+<li><a href="#92-use-cases">9.2 Use cases</a></li>
+</ul>
+</li>
+<li><a href="#10-amazon-glacier">10. Amazon Glacier</a><ul>
+<li><a href="#101-overview">10.1 Overview</a></li>
+<li><a href="#102-details">10.2 Details</a><ul>
+<li><a href="#1021-archive">10.2.1 archive</a></li>
+<li><a href="#1022-vault">10.2.2 vault</a></li>
+<li><a href="#1023-access-policy">10.2.3 access policy</a></li>
+<li><a href="#1024-job">10.2.4 Job</a></li>
+</ul>
+</li>
+<li><a href="#103-use-cases">10.3 use cases</a></li>
+</ul>
+</li>
+<li><a href="#11-amazon-relational-database-service-amazon-rds">11. Amazon Relational Database Service (Amazon RDS)</a><ul>
+<li><a href="#111-overview">11.1 Overview</a><ul>
+<li><a href="#1111-chanllenges-of-relational-databases">11.1.1 Chanllenges of relational databases</a></li>
+<li><a href="#1112-rds-intro">11.1.2 RDS intro</a></li>
+</ul>
+</li>
+<li><a href="#112-use-cases">11.2 Use cases</a></li>
+</ul>
+</li>
+<li><a href="#12-amazon-dynamodb">12. Amazon DynamoDB</a><ul>
+<li><a href="#121-overview">12.1 Overview</a><ul>
+<li><a href="#1211-features">12.1.1 Features</a></li>
+<li><a href="#1212-partitioning">12.1.2 Partitioning</a></li>
+</ul>
+</li>
+<li><a href="#122-use-cases">12.2 Use cases</a></li>
+</ul>
+</li>
+<li><a href="#13-redshift">13. Redshift</a><ul>
+<li><a href="#131-redshift-introduction">13.1 Redshift introduction</a></li>
+<li><a href="#132-overview">13.2 Overview</a><ul>
+<li><a href="#1321-cluster-management">13.2.1 Cluster management</a></li>
+</ul>
+</li>
+<li><a href="#133-use-cases">13.3 use cases</a></li>
+</ul>
+</li>
+<li><a href="#14-amazon-aurora">14. Amazon Aurora</a><ul>
+<li><a href="#141-overview">14.1 Overview</a></li>
+<li><a href="#142-benefits">14.2 benefits</a></li>
+<li><a href="#15-trused-advisor">15. Trused Advisor</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="1-aws-global-infrastructure">1. AWS global infrastructure</span><a href="#1-aws-global-infrastructure" class="header-anchor">#</a></h1><h2><span id="11-regions">1.1 Regions</span><a href="#11-regions" class="header-anchor">#</a></h2><p>AWS Regions provide multiple, physically separated and isolated Availability Zones which are connected with low latency, high throughput, and highly redundant networking. </p>
 <p><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=gi&amp;l=emea" target="_blank" rel="noopener">Region table</a></p>
 <h2><span id="12-availability-zones">1.2 Availability Zones</span><a href="#12-availability-zones" class="header-anchor">#</a></h2><p>These Availability Zones offer AWS customers an easier and more effective way to design and operate applications and databases, making them more highly available, fault tolerant, and scalable than traditional single datacenter infrastructures or multi-datacenter infrastructures. </p>
 <p>Collection of data centers within a region. </p>
@@ -380,10 +511,14 @@
 <li>Language interpreter </li>
 <li>Host </li>
 </ul>
-<h1><span id="5-application-load-balancer">5 Application Load Balancer</span><a href="#5-application-load-balancer" class="header-anchor">#</a></h1><h2><span id="51-service-introduction">5.1 Service Introduction</span><a href="#51-service-introduction" class="header-anchor">#</a></h2><p>Part of the elastic load balancer service. Add some important features<br><img src="fig6.png" alt="fig6.png"></p>
+<h1><span id="5-application-load-balancer">5 Application Load Balancer</span><a href="#5-application-load-balancer" class="header-anchor">#</a></h1><h2><span id="51-service-introduction">5.1 Service Introduction</span><a href="#51-service-introduction" class="header-anchor">#</a></h2><p>A load balancerr serves as the single point of contact for clients. The load balancer distributes incoming application traffic across multiple targets, such as EC2 instances in multiple Availability Zones. </p>
+<p>A listener checks for connection requests from clients, using the protocol and port that you configure, and forwards requests to one or more target groups, based on the rules that you define. Each rule specifies a target group, condition, and priority. When the condition is met, the traffic is forwarded to the target group. You must define a default rule for each listener, and you can add rules that specify different target groups based on the content of the request </p>
+<p>Each target group routes requests to one or more registered targets, such as EC2 instances, using the protocol and port number that you specify. You can register a target with multiple target groups. You can configure health checks on a per target group basis. Health checks are performed on all targets registered to a target group that is specified in a listener rule for your load balancer.</p>
+<p>An Application Load Balancer functions at the application layer, <strong>the seventh layer</strong> of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply, and then selects a target from the target group for the rule action. You can configure listener rules to route requests to different target groups based on the content of the application traffic. Routing is performed independently for each target group, even when a target is registered with multiple target groups.</p>
+<p>Part of the elastic load balancer service. Add some important features<br><img src="fig6.png" alt="fig6.png"></p>
 <ol>
-<li>Support more protocols </li>
-<li>cloudWatch Metrics </li>
+<li>Support more protocols  HTTP HTTPS HTTP/2 </li>
+<li>cloudWatch Metrics   </li>
 <li>Access logs </li>
 <li>Health Checks </li>
 </ol>
@@ -393,10 +528,180 @@
 <li>Target group: each target group routes requests to one or more registered targets using the protocol and port number specified. </li>
 </ol>
 <p><img src="fig7.png" alt="fig7.png"></p>
-<h2><span id="53-use-cases">5.3 Use Cases</span><a href="#53-use-cases" class="header-anchor">#</a></h2><ol>
-<li>route request to different ports within a single instance. </li>
+<h2><span id="53-benefits-of-using-application-load-balancer-instead-of-classic-load-balancer">5.3 Benefits of using Application load balancer instead of classic load balancer</span><a href="#53-benefits-of-using-application-load-balancer-instead-of-classic-load-balancer" class="header-anchor">#</a></h2><ul>
+<li>Support for path-based routing. You can configure rules for your listener that forward requests based on the URL in the request. This enables you to structure your application as smaller services, and route requests to the correct service based on the content of the URL.</li>
+<li>Support for host-based routing. You can configure rules for your listener that forward requests based on the host field in the HTTP header. This enables you to route requests to multiple domains using a single load balancer.</li>
+<li>Support for routing requests to multiple applications on a single EC2 instance. You can register each instance or IP address with the same target group using multiple ports.</li>
+<li>Support for redirecting requests from one URL to another </li>
+</ul>
+<h2><span id="54-use-cases">5.4 Use Cases</span><a href="#54-use-cases" class="header-anchor">#</a></h2><ol>
+<li>route request to different ports within a single instance.<br><img src="fig8.png" alt="fig8.png"></li>
 </ol>
-<p>Demonstration </p>
+<h1><span id="6-elastic-load-balancer-classic-load-balancer">6. Elastic Load Balancer - classic load balancer</span><a href="#6-elastic-load-balancer-classic-load-balancer" class="header-anchor">#</a></h1><h2><span id="61-overview">6.1 Overview</span><a href="#61-overview" class="header-anchor">#</a></h2><p>A load balancer distributes workloads across multiple compute resources, such as virtual servers. Using a load balancer increases the availability and fault tolerance of your applications. </p>
+<p>You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.</p>
+<p>You can <strong>configure health checks</strong>, which are used to monitor the health of the compute resources so that the load balancer can send requests only to the healthy ones. You can also <strong>offload the work of encryption and decryption to your load balancer</strong> so that your compute resources can focus on their main work.</p>
+<p>Mainly consists of there types of load balancer: </p>
+<ol>
+<li>Application Load Balancer </li>
+<li>Network Load Balancer</li>
+<li>Classic Load Balancer </li>
+</ol>
+<p><a href="https://aws.amazon.com/elasticloadbalancing/features/#compare" target="_blank" rel="noopener">The comparison among those three</a></p>
+<h2><span id="62-how-does-it-work">6.2 How does it work?</span><a href="#62-how-does-it-work" class="header-anchor">#</a></h2><p>A load balancer accepts incoming traffic from clients and routes requests to its registered targets. It also monitors the health of its registered targets and ensures that it routes traffic tonly to healthy targets. You configure your load balancer to accept incoming traffic by specifying one or more listeners. A listener is a process that checks for connection requests. It is configured with a protocol and port number for connections from clients to the load balancer and a protocol and port number for connections from the load balancer to the targets.</p>
+<h3><span id="621-cross-zone-load-balancing">6.2.1 Cross zone load balancing</span><a href="#621-cross-zone-load-balancing" class="header-anchor">#</a></h3><p>The nodes for your load balancer distribute requests from clients to registered targets. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones. When cross-zone load balancing is disabled, each load balancer node distributes traffic across the registered targets in its Availability Zone only.</p>
+<h3><span id="622-request-routing">6.2.2 Request Routing</span><a href="#622-request-routing" class="header-anchor">#</a></h3><p>Before a client sends a request to your load balancer, it resolves the load balancer’s domain name using a Domain Name System (DNS) server. The DNS entry is controlled by Amazon, because your load balancers are in the amazonaws.com domain. The Amazon DNS servers return one or more IP addresses to the client, which are the IP addresses of the load balancer nodes for your load balancer. With Network Load Balancers, Elastic Load Balancing creates a network interface for each Availability Zone you enable. Each load balancer node in the Availability Zone uses this network interface to get a static IP address. You can optionally associate one Elastic IP address with each network interface when you create the load balancer.</p>
+<p>As traffic to your application changes over time, Elastic Load Balancing scales your load balancer and updates the DNS entry. Note that the DNS entry also specifies the time-to-live (TTL) as 60 seconds, which ensures that the IP addresses can be remapped quickly in response to changing traffic.</p>
+<p><img src="fig9.png" alt="fig9.png"></p>
+<p><img src="fig10.png" alt="fig10.png"></p>
+<p>Internet facing load balancers:<br><img src="fig11.png" alt="fig11.png"></p>
+<p>Internal Load Balancers: have DNS name only resolve private nodes<br><img src="fig12.png" alt="fig12.png"></p>
+<h3><span id="623-http-connections">6.2.3 HTTP Connections</span><a href="#623-http-connections" class="header-anchor">#</a></h3><p>Classic Load Balancers use <strong>pre-open connections</strong> but Application Load Balancers do not. Both Classic Load Balancers and Application Load Balancers use <strong>connection multiplexing</strong>. This means that <strong>requests from multiple clients on multiple front-end connections can be routed to a given target through a single back-end connection</strong>. Connection multiplexing improves latency and reduces the load on your applications. To prevent connection multiplexing, disable HTTP keep-alives by setting the Connection: close header in your HTTP responses.</p>
+<h2><span id="63-use-cases">6.3 Use cases</span><a href="#63-use-cases" class="header-anchor">#</a></h2><ol>
+<li>Access through single point </li>
+<li>Decouple appliation environment </li>
+<li>Provide high availability and fault tolerance </li>
+<li>Increase elasticity and scalability </li>
+</ol>
+<h1><span id="7-auto-scaling">7. Auto Scaling</span><a href="#7-auto-scaling" class="header-anchor">#</a></h1><h2><span id="71-service-introduction">7.1 Service Introduction</span><a href="#71-service-introduction" class="header-anchor">#</a></h2><p>Auto scaling helps you ensure you have the correct number of EC2 instances available to handle the load for your application. </p>
+<p>Using cloudWatch to monitor </p>
+<h3><span id="711-scaling-out-and-scaling-in">7.1.1 Scaling out and scaling in</span><a href="#711-scaling-out-and-scaling-in" class="header-anchor">#</a></h3><p><img src="fig13.png" alt="fig13.png"></p>
+<ul>
+<li>Auto scaling components<ul>
+<li>launch configuration </li>
+<li>auto scaling group <ul>
+<li>VPC and subnets </li>
+<li>load balancer</li>
+<li>minimum instances </li>
+<li>maximum instances </li>
+<li>desired capacity </li>
+</ul>
+</li>
+<li>auto scaling policy <ul>
+<li>scheduled</li>
+<li>on demand </li>
+<li>scale out policy</li>
+<li>scale in policy </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="712-dynamic-auto-scaling">7.1.2 Dynamic auto scaling</span><a href="#712-dynamic-auto-scaling" class="header-anchor">#</a></h3><p><img src="fig14.png" alt="fig14.png"></p>
+<p>CloudWatch detect the metrics and trigger auto scaling events. </p>
+<h1><span id="8-amazon-elastic-block-storeebs">8. Amazon Elastic Block Store(EBS)</span><a href="#8-amazon-elastic-block-storeebs" class="header-anchor">#</a></h1><p>Amazon Elastic Block Store (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available and reliable storage volumes that can be attached to any running instance that is in the same Availability Zone. </p>
+<p>Amazon EBS is recommended when data must be quickly accessible and requires long-term persistence. EBS volumes are particularly well-suited for use as the primary storage for file systems, databases, or for any applications that require fine granular updates and access to raw, unformatted, block-level storage. </p>
+<p>you can launch your EBS volumes as encrypted volumes.</p>
+<p>There are three types of volumes in Amazon EBS. To understand the difference, you need to know what IOPS is. <strong>“IOPS” stands for input/output operations per second or, put it simply, the maximum amount of read/write operations you are able to perform per second.</strong> To <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html" target="_blank" rel="noopener">choose the right Amazon EBS volume type</a> you need to know IOPS requirements for your application.</p>
+<h2><span id="81-general-purpose-volumes">8.1 General Purpose Volumes</span><a href="#81-general-purpose-volumes" class="header-anchor">#</a></h2><p>Designed for a broad range of tasks, General Purpose Volumes are backed with Solid State Drive (SSD). The baseline performance of 3 IOPS/GB and a possibility to burst up to 10,000 IOPS makes them a good fit for AWS databases that need a lot of read and write operations, like PostgreSQL, MS SQL or Oracle databases.</p>
+<h2><span id="82-provisioned-iops-ssd-volumes">8.2 Provisioned IOPS (SSD) Volumes</span><a href="#82-provisioned-iops-ssd-volumes" class="header-anchor">#</a></h2><p>By expanding the bandwidth bottleneck, Provisioned IOPS Volumes allow buying read/write operations on demand regardless of the volume capacity. This type of EBS volumes is backed with the same SSD but designed for heavy workloads from 30 IOPS/GB up to 20,000 IOPS. Multiple Provisioned IOPS volumes can be striped thus ensuring up to 48,000 IOPS or 800 MBps of throughput.</p>
+<h2><span id="83-magnetic-volumes">8.3 Magnetic Volumes</span><a href="#83-magnetic-volumes" class="header-anchor">#</a></h2><p>The best way to think of the Magnetic Volumes type is as of a low-cost volume that can be used with testing and development environments on Amazon EC2. It can also be used with applications that don’t require a lot of read/write operations. Instead of SSD, this type is based on magnetic HDD drives, thus the IOPS baseline is within the range of 100 up to hundreds of IOPS. Magnetic Volumes can also become a starting point in working with Amazon EC2 — once you understand your IOPS demands, you can select the type of volume that fits best.</p>
+<h1><span id="9-amazon-simple-storage-service">9. Amazon Simple Storage Service</span><a href="#9-amazon-simple-storage-service" class="header-anchor">#</a></h1><h2><span id="91-introduction">9.1 Introduction</span><a href="#91-introduction" class="header-anchor">#</a></h2><p>No need to manage any infrastructure yourself. S3 help you manage your storage, it can store unlimited number of objects, access any time, from anywhere; rich security controls. </p>
+<p>Amazon Simple Storage Service (Amazon S3) is storage for the Internet. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web. You can accomplish these tasks using the AWS Management Console, which is a simple and intuitive web interface. </p>
+<h3><span id="911-steps">9.1.1 steps</span><a href="#911-steps" class="header-anchor">#</a></h3><ol>
+<li>create a bucket </li>
+<li>add an object to a bucket </li>
+<li>view an object </li>
+<li>move an object </li>
+<li>delete an object and bucket </li>
+</ol>
+<h3><span id="912-bucket">9.1.2 bucket</span><a href="#912-bucket" class="header-anchor">#</a></h3><p>S3 stores data as objects within buckets. An object consists of a file and optionally any metadata that describes the file. </p>
+<p>To store an object in Amazon S3, you upload the file you want to store to a bucket. When you upload a file, you can <strong>set permissions</strong> on the object as well as any metadata.</p>
+<p>Buckets are the <strong>containers</strong> for objects. You can have one or more buckets. For each bucket, you can control access to it (who can create, delete, and list objects in the bucket), view access logs for it and its objects, and choose the geographical region where Amazon S3 will store the bucket and its contents.</p>
+<p>Need a bucket to hold the data </p>
+<p>associate in region, will make duplicate  </p>
+<p>disigned for seamless scaling </p>
+<h2><span id="92-use-cases">9.2 Use cases</span><a href="#92-use-cases" class="header-anchor">#</a></h2><ol>
+<li>store application assets </li>
+<li>static web hosting </li>
+<li>backup and disaster recovery </li>
+<li>staging area for big data </li>
+</ol>
+<h1><span id="10-amazon-glacier">10. Amazon Glacier</span><a href="#10-amazon-glacier" class="header-anchor">#</a></h1><h2><span id="101-overview">10.1 Overview</span><a href="#101-overview" class="header-anchor">#</a></h2><p>Data archiving solition </p>
+<p>long tern storage at low cost </p>
+<p>access limited by vault polocies </p>
+<p>for data not accessed frequently </p>
+<p><img src="fig15.png" alt="fig15.png"></p>
+<p>It can take a really long time to retrieve data from glacier. bulk, standard, expedited. </p>
+<p>Amazon Simple Storage Service Glacier (Amazon S3 Glacier) is a storage service optimized for infrequently used data, or “cold data.” The service provides durable and extremely low-cost storage with security features for data archiving and backup. With Amazon S3 Glacier, you can store your data cost effectively for months, years, or even decades. Amazon S3 Glacier enables you to offload the administrative burdens of operating and scaling storage to AWS, so you don’t have to worry about capacity planning, hardware provisioning, data replication, hardware failure detection and recovery, or time-consuming hardware migrations. </p>
+<h2><span id="102-details">10.2 Details</span><a href="#102-details" class="header-anchor">#</a></h2><h3><span id="1021-archive">10.2.1 archive</span><a href="#1021-archive" class="header-anchor">#</a></h3><p>An archive can be any data such as a photo, video, or document and is a base unit of storage in glacier. </p>
+<h3><span id="1022-vault">10.2.2 vault</span><a href="#1022-vault" class="header-anchor">#</a></h3><p>Container to store archive. When creating a vault, you specify a name and choose an AWS region where you want to create the vault.  Within a Region, an account must use unique vault names. An AWS account can create same-named vaults in different Regions.</p>
+<h3><span id="1023-access-policy">10.2.3 access policy</span><a href="#1023-access-policy" class="header-anchor">#</a></h3><p>who can access </p>
+<h3><span id="1024-job">10.2.4 Job</span><a href="#1024-job" class="header-anchor">#</a></h3><p>Glacier jobs can perform a select query on an archive, retrieve an archive, or get an inventory of a vault. When performing a query on an archive, you initiate a job providing a SQL query and list of Glacier archive objects. Glacier Select runs the query in place and writes the output results to Amazon S3.</p>
+<h2><span id="103-use-cases">10.3 use cases</span><a href="#103-use-cases" class="header-anchor">#</a></h2><ol>
+<li>archive database snapshots and log files </li>
+<li>low cost enables more comprehensive backups </li>
+<li>archive older documents, audio, video </li>
+</ol>
+<h1><span id="11-amazon-relational-database-service-amazon-rds">11. Amazon Relational Database Service (Amazon RDS)</span><a href="#11-amazon-relational-database-service-amazon-rds" class="header-anchor">#</a></h1><h2><span id="111-overview">11.1 Overview</span><a href="#111-overview" class="header-anchor">#</a></h2><h3><span id="1111-chanllenges-of-relational-databases">11.1.1 Chanllenges of relational databases</span><a href="#1111-chanllenges-of-relational-databases" class="header-anchor">#</a></h3><ol>
+<li>server maintenance and energy footprint </li>
+<li>software install and patches </li>
+<li>database backups and high availability </li>
+<li>limits on scalability </li>
+<li>data security </li>
+<li>os install and patches </li>
+</ol>
+<h3><span id="1112-rds-intro">11.1.2 RDS intro</span><a href="#1112-rds-intro" class="header-anchor">#</a></h3><p>Amazon RDS is a managed service that sets up and operates a relational database in the cloud. </p>
+<p>AWS help you manage: </p>
+<ul>
+<li>OS installation and patches </li>
+<li>database software install and patches </li>
+<li>database backups </li>
+<li>high availability </li>
+<li>scaling </li>
+<li>power and rack &amp; stack </li>
+<li>server maintenance </li>
+</ul>
+<p>It support mainstream relation databases: </p>
+<p><img src="fig16.png" alt="fig16.png"></p>
+<h2><span id="112-use-cases">11.2 Use cases</span><a href="#112-use-cases" class="header-anchor">#</a></h2><p><img src="fig17.png" alt="fig17.png"></p>
+<h1><span id="12-amazon-dynamodb">12. Amazon DynamoDB</span><a href="#12-amazon-dynamodb" class="header-anchor">#</a></h1><h2><span id="121-overview">12.1 Overview</span><a href="#121-overview" class="header-anchor">#</a></h2><h3><span id="1211-features">12.1.1 Features</span><a href="#1211-features" class="header-anchor">#</a></h3><ul>
+<li>NoSQL databse tables as a service </li>
+<li>store as many items as you want </li>
+<li>items may have differing attributes </li>
+<li>low latency queries </li>
+<li>scalable read/ write throughput </li>
+</ul>
+<h3><span id="1212-partitioning">12.1.2 Partitioning</span><a href="#1212-partitioning" class="header-anchor">#</a></h3><p>as table grows, table partitioned by key </p>
+<p>query by key to find items efficiently </p>
+<p>scan to find items by any attribute, less efficient </p>
+<h2><span id="122-use-cases">12.2 Use cases</span><a href="#122-use-cases" class="header-anchor">#</a></h2><ul>
+<li>web </li>
+<li>mobile apps </li>
+<li>internet of things </li>
+<li>ad tech </li>
+</ul>
+<h1><span id="13-redshift">13. Redshift</span><a href="#13-redshift" class="header-anchor">#</a></h1><h2><span id="131-redshift-introduction">13.1 Redshift introduction</span><a href="#131-redshift-introduction" class="header-anchor">#</a></h2><ul>
+<li>data warehouse, to analyze the data with query. </li>
+<li>parallel processing architecture </li>
+</ul>
+<p><img src="fig18.png" alt="fig18.png"></p>
+<p>Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools. It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.</p>
+<h2><span id="132-overview">13.2 Overview</span><a href="#132-overview" class="header-anchor">#</a></h2><h3><span id="1321-cluster-management">13.2.1 Cluster management</span><a href="#1321-cluster-management" class="header-anchor">#</a></h3><p>A cluster is a set of nodes, which consists of a leader node and one or more compute nodes, The type and number of compute nodes that you need depends on the size of your data, the number of queries you will execute, and the query execution performance that you need.</p>
+<h2><span id="133-use-cases">13.3 use cases</span><a href="#133-use-cases" class="header-anchor">#</a></h2><ol>
+<li><p>Enterprise Data Warehouse (EDW)</p>
+</li>
+<li><p>Big Data </p>
+</li>
+<li><p>Saas </p>
+</li>
+</ol>
+<ul>
+<li>scale the data warehouse capacity as demand grows </li>
+<li>add analytic functionality to applications </li>
+<li>reduce hardware and software costs by an order of magnitude </li>
+</ul>
+<h1><span id="14-amazon-aurora">14. Amazon Aurora</span><a href="#14-amazon-aurora" class="header-anchor">#</a></h1><h2><span id="141-overview">14.1 Overview</span><a href="#141-overview" class="header-anchor">#</a></h2><p>mysql relational database </p>
+<p>It is designed to deliver the speed and reliability of high-end commercial databases in a simple and cost-effective manner. Aurora is designed to be compatible with MySQL 5.6 and delivers five times the throughput of standard MySQL running on the same hardware. DBAs are able to save time on planning backup storage disks, as data is continuously backed up to AWS S3 in real time, with no performance impact to the end user. </p>
+<h2><span id="142-benefits">14.2 benefits</span><a href="#142-benefits" class="header-anchor">#</a></h2><p><img src="fig19.png" alt="fig19.png"></p>
+<p><img src="fig20.png" alt="fig20.png"></p>
+<h2><span id="15-trused-advisor">15. Trused Advisor</span><a href="#15-trused-advisor" class="header-anchor">#</a></h2><p>Used to keep track of aws resources. – a dashboard for all the risks and warnings that you can take actions to save money </p>
+<p>Detect your usage in four categories: </p>
+<ol>
+<li>cost optimization </li>
+<li>performance </li>
+<li>security </li>
+<li>fault tolerance </li>
+</ol>
 <p><div id="disqus_thread"></div></p>
 <script>
 

@@ -46,7 +46,7 @@
     <link href="https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/"/>
     <id>https://llchen60.com/2019/01/21/AWS-essentials-3-Core-Services/</id>
     <published>2019-01-22T01:43:28.000Z</published>
-    <updated>2019-01-22T05:12:09.008Z</updated>
+    <updated>2019-01-23T02:56:31.424Z</updated>
     
     <summary type="html">
     
@@ -54,7 +54,10 @@
       
         
         
-          &lt;h1&gt;&lt;span id=&quot;1-aws-global-infrastructure&quot;&gt;1. AWS global infrastructure&lt;/span&gt;&lt;a href=&quot;#1-aws-global-infrastructure&quot;
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-aws-global-infrastructure&quot;&gt;1. AWS global infrastructure&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-regions&quot;&gt;1.1
         
       
     
@@ -118,7 +121,7 @@
     <link href="https://llchen60.com/2019/01/06/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"/>
     <id>https://llchen60.com/2019/01/06/网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题/</id>
     <published>2019-01-07T02:58:28.000Z</published>
-    <updated>2019-01-17T04:55:56.320Z</updated>
+    <updated>2019-01-23T02:56:33.017Z</updated>
     
     <summary type="html">
     
@@ -126,7 +129,11 @@
       
         
         
-          &lt;h1&gt;&lt;span id=&quot;1-视频压缩&quot;&gt;1. 视频压缩&lt;/span&gt;&lt;a href=&quot;#1-视频压缩&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;网络直播,视频压缩是一个很关键的技术，因为假设每一张图片大小为1024 *
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-视频压缩&quot;&gt;1. 视频压缩&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-视频和图片压缩过程特征&quot;&gt;1.1 视频和图片压缩过程特征&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#111-空间冗余&quot;&gt;1.1.1
         
       
     
@@ -243,7 +250,7 @@
     <link href="https://llchen60.com/2018/12/16/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
     <id>https://llchen60.com/2018/12/16/网络协议-四-网络层/</id>
     <published>2018-12-16T22:35:14.000Z</published>
-    <updated>2018-12-19T04:28:22.352Z</updated>
+    <updated>2019-01-23T02:56:33.902Z</updated>
     
     <summary type="html">
     
