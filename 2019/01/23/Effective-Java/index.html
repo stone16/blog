@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          Effective Java - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2019/01/23/Effective-Java/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                    <h1>Effective Java</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2019-01-23
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="1-general-programming">1. General Programming</span><a href="#1-general-programming" class="header-anchor">#</a></h1><h2><span id="11-scope-of-local-variables">1.1 Scope of Local variables</span><a href="#11-scope-of-local-variables" class="header-anchor">#</a></h2><pre><code>for (Iterator&lt;Element&gt; i = c.iterator(); i.hasNext(); ) {
+    Element e = i.next();
+    ... // Do something with e and i
+}
+
+// code with bug
+Iterator&lt;Element&gt; i2 = c2.iterator();
+while (i.hasNext()) {
+    Element e2 = i2.next();
+    ... // Do something with e2 and i2
+}
+</code></pre><p>i - i2. causing a runtime bug. This bug can be caught at compile time if you <strong>use local variable with minimal scope</strong>. </p>
+<ol>
+<li>Declare the scope of a local variable where it is first used </li>
+<li>initialize every local variable</li>
+<li>prefer for loops to while loops </li>
+<li>keep methods small and focused on a single task </li>
+</ol>
+<h2><span id="12-use-library">1.2 Use library</span><a href="#12-use-library" class="header-anchor">#</a></h2><p>Use library will give you some advantages:</p>
+<ul>
+<li>The knowledge of experts who implemented it and the experience of others who used it before you. </li>
+<li>Better performance that is implemented by experts.</li>
+<li>New features that are added to the libraries in every major release. </li>
+</ul>
+<h2><span id="13-float-double-and-exact-calculations">1.3 Float, Double and Exact Calculations</span><a href="#13-float-double-and-exact-calculations" class="header-anchor">#</a></h2><pre><code>int getPossibleBoughtItems() {
+    double dollarFunds = 1.0;
+    int numItems = 0;
+    for (double price = 0.10; dollarFunds &gt;= price; price += 0.10) {
+        dollarFunds -= price;
+        numItems++;
+    }
+    return numItems;
+}
+</code></pre><p>We should use BigDecimal, int or long for exact calculations. We should avoid using float and double for exact calculations because they are carefully designed for accurate approximations in scientific and engineering calculations. </p>
+<p>Note that the first method above will return 3, which is wrong, with funds left of $0.3999999999999999. The correct return should be 4, with funds left 0 (see the second implementation).</p>
+<h2><span id="14-primitive-types-and-boxed-primitives">1.4 Primitive Types and Boxed Primitives</span><a href="#14-primitive-types-and-boxed-primitives" class="header-anchor">#</a></h2><p>When possible, you should use primitives, instead of boxed primitives, because: </p>
+<ol>
+<li>Unnecessary use of boxed primitives may result in a hideously slow program because of repeated boxed and unboxed operations. </li>
+<li>whenboxes primitives are used, applying <code>==</code> operator is almost always wrong and can lead to deadly bugs that are difficult to discover. </li>
+</ol>
+<h2><span id="15-use-of-strings-and-other-types">1.5 Use of Strings and Other Types</span><a href="#15-use-of-strings-and-other-types" class="header-anchor">#</a></h2><pre><code>// good
+public final class ThreadLocal&lt;T&gt; {
+    public ThreadLocal() {};
+    public void set (T value) {...};
+    public T get() {...};
+}
+// not good 
+public final class ThreadLocal {
+    private ThreadLocal() {};
+    public static void set (String key, Object value) {...};
+    public static Object get(String key) {...};
+}
+</code></pre><p>We should avoid using String, because it is poor substitutes for other value types, or aggregate types, or capacity types. It is cumbersome, slower, error-prone and inflexible than other types. </p>
+<h2><span id="16-string-builder-and-string-concatenation">1.6 String Builder and String Concatenation</span><a href="#16-string-builder-and-string-concatenation" class="header-anchor">#</a></h2><p>Use String Builder instead of String Concatenation, due to its poor performance. </p>
+<pre><code>// Good 
+public String firstNamesToString(List&lt;Person&gt; members) {
+    StringBuilder sb = new StringBuilder();
+    for (Person p : members) {
+        sb.append(&quot;[&quot;);
+        sb.append(p.firstName);
+        sb.append(&quot;]&quot;);
+    }
+    return sb.toString();
+}
+// Bad 
+public String firstNamesToString(List&lt;Person&gt; members) {
+    String s = &quot;&quot;;
+    for (Person p : members) {
+        s += &quot;[&quot; + p.firstName + &quot;]&quot;;
+    }
+    return s;
+}
+</code></pre><h2><span id="17-interface-and-class-reference">1.7 Interface and Class reference</span><a href="#17-interface-and-class-reference" class="header-anchor">#</a></h2><p>Use of interface reference </p>
+<pre><code>public List&lt;Person&gt; getPeopleByFirstName(List&lt;Person&gt; members, String firstName) {}
+</code></pre><p>It would be desirable, more flexible and more backward-compatible to use interface types to refer to parameters, return values, variables and fields if appropriate interface types exist. If appropriate interface types do not exist, use least specific class types to refer to parameters, return values, variables and fields if appropriate interface types do not exist. </p>
+<h1><span id="2-objects">2. Objects</span><a href="#2-objects" class="header-anchor">#</a></h1><h2><span id="21-static-factory-methods-and-constructors">2.1 Static Factory Methods and Constructors</span><a href="#21-static-factory-methods-and-constructors" class="header-anchor">#</a></h2><p>You are designing a class such as Date and you want to allow a client to obtain an instance of the class, given some input such as instant.</p>
+<p>We should use static factory methods because Factory method has following advantages: </p>
+<ol>
+<li>have names </li>
+<li>not required to create a new object each time invoked </li>
+<li>can return an object of any subtype of their return type </li>
+<li>decouple service provider frameworks </li>
+</ol>
+<h2><span id="22-builders-and-constructors">2.2 Builders and Constructors</span><a href="#22-builders-and-constructors" class="header-anchor">#</a></h2><p>Use builders since it makes code easier for reading</p>
+<h2><span id="23-singleton">2.3 Singleton</span><a href="#23-singleton" class="header-anchor">#</a></h2><h3><span id="231-use-of-enum">2.3.1 Use of enum</span><a href="#231-use-of-enum" class="header-anchor">#</a></h3><pre><code>public enum MySingleton {
+    INSTANCE;
+
+    public void getDataByMarketplaceId(MarketplaceId id) { ... }
+}
+</code></pre><h3><span id="232-use-of-static-factory">2.3.2 Use of static factory</span><a href="#232-use-of-static-factory" class="header-anchor">#</a></h3><pre><code>public class MySingleton {
+    private static final MySingleton INSTANCE = new MySingleton();
+    private MySingleton() { ... }
+    public static MySingleton getInstance() { return INSTANCE; }
+
+    public void getDataByMarketplaceId(MarketplaceId id) { ... }
+}
+</code></pre><h2><span id="24-reusable-objects">2.4 Reusable Objects</span><a href="#24-reusable-objects" class="header-anchor">#</a></h2><pre><code>public class RomanNumber {
+    private static Pattern ROMAN = Pattern.compile(&quot;^(?=.)M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$&quot;);
+
+    static boolean isRomanNumber(String s) {
+        return ROMAN.matcher(s).matches();
+    }
+}
+</code></pre><p>Reuse the expensive objects(here is Pattern), in performace critical situations. </p>
+<h1><span id="3-classes">3. Classes</span><a href="#3-classes" class="header-anchor">#</a></h1><h2><span id="31-accessibility-of-classes-and-members">3.1 Accessibility of Classes and Members</span><a href="#31-accessibility-of-classes-and-members" class="header-anchor">#</a></h2><p>Avoid using a public array because a nonzero length array is always mutable, and thus clients will be able to modify the elements of the array. </p>
+<h2><span id="32-mutability">3.2 Mutability</span><a href="#32-mutability" class="header-anchor">#</a></h2><p>In general, classes should be immutable unless there’s a very good reason to make them mutable; and if so, you should minimize mutability when designing and implementing classes. Rules to make a class immutable: </p>
+<ol>
+<li>Don’t provide methods that modify the state of objects that you want to be immutable. </li>
+<li>Ensure that the class cann’t be extended.</li>
+<li>Make all fields final to express your intent clearly</li>
+<li>Make all fields private to prevent clients from obtaining access to mutable objects </li>
+<li>Ensure exclusive access to any mutable components</li>
+</ol>
+<p>Try to use more immutability, since it offers benefits byu nature: </p>
+<ol>
+<li>Immutable objects are simple: providing failure atomicity </li>
+<li>Inherently thread-safe, require no synchronization </li>
+<li>Can share immutable objects freely</li>
+<li>Immutable objects make great building blocks for other objects. </li>
+</ol>
+<h2><span id="33-interfaces-and-abstract-classes">3.3 Interfaces and Abstract Classes</span><a href="#33-interfaces-and-abstract-classes" class="header-anchor">#</a></h2><p>In general, use of interfaces is the best way to define a type that permits multiple implementations because a class can implement multiple interfaces whereas it cannot extend multiple abstract classes. </p>
+<h2><span id="34-static-member-classes">3.4 Static Member Classes</span><a href="#34-static-member-classes" class="header-anchor">#</a></h2><pre><code>public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements Map&lt;K,V&gt;, Cloneable, Serializable {
+    ...
+    static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        V value;
+        Node&lt;K,V&gt; next;
+        ...
+        public final K getKey()        { return key; }
+        public final V getValue()      { return value; }
+        ...
+    }
+}
+</code></pre><p>A nested class is a class defined within another class, the former should exist only to serve the latter. If you declare a member class that doesn’t require access to its enclosing instance then always put static modifier in its declaration. </p>
+<p>If you omit this modifier then each instance will have a hidden extraneous reference to its enclosing instance, and storing this reference takes time and space. More seriously, it can result in the enclosing instance being retained when it would be otherwise be eligible for garbage collection, causing catastrophic memory leak.</p>
+<h1><span id="4-methods-and-generics">4. Methods and Generics</span><a href="#4-methods-and-generics" class="header-anchor">#</a></h1><h2><span id="41-empty-and-null-returns">4.1 Empty and Null returns</span><a href="#41-empty-and-null-returns" class="header-anchor">#</a></h2><p>Never return null in place of an empty array or collection because it will require clients to check null return for all method calls, ugly!</p>
+<h2><span id="42-optional-returns">4.2 Optional Returns</span><a href="#42-optional-returns" class="header-anchor">#</a></h2><pre><code>public static &lt;E extends Comparable&lt;E&gt;&gt; Optional&lt;E&gt; max(Collection&lt;E&gt; c) {
+    if (c.isEmpty()) {
+        return Optional.empty();
+    }
+    E result = null;
+    for (E e : c) {
+        if (result == null || e.compareTo(result) &gt; 0) {
+            result = Objects.requireNonNull(e);
+        }
+    }
+    return Optional.of(result);
+}
+</code></pre><p>Since Java 8, an Optional-returning method is possible, more flexible, and easier to use than one that throws an exception; it is also less error-prone than one that returns  null . Here are some best practices when using   Optional :</p>
+<ul>
+<li>Never return a null value from an optinal-returning method because doing so defeats the entire purpose of the facility.</li>
+<li>Use helpers provided by the facility</li>
+</ul>
+<pre><code> String lastWordInLexicon = max(words).orElse(&quot;No words...&quot;); ,   
+Toy myToy = max(toys).orElseThrow(ToyException::new); 
+</code></pre><ul>
+<li>Container types, including collections, maps, streams, arrays, and optionals, should not be wrapped in optionals, because they have already provided facility to handle empty values.</li>
+<li>Never return an optional of a boxed primitive type, with possible exception of  Boolean ,  Byte ,   Character ,  Short ,  Float . For other boxed primitive types, use  OptionalInt ,   OptionalLong ,  OptionalDouble  instead.</li>
+</ul>
+<h2><span id="43-generics-and-unchecked-warnings">4.3 Generics and Unchecked Warnings</span><a href="#43-generics-and-unchecked-warnings" class="header-anchor">#</a></h2><pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable {
+    ...
+    public &lt;T&gt; T[] toArray(T[] a) {
+        if (a.length &lt; size) {
+            @SuppressWarnings(&quot;unchecked&quot;) T[] result = (T[]) Arrays.copyOf(elementData, size, a.getClass());
+            return result;
+        }
+        System.arraycopy(elementData, 0, a, 0, size);
+        if (a.length &gt; size) {
+            a[size] = null;
+        }
+        return a;
+    }
+    ...
+} 
+</code></pre><p>Unchecked warnings are important; don’t ignore them because every unchecked warning has the potential to throw a   ClassCastException  at runtime. You should do your best to eliminate as many of them as possible. If you can’t, however, get rid of an unchecked warning, but you can prove that the code that provoke it is typesafe then suppress it with the corresponding annotation in the <strong>narrowest possible scope</strong>.</p>
+<p>@SupressWarning: An anotation to surpress compile warnings about unchecked generic operations. </p>
+<h2><span id="44-generics-and-wildcards">4.4 Generics and Wildcards</span><a href="#44-generics-and-wildcards" class="header-anchor">#</a></h2><pre><code>public class Stack&lt;E&gt; {
+    ...
+    public Stack() { ... }
+    public void push(E e) { ... }
+    public E pop() { ... }
+    public boolean isEmpty { ... }
+
+    public void pushAll(Iterable&lt;? extends E&gt; src) {
+        for (E e : src) {
+            push(e);
+        }
+    }
+
+    public void popAll(Collection&lt;? super E&gt; dst) {
+        while (!isEmpty()) {
+            dst.add(pop());
+        }
+    }
+}
+</code></pre><p>It is clear that for maximum flexibility you should use wildcard types on input parameters that represent producers or consumers.</p>
+<ul>
+<li>Remember PECS, which stands for <strong>Producer-Extends and Consumer-Super</strong>. Note that  Comparable  and   Comparator  are always consumers.</li>
+</ul>
+<h1><span id="5-exceptions">5. Exceptions</span><a href="#5-exceptions" class="header-anchor">#</a></h1><h2><span id="51-checked-exceptions-and-unchecked-exceptions">5.1 Checked Exceptions and Unchecked Exceptions</span><a href="#51-checked-exceptions-and-unchecked-exceptions" class="header-anchor">#</a></h2><pre><code>/**
+ * Returns MarketplaceInfo of a given marketplace.
+ * @throws NotFoundException if marketplaceId is not found; do not retry.
+ * @throws ServiceUnavailableException if MarketplaceService does not respond after 3 retries.
+ */
+public MarketplaceInfo getMarketplaceInfoById(MarketplaceId marketplaceId) {
+    try {
+        return getMarketplaceInfoByIdFromLocalCache(marketplaceId);
+    } catch (IOException e) {
+        try {
+            MarketplaceInfo info = getMarketplaceInfoByIdFromRemoteCache(marketplaceId);
+            putMarketplaceInfoToLocalCache(marketplaceId, info);
+            return info;
+        } catch (IOException e) {
+            for (int numRetries = 0; numRetries &lt; 3; numRetries++) {
+                try {
+                    // Call dependent service to get marketplace info
+                    MarketplaceInfo info = marketplaceService.getMarketplaceInfoById(marketplaceId);
+                    putMarketplaceInfoToLocalCache(marketplaceId, info);
+                    putMarketplaceInfoToRemoteCache(marketplaceId, info);                
+                    return info;
+                } catch (ServiceUnavailableException e) {
+                    sleep(5); // sleep 5 seconds before retry
+                } catch (NotFoundException e) {
+                    LOG.error(&quot;Unable to get marketplace info because marketplace id {} is not found.&quot;, marketplaceId);
+                    throw e;
+                }
+            }
+            throw new ServiceUnavailableException(&quot;Unable to get marketplace info after 3 retries.&quot;);
+        }
+    }
+}
+</code></pre><p>We should: </p>
+<ul>
+<li>throw checked exceptions, a subclass of Exception <ul>
+<li>for recoverable conditions</li>
+</ul>
+</li>
+<li>throw unchecked exceptions, a subclass of runtimeException <ul>
+<li>for programming errors </li>
+</ul>
+</li>
+</ul>
+<p>When in doubt, throw unchecked exceptions. When throwing checked exceptions, add methods to aid in recovery for clients. </p>
+<p>You should declare checked exceptions individually and document precisely the conditions under which each exception is thrown, by using Javadoc  @throws  tag. If the same exception is thrown by many methods in a class for the same reason then you can document it in the class’s documentation comment. In addition, it is particularly important to document unchecked exceptions of methods in interfaces they may throw</p>
+<h2><span id="52-exception-implementation">5.2 Exception Implementation</span><a href="#52-exception-implementation" class="header-anchor">#</a></h2><ul>
+<li>Provide detail as much as possible</li>
+<li>detail msg should contain the values of all parameters and fields that have contributed to the exception </li>
+<li>No sensitive information contained </li>
+</ul>
+<h1><span id="6-lambdas-and-streams">6. Lambdas and Streams</span><a href="#6-lambdas-and-streams" class="header-anchor">#</a></h1><h2><span id="61-method-references">6.1 Method references</span><a href="#61-method-references" class="header-anchor">#</a></h2><ul>
+<li><code>Integer::parseInt</code> -&gt; a static method reference for <code>str -&gt; Integer.parseInt(str)</code></li>
+<li><code>Instant.now()::isAfter</code> -&gt; a bound method reference for <code>Instance i = Instant.now(); t -&gt; i.isAfter(t)</code></li>
+<li><code>String::toLowerCase</code> -&gt; an unbound method reference for <code>str -&gt; str.toLowerCase()</code></li>
+<li><code>TreeMap&lt;K, V&gt;::new</code> -&gt; A class constructor for <code>() -&gt; new TreeMap&lt;K, V&gt;</code></li>
+</ul>
+<h1><span id="7-concurrency">7. Concurrency</span><a href="#7-concurrency" class="header-anchor">#</a></h1><h2><span id="71-synchronize-access-to-sharable-mutable-data">7.1 Synchronize Access to Sharable Mutable Data</span><a href="#71-synchronize-access-to-sharable-mutable-data" class="header-anchor">#</a></h2><p>When multiple threads share mutable data, each thread that reads or writes the data must <strong>perform synchronization</strong>, otherwise there is no guarantee that one thread’s changes of the data will be visible to other threads, and therefore may cause liveness and safety failures. These failures are among the most difficult to debug.<br><code>var ++</code><br>It performs two operations on var : (1) it reads the value, (2) it writes back a new value that is equal to the old value plus one. If a second thread reads the field between the time the first thread reads the old value and writes back the new one, then both threads will see the same value and thus return the same serial number, OUCH; this is a safety failure.</p>
+<p>Note that the best way to avoid safety failure is <strong>not to share mutable data</strong>, meaning share only immutable data or don’t share at all — confine mutable data to a single thread. If you adopt this policy then you should document it carefully, so that the policy is maintained as your program evolves. It is also crucial to have a deep understanding of the frameworks and libraries you’re using because they may introduce threads that you are unaware of.</p>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/01/21/API-重新认识RESTFUL/" data-toggle="tooltip" data-placement="top" title="API-重新认识RESTFUL">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="http://Yinwang.org" target="_blank">Yin Wang</a></li>
+                    
+                        <li><a href="https://bideyuanli.com/" target="_blank">比的原理</a></li>
+                    
+                        <li><a href="https://www.fangzhipeng.com/" target="_blank">方志朋的博客</a></li>
+                    
+                        <li><a href="http://coding-geek.com/" target="_blank">coding geek</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2019/01/23/Effective-Java/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

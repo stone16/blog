@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-22T05:13:12.337Z</updated>
+  <updated>2019-01-24T04:17:29.366Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Effective Java</title>
+    <link href="https://llchen60.com/2019/01/23/Effective-Java/"/>
+    <id>https://llchen60.com/2019/01/23/Effective-Java/</id>
+    <published>2019-01-24T04:16:51.000Z</published>
+    <updated>2019-01-24T04:17:29.366Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-general-programming&quot;&gt;1. General Programming&lt;/span&gt;&lt;a href=&quot;#1-general-programming&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>API-重新认识RESTFUL</title>
@@ -486,34 +510,6 @@
         
           &lt;p&gt;建造者模式，又称为生成器模式，为客户端返回一个由多个部件组成的复杂产品。&lt;/p&gt;
 &lt;h1&gt;&lt;span id=&quot;1-建造者模式概述&quot;&gt;1. 建造者模式概述&lt;/span&gt;&lt;a href=&quot;#1-建造者模式概述&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Design Pattern" scheme="https://llchen60.com/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原型模式</title>
-    <link href="https://llchen60.com/2018/12/04/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://llchen60.com/2018/12/04/原型模式/</id>
-    <published>2018-12-05T03:58:57.000Z</published>
-    <updated>2018-12-05T04:08:27.717Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1-原型模式概述&quot;&gt;1. 原型模式概述&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#11-工作原理&quot;&gt;1.1 工作原理&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#12-包含角色&quot;&gt;1.2
         
       
     
