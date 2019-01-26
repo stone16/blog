@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-26T02:29:41.795Z</updated>
+  <updated>2019-01-26T19:47:49.291Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AWS essential(6) - pricing</title>
+    <link href="https://llchen60.com/2019/01/26/AWS-essential-6-pricing/"/>
+    <id>https://llchen60.com/2019/01/26/AWS-essential-6-pricing/</id>
+    <published>2019-01-26T19:47:32.000Z</published>
+    <updated>2019-01-26T19:47:49.291Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-pricing&quot;&gt;1. Pricing&lt;/span&gt;&lt;a href=&quot;#1-pricing&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;h2&gt;&lt;span id=&quot;11-aws-pricing-features&quot;&gt;1.1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AWS essential(5) - Architecting</title>
+    <link href="https://llchen60.com/2019/01/26/AWS-essential-5-Architecting/"/>
+    <id>https://llchen60.com/2019/01/26/AWS-essential-5-Architecting/</id>
+    <published>2019-01-26T19:46:47.000Z</published>
+    <updated>2019-01-26T19:47:08.114Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-introduction-to-well-architected-framework&quot;&gt;1. Introduction to well-architected framework&lt;/span&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
   
   <entry>
     <title>AWS essential(4)-Security</title>
@@ -464,58 +512,6 @@
     
     
       <category term="java" scheme="https://llchen60.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础知识</title>
-    <link href="https://llchen60.com/2018/12/08/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>https://llchen60.com/2018/12/08/Java基础知识/</id>
-    <published>2018-12-08T20:41:59.000Z</published>
-    <updated>2018-12-08T20:43:07.763Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;!-- toc --&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#1java平台&quot;&gt;1.Java平台&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#11-java解释执行&quot;&gt;1.1 Java解释执行？&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#12-java类加载机制&quot;&gt;1.2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="java" scheme="https://llchen60.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux性能优化-概述(一)</title>
-    <link href="https://llchen60.com/2018/12/05/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%A6%82%E8%BF%B0-%E4%B8%80/"/>
-    <id>https://llchen60.com/2018/12/05/Linux性能优化-概述-一/</id>
-    <published>2018-12-06T05:19:04.000Z</published>
-    <updated>2018-12-06T05:20:21.531Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-性能问题&quot;&gt;1. 性能问题&lt;/span&gt;&lt;a href=&quot;#1-性能问题&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://llchen60.com/tags/Linux/"/>
     
   </entry>
   

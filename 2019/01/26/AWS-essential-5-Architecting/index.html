@@ -13,11 +13,11 @@
 
     <title>
         
-          AWS essential(4)-Security - Leilei | 磊磊的博客
+          AWS essential(5) - Architecting - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2019/01/25/AWS-essential-4-Security/">
+    <link rel="canonical" href="https://llchen60.com/2019/01/26/AWS-essential-5-Architecting/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,11 +168,11 @@
                           <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
                         
                     </div>
-                    <h1>AWS essential(4)-Security</h1>
+                    <h1>AWS essential(5) - Architecting</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2019-01-25
+                        2019-01-26
                     </span>
                 </div>
             </div>
@@ -191,118 +191,122 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="1-introduction-to-aws-security">1. Introduction to AWS security</span><a href="#1-introduction-to-aws-security" class="header-anchor">#</a></h1><ul>
-<li>Approach to security <ul>
-<li>resilient infrastructure </li>
-<li>high security </li>
-<li>strong safeguards </li>
+                <h1><span id="1-introduction-to-well-architected-framework">1. Introduction to well-architected framework</span><a href="#1-introduction-to-well-architected-framework" class="header-anchor">#</a></h1><ul>
+<li>developed through reviewing customers’ architectures on AWS </li>
+<li>build and deploy faster </li>
+<li>lower or mitigate risks </li>
+<li>make informed decision </li>
+<li>learn aws best practices </li>
 </ul>
+<h2><span id="11-five-pillars">1.1 Five Pillars</span><a href="#11-five-pillars" class="header-anchor">#</a></h2><h3><span id="111-operational-excellence">1.1.1 Operational Excellence</span><a href="#111-operational-excellence" class="header-anchor">#</a></h3><ul>
+<li>Run and monitor systems to deliver business value </li>
+<li>continually improve supporting processes and procedures </li>
+</ul>
+<p>Disign Principles </p>
+<ul>
+<li>perform operations as code </li>
+<li>annotate documentation </li>
+<li>make frequent, small, reversible changes </li>
+<li>refine operations procedures frequently </li>
+<li>anticipate failure </li>
+<li>learn from all operational failures </li>
+</ul>
+<h3><span id="112-security">1.1.2 Security</span><a href="#112-security" class="header-anchor">#</a></h3><ul>
+<li>protect information, systems, assets </li>
+<li>do risk assessments and mitigation strategies </li>
+</ul>
+<p>Design Principles </p>
+<ul>
+<li>Implement a strong identity foundation </li>
+<li>enable traceability </li>
+<li>apply security best practices </li>
+<li>automate security best practices </li>
+<li>protect data in transit and at rest </li>
+<li>prepare for security events</li>
+</ul>
+<h3><span id="113-reliability">1.1.3 Reliability</span><a href="#113-reliability" class="header-anchor">#</a></h3><ul>
+<li>recover from infrastructure or service disruptions </li>
+<li>dynamically acquire computing resources to meet demand </li>
+<li>mitigate disruptions </li>
+</ul>
+<p>Design Principles:</p>
+<ul>
+<li>test recovery procedures </li>
+<li>automatically recover from failure</li>
+<li>scale horizontally to increase aggregate system availability </li>
+<li>stop guessing capacity </li>
+<li>manage change in automation </li>
+</ul>
+<h3><span id="114-performance-efficiency">1.1.4 Performance Efficiency</span><a href="#114-performance-efficiency" class="header-anchor">#</a></h3><ul>
+<li>use computing resources efficiently </li>
+<li>maintain efficiency as demand changes and technologies evolve </li>
+</ul>
+<p>Design Principles </p>
+<ul>
+<li>Democratize advanced technologies </li>
+<li>Go global in minutes </li>
+<li>use serverless architectures </li>
+<li>Experiment more often </li>
+<li>mechanical sympathy </li>
+</ul>
+<h3><span id="115-cost-optimization">1.1.5  Cost Optimization</span><a href="#115-cost-optimization" class="header-anchor">#</a></h3><ul>
+<li><p>avoid or eliminate unneeded cost or suboptimal resources<br>Design Principles </p>
 </li>
-<li>Controls </li>
-<li>AWS products and features </li>
-</ul>
-<ul>
-<li><p>Network Security </p>
-<ul>
-<li>build in firewalls </li>
-<li>encryption in transit </li>
-<li>private dedicated connections </li>
-<li>ddos mitigation </li>
-</ul>
+<li><p>adopt a consumption model </p>
 </li>
-<li><p>Data Encryption </p>
+<li>measure overall efficiency </li>
+<li>stop spending money on data center operations </li>
+<li>analyze and attribute expenditure </li>
+<li>use managed services to reduce cost of ownership </li>
+</ul>
+<h1><span id="2-fault-tolerance-and-highly-available-architecture">2. Fault tolerance and highly available architecture</span><a href="#2-fault-tolerance-and-highly-available-architecture" class="header-anchor">#</a></h1><h2><span id="21-fault-tolerance">2.1 Fault tolerance</span><a href="#21-fault-tolerance" class="header-anchor">#</a></h2><ul>
+<li>remain operational even if components fail </li>
+<li>build-in redundancy of an application’s components</li>
+</ul>
+<h2><span id="22-high-availability">2.2 High Availability</span><a href="#22-high-availability" class="header-anchor">#</a></h2><ul>
+<li>always functioning and accessible </li>
+<li>downtime is minimized </li>
+<li>without human intervention </li>
+</ul>
+<h2><span id="23-high-availability-tools">2.3 High availability tools</span><a href="#23-high-availability-tools" class="header-anchor">#</a></h2><h3><span id="231-elastic-load-balancers">2.3.1 elastic load balancers</span><a href="#231-elastic-load-balancers" class="header-anchor">#</a></h3><p>elb - distribute income traffic to your hosts, also send metrics to cloudwatch </p>
+<h3><span id="232-elastic-ip-addresses">2.3.2 elastic IP addresses</span><a href="#232-elastic-ip-addresses" class="header-anchor">#</a></h3><p>static IP addresses designed for dynamic cloud computing, able to mask failures </p>
+<p>applications still accessible </p>
+<h3><span id="233-amazon-route-53">2.3.3 amazon route 53</span><a href="#233-amazon-route-53" class="header-anchor">#</a></h3><p>Authorized DNS server, </p>
+<h3><span id="234-auto-scaling">2.3.4 auto scaling</span><a href="#234-auto-scaling" class="header-anchor">#</a></h3><p>launches and terminates by specified conditions </p>
+<p>can be adjusted/ modified </p>
+<p>create new resources on demand </p>
+<h3><span id="235-amazon-cloudwatch">2.3.5 amazon cloudwatch</span><a href="#235-amazon-cloudwatch" class="header-anchor">#</a></h3><p>collects and tracks infromations </p>
+<h2><span id="24-fault-tolerant-tools">2.4 Fault tolerant tools</span><a href="#24-fault-tolerant-tools" class="header-anchor">#</a></h2><ol>
+<li>Amazon simple queue service </li>
+<li>Amazon simple storage service </li>
+<li>Amazon simple DB </li>
+<li>Amazon relational database service </li>
+</ol>
+<h1><span id="3-web-hosting">3. Web hosting</span><a href="#3-web-hosting" class="header-anchor">#</a></h1><h2><span id="31-benefits">3.1 benefits</span><a href="#31-benefits" class="header-anchor">#</a></h2><ul>
+<li>cost effective<br>handle peak capacity </li>
+</ul>
+<p>do on demand provisioning </p>
 <ul>
-<li>encrption capabilities for aws storage/ database </li>
-<li>key management options </li>
-<li>hardware based cryptographic key storage options </li>
+<li>scalable </li>
+<li>on demand </li>
 </ul>
-</li>
-<li><p>Access Control and management </p>
-<ul>
-<li>Identity and access management </li>
-<li>Multifactor authentication </li>
-<li>integration and federation with corporate directories </li>
-</ul>
-</li>
-<li><p>Monitoring and Logging </p>
-<ul>
-<li>deep visibility into API calls </li>
-<li>log aggregation and options </li>
-<li>alerts </li>
-</ul>
-</li>
-</ul>
-<h1><span id="2-the-aws-shared-responsibility-model">2. The AWS Shared Responsibility Model</span><a href="#2-the-aws-shared-responsibility-model" class="header-anchor">#</a></h1><p>Share responsibility for securing data. </p>
-<p>AWS responsible of — security of the cloud </p>
-<ul>
-<li>compute </li>
-<li>storage </li>
-<li>databse </li>
-<li>networking </li>
-</ul>
-<p>Customer responsible of —- security in the cloud </p>
-<ul>
-<li>what to store </li>
-<li>which aws services </li>
-<li>location </li>
-<li>content format </li>
-</ul>
-<h1><span id="3-aws-access-control-and-management">3. AWS Access Control and Management</span><a href="#3-aws-access-control-and-management" class="header-anchor">#</a></h1><h2><span id="31-iam-overview-">3.1 IAM overview -</span><a href="#31-iam-overview-" class="header-anchor">#</a></h2><h3><span id="311-functions">3.1.1 Functions</span><a href="#311-functions" class="header-anchor">#</a></h3><ul>
-<li>Control access to AWS resources </li>
-<li>authentication<ul>
-<li>who can access resources</li>
-<li>use AWS IAM policy </li>
-</ul>
-</li>
-<li>Authorization <ul>
-<li>how they can use resources </li>
-</ul>
-</li>
-</ul>
-<p>Manage accesses to: </p>
-<ul>
-<li>compute </li>
-<li>storage </li>
-<li>database </li>
-<li>application services </li>
-</ul>
-<h3><span id="312-roles">3.1.2 Roles</span><a href="#312-roles" class="header-anchor">#</a></h3><ul>
-<li>User</li>
-<li>Group </li>
-<li>Permissions </li>
-<li>Role </li>
-</ul>
-<h3><span id="313-features">3.1.3 Features</span><a href="#313-features" class="header-anchor">#</a></h3><ul>
-<li>Shared access to your AWS account </li>
-<li>Granular permissions </li>
-</ul>
-<p>You can grant different permissions to different people for different resources. </p>
-<ul>
-<li>secure access to AWS resources for applications that run on Amazon EC2 </li>
-</ul>
-<p>You can use IAM features to securely provide credentials for applications that run on EC2 instances. These credentials provide permissions for your application to access other AWS resources. </p>
-<ul>
-<li>Multi-factor authentication(MFA)</li>
-<li>Identity federation </li>
-</ul>
-<p>You can allow users who already have passwords elsewhere—for example, in your corporate network or with an internet identity provider—to get temporary access to your AWS account.</p>
-<h3><span id="314-functionalities">3.1.4 functionalities</span><a href="#314-functionalities" class="header-anchor">#</a></h3><ul>
-<li>manage users and their access </li>
-<li>manage roles and their permissions </li>
-<li>manage federated users and their permissions </li>
-</ul>
-<h2><span id="32-how-iam-works">3.2 How IAM works</span><a href="#32-how-iam-works" class="header-anchor">#</a></h2><h3><span id="321-elements-contained">3.2.1 Elements contained</span><a href="#321-elements-contained" class="header-anchor">#</a></h3><ul>
-<li>Resources <ul>
-<li>The user, role, group and policy objects that are stored in IAM. </li>
-</ul>
-</li>
-<li>Identities <ul>
-<li>The IAM resource objects taht are used to identofy and group.  </li>
-</ul>
-</li>
-</ul>
-<p><img src="fig1.png" alt="fig1.png"></p>
-<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/intro-structure.html" target="_blank" rel="noopener">Understanding how IAM works</a></p>
+<h2><span id="32-web-hosting-services">3.2 Web hosting services</span><a href="#32-web-hosting-services" class="header-anchor">#</a></h2><p>Products to assist transition: </p>
+<ol>
+<li>Amazon Virtual Private Cloud </li>
+<li>Amazon Route 53 </li>
+<li>Amazon CloudFront </li>
+<li>Elastic load balancing </li>
+<li>Firewalls/ AWS shield</li>
+<li>Auto scaling </li>
+<li>App servers/ EC2 instances </li>
+<li>Amazon ElasticCache </li>
+<li>Amazon RDS/ Amazon DynamoDB </li>
+</ol>
+<h2><span id="33-key-architectural-considerations">3.3 Key Architectural considerations</span><a href="#33-key-architectural-considerations" class="header-anchor">#</a></h2><ol>
+<li>No more physical network appliances </li>
+<li>Firewalls everywhere </li>
+<li>consider multiple data centers </li>
+</ol>
 <p><div id="disqus_thread"></div></p>
 <script>
 
@@ -321,12 +325,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2019/01/26/AWS-essential-5-Architecting/" data-toggle="tooltip" data-placement="top" title="AWS essential(5) - Architecting">&larr; Previous Post</a>
+                            <a href="/2019/01/26/AWS-essential-6-pricing/" data-toggle="tooltip" data-placement="top" title="AWS essential(6) - pricing">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2019/01/23/Effective-Java/" data-toggle="tooltip" data-placement="top" title="Effective Java">Next Post &rarr;</a>
+                            <a href="/2019/01/25/AWS-essential-4-Security/" data-toggle="tooltip" data-placement="top" title="AWS essential(4)-Security">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -398,7 +402,7 @@
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2019/01/25/AWS-essential-4-Security/';
+  var disqus_url = 'https://llchen60.com/2019/01/26/AWS-essential-5-Architecting/';
   
   (function(){
     var dsq = document.createElement('script');

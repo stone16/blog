@@ -184,6 +184,51 @@
 
 <div class="post-preview">
 
+    <a href="/2018/11/10/为什么要合并HTTP请求？/">
+        <h2 class="post-title">
+            为什么要合并HTTP请求？
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            思考路径：为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ 
+本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。
+1. Client发出请求#1.1 HTTP 1.1#可以保持长连接，但是每个不同的请求之间，client要......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/11/07/Java是如何工作的/">
+        <h2 class="post-title">
+            Java是如何工作的
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. 编程语言是如何工作的#我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。
+对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为Object 文件。一系列的......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2018-11-07
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/11/05/volatile关键字/">
         <h2 class="post-title">
             volatile关键字
@@ -422,83 +467,6 @@ Synchronized statements
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/10/13/读懂财报/">
-        <h2 class="post-title">
-            读懂财报
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1 资产负债表#1.1 资产负债表 分类#企业需要做三张报表，分别是
-
-资产负债表
-利润表
-现金流
-
-1.2 财务报表是用来做什么的？#企业从事的经营活动的种类有：
-
-经营活动
-
-比如一个企业需要生产产品、销售产品、回收货款等等
-
-投资活动
-
-如果一个企业想要到一个新的地区去开展业务，想进入一个新的业务领域，或者想设计生产一个新的产品
-
-融资活动
-
-在经营和投资的过程中，当缺钱了的时候，需要......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2018-10-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/11/unix-linux-note/">
-        <h2 class="post-title">
-            Example Post With Default Header Image
-        </h2>
-        <h3 class="post-subtitle">
-            不适合人类阅读，非常水的自我笔记
-        </h3>
-        <div class="post-content-preview">
-            
-This document is not completed and will be updated anytime.
-
-Catagory#
-Unix
-Bell Labs
-Xenix
-BSD
-FreeBSD &amp; Apple
-NeXTStep
-Darwin
-POSIX
-
-
-Unix-like
-Single Unix Specification
-Apple iOS
-XNU Kernel......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by leilei on
-        2018-10-11
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -509,6 +477,10 @@ XNU Kernel......
             <a href="/page/4/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/6/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -534,7 +506,7 @@ XNU Kernel......
                     <div class="tags">
                         
                             
-                            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
+                            <a href="/tags/#AWS" title="AWS" rel="6">AWS</a>
                             
                         
                             
@@ -542,9 +514,9 @@ XNU Kernel......
                             
                         
                             
-                            <a href="/tags/#java" title="java" rel="7">java</a>
-                            
                         
+                            
+                            <a href="/tags/#java" title="java" rel="7">java</a>
                             
                         
                             
