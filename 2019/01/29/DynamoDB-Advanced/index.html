@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          DynamoDB Advanced - Leilei | 磊磊的博客
+        
+    </title>
+
+    <link rel="canonical" href="https://llchen60.com/2019/01/29/DynamoDB-Advanced/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Leilei&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                        
+                    </div>
+                    <h1>DynamoDB Advanced</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Leilei on
+                        2019-01-29
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- toc -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- toc -->
+<ul>
+<li><a href="#1-overview">1. Overview</a><ul>
+<li><a href="#11-features">1.1 Features</a></li>
+<li><a href="#12-high-availability-and-durability">1.2 High availability and durability</a></li>
+</ul>
+</li>
+<li><a href="#2-how-it-works">2. How it works</a><ul>
+<li><a href="#21-core-components">2.1 Core Components</a><ul>
+<li><a href="#211-tables-items-attributes">2.1.1 Tables, Items, Attributes</a></li>
+<li><a href="#212-primary-key">2.1.2 Primary Key</a></li>
+<li><a href="#213-secondary-indexes">2.1.3 Secondary Indexes</a></li>
+</ul>
+</li>
+<li><a href="#22-limitations">2.2 Limitations</a><ul>
+<li><a href="#221-capacity-unit-sizesfor-provisioned-tables">2.2.1 Capacity unit sizes(For Provisioned tables)</a></li>
+<li><a href="#222-request-unit-sizesfor-on-demand-tables">2.2.2 Request Unit Sizes(For On-Demand tables)</a></li>
+<li><a href="#223-throughtput-default-limits">2.2.3 Throughtput Default Limits</a></li>
+<li><a href="#224-tables">2.2.4 Tables</a></li>
+<li><a href="#225-api-specific-limits">2.2.5 API specific Limits</a></li>
+</ul>
+</li>
+<li><a href="#23-the-dynamodb-api">2.3 The DynamoDB API</a><ul>
+<li><a href="#231-control-plane">2.3.1 Control Plane</a></li>
+<li><a href="#232-data-plane">2.3.2 Data Plane</a></li>
+</ul>
+</li>
+<li><a href="#24-consistency-and-capacity">2.4 Consistency and capacity</a><ul>
+<li><a href="#241-eventually-consistent-reads">2.4.1 Eventually Consistent Reads</a></li>
+<li><a href="#242-strongly-consistent-reads">2.4.2 Strongly Consistent Reads</a></li>
+<li><a href="#243-read-write-capacity-mode-on-demand">2.4.3 Read/ Write Capacity Mode - on demand</a></li>
+<li><a href="#244-read-write-capacity-mode-provisioned">2.4.4 Read/ Write Capacity Mode - provisioned</a></li>
+<li><a href="#245-read-write-request-units">2.4.5 Read/ Write request units</a></li>
+<li><a href="#246-dynamodb-auto-scaling">2.4.6 DynamoDB Auto Scaling</a></li>
+</ul>
+</li>
+<li><a href="#25-partitions-and-data-distribution">2.5 Partitions and Data Distribution</a></li>
+</ul>
+</li>
+<li><a href="#3-java-programming-with-danamodb">3. Java Programming with DanamoDB</a><ul>
+<li><a href="#31-work-flow-using-java">3.1 Work flow using Java</a><ul>
+<li><a href="#311-create-a-table">3.1.1 Create a table</a></li>
+<li><a href="#312-load-data">3.1.2 Load data</a></li>
+<li><a href="#313-create-a-new-item">3.1.3 Create a new item</a></li>
+<li><a href="#314-read-an-item">3.1.4 Read an Item</a></li>
+<li><a href="#315-update-an-item">3.1.5 Update an Item</a></li>
+<li><a href="#316-update-an-item-conditionally">3.1.6 Update an Item conditionally</a></li>
+<li><a href="#317-delete-an-item">3.1.7 Delete an Item</a></li>
+<li><a href="#318-scan">3.1.8 Scan</a></li>
+</ul>
+</li>
+<li><a href="#32-aws-sdk-support">3.2 AWS SDK support</a><ul>
+<li><a href="#321-aws-sdk-support-workflow">3.2.1 AWS SDK support workflow</a></li>
+<li><a href="#322-services-aws-sdk-provides">3.2.2 Services AWS SDK provides</a></li>
+<li><a href="#323-programmatic-interfaces">3.2.3 Programmatic Interfaces</a></li>
+<li><a href="#324-low-level-api">3.2.4 Low level API</a><ul>
+<li><a href="#3241-request-format">3.2.4.1 Request Format</a></li>
+<li><a href="#3242-response-format">3.2.4.2 Response Format</a></li>
+<li><a href="#3243-data-type-descriptors">3.2.4.3 Data Type Descriptors</a></li>
+</ul>
+</li>
+<li><a href="#325-high-level-programming-interfaces-for-dynamodb">3.2.5 High level programming interfaces for DynamoDB</a></li>
+</ul>
+</li>
+<li><a href="#33-error-handling">3.3 Error Handling</a><ul>
+<li><a href="#331-error-components">3.3.1 Error Components</a></li>
+<li><a href="#332-error-messages-and-codes">3.3.2 Error Messages and Codes</a></li>
+<li><a href="#333-error-retries-and-expotential-backoff">3.3.3 Error Retries and Expotential Backoff</a></li>
+<li><a href="#334-batch-operations-and-error-handling">3.3.4 Batch Operations and Error Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-best-practices">5. Best Practices</a><ul>
+<li><a href="#51-partition-key-design">5.1 Partition Key Design</a><ul>
+<li><a href="#511-using-burst-capacity-effectively">5.1.1 Using Burst Capacity Effectively</a></li>
+<li><a href="#512-adaptive-capacity">5.1.2 Adaptive Capacity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="1-overview">1. Overview</span><a href="#1-overview" class="header-anchor">#</a></h1><h2><span id="11-features">1.1 Features</span><a href="#11-features" class="header-anchor">#</a></h2><ul>
+<li>Fully managed NoSQL database service </li>
+<li>offer encryption at rest </li>
+<li>on-demand backup capability <ul>
+<li>allows you to create full backups of your tables for long-term retention and archival for regulatory compliance needs</li>
+</ul>
+</li>
+<li>point-in-time recovery<ul>
+<li>restore the table to any point in time during last 35 days  </li>
+</ul>
+</li>
+<li>TTL <ul>
+<li>delete expired items from tables automatically to reduce storage usage</li>
+</ul>
+</li>
+</ul>
+<h2><span id="12-high-availability-and-durability">1.2 High availability and durability</span><a href="#12-high-availability-and-durability" class="header-anchor">#</a></h2><p>DynamoDB automatically spreads the data and traffic for your tables over a <strong>sufficient number of servers</strong>to handle your throughput and storage requirements, while maintaining consistent and fast performance. All of your data is stored on solid state disks (SSDs) and <strong>automatically replicated across multiple Availability Zones</strong> in an AWS region, providing built-in high availability and data durability. You can use <strong>global tables to keep DynamoDB tables in sync across AWS Regions</strong>. For more information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html" target="_blank" rel="noopener">Global Tables</a>.</p>
+<h1><span id="2-how-it-works">2. How it works</span><a href="#2-how-it-works" class="header-anchor">#</a></h1><h2><span id="21-core-components">2.1 Core Components</span><a href="#21-core-components" class="header-anchor">#</a></h2><h3><span id="211-tables-items-attributes">2.1.1 Tables, Items, Attributes</span><a href="#211-tables-items-attributes" class="header-anchor">#</a></h3><blockquote>
+<p>A table is a collection of items, each item is a collection of attributes.</p>
+</blockquote>
+<p>DynamoDB uses <strong>primary keys</strong> to uniquely identify each item in a table and <strong>secondary indexes</strong> to provide more querying flexibility. </p>
+<p>Below is a diagram showing a table named People:</p>
+<p><img src="fig1.png" alt="fig1.png"></p>
+<p>Note about tables:</p>
+<ul>
+<li>Each item in the table has a unique identifier, or primary key, that distinguishes the item from all of the others in the table. In the People table, the primary key consists of one attribute (PersonID).</li>
+<li>Other than the primary key, the People table is <strong>schemaless</strong>, which means that neither the attributes nor their data types need to be defined beforehand. Each item can have its own distinct attributes.</li>
+<li>Some of the items have<strong> a nested attribute </strong>(Address). DynamoDB supports nested attributes up to 32 levels deep.</li>
+</ul>
+<h3><span id="212-primary-key">2.1.2 Primary Key</span><a href="#212-primary-key" class="header-anchor">#</a></h3><p>When creating tables, you must specify the primary key of the table. <strong><em>The primary key uniquely identifies each item in the table, so that no two items can have the same key</em></strong>. </p>
+<p>DynamoDB supports two different kinds of primary keys: </p>
+<ul>
+<li>Partition Key </li>
+</ul>
+<p>DynamoDB uses the partition key’s value as input to an internal hash function. The output from the hash function determines the partition(Physical storage internal to DynamoDB) in which the item will be stored. </p>
+<ul>
+<li>Partition Key and sort key </li>
+</ul>
+<p>A composite primary key, composed of two attributes: partition key and sort key. </p>
+<p>DynamoDB uses the partition key value as input to an internal hash function. The output from the hash function determines the partition (physical storage internal to DynamoDB) in which the item will be stored. All items with the same partition key value are stored together, in sorted order by sort key value.</p>
+<p>In a table that has a partition key and a sort key, it’s possible for two items to have the same partition key value. However, those two items must have different sort key values.</p>
+<h3><span id="213-secondary-indexes">2.1.3 Secondary Indexes</span><a href="#213-secondary-indexes" class="header-anchor">#</a></h3><p>A secondary index lets you query the data in the table using an alternate key, in addtion to queries against the primary key. </p>
+<p>After you create a secondary index on a table, you can read data from the index in much the same way as you do from the table. </p>
+<ul>
+<li>Global Secondary Index</li>
+</ul>
+<p>An index with a partition key and sort key that can be different from those on the table </p>
+<ul>
+<li>Local Secondary Index</li>
+</ul>
+<p>An index that has the same partition key as the table, but a different sort key </p>
+<h2><span id="22-limitations">2.2 Limitations</span><a href="#22-limitations" class="header-anchor">#</a></h2><h3><span id="221-capacity-unit-sizesfor-provisioned-tables">2.2.1 Capacity unit sizes(For Provisioned tables)</span><a href="#221-capacity-unit-sizesfor-provisioned-tables" class="header-anchor">#</a></h3><p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html" target="_blank" rel="noopener">Link is here: </a></p>
+<p>One read capacity unit = one strongly consistent read per second, or two eventually consistent reads per second, for items up to 4 KB in size.</p>
+<p>One write capacity unit = one write per second, for items up to 1 KB in size.</p>
+<p>Transactional read requests require two read capacity units to perform one read per second for items up to 4 KB.</p>
+<p>Transactional write requests require two write capacity units to perform one write per second for items up to 1 KB.</p>
+<h3><span id="222-request-unit-sizesfor-on-demand-tables">2.2.2 Request Unit Sizes(For On-Demand tables)</span><a href="#222-request-unit-sizesfor-on-demand-tables" class="header-anchor">#</a></h3><p>One read request unit = one strongly consistent read, or two eventually consistent reads, for items up to 4 KB in size.</p>
+<p>One write request unit = one write, for items up to 1 KB in size.</p>
+<p>Transactional read requests require two read request units to perform one read for items up to 4 KB.</p>
+<p>Transactional write requests require two write request units to perform one write for items up to 1 KB.</p>
+<h3><span id="223-throughtput-default-limits">2.2.3 Throughtput Default Limits</span><a href="#223-throughtput-default-limits" class="header-anchor">#</a></h3><p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html" target="_blank" rel="noopener">See link here:</a></p>
+<h3><span id="224-tables">2.2.4 Tables</span><a href="#224-tables" class="header-anchor">#</a></h3><p>Tables are unconstrained in terms of the number of items or the number of bytes. </p>
+<p>For any AWS account, there is an initial limit of 256 tables per region.</p>
+<p>You can define a maximum of 5 local secondary indexes.</p>
+<p>There is an initial limit of 20 global secondary indexes per table.</p>
+<h3><span id="225-api-specific-limits">2.2.5 API specific Limits</span><a href="#225-api-specific-limits" class="header-anchor">#</a></h3><ul>
+<li>CreateTable/UpdateTable/DeleteTable</li>
+</ul>
+<p>In general, you can have up to 50 CreateTable, UpdateTable, and DeleteTable requests running simultaneously (in any combination). In other words, the total number of tables in the CREATING, UPDATING or DELETING state cannot exceed 50.</p>
+<ul>
+<li>BatchGetItem</li>
+</ul>
+<p>A single BatchGetItem operation can retrieve a maximum of 100 items. The total size of all the items retrieved cannot exceed 16 MB.</p>
+<ul>
+<li>BatchWriteItem</li>
+</ul>
+<p>A single BatchWriteItem operation can contain up to 25 PutItem or DeleteItem requests. The total size of all the items written cannot exceed 16 MB.</p>
+<ul>
+<li>DescribeLimits</li>
+</ul>
+<p>DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.</p>
+<ul>
+<li>Query</li>
+</ul>
+<p>The result set from a Query is limited to 1 MB per call. You can use the LastEvaluatedKey from the query response to retrieve more results.</p>
+<ul>
+<li>Scan</li>
+</ul>
+<p>The result set from a Scan is limited to 1 MB per call. You can use the LastEvaluatedKey from the scan response to retrieve more results.</p>
+<h2><span id="23-the-dynamodb-api">2.3 The DynamoDB API</span><a href="#23-the-dynamodb-api" class="header-anchor">#</a></h2><p>See Instructions <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.API.html" target="_blank" rel="noopener">here</a></p>
+<h3><span id="231-control-plane">2.3.1 Control Plane</span><a href="#231-control-plane" class="header-anchor">#</a></h3><ul>
+<li>CreateTable </li>
+<li>DescribeTable </li>
+<li>ListTables </li>
+<li>UpdateTable </li>
+<li>DeleteTable </li>
+</ul>
+<h3><span id="232-data-plane">2.3.2 Data Plane</span><a href="#232-data-plane" class="header-anchor">#</a></h3><ul>
+<li>Creating Data <ul>
+<li>PutItem </li>
+<li>BatchWriteItem </li>
+</ul>
+</li>
+<li>Reading Data <ul>
+<li>GetItem </li>
+<li>BatchGetItem </li>
+<li>Query </li>
+<li>Scan </li>
+</ul>
+</li>
+<li>Updating Data <ul>
+<li>UpdateItem </li>
+</ul>
+</li>
+<li>Deleting Data <ul>
+<li>DeleteItem </li>
+<li>BatchWriteItem </li>
+</ul>
+</li>
+<li>DynamoDB streams <ul>
+<li>listStreams</li>
+<li>DescribeStream </li>
+<li>GetShardIterator: return a shard iterator, which is a data structure that your application uses to retrieve the records from the stream. </li>
+<li>GetRecords</li>
+</ul>
+</li>
+</ul>
+<h2><span id="24-consistency-and-capacity">2.4 Consistency and capacity</span><a href="#24-consistency-and-capacity" class="header-anchor">#</a></h2><p>Region - Availability Zones</p>
+<p>When your application writes data to a DynamoDB table and receives an HTTP 200 response, the write has occured and is durable. The data is eventually consistent across all storage locations, usually within one second or less. </p>
+<p>DDB supports <strong>eventually consistent and strongly consistent reads</strong>. </p>
+<h3><span id="241-eventually-consistent-reads">2.4.1 Eventually Consistent Reads</span><a href="#241-eventually-consistent-reads" class="header-anchor">#</a></h3><p>When you read data from a DynamoDB table, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If you repeat your read request after a short time, the response should return the latest data.</p>
+<h3><span id="242-strongly-consistent-reads">2.4.2 Strongly Consistent Reads</span><a href="#242-strongly-consistent-reads" class="header-anchor">#</a></h3><p>When you request a strongly consistent read, DynamoDB returns a response with the most up-to-date data, reflecting the updates from all prior write operations that were successful. A strongly consistent read might not be available if there is a network delay or outage. Consistent reads are not supported on global secondary indexes (GSI).</p>
+<h3><span id="243-read-write-capacity-mode-on-demand">2.4.3 Read/ Write Capacity Mode - on demand</span><a href="#243-read-write-capacity-mode-on-demand" class="header-anchor">#</a></h3><p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html" target="_blank" rel="noopener">See link here</a></p>
+<p>When you choose on-demand mode, DynamoDB instantly accommodates your workloads as they ramp up or down to any previously reached traffic level. If a workload’s traffic level hits a new peak, DynamoDB adapts rapidly to accommodate the workload. Tables that use on-demand mode deliver the same single-digit millisecond latency, service-level agreement (SLA) commitment, and security that DynamoDB already offers. You can choose on-demand for both new and existing tables and you can continue using the existing DynamoDB APIs without changing code.</p>
+<h3><span id="244-read-write-capacity-mode-provisioned">2.4.4 Read/ Write Capacity Mode - provisioned</span><a href="#244-read-write-capacity-mode-provisioned" class="header-anchor">#</a></h3><p>If you choose provisioned mode, you specify the number of reads and writes per second that you require for your application. You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes. This helps you govern your DynamoDB use to stay at or below a defined request rate in order to obtain cost predictability.</p>
+<h3><span id="245-read-write-request-units">2.4.5 Read/ Write request units</span><a href="#245-read-write-request-units" class="header-anchor">#</a></h3><p>For on-demand mode tables, you don’t need to specify how much read and write throughput you expect your application to perform. DynamoDB charges you for the reads and writes that your application performs on your tables in terms of read request units and write request units.</p>
+<p>One read request unit represents one strongly consistent read request, or two eventually consistent read requests, for an item up to 4 KB in size. Transactional read requests require 2 read request units to perform one read for items up to 4 KB. If you need to read an item that is larger than 4 KB, DynamoDB needs additional read request units. The total number of read request units required depends on the item size, and whether you want an eventually consistent or strongly consistent read. For example, if your item size is 8 KB, you require 2 read request units to sustain one strongly consistent read, 1 read request unit if you choose eventually consistent reads, or 4 read request units for a transactional read request.</p>
+<p>One write request unit represents one write for an item up to 1 KB in size. If you need to write an item that is larger than 1 KB, DynamoDB needs to consume additional write request units. Transactional write requests require 2 write request units to perform one write for items up to 1 KB. The total number of write request units required depends on the item size. For example, if your item size is 2 KB, you require 2 write request units to sustain one write request or 4 read request units for a transactional write request.</p>
+<h3><span id="246-dynamodb-auto-scaling">2.4.6 DynamoDB Auto Scaling</span><a href="#246-dynamodb-auto-scaling" class="header-anchor">#</a></h3><p>Manage throughput capacity for tables and global secondary indexes. With auto scaling, you define a range for read and write capacity units. You also define a target utilization percentage within that range. DynamoDB auto scaling seeks to maintain your target utilization, even as your application workload increases or decreases.</p>
+<h2><span id="25-partitions-and-data-distribution">2.5 Partitions and Data Distribution</span><a href="#25-partitions-and-data-distribution" class="header-anchor">#</a></h2><p>A partition is an allocation of storage for a table, backed by solid-state drives (SSDs) and automatically replicated across multiple Availability Zones within an AWS Region. Partition management is handled entirely by DynamoDB—you never have to manage partitions yourself.</p>
+<p>DynamoDB allocates additional partitions to a table in the following situations:</p>
+<ul>
+<li>If you increase the table’s provisioned throughput settings beyond what the existing partitions can support.</li>
+<li>If an existing partition fills to capacity and more storage space is required.</li>
+</ul>
+<p>Choose a partition key that can have a large number of distinct values relative to the number of items in the table. </p>
+<h1><span id="3-java-programming-with-danamodb">3. Java Programming with DanamoDB</span><a href="#3-java-programming-with-danamodb" class="header-anchor">#</a></h1><h2><span id="31-work-flow-using-java">3.1 Work flow using Java</span><a href="#31-work-flow-using-java" class="header-anchor">#</a></h2><h3><span id="311-create-a-table">3.1.1 Create a table</span><a href="#311-create-a-table" class="header-anchor">#</a></h3><pre><code>public class MoviesCreateTable {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        String tableName = &quot;Movies&quot;;
+
+        try {
+            System.out.println(&quot;Attempting to create table; please wait...&quot;);
+            Table table = dynamoDB.createTable(tableName,
+                Arrays.asList(new KeySchemaElement(&quot;year&quot;, KeyType.HASH), // Partition
+                                                                          // key
+                    new KeySchemaElement(&quot;title&quot;, KeyType.RANGE)), // Sort key
+                Arrays.asList(new AttributeDefinition(&quot;year&quot;, ScalarAttributeType.N),
+                    new AttributeDefinition(&quot;title&quot;, ScalarAttributeType.S)),
+                new ProvisionedThroughput(10L, 10L));
+            table.waitForActive();
+            System.out.println(&quot;Success.  Table status: &quot; + table.getDescription().getTableStatus());
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to create table: &quot;);
+            System.err.println(e.getMessage());
+        }
+
+    }
+}
+</code></pre><h3><span id="312-load-data">3.1.2 Load data</span><a href="#312-load-data" class="header-anchor">#</a></h3><pre><code>public class MoviesLoadData {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        JsonParser parser = new JsonFactory().createParser(new File(&quot;moviedata.json&quot;));
+
+        JsonNode rootNode = new ObjectMapper().readTree(parser);
+        Iterator&lt;JsonNode&gt; iter = rootNode.iterator();
+
+        ObjectNode currentNode;
+
+        while (iter.hasNext()) {
+            currentNode = (ObjectNode) iter.next();
+
+            int year = currentNode.path(&quot;year&quot;).asInt();
+            String title = currentNode.path(&quot;title&quot;).asText();
+
+            try {
+                table.putItem(new Item().withPrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title).withJSON(&quot;info&quot;,
+                    currentNode.path(&quot;info&quot;).toString()));
+                System.out.println(&quot;PutItem succeeded: &quot; + year + &quot; &quot; + title);
+
+            }
+            catch (Exception e) {
+                System.err.println(&quot;Unable to add movie: &quot; + year + &quot; &quot; + title);
+                System.err.println(e.getMessage());
+                break;
+            }
+        }
+        parser.close();
+    }
+}
+</code></pre><h3><span id="313-create-a-new-item">3.1.3 Create a new item</span><a href="#313-create-a-new-item" class="header-anchor">#</a></h3><pre><code>public class MoviesItemOps01 {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        int year = 2015;
+        String title = &quot;The Big New Movie&quot;;
+
+        final Map&lt;String, Object&gt; infoMap = new HashMap&lt;String, Object&gt;();
+        infoMap.put(&quot;plot&quot;, &quot;Nothing happens at all.&quot;);
+        infoMap.put(&quot;rating&quot;, 0);
+
+        try {
+            System.out.println(&quot;Adding a new item...&quot;);
+            PutItemOutcome outcome = table
+                .putItem(new Item().withPrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title).withMap(&quot;info&quot;, infoMap));
+
+            System.out.println(&quot;PutItem succeeded:\n&quot; + outcome.getPutItemResult());
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to add item: &quot; + year + &quot; &quot; + title);
+            System.err.println(e.getMessage());
+        }
+
+    }
+}
+</code></pre><h3><span id="314-read-an-item">3.1.4 Read an Item</span><a href="#314-read-an-item" class="header-anchor">#</a></h3><pre><code>public class MoviesItemOps02 {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        int year = 2015;
+        String title = &quot;The Big New Movie&quot;;
+
+        GetItemSpec spec = new GetItemSpec().withPrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title);
+
+        try {
+            System.out.println(&quot;Attempting to read the item...&quot;);
+            Item outcome = table.getItem(spec);
+            System.out.println(&quot;GetItem succeeded: &quot; + outcome);
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to read item: &quot; + year + &quot; &quot; + title);
+            System.err.println(e.getMessage());
+        }
+
+    }
+}
+</code></pre><h3><span id="315-update-an-item">3.1.5 Update an Item</span><a href="#315-update-an-item" class="header-anchor">#</a></h3><pre><code>public class MoviesItemOps03 {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        int year = 2015;
+        String title = &quot;The Big New Movie&quot;;
+
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title)
+            .withUpdateExpression(&quot;set info.rating = :r, info.plot=:p, info.actors=:a&quot;)
+            .withValueMap(new ValueMap().withNumber(&quot;:r&quot;, 5.5).withString(&quot;:p&quot;, &quot;Everything happens all at once.&quot;)
+                .withList(&quot;:a&quot;, Arrays.asList(&quot;Larry&quot;, &quot;Moe&quot;, &quot;Curly&quot;)))
+            .withReturnValues(ReturnValue.UPDATED_NEW);
+
+        try {
+            System.out.println(&quot;Updating the item...&quot;);
+            UpdateItemOutcome outcome = table.updateItem(updateItemSpec);
+            System.out.println(&quot;UpdateItem succeeded:\n&quot; + outcome.getItem().toJSONPretty());
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to update item: &quot; + year + &quot; &quot; + title);
+            System.err.println(e.getMessage());
+        }
+    }
+}
+</code></pre><h3><span id="316-update-an-item-conditionally">3.1.6 Update an Item conditionally</span><a href="#316-update-an-item-conditionally" class="header-anchor">#</a></h3><pre><code>public class MoviesItemOps05 {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        int year = 2015;
+        String title = &quot;The Big New Movie&quot;;
+
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec()
+            .withPrimaryKey(new PrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title)).withUpdateExpression(&quot;remove info.actors[0]&quot;)
+            .withConditionExpression(&quot;size(info.actors) &gt; :num&quot;).withValueMap(new ValueMap().withNumber(&quot;:num&quot;, 3))
+            .withReturnValues(ReturnValue.UPDATED_NEW);
+
+        // Conditional update (we expect this to fail)
+        try {
+            System.out.println(&quot;Attempting a conditional update...&quot;);
+            UpdateItemOutcome outcome = table.updateItem(updateItemSpec);
+            System.out.println(&quot;UpdateItem succeeded:\n&quot; + outcome.getItem().toJSONPretty());
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to update item: &quot; + year + &quot; &quot; + title);
+            System.err.println(e.getMessage());
+        }
+    }
+}
+</code></pre><h3><span id="317-delete-an-item">3.1.7 Delete an Item</span><a href="#317-delete-an-item" class="header-anchor">#</a></h3><pre><code>public class MoviesItemOps06 {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        int year = 2015;
+        String title = &quot;The Big New Movie&quot;;
+
+        DeleteItemSpec deleteItemSpec = new DeleteItemSpec()
+            .withPrimaryKey(new PrimaryKey(&quot;year&quot;, year, &quot;title&quot;, title)).withConditionExpression(&quot;info.rating &lt;= :val&quot;)
+            .withValueMap(new ValueMap().withNumber(&quot;:val&quot;, 5.0));
+
+        // Conditional delete (we expect this to fail)
+
+        try {
+            System.out.println(&quot;Attempting a conditional delete...&quot;);
+            table.deleteItem(deleteItemSpec);
+            System.out.println(&quot;DeleteItem succeeded&quot;);
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to delete item: &quot; + year + &quot; &quot; + title);
+            System.err.println(e.getMessage());
+        }
+    }
+}
+</code></pre><h3><span id="318-scan">3.1.8 Scan</span><a href="#318-scan" class="header-anchor">#</a></h3><p>The scan method reads every item in the entire table, and returns all the data in the table, you can provide an optional filter_expression so that only the items matching your criteria are returned. However, the filter is applied only after the entire table has been scanned. </p>
+<pre><code>public class MoviesScan {
+
+    public static void main(String[] args) throws Exception {
+
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(&quot;http://localhost:8000&quot;, &quot;us-west-2&quot;))
+            .build();
+
+        DynamoDB dynamoDB = new DynamoDB(client);
+
+        Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+        ScanSpec scanSpec = new ScanSpec().withProjectionExpression(&quot;#yr, title, info.rating&quot;)
+            .withFilterExpression(&quot;#yr between :start_yr and :end_yr&quot;).withNameMap(new NameMap().with(&quot;#yr&quot;, &quot;year&quot;))
+            .withValueMap(new ValueMap().withNumber(&quot;:start_yr&quot;, 1950).withNumber(&quot;:end_yr&quot;, 1959));
+
+        try {
+            ItemCollection&lt;ScanOutcome&gt; items = table.scan(scanSpec);
+
+            Iterator&lt;Item&gt; iter = items.iterator();
+            while (iter.hasNext()) {
+                Item item = iter.next();
+                System.out.println(item.toString());
+            }
+
+        }
+        catch (Exception e) {
+            System.err.println(&quot;Unable to scan the table:&quot;);
+            System.err.println(e.getMessage());
+        }
+    }
+}
+</code></pre><h2><span id="32-aws-sdk-support">3.2 AWS SDK support</span><a href="#32-aws-sdk-support" class="header-anchor">#</a></h2><h3><span id="321-aws-sdk-support-workflow">3.2.1 AWS SDK support workflow</span><a href="#321-aws-sdk-support-workflow" class="header-anchor">#</a></h3><p><img src="fig2.png" alt="fig2.png"></p>
+<ol>
+<li><p>You write an application using an AWS SDK for your programming language.</p>
+</li>
+<li><p>Each AWS SDK provides one or more programmatic interfaces for working with DynamoDB. The specific interfaces available depend on which programming language and AWS SDK you use.</p>
+</li>
+<li><p>The AWS SDK constructs HTTP(S) requests for use with the low-level DynamoDB API.</p>
+</li>
+<li><p>The AWS SDK sends the request to the DynamoDB endpoint.</p>
+</li>
+<li><p>DynamoDB executes the request. If the request is successful, DynamoDB returns an HTTP 200 response code (OK). If the request is unsuccessful, DynamoDB returns an HTTP error code and an error message.</p>
+</li>
+<li><p>The AWS SDK processes the response and propagates it back to your application.</p>
+</li>
+</ol>
+<h3><span id="322-services-aws-sdk-provides">3.2.2 Services AWS SDK provides</span><a href="#322-services-aws-sdk-provides" class="header-anchor">#</a></h3><ul>
+<li>formatting HTTP(s) requests and serializing request parameters </li>
+<li>generating a cryptographic signature for each request </li>
+<li>forwarding request to a DynamoDB endpoint and receiving responses from DynamoDB </li>
+<li>extracting the results from those responses </li>
+<li>implementing basic retry logic in case of errors </li>
+</ul>
+<h3><span id="323-programmatic-interfaces">3.2.3 Programmatic Interfaces</span><a href="#323-programmatic-interfaces" class="header-anchor">#</a></h3><ol>
+<li>Low level interfaces<br>Need data type descriptors </li>
+</ol>
+<pre><code>result.getItem().getN() // get number 
+</code></pre><ol start="2">
+<li>Document Interfaces</li>
+</ol>
+<p>Documnet interface, allowing to perform data plane operations(creat, read, update, delete) on tables and indexes. No need to specify the data type descriptors. Data types are implied by the semantics of the data itself. Also provide methods to easily convert JSON documents to and from native DDB data types. </p>
+<ol start="3">
+<li>Object Persistence Interface </li>
+</ol>
+<p>Provid an object persistence interface where you do not directly perform data plane operations. Instead, you create objects that represent items in DynamoDB tables and indexes, and interact only with those objects. <strong><em>This allow you to write object-centric code, rather than database-centric code</em></strong>. </p>
+<pre><code>@DynamoDBTable(tableName=&quot;Music&quot;)
+public class MusicItem {
+    private String artist;
+    private String songTitle;
+    private String albumTitle;
+    private int year;
+
+    @DynamoDBHashKey(attributeName=&quot;Artist&quot;)
+    public String getArtist() { return artist;}
+    public void setArtist(String artist) {this.artist = artist;}
+
+    @DynamoDBRangeKey(attributeName=&quot;SongTitle&quot;)
+    public String getSongTitle() { return songTitle;}
+    public void setSongTitle(String songTitle) {this.songTitle = songTitle;}
+
+    @DynamoDBAttribute(attributeName = &quot;AlbumTitle&quot;)
+    public String getAlbumTitle() { return albumTitle;}
+    public void setAlbumTitle(String albumTitle) {this.albumTitle = albumTitle;}
+
+    @DynamoDBAttribute(attributeName = &quot;Year&quot;)
+    public int getYear() { return year; }
+    public void setYear(int year) { this.year = year; }
+}
+</code></pre><h3><span id="324-low-level-api">3.2.4 Low level API</span><a href="#324-low-level-api" class="header-anchor">#</a></h3><p>The DynamoDB low-level API is the protocol level interface for Amazon DynamoDB. At this level, every HTTP(s) request must be correctly formatted and carry a valid digital signature. </p>
+<p>The low-level DynamoDB API uses JavaScript Object Notation (JSON) as a wire protocol format. JSON presents data in a hierarchy, so that both data values and data structure are conveyed simultaneously. Name-value pairs are defined in the format name:value. The data hierarchy is defined by nested brackets of name-value pairs.</p>
+<p>DynamoDB uses JSON only as a transport protocol, not as a storage format. The AWS SDKs use JSON to send data to DynamoDB, and DynamoDB responds with JSON, but DynamoDB does not store data persistently in JSON format.</p>
+<h4><span id="3241-request-format">3.2.4.1 Request Format</span><a href="#3241-request-format" class="header-anchor">#</a></h4><p>The DynamoDB low-level API accepts HTTP(S) POST requests as input. The AWS SDKs construct these requests for you.</p>
+<p>Suppose that you have a table named Pets, with a key schema consisting of AnimalType (partition key) and Name (sort key). Both of these attributes are of type string. To retrieve an item from Pets, the AWS SDK constructs a request as shown following:</p>
+<pre><code>POST / HTTP/1.1
+Host: dynamodb.&lt;region&gt;.&lt;domain&gt;;
+Accept-Encoding: identity
+Content-Length: &lt;PayloadSizeBytes&gt;     
+User-Agent: &lt;UserAgentString&gt;
+Content-Type: application/x-amz-json-1.0
+Authorization: AWS4-HMAC-SHA256 Credential=&lt;Credential&gt;, SignedHeaders=&lt;Headers&gt;, Signature=&lt;Signature&gt;
+X-Amz-Date: &lt;Date&gt; 
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{
+    &quot;TableName&quot;: &quot;Pets&quot;,
+    &quot;Key&quot;: {
+        &quot;AnimalType&quot;: {&quot;S&quot;: &quot;Dog&quot;},
+        &quot;Name&quot;: {&quot;S&quot;: &quot;Fido&quot;}
+    }
+}
+</code></pre><ul>
+<li>The Authorization header contains information required for DynamoDB to authenticate the request.</li>
+<li>The X-Amz-Target header contains the name of a DynamoDB operation: GetItem. (This is also accompanied by the low-level API version, in this case 20120810.)</li>
+<li>The payload (body) of the request contains the parameters for the operation, in JSON format. For the GetItem operation, the parameters are TableName and Key.</li>
+</ul>
+<h4><span id="3242-response-format">3.2.4.2 Response Format</span><a href="#3242-response-format" class="header-anchor">#</a></h4><p>Upon receipt of the request, DynamoDB processes it and returns a response. For the request shown above, the HTTP(S) response payload contains the results from the operation. </p>
+<pre><code>HTTP/1.1 200 OK
+x-amzn-RequestId: &lt;RequestId&gt; 
+x-amz-crc32: &lt;Checksum&gt;
+Content-Type: application/x-amz-json-1.0
+Content-Length: &lt;PayloadSizeBytes&gt;
+Date: &lt;Date&gt; 
+{
+    &quot;Item&quot;: {
+        &quot;Age&quot;: {&quot;N&quot;: &quot;8&quot;},
+        &quot;Colors&quot;: {
+            &quot;L&quot;: [
+                {&quot;S&quot;: &quot;White&quot;},
+                {&quot;S&quot;: &quot;Brown&quot;},
+                {&quot;S&quot;: &quot;Black&quot;}
+            ]
+        },
+        &quot;Name&quot;: {&quot;S&quot;: &quot;Fido&quot;},
+        &quot;Vaccinations&quot;: {
+            &quot;M&quot;: {
+                &quot;Rabies&quot;: {
+                    &quot;L&quot;: [
+                        {&quot;S&quot;: &quot;2009-03-17&quot;},
+                        {&quot;S&quot;: &quot;2011-09-21&quot;},
+                        {&quot;S&quot;: &quot;2014-07-08&quot;}
+                    ]
+                },
+                &quot;Distemper&quot;: {&quot;S&quot;: &quot;2015-10-13&quot;}
+            }
+        },
+        &quot;Breed&quot;: {&quot;S&quot;: &quot;Beagle&quot;},
+        &quot;AnimalType&quot;: {&quot;S&quot;: &quot;Dog&quot;}
+    }
+}
+</code></pre><h4><span id="3243-data-type-descriptors">3.2.4.3 Data Type Descriptors</span><a href="#3243-data-type-descriptors" class="header-anchor">#</a></h4><p>The low-level DynamoDB API protocol requires each attribute to be accompanied by a data type descriptor. Data type descriptors are tokens that tell DynamoDB how to interpret each attribute.</p>
+<p>The examples in Request Format and Response Format show examples of how data type descriptors are used. The GetItem request specifies S for the Pets key schema attributes (AnimalType and Name), which are of type string. The GetItem response contains a Pets item with attributes of type string (S), number (N), map (M), and list (L).</p>
+<h3><span id="325-high-level-programming-interfaces-for-dynamodb">3.2.5 High level programming interfaces for DynamoDB</span><a href="#325-high-level-programming-interfaces-for-dynamodb" class="header-anchor">#</a></h3><p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HigherLevelInterfaces.html" target="_blank" rel="noopener">DynamoDBMapper</a></p>
+<h2><span id="33-error-handling">3.3 Error Handling</span><a href="#33-error-handling" class="header-anchor">#</a></h2><h3><span id="331-error-components">3.3.1 Error Components</span><a href="#331-error-components" class="header-anchor">#</a></h3><p>Unsuccessful: returns an error, which contains: </p>
+<ul>
+<li>An HTTP status code</li>
+<li>An exception name</li>
+<li>An error message</li>
+</ul>
+<p>The AWS SDK tale care of propagating errors to your application, so that you can take appropriate action. </p>
+<h3><span id="332-error-messages-and-codes">3.3.2 Error Messages and Codes</span><a href="#332-error-messages-and-codes" class="header-anchor">#</a></h3><ul>
+<li>HTTP status code 400<ul>
+<li>AccessDeniedException <ul>
+<li>The client did not correctly sign the request.</li>
+</ul>
+</li>
+<li>ConditionalCheckFailedException<ul>
+<li>You specified a condition that evaluated to false. </li>
+</ul>
+</li>
+<li>IncompleteSignatureException <ul>
+<li>The request signature did not include all of the required components.</li>
+</ul>
+</li>
+<li>ItemCollectionSizeLimitExceededException<ul>
+<li>For a table with a local secondary index, a group of items with the same partition key value has exceeded the maximum size limit of 10 GB. </li>
+</ul>
+</li>
+<li>LimitExceededException<ul>
+<li>There are too many concurrent control plane operations. The cumulative number of tables and indexes in the CREATING, DELETING, or UPDATING state cannot exceed 50.</li>
+</ul>
+</li>
+<li>MissingAuthenticationTokenException<ul>
+<li>The request did not include the required authorization header, or it was malformed. </li>
+</ul>
+</li>
+<li>ProvisionedThroughputExceededException<ul>
+<li>Your request rate is too high. The AWS SDKs for DynamoDB automatically retry requests that receive this exception. Your request is eventually successful, unless your retry queue is too large to finish. </li>
+</ul>
+</li>
+<li>RequestLimitExceeded<ul>
+<li>Throughput exceeds the current throughput limit for your account.</li>
+</ul>
+</li>
+<li>ResourceInUseException<ul>
+<li>The resource which you are attempting to change is in use.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>Table table = dynamoDB.getTable(&quot;Movies&quot;);
+
+try {
+    Item item = table.getItem(&quot;year&quot;, 1978, &quot;title&quot;, &quot;Superman&quot;);
+    if (item != null) {
+        System.out.println(&quot;Result: &quot; + item);
+    } else { 
+        //No such item exists in the table
+        System.out.println(&quot;Item not found&quot;);
+    }
+
+} catch (AmazonServiceException ase) {
+    System.err.println(&quot;Could not complete operation&quot;);
+    System.err.println(&quot;Error Message:  &quot; + ase.getMessage());
+    System.err.println(&quot;HTTP Status:    &quot; + ase.getStatusCode());
+    System.err.println(&quot;AWS Error Code: &quot; + ase.getErrorCode());
+    System.err.println(&quot;Error Type:     &quot; + ase.getErrorType());
+    System.err.println(&quot;Request ID:     &quot; + ase.getRequestId());
+
+} catch (AmazonClientException ace) {
+    System.err.println(&quot;Internal error occured communicating with DynamoDB&quot;);
+    System.out.println(&quot;Error Message:  &quot; + ace.getMessage());
+</code></pre><h3><span id="333-error-retries-and-expotential-backoff">3.3.3 Error Retries and Expotential Backoff</span><a href="#333-error-retries-and-expotential-backoff" class="header-anchor">#</a></h3><h3><span id="334-batch-operations-and-error-handling">3.3.4 Batch Operations and Error Handling</span><a href="#334-batch-operations-and-error-handling" class="header-anchor">#</a></h3><h1><span id="5-best-practices">5. Best Practices</span><a href="#5-best-practices" class="header-anchor">#</a></h1><h2><span id="51-partition-key-design">5.1 Partition Key Design</span><a href="#51-partition-key-design" class="header-anchor">#</a></h2><p>Generally speaking, you should design your application for <strong>uniform activity across all logical partition keys</strong> in the Table and its secondary indexes. You can determine the access patterns that your application requires, and estimate the total RCUs and WCUs that each table and secondary Index requires.</p>
+<p>As traffic starts to flow, DynamoDB automatically supports your access patterns using the throughput you have provisioned, as long as the traffic against a given partition key does not exceed 3000 RCUs or 1000 WCUs.</p>
+<h3><span id="511-using-burst-capacity-effectively">5.1.1 Using Burst Capacity Effectively</span><a href="#511-using-burst-capacity-effectively" class="header-anchor">#</a></h3><p>DynamoDB provides some flexibility in your per-partition throughput provisioning by providing burst capacity, as follows. Whenever you are not fully using a partition’s throughput, DynamoDB reserves a portion of that unused capacity for later bursts of throughput to handle usage spikes.</p>
+<p>DynamoDB currently retains up to <strong>five minutes (300 seconds)</strong> of unused read and write capacity. During an occasional burst of read or write activity, these extra capacity units can be consumed quickly—even faster than the per-second provisioned throughput capacity that you’ve defined for your table.</p>
+<h3><span id="512-adaptive-capacity">5.1.2 Adaptive Capacity</span><a href="#512-adaptive-capacity" class="header-anchor">#</a></h3><p>When data access is imbalanced, a “hot” partition can receive such a higher volume of read and write traffic compared to other partitions. In extreme cases, throttling can occur if a single partition receives more than 3,000 RCUs or 1,000 WCUs. </p>
+<p>To better accommodate uneven access patterns, DynamoDB adaptive capacity enables your application to continue reading and writing to hot partitions without being throttled, provided that traffic does not exceed your table’s total provisioned capacity or the partition maximum capacity. Adaptive capacity works by automatically increasing throughput capacity for partitions that receive more traffic.</p>
+<p><div id="disqus_thread"></div></p>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/<em><br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};
+</em>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/01/26/AWS-essential-6-pricing/" data-toggle="tooltip" data-placement="top" title="AWS essential(6) - pricing">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="http://Yinwang.org" target="_blank">Yin Wang</a></li>
+                    
+                        <li><a href="https://bideyuanli.com/" target="_blank">比的原理</a></li>
+                    
+                        <li><a href="https://www.fangzhipeng.com/" target="_blank">方志朋的博客</a></li>
+                    
+                        <li><a href="http://coding-geek.com/" target="_blank">coding geek</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+  var disqus_shortname = 'leilei-blog';
+  
+  var disqus_url = 'https://llchen60.com/2019/01/29/DynamoDB-Advanced/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/cc-stone">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/llchen60">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/stone16">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/leilei-chen-837870b4">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Leilei&#39;s Blog 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://llchen60.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-127393934-1';
+    var _gaDomain = 'llchen60.com';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://llchen60.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

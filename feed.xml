@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-01-26T19:47:49.291Z</updated>
+  <updated>2019-01-30T03:53:08.511Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DynamoDB Advanced</title>
+    <link href="https://llchen60.com/2019/01/29/DynamoDB-Advanced/"/>
+    <id>https://llchen60.com/2019/01/29/DynamoDB-Advanced/</id>
+    <published>2019-01-30T03:52:06.000Z</published>
+    <updated>2019-01-30T03:53:08.511Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-overview&quot;&gt;1. Overview&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-features&quot;&gt;1.1 Features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AWS" scheme="https://llchen60.com/tags/AWS/"/>
+    
+  </entry>
   
   <entry>
     <title>AWS essential(6) - pricing</title>
@@ -487,31 +515,6 @@
     
     
       <category term="web" scheme="https://llchen60.com/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HashMap在Java中是如何工作的</title>
-    <link href="https://llchen60.com/2018/12/12/HashMap%E5%9C%A8Java%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
-    <id>https://llchen60.com/2018/12/12/HashMap在Java中是如何工作的/</id>
-    <published>2018-12-13T05:00:32.000Z</published>
-    <updated>2018-12-13T05:05:31.844Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;HashMap是存储以及获取数据的一种简单有效的方式，本文探究Java的HashMap的内部实现。&lt;/p&gt;
-&lt;h1&gt;&lt;span id=&quot;1-内部存储&quot;&gt;1. 内部存储&lt;/span&gt;&lt;a href=&quot;#1-内部存储&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="java" scheme="https://llchen60.com/tags/java/"/>
     
   </entry>
   
