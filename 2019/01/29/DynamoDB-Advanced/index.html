@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -305,6 +305,18 @@
 <li><a href="#512-adaptive-capacity">5.1.2 Adaptive Capacity</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#6-working-with-stream">6. Working with Stream</a><ul>
+<li><a href="#61-reading-and-processing-a-stream">6.1 Reading and Processing a Stream</a></li>
+<li><a href="#62-dynamodb-streams-api">6.2 DynamoDB Streams API</a><ul>
+<li><a href="#621-liststreams">6.2.1 ListStreams</a></li>
+<li><a href="#622-describestream">6.2.2 DescribeStream</a></li>
+<li><a href="#623-getsharditerator">6.2.3 GetShardIterator</a></li>
+<li><a href="#624-getrecords">6.2.4 GetRecords</a></li>
+</ul>
+</li>
+<li><a href="#63-using-the-dynamodb-streams-kinesis-adapter-to-process-stream-records">6.3 Using the DynamoDB Streams Kinesis Adapter to Process Stream Records</a></li>
 </ul>
 </li>
 </ul>
@@ -1541,6 +1553,35 @@ public class DynamoDBMapperExample {
 <p>DynamoDB currently retains up to <strong>five minutes (300 seconds)</strong> of unused read and write capacity. During an occasional burst of read or write activity, these extra capacity units can be consumed quickly—even faster than the per-second provisioned throughput capacity that you’ve defined for your table.</p>
 <h3><span id="512-adaptive-capacity">5.1.2 Adaptive Capacity</span><a href="#512-adaptive-capacity" class="header-anchor">#</a></h3><p>When data access is imbalanced, a “hot” partition can receive such a higher volume of read and write traffic compared to other partitions. In extreme cases, throttling can occur if a single partition receives more than 3,000 RCUs or 1,000 WCUs. </p>
 <p>To better accommodate uneven access patterns, DynamoDB adaptive capacity enables your application to continue reading and writing to hot partitions without being throttled, provided that traffic does not exceed your table’s total provisioned capacity or the partition maximum capacity. Adaptive capacity works by automatically increasing throughput capacity for partitions that receive more traffic.</p>
+<h1><span id="6-working-with-stream">6. Working with Stream</span><a href="#6-working-with-stream" class="header-anchor">#</a></h1><p>DynamoDB streams captures a time-ordered sequence of item-level modifications in any DynamoDB table, and stores this information in a log for up to 24 hours. Applications can access this log and view the data items as they appeared before and after they were modified, in near real time.</p>
+<blockquote>
+<p>A DynamoDB stream is an ordered flow of information about changes to items in an Amazon DynamoDB table. When you enable a stream on a table, DynamoDB captures information about every modification to data items in the table. </p>
+</blockquote>
+<p>Whenever an application creates, updates, or deletes items in the table, DynamoDB Streams writes a stream record with the primary key attribute(s) of the items that were modified. A stream record contains information about a data modification to a single item in a DynamoDB table. You can configure the stream so that the stream records capture additional information, such as the “before” and “after” images of modified items.</p>
+<p>DynamoDB Streams guarantees the following: </p>
+<ul>
+<li>Each stream record appears exactly once in the stream </li>
+<li><strong>For each item that is modified in a DynamoDB table, the stream records appear in the same sequence as the actual modifications to the item.</strong></li>
+</ul>
+<p>DynamoDB Streams writes stream records in near real time, so that you can build applications that consume these streams and take action based on the contents.</p>
+<p>Use one endpoint for accessing DynamoDB, and another endpoint within same region for accessing DynamoDB streams. </p>
+<h2><span id="61-reading-and-processing-a-stream">6.1 Reading and Processing a Stream</span><a href="#61-reading-and-processing-a-stream" class="header-anchor">#</a></h2><p>To read and process a stream, your application will need to connect to a DynamoDB Streams endpoint and issue API requests. </p>
+<p>A stream consists of stream records. Each stream record represents a single data modification in the DynamoDB table to which the stream belongs. Each stream record is assigned a sequence number, reflecting the order in which the record was published to the stream.</p>
+<p>Stream records are organized into groups, or shards. Each shard acts as a container for multiple stream records, and contains information required for accessing and iterating through these records. The stream records within a shard are removed automatically after 24 hours.</p>
+<p>Shards are ephemeral: They are created and deleted automatically, as needed. Any shard can also split into multiple new shards; this also occurs automatically. (Note that it is also possible for a parent shard to have just one child shard.) A shard might split in response to high levels of write activity on its parent table, so that applications can process records from multiple shards in parallel.</p>
+<p>Because shards have a lineage (parent and children), an application must always process a parent shard before it processes a child shard. This will ensure that the stream records are also processed in the correct order. (If you use the DynamoDB Streams Kinesis Adapter, this is handled for you: Your application will process the shards and stream records in the correct order, and automatically handle new or expired shards, as well as shards that split while the application is running.</p>
+<p>To access a stream and process the stream records within, you must do the following: </p>
+<ul>
+<li>Determine the unique Amazon Resource Name (ARN) of the stream that you want to access.</li>
+<li>Determine which shard(s) in the stream contain the stream records that you are interested in.</li>
+<li>Access the shard(s) and retrieve the stream records that you want</li>
+</ul>
+<h2><span id="62-dynamodb-streams-api">6.2 DynamoDB Streams API</span><a href="#62-dynamodb-streams-api" class="header-anchor">#</a></h2><p><a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.html" target="_blank" rel="noopener">API Instructions</a></p>
+<h3><span id="621-liststreams">6.2.1 ListStreams</span><a href="#621-liststreams" class="header-anchor">#</a></h3><p>returns a list of stream descriptors for the current account and endpoint. You can optionally request just the stream descriptors for a particular table name.</p>
+<h3><span id="622-describestream">6.2.2 DescribeStream</span><a href="#622-describestream" class="header-anchor">#</a></h3><p>returns detailed information about a given stream. The output includes a list of shards associated with the stream, including the shard IDs.</p>
+<h3><span id="623-getsharditerator">6.2.3 GetShardIterator</span><a href="#623-getsharditerator" class="header-anchor">#</a></h3><p>returns a shard iterator, which describes a location within a shard. You can request that the iterator provide access to the oldest point, the newest point, or a particular point in the stream.</p>
+<h3><span id="624-getrecords">6.2.4 GetRecords</span><a href="#624-getrecords" class="header-anchor">#</a></h3><p>returns the stream records from within a given shard. </p>
+<h2><span id="63-using-the-dynamodb-streams-kinesis-adapter-to-process-stream-records">6.3 Using the DynamoDB Streams Kinesis Adapter to Process Stream Records</span><a href="#63-using-the-dynamodb-streams-kinesis-adapter-to-process-stream-records" class="header-anchor">#</a></h2><p><a href="https://aws.amazon.com/blogs/database/how-to-perform-ordered-data-replication-between-applications-by-using-amazon-dynamodb-streams/" target="_blank" rel="noopener">How to perform ordered data replication between applications by using Amazon DynamoDB Streams</a></p>
 <p><div id="disqus_thread"></div></p>
 <script>
 
