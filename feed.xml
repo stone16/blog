@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-02-02T19:22:00.473Z</updated>
+  <updated>2019-02-03T20:31:32.998Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何设计一个秒杀系统</title>
+    <link href="https://llchen60.com/2019/02/03/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://llchen60.com/2019/02/03/如何设计一个秒杀系统/</id>
+    <published>2019-02-03T20:30:18.000Z</published>
+    <updated>2019-02-03T20:31:32.998Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;1-overview&quot;&gt;1. Overview&lt;/span&gt;&lt;a href=&quot;#1-overview&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;h2&gt;&lt;span id=&quot;11-并发读写&quot;&gt;1.1 并发读写&lt;/span&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="System Design" scheme="https://llchen60.com/tags/System-Design/"/>
+    
+  </entry>
   
   <entry>
     <title>网络协议(八)-数据中心, VPN, 移动网络</title>
@@ -491,30 +515,6 @@
     
     
       <category term="网络协议" scheme="https://llchen60.com/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Food Rules</title>
-    <link href="https://llchen60.com/2018/12/15/Food-Rules/"/>
-    <id>https://llchen60.com/2018/12/15/Food-Rules/</id>
-    <published>2018-12-16T04:52:22.000Z</published>
-    <updated>2018-12-16T04:53:00.798Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Read a book recommended by Doctor, it tells about some food rules mainly focusing on what should we eat, how much should we eat, pretty
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Reading" scheme="https://llchen60.com/tags/Reading/"/>
     
   </entry>
   

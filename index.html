@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,30 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2019/02/03/如何设计一个秒杀系统/">
+        <h2 class="post-title">
+            如何设计一个秒杀系统
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. Overview#1.1 并发读写#秒杀要解决的主要问题是：并发读与并发写。
+并发读的优化理念是尽量减少用户到服务端来读数据，或者让他们读更少的数据；并发写的处理原则一样，要求我们在数据库层面独立出一个库，做特殊的处理。
+其次，还需要针对秒杀系统做一些保护，针对意料之外的情况设计兜底方案，以防止最坏的情况发生。
+1.2 API设计原则#值得注意的地方是：如果想打造并维护一个超大流量并发......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Leilei on
+        2019-02-03
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -443,34 +467,6 @@ After aws, initiated within seconds; treat these as temprorary and disposable; f
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/01/18/AWS-essentials-1-introduction/">
-        <h2 class="post-title">
-            AWS essentials(1) - introduction
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. AWS Cloud Concepts#
-Introduction to cloud
-Introduction to the AWS Cloud
-
-2. AWS Core Services#
-Overview of Services and Categories 
-Introduction to the AWS Global Infrastructure 
-Introduction to......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Leilei on
-        2019-01-18
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -506,11 +502,11 @@ Introduction to......
                     <div class="tags">
                         
                             
-                            <a href="/tags/#web" title="web" rel="5">web</a>
+                            <a href="/tags/#AWS" title="AWS" rel="7">AWS</a>
                             
                         
                             
-                            <a href="/tags/#AWS" title="AWS" rel="7">AWS</a>
+                            <a href="/tags/#web" title="web" rel="5">web</a>
                             
                         
                             
@@ -547,6 +543,8 @@ Introduction to......
                         
                             
                             <a href="/tags/#网络协议" title="网络协议" rel="8">网络协议</a>
+                            
+                        
                             
                         
                             
