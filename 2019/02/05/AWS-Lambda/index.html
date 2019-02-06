@@ -13,11 +13,11 @@
 
     <title>
         
-          React Advanced 4 - Leilei | 磊磊的博客
+          AWS Lambda - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/11/27/React-Advanced-4/">
+    <link rel="canonical" href="https://llchen60.com/2019/02/05/AWS-Lambda/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,16 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#React" title="React">React</a>
-                        
-                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
                         
                     </div>
-                    <h1>React Advanced 4</h1>
+                    <h1>AWS Lambda</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-11-27
+                        2019-02-05
                     </span>
                 </div>
             </div>
@@ -193,63 +191,35 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="1-the-component-lifecycle">1. The component lifecycle</span><a href="#1-the-component-lifecycle" class="header-anchor">#</a></h1><p>Each component has several lifecycle methods that you can override to run code at perticular times in the process. </p>
-<h2><span id="11-mounting">1.1 Mounting</span><a href="#11-mounting" class="header-anchor">#</a></h2><p>Methods are called <strong>in this order</strong> when an instance of a component is being created and inserted into the DOM. </p>
-<ol>
-<li>constructor()</li>
-<li>static getDerivedStateFromProps(): exists for use cases where the state depends on changes in props over time </li>
-<li>render()</li>
-<li>componentDidMount()</li>
-</ol>
-<h2><span id="12-updating">1.2 Updating</span><a href="#12-updating" class="header-anchor">#</a></h2><ol>
-<li>static getDerivedStateFromProps()</li>
-<li>shouldComponentUpdate(): judge if a component’s output is not affected by the current change in state or props</li>
-<li>render()</li>
-<li>getSnapshotBeforeUpdate()</li>
-<li>componentDidUpdate() </li>
-</ol>
-<h2><span id="13-unmounting">1.3 Unmounting</span><a href="#13-unmounting" class="header-anchor">#</a></h2><ol>
-<li>ComponentWillUnmount()</li>
-</ol>
-<h2><span id="14-error-handling">1.4 Error Handling</span><a href="#14-error-handling" class="header-anchor">#</a></h2><ol>
-<li>static getDerivedStateFromError()</li>
-<li>componentDidCatch() </li>
-</ol>
-<h1><span id="2-jsx-in-depth">2. JSX in Depth</span><a href="#2-jsx-in-depth" class="header-anchor">#</a></h1><h2><span id="21-specifying-the-react-element-type">2.1 Specifying the react element type</span><a href="#21-specifying-the-react-element-type" class="header-anchor">#</a></h2><p>Capitalized types indicate that the JSX tag is <strong>referring to a React component</strong>. These tages get compiled into a direct reference to the named variable, so if you use the JSX <code>&lt;Foo/&gt;</code> expression, Foo must be in scope. </p>
-<p>E.G Here: </p>
-<pre><code>import React from &apos;react&apos;;
-import CustomButton from &apos;./CustomButton&apos;;
-
-function WarningButton() {
-  // return React.createElement(CustomButton, {color: &apos;red&apos;}, null);
-  return &lt;CustomButton color=&quot;red&quot; /&gt;;
-}
-</code></pre><p>Need to import those things before truly use it in function scope. </p>
-<h2><span id="22-user-defined-components-must-be-capitalized">2.2 User defined components must be capitalized</span><a href="#22-user-defined-components-must-be-capitalized" class="header-anchor">#</a></h2><p>When an element type starts with a lowercase letter, it refers to a build-in component like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> passed to React.createElement.  </p>
-<p>***Types that start with a capital letter like <code>&lt;Foo/&gt;</code> compile to React.createElement(Foo) and correspond to a component defined or imported in your js file. </p>
-<h2><span id="23-spread-attributes">2.3 Spread Attributes</span><a href="#23-spread-attributes" class="header-anchor">#</a></h2><p>If you already have props as an object, and you want to pass it in JSX, you can use <code>...</code> as a spread operator to pass the whole props object. </p>
-<p>Equivalent expressions: </p>
-<pre><code>function App1() {
-  return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot; /&gt;;
-}
-
-function App2() {
-  const props = {firstName: &apos;Ben&apos;, lastName: &apos;Hector&apos;};
-  return &lt;Greeting {...props} /&gt;;
-}
-</code></pre><h2><span id="24-children-in-jsx">2.4 Children in JSX</span><a href="#24-children-in-jsx" class="header-anchor">#</a></h2><p>In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: <code>props.children</code>. Several different ways to pass children: </p>
-<ol>
-<li>String literals </li>
-</ol>
-<p><code>&lt;div&gt;Hello World!&lt;/div&gt;</code></p>
-<ol start="2">
-<li><p>JSX children</p>
-</li>
-<li><p>JS Expressions as Children</p>
-</li>
-</ol>
-<p>Wrap it within <code>{}</code></p>
-<p><div id="disqus_thread"></div></p>
+                <h1><span id="1-overview">1. Overview</span><a href="#1-overview" class="header-anchor">#</a></h1><p>A compute service that lets you run code without provisioning or managing servers. It can executes your code thousands per second. You pay for the compute time you consume.</p>
+<p>Lambda executes your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging.</p>
+<p>You can run AWS lambda to run your code in response to events, such as changes to data in an Amazon S3 bucket or an Amazon DynamoDB table; to run your code in response to HTTP requests using Amazon API gateway; or invoke your code using API calls made using AWS SDKs. </p>
+<h1><span id="2-getting-started">2. Getting started</span><a href="#2-getting-started" class="header-anchor">#</a></h1><h2><span id="21-configuration-on-console-page">2.1 Configuration on console page</span><a href="#21-configuration-on-console-page" class="header-anchor">#</a></h2><ul>
+<li>environment variables: for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code.</li>
+<li>Tags: are key-value pairs that you attach to AWS resources to better organize them. </li>
+<li>Execution role: which allows you to administer security on your function, using defined roles and policies or creating new ones.</li>
+<li>Basic settings: allows you to dictate the memory allocation and timeout limit for your Lambda function.</li>
+<li>Network: allow you to select a VPC your function will access</li>
+<li>Debugging and error handling: allow you to select a AWS <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html" target="_blank" rel="noopener">Lambda Function Dead Letter Queues</a> resource to analyze failed function invocation retries. </li>
+<li>Concurrency: allows you to allocate a specific limit of concurrent executions allowed for this function</li>
+<li>Auditing and compliance: logs function invocations for operational and risk auditing, governance and compliance. </li>
+</ul>
+<h2><span id="22-lambda-concept">2.2 Lambda concept</span><a href="#22-lambda-concept" class="header-anchor">#</a></h2><p>Lambda can automatically scales up the number of instances of your function to handle high number of events. </p>
+<ul>
+<li>Function: A script or program that runs in AWS lambda. Lambda passes invocation events to your function. The function processes an event and returns a response</li>
+<li>Runtimes: Lambda runtimes allow functions in different languages to run in the same base execution environment, you configure your function to use a runtime that matches your programming language. The runtime sits in between the Lambda service and your function code, relaying invocation events, context information and responses between the two. </li>
+<li>Layers: Lambda layers are a distribution mechanism for libraries, custom runtimes and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers.</li>
+<li>Event source: An AWS service that triggers your function and executes its logic. </li>
+<li>Downstream resources: An AWS service that your lambda function calls once it is triggered</li>
+<li>Log streams: While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function to ensure it’s working properly.</li>
+</ul>
+<h2><span id="23-programming-model">2.3 Programming Model</span><a href="#23-programming-model" class="header-anchor">#</a></h2><p>Regardless of the language you choose, there is a common pattern ti write code for a Lambda Function includes concepts as follow:</p>
+<h3><span id="231-handler">2.3.1 Handler</span><a href="#231-handler" class="header-anchor">#</a></h3><p>The function AWS Lambda calls to start execution of your lambda function. When a Lambda function is invoked, Lambda starts executing your code by calling the handler function</p>
+<h3><span id="232-context">2.3.2 Context</span><a href="#232-context" class="header-anchor">#</a></h3><p>Lambda also passes a context object to the handler function, as the second parameter. Via this context object your code can interact with Lambda</p>
+<h3><span id="233-logging">2.3.3 Logging</span><a href="#233-logging" class="header-anchor">#</a></h3><p>Function can contain logging statements, it writes these logs to cloudWatch logs. </p>
+<h3><span id="234-exceptions">2.3.4 Exceptions</span><a href="#234-exceptions" class="header-anchor">#</a></h3><p>Function needs to communicate the result of the function execution to AWS Lambda. Many ways to end a request or to notify AWS Lambda an error occured during execution</p>
+<h3><span id="235-concurrency">2.3.5 Concurrency</span><a href="#235-concurrency" class="header-anchor">#</a></h3><p>When your function is invoked more quickly than a single instance of your function can process events, Lambda scales by running additional instances. Each instance of your function handles only one request at a time, so you don’t need to worry about synchronizing threads or processes. You can, however, use asynchronous language features to process batches of events in parallel, and save data to the /tmp directory for use in future invocations on the same instance. </p>
+<h1><span id="3-building-lambda-functions-with-java">3. Building Lambda Functions with Java</span><a href="#3-building-lambda-functions-with-java" class="header-anchor">#</a></h1><p><div id="disqus_thread"></div></p>
 <script>
 
 <p>/**</p>
@@ -266,13 +236,9 @@ function App2() {
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/12/01/说说日本-一/" data-toggle="tooltip" data-placement="top" title="说说日本(一)">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/27/正则表达式/" data-toggle="tooltip" data-placement="top" title="正则表达式">Next Post &rarr;</a>
+                            <a href="/2019/02/03/如何设计一个秒杀系统/" data-toggle="tooltip" data-placement="top" title="如何设计一个秒杀系统">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -305,9 +271,7 @@ function App2() {
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#React" title="React">React</a>
-                        
-                          <a class="tag" href="/tags/#FrontEnd" title="FrontEnd">FrontEnd</a>
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
                         
                     </div>
                 </section>
@@ -346,7 +310,7 @@ function App2() {
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/11/27/React-Advanced-4/';
+  var disqus_url = 'https://llchen60.com/2019/02/05/AWS-Lambda/';
   
   (function(){
     var dsq = document.createElement('script');
