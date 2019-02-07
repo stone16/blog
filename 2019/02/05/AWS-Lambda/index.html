@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -219,7 +219,129 @@
 <h3><span id="233-logging">2.3.3 Logging</span><a href="#233-logging" class="header-anchor">#</a></h3><p>Function can contain logging statements, it writes these logs to cloudWatch logs. </p>
 <h3><span id="234-exceptions">2.3.4 Exceptions</span><a href="#234-exceptions" class="header-anchor">#</a></h3><p>Function needs to communicate the result of the function execution to AWS Lambda. Many ways to end a request or to notify AWS Lambda an error occured during execution</p>
 <h3><span id="235-concurrency">2.3.5 Concurrency</span><a href="#235-concurrency" class="header-anchor">#</a></h3><p>When your function is invoked more quickly than a single instance of your function can process events, Lambda scales by running additional instances. Each instance of your function handles only one request at a time, so you don’t need to worry about synchronizing threads or processes. You can, however, use asynchronous language features to process batches of events in parallel, and save data to the /tmp directory for use in future invocations on the same instance. </p>
-<h1><span id="3-building-lambda-functions-with-java">3. Building Lambda Functions with Java</span><a href="#3-building-lambda-functions-with-java" class="header-anchor">#</a></h1><p><div id="disqus_thread"></div></p>
+<h1><span id="3-building-lambda-functions-with-java">3. Building Lambda Functions with Java</span><a href="#3-building-lambda-functions-with-java" class="header-anchor">#</a></h1><h2><span id="31-handler-input-output-types">3.1 Handler Input/ Output Types</span><a href="#31-handler-input-output-types" class="header-anchor">#</a></h2><p>When AWS lambda executes the Lambda function, it invokes the handler. First parameter is the input to the handler which can be event data (published by an event source) or custom input you provide such as a string or any custom data object. </p>
+<p>AWS Lambda supports the following input/ output types for a handler: </p>
+<ul>
+<li>Simple Java types (AWS Lambda supports the String, Integer, Boolean, Map and List types )</li>
+<li>POJO</li>
+<li><p>stream type </p>
+<h3><span id="311-handler-input-output-string-type">3.1.1 Handler input/ output: String Type</span><a href="#311-handler-input-output-string-type" class="header-anchor">#</a></h3><p>  package example;</p>
+<p>  import com.amazonaws.services.lambda.runtime.Context; </p>
+<p>  public class Hello {</p>
+<pre><code>public String myHandler(String name, Context context) {
+    return String.format(&quot;Hello %s.&quot;, name);
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p>When you invoke a Lambda function asynchronously, any return value by your Lambda function will be ignored. Therefore you might want to <strong><em>set the return type to void</em></strong> to make this clear in your code </p>
+<h3><span id="312-handler-input-output-pojo">3.1.2 Handler Input/ Output: POJO</span><a href="#312-handler-input-output-pojo" class="header-anchor">#</a></h3><pre><code>package example;
+
+import com.amazonaws.services.lambda.runtime.Context; 
+
+public class HelloPojo {
+
+    // Define two classes/POJOs for use with Lambda function.
+    public static class RequestClass {
+      ...
+    }
+
+    public static class ResponseClass {
+      ...
+    }
+
+    public static ResponseClass myHandler(RequestClass request, Context context) {
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.getFirstName(), request.getLastName());
+        return new ResponseClass(greetingString);
+    }
+}
+</code></pre><p>Suppose your application events generate data that includes first name and last name as shown:</p>
+<pre><code>{ &quot;firstName&quot;: &quot;John&quot;, &quot;lastName&quot;: &quot;Doe&quot; }  
+</code></pre><p>For this example, the handler receives this JSON and returns the string “Hello John Doe”.</p>
+<pre><code>public static ResponseClass handleRequest(RequestClass request, Context context){
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.firstName, request.lastName);
+        return new ResponseClass(greetingString);
+}
+</code></pre><p>To create a Lambda function with this handler, you must provide implementation of the input and output types as shown in the following Java example. The HelloPojo class defines the handler method.</p>
+<pre><code>package example;
+
+import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
+public class HelloPojo implements RequestHandler&lt;RequestClass, ResponseClass&gt;{   
+
+    public ResponseClass handleRequest(RequestClass request, Context context){
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.firstName, request.lastName);
+        return new ResponseClass(greetingString);
+    }
+}
+</code></pre><p>In order to implement the input type, add the following code to a separate file and name it RequestClass.java. Place it next to the HelloPojo.java class in your directory structure:</p>
+<pre><code>package example;
+
+     public class RequestClass {
+        String firstName;
+        String lastName;
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public RequestClass(String firstName, String lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public RequestClass() {
+        }
+    }
+</code></pre><p>In order to implement the output type, add the following code to a separate file and name it ResponseClass.java. Place it next to the HelloPojo.java class in your directory structure:</p>
+<pre><code>package example;
+
+ public class ResponseClass {
+    String greetings;
+
+    public String getGreetings() {
+        return greetings;
+    }
+
+    public void setGreetings(String greetings) {
+        this.greetings = greetings;
+    }
+
+    public ResponseClass(String greetings) {
+        this.greetings = greetings;
+    }
+
+    public ResponseClass() {
+    }
+
+}
+</code></pre><h2><span id="32-context-object-in-java">3.2 Context Object in Java</span><a href="#32-context-object-in-java" class="header-anchor">#</a></h2><p>When Lambda runs your function, it passes a context object to the handler. The object provides methods and properties that provide information about the invocation, function and execution environment. </p>
+<ul>
+<li>getRemainingTimeInMillis()</li>
+<li>getFunctionName()</li>
+<li>getFunctionVersion()</li>
+<li>getInvokedFunctionArn() - Returns the Amazon Resource Name(ARN) used to invoke the function. Indicates if the invoker specified a version number or alias. </li>
+<li>getMemoryLimitInMB()</li>
+<li>getAwsRequestId()</li>
+<li>getLogGroupName()</li>
+<li>getIdentity()</li>
+<li>getClientContext()</li>
+<li>getLogger() </li>
+</ul>
+<h1><span id="4">4.</span><a href="#4" class="header-anchor">#</a></h1><p><div id="disqus_thread"></div></p>
 <script>
 
 <p>/**</p>
