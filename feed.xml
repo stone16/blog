@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://llchen60.com/"/>
-  <updated>2019-02-07T04:48:07.986Z</updated>
+  <updated>2019-02-11T00:12:00.971Z</updated>
   <id>https://llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java - ExecutorService</title>
+    <link href="https://llchen60.com/2019/02/10/Java-ExecutorService/"/>
+    <id>https://llchen60.com/2019/02/10/Java-ExecutorService/</id>
+    <published>2019-02-11T00:11:28.000Z</published>
+    <updated>2019-02-11T00:12:00.971Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in &lt;strong&gt;&lt;em&gt;asynchronous&lt;/em&gt;&lt;/strong&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://llchen60.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>AWS Lambda</title>
@@ -488,30 +512,6 @@
         
           &lt;p&gt;MAC层是用来解决多路访问的堵车问题的，ARP通过在局域网大吼一声的方式来寻找目标MAC地址。交换机有MAC地址学习能力。 &lt;/p&gt;
 &lt;h1&gt;&lt;span id=&quot;1-mac层&quot;&gt;1. MAC层&lt;/span&gt;&lt;a href=&quot;#1-mac层&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="网络协议" scheme="https://llchen60.com/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络协议(二)-物理层</title>
-    <link href="https://llchen60.com/2018/12/16/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"/>
-    <id>https://llchen60.com/2018/12/16/网络协议-二-物理层/</id>
-    <published>2018-12-16T22:34:50.000Z</published>
-    <updated>2018-12-16T22:37:19.754Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;1-物理层实现多个终端的交流&quot;&gt;1. 物理层实现多个终端的交流&lt;/span&gt;&lt;a href=&quot;#1-物理层实现多个终端的交流&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;网线的1-3,
         
       
     

@@ -13,11 +13,11 @@
 
     <title>
         
-          Linux性能优化-平均负载(二) - Leilei | 磊磊的博客
+          Java - ExecutorService - Leilei | 磊磊的博客
         
     </title>
 
-    <link rel="canonical" href="https://llchen60.com/2018/12/18/Linux性能优化-平均负载-二/">
+    <link rel="canonical" href="https://llchen60.com/2019/02/10/Java-ExecutorService/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                          <a class="tag" href="/tags/#java" title="java">java</a>
                         
                     </div>
-                    <h1>Linux性能优化-平均负载(二)</h1>
+                    <h1>Java - ExecutorService</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Leilei on
-                        2018-12-18
+                        2019-02-10
                     </span>
                 </div>
             </div>
@@ -191,85 +191,68 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="1-如何理解平均负载">1. 如何理解平均负载</span><a href="#1-如何理解平均负载" class="header-anchor">#</a></h1><pre><code>$uptime
-14:35:36 up 62 days,  2:51,  2 users,  load average: 0.02, 0.70, 1.06
-</code></pre><p>当前时间，系统运行时间，正在登录用户数</p>
-<p>后面的三个数字是过去1min, 5min, 15min的平均负载。</p>
-<blockquote>
-<p>平均负载时指单位时间内，系统处于可运行状态和不可中断状态的平均进程数，也就是平均活跃进程数，它和CPU使用率没有直接关系。</p>
-</blockquote>
-<blockquote>
-<p>可运行状态的进程：指正在使用CPU或者正在等待CPU的进程, 也就是我们用<code>ps</code>看到的处于Running/ Runnable状态的进程。</p>
-</blockquote>
-<blockquote>
-<p>不可中断状态的进程：指正处于内核态关键流程中的进程，并且这些进程是不可以被打断的。比如等待硬件设备的I/O响应，即我们在<code>ps</code>命令下看到的D(Uninerruptible Sleep/ Disk Sleep)状态.</p>
-</blockquote>
-<p>例如当一个进程向磁盘读写数据时，为了一致，在得到磁盘回复之前，是不能被其他进程或者中断打断的。否则容易出现磁盘数据与进程数据不一致的问题。</p>
-<p>不可中断状态实际上是系统对进程和硬件设备的一种保护机制。</p>
-<p>平均负载 -&gt; 平均活跃进程数 -&gt; 单位时间内的活跃进程数.最理想的情况就是每个CPU都刚好运行着一个进程，这样每一个CPU都能得到充分的利用。</p>
-<h1><span id="2-平均负载为多少时比较合理">2. 平均负载为多少时比较合理？</span><a href="#2-平均负载为多少时比较合理" class="header-anchor">#</a></h1><p>首先需要知道系统有几个CPU，可以通过top命令或者从文件/proc/cpuinfo中读取</p>
-<pre><code>$grep &apos;model name&apos; /proc/cpuinfo | wc -l
-</code></pre><p>当平均负载高于CPU数量70%的时候，就应该分析和排查负载高的问题了。</p>
-<h1><span id="3-平均负载与cpu使用率">3. 平均负载与CPU使用率</span><a href="#3-平均负载与cpu使用率" class="header-anchor">#</a></h1><p>二者不一定会完全一致，因为平均负载指单位时间内处于可运行状态和不可中断状态的进程数，不仅包括了<strong><em>正在使用CPU的进程，还包括等待CPU和等待I/O的进程</em></strong>。</p>
-<p>而CPU使用率，是根据单位时间内CPU的繁忙情况进行统计的，举例：</p>
-<ul>
-<li>CPU密集进程</li>
-</ul>
-<p>使用大量CPU使得平均负载升高，此时二者是一致的</p>
-<ul>
-<li>IO密集型进程</li>
-</ul>
-<p>等待I/O也会导致平均负载升高，但CPU使用率不一定会很高</p>
-<h1><span id="4-案例分析">4. 案例分析</span><a href="#4-案例分析" class="header-anchor">#</a></h1><h2><span id="41-使用工具">4.1 使用工具</span><a href="#41-使用工具" class="header-anchor">#</a></h2><h3><span id="411-stress">4.1.1 stress</span><a href="#411-stress" class="header-anchor">#</a></h3><p>Linux 系统压力测试工具，可以用作异常进程模拟平均负载升高的场景。</p>
-<h3><span id="412-sysstat">4.1.2 sysstat</span><a href="#412-sysstat" class="header-anchor">#</a></h3><p>包含了常用的多核CPU性能分析工具，用来实时查看进程的CPU、内存、I/O以及上下文切换等性能指标。</p>
-<h2><span id="42-场景分析-cpu密集型进程">4.2 场景分析-CPU密集型进程</span><a href="#42-场景分析-cpu密集型进程" class="header-anchor">#</a></h2><p>terminal 1: </p>
-<pre><code>$ stress --cpu 1 --timeout 600
-</code></pre><p>terminal 2: </p>
-<pre><code># -d 参数表示高亮显示变化的区域
-$ watch -d uptime
-...,  load average: 1.00, 0.75, 0.39
-</code></pre><p>terminal 3: run mpstat to see CPU usage </p>
-<pre><code># -P ALL 表示监控所有 CPU，后面数字 5 表示间隔 5 秒后输出一组数据
-$ mpstat -P ALL 5
-Linux 4.15.0 (ubuntu) 09/22/18 _x86_64_ (2 CPU)
-13:30:06     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
-13:30:11     all   50.05    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   49.95
-13:30:11       0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-13:30:11       1  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-</code></pre><p>Use pidstat to see process usage </p>
-<pre><code># 间隔 5 秒后输出一组数据
-$ pidstat -u 5 1
-13:37:07      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
-13:37:12        0      2962  100.00    0.00    0.00    0.00  100.00     1  stress
-</code></pre><h1><span id="5-总结">5. 总结</span><a href="#5-总结" class="header-anchor">#</a></h1><ol>
-<li>mpstat -P ALL 5</li>
-<li>pidstat -u 5 1</li>
-</ol>
-<ul>
-<li>-u : cpu usage</li>
-<li>-r : memory usage</li>
-<li>-d : I/O usage</li>
-<li>-p : specific process id </li>
-</ul>
-<ol start="3">
-<li>watch -d uptime </li>
-</ol>
-<p>watch可以帮你检测一个命令的运行结果，在Linux下，watch是周期性的执行下个程序，并全屏显示执行结果。你可以拿他来监测你想要的一切命令的结果变化，比如 tail 一个 log 文件，ls 监测某个文件的大小变化。</p>
-<ul>
-<li>-n : interval</li>
-<li>-d : highlight </li>
-<li>‘’ : command</li>
-</ul>
-<p>e.g : <code>watch -n 1 -d &#39;pstree|grep http&#39;</code></p>
-<ol start="4">
-<li>uptime </li>
-</ol>
-<h1><span id="6-reference">6. Reference</span><a href="#6-reference" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858775.html" target="_blank" rel="noopener">Linux CPU 实时监控mpstat命令详解</a></li>
-<li><a href="http://www.cnblogs.com/peida/archive/2012/12/31/2840241.html" target="_blank" rel="noopener">watch命令</a></li>
-<li><a href="https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858874.html" target="_blank" rel="noopener">Linux运行进程实时监控pidstat命令详解</a></li>
-</ol>
-<p><div id="disqus_thread"></div></p>
+                <p>ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in <strong><em>asynchronous</em></strong> mode. ExecutorService automatically provides a pool of threads and API for assigning tasks to it. </p>
+<h1><span id="1-instantiation">1. Instantiation</span><a href="#1-instantiation" class="header-anchor">#</a></h1><h2><span id="11-factory-methods-of-executors-class">1.1 Factory methods of Executors class</span><a href="#11-factory-methods-of-executors-class" class="header-anchor">#</a></h2><p>Use its factory methods of the Executors class to create ExecutorService. </p>
+<pre><code>ExecutorService executor = Executors.newFixedThreadPool(10);
+</code></pre><h2><span id="12-directly-create">1.2 Directly create</span><a href="#12-directly-create" class="header-anchor">#</a></h2><pre><code>ExecutorService executorService = 
+  new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,   
+  new LinkedBlockingQueue&lt;Runnable&gt;());
+</code></pre><h1><span id="2-assigning-tasks">2. Assigning Tasks</span><a href="#2-assigning-tasks" class="header-anchor">#</a></h1><p>ExecutorService can execute Runnable and Callable tasks. </p>
+<pre><code>Runnable runnableTask = () -&gt; {
+    try {
+        TimeUnit.MILLISECONDS.sleep(300);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+};
+
+Callable&lt;String&gt; callableTask = () -&gt; {
+    TimeUnit.MILLISECONDS.sleep(300);
+    return &quot;Task&apos;s execution&quot;;
+};
+
+List&lt;Callable&lt;String&gt;&gt; callableTasks = new ArrayList&lt;&gt;();
+callableTasks.add(callableTask);
+callableTasks.add(callableTask);
+callableTasks.add(callableTask);
+</code></pre><h2><span id="21-execute">2.1 execute()</span><a href="#21-execute" class="header-anchor">#</a></h2><p>The execute() method is void, and it doesn’t give any possibility to get the result of task’s execution or to check the task’s status (is it running or executed).</p>
+<pre><code>executerService.execute(runnableTask);
+</code></pre><h2><span id="22-submit">2.2 submit()</span><a href="#22-submit" class="header-anchor">#</a></h2><p>submit() submits a Callable or a Runnable task to an ExecutorService and returns a result of type Future.</p>
+<pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);
+</code></pre><h2><span id="23-invokeany">2.3 invokeAny()</span><a href="#23-invokeany" class="header-anchor">#</a></h2><p>invokeAny() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of a successful execution of one task (if there was a successful execution).</p>
+<pre><code>String result = executorService.invokeAny(callableTasks);
+</code></pre><h2><span id="24-invokeall">2.4 invokeAll()</span><a href="#24-invokeall" class="header-anchor">#</a></h2><p>invokeAll() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of all task executions in the form of a list of objects of type Future.</p>
+<pre><code>List&lt;Future&lt;String&gt;&gt; futures = executorService.invokeAll(callableTasks);
+</code></pre><h1><span id="3-shutdown">3. Shutdown</span><a href="#3-shutdown" class="header-anchor">#</a></h1><p>In general, the ExecutorService will not be automatically destroyed when there is not task to process. It will stay alive and wait for new work to do.</p>
+<p>In some cases this is very helpful; for example, if an app needs to process tasks which appear on an irregular basis or the quantity of these tasks is not known at compile time.</p>
+<p>On the other hand, an app could reach its end, but it will not be stopped because a waiting ExecutorService will cause the JVM to keep running.</p>
+<h2><span id="31-shutdown">3.1 shutdown()</span><a href="#31-shutdown" class="header-anchor">#</a></h2><p>The shutdown() method doesn’t cause an immediate destruction of the ExecutorService. It will make the ExecutorService stop accepting new tasks and shut down after all running threads finish their current work.</p>
+<pre><code>executorService.shutdown();
+</code></pre><h2><span id="32-shutdownnow">3.2 shutdownNow()</span><a href="#32-shutdownnow" class="header-anchor">#</a></h2><p>The shutdownNow() method tries to destroy the ExecutorService immediately, but it doesn’t guarantee that all the running threads will be stopped at the same time. This method returns a list of tasks which are waiting to be processed. It is up to the developer to decide what to do with these tasks.</p>
+<pre><code>List&lt;Runnable&gt; notExecutedTasks = executorService.shutDownNow();
+</code></pre><h2><span id="33-best-behavior">3.3 best behavior</span><a href="#33-best-behavior" class="header-anchor">#</a></h2><pre><code>executorService.shutdown();
+try {
+    if (!executorService.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+        executorService.shutdownNow();
+    } 
+} catch (InterruptedException e) {
+    executorService.shutdownNow();
+}
+</code></pre><h1><span id="4-future-interface">4. Future interface</span><a href="#4-future-interface" class="header-anchor">#</a></h1><p>Future interface provides a <code>get()</code> which returns an actual result of the Callable task’s execution or null in the case of Runnable task. Calling the get() method while the task is still running will cause execution to block until the task is properly executed and the result is available.</p>
+<pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);
+String result = null;
+try {
+    result = future.get();
+} catch (InterruptedException | ExecutionException e) {
+    e.printStackTrace();
+}
+</code></pre><p>With very long blocking caused by the get() method, an application’s performance can degrade. If the resulting data is not crucial, it is possible to avoid such a problem by using timeouts:</p>
+<pre><code>String result = future.get(200, TimeUnit.MILLISECONDS);
+</code></pre><p>some other methods provided:</p>
+<pre><code>cancel()
+isCancelled()
+isDone() 
+</code></pre><p><div id="disqus_thread"></div></p>
 <script>
 
 <p>/**</p>
@@ -286,13 +269,9 @@ $ pidstat -u 5 1
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/12/20/网络协议-五-传输层/" data-toggle="tooltip" data-placement="top" title="网络协议(五)-传输层">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/12/16/网络协议-四-网络层/" data-toggle="tooltip" data-placement="top" title="网络协议(四)-网络层">Next Post &rarr;</a>
+                            <a href="/2019/02/05/AWS-Lambda/" data-toggle="tooltip" data-placement="top" title="AWS Lambda">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -325,7 +304,7 @@ $ pidstat -u 5 1
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                          <a class="tag" href="/tags/#java" title="java">java</a>
                         
                     </div>
                 </section>
@@ -364,7 +343,7 @@ $ pidstat -u 5 1
 <script>
   var disqus_shortname = 'leilei-blog';
   
-  var disqus_url = 'https://llchen60.com/2018/12/18/Linux性能优化-平均负载-二/';
+  var disqus_url = 'https://llchen60.com/2019/02/10/Java-ExecutorService/';
   
   (function(){
     var dsq = document.createElement('script');
