@@ -113,3 +113,7 @@ baidu_url_submit:
 search:
   path: search.xml
   field: post
+
+
+sitemap:
+  path: sitemap.xml
