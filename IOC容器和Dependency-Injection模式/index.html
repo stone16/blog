@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IOC容器和Dependency Injection模式 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" java , backend ">
+  <meta name="description" content="IOC容器和Dependency Injection模式 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-28T03:32:09.008Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(189)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="189">
+<input type="hidden" id="yelog_site_word_count" value="349k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">frontend</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">css</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">backend</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">distributed system</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">system design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DDD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">javaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">backend - ruby - tutorial</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">optimization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">tomcat - connector</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">tomcat - backend - servlet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">JavaScript - OOP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Design Pattern</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">js</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">OS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Unix</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">数据结构与算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">树</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">编程思维</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">网络协议</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2019-01-21 21:12:03">2019/01/21</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2019-04-02 11:26:42">2019/04/02</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-VPC/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2019-02-21 19:39:00">2019/02/21</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2019-01-25 18:29:16">2019/01/25</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-Lambda/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2019-02-05 21:46:31">2019/02/05</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-X-Ray-Intro-in-Java/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro in Java">AWS X-Ray Intro in Java</span>
+            <span class="post-date" title="2019-03-13 18:43:21">2019/03/13</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2019-01-18 23:25:39">2019/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2019-01-26 11:46:47">2019/01/26</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-6-pricing/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(6) - pricing">AWS essential(6) - pricing</span>
+            <span class="post-date" title="2019-01-26 11:47:32">2019/01/26</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts ">AWS essentials(2) - Cloud Concepts </span>
+            <span class="post-date" title="2019-01-18 23:25:59">2019/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="frontend,css"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2019-11-30 10:53:17">2019/11/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Apache-Ant/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Apache Ant ">Apache Ant </span>
+            <span class="post-date" title="2019-02-17 18:26:49">2019/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/CacheLoader-%E6%95%99%E7%A8%8B/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="CacheLoader 教程">CacheLoader 教程</span>
+            <span class="post-date" title="2019-08-15 19:48:16">2019/08/15</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2019-01-21 17:43:28">2019/01/21</span>
+        </a>
+        
+        <a  class=""
+           href="/Cost-of-abstraction/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Cost of abstraction">Cost of abstraction</span>
+            <span class="post-date" title="2019-04-04 19:28:23">2019/04/04</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling ">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling </span>
+            <span class="post-date" title="2019-03-14 20:45:25">2019/03/14</span>
+        </a>
+        
+        <a  class=""
+           href="/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"
+           data-tag="java,backend,thought"
+           data-author="" >
+            <span class="post-title" title="DDD - 领域驱动设计">DDD - 领域驱动设计</span>
+            <span class="post-date" title="2019-12-15 16:24:18">2019/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2019-03-19 19:03:26">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2019-03-15 17:47:25">2019/03/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2019-03-20 17:49:30">2019/03/20</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2019-03-15 19:42:09">2019/03/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2019-03-17 15:38:47">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2019-03-17 20:46:10">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2019-03-17 10:22:56">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2019-03-16 13:23:00">2019/03/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2019-03-19 19:02:42">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Distributed-Tracing/"
+           data-tag="backend,distributed system,system design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2019-10-01 18:25:06">2019/10/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2019-03-19 19:02:03">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2019-06-18 20:24:53">2019/06/18</span>
+        </a>
+        
+        <a  class=""
+           href="/Effective-Java/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Effective Java">Effective Java</span>
+            <span class="post-date" title="2019-01-23 20:16:51">2019/01/23</span>
+        </a>
+        
+        <a  class=""
+           href="/Elasticsearch-Overview/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2019-02-28 20:03:17">2019/02/28</span>
+        </a>
+        
+        <a  class=""
+           href="/EnumMap-vs-HashMap/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="EnumMap vs HashMap">EnumMap vs HashMap</span>
+            <span class="post-date" title="2019-09-17 19:43:44">2019/09/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Event-Storming/"
+           data-tag="backend,DDD"
+           data-author="" >
+            <span class="post-title" title="Event Storming">Event Storming</span>
+            <span class="post-date" title="2019-12-16 19:06:59">2019/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Executor-ExecutorService-and-Executors/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Executor, ExecutorService and Executors">Executor, ExecutorService and Executors</span>
+            <span class="post-date" title="2019-02-25 21:11:10">2019/02/25</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2019-06-03 12:27:54">2019/06/03</span>
+        </a>
+        
+        <a  class=""
+           href="/Google-%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Google 搜索技巧">Google 搜索技巧</span>
+            <span class="post-date" title="2019-07-13 23:30:30">2019/07/13</span>
+        </a>
+        
+        <a  class=""
+           href="/Food-Rules/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2018-12-15 20:52:22">2018/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Google-Dagger-Tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Google Dagger Tutorial">Google Dagger Tutorial</span>
+            <span class="post-date" title="2019-07-11 10:12:26">2019/07/11</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2019-06-04 12:28:47">2019/06/04</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2019-06-12 09:01:25">2019/06/12</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2019-06-05 21:04:03">2019/06/05</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2019-06-05 18:08:01">2019/06/05</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2019-06-08 08:35:40">2019/06/08</span>
+        </a>
+        
+        <a  class=""
+           href="/HashMap%E5%9C%A8Java%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="HashMap在Java中是如何工作的">HashMap在Java中是如何工作的</span>
+            <span class="post-date" title="2018-12-12 21:00:32">2018/12/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Handling-overload-effectively-with-load-balancers/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Handling overload effectively with load balancers ">Handling overload effectively with load balancers </span>
+            <span class="post-date" title="2019-06-28 18:43:15">2019/06/28</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2019-06-06 13:21:53">2019/06/06</span>
+        </a>
+        
+        <a  class=""
+           href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="IOC容器和Dependency Injection模式">IOC容器和Dependency Injection模式</span>
+            <span class="post-date" title="2018-11-13 18:25:40">2018/11/13</span>
+        </a>
+        
+        <a  class=""
+           href="/JMX-Tutorials/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JMX - Tutorials">JMX - Tutorials</span>
+            <span class="post-date" title="2019-06-24 19:21:38">2019/06/24</span>
+        </a>
+        
+        <a  class=""
+           href="/JSP-Tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JSP Tutorial">JSP Tutorial</span>
+            <span class="post-date" title="2019-04-24 19:51:50">2019/04/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Jackson-java-json-parser/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Jackson  java-json parser">Jackson  java-json parser</span>
+            <span class="post-date" title="2019-06-27 18:42:15">2019/06/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java Annotations 注解详解">Java Annotations 注解详解</span>
+            <span class="post-date" title="2019-02-27 19:19:06">2019/02/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-ExecutorService/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - ExecutorService">Java - ExecutorService</span>
+            <span class="post-date" title="2019-02-10 16:11:28">2019/02/10</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java Pattern Regex表达式">Java Pattern Regex表达式</span>
+            <span class="post-date" title="2019-04-30 19:25:21">2019/04/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2018-10-27 12:07:47">2018/10/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-callback/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - callback">Java - callback</span>
+            <span class="post-date" title="2019-02-10 16:28:40">2019/02/10</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-map-%E4%B8%8E-flatMap-%E7%9A%84%E6%AF%94%E8%BE%83/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java map() 与 flatMap()的比较">Java map() 与 flatMap()的比较</span>
+            <span class="post-date" title="2019-07-12 10:13:18">2019/07/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java 反射机制">Java 反射机制</span>
+            <span class="post-date" title="2019-09-30 20:55:52">2019/09/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java 继承与组合">Java 继承与组合</span>
+            <span class="post-date" title="2019-06-17 19:29:00">2019/06/17</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-callback-function/"
+           data-tag="JavaScript,callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2019-11-12 20:37:21">2019/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B%20-%20part%201/"
+           data-tag="frontend,javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 Part 1">JavaScript 教程 Part 1</span>
+            <span class="post-date" title="2019-10-31 20:41:31">2019/10/31</span>
+        </a>
+        
+        <a  class=""
+           href="/Javadoc-tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Javadoc tutorial">Javadoc tutorial</span>
+            <span class="post-date" title="2019-05-30 08:16:03">2019/05/30</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="frontend,javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2019-11-30 12:47:32">2019/11/30</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaUnitTest-JUnit5/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JavaUnitTest-JUnit5">JavaUnitTest-JUnit5</span>
+            <span class="post-date" title="2019-03-04 20:58:52">2019/03/04</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2019-12-01 14:47:00">2019/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2018-11-04 09:25:14">2018/11/04</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java基础知识">Java基础知识</span>
+            <span class="post-date" title="2018-12-08 12:41:59">2018/12/08</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java是如何工作的">Java是如何工作的</span>
+            <span class="post-date" title="2018-11-07 21:19:10">2018/11/07</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题">Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题</span>
+            <span class="post-date" title="2019-06-20 20:40:29">2019/06/20</span>
+        </a>
+        
+        <a  class=""
+           href="/LDAP-Intro/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2018-12-01 20:34:42">2018/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%B8%80/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(一)">Linux 常用指令(一)</span>
+            <span class="post-date" title="2019-04-06 16:10:59">2019/04/06</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%B8%89-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(三) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(三) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2019-07-29 19:05:33">2019/07/29</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%BA%8C/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(二)">Linux常用指令(二)</span>
+            <span class="post-date" title="2019-04-08 20:35:51">2019/04/08</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E4%B8%89-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(三)-CPU 上下文切换">Linux性能优化(三)-CPU 上下文切换</span>
+            <span class="post-date" title="2019-03-12 19:29:37">2019/03/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9B%9B-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(四)-CPU使用率">Linux性能优化(四)-CPU使用率</span>
+            <span class="post-date" title="2019-06-19 22:06:47">2019/06/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%A6%82%E8%BF%B0-%E4%B8%80/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化-概述(一)">Linux性能优化-概述(一)</span>
+            <span class="post-date" title="2018-12-05 21:19:04">2018/12/05</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD-%E4%BA%8C/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化-平均负载(二)">Linux性能优化-平均负载(二)</span>
+            <span class="post-date" title="2018-12-18 20:29:23">2018/12/18</span>
+        </a>
+        
+        <a  class=""
+           href="/Nightwatch-js-tutorial/"
+           data-tag="frontend"
+           data-author="" >
+            <span class="post-title" title="Nightwatch js tutorial">Nightwatch js tutorial</span>
+            <span class="post-date" title="2019-08-28 18:40:54">2019/08/28</span>
+        </a>
+        
+        <a  class=""
+           href="/Lombok/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Lombok">Lombok</span>
+            <span class="post-date" title="2019-02-12 21:06:57">2019/02/12</span>
+        </a>
+        
+        <a  class=""
+           href="/PATH-and-LD-LIBRARY-PATH/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="PATH and LD_LIBRARY_PATH">PATH and LD_LIBRARY_PATH</span>
+            <span class="post-date" title="2019-04-26 22:56:00">2019/04/26</span>
+        </a>
+        
+        <a  class=""
+           href="/RESTful-vs-RPC/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2019-02-13 20:56:11">2019/02/13</span>
+        </a>
+        
+        <a  class=""
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2019-08-16 22:35:05">2019/08/16</span>
+        </a>
+        
+        <a  class=""
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2018-12-15 17:31:54">2018/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 2">React Advanced 2</span>
+            <span class="post-date" title="2018-11-25 11:02:26">2018/11/25</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 1">React Advanced 1</span>
+            <span class="post-date" title="2018-11-24 12:52:47">2018/11/24</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 3">React Advanced 3</span>
+            <span class="post-date" title="2018-11-26 20:17:20">2018/11/26</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 4">React Advanced 4</span>
+            <span class="post-date" title="2018-11-27 22:01:33">2018/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="frontend"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2019-09-07 15:08:33">2019/09/07</span>
+        </a>
+        
+        <a  class=""
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2019-05-29 06:59:51">2019/05/29</span>
+        </a>
+        
+        <a  class=""
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2018-10-16 21:53:00">2018/10/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Ruby-Totorial/"
+           data-tag="backend - ruby - tutorial"
+           data-author="" >
+            <span class="post-title" title="Ruby Totorial ">Ruby Totorial </span>
+            <span class="post-date" title="2019-10-02 22:34:45">2019/10/02</span>
+        </a>
+        
+        <a  class=""
+           href="/Scaling-webapps/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2019-04-09 20:37:11">2019/04/09</span>
+        </a>
+        
+        <a  class=""
+           href="/Spring-Series-1-Overview/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring Series 1.Overview">Spring Series 1.Overview</span>
+            <span class="post-date" title="2019-03-29 12:03:16">2019/03/29</span>
+        </a>
+        
+        <a  class=""
+           href="/System-gc-and-Runtime-gc/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="System.gc() and Runtime.gc() ">System.gc() and Runtime.gc() </span>
+            <span class="post-date" title="2019-10-09 21:36:21">2019/10/09</span>
+        </a>
+        
+        <a  class=""
+           href="/Spring-Series-2-Core-IoC-containers/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring Series 2. Core - IoC containers">Spring Series 2. Core - IoC containers</span>
+            <span class="post-date" title="2019-03-31 12:04:08">2019/03/31</span>
+        </a>
+        
+        <a  class=""
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="frontend,accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2019-10-26 18:28:05">2019/10/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2019-08-24 21:31:31">2019/08/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2019-08-23 21:50:21">2019/08/23</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="tomcat,optimization"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2019-10-27 14:09:59">2019/10/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="tomcat - connector"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2019-09-03 19:18:53">2019/09/03</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="tomcat - backend - servlet"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2019-10-26 22:27:15">2019/10/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2019-08-25 12:32:47">2019/08/25</span>
+        </a>
+        
+        <a  class=""
+           href="/Typescript-Tutorial/"
+           data-tag="web,frontend,TypeScript,JavaScript - OOP"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial ">Typescript Tutorial </span>
+            <span class="post-date" title="2019-10-12 16:21:54">2019/10/12</span>
+        </a>
+        
+        <a  class=""
+           href="/UML-Class-Diagram/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="UML - Class Diagram">UML - Class Diagram</span>
+            <span class="post-date" title="2019-09-07 15:49:47">2019/09/07</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2019-09-26 19:49:19">2019/09/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2019-09-24 17:48:52">2019/09/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2019-09-25 20:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2019-09-28 08:27:53">2019/09/28</span>
+        </a>
+        
+        <a  class=""
+           href="/XML%E4%B8%8EJSON%E7%9A%84%E6%AF%94%E8%BE%83/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="XML与JSON的比较">XML与JSON的比较</span>
+            <span class="post-date" title="2019-02-22 23:34:39">2019/02/22</span>
+        </a>
+        
+        <a  class=""
+           href="/curl-totorial/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="curl totorial">curl totorial</span>
+            <span class="post-date" title="2019-09-23 16:17:57">2019/09/23</span>
+        </a>
+        
+        <a  class=""
+           href="/baidu_verify_c7TSOAB3l3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="baidu_verify_c7TSOAB3l3">baidu_verify_c7TSOAB3l3</span>
+            <span class="post-date" title="2020-01-27 19:52:51">2020/01/27</span>
+        </a>
+        
+        <a  class=""
+           href="/google556df425dcd23f17/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="google556df425dcd23f17">google556df425dcd23f17</span>
+            <span class="post-date" title="2020-01-27 19:52:51">2020/01/27</span>
+        </a>
+        
+        <a  class=""
+           href="/java-serialization/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="java - serialization">java - serialization</span>
+            <span class="post-date" title="2019-03-08 23:38:18">2019/03/08</span>
+        </a>
+        
+        <a  class=""
+           href="/i18next-tutorial/"
+           data-tag="js,i18next"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial ">i18next tutorial </span>
+            <span class="post-date" title="2019-12-23 21:07:13">2019/12/23</span>
+        </a>
+        
+        <a  class=""
+           href="/unix-linux-note/"
+           data-tag="Linux,OS,Unix"
+           data-author="" >
+            <span class="post-title" title="Example Post With Default Header Image">Example Post With Default Header Image</span>
+            <span class="post-date" title="2018-10-11 00:00:00">2018/10/11</span>
+        </a>
+        
+        <a  class=""
+           href="/volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="volatile关键字">volatile关键字</span>
+            <span class="post-date" title="2018-11-05 22:43:44">2018/11/05</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2018-10-14 11:25:04">2018/10/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82%EF%BC%9F/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求？">为什么要合并HTTP请求？</span>
+            <span class="post-date" title="2018-11-10 11:31:12">2018/11/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="今日简史 - 致敬充满未知的世界">今日简史 - 致敬充满未知的世界</span>
+            <span class="post-date" title="2019-02-17 13:58:27">2019/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2018-12-27 09:21:00">2018/12/27</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2019-06-29 18:44:12">2019/06/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2018-12-03 21:17:06">2018/12/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="后端开发实践-项目模板">后端开发实践-项目模板</span>
+            <span class="post-date" title="2019-06-02 08:54:43">2019/06/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2019-06-26 20:22:11">2019/06/26</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="原型模式">原型模式</span>
+            <span class="post-date" title="2018-12-04 19:58:57">2018/12/04</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2019-06-01 21:27:56">2019/06/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2019-10-15 17:51:57">2019/10/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="如何确定一个服务器的最大连接数">如何确定一个服务器的最大连接数</span>
+            <span class="post-date" title="2019-06-25 19:46:25">2019/06/25</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2019-10-29 19:31:38">2019/10/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
+           data-tag="System Design"
+           data-author="" >
+            <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
+            <span class="post-date" title="2019-02-03 12:30:18">2019/02/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式">工厂方法模式</span>
+            <span class="post-date" title="2018-11-18 21:53:56">2018/11/18</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="建造者模式">建造者模式</span>
+            <span class="post-date" title="2018-12-04 20:10:47">2018/12/04</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="微信红包高并发架构设计">微信红包高并发架构设计</span>
+            <span class="post-date" title="2019-07-28 16:07:42">2019/07/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式">抽象工厂模式</span>
+            <span class="post-date" title="2018-11-19 20:48:06">2018/11/19</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(1)-概述">数据结构与算法(1)-概述</span>
+            <span class="post-date" title="2019-12-31 19:05:12">2019/12/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(10)-排序(桶排序 计数排序 基数排序)">数据结构与算法(10)-排序(桶排序 计数排序 基数排序)</span>
+            <span class="post-date" title="2020-01-14 09:35:21">2020/01/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-11-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(11)-应用场景下的排序函数">数据结构与算法(11)-应用场景下的排序函数</span>
+            <span class="post-date" title="2020-01-15 16:26:52">2020/01/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-12-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(12)-二分查找">数据结构与算法(12)-二分查找</span>
+            <span class="post-date" title="2020-01-16 19:17:32">2020/01/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(13)-跳表">数据结构与算法(13)-跳表</span>
+            <span class="post-date" title="2020-01-17 19:32:18">2020/01/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-14-%E6%95%A3%E5%88%97%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(14)-散列表">数据结构与算法(14)-散列表</span>
+            <span class="post-date" title="2020-01-19 10:24:15">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-15-%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title=" 数据结构与算法(15)-哈希算法"> 数据结构与算法(15)-哈希算法</span>
+            <span class="post-date" title="2020-01-23 18:26:45">2020/01/23</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-16-%E4%BA%8C%E5%8F%89%E6%A0%91/"
+           data-tag="树"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(16)-二叉树">数据结构与算法(16)-二叉树</span>
+            <span class="post-date" title="2020-01-25 21:49:28">2020/01/25</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(2)-复杂度分析">数据结构与算法(2)-复杂度分析</span>
+            <span class="post-date" title="2020-01-02 22:36:33">2020/01/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-3-%E6%95%B0%E7%BB%84/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(3)-数组">数据结构与算法(3)-数组</span>
+            <span class="post-date" title="2020-01-03 18:35:59">2020/01/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-4-%E9%93%BE%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(4)-链表">数据结构与算法(4)-链表</span>
+            <span class="post-date" title="2020-01-06 18:50:44">2020/01/06</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-5-%E6%A0%88/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(5)-栈">数据结构与算法(5)-栈</span>
+            <span class="post-date" title="2019-04-15 20:14:56">2019/04/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(6)-队列">数据结构与算法(6)-队列</span>
+            <span class="post-date" title="2020-01-10 19:36:21">2020/01/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(7)-递归">数据结构与算法(7)-递归</span>
+            <span class="post-date" title="2019-04-17 21:57:14">2019/04/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(8)-排序(冒泡 插入 选择)">数据结构与算法(8)-排序(冒泡 插入 选择)</span>
+            <span class="post-date" title="2020-01-13 20:47:59">2020/01/13</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2019-12-08 16:43:50">2019/12/08</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-general/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="架构学习-general">架构学习-general</span>
+            <span class="post-date" title="2019-07-01 20:58:32">2019/07/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2019-04-03 21:24:15">2019/04/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8E%9F%E5%88%99/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-原则">架构学习-原则</span>
+            <span class="post-date" title="2019-07-14 09:39:56">2019/07/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-可扩展架构模式">架构学习-可扩展架构模式</span>
+            <span class="post-date" title="2019-08-14 19:59:11">2019/08/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-复杂度来源">架构学习-复杂度来源</span>
+            <span class="post-date" title="2019-07-10 17:49:52">2019/07/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%AE%9E%E6%88%98/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 实战">架构学习 - 实战</span>
+            <span class="post-date" title="2019-08-22 20:47:02">2019/08/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 架构设计文档模板">架构学习 - 架构设计文档模板</span>
+            <span class="post-date" title="2019-08-22 20:49:18">2019/08/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-架构设计流程">架构学习-架构设计流程</span>
+            <span class="post-date" title="2019-07-14 17:30:40">2019/07/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-高可用架构模式">架构学习-高可用架构模式</span>
+            <span class="post-date" title="2019-07-29 19:06:28">2019/07/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-高性能架构模式">架构学习-高性能架构模式</span>
+            <span class="post-date" title="2019-07-22 09:54:27">2019/07/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2018-10-21 15:47:15">2018/10/21</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2018-11-27 21:24:05">2018/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="混沌工程">混沌工程</span>
+            <span class="post-date" title="2019-05-28 19:44:35">2019/05/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%AC%94%E8%AE%B0-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-by-Eric-Evans/"
+           data-tag="backend,system design,DDD"
+           data-author="" >
+            <span class="post-title" title="笔记 - 领域驱动设计 by Eric Evans">笔记 - 领域驱动设计 by Eric Evans</span>
+            <span class="post-date" title="2019-12-17 21:31:51">2019/12/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2019-05-31 18:49:25">2019/05/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2019-03-30 22:03:05">2019/03/30</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式">简单工厂模式</span>
+            <span class="post-date" title="2018-11-14 21:17:32">2018/11/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-基于原型的编程">编程范式系列-基于原型的编程</span>
+            <span class="post-date" title="2018-11-11 14:17:36">2018/11/11</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-函数式编程">编程范式系列-函数式编程</span>
+            <span class="post-date" title="2018-10-31 20:39:37">2018/10/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-泛型编程">编程范式系列-泛型编程</span>
+            <span class="post-date" title="2018-10-28 12:45:43">2018/10/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-面向对象编程">编程范式系列-面向对象编程</span>
+            <span class="post-date" title="2018-11-11 14:17:51">2018/11/11</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2018-12-16 14:34:27">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2018-12-16 14:35:03">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</span>
+            <span class="post-date" title="2019-01-06 18:58:28">2019/01/06</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(九)-云">网络协议(九)-云</span>
+            <span class="post-date" title="2019-02-14 19:21:17">2019/02/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2018-12-16 14:34:50">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2018-12-20 22:02:42">2018/12/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AB-%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83-VPN-%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(八)-数据中心, VPN, 移动网络">网络协议(八)-数据中心, VPN, 移动网络</span>
+            <span class="post-date" title="2019-02-02 11:20:54">2019/02/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2019-10-07 18:44:34">2019/10/07</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(十一)-用双十一理顺起来的网络协议">网络协议(十一)-用双十一理顺起来的网络协议</span>
+            <span class="post-date" title="2019-03-07 19:50:27">2019/03/07</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81-RPC-SOAP-RESTful/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(十) - RPC, SOAP, RESTful">网络协议(十) - RPC, SOAP, RESTful</span>
+            <span class="post-date" title="2019-02-20 20:07:36">2019/02/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2019-09-22 15:56:03">2019/09/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="观察者模式">观察者模式</span>
+            <span class="post-date" title="2019-09-18 21:03:34">2019/09/18</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2018-12-16 14:35:14">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="设计模式概述">设计模式概述</span>
+            <span class="post-date" title="2018-11-12 20:51:51">2018/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC-%E4%B8%80/"
+           data-tag="history"
+           data-author="" >
+            <span class="post-title" title="说说日本(一)">说说日本(一)</span>
+            <span class="post-date" title="2018-12-01 12:10:06">2018/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2018-10-13 12:08:50">2018/10/13</span>
+        </a>
+        
+        <a  class=""
+           href="/%E9%87%8D%E6%9E%84-%E7%AC%94%E8%AE%B0/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="重构 笔记">重构 笔记</span>
+            <span class="post-date" title="2019-07-20 15:20:16">2019/07/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="面向对象设计原则">面向对象设计原则</span>
+            <span class="post-date" title="2018-11-12 20:51:59">2018/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="DynamoDB Advanced">DynamoDB Advanced</span>
+            <span class="post-date" title="2019-01-29 19:52:06">2019/01/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-IOC容器和Dependency-Injection模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">IOC容器和Dependency Injection模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color3">backend</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-27 19:52:50'>2018-11-13 18:25</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:5.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-问题"><span class="toc-text">1. 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实例"><span class="toc-text">2.实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-控制反转"><span class="toc-text">3. 控制反转</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-依赖注入的几种形式"><span class="toc-text">3.1 依赖注入的几种形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-构造函数注入"><span class="toc-text">3.1.1 构造函数注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-设值方法注入"><span class="toc-text">3.1.2 设值方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-接口注入"><span class="toc-text">3.1.3 接口注入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-构造函数注入-vs-设值方法注入"><span class="toc-text">3.2 构造函数注入 vs. 设值方法注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-代码配置-vs-配置文件"><span class="toc-text">3.3 代码配置 vs 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-分离配置和使用"><span class="toc-text">3.4 分离配置和使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-结论与思考"><span class="toc-text">4. 结论与思考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Martin Fowler的文章，在文中深入探索控制反转的的工作原理，给它一个更能描述其特点的名字——”依赖注入”（Dependency Injection），并将其与”服务定位器”（Service Locator）模式作一个比较。探讨了异同。最最重要的，也是每个程序员都应该注意的是：应该将服务的配置和应用程序内部对服务的使用分离开。这也是控制反转以及服务定位器一直在做的。</p>
+<h1 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h1><p>J2EE开发者常遇到的一个问题就是<strong><em>如何组装不同的程序元素</em></strong>：如果web控制器体系结构和数据库接口是由不同的团队所开发的，彼此几乎一无所知，你应该如何让它们配合工作？很多框架尝试过解决这个问题，有几个框架索性朝这个方向发展，提供了更通用的”组装各层组件”的方案。这样的框架通常被称为”轻量级容器”，PicoContainer和Spring都在此列中。</p>
+<h2 id="2-实例"><a href="#2-实例" class="headerlink" title="2.实例"></a>2.实例</h2><p>有一个提供一份电影清单的组件，清单上列出有一位特定导演执导的影片</p>
+<pre><code>class MovieLister...
+
+public Movie[] moviesDirectedBy(String arg)
+{
+    List allMovies = finder.findAll();
+    for (Iterator it = allMovies.iterator(); it.hasNext();)
+    {
+        Movie movie = (Movie) it.next();
+        if (!movie.getDirector().equals(arg))
+        {
+            it.remove();
+        }
+
+    }
+    return (Movie[]) allMovies.toArray(new Movie[allMovies.size()]);
+}</code></pre><p>这个功能的实现极其简单：moviesDirectedBy方法首先请求finder（影片搜寻者）对象（我们稍后会谈到这个对象）返回后者所知道的所有影片，然后遍历finder对象返回的清单，并返回其中由特定的某个导演执导的影片。非常简单，不过不必担心，这只是整个例子的脚手架罢了。<strong><em>我们真正想要考察的是finder对象，或者说，如何将MovieLister对象与特定的finder对象连接起来</em></strong>。为什么我们对这个问题特别感兴趣？因为<strong><em>我希望上面这个漂亮的moviesDirectedBy方法完全不依赖于影片的实际存储方式。</em></strong>所以，这个方法只能引用一个finder对象，而finder对象则必须知道如何对findAll 方法作出回应。为了帮助读者更清楚地理解，我给finder定义了一个接口：</p>
+<pre><code>public interface MovieFinder
+{
+    List findAll();
+}</code></pre><p>现在，两个对象之间没有什么耦合关系。但是，当我要实际寻找影片时，就必须涉及到MovieFinder的某个具体子类。在这里，<em>我把涉及具体子类的代码放在MovieLister类的构造函数中</em>。</p>
+<pre><code>class MovieLister...
+private MovieFinder finder;
+public MovieLister()
+{
+    finder = new ColonDelimitedMovieFinder(&quot;movies1.txt&quot;);
+}</code></pre><p>这个实现类的名字就说明：我将要从一个逗号分隔的文本文件中获得影片列表。你不必操心具体的实现细节，只要设想这样一个实现类就可以了。如果这个类只由我自己使用，一切都没问题。但是，如果我的朋友叹服于这个精彩的功能，也想使用我的程序，那又会怎么样呢？如果他们也把影片清单保存在一个逗号分隔的文本文件中，并且也把这个文件命名为” movie1.txt “，那么一切还是没问题。如果他们只是给这个文件改改名，我也可以从一个配置文件获得文件名，这也很容易。<strong>但是，如果他们用完全不同的方式——例如SQL 数据库、XML 文件、web service，或者另一种格式的文本文件——来存储影片清单呢？</strong>在这种情况下，我们需要用另一个类来获取数据。由于已经定义了MovieFinder接口，我可以不用修改moviesDirectedBy方法。但是，我<strong><em>仍然需要通过某种途径获得合适的MovieFinder实现类的实例</em></strong>。</p>
+<p><img src="figure1.gif" alt="figure1.gif"></p>
+<p>MovieLister类既依赖于MovieFinder接口，也依赖于具体的实现类。我们当然希望MovieLister类只依赖于接口，但我们要如何获得一个MovieFinder子类的实例呢？</p>
+<p>在Patterns of Enterprise Application Architecture一书中，我们把这种情况称为<strong>插件（plugin）</strong>：MovieFinder的实现类<strong>不是在编译期连入程序之中的</strong>，因为我并不知道我的朋友会使用哪个实现类。我们希望MovieLister类能够与MovieFinder的任何实现类配合工作，并且允许<strong>在运行期插入具体的实现类</strong>，插入动作完全脱离我（原作者）的控制。这里的问题就是：<strong>如何设计这个连接过程，使MovieLister类在不知道实现类细节的前提下与其实例协同工作。</strong></p>
+<p>将这个例子推而广之，在一个真实的系统中，我们可能有数十个服务和组件。在任何时候，我们总可以对使用组件的情形加以抽象，<strong>通过接口与具体的组件交流</strong>（如果组件并没有设计一个接口，也可以通过适配器与之交流）。但是，如果我们希望以不同的方式部署这个系统，就需要用插件机制来处理服务之间的交互过程，这样我们才可能在不同的部署方案中使用不同的实现。所以，现在的核心问题就是：<strong>如何将这些插件组合成一个应用程序？这正是新生的轻量级容器所面临的主要问题，而它们解决这个问题的手段无一例外地是控制反转（Inversion of Control）模式</strong>。</p>
+<h1 id="3-控制反转"><a href="#3-控制反转" class="headerlink" title="3. 控制反转"></a>3. 控制反转</h1><p>几位轻量级容器的作者曾骄傲地对我说：这些容器非常有用，因为它们实现了控制反转。这样的说辞让我深感迷惑：控制反转是框架所共有的特征，如果仅仅因为使用了控制反转就认为这些轻量级容器与众不同，就好象在说我的轿车是与众不同的，因为它有四个轮子。</p>
+<p>问题的关键在于：它们反转了哪方面的控制？我第一次接触到的控制反转针对的是用户界面的主控权。早期的用户界面是完全由应用程序来控制的，你预先设计一系列命令，例如输入姓名、输入地址等，应用程序逐条输出提示信息，并取回用户的响应。而在图形用户界面环境下，UI框架将负责执行一个主循环，你的应用程序只需为屏幕的各个区域提供事件处理函数即可。在这里，程序的主控权发生了反转：从应用程序移到了框架。对于这些新生的容器，它们反转的是如何定位插件的具体实现。在前面那个简单的例子中，MovieLister类负责定位MovieFinder的具体实现——它直接实例化后者的一个子类。这样一来，MovieFinder也就不成其为一个插件了，因为它并不是在运行期插入应用程序中的。而这些轻量级容器则使用了更为灵活的办法，<strong>只要插件遵循一定的规则，一个独立的组装模块就能够将插件的具体实现注射到应用程序中。</strong>因此，我想我们需要给这个模式起一个更能说明其特点的名字——”控制反转”这个名字太泛了，常常让人有些迷惑。与多位IoC 爱好者讨论之后，我们决定将这个模式叫做”依赖注入”（Dependency Injection）。</p>
+<p>下面，我将开始介绍Dependency Injection模式的几种不同形式。不过，在此之前，我要首先指出：要消除应用程序对插件实现的依赖，依赖注入并不是唯一的选择，你也可以用ServiceLocator模式获得同样的效果。介绍完Dependency Injection模式之后，我也会谈到ServiceLocator 模式。</p>
+<h2 id="3-1-依赖注入的几种形式"><a href="#3-1-依赖注入的几种形式" class="headerlink" title="3.1 依赖注入的几种形式"></a>3.1 依赖注入的几种形式</h2><p>Dependency Injection模式的基本思想是：用一个单独的对象（装配器）来获得MovieFinder的一个合适的实现，并将其实例赋给MovieLister类的一个字段。这样一来，我们就得到了图2所示的依赖图：</p>
+<p><img src="figure2.gif" alt="figure2.gif"></p>
+<h3 id="3-1-1-构造函数注入"><a href="#3-1-1-构造函数注入" class="headerlink" title="3.1.1 构造函数注入"></a>3.1.1 构造函数注入</h3><p>这里使用PicoContainer，一个轻量级容器来完成依赖注入。</p>
+<p>PicoContainer通过构造函数来判断如何将MovieFinder实例注入MovieLister 类。因此，MovieLister类必须声明一个构造函数，并在其中包含所有需要注入的元素：</p>
+<pre><code>class MovieLister...
+    public MovieLister(MovieFinder finder)
+    {
+        this.finder = finder;
+    }</code></pre><p>MovieFinder实例本身也将由PicoContainer来管理，因此文本文件的名字也可以由容器注入：</p>
+<pre><code>class ColonMovieFinder...
+    public ColonMovieFinder(String filename)
+    {
+        this.filename = filename;
+    }</code></pre><p>随后，需要告诉PicoContainer：各个接口分别与哪个实现类关联、将哪个字符串注入MovieFinder组件。</p>
+<pre><code>private MutablePicoContainer configureContainer()
+{
+    MutablePicoContainer pico = new DefaultPicoContainer();
+    Parameter[] finderParams = {newConstantParameter(&quot;movies1.txt&quot;)};
+    pico.registerComponentImplementation(MovieFinder.class,ColonMovieFinder.class, finderParams);
+    pico.registerComponentImplementation(MovieLister.class);
+    return pico;
+}</code></pre><p>这段配置代码通常位于另一个类。对于我们这个例子，使用我的MovieLister 类的朋友需要在自己的设置类中编写合适的配置代码。当然，还可以将这些配置信息放在一个单独的配置文件中，这也是一种常见的做法。你可以编写一个类来读取配置文件，然后对容器进行合适的设置。尽管PicoContainer本身并不包含这项功能，但另一个与它关系紧密的项目NanoContainer提供了一些包装，允许开发者使用XML配置文件保存配置信息。NanoContainer能够解析XML文件，并对底下的PicoContainer进行配置。这个项目的哲学观念就是：将配置文件的格式与底下的配置机制分离开。</p>
+<pre><code>public void testWithPico()
+{
+    MutablePicoContainer pico = configureContainer();
+    MovieLister lister = (MovieLister)pico.getComponentInstance(MovieLister.class);
+    Movie[] movies = lister.moviesDirectedBy(&quot;Sergio Leone&quot;);
+    assertEquals(&quot;Once Upon a Time in the West&quot;,movies[0].getTitle());
+}</code></pre><h3 id="3-1-2-设值方法注入"><a href="#3-1-2-设值方法注入" class="headerlink" title="3.1.2 设值方法注入"></a>3.1.2 设值方法注入</h3><p>Spring 框架是一个用途广泛的企业级Java 开发框架，其中包括了针对事务、持久化框架、web应用开发和JDBC等常用功能的抽象。和PicoContainer一样，它也同时支持构造函数注入和设值方法注入，但该项目的开发者更推荐使用设值方法注入——恰好适合这个例子。为了让MovieLister类接受注入，我需要为它定义一个设值方法，该方法接受类型为MovieFinder的参数：</p>
+<pre><code>class MovieLister...
+private MovieFinder finder;
+public void setFinder(MovieFinder finder)
+{
+    this.finder = finder;
+}</code></pre><p>类似地，在MovieFinder的实现类中，我也定义了一个设值方法，接受类型为String 的参数：</p>
+<pre><code>class ColonMovieFinder...
+    public void setFilename(String filename)
+    {
+        this.filename = filename;
+    }</code></pre><p>第三步是设定配置文件。Spring 支持多种配置方式，你可以通过XML 文件进行配置，也可以直接在代码中配置。不过，XML 文件是比较理想的配置方式。</p>
+<pre><code>&lt;beans&gt;
+    &lt;bean id=&quot;MovieLister&quot; class=&quot;spring.MovieLister&quot;&gt;
+        &lt;property name=&quot;finder&quot;&gt;
+            &lt;ref local=&quot;MovieFinder&quot;/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;MovieFinder&quot; class=&quot;spring.ColonMovieFinder&quot;&gt;
+        &lt;property name=&quot;filename&quot;&gt;
+            &lt;value&gt;movies1.txt&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;</code></pre><p>测试代码：</p>
+<pre><code>public void testWithSpring() throws Exception
+{
+    ApplicationContext ctx = newFileSystemXmlApplicationContext(&quot;spring.xml&quot;);
+    MovieLister lister = (MovieLister) ctx.getBean(&quot;MovieLister&quot;);
+    Movie[] movies = lister.moviesDirectedBy(&quot;Sergio Leone&quot;);
+    assertEquals(&quot;Once Upon a Time in the West&quot;,movies[0].getTitle());
+}</code></pre><h3 id="3-1-3-接口注入"><a href="#3-1-3-接口注入" class="headerlink" title="3.1.3 接口注入"></a>3.1.3 接口注入</h3><p>除了前面两种注入技术，还可以在接口中定义需要注入的信息，并通过接口完成注入。Avalon框架就使用了类似的技术。在这里，我首先用简单的范例代码说明它的用法，后面还会有更深入的讨论。首先，我需要定义一个接口，<strong>组件的注入将通过这个接口进行</strong>。在本例中，这个接口的用途是将一个MovieFinder实例注入继承了该接口的对象。</p>
+<pre><code>public interface InjectFinder
+{
+    void injectFinder(MovieFinder finder);
+}</code></pre><p>这个接口应该由提供MovieFinder接口的人一并提供。任何想要使用MovieFinder实例的类（例如MovieLister类）都必须实现这个接口。</p>
+<pre><code>class MovieLister implements InjectFinder...
+    public void injectFinder(MovieFinder finder)
+    {
+        this.finder = finder;
+    }</code></pre><p>然后，我使用类似的方法将文件名注入MovieFinder的实现类：</p>
+<pre><code>public interface InjectFilename
+{
+    void injectFilename (String filename);
+}
+
+class ColonMovieFinder implements MovieFinder, InjectFilename...
+    public void injectFilename(String filename)
+    {
+        this.filename = filename;
+    }</code></pre><p>现在，还需要用一些配置代码将所有的组件实现装配起来。简单起见，我直接在代码中完成配置，并将配置好的MovieLister 对象保存在名为lister的字段中：</p>
+<pre><code>class IfaceTester...
+    private MovieLister lister;
+    private void configureLister()
+    {
+        ColonMovieFinder finder = new ColonMovieFinder();
+        finder.injectFilename(&quot;movies1.txt&quot;);
+        lister = new MovieLister();
+        lister.injectFinder(finder);
+    }</code></pre><p>测试代码：</p>
+<pre><code>class IfaceTester...
+public void testIface()
+{
+    configureLister();
+    Movie[] movies = lister.moviesDirectedBy(&quot;Sergio Leone&quot;);
+    assertEquals(&quot;Once Upon a Time in the West&quot;,movies[0].getTitle());
+}</code></pre><h2 id="3-2-构造函数注入-vs-设值方法注入"><a href="#3-2-构造函数注入-vs-设值方法注入" class="headerlink" title="3.2 构造函数注入 vs. 设值方法注入"></a>3.2 构造函数注入 vs. 设值方法注入</h2><p>在组合服务时，你总得遵循一定的约定，才可能将所有东西拼装起来。<strong>依赖注入的优点主要在于：它只需要非常简单的约定——至少对于构造函数注入和设值方法注入来说是这样</strong>。相比于这两者，接口注入的侵略性要强得多，比起Service Locator模式的优势也不那么明显。所以，如果你想要提供一个组件给多个使用者，构造函数注入和设值方法注入看起来很有吸引力。你不必在组件中加入什么希奇古怪的东西，注入器可以相当轻松地把所有东西配置起来。</p>
+<p>设值函数注入和构造函数注入之间的选择相当有趣，因为它折射出面向对象编程的一些更普遍的问题：应该在哪里填充对象的字段，构造函数还是设值方法？</p>
+<p>一直以来，我首选的做法是尽量在构造阶段就创建完整、合法的对象——也就是说，在构造函数中填充对象字段。这样做的好处可以追溯到Kent Beck在Smalltalk Best Practice Patterns一书中介绍的两个模式：Constructor Method和Constructor Parameter Method。带有参数的构造函数可以明确地告诉你如何创建一个合法的对象。如果创建合法对象的方式不止一种，你还可以提供多个构造函数，以说明不同的组合方式。</p>
+<p>构造函数初始化的另一个好处是：你可以隐藏任何不可变的字段——只要不为它提供设值方法就行了。我认为这很重要：如果某个字段是不应该被改变的，没有针对该字段的设值方法就很清楚地说明了这一点。如果你通过设值方法完成初始化，暴露出来的设值方法很可能成为你心头永远的痛。（实际上，在这种时候我更愿意回避通常的设值方法约定，而是使用诸如initFoo之类的方法名，以表明该方法只应该在对象创建之初调用。）</p>
+<p>不过，世事总有例外。如果参数太多，构造函数会显得凌乱不堪，特别是对于不支持关键字参数的语言更是如此。的确，如果构造函数参数列表太长，通常标志着对象太过繁忙，理应将其拆分成几个对象，但有些时候也确实需要那么多的参数。如果有不止一种的方式可以构造一个合法的对象，也很难通过构造函数描述这一信息，因为构造函数之间只能通过参数的个数和类型加以区分。这就是Factory Method模式适用的场合了，工厂方法<strong>可以借助多个私有构造函数和设值方法的组合来完成自己的任务</strong>。经典Factory Method模式的问题在于：它们往往以静态方法的形式出现，你无法在接口中声明它们。你可以创建一个工厂类，但那又变成另一个服务实体了。工厂服务是一种不错的技巧，但你仍然需要以某种方式实例化这个工厂对象，问题仍然没有解决。</p>
+<p>如果要传入的参数是像字符串这样的简单类型，构造函数注入也会带来一些麻烦。使用设值方法注入时，你可以在每个设值方法的名字中说明参数的用途；而使用构造函数注入时，你只能靠参数的位置来决定每个参数的作用，而记住参数的正确位置显然要困难得多。</p>
+<p>如果对象有多个构造函数，对象之间又存在继承关系，事情就会变得特别讨厌。为了让所有东西都正确地初始化，你必须将对子类构造函数的调用转发给超类的构造函数，然后处理自己的参数。这可能造成构造函数规模的进一步膨胀。</p>
+<p>尽管有这些缺陷，但我仍然建议你首先考虑构造函数注入。不过，一旦前面提到的问题真的成了问题，你就应该准备转为使用设值方法注入。</p>
+<h2 id="3-3-代码配置-vs-配置文件"><a href="#3-3-代码配置-vs-配置文件" class="headerlink" title="3.3 代码配置 vs 配置文件"></a>3.3 代码配置 vs 配置文件</h2><p>另一个问题相对独立，但也经常与其他问题牵涉在一起：如何配置服务的组装，通过配置文件还是直接编码组装？对于大多数需要在多处部署的应用程序来说，一个单独的配置文件会更合适。配置文件几乎都是XML 文件，XML 也的确很适合这一用途。不过，有些时候直接在程序代码中实现装配会更简单。譬如一个简单的应用程序，也没有很多部署上的变化，这时用几句代码来配置就比XML 文件要清晰得多。</p>
+<p>与之相对的，有时应用程序的组装非常复杂，涉及大量的条件步骤。一旦编程语言中的配置逻辑开始变得复杂，你就应该用一种合适的语言来描述配置信息，使程序逻辑变得更清晰。然后，<strong>你可以编写一个构造器（builder）类来完成装配工作</strong>。如果使用构造器的情景不止一种，你可以提供多个构造器类，然后通过一个简单的配置文件在它们之间选择。</p>
+<p>我常常发现，人们太急于定义配置文件。编程语言通常会提供简捷而强大的配置管理机制，现代编程语言也可以将程序编译成小的模块，并将其插入大型系统中。如果编译过程会很费力，脚本语言也可以在这方面提供帮助。通常认为，配置文件不应该用编程语言来编写，因为它们需要能够被不懂编程的系统管理人员编辑。但是，这种情况出现的几率有多大呢？我们真的希望不懂编程的系统管理人员来改变一个复杂的服务器端应用程序的事务隔离等级吗？只有在非常简单的时候，非编程语言的配置文件才有最好的效果。如果配置信息开始变得复杂，就应该考虑选择一种合适的编程语言来编写配置文件。</p>
+<p>在Java 世界里，我们听到了来自配置文件的不和谐音——每个组件都有它自己的配置文件，而且格式还各不相同。如果你要使用一打这样的组件，你就得维护一打的配置文件，那会很快让你烦死。</p>
+<p>在这里，我的建议是：始终提供一种标准的配置方式，使程序员能够通过同一个编程接口轻松地完成配置工作。至于其他的配置文件，仅仅把它们当作一种可选的功能。借助这个编程接口，开发者可以轻松地管理配置文件。如果你编写了一个组件，则可以由组件的使用者来选择如何管理配置信息：使用你的编程接口、直接操作配置文件格式，或者定义他们自己的配置文件格式，并将其与你的编程接口相结合。</p>
+<h2 id="3-4-分离配置和使用"><a href="#3-4-分离配置和使用" class="headerlink" title="3.4 分离配置和使用"></a>3.4 分离配置和使用</h2><p>所有这一切的关键在于：<strong><em>服务的配置应该与使用分开</em></strong>。实际上，这是一个基本的设计原则——分离接口与实现。在面向对象程序里，我们在一个地方用条件逻辑来决定具体实例化哪一个类，以后的条件分支都由多态来实现，而不是继续重复前面的条件逻辑，这就是分离接口与实现的原则。</p>
+<p>如果对于一段代码而言，接口与实现的分离还只是有用的话，那么当你需要使用外部元素（例如组件和服务）时，它就是生死攸关的大事。这里的第一个问题是：你是否希望将选择具体实现类的决策推迟到部署阶段。如果是，那么你需要使用插入技术。使用了插入技术之后，插件的装配原则上是与应用程序的其余部分分开的，这样你就可以轻松地针对不同的部署替换不同的配置。这种配置机制可以通过服务定位器来实现（Service Locator模式），也可以借助依赖注入直接完成（Dependency Injection 模式）。</p>
+<h1 id="4-结论与思考"><a href="#4-结论与思考" class="headerlink" title="4. 结论与思考"></a>4. 结论与思考</h1><p>在时下流行的轻量级容器都使用了一个共同的模式来组装应用程序所需的服务，我把这个模式称为Dependency Injection，它可以有效地替代Service Locator模式。在开发应用程序时，两者不相上下，但我认为Service Locator模式略有优势，因为它的行为方式更为直观。但是，如果你开发的组件要交给多个应用程序去使用，那么Dependency Injection模式会是更好的选择。</p>
+<p>如果你决定使用Dependency Injection模式，这里还有几种不同的风格可供选择。我建议你首先考虑构造函数注入；如果遇到了某些特定的问题，再改用设值方法注入。如果你要选择一个容器，在其之上进行开发，我建议你选择同时支持这两种注入方式的容器。</p>
+<p>Service Locator 模式和Dependency Injection 模式之间的选择并是最重要的，更重要的是：应该将服务的配置和应用程序内部对服务的使用分离开。</p>
+<p><a href="https://martinfowler.com/articles/injection.html" target="_blank" rel="noopener">1.[Inversion of Control Containers and the Dependency Injection pattern]</a></p>
+<div id="disqus_thread"></div>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/" target="_blank" rel="noopener">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/*<br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};</li>
+<li>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;" target="_blank" rel="noopener">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><br><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>IOC容器和Dependency Injection模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">5.9k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2018-11-13, 18:25:40</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-27, 19:52:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/" title="IOC容器和Dependency Injection模式">https://www.llchen60.com/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/';
+            this.page.identifier = 'IOC容器和Dependency-Injection模式/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="IOC容器和Dependency-Injection模式/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#web','#AWS','#frontend','#css','#java','#backend','#thought','#distributed system','#system design','#DDD','#network','#reading','#JavaScript','#callback','#javaScript','#Linux','#FrontEnd','#React','#backend - ruby - tutorial','#Spring','#accessibility','#tomcat','#optimization','#tomcat - connector','#tomcat - backend - servlet','#TypeScript','#JavaScript - OOP','#Design Pattern','#js','#i18next','#OS','#Unix','#history','#System Design','#架构','#数据结构与算法','#树','#编程思维','#网络协议',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

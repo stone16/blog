@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AWS essentials(3) - Core Services | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS ">
+  <meta name="description" content="AWS essentials(3) - Core Services | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-28T03:32:09.008Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(189)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="189">
+<input type="hidden" id="yelog_site_word_count" value="349k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">frontend</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">css</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">backend</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">distributed system</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">system design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DDD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">javaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">backend - ruby - tutorial</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">optimization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">tomcat - connector</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">tomcat - backend - servlet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">JavaScript - OOP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Design Pattern</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">js</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">OS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Unix</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">数据结构与算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">树</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">编程思维</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">网络协议</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2019-01-21 21:12:03">2019/01/21</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2019-04-02 11:26:42">2019/04/02</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-VPC/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2019-02-21 19:39:00">2019/02/21</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2019-01-25 18:29:16">2019/01/25</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-Lambda/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2019-02-05 21:46:31">2019/02/05</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-X-Ray-Intro-in-Java/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro in Java">AWS X-Ray Intro in Java</span>
+            <span class="post-date" title="2019-03-13 18:43:21">2019/03/13</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2019-01-18 23:25:39">2019/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2019-01-26 11:46:47">2019/01/26</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essential-6-pricing/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(6) - pricing">AWS essential(6) - pricing</span>
+            <span class="post-date" title="2019-01-26 11:47:32">2019/01/26</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts ">AWS essentials(2) - Cloud Concepts </span>
+            <span class="post-date" title="2019-01-18 23:25:59">2019/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="frontend,css"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2019-11-30 10:53:17">2019/11/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Apache-Ant/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Apache Ant ">Apache Ant </span>
+            <span class="post-date" title="2019-02-17 18:26:49">2019/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/CacheLoader-%E6%95%99%E7%A8%8B/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="CacheLoader 教程">CacheLoader 教程</span>
+            <span class="post-date" title="2019-08-15 19:48:16">2019/08/15</span>
+        </a>
+        
+        <a  class=""
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2019-01-21 17:43:28">2019/01/21</span>
+        </a>
+        
+        <a  class=""
+           href="/Cost-of-abstraction/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Cost of abstraction">Cost of abstraction</span>
+            <span class="post-date" title="2019-04-04 19:28:23">2019/04/04</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling ">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling </span>
+            <span class="post-date" title="2019-03-14 20:45:25">2019/03/14</span>
+        </a>
+        
+        <a  class=""
+           href="/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"
+           data-tag="java,backend,thought"
+           data-author="" >
+            <span class="post-title" title="DDD - 领域驱动设计">DDD - 领域驱动设计</span>
+            <span class="post-date" title="2019-12-15 16:24:18">2019/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2019-03-19 19:03:26">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2019-03-15 17:47:25">2019/03/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2019-03-20 17:49:30">2019/03/20</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2019-03-15 19:42:09">2019/03/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2019-03-17 15:38:47">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2019-03-17 20:46:10">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2019-03-17 10:22:56">2019/03/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2019-03-16 13:23:00">2019/03/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2019-03-19 19:02:42">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Distributed-Tracing/"
+           data-tag="backend,distributed system,system design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2019-10-01 18:25:06">2019/10/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2019-03-19 19:02:03">2019/03/19</span>
+        </a>
+        
+        <a  class=""
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2019-06-18 20:24:53">2019/06/18</span>
+        </a>
+        
+        <a  class=""
+           href="/Effective-Java/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Effective Java">Effective Java</span>
+            <span class="post-date" title="2019-01-23 20:16:51">2019/01/23</span>
+        </a>
+        
+        <a  class=""
+           href="/Elasticsearch-Overview/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2019-02-28 20:03:17">2019/02/28</span>
+        </a>
+        
+        <a  class=""
+           href="/EnumMap-vs-HashMap/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="EnumMap vs HashMap">EnumMap vs HashMap</span>
+            <span class="post-date" title="2019-09-17 19:43:44">2019/09/17</span>
+        </a>
+        
+        <a  class=""
+           href="/Event-Storming/"
+           data-tag="backend,DDD"
+           data-author="" >
+            <span class="post-title" title="Event Storming">Event Storming</span>
+            <span class="post-date" title="2019-12-16 19:06:59">2019/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Executor-ExecutorService-and-Executors/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Executor, ExecutorService and Executors">Executor, ExecutorService and Executors</span>
+            <span class="post-date" title="2019-02-25 21:11:10">2019/02/25</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2019-06-03 12:27:54">2019/06/03</span>
+        </a>
+        
+        <a  class=""
+           href="/Google-%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Google 搜索技巧">Google 搜索技巧</span>
+            <span class="post-date" title="2019-07-13 23:30:30">2019/07/13</span>
+        </a>
+        
+        <a  class=""
+           href="/Food-Rules/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2018-12-15 20:52:22">2018/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/Google-Dagger-Tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Google Dagger Tutorial">Google Dagger Tutorial</span>
+            <span class="post-date" title="2019-07-11 10:12:26">2019/07/11</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2019-06-04 12:28:47">2019/06/04</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2019-06-12 09:01:25">2019/06/12</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2019-06-05 21:04:03">2019/06/05</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2019-06-05 18:08:01">2019/06/05</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2019-06-08 08:35:40">2019/06/08</span>
+        </a>
+        
+        <a  class=""
+           href="/HashMap%E5%9C%A8Java%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="HashMap在Java中是如何工作的">HashMap在Java中是如何工作的</span>
+            <span class="post-date" title="2018-12-12 21:00:32">2018/12/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Handling-overload-effectively-with-load-balancers/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Handling overload effectively with load balancers ">Handling overload effectively with load balancers </span>
+            <span class="post-date" title="2019-06-28 18:43:15">2019/06/28</span>
+        </a>
+        
+        <a  class=""
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="network"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2019-06-06 13:21:53">2019/06/06</span>
+        </a>
+        
+        <a  class=""
+           href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="IOC容器和Dependency Injection模式">IOC容器和Dependency Injection模式</span>
+            <span class="post-date" title="2018-11-13 18:25:40">2018/11/13</span>
+        </a>
+        
+        <a  class=""
+           href="/JMX-Tutorials/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JMX - Tutorials">JMX - Tutorials</span>
+            <span class="post-date" title="2019-06-24 19:21:38">2019/06/24</span>
+        </a>
+        
+        <a  class=""
+           href="/JSP-Tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JSP Tutorial">JSP Tutorial</span>
+            <span class="post-date" title="2019-04-24 19:51:50">2019/04/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Jackson-java-json-parser/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Jackson  java-json parser">Jackson  java-json parser</span>
+            <span class="post-date" title="2019-06-27 18:42:15">2019/06/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java Annotations 注解详解">Java Annotations 注解详解</span>
+            <span class="post-date" title="2019-02-27 19:19:06">2019/02/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-ExecutorService/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - ExecutorService">Java - ExecutorService</span>
+            <span class="post-date" title="2019-02-10 16:11:28">2019/02/10</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java Pattern Regex表达式">Java Pattern Regex表达式</span>
+            <span class="post-date" title="2019-04-30 19:25:21">2019/04/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2018-10-27 12:07:47">2018/10/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-callback/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - callback">Java - callback</span>
+            <span class="post-date" title="2019-02-10 16:28:40">2019/02/10</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-map-%E4%B8%8E-flatMap-%E7%9A%84%E6%AF%94%E8%BE%83/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java map() 与 flatMap()的比较">Java map() 与 flatMap()的比较</span>
+            <span class="post-date" title="2019-07-12 10:13:18">2019/07/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java 反射机制">Java 反射机制</span>
+            <span class="post-date" title="2019-09-30 20:55:52">2019/09/30</span>
+        </a>
+        
+        <a  class=""
+           href="/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java 继承与组合">Java 继承与组合</span>
+            <span class="post-date" title="2019-06-17 19:29:00">2019/06/17</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-callback-function/"
+           data-tag="JavaScript,callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2019-11-12 20:37:21">2019/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B%20-%20part%201/"
+           data-tag="frontend,javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 Part 1">JavaScript 教程 Part 1</span>
+            <span class="post-date" title="2019-10-31 20:41:31">2019/10/31</span>
+        </a>
+        
+        <a  class=""
+           href="/Javadoc-tutorial/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Javadoc tutorial">Javadoc tutorial</span>
+            <span class="post-date" title="2019-05-30 08:16:03">2019/05/30</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="frontend,javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2019-11-30 12:47:32">2019/11/30</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaUnitTest-JUnit5/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="JavaUnitTest-JUnit5">JavaUnitTest-JUnit5</span>
+            <span class="post-date" title="2019-03-04 20:58:52">2019/03/04</span>
+        </a>
+        
+        <a  class=""
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="javaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2019-12-01 14:47:00">2019/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2018-11-04 09:25:14">2018/11/04</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java基础知识">Java基础知识</span>
+            <span class="post-date" title="2018-12-08 12:41:59">2018/12/08</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java是如何工作的">Java是如何工作的</span>
+            <span class="post-date" title="2018-11-07 21:19:10">2018/11/07</span>
+        </a>
+        
+        <a  class=""
+           href="/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题">Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题</span>
+            <span class="post-date" title="2019-06-20 20:40:29">2019/06/20</span>
+        </a>
+        
+        <a  class=""
+           href="/LDAP-Intro/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2018-12-01 20:34:42">2018/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%B8%80/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(一)">Linux 常用指令(一)</span>
+            <span class="post-date" title="2019-04-06 16:10:59">2019/04/06</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%B8%89-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(三) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(三) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2019-07-29 19:05:33">2019/07/29</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-%E4%BA%8C/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(二)">Linux常用指令(二)</span>
+            <span class="post-date" title="2019-04-08 20:35:51">2019/04/08</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E4%B8%89-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(三)-CPU 上下文切换">Linux性能优化(三)-CPU 上下文切换</span>
+            <span class="post-date" title="2019-03-12 19:29:37">2019/03/12</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9B%9B-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(四)-CPU使用率">Linux性能优化(四)-CPU使用率</span>
+            <span class="post-date" title="2019-06-19 22:06:47">2019/06/19</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%A6%82%E8%BF%B0-%E4%B8%80/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化-概述(一)">Linux性能优化-概述(一)</span>
+            <span class="post-date" title="2018-12-05 21:19:04">2018/12/05</span>
+        </a>
+        
+        <a  class=""
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD-%E4%BA%8C/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化-平均负载(二)">Linux性能优化-平均负载(二)</span>
+            <span class="post-date" title="2018-12-18 20:29:23">2018/12/18</span>
+        </a>
+        
+        <a  class=""
+           href="/Nightwatch-js-tutorial/"
+           data-tag="frontend"
+           data-author="" >
+            <span class="post-title" title="Nightwatch js tutorial">Nightwatch js tutorial</span>
+            <span class="post-date" title="2019-08-28 18:40:54">2019/08/28</span>
+        </a>
+        
+        <a  class=""
+           href="/Lombok/"
+           data-tag="java,backend"
+           data-author="" >
+            <span class="post-title" title="Lombok">Lombok</span>
+            <span class="post-date" title="2019-02-12 21:06:57">2019/02/12</span>
+        </a>
+        
+        <a  class=""
+           href="/PATH-and-LD-LIBRARY-PATH/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="PATH and LD_LIBRARY_PATH">PATH and LD_LIBRARY_PATH</span>
+            <span class="post-date" title="2019-04-26 22:56:00">2019/04/26</span>
+        </a>
+        
+        <a  class=""
+           href="/RESTful-vs-RPC/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2019-02-13 20:56:11">2019/02/13</span>
+        </a>
+        
+        <a  class=""
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2019-08-16 22:35:05">2019/08/16</span>
+        </a>
+        
+        <a  class=""
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2018-12-15 17:31:54">2018/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 2">React Advanced 2</span>
+            <span class="post-date" title="2018-11-25 11:02:26">2018/11/25</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 1">React Advanced 1</span>
+            <span class="post-date" title="2018-11-24 12:52:47">2018/11/24</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 3">React Advanced 3</span>
+            <span class="post-date" title="2018-11-26 20:17:20">2018/11/26</span>
+        </a>
+        
+        <a  class=""
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced 4">React Advanced 4</span>
+            <span class="post-date" title="2018-11-27 22:01:33">2018/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="frontend"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2019-09-07 15:08:33">2019/09/07</span>
+        </a>
+        
+        <a  class=""
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2019-05-29 06:59:51">2019/05/29</span>
+        </a>
+        
+        <a  class=""
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2018-10-16 21:53:00">2018/10/16</span>
+        </a>
+        
+        <a  class=""
+           href="/Ruby-Totorial/"
+           data-tag="backend - ruby - tutorial"
+           data-author="" >
+            <span class="post-title" title="Ruby Totorial ">Ruby Totorial </span>
+            <span class="post-date" title="2019-10-02 22:34:45">2019/10/02</span>
+        </a>
+        
+        <a  class=""
+           href="/Scaling-webapps/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2019-04-09 20:37:11">2019/04/09</span>
+        </a>
+        
+        <a  class=""
+           href="/Spring-Series-1-Overview/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring Series 1.Overview">Spring Series 1.Overview</span>
+            <span class="post-date" title="2019-03-29 12:03:16">2019/03/29</span>
+        </a>
+        
+        <a  class=""
+           href="/System-gc-and-Runtime-gc/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="System.gc() and Runtime.gc() ">System.gc() and Runtime.gc() </span>
+            <span class="post-date" title="2019-10-09 21:36:21">2019/10/09</span>
+        </a>
+        
+        <a  class=""
+           href="/Spring-Series-2-Core-IoC-containers/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="Spring Series 2. Core - IoC containers">Spring Series 2. Core - IoC containers</span>
+            <span class="post-date" title="2019-03-31 12:04:08">2019/03/31</span>
+        </a>
+        
+        <a  class=""
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="frontend,accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2019-10-26 18:28:05">2019/10/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2019-08-24 21:31:31">2019/08/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2019-08-23 21:50:21">2019/08/23</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="tomcat,optimization"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2019-10-27 14:09:59">2019/10/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="tomcat - connector"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2019-09-03 19:18:53">2019/09/03</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="tomcat - backend - servlet"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2019-10-26 22:27:15">2019/10/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2019-08-25 12:32:47">2019/08/25</span>
+        </a>
+        
+        <a  class=""
+           href="/Typescript-Tutorial/"
+           data-tag="web,frontend,TypeScript,JavaScript - OOP"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial ">Typescript Tutorial </span>
+            <span class="post-date" title="2019-10-12 16:21:54">2019/10/12</span>
+        </a>
+        
+        <a  class=""
+           href="/UML-Class-Diagram/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="UML - Class Diagram">UML - Class Diagram</span>
+            <span class="post-date" title="2019-09-07 15:49:47">2019/09/07</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2019-09-26 19:49:19">2019/09/26</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2019-09-24 17:48:52">2019/09/24</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2019-09-25 20:17:18">2019/09/25</span>
+        </a>
+        
+        <a  class=""
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2019-09-28 08:27:53">2019/09/28</span>
+        </a>
+        
+        <a  class=""
+           href="/XML%E4%B8%8EJSON%E7%9A%84%E6%AF%94%E8%BE%83/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="XML与JSON的比较">XML与JSON的比较</span>
+            <span class="post-date" title="2019-02-22 23:34:39">2019/02/22</span>
+        </a>
+        
+        <a  class=""
+           href="/curl-totorial/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="curl totorial">curl totorial</span>
+            <span class="post-date" title="2019-09-23 16:17:57">2019/09/23</span>
+        </a>
+        
+        <a  class=""
+           href="/baidu_verify_c7TSOAB3l3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="baidu_verify_c7TSOAB3l3">baidu_verify_c7TSOAB3l3</span>
+            <span class="post-date" title="2020-01-27 19:52:51">2020/01/27</span>
+        </a>
+        
+        <a  class=""
+           href="/google556df425dcd23f17/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="google556df425dcd23f17">google556df425dcd23f17</span>
+            <span class="post-date" title="2020-01-27 19:52:51">2020/01/27</span>
+        </a>
+        
+        <a  class=""
+           href="/java-serialization/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="java - serialization">java - serialization</span>
+            <span class="post-date" title="2019-03-08 23:38:18">2019/03/08</span>
+        </a>
+        
+        <a  class=""
+           href="/i18next-tutorial/"
+           data-tag="js,i18next"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial ">i18next tutorial </span>
+            <span class="post-date" title="2019-12-23 21:07:13">2019/12/23</span>
+        </a>
+        
+        <a  class=""
+           href="/unix-linux-note/"
+           data-tag="Linux,OS,Unix"
+           data-author="" >
+            <span class="post-title" title="Example Post With Default Header Image">Example Post With Default Header Image</span>
+            <span class="post-date" title="2018-10-11 00:00:00">2018/10/11</span>
+        </a>
+        
+        <a  class=""
+           href="/volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="volatile关键字">volatile关键字</span>
+            <span class="post-date" title="2018-11-05 22:43:44">2018/11/05</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2018-10-14 11:25:04">2018/10/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82%EF%BC%9F/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求？">为什么要合并HTTP请求？</span>
+            <span class="post-date" title="2018-11-10 11:31:12">2018/11/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="今日简史 - 致敬充满未知的世界">今日简史 - 致敬充满未知的世界</span>
+            <span class="post-date" title="2019-02-17 13:58:27">2019/02/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2018-12-27 09:21:00">2018/12/27</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2019-06-29 18:44:12">2019/06/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2018-12-03 21:17:06">2018/12/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5-%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="后端开发实践-项目模板">后端开发实践-项目模板</span>
+            <span class="post-date" title="2019-06-02 08:54:43">2019/06/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2019-06-26 20:22:11">2019/06/26</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="原型模式">原型模式</span>
+            <span class="post-date" title="2018-12-04 19:58:57">2018/12/04</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2019-06-01 21:27:56">2019/06/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2019-10-15 17:51:57">2019/10/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="如何确定一个服务器的最大连接数">如何确定一个服务器的最大连接数</span>
+            <span class="post-date" title="2019-06-25 19:46:25">2019/06/25</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2019-10-29 19:31:38">2019/10/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
+           data-tag="System Design"
+           data-author="" >
+            <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
+            <span class="post-date" title="2019-02-03 12:30:18">2019/02/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式">工厂方法模式</span>
+            <span class="post-date" title="2018-11-18 21:53:56">2018/11/18</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="建造者模式">建造者模式</span>
+            <span class="post-date" title="2018-12-04 20:10:47">2018/12/04</span>
+        </a>
+        
+        <a  class=""
+           href="/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="微信红包高并发架构设计">微信红包高并发架构设计</span>
+            <span class="post-date" title="2019-07-28 16:07:42">2019/07/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式">抽象工厂模式</span>
+            <span class="post-date" title="2018-11-19 20:48:06">2018/11/19</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(1)-概述">数据结构与算法(1)-概述</span>
+            <span class="post-date" title="2019-12-31 19:05:12">2019/12/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(10)-排序(桶排序 计数排序 基数排序)">数据结构与算法(10)-排序(桶排序 计数排序 基数排序)</span>
+            <span class="post-date" title="2020-01-14 09:35:21">2020/01/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-11-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(11)-应用场景下的排序函数">数据结构与算法(11)-应用场景下的排序函数</span>
+            <span class="post-date" title="2020-01-15 16:26:52">2020/01/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-12-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(12)-二分查找">数据结构与算法(12)-二分查找</span>
+            <span class="post-date" title="2020-01-16 19:17:32">2020/01/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(13)-跳表">数据结构与算法(13)-跳表</span>
+            <span class="post-date" title="2020-01-17 19:32:18">2020/01/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-14-%E6%95%A3%E5%88%97%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(14)-散列表">数据结构与算法(14)-散列表</span>
+            <span class="post-date" title="2020-01-19 10:24:15">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-15-%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title=" 数据结构与算法(15)-哈希算法"> 数据结构与算法(15)-哈希算法</span>
+            <span class="post-date" title="2020-01-23 18:26:45">2020/01/23</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-16-%E4%BA%8C%E5%8F%89%E6%A0%91/"
+           data-tag="树"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(16)-二叉树">数据结构与算法(16)-二叉树</span>
+            <span class="post-date" title="2020-01-25 21:49:28">2020/01/25</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(2)-复杂度分析">数据结构与算法(2)-复杂度分析</span>
+            <span class="post-date" title="2020-01-02 22:36:33">2020/01/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-3-%E6%95%B0%E7%BB%84/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(3)-数组">数据结构与算法(3)-数组</span>
+            <span class="post-date" title="2020-01-03 18:35:59">2020/01/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-4-%E9%93%BE%E8%A1%A8/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(4)-链表">数据结构与算法(4)-链表</span>
+            <span class="post-date" title="2020-01-06 18:50:44">2020/01/06</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-5-%E6%A0%88/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(5)-栈">数据结构与算法(5)-栈</span>
+            <span class="post-date" title="2019-04-15 20:14:56">2019/04/15</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(6)-队列">数据结构与算法(6)-队列</span>
+            <span class="post-date" title="2020-01-10 19:36:21">2020/01/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(7)-递归">数据结构与算法(7)-递归</span>
+            <span class="post-date" title="2019-04-17 21:57:14">2019/04/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="数据结构与算法(8)-排序(冒泡 插入 选择)">数据结构与算法(8)-排序(冒泡 插入 选择)</span>
+            <span class="post-date" title="2020-01-13 20:47:59">2020/01/13</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2019-12-08 16:43:50">2019/12/08</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-general/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="架构学习-general">架构学习-general</span>
+            <span class="post-date" title="2019-07-01 20:58:32">2019/07/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2019-04-03 21:24:15">2019/04/03</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8E%9F%E5%88%99/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-原则">架构学习-原则</span>
+            <span class="post-date" title="2019-07-14 09:39:56">2019/07/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-可扩展架构模式">架构学习-可扩展架构模式</span>
+            <span class="post-date" title="2019-08-14 19:59:11">2019/08/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-复杂度来源">架构学习-复杂度来源</span>
+            <span class="post-date" title="2019-07-10 17:49:52">2019/07/10</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%AE%9E%E6%88%98/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 实战">架构学习 - 实战</span>
+            <span class="post-date" title="2019-08-22 20:47:02">2019/08/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 架构设计文档模板">架构学习 - 架构设计文档模板</span>
+            <span class="post-date" title="2019-08-22 20:49:18">2019/08/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-架构设计流程">架构学习-架构设计流程</span>
+            <span class="post-date" title="2019-07-14 17:30:40">2019/07/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-高可用架构模式">架构学习-高可用架构模式</span>
+            <span class="post-date" title="2019-07-29 19:06:28">2019/07/29</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-高性能架构模式">架构学习-高性能架构模式</span>
+            <span class="post-date" title="2019-07-22 09:54:27">2019/07/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="web"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2018-10-21 15:47:15">2018/10/21</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2018-11-27 21:24:05">2018/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"
+           data-tag="backend"
+           data-author="" >
+            <span class="post-title" title="混沌工程">混沌工程</span>
+            <span class="post-date" title="2019-05-28 19:44:35">2019/05/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%AC%94%E8%AE%B0-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-by-Eric-Evans/"
+           data-tag="backend,system design,DDD"
+           data-author="" >
+            <span class="post-title" title="笔记 - 领域驱动设计 by Eric Evans">笔记 - 领域驱动设计 by Eric Evans</span>
+            <span class="post-date" title="2019-12-17 21:31:51">2019/12/17</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2019-05-31 18:49:25">2019/05/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2019-03-30 22:03:05">2019/03/30</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式">简单工厂模式</span>
+            <span class="post-date" title="2018-11-14 21:17:32">2018/11/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-基于原型的编程">编程范式系列-基于原型的编程</span>
+            <span class="post-date" title="2018-11-11 14:17:36">2018/11/11</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-函数式编程">编程范式系列-函数式编程</span>
+            <span class="post-date" title="2018-10-31 20:39:37">2018/10/31</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-泛型编程">编程范式系列-泛型编程</span>
+            <span class="post-date" title="2018-10-28 12:45:43">2018/10/28</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"
+           data-tag="编程思维"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-面向对象编程">编程范式系列-面向对象编程</span>
+            <span class="post-date" title="2018-11-11 14:17:51">2018/11/11</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2018-12-16 14:34:27">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2018-12-16 14:35:03">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</span>
+            <span class="post-date" title="2019-01-06 18:58:28">2019/01/06</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(九)-云">网络协议(九)-云</span>
+            <span class="post-date" title="2019-02-14 19:21:17">2019/02/14</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2018-12-16 14:34:50">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2018-12-20 22:02:42">2018/12/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AB-%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83-VPN-%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(八)-数据中心, VPN, 移动网络">网络协议(八)-数据中心, VPN, 移动网络</span>
+            <span class="post-date" title="2019-02-02 11:20:54">2019/02/02</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2019-10-07 18:44:34">2019/10/07</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(十一)-用双十一理顺起来的网络协议">网络协议(十一)-用双十一理顺起来的网络协议</span>
+            <span class="post-date" title="2019-03-07 19:50:27">2019/03/07</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81-RPC-SOAP-RESTful/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(十) - RPC, SOAP, RESTful">网络协议(十) - RPC, SOAP, RESTful</span>
+            <span class="post-date" title="2019-02-20 20:07:36">2019/02/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2019-09-22 15:56:03">2019/09/22</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="观察者模式">观察者模式</span>
+            <span class="post-date" title="2019-09-18 21:03:34">2019/09/18</span>
+        </a>
+        
+        <a  class=""
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="网络协议"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2018-12-16 14:35:14">2018/12/16</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="设计模式概述">设计模式概述</span>
+            <span class="post-date" title="2018-11-12 20:51:51">2018/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC-%E4%B8%80/"
+           data-tag="history"
+           data-author="" >
+            <span class="post-title" title="说说日本(一)">说说日本(一)</span>
+            <span class="post-date" title="2018-12-01 12:10:06">2018/12/01</span>
+        </a>
+        
+        <a  class=""
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2018-10-13 12:08:50">2018/10/13</span>
+        </a>
+        
+        <a  class=""
+           href="/%E9%87%8D%E6%9E%84-%E7%AC%94%E8%AE%B0/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="重构 笔记">重构 笔记</span>
+            <span class="post-date" title="2019-07-20 15:20:16">2019/07/20</span>
+        </a>
+        
+        <a  class=""
+           href="/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="面向对象设计原则">面向对象设计原则</span>
+            <span class="post-date" title="2018-11-12 20:51:59">2018/11/12</span>
+        </a>
+        
+        <a  class=""
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="DynamoDB Advanced">DynamoDB Advanced</span>
+            <span class="post-date" title="2019-01-29 19:52:06">2019/01/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-AWS-essentials-3-Core-Services" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">AWS essentials(3) - Core Services</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-27 19:52:50'>2019-01-21 17:43</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AWS-global-infrastructure"><span class="toc-text">1. AWS global infrastructure</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Regions"><span class="toc-text">1.1 Regions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Availability-Zones"><span class="toc-text">1.2 Availability Zones</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Edge-Locations"><span class="toc-text">1.3 Edge Locations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-Local-Regions"><span class="toc-text">1.4 Local Regions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Virtual-Private-Cloud-VPC"><span class="toc-text">2. Virtual Private Cloud (VPC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Introduction"><span class="toc-text">2.1 Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Features"><span class="toc-text">2.2 Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Subnets"><span class="toc-text">2.3 Subnets</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AWS-Security"><span class="toc-text">3. AWS Security</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-AWS-security-groups"><span class="toc-text">3.1 AWS security groups</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Compute-Services"><span class="toc-text">4. Compute Services</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Amazon-EC2"><span class="toc-text">4.1 Amazon EC2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-What-is-EC2"><span class="toc-text">4.1.1 What is EC2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-Amazon-EC2-instances-instructions"><span class="toc-text">4.1.2 Amazon EC2 instances instructions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-3-Features-of-EC2"><span class="toc-text">4.1.3 Features of EC2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-4-Security-best-practices"><span class="toc-text">4.1.4 Security best practices</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-5-Instance-types"><span class="toc-text">4.1.5 Instance types</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Lambda"><span class="toc-text">4.2 Lambda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-Overviews"><span class="toc-text">4.2.1 Overviews</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-benefits"><span class="toc-text">4.2.2 benefits :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-Use-cases"><span class="toc-text">4.2.3 Use cases</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-4-Lambda-Applications"><span class="toc-text">4.2.4 Lambda Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-5-Work-with-AWS-Lambda-Functions"><span class="toc-text">4.2.5 Work with AWS Lambda Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-6-Lambda-Concepts"><span class="toc-text">4.2.6 Lambda Concepts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-AWS-Elastic-Beanstalk"><span class="toc-text">4.3 AWS Elastic Beanstalk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-Overview"><span class="toc-text">4.3.1 Overview</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Application-Load-Balancer"><span class="toc-text">5 Application Load Balancer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Service-Introduction"><span class="toc-text">5.1 Service Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-Key-Concepts"><span class="toc-text">5.2 Key Concepts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer"><span class="toc-text">5.3 Benefits of using Application load balancer instead of classic load balancer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-Use-Cases"><span class="toc-text">5.4 Use Cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Elastic-Load-Balancer-classic-load-balancer"><span class="toc-text">6. Elastic Load Balancer - classic load balancer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Overview"><span class="toc-text">6.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-How-does-it-work"><span class="toc-text">6.2 How does it work?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-Cross-zone-load-balancing"><span class="toc-text">6.2.1 Cross zone load balancing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-Request-Routing"><span class="toc-text">6.2.2 Request Routing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-HTTP-Connections"><span class="toc-text">6.2.3 HTTP Connections</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-Use-cases"><span class="toc-text">6.3 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Auto-Scaling"><span class="toc-text">7. Auto Scaling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Service-Introduction"><span class="toc-text">7.1 Service Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-1-Scaling-out-and-scaling-in"><span class="toc-text">7.1.1 Scaling out and scaling in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2-Dynamic-auto-scaling"><span class="toc-text">7.1.2 Dynamic auto scaling</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Amazon-Elastic-Block-Store-EBS"><span class="toc-text">8. Amazon Elastic Block Store(EBS)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-General-Purpose-Volumes"><span class="toc-text">8.1 General Purpose Volumes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-Provisioned-IOPS-SSD-Volumes"><span class="toc-text">8.2 Provisioned IOPS (SSD) Volumes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-Magnetic-Volumes"><span class="toc-text">8.3 Magnetic Volumes</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Amazon-Simple-Storage-Service"><span class="toc-text">9. Amazon Simple Storage Service</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-Introduction"><span class="toc-text">9.1 Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-steps"><span class="toc-text">9.1.1 steps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-bucket"><span class="toc-text">9.1.2 bucket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-Use-cases"><span class="toc-text">9.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Amazon-Glacier"><span class="toc-text">10. Amazon Glacier</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-Overview"><span class="toc-text">10.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-Details"><span class="toc-text">10.2 Details</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-1-archive"><span class="toc-text">10.2.1 archive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-2-vault"><span class="toc-text">10.2.2 vault</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-3-access-policy"><span class="toc-text">10.2.3 access policy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-4-Job"><span class="toc-text">10.2.4 Job</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-use-cases"><span class="toc-text">10.3 use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Amazon-Relational-Database-Service-Amazon-RDS"><span class="toc-text">11. Amazon Relational Database Service (Amazon RDS)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-Overview"><span class="toc-text">11.1 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-1-Chanllenges-of-relational-databases"><span class="toc-text">11.1.1 Chanllenges of relational databases</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-2-RDS-intro"><span class="toc-text">11.1.2 RDS intro</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-Use-cases"><span class="toc-text">11.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Amazon-DynamoDB"><span class="toc-text">12. Amazon DynamoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-Overview"><span class="toc-text">12.1 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-1-Features"><span class="toc-text">12.1.1 Features</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-2-Partitioning"><span class="toc-text">12.1.2 Partitioning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-Use-cases"><span class="toc-text">12.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Redshift"><span class="toc-text">13. Redshift</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1-Redshift-introduction"><span class="toc-text">13.1 Redshift introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2-Overview"><span class="toc-text">13.2 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-1-Cluster-management"><span class="toc-text">13.2.1 Cluster management</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-3-use-cases"><span class="toc-text">13.3 use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Amazon-Aurora"><span class="toc-text">14. Amazon Aurora</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1-Overview"><span class="toc-text">14.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2-benefits"><span class="toc-text">14.2 benefits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-Trused-Advisor"><span class="toc-text">15. Trused Advisor</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+
+<h1 id="1-AWS-global-infrastructure"><a href="#1-AWS-global-infrastructure" class="headerlink" title="1. AWS global infrastructure"></a>1. AWS global infrastructure</h1><h2 id="1-1-Regions"><a href="#1-1-Regions" class="headerlink" title="1.1 Regions"></a>1.1 Regions</h2><p>AWS Regions provide multiple, physically separated and isolated Availability Zones which are connected with low latency, high throughput, and highly redundant networking. </p>
+<p><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=gi&l=emea" target="_blank" rel="noopener">Region table</a></p>
+<h2 id="1-2-Availability-Zones"><a href="#1-2-Availability-Zones" class="headerlink" title="1.2 Availability Zones"></a>1.2 Availability Zones</h2><p>These Availability Zones offer AWS customers an easier and more effective way to design and operate applications and databases, making them more highly available, fault tolerant, and scalable than traditional single datacenter infrastructures or multi-datacenter infrastructures. </p>
+<p>Collection of data centers within a region. </p>
+<p>isolate - protect from failures </p>
+<p>AZs are pyhsically and logically seperated within a region. Own their own: </p>
+<ol>
+<li>uninterruptible power supply </li>
+<li>cooling equipment </li>
+<li>networking connectivity </li>
+<li>backup generators </li>
+</ol>
+<h2 id="1-3-Edge-Locations"><a href="#1-3-Edge-Locations" class="headerlink" title="1.3 Edge Locations"></a>1.3 Edge Locations</h2><p>Content Delivery Network  —- Amazon CloudFront </p>
+<p>Deliver content to customers </p>
+<p>When a user requests content that you’re serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.</p>
+<p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html" target="_blank" rel="noopener">CloudFront Developer Guide</a></p>
+<h2 id="1-4-Local-Regions"><a href="#1-4-Local-Regions" class="headerlink" title="1.4 Local Regions"></a>1.4 Local Regions</h2><p>An AWS Local Region is a single datacenter designed to complement an existing AWS Region. Like all AWS Regions, AWS Local Regions are completely isolated from other AWS Regions. </p>
+<h1 id="2-Virtual-Private-Cloud-VPC"><a href="#2-Virtual-Private-Cloud-VPC" class="headerlink" title="2. Virtual Private Cloud (VPC)"></a>2. Virtual Private Cloud (VPC)</h1><h2 id="2-1-Introduction"><a href="#2-1-Introduction" class="headerlink" title="2.1 Introduction"></a>2.1 Introduction</h2><p>Amazon VPC enables you to launch AWS resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.Consists of such features: </p>
+<ul>
+<li>A private, virtual network in the AWS Cloud <ul>
+<li>Uses same concepts as on premise networking </li>
+</ul>
+</li>
+<li>Allows complete control of network configuration<ul>
+<li>Ability to isolate and expose resources inside VPC </li>
+</ul>
+</li>
+<li>Offers several layers of security controls <ul>
+<li>Ability to allow and deny specific internet and internal traffic </li>
+</ul>
+</li>
+<li>Other AWS services deploy into VPC <ul>
+<li>Services inherent security built into network </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-Features"><a href="#2-2-Features" class="headerlink" title="2.2 Features"></a>2.2 Features</h2><ul>
+<li><p>Build upon high availabilty of AWS regions and availability zones </p>
+<ul>
+<li>Amazon VPC lives within a region </li>
+<li>Multiple VPCs per account </li>
+</ul>
+</li>
+<li><p>Subnets   </p>
+<ul>
+<li>Used to divide Amazon VPC </li>
+<li>Allow Amazon VPC to span multiple Azs </li>
+<li>seperate public and private network </li>
+</ul>
+</li>
+<li><p>Route tables </p>
+<ul>
+<li>Control traffic going out of the subnets </li>
+</ul>
+</li>
+<li><p>Internet Gateway (IGW)</p>
+<ul>
+<li>Allows private subnet resources to access internet </li>
+</ul>
+</li>
+<li><p>Network Access Control Lists(NACL)</p>
+<ul>
+<li>Control access to subnets; stateless </li>
+</ul>
+</li>
+</ul>
+<p><img src="fig1.png" alt="fig1.png"></p>
+<h2 id="2-3-Subnets"><a href="#2-3-Subnets" class="headerlink" title="2.3 Subnets"></a>2.3 Subnets</h2><p>A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won’t be connected to the internet. </p>
+<h1 id="3-AWS-Security"><a href="#3-AWS-Security" class="headerlink" title="3. AWS Security"></a>3. AWS Security</h1><h2 id="3-1-AWS-security-groups"><a href="#3-1-AWS-security-groups" class="headerlink" title="3.1 AWS security groups"></a>3.1 AWS security groups</h2><p>Filter traffic to your instances </p>
+<p><img src="fig2.png" alt="fig2.png"></p>
+<p>Can configure the security rules, have multi rules. Web tier - application tier - database tier. </p>
+<p>A security group acts as a virtual firewall for instances to control inbound and outbound traffic. Security group act at the instance level , not the subnet level. For each security group, you add rules that control the inbound traffic to instances, and a separate set of riles that control the outbound traffic. </p>
+<h1 id="4-Compute-Services"><a href="#4-Compute-Services" class="headerlink" title="4. Compute Services"></a>4. Compute Services</h1><h2 id="4-1-Amazon-EC2"><a href="#4-1-Amazon-EC2" class="headerlink" title="4.1 Amazon EC2"></a>4.1 Amazon EC2</h2><p>Flexible configuration and control </p>
+<p>maintain complete control of envs </p>
+<p>EC2 overview </p>
+<h3 id="4-1-1-What-is-EC2"><a href="#4-1-1-What-is-EC2" class="headerlink" title="4.1.1 What is EC2"></a>4.1.1 What is EC2</h3><p>EC2: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" target="_blank" rel="noopener">Elastic compute cloud</a> </p>
+<p>Compute: different thing you can do with servers </p>
+<ul>
+<li>Application server </li>
+<li>Web server </li>
+<li>Database server </li>
+<li>Game server </li>
+<li>Mail server </li>
+<li>Media server </li>
+<li>Catalog server </li>
+<li>File server </li>
+<li>Computing server </li>
+<li>Proxy server </li>
+</ul>
+<h3 id="4-1-2-Amazon-EC2-instances-instructions"><a href="#4-1-2-Amazon-EC2-instances-instructions" class="headerlink" title="4.1.2 Amazon EC2 instances instructions"></a>4.1.2 Amazon EC2 instances instructions</h3><p>need to select AMI(Amazon Machine Image), present for software choices </p>
+<p>Select instance type(hard ware)</p>
+<p>Configure network, storage, key pairs (Use key value pair to access the instance)</p>
+<h3 id="4-1-3-Features-of-EC2"><a href="#4-1-3-Features-of-EC2" class="headerlink" title="4.1.3 Features of EC2"></a>4.1.3 Features of EC2</h3><ol>
+<li>virtual computing env. known as instances </li>
+<li>various comfigurations of CPU, memory, and networking capacity for your instances </li>
+<li>secure login information for your instances using key pairs(AWS stores the public key, and you store the private key)</li>
+<li>Sotrage volumes(temporory) and persistent storage volumes – Amazon Elastic Block Store</li>
+<li>Firewall that enables you to specify the protocols, ports and source IP ranges that can reach your instances using security groups </li>
+<li>static IPv4 addresses for dynamic cloud computing, known as Elastic IP adddresses</li>
+<li>metadata, known as tags, that you can create and assign to your Amazon EC2 resources </li>
+<li>Virtual networks you can create that are logically isolated from the rest of the AWS cloud</li>
+</ol>
+<h3 id="4-1-4-Security-best-practices"><a href="#4-1-4-Security-best-practices" class="headerlink" title="4.1.4 Security best practices"></a>4.1.4 Security best practices</h3><ol>
+<li>Use AWS identiry and access Management(IAM) to control access to AWS resources, including instances. You can create IAM users and groups under your AWS account, assign security credentials to each, and control the access that each has to resources and services in AWS. </li>
+<li>Restrict access by only allowing trusted hosts or networks to access ports on your instance. For example, you can restrict SSH access by restricting incoming traffic on port 22.</li>
+</ol>
+<h3 id="4-1-5-Instance-types"><a href="#4-1-5-Instance-types" class="headerlink" title="4.1.5 Instance types"></a>4.1.5 Instance types</h3><p>Instance type you specify determines the hardware of the host computer used for your instance. Each instance is provided with a consistent and predictable amount of CPU capacity, memory, storage. </p>
+<ul>
+<li>general purpose </li>
+<li>compute optimized </li>
+<li>memory optimized </li>
+<li>storage optimized </li>
+<li>accelerated computing </li>
+</ul>
+<h2 id="4-2-Lambda"><a href="#4-2-Lambda" class="headerlink" title="4.2 Lambda"></a>4.2 Lambda</h2><h3 id="4-2-1-Overviews"><a href="#4-2-1-Overviews" class="headerlink" title="4.2.1 Overviews"></a>4.2.1 Overviews</h3><p>AWS Lambda is a compute service that lets you run code without provisioning or managing servers. Pay for the compute time you consume. AWS Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, <strong>including server and operating system maintenance, capacity provisioning and automatic scaling</strong>, code monitoring and logging.</p>
+<p>fully managed serverless compute </p>
+<p>event driven execution, respond to event </p>
+<p>sub second metering </p>
+<h3 id="4-2-2-benefits"><a href="#4-2-2-benefits" class="headerlink" title="4.2.2 benefits :"></a>4.2.2 benefits :</h3><ol>
+<li>Lambda manages the compute fleet that offers a balance of memory, CPU, network and other resources. </li>
+</ol>
+<h3 id="4-2-3-Use-cases"><a href="#4-2-3-Use-cases" class="headerlink" title="4.2.3 Use cases"></a>4.2.3 Use cases</h3><ol>
+<li>Run code in response to events, such as changes to data in an Amazon S3 bucket or an DynamoDB table</li>
+<li>Run code in response to HTTP requests using Amazon API gateway</li>
+<li>Invoke code using API calls made using AWS SDKs </li>
+<li>Build serverless applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild. </li>
+</ol>
+<p><img src="fig3.png" alt="fig3.png"><br><img src="fig4.png" alt="fig4.png"><br><img src="fig5.png" alt="fig5.png"></p>
+<h3 id="4-2-4-Lambda-Applications"><a href="#4-2-4-Lambda-Applications" class="headerlink" title="4.2.4 Lambda Applications"></a>4.2.4 Lambda Applications</h3><p>An AWS Lambda application is a combination of Lambda functions, event sources, and other resources that work together to perform tasks. You can use AWS CloudFormation and other tools to collect your application’s components into a single package that can be deployed and managed as one resource. </p>
+<h3 id="4-2-5-Work-with-AWS-Lambda-Functions"><a href="#4-2-5-Work-with-AWS-Lambda-Functions" class="headerlink" title="4.2.5 Work with AWS Lambda Functions"></a>4.2.5 Work with AWS Lambda Functions</h3><ol>
+<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html" target="_blank" rel="noopener">Working with AWS Lambda Functions</a></p>
+</li>
+<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html" target="_blank" rel="noopener">AWS Lambda Limits</a></p>
+</li>
+</ol>
+<ul>
+<li>Concurrent Executions limit: 1000 </li>
+<li>function timeout: 15 minutes </li>
+<li>execution threads: 1024 </li>
+</ul>
+<ol start="3">
+<li>[Building Lambda Functions]</li>
+</ol>
+<ul>
+<li>Lifecycle for an AWS lambda-based application<ul>
+<li>authoring code<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html" target="_blank" rel="noopener">programing model</a> - the format of the code    </li>
+</ul>
+</li>
+<li>deploying code<ul>
+<li>Package code and dependencies in a deployment package</li>
+<li>upload the package to AWS Lambda to create Lambda function</li>
+</ul>
+</li>
+<li>monitoring<ul>
+<li>CloudWatch    </li>
+</ul>
+</li>
+<li>troubleshooting</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/use-cases.html" target="_blank" rel="noopener">Using AWS Lambda With Other Services</a></li>
+</ol>
+<h3 id="4-2-6-Lambda-Concepts"><a href="#4-2-6-Lambda-Concepts" class="headerlink" title="4.2.6 Lambda Concepts"></a>4.2.6 Lambda Concepts</h3><ul>
+<li>Function - A script or program that runs in AWS Lambda. Lambda passes invocation events to your function. The function processes an event and returns a response. </li>
+<li>Runtimes – Lambda runtimes allow functions in different languages to run in the same base execution environment. You configure your function to use a runtime that matches your programming language. The runtime sits in-between the Lambda service and your function code, relaying invocation events, context information, and responses between the two. You can use runtimes provided by Lambda, or build your own. </li>
+<li>Layers – Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers.</li>
+</ul>
+<p>A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank" rel="noopener">layer</a> is a ZIP archive that contains libraries, a custom runtime or other dependencies. With layers, you can use libraries in your function without needing to include them in your deployment package. Layers let you keep your deployment package small, which makes development easier. </p>
+<ul>
+<li>Event source – An AWS service, such as Amazon SNS, or a custom service, that triggers your function and executes its logic.</li>
+<li>Downstream resources – An AWS service, such as DynamoDB tables or Amazon S3 buckets, that your Lambda function calls once it is triggered.</li>
+<li>Log streams – While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function to ensure it’s working properly.</li>
+<li>AWS SAM – A model to define serverless applications. AWS SAM is natively supported by AWS CloudFormation and defines simplified syntax for expressing serverless resources. </li>
+</ul>
+<h2 id="4-3-AWS-Elastic-Beanstalk"><a href="#4-3-AWS-Elastic-Beanstalk" class="headerlink" title="4.3 AWS Elastic Beanstalk"></a>4.3 AWS Elastic Beanstalk</h2><h3 id="4-3-1-Overview"><a href="#4-3-1-Overview" class="headerlink" title="4.3.1 Overview"></a>4.3.1 Overview</h3><p>Quick get application into the cloud </p>
+<p>Platform as a service </p>
+<p>You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.</p>
+<p>Allow quick deployment of your applications </p>
+<p>Elastic Beanstalk provides:</p>
+<ul>
+<li>Application service</li>
+<li>HTTP service</li>
+<li>Operating system</li>
+<li>Language interpreter </li>
+<li>Host </li>
+</ul>
+<h1 id="5-Application-Load-Balancer"><a href="#5-Application-Load-Balancer" class="headerlink" title="5 Application Load Balancer"></a>5 Application Load Balancer</h1><h2 id="5-1-Service-Introduction"><a href="#5-1-Service-Introduction" class="headerlink" title="5.1 Service Introduction"></a>5.1 Service Introduction</h2><p>A load balancerr serves as the single point of contact for clients. The load balancer distributes incoming application traffic across multiple targets, such as EC2 instances in multiple Availability Zones. </p>
+<p>A listener checks for connection requests from clients, using the protocol and port that you configure, and forwards requests to one or more target groups, based on the rules that you define. Each rule specifies a target group, condition, and priority. When the condition is met, the traffic is forwarded to the target group. You must define a default rule for each listener, and you can add rules that specify different target groups based on the content of the request </p>
+<p>Each target group routes requests to one or more registered targets, such as EC2 instances, using the protocol and port number that you specify. You can register a target with multiple target groups. You can configure health checks on a per target group basis. Health checks are performed on all targets registered to a target group that is specified in a listener rule for your load balancer.</p>
+<p>An Application Load Balancer functions at the application layer, <strong>the seventh layer</strong> of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply, and then selects a target from the target group for the rule action. You can configure listener rules to route requests to different target groups based on the content of the application traffic. Routing is performed independently for each target group, even when a target is registered with multiple target groups.</p>
+<p>Part of the elastic load balancer service. Add some important features<br><img src="fig6.png" alt="fig6.png"></p>
+<ol>
+<li>Support more protocols  HTTP HTTPS HTTP/2 </li>
+<li>cloudWatch Metrics   </li>
+<li>Access logs </li>
+<li>Health Checks </li>
+</ol>
+<h2 id="5-2-Key-Concepts"><a href="#5-2-Key-Concepts" class="headerlink" title="5.2 Key Concepts"></a>5.2 Key Concepts</h2><ol>
+<li>Listeners: a process that cehcks for connection requests, using the protocol and port that you configure. Rules that you define for a listener determine how the load balancer routes requests to the targets in one or more target groups. </li>
+<li>Target: A target is a destination for traffic based on the established listener rules </li>
+<li>Target group: each target group routes requests to one or more registered targets using the protocol and port number specified. </li>
+</ol>
+<p><img src="fig7.png" alt="fig7.png"></p>
+<h2 id="5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer"><a href="#5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer" class="headerlink" title="5.3 Benefits of using Application load balancer instead of classic load balancer"></a>5.3 Benefits of using Application load balancer instead of classic load balancer</h2><ul>
+<li>Support for path-based routing. You can configure rules for your listener that forward requests based on the URL in the request. This enables you to structure your application as smaller services, and route requests to the correct service based on the content of the URL.</li>
+<li>Support for host-based routing. You can configure rules for your listener that forward requests based on the host field in the HTTP header. This enables you to route requests to multiple domains using a single load balancer.</li>
+<li>Support for routing requests to multiple applications on a single EC2 instance. You can register each instance or IP address with the same target group using multiple ports.</li>
+<li>Support for redirecting requests from one URL to another </li>
+</ul>
+<h2 id="5-4-Use-Cases"><a href="#5-4-Use-Cases" class="headerlink" title="5.4 Use Cases"></a>5.4 Use Cases</h2><ol>
+<li>route request to different ports within a single instance.<br><img src="fig8.png" alt="fig8.png"></li>
+</ol>
+<h1 id="6-Elastic-Load-Balancer-classic-load-balancer"><a href="#6-Elastic-Load-Balancer-classic-load-balancer" class="headerlink" title="6. Elastic Load Balancer - classic load balancer"></a>6. Elastic Load Balancer - classic load balancer</h1><h2 id="6-1-Overview"><a href="#6-1-Overview" class="headerlink" title="6.1 Overview"></a>6.1 Overview</h2><p>A load balancer distributes workloads across multiple compute resources, such as virtual servers. Using a load balancer increases the availability and fault tolerance of your applications. </p>
+<p>You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.</p>
+<p>You can <strong>configure health checks</strong>, which are used to monitor the health of the compute resources so that the load balancer can send requests only to the healthy ones. You can also <strong>offload the work of encryption and decryption to your load balancer</strong> so that your compute resources can focus on their main work.</p>
+<p>Mainly consists of there types of load balancer: </p>
+<ol>
+<li>Application Load Balancer </li>
+<li>Network Load Balancer</li>
+<li>Classic Load Balancer </li>
+</ol>
+<p><a href="https://aws.amazon.com/elasticloadbalancing/features/#compare" target="_blank" rel="noopener">The comparison among those three</a></p>
+<h2 id="6-2-How-does-it-work"><a href="#6-2-How-does-it-work" class="headerlink" title="6.2 How does it work?"></a>6.2 How does it work?</h2><p>A load balancer accepts incoming traffic from clients and routes requests to its registered targets. It also monitors the health of its registered targets and ensures that it routes traffic tonly to healthy targets. You configure your load balancer to accept incoming traffic by specifying one or more listeners. A listener is a process that checks for connection requests. It is configured with a protocol and port number for connections from clients to the load balancer and a protocol and port number for connections from the load balancer to the targets.</p>
+<h3 id="6-2-1-Cross-zone-load-balancing"><a href="#6-2-1-Cross-zone-load-balancing" class="headerlink" title="6.2.1 Cross zone load balancing"></a>6.2.1 Cross zone load balancing</h3><p>The nodes for your load balancer distribute requests from clients to registered targets. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones. When cross-zone load balancing is disabled, each load balancer node distributes traffic across the registered targets in its Availability Zone only.</p>
+<h3 id="6-2-2-Request-Routing"><a href="#6-2-2-Request-Routing" class="headerlink" title="6.2.2 Request Routing"></a>6.2.2 Request Routing</h3><p>Before a client sends a request to your load balancer, it resolves the load balancer’s domain name using a Domain Name System (DNS) server. The DNS entry is controlled by Amazon, because your load balancers are in the amazonaws.com domain. The Amazon DNS servers return one or more IP addresses to the client, which are the IP addresses of the load balancer nodes for your load balancer. With Network Load Balancers, Elastic Load Balancing creates a network interface for each Availability Zone you enable. Each load balancer node in the Availability Zone uses this network interface to get a static IP address. You can optionally associate one Elastic IP address with each network interface when you create the load balancer.</p>
+<p>As traffic to your application changes over time, Elastic Load Balancing scales your load balancer and updates the DNS entry. Note that the DNS entry also specifies the time-to-live (TTL) as 60 seconds, which ensures that the IP addresses can be remapped quickly in response to changing traffic.</p>
+<p><img src="fig9.png" alt="fig9.png"></p>
+<p><img src="fig10.png" alt="fig10.png"></p>
+<p>Internet facing load balancers:<br><img src="fig11.png" alt="fig11.png"></p>
+<p>Internal Load Balancers: have DNS name only resolve private nodes<br><img src="fig12.png" alt="fig12.png"></p>
+<h3 id="6-2-3-HTTP-Connections"><a href="#6-2-3-HTTP-Connections" class="headerlink" title="6.2.3 HTTP Connections"></a>6.2.3 HTTP Connections</h3><p>Classic Load Balancers use <strong>pre-open connections</strong> but Application Load Balancers do not. Both Classic Load Balancers and Application Load Balancers use <strong>connection multiplexing</strong>. This means that <strong>requests from multiple clients on multiple front-end connections can be routed to a given target through a single back-end connection</strong>. Connection multiplexing improves latency and reduces the load on your applications. To prevent connection multiplexing, disable HTTP keep-alives by setting the Connection: close header in your HTTP responses.</p>
+<h2 id="6-3-Use-cases"><a href="#6-3-Use-cases" class="headerlink" title="6.3 Use cases"></a>6.3 Use cases</h2><ol>
+<li>Access through single point </li>
+<li>Decouple appliation environment </li>
+<li>Provide high availability and fault tolerance </li>
+<li>Increase elasticity and scalability </li>
+</ol>
+<h1 id="7-Auto-Scaling"><a href="#7-Auto-Scaling" class="headerlink" title="7. Auto Scaling"></a>7. Auto Scaling</h1><h2 id="7-1-Service-Introduction"><a href="#7-1-Service-Introduction" class="headerlink" title="7.1 Service Introduction"></a>7.1 Service Introduction</h2><p>Auto scaling helps you ensure you have the correct number of EC2 instances available to handle the load for your application. </p>
+<p>Using cloudWatch to monitor </p>
+<h3 id="7-1-1-Scaling-out-and-scaling-in"><a href="#7-1-1-Scaling-out-and-scaling-in" class="headerlink" title="7.1.1 Scaling out and scaling in"></a>7.1.1 Scaling out and scaling in</h3><p><img src="fig13.png" alt="fig13.png"></p>
+<ul>
+<li>Auto scaling components<ul>
+<li>launch configuration </li>
+<li>auto scaling group <ul>
+<li>VPC and subnets </li>
+<li>load balancer</li>
+<li>minimum instances </li>
+<li>maximum instances </li>
+<li>desired capacity </li>
+</ul>
+</li>
+<li>auto scaling policy <ul>
+<li>scheduled</li>
+<li>on demand </li>
+<li>scale out policy</li>
+<li>scale in policy </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-1-2-Dynamic-auto-scaling"><a href="#7-1-2-Dynamic-auto-scaling" class="headerlink" title="7.1.2 Dynamic auto scaling"></a>7.1.2 Dynamic auto scaling</h3><p><img src="fig14.png" alt="fig14.png"></p>
+<p>CloudWatch detect the metrics and trigger auto scaling events. </p>
+<h1 id="8-Amazon-Elastic-Block-Store-EBS"><a href="#8-Amazon-Elastic-Block-Store-EBS" class="headerlink" title="8. Amazon Elastic Block Store(EBS)"></a>8. Amazon Elastic Block Store(EBS)</h1><p>Amazon Elastic Block Store (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available and reliable storage volumes that can be attached to any running instance that is in the same Availability Zone. </p>
+<p>Amazon EBS is recommended when data must be quickly accessible and requires long-term persistence. EBS volumes are particularly well-suited for use as the primary storage for file systems, databases, or for any applications that require fine granular updates and access to raw, unformatted, block-level storage. </p>
+<p>you can launch your EBS volumes as encrypted volumes.</p>
+<p>There are three types of volumes in Amazon EBS. To understand the difference, you need to know what IOPS is. <strong>“IOPS” stands for input/output operations per second or, put it simply, the maximum amount of read/write operations you are able to perform per second.</strong> To <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html" target="_blank" rel="noopener">choose the right Amazon EBS volume type</a> you need to know IOPS requirements for your application.</p>
+<h2 id="8-1-General-Purpose-Volumes"><a href="#8-1-General-Purpose-Volumes" class="headerlink" title="8.1 General Purpose Volumes"></a>8.1 General Purpose Volumes</h2><p>Designed for a broad range of tasks, General Purpose Volumes are backed with Solid State Drive (SSD). The baseline performance of 3 IOPS/GB and a possibility to burst up to 10,000 IOPS makes them a good fit for AWS databases that need a lot of read and write operations, like PostgreSQL, MS SQL or Oracle databases.</p>
+<h2 id="8-2-Provisioned-IOPS-SSD-Volumes"><a href="#8-2-Provisioned-IOPS-SSD-Volumes" class="headerlink" title="8.2 Provisioned IOPS (SSD) Volumes"></a>8.2 Provisioned IOPS (SSD) Volumes</h2><p>By expanding the bandwidth bottleneck, Provisioned IOPS Volumes allow buying read/write operations on demand regardless of the volume capacity. This type of EBS volumes is backed with the same SSD but designed for heavy workloads from 30 IOPS/GB up to 20,000 IOPS. Multiple Provisioned IOPS volumes can be striped thus ensuring up to 48,000 IOPS or 800 MBps of throughput.</p>
+<h2 id="8-3-Magnetic-Volumes"><a href="#8-3-Magnetic-Volumes" class="headerlink" title="8.3 Magnetic Volumes"></a>8.3 Magnetic Volumes</h2><p>The best way to think of the Magnetic Volumes type is as of a low-cost volume that can be used with testing and development environments on Amazon EC2. It can also be used with applications that don’t require a lot of read/write operations. Instead of SSD, this type is based on magnetic HDD drives, thus the IOPS baseline is within the range of 100 up to hundreds of IOPS. Magnetic Volumes can also become a starting point in working with Amazon EC2 — once you understand your IOPS demands, you can select the type of volume that fits best.</p>
+<h1 id="9-Amazon-Simple-Storage-Service"><a href="#9-Amazon-Simple-Storage-Service" class="headerlink" title="9. Amazon Simple Storage Service"></a>9. Amazon Simple Storage Service</h1><h2 id="9-1-Introduction"><a href="#9-1-Introduction" class="headerlink" title="9.1 Introduction"></a>9.1 Introduction</h2><p>No need to manage any infrastructure yourself. S3 help you manage your storage, it can store unlimited number of objects, access any time, from anywhere; rich security controls. </p>
+<p>Amazon Simple Storage Service (Amazon S3) is storage for the Internet. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web. You can accomplish these tasks using the AWS Management Console, which is a simple and intuitive web interface. </p>
+<h3 id="9-1-1-steps"><a href="#9-1-1-steps" class="headerlink" title="9.1.1 steps"></a>9.1.1 steps</h3><ol>
+<li>create a bucket </li>
+<li>add an object to a bucket </li>
+<li>view an object </li>
+<li>move an object </li>
+<li>delete an object and bucket </li>
+</ol>
+<h3 id="9-1-2-bucket"><a href="#9-1-2-bucket" class="headerlink" title="9.1.2 bucket"></a>9.1.2 bucket</h3><p>S3 stores data as objects within buckets. An object consists of a file and optionally any metadata that describes the file. </p>
+<p>To store an object in Amazon S3, you upload the file you want to store to a bucket. When you upload a file, you can <strong>set permissions</strong> on the object as well as any metadata.</p>
+<p>Buckets are the <strong>containers</strong> for objects. You can have one or more buckets. For each bucket, you can control access to it (who can create, delete, and list objects in the bucket), view access logs for it and its objects, and choose the geographical region where Amazon S3 will store the bucket and its contents.</p>
+<p>Need a bucket to hold the data </p>
+<p>associate in region, will make duplicate  </p>
+<p>disigned for seamless scaling </p>
+<h2 id="9-2-Use-cases"><a href="#9-2-Use-cases" class="headerlink" title="9.2 Use cases"></a>9.2 Use cases</h2><ol>
+<li>store application assets </li>
+<li>static web hosting </li>
+<li>backup and disaster recovery </li>
+<li>staging area for big data </li>
+</ol>
+<h1 id="10-Amazon-Glacier"><a href="#10-Amazon-Glacier" class="headerlink" title="10. Amazon Glacier"></a>10. Amazon Glacier</h1><h2 id="10-1-Overview"><a href="#10-1-Overview" class="headerlink" title="10.1 Overview"></a>10.1 Overview</h2><p>Data archiving solition </p>
+<p>long tern storage at low cost </p>
+<p>access limited by vault polocies </p>
+<p>for data not accessed frequently </p>
+<p><img src="fig15.png" alt="fig15.png"></p>
+<p>It can take a really long time to retrieve data from glacier. bulk, standard, expedited. </p>
+<p>Amazon Simple Storage Service Glacier (Amazon S3 Glacier) is a storage service optimized for infrequently used data, or “cold data.” The service provides durable and extremely low-cost storage with security features for data archiving and backup. With Amazon S3 Glacier, you can store your data cost effectively for months, years, or even decades. Amazon S3 Glacier enables you to offload the administrative burdens of operating and scaling storage to AWS, so you don’t have to worry about capacity planning, hardware provisioning, data replication, hardware failure detection and recovery, or time-consuming hardware migrations. </p>
+<h2 id="10-2-Details"><a href="#10-2-Details" class="headerlink" title="10.2 Details"></a>10.2 Details</h2><h3 id="10-2-1-archive"><a href="#10-2-1-archive" class="headerlink" title="10.2.1 archive"></a>10.2.1 archive</h3><p>An archive can be any data such as a photo, video, or document and is a base unit of storage in glacier. </p>
+<h3 id="10-2-2-vault"><a href="#10-2-2-vault" class="headerlink" title="10.2.2 vault"></a>10.2.2 vault</h3><p>Container to store archive. When creating a vault, you specify a name and choose an AWS region where you want to create the vault.  Within a Region, an account must use unique vault names. An AWS account can create same-named vaults in different Regions.</p>
+<h3 id="10-2-3-access-policy"><a href="#10-2-3-access-policy" class="headerlink" title="10.2.3 access policy"></a>10.2.3 access policy</h3><p>who can access </p>
+<h3 id="10-2-4-Job"><a href="#10-2-4-Job" class="headerlink" title="10.2.4 Job"></a>10.2.4 Job</h3><p>Glacier jobs can perform a select query on an archive, retrieve an archive, or get an inventory of a vault. When performing a query on an archive, you initiate a job providing a SQL query and list of Glacier archive objects. Glacier Select runs the query in place and writes the output results to Amazon S3.</p>
+<h2 id="10-3-use-cases"><a href="#10-3-use-cases" class="headerlink" title="10.3 use cases"></a>10.3 use cases</h2><ol>
+<li>archive database snapshots and log files </li>
+<li>low cost enables more comprehensive backups </li>
+<li>archive older documents, audio, video </li>
+</ol>
+<h1 id="11-Amazon-Relational-Database-Service-Amazon-RDS"><a href="#11-Amazon-Relational-Database-Service-Amazon-RDS" class="headerlink" title="11. Amazon Relational Database Service (Amazon RDS)"></a>11. Amazon Relational Database Service (Amazon RDS)</h1><h2 id="11-1-Overview"><a href="#11-1-Overview" class="headerlink" title="11.1 Overview"></a>11.1 Overview</h2><h3 id="11-1-1-Chanllenges-of-relational-databases"><a href="#11-1-1-Chanllenges-of-relational-databases" class="headerlink" title="11.1.1 Chanllenges of relational databases"></a>11.1.1 Chanllenges of relational databases</h3><ol>
+<li>server maintenance and energy footprint </li>
+<li>software install and patches </li>
+<li>database backups and high availability </li>
+<li>limits on scalability </li>
+<li>data security </li>
+<li>os install and patches </li>
+</ol>
+<h3 id="11-1-2-RDS-intro"><a href="#11-1-2-RDS-intro" class="headerlink" title="11.1.2 RDS intro"></a>11.1.2 RDS intro</h3><p>Amazon RDS is a managed service that sets up and operates a relational database in the cloud. </p>
+<p>AWS help you manage: </p>
+<ul>
+<li>OS installation and patches </li>
+<li>database software install and patches </li>
+<li>database backups </li>
+<li>high availability </li>
+<li>scaling </li>
+<li>power and rack &amp; stack </li>
+<li>server maintenance </li>
+</ul>
+<p>It support mainstream relation databases: </p>
+<p><img src="fig16.png" alt="fig16.png"></p>
+<h2 id="11-2-Use-cases"><a href="#11-2-Use-cases" class="headerlink" title="11.2 Use cases"></a>11.2 Use cases</h2><p><img src="fig17.png" alt="fig17.png"></p>
+<h1 id="12-Amazon-DynamoDB"><a href="#12-Amazon-DynamoDB" class="headerlink" title="12. Amazon DynamoDB"></a>12. Amazon DynamoDB</h1><h2 id="12-1-Overview"><a href="#12-1-Overview" class="headerlink" title="12.1 Overview"></a>12.1 Overview</h2><h3 id="12-1-1-Features"><a href="#12-1-1-Features" class="headerlink" title="12.1.1 Features"></a>12.1.1 Features</h3><ul>
+<li>NoSQL databse tables as a service </li>
+<li>store as many items as you want </li>
+<li>items may have differing attributes </li>
+<li>low latency queries </li>
+<li>scalable read/ write throughput </li>
+</ul>
+<h3 id="12-1-2-Partitioning"><a href="#12-1-2-Partitioning" class="headerlink" title="12.1.2 Partitioning"></a>12.1.2 Partitioning</h3><p>as table grows, table partitioned by key </p>
+<p>query by key to find items efficiently </p>
+<p>scan to find items by any attribute, less efficient </p>
+<h2 id="12-2-Use-cases"><a href="#12-2-Use-cases" class="headerlink" title="12.2 Use cases"></a>12.2 Use cases</h2><ul>
+<li>web </li>
+<li>mobile apps </li>
+<li>internet of things </li>
+<li>ad tech </li>
+</ul>
+<h1 id="13-Redshift"><a href="#13-Redshift" class="headerlink" title="13. Redshift"></a>13. Redshift</h1><h2 id="13-1-Redshift-introduction"><a href="#13-1-Redshift-introduction" class="headerlink" title="13.1 Redshift introduction"></a>13.1 Redshift introduction</h2><ul>
+<li>data warehouse, to analyze the data with query. </li>
+<li>parallel processing architecture </li>
+</ul>
+<p><img src="fig18.png" alt="fig18.png"></p>
+<p>Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools. It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.</p>
+<h2 id="13-2-Overview"><a href="#13-2-Overview" class="headerlink" title="13.2 Overview"></a>13.2 Overview</h2><h3 id="13-2-1-Cluster-management"><a href="#13-2-1-Cluster-management" class="headerlink" title="13.2.1 Cluster management"></a>13.2.1 Cluster management</h3><p>A cluster is a set of nodes, which consists of a leader node and one or more compute nodes, The type and number of compute nodes that you need depends on the size of your data, the number of queries you will execute, and the query execution performance that you need.</p>
+<h2 id="13-3-use-cases"><a href="#13-3-use-cases" class="headerlink" title="13.3 use cases"></a>13.3 use cases</h2><ol>
+<li><p>Enterprise Data Warehouse (EDW)</p>
+</li>
+<li><p>Big Data </p>
+</li>
+<li><p>Saas </p>
+</li>
+</ol>
+<ul>
+<li>scale the data warehouse capacity as demand grows </li>
+<li>add analytic functionality to applications </li>
+<li>reduce hardware and software costs by an order of magnitude </li>
+</ul>
+<h1 id="14-Amazon-Aurora"><a href="#14-Amazon-Aurora" class="headerlink" title="14. Amazon Aurora"></a>14. Amazon Aurora</h1><h2 id="14-1-Overview"><a href="#14-1-Overview" class="headerlink" title="14.1 Overview"></a>14.1 Overview</h2><p>mysql relational database </p>
+<p>It is designed to deliver the speed and reliability of high-end commercial databases in a simple and cost-effective manner. Aurora is designed to be compatible with MySQL 5.6 and delivers five times the throughput of standard MySQL running on the same hardware. DBAs are able to save time on planning backup storage disks, as data is continuously backed up to AWS S3 in real time, with no performance impact to the end user. </p>
+<h2 id="14-2-benefits"><a href="#14-2-benefits" class="headerlink" title="14.2 benefits"></a>14.2 benefits</h2><p><img src="fig19.png" alt="fig19.png"></p>
+<p><img src="fig20.png" alt="fig20.png"></p>
+<h2 id="15-Trused-Advisor"><a href="#15-Trused-Advisor" class="headerlink" title="15. Trused Advisor"></a>15. Trused Advisor</h2><p>Used to keep track of aws resources. – a dashboard for all the risks and warnings that you can take actions to save money </p>
+<p>Detect your usage in four categories: </p>
+<ol>
+<li>cost optimization </li>
+<li>performance </li>
+<li>security </li>
+<li>fault tolerance </li>
+</ol>
+<div id="disqus_thread"></div>
+<script>
+
+<p>/**</p>
+<ul>
+<li>RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.</li>
+<li>LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: <a href="https://disqus.com/admin/universalcode/#configuration-variables*/" target="_blank" rel="noopener">https://disqus.com/admin/universalcode/#configuration-variables*/</a><br>/*<br>var disqus_config = function () {<br>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page’s canonical URL variable<br>this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page’s unique identifier variable<br>};</li>
+<li>/<br>(function() { // DON’T EDIT BELOW THIS LINE<br>var d = document, s = d.createElement(‘script’);<br>s.src = ‘<a href="https://leileichen.disqus.com/embed.js&#39;" target="_blank" rel="noopener">https://leileichen.disqus.com/embed.js&#39;</a>;<br>s.setAttribute(‘data-timestamp’, +new Date());<br>(d.head || d.body).appendChild(s);<br>})();<br></script><br><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>AWS essentials(3) - Core Services</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.2k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-01-21, 17:43:28</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-27, 19:52:50</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-essentials-3-Core-Services/" title="AWS essentials(3) - Core Services">https://www.llchen60.com/AWS-essentials-3-Core-Services/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/AWS-essentials-3-Core-Services/';
+            this.page.identifier = 'AWS-essentials-3-Core-Services/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-essentials-3-Core-Services/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-essentials-3-Core-Services/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#web','#AWS','#frontend','#css','#java','#backend','#thought','#distributed system','#system design','#DDD','#network','#reading','#JavaScript','#callback','#javaScript','#Linux','#FrontEnd','#React','#backend - ruby - tutorial','#Spring','#accessibility','#tomcat','#optimization','#tomcat - connector','#tomcat - backend - servlet','#TypeScript','#JavaScript - OOP','#Design Pattern','#js','#i18next','#OS','#Unix','#history','#System Design','#架构','#数据结构与算法','#树','#编程思维','#网络协议',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
