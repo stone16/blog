@@ -117,3 +117,6 @@ search:
 
 sitemap:
   path: sitemap.xml
+
+# Google Analytics
+google_analytics: 'UA-127393934-1'            # Format: UA-xxxxxx-xx
