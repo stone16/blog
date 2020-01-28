@@ -3,8 +3,8 @@ title: React初探
 date: 2020-01-27 21:58:30
 categories: FrontEnd
 tags:
-    -React 
-	-FrontEnd
+    - React 
+	- FrontEnd
 top:
 ---
 初探React,很喜欢Component这种方式，很大程度提高了复用性，如果抛除C/S的区别，感觉有点像mason，毕竟刚刚弃掉mason的坑，很有意思的React。
