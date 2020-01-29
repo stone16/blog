@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Developing on AWS Note.11 Deploying Applications</title>
+      <link href="/Developing-on-AWS-Note-11-Deploying-Applications/"/>
+      <url>/Developing-on-AWS-Note-11-Deploying-Applications/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-DevOps"><a href="#1-DevOps" class="headerlink" title="1. DevOps"></a>1. DevOps</h1><ul><li>Application is the application plus all of the associated infrastructure</li><li>includes<ul><li>VPCs </li><li>load balancers</li><li>auto scaling groups </li><li>Amazon RDS databases</li><li>Amazon S3 bucket </li><li>elastiCache servers</li></ul></li><li>deploying in the cloud helps break down these traditional silos. Bugs due to different environment. </li><li>practices<ul><li>microservices</li><li>CI/ CD</li><li>Infrastructure as code </li></ul></li><li>Tools <ul><li>AWS Code Services </li></ul></li><li>Under a DevOps model, development and operations are no longer siloed. </li><li>Sometimes, those two functions are merged into a single team where engineers work across the entire application lifecycle, from development and test to deployment to operations, and develop a range of skills not limited to a single function. </li><li>Quality assurance and security teams could become more tightly integrated with development and operations throughout the application lifecycle. </li></ul><h1 id="2-Release-Processes-Major-Phases"><a href="#2-Release-Processes-Major-Phases" class="headerlink" title="2. Release Processes Major Phases"></a>2. Release Processes Major Phases</h1><p>Each steps can be automated without the entire release process being automated. </p><ul><li>Source<ul><li>Check in source code such as .java files </li><li>Code review</li></ul></li><li>Build<ul><li>Compile code </li><li>style checkers</li><li>code metrics</li><li>create container images </li></ul></li><li>Test <ul><li>Integration tests with other systems</li><li>load testing</li><li>UI tests</li><li>penetration testing </li></ul></li><li>Deploy<ul><li>Deployment to production environments </li></ul></li><li>Monitor<ul><li>Monitor in production to quickly detect unusual activity or errors</li></ul></li></ul><h1 id="3-Understanding-CI-amp-CD"><a href="#3-Understanding-CI-amp-CD" class="headerlink" title="3. Understanding CI &amp; CD"></a>3. Understanding CI &amp; CD</h1><ul><li><p>Continuous Integration </p><ul><li>The practice of checking code and verifying each change with an automated build and test process</li><li>Require teams to write automated tests which can improve the quality of the software being released and reduce the time it takes to validate that the new version of software is good. </li><li>Architecture for cloud Continuous Integration<ul><li>Developer commits changes to the central repo. Pre-commit hooks should run and verify that the code meets specified requirements</li><li>A CI server pulls the changes from the central repo and builds the code</li><li>The CI server runs all required tests against the new branch or mainline change. </li><li>The CI server returns a report to developer and stops the build job if a failure occurs. </li><li>If the changes pass the required tests, the CI server builds the artifacts</li><li>The CI server pushes artifacts to the package builder</li><li>The <strong>package builder</strong> gets configuration information from the version control system </li><li>The pacakge builder uses the configuration information and the artifacts to build the specified packages </li><li>the packages are stored in a repository </li><li>the repo uses a post-receive hook to deploy specific packages to staging. </li><li>Do not fear rollbacks. Errors will happen, mistakes will be made, and the benefit of employing version control systems is that when appropriate, you can always revert to a previously working state and save yourself the time and effort of trying to debug </li></ul></li></ul></li><li><p>Continuous Delivery</p><ul><li>It extends continuous Integration to include testing out to production-like stages and running verification testing against those deployments. </li><li>CD may extend all the way to a production deployment, but they have some form of manual intervention between a code check-in and when that code is available for customers to use</li></ul></li><li><p>Continuous Deployment </p><ul><li>extends continuous delivery and is the automated release of software to customers from check in through to production without human intervention.  </li></ul></li></ul><h1 id="4-How-do-you-deploy-all-infrastructure-along-with-your-application"><a href="#4-How-do-you-deploy-all-infrastructure-along-with-your-application" class="headerlink" title="4. How do you deploy all infrastructure along with your application?"></a>4. How do you deploy all infrastructure along with your application?</h1><ul><li>Infrastructure as code <ul><li>Define your AWS environment so that it can be created in a repeatable automated fashion </li><li>stand up identical dev/ test environments on demand </li><li>use the same code to create your production environment that you used to create your other environments</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> CI/ CD </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Developing on AWS Note.10 Docker, ECS, Security</title>
       <link href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"/>
       <url>/Developing-on-AWS-Note-10-Docker-ECS-Security/</url>

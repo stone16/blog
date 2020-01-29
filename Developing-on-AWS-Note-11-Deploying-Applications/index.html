@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.11 Deploying Applications | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , CI/ CD ">
+  <meta name="description" content="Developing on AWS Note.11 Deploying Applications | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -551,12 +551,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Developing-on-AWS-Note-11-Deploying-Applications" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Developing on AWS Note.11 Deploying Applications</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color2">CI/ CD</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-28 23:23:08'>2020-01-28 23:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:552</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-DevOps"><span class="toc-text">1. DevOps</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Release-Processes-Major-Phases"><span class="toc-text">2. Release Processes Major Phases</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Understanding-CI-amp-CD"><span class="toc-text">3. Understanding CI &amp; CD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-How-do-you-deploy-all-infrastructure-along-with-your-application"><span class="toc-text">4. How do you deploy all infrastructure along with your application?</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -569,26 +627,139 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-DevOps"><a href="#1-DevOps" class="headerlink" title="1. DevOps"></a>1. DevOps</h1><ul>
+<li>Application is the application plus all of the associated infrastructure</li>
+<li>includes<ul>
+<li>VPCs </li>
+<li>load balancers</li>
+<li>auto scaling groups </li>
+<li>Amazon RDS databases</li>
+<li>Amazon S3 bucket </li>
+<li>elastiCache servers</li>
+</ul>
+</li>
+<li>deploying in the cloud helps break down these traditional silos. Bugs due to different environment. </li>
+<li>practices<ul>
+<li>microservices</li>
+<li>CI/ CD</li>
+<li>Infrastructure as code </li>
+</ul>
+</li>
+<li>Tools <ul>
+<li>AWS Code Services </li>
+</ul>
+</li>
+<li>Under a DevOps model, development and operations are no longer siloed. </li>
+<li>Sometimes, those two functions are merged into a single team where engineers work across the entire application lifecycle, from development and test to deployment to operations, and develop a range of skills not limited to a single function. </li>
+<li>Quality assurance and security teams could become more tightly integrated with development and operations throughout the application lifecycle. </li>
+</ul>
+<h1 id="2-Release-Processes-Major-Phases"><a href="#2-Release-Processes-Major-Phases" class="headerlink" title="2. Release Processes Major Phases"></a>2. Release Processes Major Phases</h1><p>Each steps can be automated without the entire release process being automated. </p>
+<ul>
+<li>Source<ul>
+<li>Check in source code such as .java files </li>
+<li>Code review</li>
+</ul>
+</li>
+<li>Build<ul>
+<li>Compile code </li>
+<li>style checkers</li>
+<li>code metrics</li>
+<li>create container images </li>
+</ul>
+</li>
+<li>Test <ul>
+<li>Integration tests with other systems</li>
+<li>load testing</li>
+<li>UI tests</li>
+<li>penetration testing </li>
+</ul>
+</li>
+<li>Deploy<ul>
+<li>Deployment to production environments </li>
+</ul>
+</li>
+<li>Monitor<ul>
+<li>Monitor in production to quickly detect unusual activity or errors</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Understanding-CI-amp-CD"><a href="#3-Understanding-CI-amp-CD" class="headerlink" title="3. Understanding CI &amp; CD"></a>3. Understanding CI &amp; CD</h1><ul>
+<li><p>Continuous Integration </p>
+<ul>
+<li>The practice of checking code and verifying each change with an automated build and test process</li>
+<li>Require teams to write automated tests which can improve the quality of the software being released and reduce the time it takes to validate that the new version of software is good. </li>
+<li>Architecture for cloud Continuous Integration<ul>
+<li>Developer commits changes to the central repo. Pre-commit hooks should run and verify that the code meets specified requirements</li>
+<li>A CI server pulls the changes from the central repo and builds the code</li>
+<li>The CI server runs all required tests against the new branch or mainline change. </li>
+<li>The CI server returns a report to developer and stops the build job if a failure occurs. </li>
+<li>If the changes pass the required tests, the CI server builds the artifacts</li>
+<li>The CI server pushes artifacts to the package builder</li>
+<li>The <strong>package builder</strong> gets configuration information from the version control system </li>
+<li>The pacakge builder uses the configuration information and the artifacts to build the specified packages </li>
+<li>the packages are stored in a repository </li>
+<li>the repo uses a post-receive hook to deploy specific packages to staging. </li>
+<li>Do not fear rollbacks. Errors will happen, mistakes will be made, and the benefit of employing version control systems is that when appropriate, you can always revert to a previously working state and save yourself the time and effort of trying to debug </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Continuous Delivery</p>
+<ul>
+<li>It extends continuous Integration to include testing out to production-like stages and running verification testing against those deployments. </li>
+<li>CD may extend all the way to a production deployment, but they have some form of manual intervention between a code check-in and when that code is available for customers to use</li>
+</ul>
+</li>
+<li><p>Continuous Deployment </p>
+<ul>
+<li>extends continuous delivery and is the automated release of software to customers from check in through to production without human intervention.  </li>
+</ul>
+</li>
+</ul>
+<h1 id="4-How-do-you-deploy-all-infrastructure-along-with-your-application"><a href="#4-How-do-you-deploy-all-infrastructure-along-with-your-application" class="headerlink" title="4. How do you deploy all infrastructure along with your application?"></a>4. How do you deploy all infrastructure along with your application?</h1><ul>
+<li>Infrastructure as code <ul>
+<li>Define your AWS environment so that it can be created in a repeatable automated fashion </li>
+<li>stand up identical dev/ test environments on demand </li>
+<li>use the same code to create your production environment that you used to create your other environments</li>
+</ul>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.11 Deploying Applications</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">552</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:22:38</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:23:08</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-11-Deploying-Applications/" title="Developing on AWS Note.11 Deploying Applications">https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/SQS/index.html';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/';
+            this.page.identifier = 'Developing-on-AWS-Note-11-Deploying-Applications/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -604,8 +775,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/SQS/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-11-Deploying-Applications/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
