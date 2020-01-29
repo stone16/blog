@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java-Synchronized方法 | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" Java , Concurrency , Synchronized , Lock ">
-  <meta name="description" content="Java-Synchronized方法 | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , EC2 , ELB , AutoScaling ">
+  <meta name="description" content="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -401,9 +401,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Java-Synchronized方法" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java-Synchronized方法</h1>
+        <h1 class="article-title">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</h1>
     
     <div class="article-meta">
         
@@ -411,32 +411,32 @@
         
         <span class="book">
             
-                <a  data-rel="BackEnd">BackEnd</a>
+                <a  data-rel="Cloud">Cloud</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">Java</a>
+            <a class="color4">AWS</a>
             
-            <a class="color2">Concurrency</a>
+            <a class="color4">EC2</a>
             
-            <a class="color3">Synchronized</a>
+            <a class="color4">ELB</a>
             
-            <a class="color5">Lock</a>
+            <a class="color2">AutoScaling</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-28 20:35:58'>2020-01-28 20:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-28 22:59:11'>2020-01-28 22:58</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.9k</span>
+        <span>字数:831</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -466,7 +466,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-synchronized-type"><span class="toc-text">1. synchronized type</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Synchronized-Methods"><span class="toc-text">2. Synchronized Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-不可插入"><span class="toc-text">2.1 不可插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-自动传递状态"><span class="toc-text">2.2 自动传递状态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Synchronized-Statements"><span class="toc-text">3. Synchronized Statements</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-底层实现原理"><span class="toc-text">4. 底层实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-synchronized-优化"><span class="toc-text">5. synchronized 优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-CAS操作"><span class="toc-text">5.1 CAS操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-操作过程"><span class="toc-text">5.1.1 操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-存在的问题"><span class="toc-text">5.1.2 存在的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-对象头"><span class="toc-text">5.2 对象头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-偏向锁"><span class="toc-text">5.3 偏向锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-轻量级锁"><span class="toc-text">5.4 轻量级锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-比较"><span class="toc-text">5.5 比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-Overview"><span class="toc-text">0. Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Cloud-computing-definition"><span class="toc-text">1.  Cloud computing definition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Models-of-Cloud-Computing"><span class="toc-text">2. Models of Cloud Computing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AWS-Service-Stack"><span class="toc-text">3. AWS Service Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Compute-services"><span class="toc-text">4. Compute services</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-EC2"><span class="toc-text">4.1 EC2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-ELB-Elastic-Load-Balancing"><span class="toc-text">4.2 ELB - Elastic Load Balancing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Auto-Scaling"><span class="toc-text">4.3 Auto Scaling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Exceptions-and-Errors-handle"><span class="toc-text">5. Exceptions and Errors handle</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -482,65 +482,240 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-synchronized-type"><a href="#1-synchronized-type" class="headerlink" title="1. synchronized type"></a>1. synchronized type</h1><ol>
-<li>Synchronized methods</li>
-<li>Synchronized statements </li>
-</ol>
-<h1 id="2-Synchronized-Methods"><a href="#2-Synchronized-Methods" class="headerlink" title="2. Synchronized Methods"></a>2. Synchronized Methods</h1><p>修饰实例方法，作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁。修饰静态方法，作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁。 </p>
-<h2 id="2-1-不可插入"><a href="#2-1-不可插入" class="headerlink" title="2.1 不可插入"></a>2.1 不可插入</h2><p>It is not possible for two invocations of synchronized methods on the same object to interleave. When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block (suspend execution) until the first thread is done with the object.</p>
-<p>当一个方法是同步的时候，当前线程在执行时，其他线程都会停止运行，直到线程完成工作，下一个线程继续执行。</p>
-<h2 id="2-2-自动传递状态"><a href="#2-2-自动传递状态" class="headerlink" title="2.2 自动传递状态"></a>2.2 自动传递状态</h2><p>when a synchronized method exits, it automatically establishes a happens-before relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.</p>
-<p>保证状态可见，上个线程对对象的操作结果会作为输入给下一个线程来使用。 </p>
-<h1 id="3-Synchronized-Statements"><a href="#3-Synchronized-Statements" class="headerlink" title="3. Synchronized Statements"></a>3. Synchronized Statements</h1><p>修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</p>
-<p>Synchronized statements must specify the object that provides the intrinsic lock. </p>
-<pre><code>public void addName(String name) {
-    synchronized(this) {
-        lastName = name;
-        nameCount++;
-    }
-    nameList.add(name);
-}</code></pre><p>这里lastname 和namecount都要改变，是同步的。但要注意在声明里不可以调用其他对象的方法。</p>
-<h1 id="4-底层实现原理"><a href="#4-底层实现原理" class="headerlink" title="4. 底层实现原理"></a>4. 底层实现原理</h1><p>可以锁代码块，也可以锁方法。如果锁的是类的实例对象，那么就是锁这个。如果锁的是类对象，那么尽管new多个实例对象，他们仍然属于同一个类，依然会被锁住，即线程之间保证同步关系。</p>
-<p><code>synchronized</code> 同步语句块的实现使用的是 <code>monitorenter</code> 和 <code>monitorexit</code> 指令，其中 <code>monitorenter</code> 指令指向同步代码块的开始位置，<code>monitorexit</code> 指令则指明同步代码块的结束位置。</p>
-<p>当执行 monitorenter 指令时，线程试图获取锁也就是获取 monitor(monitor对象存在于每个Java对象的对象头中，synchronized 锁便是通过这种方式获取锁的，也是为什么Java中任意对象可以作为锁的原因) 的持有权.当计数器为0则可以成功获取，获取后将锁计数器设为1也就是加1。相应的在执行 monitorexit 指令后，将锁计数器设为0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
-<p>最开始的Synchronized是调用OS的mutex lock，要完成context switch ，映射到原生操作系统里，从用户态转到内核态。现在从JVM层面做了大量的优化，减少了锁开销。</p>
-<h1 id="5-synchronized-优化"><a href="#5-synchronized-优化" class="headerlink" title="5. synchronized 优化"></a>5. synchronized 优化</h1><p>synchronized是互斥的，我们需要找方法加快中间过程，比如传统的零售交钱排队，找零到扫码付费的转变。这里介绍轻量级锁，偏向锁。</p>
-<h2 id="5-1-CAS操作"><a href="#5-1-CAS操作" class="headerlink" title="5.1 CAS操作"></a>5.1 CAS操作</h2><p>使用锁的时候，线程获取锁是一种悲观锁，即认为每一次执行临界区的代码都会产生冲突，所以当前线程获取锁的时候同时会堵塞其他线程获取锁。而CAS是一种乐观锁策略，<strong>假设所有线程访问共享资源的时候不会出现冲突</strong>。出现了冲突以后采取CAS(compare and swap) 策略，用来比较交换，看线程之间是否出现了冲突。</p>
-<h3 id="5-1-1-操作过程"><a href="#5-1-1-操作过程" class="headerlink" title="5.1.1 操作过程"></a>5.1.1 操作过程</h3><p>CAS比较交换的过程可以通俗的理解为CAS(V,O,N)，包含三个值分别为：V 内存地址存放的实际值；O 预期的值（旧值）；N 更新的新值。当V和O相同时，也就是说旧值和内存中实际的值相同表明该值没有被其他线程更改过，即该旧值O就是目前来说最新的值了，自然而然可以将新值N赋值给V。反之，V和O不相同，表明该值已经被其他线程改过了则该旧值O不是最新版本的值了，所以不能将新值N赋给V，返回V即可。当多个线程使用CAS操作一个变量是，只有一个线程会成功，并成功更新，其余会失败。失败的线程会重新尝试，当然也可以选择挂起线程。</p>
-<p>It compares the contents of a memory location with a given value and, only if they are the same, modifies the contents of that memory location to a new given value. This is done as a single atomic operation. The atomicity guarantees that the new value is calculated based on up-to-date information; if the value had been updated by another thread in the meantime, the write would fail.</p>
-<p>非阻塞同步。</p>
-<h3 id="5-1-2-存在的问题"><a href="#5-1-2-存在的问题" class="headerlink" title="5.1.2 存在的问题"></a>5.1.2 存在的问题</h3><ol>
-<li>ABA问题</li>
-</ol>
-<p>发生了变化，但又变了回去。（加上序号来解决）</p>
-<ol start="2">
-<li>自旋时间过长</li>
-<li>只能保证一个共享变量的原子操作</li>
-</ol>
-<h2 id="5-2-对象头"><a href="#5-2-对象头" class="headerlink" title="5.2 对象头"></a>5.2 对象头</h2><p>对象的锁 -&gt;  对象的标记，存在java对象的对象头里面。存放有</p>
-<ol>
-<li>锁状态<ul>
-<li>无锁状态</li>
-<li>偏向锁状态</li>
-<li>轻量级锁状态</li>
-<li>重量级锁状态</li>
+        <h1 id="0-Overview"><a href="#0-Overview" class="headerlink" title="0. Overview"></a>0. Overview</h1><p>We use SDKs to interract with Application Programing Interface(API), and then connect to all AWS services. </p>
+<h1 id="1-Cloud-computing-definition"><a href="#1-Cloud-computing-definition" class="headerlink" title="1.  Cloud computing definition"></a>1.  Cloud computing definition</h1><ul>
+<li>enable you to stop thinking of your infrastructure as hardware, and instead think of it and use it as software. </li>
+</ul>
+<h1 id="2-Models-of-Cloud-Computing"><a href="#2-Models-of-Cloud-Computing" class="headerlink" title="2. Models of Cloud Computing"></a>2. Models of Cloud Computing</h1><ul>
+<li><p>IaaS (Infrastructure as a Service)</p>
+<ul>
+<li>basic buiding blocks for Cloud IT <ul>
+<li>Networking features </li>
+<li>Computers </li>
+<li>Data storage space </li>
 </ul>
 </li>
-<li>对象的hashcode</li>
-<li>对象分代年龄</li>
-<li>是否是偏向锁</li>
-<li>锁标志位</li>
-</ol>
-<blockquote>
-<p>Tips: 级别从低到高依次是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态，这几个状态会随着竞争情况逐渐升级。锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后不能降级成偏向锁。这种锁升级却不能降级的策略，目的是为了提高获得锁和释放锁的效率。</p>
-</blockquote>
-<h2 id="5-3-偏向锁"><a href="#5-3-偏向锁" class="headerlink" title="5.3 偏向锁"></a>5.3 偏向锁</h2><p>大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。</p>
-<p>当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进入和退出同步块时不需要进行CAS操作来加锁和解锁，只需简单地测试一下对象头的Mark Word里是否存储着指向当前线程的偏向锁。如果测试成功，表示线程已经获得了锁。如果测试失败，则需要再测试一下Mark Word中偏向锁的标识是否设置成1（表示当前是偏向锁）：如果没有设置，则使用CAS竞争锁；如果设置了，则尝试使用CAS将对象头的偏向锁指向当前线程</p>
-<p>偏向锁使用了一种等到竞争出现才释放锁的机制，所以当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。</p>
-<h2 id="5-4-轻量级锁"><a href="#5-4-轻量级锁" class="headerlink" title="5.4 轻量级锁"></a>5.4 轻量级锁</h2><p>线程在执行同步块之前，JVM会先在当前线程的栈桢中创建用于存储锁记录的空间，并将对象头中的Mark Word复制到锁记录中，官方称为Displaced Mark Word。然后线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针。如果成功，当前线程获得锁，如果失败，表示其他线程竞争锁，当前线程便尝试使用自旋来获取锁。</p>
-<p>轻量级解锁时，会使用原子的CAS操作将Displaced Mark Word替换回到对象头，如果成功，则表示没有竞争发生。如果失败，表示当前锁存在竞争，锁就会膨胀成重量级锁。</p>
-<h2 id="5-5-比较"><a href="#5-5-比较" class="headerlink" title="5.5 比较"></a>5.5 比较</h2><p><img src="https://i.loli.net/2020/01/29/meDvzPd6g24ITU9.png" alt="锁比较.png"></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://en.wikipedia.org/wiki/Compare-and-swap" target="_blank" rel="noopener">1. Wiki: Compare and swap</a></p>
+<li>PaaS (Platform as a Service)<ul>
+<li>enables you to run applications without the need to manage underlying infrastructure(hardware and operating systems)</li>
+</ul>
+</li>
+<li>SaaS (Software as a Service)<ul>
+<li>A complete product that is run and managed by the service provider<h1 id="3-AWS-Service-Stack"><a href="#3-AWS-Service-Stack" class="headerlink" title="3. AWS Service Stack"></a>3. AWS Service Stack</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Infrastructure </p>
+<ul>
+<li>Regions </li>
+<li>Availability Zones </li>
+<li>Edge Locations </li>
+</ul>
+</li>
+<li><p>Foundation Services </p>
+<ul>
+<li>Compute<ul>
+<li>virtual instances </li>
+<li>auto scaling </li>
+<li>load balancing </li>
+</ul>
+</li>
+<li>networking </li>
+<li>storage <ul>
+<li>object </li>
+<li>block </li>
+<li>archive </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Platform Services </p>
+<ul>
+<li>Compute<ul>
+<li>AWS Lambda</li>
+<li>AWS Elastic Beanstalk </li>
+<li>Amazon ECS</li>
+<li>Amazon EKS </li>
+</ul>
+</li>
+<li>database<ul>
+<li>relational </li>
+<li>No SQL </li>
+<li>Caching </li>
+<li>Products <ul>
+<li>DynamoDB</li>
+<li>RDS - relational database service </li>
+<li>Elastic Cache </li>
+<li>Redshift - data warehouse, for analysis and migration </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Analytics <ul>
+<li>Cluster computing </li>
+<li>real time </li>
+<li>data warehouse </li>
+<li>data workflows </li>
+<li>Products <ul>
+<li>EMR - managed hadoop framework </li>
+<li>Kinesis </li>
+<li>CloudSearch </li>
+<li>ElasticSearch </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>App services <ul>
+<li>Queuing </li>
+<li>Orchestration </li>
+<li>App streaming </li>
+<li>Transcoding </li>
+<li>Email </li>
+<li>Search </li>
+<li>Products <ul>
+<li>SQS </li>
+<li>SNS </li>
+<li>SES </li>
+<li>Amazon Step Functions </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Deployment and management <ul>
+<li>containers </li>
+<li>Dev/ ops tools </li>
+<li>resource templates </li>
+<li>usage tracking </li>
+<li>monitoring and logs </li>
+<li>products <ul>
+<li>CodeCommit </li>
+<li>CodeDeploy </li>
+<li>CodePipeline </li>
+<li>CodeBuild </li>
+<li>X-Ray </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Mobile Services <ul>
+<li>identity </li>
+<li>sync </li>
+<li>mobile analytics </li>
+<li>notifications </li>
+<li>products <ul>
+<li>Cognito </li>
+<li>Pinpoint </li>
+<li>API gateway </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Applications </p>
+<ul>
+<li>Virtual Desktops </li>
+<li>Collaboration and Sharing </li>
+</ul>
+</li>
+</ul>
+<h1 id="4-Compute-services"><a href="#4-Compute-services" class="headerlink" title="4. Compute services"></a>4. Compute services</h1><h2 id="4-1-EC2"><a href="#4-1-EC2" class="headerlink" title="4.1 EC2"></a>4.1 EC2</h2><ul>
+<li>Computers in the cloud. </li>
+<li>Can create images of your servers at any time with a few clicks or simple API call. </li>
+<li>different instance type for different use cases:<ul>
+<li>low traffic websites </li>
+<li>small database </li>
+<li>high performance web services </li>
+<li>high performance databases </li>
+<li>distributed memory caches </li>
+<li>data warehousing </li>
+<li>log or data-processing applications </li>
+<li>3D visualizations </li>
+<li>Machine learning </li>
+</ul>
+</li>
+<li>Pricing <ul>
+<li>on demand </li>
+<li>reserved instances </li>
+<li>spot instances </li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-ELB-Elastic-Load-Balancing"><a href="#4-2-ELB-Elastic-Load-Balancing" class="headerlink" title="4.2 ELB - Elastic Load Balancing"></a>4.2 ELB - Elastic Load Balancing</h2><ul>
+<li><p>distribute traffic across multiple EC2 instances, in multiple Availability Zones </p>
+</li>
+<li><p>Support health checks to detect unhealthy Amazon EC2 instances </p>
+<ul>
+<li>To discover the availability of instances, a ELB periodically sends pings, attempts connections or sends requests to test the EC2 instances.  </li>
+</ul>
+</li>
+<li><p>Supports the routing and load balancing of traffic to Amazon EC2 instances. </p>
+</li>
+<li><p>when the LB determins that an instance is unhealthy, it stops routing requests to that instance. </p>
+</li>
+<li><p>sticky sessions</p>
+<ul>
+<li>enables the load balancer to bind a user’s session to a <strong>specific server instance</strong>. </li>
+</ul>
+</li>
+<li><p>we should get rid of sticky sessions since: </p>
+<ul>
+<li>limit application’s scalability </li>
+<li>lead to unequal load across servers </li>
+<li>affect end-user response time since a single user’s load isn’t even spread across servers. </li>
+</ul>
+</li>
+<li><p>Instead of using sticky sessions: cache </p>
+<ul>
+<li>manage user sessions by<ul>
+<li>store locally to the node responding to the HTTP request </li>
+<li>designate a layer which can store those sessions in a scalable and robust manner. </li>
+</ul>
+</li>
+<li>Duration based session stickiness<ul>
+<li>LB uses a special LB generated cookie to rack the application instance for each request. <strong>When the load balancer reveives a request, it first checks to see whether this cookie is present in the request</strong>.  If so, the reqeust is sent to the application instance specified in the cookie. If not, the LB chooses an application instance based on the existing load balancing algo. <strong>A cookie is inserted into the response for binding subsequent requests from the same user to that application instance</strong>. The stickiness policy configuration defines a cookie expiration, which establishes the duration of validity for each cookie. Cookie will be automatically updated after its duration expires. </li>
+</ul>
+</li>
+<li>Application base session stickiness <ul>
+<li>LB uses a <strong>special cookie</strong> to associate the session with the original server that handled the reqeust. But follows the lifetime of the application-generated cookie corresponding to the cookie name specified in the policy configuration. </li>
+<li>The LB only inserts a new stickiness cookie if the application response includes a new application cookie. </li>
+<li>The load balancer stickiness cookie does not update with each request. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</li>
+<li>Application often store session data in memory, but this approach does not scale well</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Methods available to manage session data without sticky sessions include: </p>
+<ul>
+<li>using ElasticCache to store session data </li>
+<li>using Amazon DynamoDB to store session data </li>
+</ul>
+</li>
+</ul>
+<h2 id="4-3-Auto-Scaling"><a href="#4-3-Auto-Scaling" class="headerlink" title="4.3 Auto Scaling"></a>4.3 Auto Scaling</h2><p>Auto Scaling helps you ensure that you have the correct number of EC2 instances available to handle the load for your application. Auto Scaling is particularly well-suited for applications that experience hourly, daily, or weekly variability in usage.</p>
+<h1 id="5-Exceptions-and-Errors-handle"><a href="#5-Exceptions-and-Errors-handle" class="headerlink" title="5. Exceptions and Errors handle"></a>5. Exceptions and Errors handle</h1><ul>
+<li>400 series: handle error in application </li>
+<li>500 series: retry operations </li>
+</ul>
+<p>Java SDK throes the following unchecked(runtime) exceptions when error occur:</p>
+<ul>
+<li>AmazonServiceException<ul>
+<li>indicates that the reqeust was correctly transmitted to the service, but for some reason, the service was not able to process it, and returned an error response instead. </li>
+</ul>
+</li>
+<li>AmazonClientException <ul>
+<li>indicates that a problem occured inside the hava client code <ul>
+<li>try to send a request to AWS </li>
+<li>try to parse a response from AWS </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IllegalArgumentException <ul>
+<li>throw if you pass an illegal argument when performing an operation on a service  </li>
+</ul>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -554,12 +729,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Java-Synchronized方法</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">831</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 20:34:26</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-28, 20:35:58</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-Synchronized%E6%96%B9%E6%B3%95/" title="Java-Synchronized方法">https://www.llchen60.com/Java-Synchronized%E6%96%B9%E6%B3%95/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 22:58:39</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 22:59:11</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -572,8 +747,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Java-Synchronized%E6%96%B9%E6%B3%95/';
-            this.page.identifier = 'Java-Synchronized方法/';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/';
+            this.page.identifier = 'Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -589,8 +764,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Java-Synchronized方法/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Java-Synchronized%E6%96%B9%E6%B3%95/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"></span>
 
 
 

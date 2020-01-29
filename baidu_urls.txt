@@ -1,1 +1,1 @@
-https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/
+https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/
