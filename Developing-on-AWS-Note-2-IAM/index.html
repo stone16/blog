@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.2  - IAM | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , Identity and Access Management ">
+  <meta name="description" content="Developing on AWS Note.2  - IAM | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -403,12 +403,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Developing-on-AWS-Note-2-IAM" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Developing on AWS Note.2  - IAM</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color1">Identity and Access Management</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-28 23:01:58'>2020-01-28 23:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:729</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Why-need-IAM"><span class="toc-text">1. Why need IAM?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Concepts"><span class="toc-text">2. Concepts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Features"><span class="toc-text">3. Features</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-IAM-best-practice"><span class="toc-text">4. IAM best practice</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Amazon-Shared-Responsibility-Model"><span class="toc-text">5. Amazon Shared Responsibility Model</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -421,26 +479,172 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Why-need-IAM"><a href="#1-Why-need-IAM" class="headerlink" title="1. Why need IAM?"></a>1. Why need IAM?</h1><p>IAM: AWS Identity and Access Management</p>
+<ul>
+<li><p>web service that helps you securely control access to AWS resources for your users. </p>
+</li>
+<li><p>You use IAM to control <strong>who</strong> can use your AWS resources (<strong>authentication</strong>) and <strong>what resources</strong> they can use and in what ways (<strong>authorization</strong>).</p>
+</li>
+<li><p>To set up your dev env to wrok with the AWS SDK. </p>
+<ul>
+<li>Need an AWS acount and AWS credentials </li>
+<li>Use an IAM user to provide access credentials to <strong><em>increase the security of your AWS account</em></strong>. </li>
+</ul>
+</li>
+<li><p>grant least privilege - <strong>grant only permissions required to perform a task</strong></p>
+</li>
+</ul>
+<h1 id="2-Concepts"><a href="#2-Concepts" class="headerlink" title="2. Concepts"></a>2. Concepts</h1><p><img src="https://i.loli.net/2020/01/29/TbyX6r1jtKR2VuJ.png" alt="fig1.png"></p>
+<ul>
+<li>User<ul>
+<li>we can set up a user account for every developer in organization </li>
+<li>each user has credentials that they <strong>must</strong> use to access AWS services. </li>
+</ul>
+</li>
+<li>groups </li>
+<li>roles <ul>
+<li>trusted entities </li>
+<li>A role has policies granting access to specific services and operations </li>
+<li>create role like developer, and associate it with each developer user account</li>
+<li>developer role can be configured with policies that control which services and operations that role has access to </li>
+<li>a role does not have standard long-term credentials(pwd or access keys) associated with it</li>
+</ul>
+</li>
+<li>Policy<ul>
+<li>contain permissions which specify which actions an entity can perform and on which resources </li>
+<li>a JSON document that defines effect, actions, resources, and optional conditions for what API calls an entity can invoke </li>
+<li>Type<ul>
+<li>Managed policy<ul>
+<li>standablon policies that you can attach to multiplke users, groups and roles </li>
+<li>reusability </li>
+<li>central change management </li>
+<li>version</li>
+<li>rollback </li>
+</ul>
+</li>
+<li>Inline policy<ul>
+<li>embedded in a principal entity like a user, group, or role. </li>
+<li>you can use the same policy across multiple entities, but those entities are not sharing the policy </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Resources <ul>
+<li>The user, role, group, and policy objects that are stored in IAM</li>
+<li>you can add, edit, and remove resources from IAM</li>
+</ul>
+</li>
+<li>Identities <ul>
+<li>The IAM resource objects that are used to identify and group. These include users, groups, and roles.</li>
+</ul>
+</li>
+<li>Entities<ul>
+<li>The IAM resource objects that AWS uses for authentication</li>
+<li>includes users and roles </li>
+</ul>
+</li>
+<li>Principles<ul>
+<li>a person or application that uses an entity to sign in and make requests </li>
+</ul>
+</li>
+<li>Authentication<ul>
+<li>As a principal, you must be authenticated (signed in to AWS) using an IAM entity to send a request to AWS.</li>
+<li>Must provide your access key and secret key when accessing by CLI</li>
+</ul>
+</li>
+<li>Authorization <ul>
+<li>Must be authorized to complete request </li>
+<li>AWS uses values from the request context to check for policies that apply to the request. </li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Features"><a href="#3-Features" class="headerlink" title="3. Features"></a>3. Features</h1><ul>
+<li>management<ul>
+<li>user, role, federated users </li>
+</ul>
+</li>
+<li>Shared access to your AWS account </li>
+<li>Granular permissions <ul>
+<li>grant different permissions to different people for different resources</li>
+</ul>
+</li>
+<li>secire access tp AWS respirces for applications that run on Amazon EC2 </li>
+<li>multi factor authentication </li>
+<li>eventually consistent </li>
+<li>identity based permissions<ul>
+<li>attached to the IAM user and indicate what the user is permitted to do.</li>
+<li>attached to a resource and indicate what a specified user (or group of users) is permitted to do with it. <strong>Amazon S3, Amazon Simple Queue Service (Amazon SQS), Amazon Simple Notification Service (Amazon SNS), and AWS OpsWorks are the only services that support resource-based permissions</strong>.</li>
+</ul>
+</li>
+<li>resource based permissions</li>
+<li>IAM Evaluation logic (In order)<ul>
+<li>By default, all requests are denied. (In general, requests made using the account/root credentials for resources in the account are always allowed.)</li>
+<li>An explicit allow overrides this default.</li>
+<li>An explicit deny overrides any allows</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-IAM-best-practice"><a href="#4-IAM-best-practice" class="headerlink" title="4. IAM best practice"></a>4. IAM best practice</h1><ul>
+<li>IAM policies are specified with JSON-formatted text.</li>
+<li>Policies are used to control access permissions for AWS APIs and other AWS resources. </li>
+<li>They are not used for operating system permissions or application permissions. For those, use LDAP or Active Directory/Active Directory Federation Services (AD FS).</li>
+<li>When you create IAM policies, follow the standard security advice of granting least privilege; <ul>
+<li>i.e., grant only the permissions required to perform a task. </li>
+<li>Determine what users need to do, and then craft policies for them that let the users perform only those tasks. </li>
+<li>Similarly, create policies for individual resources that identify precisely who is allowed to access the resource, and allow only the minimal permissions for those users. </li>
+</ul>
+</li>
+</ul>
+<h1 id="5-Amazon-Shared-Responsibility-Model"><a href="#5-Amazon-Shared-Responsibility-Model" class="headerlink" title="5. Amazon Shared Responsibility Model"></a>5. Amazon Shared Responsibility Model</h1><p>Customer and AWS table the responsibility together: </p>
+<ul>
+<li>customer<ul>
+<li>responsible for what you implement using AWS and for the applications you connect to AWS</li>
+</ul>
+</li>
+<li>AWS<ul>
+<li>goes from the ground up to the hypervisor. </li>
+<li>secure the hardware, software, facilities, and networks that run all of our products and services. Customers are responsible for securely configuring the services they sign up for and anything they put on those services. </li>
+</ul>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.2  - IAM</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">729</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:00:14</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:01:58</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-2-IAM/" title="Developing on AWS Note.2  - IAM">https://www.llchen60.com/Developing-on-AWS-Note-2-IAM/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/AWS/index.html';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-2-IAM/';
+            this.page.identifier = 'Developing-on-AWS-Note-2-IAM/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -456,8 +660,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/AWS/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-2-IAM/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-2-IAM/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
