@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://www.llchen60.com/Developing-on-AWS-Note-10-Docker-ECS-Security/</loc>
+        <lastmod>2020-01-29T07:21:59.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/</loc>
         <lastmod>2020-01-29T07:20:24.798Z</lastmod>
         <changefreq>weekly</changefreq>
