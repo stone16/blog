@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/stock/</loc>
+        <lastmod>2020-01-29T05:02:56.010Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/finance/</loc>
+        <lastmod>2020-01-29T05:02:56.010Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/reading/</loc>
+        <lastmod>2020-01-29T05:02:56.010Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Web-Development/</loc>
         <lastmod>2020-01-29T04:40:13.870Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -117,27 +138,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/history/</loc>
         <lastmod>2020-01-28T05:10:20.732Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/stock/</loc>
-        <lastmod>2020-01-28T05:09:23.102Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/finance/</loc>
-        <lastmod>2020-01-28T05:09:23.102Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/reading/</loc>
-        <lastmod>2020-01-28T05:09:23.102Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
