@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>为什么要合并HTTP请求? | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" FrontEnd , Network , HTTP , Batch Processing , Web Development ">
-  <meta name="description" content="为什么要合并HTTP请求? | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.5 DynamoDB | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , NoSQL , DynamoDB ">
+  <meta name="description" content="Developing on AWS Note.5 DynamoDB | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -449,9 +449,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-为什么要合并HTTP请求" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Developing-on-AWS-Note-5-DynamoDB" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">为什么要合并HTTP请求?</h1>
+        <h1 class="article-title">Developing on AWS Note.5 DynamoDB</h1>
     
     <div class="article-meta">
         
@@ -459,34 +459,30 @@
         
         <span class="book">
             
-                <a  data-rel="Network">Network</a>
+                <a  data-rel="Cloud">Cloud</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">FrontEnd</a>
+            <a class="color4">AWS</a>
             
-            <a class="color3">Network</a>
+            <a class="color1">NoSQL</a>
             
-            <a class="color5">HTTP</a>
-            
-            <a class="color2">Batch Processing</a>
-            
-            <a class="color1">Web Development</a>
+            <a class="color4">DynamoDB</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-28 20:40:13'>2020-01-28 20:37</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-28 23:06:02'>2020-01-28 23:05</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.9k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -516,7 +512,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Client发出请求"><span class="toc-text">1. Client发出请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-HTTP-1-1"><span class="toc-text">1.1 HTTP 1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-TCP丢包问题"><span class="toc-text">1.2 TCP丢包问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-浏览器线程数限制"><span class="toc-text">1.3 浏览器线程数限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-DNS缓存问题"><span class="toc-text">1.4 DNS缓存问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-服务器处理请求"><span class="toc-text">2. 服务器处理请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-HTTP-2-0"><span class="toc-text">3. HTTP 2.0</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Fully-multiplexed"><span class="toc-text">3.1 Fully multiplexed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Header-Compression"><span class="toc-text">3.2 Header Compression</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-总结"><span class="toc-text">4. 总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AWS-Database-Options"><span class="toc-text">1. AWS Database Options</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-SQL-vs-NoSQL-database"><span class="toc-text">1.1 SQL vs NoSQL database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-AWS-database-Options"><span class="toc-text">1.2 AWS database Options</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-DynamoDB"><span class="toc-text">2. DynamoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Intro"><span class="toc-text">2.1 Intro</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Components"><span class="toc-text">2.2 Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-APIs-and-operations"><span class="toc-text">2.3 APIs and operations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-Control-operations"><span class="toc-text">2.3.1 Control operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-Data-operations"><span class="toc-text">2.3.2 Data operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-Stream-operations"><span class="toc-text">2.3.3 Stream operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-Object-persistence-Model"><span class="toc-text">2.3.4 Object persistence Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-Batch-Operations"><span class="toc-text">2.3.5 Batch Operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-6-Transactional-Operations"><span class="toc-text">2.3.6 Transactional Operations</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-On-demand-mode"><span class="toc-text">2.4 On-demand mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Query-and-Scan"><span class="toc-text">2.5 Query and Scan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Best-Practices"><span class="toc-text">2.6 Best Practices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-DynamoDB-Accelerator-DAX"><span class="toc-text">2.7 DynamoDB Accelerator (DAX)</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -532,32 +528,399 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>思考路径：<br>为什么要实现batch call? -&gt; 减少网络中的传输损耗 -&gt; 如何减少的? -&gt; 通过合并HTTP请求 -&gt; 合并HTTP请求是如何减少网络损耗的？ </p>
-<p>本文将解决这个问题。一起看看单个请求携载大量信息和多个请求携载小量信息对于整个时间的影响。</p>
-<h1 id="1-Client发出请求"><a href="#1-Client发出请求" class="headerlink" title="1. Client发出请求"></a>1. Client发出请求</h1><h2 id="1-1-HTTP-1-1"><a href="#1-1-HTTP-1-1" class="headerlink" title="1.1 HTTP 1.1"></a>1.1 HTTP 1.1</h2><p>可以保持长连接，但是每个不同的请求之间，client要向server发一个请求头</p>
-<p>请求无法并行执行的，在一个连接里面</p>
-<p>假设如果不合并的话需要建立N个连接，那么合并就可以省去(N-1)*RTT的时间，RTT指网络延迟（在传输介质中传输所用的时间，即从报文开始进入网络到它开始离开网络之间的时间）。</p>
-<h2 id="1-2-TCP丢包问题"><a href="#1-2-TCP丢包问题" class="headerlink" title="1.2 TCP丢包问题"></a>1.2 TCP丢包问题</h2><p>慢启动，拥塞控制窗口</p>
-<p>TCP报文乱序到达，合并后的文件可以允许队首丢包以后在队中补上来，但是分开资源的时候，前一个资源未加载完成后面的资源是不能加载的，会有更严重的队首阻塞问题，丢包率会严重影响Keep alive情况下多个文件的传输速率。</p>
-<h2 id="1-3-浏览器线程数限制"><a href="#1-3-浏览器线程数限制" class="headerlink" title="1.3 浏览器线程数限制"></a>1.3 浏览器线程数限制</h2><p>多为2-6个线程，会在每个连接上串行发送若干个请求。TCP连接太多，会给服务器造成很大的压力的。</p>
-<h2 id="1-4-DNS缓存问题"><a href="#1-4-DNS缓存问题" class="headerlink" title="1.4 DNS缓存问题"></a>1.4 DNS缓存问题</h2><p> 每次请求都需要找DNS缓存，多个请求就需要查找多次，而且缓存有可能被无故清空</p>
-<h1 id="2-服务器处理请求"><a href="#2-服务器处理请求" class="headerlink" title="2. 服务器处理请求"></a>2. 服务器处理请求</h1><p>每个请求需要使用一个连接，建立一个线程，分配一部分CPU, 对于CPU而言，是种负担，尤其是一般来说建立了连接以后，哪怕发回了请求，这个连接还会保持一段时间才会timeout。这种时候，维持连接是对服务器资源的一种巨大的浪费。</p>
-<h1 id="3-HTTP-2-0"><a href="#3-HTTP-2-0" class="headerlink" title="3. HTTP 2.0"></a>3. HTTP 2.0</h1><p>上面描述的所有都是基于HTTP/1.1的一些特性，或者说弊端，有长连接但是无法并行处理请求，TCP的慢启动和拥塞控制，队首阻塞问题都给整个性能带来很多弊端，因此我们有了HTTP2.0来做针对性的改进。很有意思的东西，直接看图： </p>
+        <h1 id="1-AWS-Database-Options"><a href="#1-AWS-Database-Options" class="headerlink" title="1. AWS Database Options"></a>1. AWS Database Options</h1><h2 id="1-1-SQL-vs-NoSQL-database"><a href="#1-1-SQL-vs-NoSQL-database" class="headerlink" title="1.1 SQL vs NoSQL database"></a>1.1 SQL vs NoSQL database</h2><table>
+<thead>
+<tr>
+<th>Attr</th>
+<th>SQL</th>
+<th>NoSQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data Storage</td>
+<td>rows and columns</td>
+<td>key-value, document, wide-column, graph</td>
+</tr>
+<tr>
+<td>Schemas</td>
+<td>fixed</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td>Querying</td>
+<td>Using SQL</td>
+<td>Focused on collection of documents</td>
+</tr>
+<tr>
+<td>Scalability</td>
+<td>Vertical</td>
+<td>Horizontal</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>Supported</td>
+<td>Support varies</td>
+</tr>
+<tr>
+<td>Consistency</td>
+<td>Strong</td>
+<td>Eventual and strong</td>
+</tr>
+</tbody></table>
 <ul>
-<li><p>HTTP/1.1 network的请求图<br><img src="https://i.loli.net/2020/01/29/JPaxGAR2lrnKh6b.png" alt="http1-waterfall.png"></p>
+<li>Relational Database supports vertical scaling which means that a single server must be made more powerful </li>
+<li>Relational Database support ACID transactions<ul>
+<li>atomicity</li>
+<li>consistency</li>
+<li>isolation </li>
+<li>durability</li>
+</ul>
 </li>
-<li><p>HTTP/2 network的请求图<br><img src="https://i.loli.net/2020/01/29/C64pmQAVzZrtyus.png" alt="http2-waterfall.png"></p>
+<li>Relational databases automatically support strong data consistency due to ACID properties of transactions.</li>
+</ul>
+<h2 id="1-2-AWS-database-Options"><a href="#1-2-AWS-database-Options" class="headerlink" title="1.2 AWS database Options"></a>1.2 AWS database Options</h2><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>SQL</th>
+<th>NoSQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Transactional Databses</td>
+<td>Amazon RDS</td>
+<td>Amazon DynamoDB</td>
+</tr>
+<tr>
+<td>Data Analytics/ Relationshiups</td>
+<td>Amazon Redshift</td>
+<td>Amazon Neptune</td>
+</tr>
+<tr>
+<td>In-memory Data Store and Cache</td>
+<td></td>
+<td>Amazon ElastiCache</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Amazon Relational Database Service(RDS): provides relational database services in the cloud with support for the following db engines: <ul>
+<li>AMazon Aurora</li>
+<li>PostgreSQL</li>
+<li>MySQL</li>
+<li>MariaDB</li>
+<li>Oracle</li>
+<li>Microsoft SQL server </li>
+</ul>
+</li>
+<li>Amazon Redshift: fast, fully managed data warehouse<ul>
+<li>includes Redshift Spectrum, allowing you to directly run SQL queries against exabytes of unstructured data in Amazon S3. </li>
+</ul>
+</li>
+<li>Amazon DynamoDB: NoSQL db that supports both document and key-value store models </li>
+<li>Amazon Neptune: fully managed graph databse service<ul>
+<li>fully manged graoh databse service </li>
+<li>purpose-built, high-performance <strong>graph database engine</strong> optimized for storing billions of <strong>relationships</strong> and querying the graph with milliseconds latency.</li>
+<li>A graph database is ideal when you need to create relationships between data and quickly query these relationships. </li>
+<li>This type of requirement is challenging to satisfy using a relational database because you would need multiple tables with multiple foreign keys. </li>
+<li>In addition, SQL queries to navigate this data would require nested queries and complex joins that could quickly become complex and inefficient as your data size grows over time. </li>
+<li>Neptune uses graph structures such as nodes (data entities), edges (relationships), and properties to represent and store data. </li>
+<li>The relationships are stored as first order citizens of the data model. </li>
+<li>This allows data in nodes to be directly linked, dramatically improving the performance of queries that navigate relationships in the data.</li>
+</ul>
+</li>
+<li>Amazon ElastiCache: <strong>in-memory data cache</strong> that supports a fully managed Redis or Memcached engine<ul>
+<li>easier to deploy, operate, and scale an in-memory data store or cache in the cloud. </li>
+<li>improve the performance of web applications by allowing you to retrieve information from fast, managed, in memory caches</li>
+<li>provides <ul>
+<li>redis</li>
+<li>memcached</li>
+</ul>
 </li>
 </ul>
-<p>就是这么酷炫，HTTP/2多了很多特性来解决HTTP/1.1的很多问题</p>
-<h2 id="3-1-Fully-multiplexed"><a href="#3-1-Fully-multiplexed" class="headerlink" title="3.1 Fully multiplexed"></a>3.1 Fully multiplexed</h2><p>解决了队首阻塞的问题。对于同一个TCP连接，现在可以发送多个请求，接收多个回应了！在HTTP/1.1里面，如果在一个连接里上一个请求发生了丢包，那么后面的所有请求都必须等第一个请求补上包，收到回应以后才能继续执行。而在HTTP/2里面，可以直接并行处理。</p>
-<h2 id="3-2-Header-Compression"><a href="#3-2-Header-Compression" class="headerlink" title="3.2 Header Compression"></a>3.2 Header Compression</h2><p>所有的HTTP request和response都有header，但是header里很可能包含缓存信息，导致他的大小会迅速增大的。但是在一个连接里大部分请求的请求头其实携带的信息都很类似，所以HTTP/2使用了索引表，存储了第一次出现的请求的请求头，然后后面的类似的请求只需要携带这个索引的数字就好了。头部压缩平均减少了30%的头部大小，加快了整体的网络中传输的速度。</p>
-<p>这两点是和本文关系最大的，有了这两点，实质上合并HTTP请求的好处在HTTP/2的协议下，已经基本上消失了。合并不合并请求，更多的是看业务上的需求，后端的一些配置。</p>
-<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>It’s a trade-off. 其实最重要的是看你传输什么东西，因为合并HTTP请求实质上是减少了网络延时，但是如果你在服务器上处理的时间远远大于网络延时的时间的时候，那么合并HTTP请求并不会给你带来很多性能上的提升。而且大数据量的传输一定会降低浏览器的cache hit rate,对于缓存的利用率会降低很多。但是对于HTTP请求携带的数据量比较少的情况，合并请求带来的性能提升会是显而易见的。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.zhihu.com/question/34689035" target="_blank" rel="noopener">1. 网络延迟</a></p>
-<p><a href="https://www.zhihu.com/question/34401250" target="_blank" rel="noopener">2.知乎:合并HTTP请求是否真的有意义？</a></p>
-<p><a href="https://deliciousbrains.com/performance-best-practices-http2/" target="_blank" rel="noopener">3. HTTP/2 Intro</a></p>
-<p><a href="https://www.tutorialdocs.com/article/merge-parallel-http-request.html" target="_blank" rel="noopener">4. Merge parallel htto requests</a></p>
+</li>
+</ul>
+<h1 id="2-DynamoDB"><a href="#2-DynamoDB" class="headerlink" title="2. DynamoDB"></a>2. DynamoDB</h1><h2 id="2-1-Intro"><a href="#2-1-Intro" class="headerlink" title="2.1 Intro"></a>2.1 Intro</h2><p>Amazon DynamoDB is a fast and flexible non-relational database service for all applications that need consistent, <strong>single-digit millisecond latency</strong> at any scale. It is a fully managed cloud database and supports both document and key-value store models.</p>
+<h2 id="2-2-Components"><a href="#2-2-Components" class="headerlink" title="2.2 Components"></a>2.2 Components</h2><ul>
+<li>Table <ul>
+<li>data is stored in tables </li>
+<li>contain<ul>
+<li>item with attributes </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Partition<ul>
+<li>ddb can divide a table’s items into multiple partitions based on the primary key value. </li>
+<li>an allocation of storage for a table</li>
+<li>backed by SSDs and automatically replicated across multiple Availability Zones within an AWS region</li>
+<li>partition key (hashkey), ddb use this to do partition </li>
+</ul>
+</li>
+<li>sort key (range key) A sort key can be defined to store all of the items with the same partition key value <strong>physically close together and order them by sort key value in the partition</strong>. It represents a one-to-many relationship based on the partition key and enables querying on the sort key attribute.</li>
+<li>Primary key - uniquely identify an Item<ul>
+<li>types<ul>
+<li>partition primary key</li>
+<li>partition and sort primary key</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>item (400 KB at most)<ul>
+<li>collection of attributes </li>
+<li>not cosntrained by a predefined schema</li>
+<li>items in a table can have different types of attributes </li>
+</ul>
+</li>
+<li>attribute<ul>
+<li>name</li>
+<li>data type<ul>
+<li>scalar<ul>
+<li>number, string, binary, boolean, null</li>
+</ul>
+</li>
+<li>multi-valued types <ul>
+<li>string set</li>
+<li>number set</li>
+<li>binary set</li>
+</ul>
+</li>
+<li>Document types<ul>
+<li>List</li>
+<li>Map</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>value</li>
+</ul>
+</li>
+<li>Read/ Write Consistency<ul>
+<li>Read<ul>
+<li>eventually consistent</li>
+<li>strongly consistent: return most up-to-date data</li>
+<li>transactional: provides ACID consistency</li>
+</ul>
+</li>
+<li>write<ul>
+<li>standard</li>
+<li>transactional </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Read/ write Throughput<ul>
+<li>RCU: number of strongly consistent reads per second of items up to <strong>4KB</strong> in size </li>
+<li>WCU: number of <strong>1KB</strong> writes per second</li>
+</ul>
+</li>
+<li>Secondary Indexes<ul>
+<li>allow you to query data based on non-primary key attributes</li>
+<li>contain<ul>
+<li>alternate key attributes</li>
+<li>primary key attributes</li>
+<li>optinal subset of other attributes from the base table </li>
+</ul>
+</li>
+<li>type<ul>
+<li>GSI<ul>
+<li>queries on this index can span all the data in a table, across all partitions</li>
+<li>can have different partition key and sort key from original table</li>
+<li>key values do not to be unique</li>
+<li>can be deleted </li>
+<li>supports eventually consistent only </li>
+<li>its own provisioned WCU and RCU</li>
+<li>*<em>queries only return attributes that are projected into the index *</em></li>
+</ul>
+</li>
+<li>LSI<ul>
+<li>index is located on the same table partition</li>
+<li>sort key can be any scalar attribute </li>
+<li>cannot be deleted </li>
+<li>support eventually consitent and strong consistent </li>
+<li>use table’s read and write capacity units</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Streams<ul>
+<li>Ordered flow of information about changes to a table </li>
+<li>contains changes to items in a single table </li>
+<li>When you make an update to a table, DynamoDB first <strong>persists the data durably</strong> to the table. </li>
+<li>It then asynchronously updates the corresponding stream with information about the changes made. </li>
+<li>The asynchronous update is made to the stream with <strong>sub-second latency</strong>. </li>
+<li>The update to the stream does not affect the write throughput of the table</li>
+<li><strong>stricly in the order</strong> </li>
+<li>each change contains exactly one stream record, available for 24 hours</li>
+<li>streams scale by splitting data across shards </li>
+<li>shards in detail<ul>
+<li>A shard is created per partition in your DynamoDB table. If a partition split is required due to too many items in the same partition, the shard gets split into children as well.</li>
+<li>DynamoDB Streams captures a time-ordered sequence of item-level modifications in your DynamoDB table. This time-ordered sequence is preserved at a per shard level. In other words, the order within a shard is established based on the order in which items were created, updated or deleted. </li>
+</ul>
+</li>
+<li>configuration<ul>
+<li>StreamEnabled: specify whether a stream is enabled or disabled </li>
+<li>StreamViewType: specify the information that will be written to the stream whenever data in the table is modified<ul>
+<li>KEYS_ONLY: only the key attributes </li>
+<li>NEW_IMAGE: entire item, as it appears after modified</li>
+<li>OLD_IMAGE: entire item, as it appears before modified</li>
+<li>NEW_AND_OLD_IMAGES: both the new and old images of the item</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>when a stream is created, DDB assigns an ARN(Amazon Resource Name) that can be used to retrieve information about a stream. </li>
+</ul>
+</li>
+<li>Global table<ul>
+<li>A collection of one or more DynamoDB tables, all ownd by a single AWS account, identified as replica tables </li>
+<li>A replica table (or replica, for short) is a single DynamoDB table that functions as a part of a global table. Each replica stores the same set of data items.</li>
+<li>data replication<ul>
+<li>Any changes made to any item in any replica table will be replicated to all of the other replicas within the same global table. </li>
+<li>propagate within seconds </li>
+</ul>
+</li>
+<li>concurrent updates <ul>
+<li>all replicas agree on the latest update, and converge toward a state in which they all have identical data</li>
+</ul>
+</li>
+<li>Read Consistency <ul>
+<li>An application can read and write data to any replica table. </li>
+<li>If your application only uses eventually consistent reads, and only issues reads against one AWS region, then it will work without any modification. </li>
+<li>However, if your application requires strongly consistent reads, then it must perform all of its strongly consistent reads and writes in the same region. DynamoDB does not support strongly consistent reads across AWS regions; </li>
+<li>therefore, if you write to one region and read from another region, the read response might include stale data that doesn’t reflect the results of recently-completed writes in the other region. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Backup and Restore<ul>
+<li>on-demand backup and restore capabilities </li>
+<li>all backups in DDB work without consuming any provisioned throughput on the table </li>
+<li>point-in-time recovery can restore the table to any point in time during last 35 days</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-APIs-and-operations"><a href="#2-3-APIs-and-operations" class="headerlink" title="2.3 APIs and operations"></a>2.3 APIs and operations</h2><h3 id="2-3-1-Control-operations"><a href="#2-3-1-Control-operations" class="headerlink" title="2.3.1 Control operations"></a>2.3.1 Control operations</h3><p>Create and manage DynamoDB tables. Let you work with indexes, streams, and other objects that are dependent on tables. </p>
+<h3 id="2-3-2-Data-operations"><a href="#2-3-2-Data-operations" class="headerlink" title="2.3.2 Data operations"></a>2.3.2 Data operations</h3><p>Perform CRUD actions on data in a table. Also let you read data from a secondary index. </p>
+<ul>
+<li>PutItem<ul>
+<li>create a new item or replace an existing item </li>
+</ul>
+</li>
+<li>GetItem<ul>
+<li>reads an item from a table</li>
+</ul>
+</li>
+<li>UpdateItem<ul>
+<li>edit an existing item’s attributes, or adds a new item to the table</li>
+<li>can perform a conditional update on an existing item </li>
+<li>can only bring some attributes instead of all comparing with putItem</li>
+</ul>
+</li>
+<li>deleteItem<ul>
+<li>can delete an item in a table using its primary key  </li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-3-Stream-operations"><a href="#2-3-3-Stream-operations" class="headerlink" title="2.3.3 Stream operations"></a>2.3.3 Stream operations</h3><p>Enable or disable a stream on a table, and allow access to the data modification records contained in a stream. </p>
+<h3 id="2-3-4-Object-persistence-Model"><a href="#2-3-4-Object-persistence-Model" class="headerlink" title="2.3.4 Object persistence Model"></a>2.3.4 Object persistence Model</h3><ul>
+<li>Allow you to persist client-side objects in DynamoDB<ul>
+<li>supports the mapping of objects to tables</li>
+</ul>
+</li>
+<li>Provides higher-level programming interfaces to:<ul>
+<li>connect to DynamoDB</li>
+<li>perform CRUD operations</li>
+<li>execute queries</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-5-Batch-Operations"><a href="#2-3-5-Batch-Operations" class="headerlink" title="2.3.5 Batch Operations"></a>2.3.5 Batch Operations</h3><ul>
+<li>BatchGetItem<ul>
+<li>Read up to 16MB of data consisting of up to 100 items from multiple tables</li>
+</ul>
+</li>
+<li>BatchWriteItem<ul>
+<li>write up to 16MB of data consisting of up to 25 put or delete requests in multiple tables </li>
+</ul>
+</li>
+<li>retry <ul>
+<li>if one request in a batch fails, the entire operation does not fail</li>
+<li>retry with failed keys and data returned </li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-6-Transactional-Operations"><a href="#2-3-6-Transactional-Operations" class="headerlink" title="2.3.6 Transactional Operations"></a>2.3.6 Transactional Operations</h3><ul>
+<li>TransactWriteItems<ul>
+<li>contains a write set </li>
+<li>includes one or more PutItem, updateItem, and DeleteItem operations across</li>
+</ul>
+</li>
+<li>TransactGetItems<ul>
+<li>contains a read set </li>
+<li>includes one or more getItem operations across multiple tables</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-On-demand-mode"><a href="#2-4-On-demand-mode" class="headerlink" title="2.4 On-demand mode"></a>2.4 On-demand mode</h2><p>Amazon DynamoDB on-demand is a flexible billing option capable of serving thousands of requests per second without capacity planning. DynamoDB on-demand offers pay-per-request pricing for read and write requests so that you pay only for what you use. </p>
+<h2 id="2-5-Query-and-Scan"><a href="#2-5-Query-and-Scan" class="headerlink" title="2.5 Query and Scan"></a>2.5 Query and Scan</h2><ul>
+<li>Query <ul>
+<li>reads from a table or secondary index only the items that match the primary key specified in the key condition expression.  </li>
+<li>parameters<ul>
+<li>tableName</li>
+<li>KeyContditionExpression<ul>
+<li>must specify partition key name and value</li>
+</ul>
+</li>
+<li>ProjectExpression </li>
+<li>ConsistentRead</li>
+<li>FilterExpression<ul>
+<li>a string that contains conditions that DDB applies after the query operation, but before the data is returned to you </li>
+<li>all other records are discarded </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Scan <ul>
+<li>reads all items from the table or index </li>
+<li>parameters <ul>
+<li>tableName</li>
+<li>ProjectionExpression <ul>
+<li>a string that identify one or more attributes to retrieve from the table </li>
+</ul>
+</li>
+<li>consistentRead</li>
+<li>filterExpression </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-6-Best-Practices"><a href="#2-6-Best-Practices" class="headerlink" title="2.6 Best Practices"></a>2.6 Best Practices</h2><ul>
+<li>Uniform workloads</li>
+<li>One-To-Many tables<ul>
+<li>If your table has items that store a large number of values in an attribute of set type, such as string set or number set, consider removing the set attribute from the table and splitting it as separate items in another table.</li>
+<li>If you frequently access large items in a table but do not use the large attribute values, consider storing frequently accessed smaller attributes in a separate table</li>
+</ul>
+</li>
+<li>Optimistic Locking with Version Number <ul>
+<li>Use optimistic locking with a version number to make sure that an item has not changed since the last time you read it. </li>
+<li>Maintain a version number to check that the item has not been updated between the last read and update </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-7-DynamoDB-Accelerator-DAX"><a href="#2-7-DynamoDB-Accelerator-DAX" class="headerlink" title="2.7 DynamoDB Accelerator (DAX)"></a>2.7 DynamoDB Accelerator (DAX)</h2><ul>
+<li>deliver fast response times for accessing eventually consistent data </li>
+<li>DAX is a DynamoDB compatible caching service that enables you to benefit from fast in memory performance for demanding applications. It addresses three core scenarios: <ul>
+<li>reduce the response times of eventually consistent read workloads by an order of magnitude, from single-digit milliseconds to microsends</li>
+<li>reduce operational and application complexity by providing a managed service that is API-compatible with Amazon DynamoDB</li>
+<li>DAX provides increased throughput and potential operational cost savings by reducing the need to over-provision read capacity units</li>
+</ul>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -571,12 +934,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>为什么要合并HTTP请求?</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.5 DynamoDB</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 20:37:15</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-28, 20:40:13</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/" title="为什么要合并HTTP请求?">https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:05:29</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:06:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-5-DynamoDB/" title="Developing on AWS Note.5 DynamoDB">https://www.llchen60.com/Developing-on-AWS-Note-5-DynamoDB/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -589,8 +952,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/';
-            this.page.identifier = '为什么要合并HTTP请求/';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-5-DynamoDB/';
+            this.page.identifier = 'Developing-on-AWS-Note-5-DynamoDB/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -606,8 +969,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="为什么要合并HTTP请求/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-5-DynamoDB/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-5-DynamoDB/"></span>
 
 
 

@@ -3,14 +3,28 @@
 
 
     <url>
-        <loc>https://www.llchen60.com/tags/S3/</loc>
-        <lastmod>2020-01-29T07:04:09.600Z</lastmod>
+        <loc>https://www.llchen60.com/tags/DynamoDB/</loc>
+        <lastmod>2020-01-29T07:06:02.106Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/NoSQL/</loc>
+        <lastmod>2020-01-29T07:06:02.106Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-29T07:06:02.106Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/S3/</loc>
         <lastmod>2020-01-29T07:04:09.600Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
