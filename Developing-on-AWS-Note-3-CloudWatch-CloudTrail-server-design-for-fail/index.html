@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , CloudWatch , CloudTrail ">
+  <meta name="description" content="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -419,12 +419,72 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color1">CloudWatch</a>
+            
+            <a class="color1">CloudTrail</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-28 23:03:01'>2020-01-28 23:02</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:522</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-CloudWatch"><span class="toc-text">1. CloudWatch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-use-Amazon-CloudWatch"><span class="toc-text">Why use Amazon CloudWatch?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-CloudTrail"><span class="toc-text">2. CloudTrail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Best-practices-of-developing-cloud-apps"><span class="toc-text">3. Best practices of developing cloud apps</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -437,26 +497,101 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-CloudWatch"><a href="#1-CloudWatch" class="headerlink" title="1. CloudWatch"></a>1. CloudWatch</h1><h2 id="Why-use-Amazon-CloudWatch"><a href="#Why-use-Amazon-CloudWatch" class="headerlink" title="Why use Amazon CloudWatch?"></a>Why use Amazon CloudWatch?</h2><p>Need it to: </p>
+<ul>
+<li>monitor CPU, memory, disk I/O, network  -&gt; metrics</li>
+<li>react to application log events and availability -&gt; logs/ event</li>
+<li>automatically scale ec2 instance fleet -&gt; logs/ event</li>
+<li>view operational status and identify issues -&gt; alarms, dashboard </li>
+</ul>
+<p>Actually, we could use Amazon CloudWatch to gain <strong>system-wide visibility</strong> into <strong>resource utilization</strong>, <strong>application performance</strong>, and <strong>operational health</strong>. You can use these insights to react and keep your application running smoothly. Amazon CloudWatch monitors your AWS Cloud resources and your cloud-powered applications. It tracks the metrics so that you can visualize and review them. You can also set alarms that will fire when a metric goes beyond a limit that you specified. CloudWatch gives you visibility into resource utilization, application performance, and operational health.</p>
+<h1 id="2-CloudTrail"><a href="#2-CloudTrail" class="headerlink" title="2. CloudTrail"></a>2. CloudTrail</h1><p>CloudTrail is integrated with several AWS services. </p>
+<ul>
+<li>EC2</li>
+<li>VPC</li>
+<li>S3</li>
+<li>EBS</li>
+<li>DDB</li>
+<li>RDS</li>
+<li>Redshift</li>
+<li>CloudFormation </li>
+<li>IAM</li>
+<li>…etc. </li>
+</ul>
+<p>AWS CloudTrail is an AWS service that generates logs of calls to the AWS API. AWS CloudTrail can <strong>record all activity</strong> against the services it monitors. Here are questions that you can answer using CloudTrail logs: <strong>who, when, what, which, where</strong>? While the coverage is extensive, not all services are covered in CloudTrail logs. You can use the AWS API <strong>call history produced by CloudTrail to track changes to AWS resources</strong>, including creation, modification, and deletion of AWS resources such as Amazon EC2 instances, Amazon VPC security groups, and Amazon EBS volumes.</p>
+<p>You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS region. You can also download a file with that info, or a subset of info based on the filter and time range you choose</p>
+<h1 id="3-Best-practices-of-developing-cloud-apps"><a href="#3-Best-practices-of-developing-cloud-apps" class="headerlink" title="3. Best practices of developing cloud apps"></a>3. Best practices of developing cloud apps</h1><ul>
+<li>consider designing applications that are <strong>loosely coupled</strong>. <ul>
+<li>think of your application as a consumer and provider of services </li>
+<li>design and develop app as <strong>granular components</strong> that can be delivered and scaled independently. </li>
+</ul>
+</li>
+<li>Architect for resilience; <ul>
+<li>Set up your servers to scale automatically based on the number of users concurrently visiting your application.</li>
+<li>Autoscaling would enable your application to handle a surge in volumn during a sale or propmotion and go back to normal </li>
+<li>set up a <strong>cluster of nodes</strong> such that when one node fails, another node automatically picks up all the traffic. </li>
+<li>Consider setting up <strong>read replicas for your database</strong>. </li>
+</ul>
+</li>
+<li>design for failure<ul>
+<li>In case of service failure, your application may log the failure and retry at a later time.</li>
+<li>If the service is slow to respond, your application could retry by using an exponential backoff algorithm: retry after increasing amounts of time between attempts.<ul>
+<li>This approach attempts to <strong>reach the service without overwhelming it</strong> with repeated requests and potentially aggravating the latency issue. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>log metrics and monitor performance </li>
+<li>implement a strong DevOps model<ul>
+<li>Operationalize the development and deployment process for your application</li>
+<li>Develop a <strong>modular, automated, and continuous build</strong> process. </li>
+<li>Ensure <strong>consistency</strong> in the development, staging, and production environments. Set up scripts or use robust tools to consistently configure your environments.</li>
+</ul>
+</li>
+<li>implement security in every layer <ul>
+<li>infrastructure</li>
+<li>application</li>
+<li>data at transit and at rest </li>
+<li>user authentication and authorization</li>
+</ul>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">522</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:02:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:03:01</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/world-war/index.html';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/';
+            this.page.identifier = 'Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -472,8 +607,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/world-war/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">

@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</title>
+      <link href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"/>
+      <url>/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-CloudWatch"><a href="#1-CloudWatch" class="headerlink" title="1. CloudWatch"></a>1. CloudWatch</h1><h2 id="Why-use-Amazon-CloudWatch"><a href="#Why-use-Amazon-CloudWatch" class="headerlink" title="Why use Amazon CloudWatch?"></a>Why use Amazon CloudWatch?</h2><p>Need it to: </p><ul><li>monitor CPU, memory, disk I/O, network  -&gt; metrics</li><li>react to application log events and availability -&gt; logs/ event</li><li>automatically scale ec2 instance fleet -&gt; logs/ event</li><li>view operational status and identify issues -&gt; alarms, dashboard </li></ul><p>Actually, we could use Amazon CloudWatch to gain <strong>system-wide visibility</strong> into <strong>resource utilization</strong>, <strong>application performance</strong>, and <strong>operational health</strong>. You can use these insights to react and keep your application running smoothly. Amazon CloudWatch monitors your AWS Cloud resources and your cloud-powered applications. It tracks the metrics so that you can visualize and review them. You can also set alarms that will fire when a metric goes beyond a limit that you specified. CloudWatch gives you visibility into resource utilization, application performance, and operational health.</p><h1 id="2-CloudTrail"><a href="#2-CloudTrail" class="headerlink" title="2. CloudTrail"></a>2. CloudTrail</h1><p>CloudTrail is integrated with several AWS services. </p><ul><li>EC2</li><li>VPC</li><li>S3</li><li>EBS</li><li>DDB</li><li>RDS</li><li>Redshift</li><li>CloudFormation </li><li>IAM</li><li>…etc. </li></ul><p>AWS CloudTrail is an AWS service that generates logs of calls to the AWS API. AWS CloudTrail can <strong>record all activity</strong> against the services it monitors. Here are questions that you can answer using CloudTrail logs: <strong>who, when, what, which, where</strong>? While the coverage is extensive, not all services are covered in CloudTrail logs. You can use the AWS API <strong>call history produced by CloudTrail to track changes to AWS resources</strong>, including creation, modification, and deletion of AWS resources such as Amazon EC2 instances, Amazon VPC security groups, and Amazon EBS volumes.</p><p>You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS region. You can also download a file with that info, or a subset of info based on the filter and time range you choose</p><h1 id="3-Best-practices-of-developing-cloud-apps"><a href="#3-Best-practices-of-developing-cloud-apps" class="headerlink" title="3. Best practices of developing cloud apps"></a>3. Best practices of developing cloud apps</h1><ul><li>consider designing applications that are <strong>loosely coupled</strong>. <ul><li>think of your application as a consumer and provider of services </li><li>design and develop app as <strong>granular components</strong> that can be delivered and scaled independently. </li></ul></li><li>Architect for resilience; <ul><li>Set up your servers to scale automatically based on the number of users concurrently visiting your application.</li><li>Autoscaling would enable your application to handle a surge in volumn during a sale or propmotion and go back to normal </li><li>set up a <strong>cluster of nodes</strong> such that when one node fails, another node automatically picks up all the traffic. </li><li>Consider setting up <strong>read replicas for your database</strong>. </li></ul></li><li>design for failure<ul><li>In case of service failure, your application may log the failure and retry at a later time.</li><li>If the service is slow to respond, your application could retry by using an exponential backoff algorithm: retry after increasing amounts of time between attempts.<ul><li>This approach attempts to <strong>reach the service without overwhelming it</strong> with repeated requests and potentially aggravating the latency issue. </li></ul></li></ul></li><li>log metrics and monitor performance </li><li>implement a strong DevOps model<ul><li>Operationalize the development and deployment process for your application</li><li>Develop a <strong>modular, automated, and continuous build</strong> process. </li><li>Ensure <strong>consistency</strong> in the development, staging, and production environments. Set up scripts or use robust tools to consistently configure your environments.</li></ul></li><li>implement security in every layer <ul><li>infrastructure</li><li>application</li><li>data at transit and at rest </li><li>user authentication and authorization</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> CloudWatch </tag>
+            
+            <tag> CloudTrail </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Developing on AWS Note.2  - IAM</title>
       <link href="/Developing-on-AWS-Note-2-IAM/"/>
       <url>/Developing-on-AWS-Note-2-IAM/</url>

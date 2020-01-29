@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/CloudTrail/</loc>
+        <lastmod>2020-01-29T07:03:01.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/CloudWatch/</loc>
+        <lastmod>2020-01-29T07:03:01.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-29T07:03:01.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/world-war/</loc>
         <lastmod>2020-01-29T07:02:01.356Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,13 +39,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/Identity-and-Access-Management/</loc>
-        <lastmod>2020-01-29T07:01:58.473Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-01-29T07:01:58.473Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
