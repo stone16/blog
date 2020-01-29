@@ -1,1 +1,1 @@
-https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/
+https://www.llchen60.com/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/

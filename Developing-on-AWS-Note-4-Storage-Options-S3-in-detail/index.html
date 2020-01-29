@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Developing on AWS Note.4 Storage Options, S3 in detail | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , S3 ">
+  <meta name="description" content="Developing on AWS Note.4 Storage Options, S3 in detail | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -431,12 +431,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Developing-on-AWS-Note-4-Storage-Options-S3-in-detail" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Developing on AWS Note.4 Storage Options, S3 in detail</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color3">S3</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-28 23:04:09'>2020-01-28 23:03</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:949</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AWS-Storage-Options"><span class="toc-text">1. AWS Storage Options</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Amazon-S3"><span class="toc-text">2. Amazon S3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Use-cases"><span class="toc-text">2.1 Use cases</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Components"><span class="toc-text">2.2 Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Operations"><span class="toc-text">2.3 Operations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-put"><span class="toc-text">2.3.1 put</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-Get"><span class="toc-text">2.3.2 Get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-Select"><span class="toc-text">2.3.3 Select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-Delete"><span class="toc-text">2.3.4 Delete</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-Listing-Keys"><span class="toc-text">2.3.5 Listing Keys</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Features"><span class="toc-text">2.4 Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-Pre-Signed-URLs"><span class="toc-text">2.4.1 Pre-Signed URLs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-Date-Encryption"><span class="toc-text">2.4.2 Date Encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-Corss-Origin-Resource-Sharing-CORS"><span class="toc-text">2.4.3 Corss Origin Resource Sharing (CORS)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Best-practices"><span class="toc-text">2.5 Best practices</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -449,26 +507,235 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-AWS-Storage-Options"><a href="#1-AWS-Storage-Options" class="headerlink" title="1. AWS Storage Options"></a>1. AWS Storage Options</h1><ul>
+<li>Amazon S3<ul>
+<li>Scalable, highly durable object storage in the cloud</li>
+</ul>
+</li>
+<li>Amazon Glacier<ul>
+<li>Low-cost, highly durable <strong>archive</strong> storage in the cloud</li>
+</ul>
+</li>
+<li>Amazon EFS<ul>
+<li>Scalable network file storage for Amazon EC2 instances</li>
+<li>network file system that can grow to petabytes </li>
+<li>allows massively parallel access from EC2 instances to your data within a region</li>
+<li>designed to <strong>meet the performance needs of big data and analytics</strong></li>
+</ul>
+</li>
+<li>Amazon EBS<ul>
+<li>Network attached volumes that provide durable block-level storage for Amazon EC2 instances </li>
+</ul>
+</li>
+<li>AWS storage gateway<ul>
+<li>change to hybrid later </li>
+<li>connects an on-premises software appliance with cloud-based storage to provide seamless and secure storage integration between an organization’s on-premises IT environment and the AWS storage infrastructure like Amazon S3, Amazon Glacier and EBS.</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-Amazon-S3"><a href="#2-Amazon-S3" class="headerlink" title="2. Amazon S3"></a>2. Amazon S3</h1><p>Amazon Simple Storage Service provides develipers with <strong>high secure, durable, and scalable object storage</strong>. </p>
+<h2 id="2-1-Use-cases"><a href="#2-1-Use-cases" class="headerlink" title="2.1 Use cases"></a>2.1 Use cases</h2><ul>
+<li>storage solution <ul>
+<li>content storage and distribution</li>
+</ul>
+</li>
+<li>backup</li>
+<li>archiving </li>
+<li>big data analytics</li>
+<li>static web site hosting</li>
+<li>disaster recovery <ul>
+<li>cross region replication(CRR) automatically replicates every S3 object to a destination bucket located in a different AWS Region. </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-Components"><a href="#2-2-Components" class="headerlink" title="2.2 Components"></a>2.2 Components</h2><ul>
+<li>bucket<ul>
+<li>global unique</li>
+<li>use only lower case letters, numbers and hyphens</li>
+<li>associated with a region<ul>
+<li>choose region by considering<ul>
+<li>latency</li>
+<li>cost</li>
+<li>regulatory requirements </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Object<ul>
+<li>S3 refers to files as objects </li>
+<li>you can store any number of objects inside bucket</li>
+<li>each object is <strong>identified by a unique key</strong></li>
+<li>object metadata</li>
+<li>version<ul>
+<li>each object has a version ID if you enable this feature</li>
+<li>Object locking supported on versioned buckets<ul>
+<li>use object lock to prevent data from being changed, overwritten, or deleted </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>URLs for S3 Objects<ul>
+<li>Path style URL<ul>
+<li><code>http://&lt;region-specific endpoint&gt;/&lt;bucket name&gt;/&lt;object name&gt;</code></li>
+</ul>
+</li>
+<li>virtual hosted-style URL<ul>
+<li><code>http://&lt;bucket name&gt;.s3.amazonaws.com/&lt;object key&gt;</code> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Key<ul>
+<li>unique identifier for each object in an S3 bucket </li>
+</ul>
+</li>
+<li>Object Url<ul>
+<li>specify region, bucket name, object name(key)</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-Operations"><a href="#2-3-Operations" class="headerlink" title="2.3 Operations"></a>2.3 Operations</h2><h3 id="2-3-1-put"><a href="#2-3-1-put" class="headerlink" title="2.3.1 put"></a>2.3.1 put</h3><ul>
+<li>upload object</li>
+<li>copy object <ul>
+<li>create copies of an object </li>
+<li>rename obejcts by creating a copy and deleting the original object </li>
+<li>move objects across S3 locations </li>
+<li>update object metadata </li>
+</ul>
+</li>
+<li>limits<ul>
+<li>5 GB at most in a single PUT operation </li>
+<li>recommened: use multipart upload if size &gt; 100MB<ul>
+<li>Multipart upload allows you to upload a single object as a set of parts. </li>
+<li>You can upload each part separately. </li>
+<li>If one of the parts fails to upload, you can retransmit that particular part without retransmitting the remaining parts. After all the parts of your object are uploaded to the server, you must send a complete multipart upload request that indicates that multipart upload has been completed. </li>
+<li>Amazon S3 then assembles these parts and creates the complete object. </li>
+<li>Amazon S3 retains all parts on the server until you complete or abort the upload.</li>
+<li>You can upload parts in parallel to improve throughput, recover quickly from network issues, pause and resume object uploads </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-2-Get"><a href="#2-3-2-Get" class="headerlink" title="2.3.2 Get"></a>2.3.2 Get</h3><ul>
+<li>retrieve a complete object in a single GET request </li>
+<li>You can also retrieve an object in parts by specifying the range of bytes needed. This is useful in scenarios where network connectivity is poor or your application can or must process only subsets of object data.</li>
+</ul>
+<h3 id="2-3-3-Select"><a href="#2-3-3-Select" class="headerlink" title="2.3.3 Select"></a>2.3.3 Select</h3><ul>
+<li>Select content from Object instead of retrieving Object </li>
+<li>filter of content handled at S3 service level <ul>
+<li>works by providing the ability to retrieve a subset of data from an object in Amazon S3 using simple SQL expressions </li>
+<li>simply change API from get to select </li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-4-Delete"><a href="#2-3-4-Delete" class="headerlink" title="2.3.4 Delete"></a>2.3.4 Delete</h3><ul>
+<li>can delete a single object or delete multiple objects in a single delete request <ul>
+<li>versioning disabled <ul>
+<li>can permanently delete an object by specifying the key that you want to delete</li>
+</ul>
+</li>
+<li>versioning enabled <ul>
+<li>can permanently delete an object by invoking a delete request with a key and version ID</li>
+<li>must delete each individual version to completely remove an object </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-5-Listing-Keys"><a href="#2-3-5-Listing-Keys" class="headerlink" title="2.3.5 Listing Keys"></a>2.3.5 Listing Keys</h3><ul>
+<li>There is no hierarchy of objects in S3 buckets. You can use prefixes in key names to group similar items. </li>
+<li>You can use delimiters (any string such as / or _) in key names to organize your keys and create a logical hierarchy</li>
+</ul>
+<h2 id="2-4-Features"><a href="#2-4-Features" class="headerlink" title="2.4 Features"></a>2.4 Features</h2><h3 id="2-4-1-Pre-Signed-URLs"><a href="#2-4-1-Pre-Signed-URLs" class="headerlink" title="2.4.1 Pre-Signed URLs"></a>2.4.1 Pre-Signed URLs</h3><ul>
+<li>Provide access to PUT/ GET objects without opening permissions to do anything else </li>
+<li>Use permissions of the user who creates the URL</li>
+<li>Provide security credentials, a bucket name, an object key, HTTP method and expiration date and time </li>
+<li>onlu valid until expiration time </li>
+</ul>
+<h3 id="2-4-2-Date-Encryption"><a href="#2-4-2-Date-Encryption" class="headerlink" title="2.4.2 Date Encryption"></a>2.4.2 Date Encryption</h3><ul>
+<li>Securing data in transit <ul>
+<li>SSL-encrypted endpoints with HTTPS</li>
+<li>client-side encryption - via SDKs</li>
+<li>server-side encryption<ul>
+<li>S3 encrypts your data at the object level  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Securing data at rest on server<ul>
+<li>Amazon S3 managed keys (SSE-S3)</li>
+<li>AWS KMS-managed keys (SSE-KMS)</li>
+<li>Customer-provided keys (SSE-C)</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-3-Corss-Origin-Resource-Sharing-CORS"><a href="#2-4-3-Corss-Origin-Resource-Sharing-CORS" class="headerlink" title="2.4.3 Corss Origin Resource Sharing (CORS)"></a>2.4.3 Corss Origin Resource Sharing (CORS)</h3><ul>
+<li>defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.</li>
+</ul>
+<h2 id="2-5-Best-practices"><a href="#2-5-Best-practices" class="headerlink" title="2.5 Best practices"></a>2.5 Best practices</h2><ul>
+<li>Avoid unnecessary requests <ul>
+<li>handle noSuchBucket errors instead of checking for existence of fixed buckets </li>
+<li>set the object metadata before uploading an object </li>
+<li>avoid using the copy operation to update metadata</li>
+<li>cache bucket and key names if your application design allows it </li>
+</ul>
+</li>
+<li>Network latency<ul>
+<li>choose the bucket region closest to latency-sensitive customers </li>
+<li>consider compressing data stored in Amazon S3 to reduce the size of data transferred and storage used</li>
+<li>use a CDN to distribute content </li>
+</ul>
+</li>
+<li>Data integrity<ul>
+<li>ensure the data has not been corrupted in transit</li>
+<li>check MD5 checksum of the object retrieved from the GET and PUT operation <ul>
+<li>AWS SDK automatically specifies MD5 checksum in a PUT operation. Amazon S3 recalculates MD5 checksum and compares it with the specified value. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.4 Storage Options, S3 in detail</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">949</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:03:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:04:09</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/" title="Developing on AWS Note.4 Storage Options, S3 in detail">https://www.llchen60.com/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/CloudWatch/index.html';
+            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/';
+            this.page.identifier = 'Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -484,8 +751,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/CloudWatch/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
