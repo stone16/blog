@@ -1,1 +1,1 @@
-https://www.llchen60.com/Developing-on-AWS-Note-7-API-Gateway/
+https://www.llchen60.com/Developing-on-AWS-Note-8-SQS-SNS/
