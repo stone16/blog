@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Volatile关键字 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" BackEnd , Java , Concurrency ">
+  <meta name="description" content="Volatile关键字 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -311,12 +311,72 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Volatile关键字" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Volatile关键字</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="BackEnd">BackEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">BackEnd</a>
+            
+            <a class="color5">Java</a>
+            
+            <a class="color2">Concurrency</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-28 20:28:12'>2020-01-28 20:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:915</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Synchronized-vs-volatile"><span class="toc-text">1. Synchronized vs volatile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-实现原理"><span class="toc-text">2. 实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-volatile的happen-before关系"><span class="toc-text">3. volatile的happen before关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-volatile的内存语义实现"><span class="toc-text">4. volatile的内存语义实现</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -329,26 +389,64 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Synchronized-vs-volatile"><a href="#1-Synchronized-vs-volatile" class="headerlink" title="1. Synchronized vs volatile"></a>1. Synchronized vs volatile</h1><p>synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。而volatile是java虚拟机提供的最轻量级的同步机制。而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。</p>
+<p><strong>被volatile修饰的变量能够保证每个线程能够获取该变量的最新值，从而避免出现数据脏读的现象。</strong></p>
+<h1 id="2-实现原理"><a href="#2-实现原理" class="headerlink" title="2. 实现原理"></a>2. 实现原理</h1><p>生成汇编代码时会在Volatile修饰的共享变量进行写操作的时候多出lock前缀的指令：<strong>该指令会将当前处理器缓存行的数据写会系统内存；这个写回内存的操作会使得其他CPU里缓存了该内存地址的数据无效</strong></p>
+<p>为了提高处理速度，处理器不直接和内存进行通信，而是先将系统内存的数据读到<strong>内部缓存（L1，L2或其他</strong>）后再进行操作，但操作完不知道何时会写到内存。如果对声明了volatile的变量进行写操作，JVM就会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写回到系统内存。但是，就算写回到内存，如果其他处理器缓存的值还是旧的，再执行计算操作就会有问题。所以，在多处理器下，为了保证各个处理器的缓存是一致的，就会实现<strong>缓存一致性协</strong>议，<strong>每个处理器通过嗅探在总线上传播的数据来检查自己缓存的值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。</strong>因此，经过分析我们可以得出如下结论：</p>
+<ol>
+<li>lock前缀的指令会引起处理器缓存写回内存</li>
+<li>一个处理器的缓存回写到内存会导致其他处理器的缓存失效</li>
+<li>当处理器发现本地缓存失效后，就会从内存中重读该变量数据，即可以获得当前最新值</li>
+</ol>
+<h1 id="3-volatile的happen-before关系"><a href="#3-volatile的happen-before关系" class="headerlink" title="3. volatile的happen before关系"></a>3. volatile的happen before关系</h1><p>写后读，线程A改本地内存的变量，同步到主内存，线程B的本地内存废弃，到主内存中拿到更新的数据。</p>
+<h1 id="4-volatile的内存语义实现"><a href="#4-volatile的内存语义实现" class="headerlink" title="4. volatile的内存语义实现"></a>4. volatile的内存语义实现</h1><p>为了性能优化，JMM在不改变正确语义的前提下，会允许编译器和处理器对指令序列进行重排序，那如果想阻止重排序要怎么办了？答案是可以添加内存屏障。</p>
+<p>内存屏障类型： </p>
+<p><img src="https://i.loli.net/2020/01/29/kIQaATpeCf56nxs.png" alt="内存屏障.png"></p>
+<p><img src="https://i.loli.net/2020/01/29/RKDH1XxFAJeQVjY.png" alt="重排序.png"></p>
+<p>“NO”表示禁止重排序。为了实现volatile内存语义时，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎是不可能的，为此，JMM采取了保守策略：</p>
+<ol>
+<li>在每个volatile写操作的前面插入一个StoreStore屏障；</li>
+<li>在每个volatile写操作的后面插入一个StoreLoad屏障；</li>
+<li>在每个volatile读操作的后面插入一个LoadLoad屏障；</li>
+<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
+</ol>
+<p><img src="https://i.loli.net/2020/01/29/8JCkKYZg2NfMzP5.png" alt="volatile内存屏障.png"><br><img src="https://i.loli.net/2020/01/29/uY9qUvorMLK5a1V.png" alt="volatile读插入内存屏障示意图.png"></p>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Volatile关键字</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">915</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-28, 20:22:48</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-28, 20:28:12</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/" title="Volatile关键字">https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'categories/读书笔记/index.html';
+            this.page.url = 'https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/';
+            this.page.identifier = 'Volatile关键字/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -364,8 +462,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="categories/读书笔记/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Volatile关键字/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
