@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Developing on AWS Note.7 API Gateway</title>
+      <link href="/Developing-on-AWS-Note-7-API-Gateway/"/>
+      <url>/Developing-on-AWS-Note-7-API-Gateway/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-What-is-Amazon-API-Gateway"><a href="#1-What-is-Amazon-API-Gateway" class="headerlink" title="1. What is Amazon API Gateway?"></a>1. What is Amazon API Gateway?</h1><h2 id="1-1-Functionalities"><a href="#1-1-Functionalities" class="headerlink" title="1.1 Functionalities"></a>1.1 Functionalities</h2><ul><li>enables developers to create, publish, maintain, monitor and secure APIs</li><li>allow you to connect your applications to AWS services and other public or private websites</li><li>provides consistent RESTFUL APIs for mobile and web applications to access AWS services and other resources hosted outside of AWS</li><li>Handles all the tasks involved in <strong>accepting and processing</strong> up to hundreds of thousands of concurrent API calls, including <strong>traffic management, authorization and access control, monitoring and API version management</strong></li></ul><h2 id="1-2-Use-cases"><a href="#1-2-Use-cases" class="headerlink" title="1.2 Use cases"></a>1.2 Use cases</h2><ul><li><p>Create a unified API frontend for multiple microservices</p></li><li><p>DDoS protection and throttling for backend </p></li><li><p>Authenticate and authorize requests to a backend</p></li><li><p>Throttle, meter, and monetize API usage by third party developers </p></li><li><p>message transformation and validation</p><ul><li><strong>models</strong> can be created to define a schema for reqeust/ response messages</li><li>A <strong>Mapping Template</strong> can then be used to transform data from one model to another</li><li>request/ response payload and header can be validated against the model</li><li>message transformation and mapping can be done using API Gateway</li><li>customers will often map request messages to a canonical format for downstream applications using API Gateway.  –&gt; <strong>transform a response body from the backend data format to the frontend data format</strong></li></ul></li><li><p>Expose backend resources</p><ul><li>allow you to create an API that acts as a front door for applications to access data, business logic or functionality from your backend service</li><li>expose<ul><li>HTTP endpoints</li><li>AWS services</li><li>AWS Lambda functions</li></ul></li></ul></li><li><p>Increase API performance : Cache</p><ul><li>eploy APIs to Regional or Edge-optimized endpoints to bring them closer to their clients. Cache API responses to the API Gateway response cache.</li><li>You can also enable API caching in Amazon API Gateway to cache your endpoint’s response. </li><li>With caching, you can reduce the number of calls made to your endpoint and also improve the latency of the requests to your API. When you enable caching for a stage, API Gateway caches responses from your endpoint for a specified time-to-live (TTL) period, in seconds. </li><li>API Gateway then responds to the request by looking up the endpoint response from the cache instead of making a request to your endpoint</li></ul></li><li><p>Control Access to APIs</p><ul><li>method level throttling </li><li>client usage throttling and quota limits sepcified in a usage plan </li><li>help prevent one customer from consuming all of your backend system’s capacity</li></ul></li><li><p>Secure API method invocations</p><ul><li>creating a resource policy <ul><li>a JSON policy document that you attach to an API to control whether a specified principal(IAM user or role) can invoke the API </li><li>You can use a resource policy to enable users from a different AWS account to securely access your API or to allow the API to be invoked only from specified source IP address ranges or Classless Inter-Domain Routing (CIDR) blocks.</li></ul></li><li>Creating IAM permission policy, can protect: <ul><li>the creation, deployment, and management of an API</li><li>the invocation of the methods in the API and refresh of its cache</li></ul></li><li>Creating a Private API endpoint that can only be accessed by a VPC client</li><li>Integrating with Amazon Cognito or Lambda authorizers to authenticate and authorize clients before accessing backend resources</li><li>Resource policy and IAM permission capabilities offer flexible and robust access controls that can be applied to an entire API set or individual methods. <h1 id="2-Best-practices"><a href="#2-Best-practices" class="headerlink" title="2. Best practices"></a>2. Best practices</h1></li></ul></li></ul><h2 id="2-1-Developing-an-API"><a href="#2-1-Developing-an-API" class="headerlink" title="2.1 Developing an API"></a>2.1 Developing an API</h2><ul><li>WHen API client requests come from the same region where the API is deployed, choose a regional API endpoint type</li><li>Test invking the API before deploying it</li><li>Use HTTP 500 error code for error handling </li><li>Cache only GET methods </li></ul><h1 id="3-Serverless-Application-Model-SAM"><a href="#3-Serverless-Application-Model-SAM" class="headerlink" title="3. Serverless Application Model (SAM)"></a>3. Serverless Application Model (SAM)</h1><p>Template driven development model for defining serverless apps</p><ul><li>supports <ul><li>Lambda</li><li>API Gateway</li><li>DynamoDB table</li><li>Any resource that AWS CloudFormation supports </li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> Gateway </tag>
+            
+            <tag> RESTFul </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Developing on AWS Note.6 AWS Serverless platform, Lambda</title>
       <link href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"/>
       <url>/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/</url>

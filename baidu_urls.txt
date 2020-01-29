@@ -1,1 +1,1 @@
-https://www.llchen60.com/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/
+https://www.llchen60.com/Developing-on-AWS-Note-7-API-Gateway/
