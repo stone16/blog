@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Distributed Tracing</title>
+      <link href="/Distributed-Tracing/"/>
+      <url>/Distributed-Tracing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Why-we-need-it"><a href="#1-Why-we-need-it" class="headerlink" title="1. Why we need it?"></a>1. Why we need it?</h1><p>Short answer - due to disturbuted applications. </p><h2 id="1-1-Monolithis-software"><a href="#1-1-Monolithis-software" class="headerlink" title="1.1 Monolithis software"></a>1.1 Monolithis software</h2><p>Monolithis software is build upon a large and sprawling legacy code base that is often so tightly coupled that any changes in one small section often result in breaking one or several features that depend on it. In such app, high possibly it’ll break and we need to use tech - tracing to <strong>follw the course of a request or system event</strong> from its source to its ultimate destination. </p><p>In this way, each trace comes to be a narrative that tells the request’s story as it travels through system. </p><h2 id="2-2-Distributed-System"><a href="#2-2-Distributed-System" class="headerlink" title="2.2 Distributed System"></a>2.2 Distributed System</h2><p>Use distributed tracing to profile and monitor microservice-based apps/ architectures, locate failures, and improve performance. </p><h1 id="2-Key-Concepts"><a href="#2-Key-Concepts" class="headerlink" title="2. Key Concepts"></a>2. Key Concepts</h1><p>In general, distributed tracing start with a single request - the entity or event being traced. As the request makes its journey, it <strong>generates traces that record complete processing operations</strong> performed on it by entities within a distributed system/ network infrastructure. </p><p>Each trace is assigned with its own unique ID and passes through a segment that indicates a given activity that a host system performs on the request. Every segments represents a single step within the reqeust’s path and has a name, unique ID, and timestamp. A span(segment) can also carry additional metadata. </p><p>The idea is – specific request inflexion points mush be identified within a system and instrumented. All of the trace data mush be coordinated and collated to provide a meaningflow view of a request. </p><p>Challenge would be processing the volume of the data generated from increasingly large scale systems. </p><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p>Google created Dapper in the past as a middleware that supports using different language within the system. As said, the value of tracing is only realised through: </p><ul><li>ubiquitous deployment, and no parts of the system under observation are not instrumented </li><li>continuous monitoring <ul><li>system mush be monitoring constantly </li></ul></li></ul><h1 id="4-Why-we-need-distributed-tracing"><a href="#4-Why-we-need-distributed-tracing" class="headerlink" title="4. Why we need distributed tracing"></a>4. Why we need distributed tracing</h1><p>Greg Linden commented in 2006 that experiments ran by Amazon.com demonstrated a <a href="http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html" target="_blank" rel="noopener">significant drop in revenue</a> was experienced when 100ms delay to page load was added. Although understanding the flow of a web request through a system can be challenging, there can be significant commercial gains if performance bottlenecks are identified and eliminated.</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://epsagon.com/blog/introduction-to-distributed-tracing/" target="_blank" rel="noopener">https://epsagon.com/blog/introduction-to-distributed-tracing/</a></li><li><a href="https://www.infoq.com/articles/distributed-tracing-microservices/" target="_blank" rel="noopener">https://www.infoq.com/articles/distributed-tracing-microservices/</a></li><li><a href="https://www.javacodegeeks.com/microservices-distributed-tracing.html" target="_blank" rel="noopener">https://www.javacodegeeks.com/microservices-distributed-tracing.html</a></li><li><a href="https://ai.google/research/pubs/pub36356" target="_blank" rel="noopener">https://ai.google/research/pubs/pub36356</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Distributed Tracing </tag>
+            
+            <tag> System Design </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DynamoDB-Advanced</title>
       <link href="/DynamoDB-Advanced/"/>
       <url>/DynamoDB-Advanced/</url>
