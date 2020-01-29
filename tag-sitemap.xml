@@ -3,15 +3,29 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Lock/</loc>
+        <lastmod>2020-01-29T04:35:58.499Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Synchronized/</loc>
+        <lastmod>2020-01-29T04:35:58.499Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Concurrency/</loc>
-        <lastmod>2020-01-29T04:28:12.976Z</lastmod>
+        <lastmod>2020-01-29T04:35:58.499Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://www.llchen60.com/tags/Java/</loc>
-        <lastmod>2020-01-29T04:28:12.976Z</lastmod>
+        <lastmod>2020-01-29T04:35:58.499Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
