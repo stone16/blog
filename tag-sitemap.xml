@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/ElasticCache/</loc>
+        <lastmod>2020-01-29T07:20:24.798Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Step-Functions/</loc>
+        <lastmod>2020-01-29T07:20:24.798Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-29T07:20:24.798Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Queue/</loc>
         <lastmod>2020-01-29T07:17:45.784Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,13 +46,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/SQS/</loc>
-        <lastmod>2020-01-29T07:17:45.784Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-01-29T07:17:45.784Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
