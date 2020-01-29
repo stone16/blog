@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Serverless/</loc>
+        <lastmod>2020-01-29T07:09:58.331Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Lambda/</loc>
+        <lastmod>2020-01-29T07:09:58.331Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-29T07:09:58.331Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/DynamoDB/</loc>
         <lastmod>2020-01-29T07:06:02.106Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +32,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/NoSQL/</loc>
-        <lastmod>2020-01-29T07:06:02.106Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-01-29T07:06:02.106Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
