@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>AWS essential(5) - Architecting | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS ">
+  <meta name="description" content="AWS essential(5) - Architecting | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -687,12 +687,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-AWS-essential-5-Architecting" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">AWS essential(5) - Architecting</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-29 21:07:13'>2020-01-29 21:06</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:433</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Introduction-to-well-architected-framework"><span class="toc-text">1. Introduction to well-architected framework</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Five-Pillars"><span class="toc-text">1.1 Five Pillars</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Operational-Excellence"><span class="toc-text">1.1.1 Operational Excellence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-Security"><span class="toc-text">1.1.2 Security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-Reliability"><span class="toc-text">1.1.3 Reliability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-4-Performance-Efficiency"><span class="toc-text">1.1.4 Performance Efficiency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-5-Cost-Optimization"><span class="toc-text">1.1.5  Cost Optimization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Fault-tolerance-and-highly-available-architecture"><span class="toc-text">2. Fault tolerance and highly available architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Fault-tolerance"><span class="toc-text">2.1 Fault tolerance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-High-Availability"><span class="toc-text">2.2 High Availability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-High-availability-tools"><span class="toc-text">2.3 High availability tools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-elastic-load-balancers"><span class="toc-text">2.3.1 elastic load balancers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-elastic-IP-addresses"><span class="toc-text">2.3.2 elastic IP addresses</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-amazon-route-53"><span class="toc-text">2.3.3 amazon route 53</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-auto-scaling"><span class="toc-text">2.3.4 auto scaling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-amazon-cloudwatch"><span class="toc-text">2.3.5 amazon cloudwatch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Fault-tolerant-tools"><span class="toc-text">2.4 Fault tolerant tools</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Web-hosting"><span class="toc-text">3. Web hosting</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-benefits"><span class="toc-text">3.1 benefits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Web-hosting-services"><span class="toc-text">3.2 Web hosting services</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Key-Architectural-considerations"><span class="toc-text">3.3 Key Architectural considerations</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -705,26 +761,162 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Introduction-to-well-architected-framework"><a href="#1-Introduction-to-well-architected-framework" class="headerlink" title="1. Introduction to well-architected framework"></a>1. Introduction to well-architected framework</h1><ul>
+<li>developed through reviewing customers’ architectures on AWS </li>
+<li>build and deploy faster </li>
+<li>lower or mitigate risks </li>
+<li>make informed decision </li>
+<li>learn aws best practices </li>
+</ul>
+<h2 id="1-1-Five-Pillars"><a href="#1-1-Five-Pillars" class="headerlink" title="1.1 Five Pillars"></a>1.1 Five Pillars</h2><h3 id="1-1-1-Operational-Excellence"><a href="#1-1-1-Operational-Excellence" class="headerlink" title="1.1.1 Operational Excellence"></a>1.1.1 Operational Excellence</h3><ul>
+<li>Run and monitor systems to deliver business value </li>
+<li>continually improve supporting processes and procedures </li>
+</ul>
+<p>Disign Principles </p>
+<ul>
+<li>perform operations as code </li>
+<li>annotate documentation </li>
+<li>make frequent, small, reversible changes </li>
+<li>refine operations procedures frequently </li>
+<li>anticipate failure </li>
+<li>learn from all operational failures </li>
+</ul>
+<h3 id="1-1-2-Security"><a href="#1-1-2-Security" class="headerlink" title="1.1.2 Security"></a>1.1.2 Security</h3><ul>
+<li>protect information, systems, assets </li>
+<li>do risk assessments and mitigation strategies </li>
+</ul>
+<p>Design Principles </p>
+<ul>
+<li>Implement a strong identity foundation </li>
+<li>enable traceability </li>
+<li>apply security best practices </li>
+<li>automate security best practices </li>
+<li>protect data in transit and at rest </li>
+<li>prepare for security events</li>
+</ul>
+<h3 id="1-1-3-Reliability"><a href="#1-1-3-Reliability" class="headerlink" title="1.1.3 Reliability"></a>1.1.3 Reliability</h3><ul>
+<li>recover from infrastructure or service disruptions </li>
+<li>dynamically acquire computing resources to meet demand </li>
+<li>mitigate disruptions </li>
+</ul>
+<p>Design Principles:</p>
+<ul>
+<li>test recovery procedures </li>
+<li>automatically recover from failure</li>
+<li>scale horizontally to increase aggregate system availability </li>
+<li>stop guessing capacity </li>
+<li>manage change in automation </li>
+</ul>
+<h3 id="1-1-4-Performance-Efficiency"><a href="#1-1-4-Performance-Efficiency" class="headerlink" title="1.1.4 Performance Efficiency"></a>1.1.4 Performance Efficiency</h3><ul>
+<li>use computing resources efficiently </li>
+<li>maintain efficiency as demand changes and technologies evolve </li>
+</ul>
+<p>Design Principles </p>
+<ul>
+<li>Democratize advanced technologies </li>
+<li>Go global in minutes </li>
+<li>use serverless architectures </li>
+<li>Experiment more often </li>
+<li>mechanical sympathy </li>
+</ul>
+<h3 id="1-1-5-Cost-Optimization"><a href="#1-1-5-Cost-Optimization" class="headerlink" title="1.1.5  Cost Optimization"></a>1.1.5  Cost Optimization</h3><ul>
+<li><p>avoid or eliminate unneeded cost or suboptimal resources<br>Design Principles </p>
+</li>
+<li><p>adopt a consumption model </p>
+</li>
+<li><p>measure overall efficiency </p>
+</li>
+<li><p>stop spending money on data center operations </p>
+</li>
+<li><p>analyze and attribute expenditure </p>
+</li>
+<li><p>use managed services to reduce cost of ownership </p>
+</li>
+</ul>
+<h1 id="2-Fault-tolerance-and-highly-available-architecture"><a href="#2-Fault-tolerance-and-highly-available-architecture" class="headerlink" title="2. Fault tolerance and highly available architecture"></a>2. Fault tolerance and highly available architecture</h1><h2 id="2-1-Fault-tolerance"><a href="#2-1-Fault-tolerance" class="headerlink" title="2.1 Fault tolerance"></a>2.1 Fault tolerance</h2><ul>
+<li>remain operational even if components fail </li>
+<li>build-in redundancy of an application’s components</li>
+</ul>
+<h2 id="2-2-High-Availability"><a href="#2-2-High-Availability" class="headerlink" title="2.2 High Availability"></a>2.2 High Availability</h2><ul>
+<li>always functioning and accessible </li>
+<li>downtime is minimized </li>
+<li>without human intervention </li>
+</ul>
+<h2 id="2-3-High-availability-tools"><a href="#2-3-High-availability-tools" class="headerlink" title="2.3 High availability tools"></a>2.3 High availability tools</h2><h3 id="2-3-1-elastic-load-balancers"><a href="#2-3-1-elastic-load-balancers" class="headerlink" title="2.3.1 elastic load balancers"></a>2.3.1 elastic load balancers</h3><p>elb - distribute income traffic to your hosts, also send metrics to cloudwatch </p>
+<h3 id="2-3-2-elastic-IP-addresses"><a href="#2-3-2-elastic-IP-addresses" class="headerlink" title="2.3.2 elastic IP addresses"></a>2.3.2 elastic IP addresses</h3><p>static IP addresses designed for dynamic cloud computing, able to mask failures </p>
+<p>applications still accessible </p>
+<h3 id="2-3-3-amazon-route-53"><a href="#2-3-3-amazon-route-53" class="headerlink" title="2.3.3 amazon route 53"></a>2.3.3 amazon route 53</h3><p>Authorized DNS server, </p>
+<h3 id="2-3-4-auto-scaling"><a href="#2-3-4-auto-scaling" class="headerlink" title="2.3.4 auto scaling"></a>2.3.4 auto scaling</h3><p>launches and terminates by specified conditions </p>
+<p>can be adjusted/ modified </p>
+<p>create new resources on demand </p>
+<h3 id="2-3-5-amazon-cloudwatch"><a href="#2-3-5-amazon-cloudwatch" class="headerlink" title="2.3.5 amazon cloudwatch"></a>2.3.5 amazon cloudwatch</h3><p>collects and tracks infromations </p>
+<h2 id="2-4-Fault-tolerant-tools"><a href="#2-4-Fault-tolerant-tools" class="headerlink" title="2.4 Fault tolerant tools"></a>2.4 Fault tolerant tools</h2><ol>
+<li>Amazon simple queue service </li>
+<li>Amazon simple storage service </li>
+<li>Amazon simple DB </li>
+<li>Amazon relational database service </li>
+</ol>
+<h1 id="3-Web-hosting"><a href="#3-Web-hosting" class="headerlink" title="3. Web hosting"></a>3. Web hosting</h1><h2 id="3-1-benefits"><a href="#3-1-benefits" class="headerlink" title="3.1 benefits"></a>3.1 benefits</h2><ul>
+<li>cost effective<br>handle peak capacity </li>
+</ul>
+<p>do on demand provisioning </p>
+<ul>
+<li>scalable </li>
+<li>on demand </li>
+</ul>
+<h2 id="3-2-Web-hosting-services"><a href="#3-2-Web-hosting-services" class="headerlink" title="3.2 Web hosting services"></a>3.2 Web hosting services</h2><p>Products to assist transition: </p>
+<ol>
+<li>Amazon Virtual Private Cloud </li>
+<li>Amazon Route 53 </li>
+<li>Amazon CloudFront </li>
+<li>Elastic load balancing </li>
+<li>Firewalls/ AWS shield</li>
+<li>Auto scaling </li>
+<li>App servers/ EC2 instances </li>
+<li>Amazon ElasticCache </li>
+<li>Amazon RDS/ Amazon DynamoDB </li>
+</ol>
+<h2 id="3-3-Key-Architectural-considerations"><a href="#3-3-Key-Architectural-considerations" class="headerlink" title="3.3 Key Architectural considerations"></a>3.3 Key Architectural considerations</h2><ol>
+<li>No more physical network appliances </li>
+<li>Firewalls everywhere </li>
+<li>consider multiple data centers </li>
+</ol>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>AWS essential(5) - Architecting</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">433</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 21:06:50</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 21:07:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-essential-5-Architecting/" title="AWS essential(5) - Architecting">https://www.llchen60.com/AWS-essential-5-Architecting/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/Notification-Service/index.html';
+            this.page.url = 'https://www.llchen60.com/AWS-essential-5-Architecting/';
+            this.page.identifier = 'AWS-essential-5-Architecting/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -740,8 +932,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/Notification-Service/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-essential-5-Architecting/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-essential-5-Architecting/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
