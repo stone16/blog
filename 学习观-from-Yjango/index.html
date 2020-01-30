@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" AWS , EC2 , ELB , AutoScaling ">
-  <meta name="description" content="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling | Leilei&#39;s Blog | 磊磊的博客">
+  <title>学习观 from Yjango | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" reading , thought ">
+  <meta name="description" content="学习观 from Yjango | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -765,9 +765,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-学习观-from-Yjango" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</h1>
+        <h1 class="article-title">学习观 from Yjango</h1>
     
     <div class="article-meta">
         
@@ -775,32 +775,28 @@
         
         <span class="book">
             
-                <a  data-rel="Cloud">Cloud</a>
+                <a  data-rel="笔记">笔记</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">AWS</a>
+            <a class="color3">reading</a>
             
-            <a class="color4">EC2</a>
-            
-            <a class="color4">ELB</a>
-            
-            <a class="color2">AutoScaling</a>
+            <a class="color3">thought</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-29 21:19:14'>2020-01-28 22:58</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-29 22:37:20'>2020-01-29 22:36</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:831</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -830,7 +826,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-Overview"><span class="toc-text">0. Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Cloud-computing-definition"><span class="toc-text">1.  Cloud computing definition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Models-of-Cloud-Computing"><span class="toc-text">2. Models of Cloud Computing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AWS-Service-Stack"><span class="toc-text">3. AWS Service Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Compute-services"><span class="toc-text">4. Compute services</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-EC2"><span class="toc-text">4.1 EC2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-ELB-Elastic-Load-Balancing"><span class="toc-text">4.2 ELB - Elastic Load Balancing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Auto-Scaling"><span class="toc-text">4.3 Auto Scaling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Exceptions-and-Errors-handle"><span class="toc-text">5. Exceptions and Errors handle</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-什么是学习？"><span class="toc-text">1. 什么是学习？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-如何学习？"><span class="toc-text">2. 如何学习？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-学习误区"><span class="toc-text">3. 学习误区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-针对知识的类型做出不同的学习方案-知识构建方式"><span class="toc-text">3.1 针对知识的类型做出不同的学习方案 - 知识构建方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-错误的输入输出"><span class="toc-text">3.2 错误的输入输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-不通过例子，仅记忆知识"><span class="toc-text">3.3 不通过例子，仅记忆知识</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-应用误区"><span class="toc-text">4. 应用误区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-思维导图"><span class="toc-text">5. 思维导图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-费曼技巧"><span class="toc-text">6. 费曼技巧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -846,240 +842,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="0-Overview"><a href="#0-Overview" class="headerlink" title="0. Overview"></a>0. Overview</h1><p>We use SDKs to interract with Application Programing Interface(API), and then connect to all AWS services. </p>
-<h1 id="1-Cloud-computing-definition"><a href="#1-Cloud-computing-definition" class="headerlink" title="1.  Cloud computing definition"></a>1.  Cloud computing definition</h1><ul>
-<li>enable you to stop thinking of your infrastructure as hardware, and instead think of it and use it as software. </li>
-</ul>
-<h1 id="2-Models-of-Cloud-Computing"><a href="#2-Models-of-Cloud-Computing" class="headerlink" title="2. Models of Cloud Computing"></a>2. Models of Cloud Computing</h1><ul>
-<li><p>IaaS (Infrastructure as a Service)</p>
+        <p>机缘巧合，看到个Yjango的学习观系列视频，把如何学习，怎么学习讲得非常透彻，在这里做下整理，希望能对大家都有所裨益。</p>
+<h1 id="1-什么是学习？"><a href="#1-什么是学习？" class="headerlink" title="1. 什么是学习？"></a>1. 什么是学习？</h1><p>记忆 vs 学习</p>
+<p>学习：从有限的例子当中得到一般性的规律的过程，找出的规律叫做知识。</p>
+<p>学习是在用知识来压缩信息的，我不需要记住无数种情况，但是我需要根据每次出现的情况，根据我的知识来做出相应的判断。</p>
+<h1 id="2-如何学习？"><a href="#2-如何学习？" class="headerlink" title="2. 如何学习？"></a>2. 如何学习？</h1><p>在人脑中，学习是通过例子来找出问题和答案之间的关系，而后重塑大脑链接来完成的。</p>
+<p><strong>信息是具体的情况，而知识不是单纯的信息，而是信息与信息之间的关系</strong></p>
+<p>对于知识的描述能对学习起到之音的作用，而最终想要达到的目的一定是<strong>通过例子理清问题和答案的关系来重塑大脑连接</strong>。</p>
+<p>先把书读厚，再把书读薄。<br>就是说：尽可能的<strong>搜集更多的例子帮助体会问题和答案之间的关系</strong>，当你真正学会之后，这些都会被压缩为知识的。</p>
+<h1 id="3-学习误区"><a href="#3-学习误区" class="headerlink" title="3. 学习误区"></a>3. 学习误区</h1><h2 id="3-1-针对知识的类型做出不同的学习方案-知识构建方式"><a href="#3-1-针对知识的类型做出不同的学习方案-知识构建方式" class="headerlink" title="3.1 针对知识的类型做出不同的学习方案 - 知识构建方式"></a>3.1 针对知识的类型做出不同的学习方案 - 知识构建方式</h2><p>首先我们的学习可以分为两大类：思考类学习和运动类学习。</p>
+<p>思考类：是很慢的，是需要显示的经过大脑思考，然后做出判断，然后给出输出的。擅长解决推断问题，但是慢，无法应对多因素的问题。</p>
+<p>运动类：很快，完全不经过我们的意识处理，我们就可以对应的做出反应。非思考类，非意识能解决的问题。面对这种情况，我们必须进行大量训练，行程肌肉记忆。这类训练最重要的是要有正确的输入输出，没有正确的反馈将永远都学不会。</p>
+<p>我们需要对两种类型的学习进行区分，而后做出对应的学习处理。</p>
+<h2 id="3-2-错误的输入输出"><a href="#3-2-错误的输入输出" class="headerlink" title="3.2 错误的输入输出"></a>3.2 错误的输入输出</h2><p>比如说听说读写学英文，我们将应该使用运动类的方式进行学习的东西当成了思考类进行学习的东西，于是文字输入并做文字输出，结果就导致了学习很长时间但是就是学不好东西。</p>
+<p>而正确的解决方式，对于听说读写来说，理应是：</p>
 <ul>
-<li>basic buiding blocks for Cloud IT <ul>
-<li>Networking features </li>
-<li>Computers </li>
-<li>Data storage space </li>
+<li>听： 声音 -&gt; 意思， 运动类</li>
+<li>说:  想法 -&gt; 发声,  运动类</li>
+<li>读:  文字 -&gt; 意思,  运动类</li>
+<li>写:  想法 -&gt; 打字,  运动类</li>
 </ul>
-</li>
-<li>PaaS (Platform as a Service)<ul>
-<li>enables you to run applications without the need to manage underlying infrastructure(hardware and operating systems)</li>
-</ul>
-</li>
-<li>SaaS (Software as a Service)<ul>
-<li>A complete product that is run and managed by the service provider<h1 id="3-AWS-Service-Stack"><a href="#3-AWS-Service-Stack" class="headerlink" title="3. AWS Service Stack"></a>3. AWS Service Stack</h1></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Infrastructure </p>
+<h2 id="3-3-不通过例子，仅记忆知识"><a href="#3-3-不通过例子，仅记忆知识" class="headerlink" title="3.3 不通过例子，仅记忆知识"></a>3.3 不通过例子，仅记忆知识</h2><p>大量例子，来构建知识之间的联结 </p>
+<h1 id="4-应用误区"><a href="#4-应用误区" class="headerlink" title="4. 应用误区"></a>4. 应用误区</h1><p>解决subtask，分而治之，因为人的大脑在进行思考类的学习或者说解决问题的时候，是无法同时触及多个领域的内容的。所以我们需要专注于一个方面的东西，深入研究，解决完这个小问题以后再接下来解决下一个小问题。将原来需要<strong>指数级</strong>解决的问题转化成了<strong>线性级</strong>可以解决的问题。</p>
+<h1 id="5-思维导图"><a href="#5-思维导图" class="headerlink" title="5. 思维导图"></a>5. 思维导图</h1><p>为什么简单又强大？</p>
+<p>帮助学习应用当中的误区</p>
 <ul>
-<li>Regions </li>
-<li>Availability Zones </li>
-<li>Edge Locations </li>
-</ul>
+<li><p>列关键词</p>
 </li>
-<li><p>Foundation Services </p>
+<li><p>遍历联想</p>
+</li>
+<li><p>压缩信息</p>
+</li>
+<li><p>分析共同输入输出，找出规律</p>
+</li>
+<li><p>这个关键词是在代表着几者之间的关系的</p>
+</li>
+<li><p>思维导图的关键词  – 动宾结构，描述的是输入和输出之间的函数关系</p>
+</li>
+<li><p>对思维的拆分  拆成小知识的组合</p>
 <ul>
-<li>Compute<ul>
-<li>virtual instances </li>
-<li>auto scaling </li>
-<li>load balancing </li>
+<li>然后用例子来构建</li>
+<li>知识的网络的好处就在于其重用性</li>
 </ul>
 </li>
-<li>networking </li>
-<li>storage <ul>
-<li>object </li>
-<li>block </li>
-<li>archive </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Platform Services </p>
+<li><p>思维导图在描述的是二阶知识</p>
 <ul>
-<li>Compute<ul>
-<li>AWS Lambda</li>
-<li>AWS Elastic Beanstalk </li>
-<li>Amazon ECS</li>
-<li>Amazon EKS </li>
+<li>一般的是在描述信息与信息之间的关系</li>
+<li>而思维导图是想描述知识与知识之间的关系</li>
 </ul>
 </li>
-<li>database<ul>
-<li>relational </li>
-<li>No SQL </li>
-<li>Caching </li>
-<li>Products <ul>
-<li>DynamoDB</li>
-<li>RDS - relational database service </li>
-<li>Elastic Cache </li>
-<li>Redshift - data warehouse, for analysis and migration </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Analytics <ul>
-<li>Cluster computing </li>
-<li>real time </li>
-<li>data warehouse </li>
-<li>data workflows </li>
-<li>Products <ul>
-<li>EMR - managed hadoop framework </li>
-<li>Kinesis </li>
-<li>CloudSearch </li>
-<li>ElasticSearch </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>App services <ul>
-<li>Queuing </li>
-<li>Orchestration </li>
-<li>App streaming </li>
-<li>Transcoding </li>
-<li>Email </li>
-<li>Search </li>
-<li>Products <ul>
-<li>SQS </li>
-<li>SNS </li>
-<li>SES </li>
-<li>Amazon Step Functions </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Deployment and management <ul>
-<li>containers </li>
-<li>Dev/ ops tools </li>
-<li>resource templates </li>
-<li>usage tracking </li>
-<li>monitoring and logs </li>
-<li>products <ul>
-<li>CodeCommit </li>
-<li>CodeDeploy </li>
-<li>CodePipeline </li>
-<li>CodeBuild </li>
-<li>X-Ray </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Mobile Services <ul>
-<li>identity </li>
-<li>sync </li>
-<li>mobile analytics </li>
-<li>notifications </li>
-<li>products <ul>
-<li>Cognito </li>
-<li>Pinpoint </li>
-<li>API gateway </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Applications </p>
+<li><p>学习原则</p>
 <ul>
-<li>Virtual Desktops </li>
-<li>Collaboration and Sharing </li>
+<li>明确任务输入输出</li>
+<li>将信息压缩成知识</li>
+<li>例子重塑大脑连接</li>
+<li>二阶知识拆分知识</li>
 </ul>
 </li>
 </ul>
-<h1 id="4-Compute-services"><a href="#4-Compute-services" class="headerlink" title="4. Compute services"></a>4. Compute services</h1><h2 id="4-1-EC2"><a href="#4-1-EC2" class="headerlink" title="4.1 EC2"></a>4.1 EC2</h2><ul>
-<li>Computers in the cloud. </li>
-<li>Can create images of your servers at any time with a few clicks or simple API call. </li>
-<li>different instance type for different use cases:<ul>
-<li>low traffic websites </li>
-<li>small database </li>
-<li>high performance web services </li>
-<li>high performance databases </li>
-<li>distributed memory caches </li>
-<li>data warehousing </li>
-<li>log or data-processing applications </li>
-<li>3D visualizations </li>
-<li>Machine learning </li>
-</ul>
-</li>
-<li>Pricing <ul>
-<li>on demand </li>
-<li>reserved instances </li>
-<li>spot instances </li>
-</ul>
-</li>
-</ul>
-<h2 id="4-2-ELB-Elastic-Load-Balancing"><a href="#4-2-ELB-Elastic-Load-Balancing" class="headerlink" title="4.2 ELB - Elastic Load Balancing"></a>4.2 ELB - Elastic Load Balancing</h2><ul>
-<li><p>distribute traffic across multiple EC2 instances, in multiple Availability Zones </p>
-</li>
-<li><p>Support health checks to detect unhealthy Amazon EC2 instances </p>
+<h1 id="6-费曼技巧"><a href="#6-费曼技巧" class="headerlink" title="6. 费曼技巧"></a>6. 费曼技巧</h1><p>学习 + 解释 </p>
+<p>解释的过程达成的目的：</p>
 <ul>
-<li>To discover the availability of instances, a ELB periodically sends pings, attempts connections or sends requests to test the EC2 instances.  </li>
-</ul>
-</li>
-<li><p>Supports the routing and load balancing of traffic to Amazon EC2 instances. </p>
-</li>
-<li><p>when the LB determins that an instance is unhealthy, it stops routing requests to that instance. </p>
-</li>
-<li><p>sticky sessions</p>
-<ul>
-<li>enables the load balancer to bind a user’s session to a <strong>specific server instance</strong>. </li>
-</ul>
-</li>
-<li><p>we should get rid of sticky sessions since: </p>
-<ul>
-<li>limit application’s scalability </li>
-<li>lead to unequal load across servers </li>
-<li>affect end-user response time since a single user’s load isn’t even spread across servers. </li>
-</ul>
-</li>
-<li><p>Instead of using sticky sessions: cache </p>
-<ul>
-<li>manage user sessions by<ul>
-<li>store locally to the node responding to the HTTP request </li>
-<li>designate a layer which can store those sessions in a scalable and robust manner. </li>
-</ul>
-</li>
-<li>Duration based session stickiness<ul>
-<li>LB uses a special LB generated cookie to rack the application instance for each request. <strong>When the load balancer reveives a request, it first checks to see whether this cookie is present in the request</strong>.  If so, the reqeust is sent to the application instance specified in the cookie. If not, the LB chooses an application instance based on the existing load balancing algo. <strong>A cookie is inserted into the response for binding subsequent requests from the same user to that application instance</strong>. The stickiness policy configuration defines a cookie expiration, which establishes the duration of validity for each cookie. Cookie will be automatically updated after its duration expires. </li>
-</ul>
-</li>
-<li>Application base session stickiness <ul>
-<li>LB uses a <strong>special cookie</strong> to associate the session with the original server that handled the reqeust. But follows the lifetime of the application-generated cookie corresponding to the cookie name specified in the policy configuration. </li>
-<li>The LB only inserts a new stickiness cookie if the application response includes a new application cookie. </li>
-<li>The load balancer stickiness cookie does not update with each request. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</li>
-<li>Application often store session data in memory, but this approach does not scale well</li>
+<li>提取压缩</li>
+<li>转化为自己的语言<ul>
+<li>明确任务</li>
+<li>拆分知识<ul>
+<li>子知识之间的输入输出，pipeline </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Methods available to manage session data without sticky sessions include: </p>
-<ul>
-<li>using ElasticCache to store session data </li>
-<li>using Amazon DynamoDB to store session data </li>
+<li>是在验证自己学会了  即遇到从未遇到的情况的时候如何去解决</li>
+<li>需要新例子，新角度 </li>
+<li>思维导图在拆分知识，而费曼技巧则是在验证知识 </li>
 </ul>
-</li>
-</ul>
-<h2 id="4-3-Auto-Scaling"><a href="#4-3-Auto-Scaling" class="headerlink" title="4.3 Auto Scaling"></a>4.3 Auto Scaling</h2><p>Auto Scaling helps you ensure that you have the correct number of EC2 instances available to handle the load for your application. Auto Scaling is particularly well-suited for applications that experience hourly, daily, or weekly variability in usage.</p>
-<h1 id="5-Exceptions-and-Errors-handle"><a href="#5-Exceptions-and-Errors-handle" class="headerlink" title="5. Exceptions and Errors handle"></a>5. Exceptions and Errors handle</h1><ul>
-<li>400 series: handle error in application </li>
-<li>500 series: retry operations </li>
-</ul>
-<p>Java SDK throes the following unchecked(runtime) exceptions when error occur:</p>
-<ul>
-<li>AmazonServiceException<ul>
-<li>indicates that the reqeust was correctly transmitted to the service, but for some reason, the service was not able to process it, and returned an error response instead. </li>
-</ul>
-</li>
-<li>AmazonClientException <ul>
-<li>indicates that a problem occured inside the hava client code <ul>
-<li>try to send a request to AWS </li>
-<li>try to parse a response from AWS </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>IllegalArgumentException <ul>
-<li>throw if you pass an illegal argument when performing an operation on a service  </li>
-</ul>
-</li>
-</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>超智能体 公众号-YJango</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -1093,12 +932,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">831</span></p>
+    <p><span class="copy-title">文章标题:</span>学习观 from Yjango</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 22:58:39</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-29, 21:19:14</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 22:36:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 22:37:20</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/" title="学习观 from Yjango">https://www.llchen60.com/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1111,8 +950,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/';
-            this.page.identifier = 'Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/';
+            this.page.url = 'https://www.llchen60.com/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/';
+            this.page.identifier = '学习观-from-Yjango/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1128,8 +967,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="学习观-from-Yjango/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"></span>
 
 
 
