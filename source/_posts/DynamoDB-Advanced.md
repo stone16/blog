@@ -482,38 +482,38 @@ Choose a partition key that can have a large number of distinct values relative 
 
 The scan method reads every item in the entire table, and returns all the data in the table, you can provide an optional filter_expression so that only the items matching your criteria are returned. However, the filter is applied only after the entire table has been scanned. 
 
-    public class MoviesScan {
-    
-        public static void main(String[] args) throws Exception {
-    
-            AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
-                .build();
-    
-            DynamoDB dynamoDB = new DynamoDB(client);
-    
-            Table table = dynamoDB.getTable("Movies");
-    
-            ScanSpec scanSpec = new ScanSpec().withProjectionExpression("#yr, title, info.rating")
-                .withFilterExpression("#yr between :start_yr and :end_yr").withNameMap(new NameMap().with("#yr", "year"))
-                .withValueMap(new ValueMap().withNumber(":start_yr", 1950).withNumber(":end_yr", 1959));
-    
-            try {
-                ItemCollection<ScanOutcome> items = table.scan(scanSpec);
-    
-                Iterator<Item> iter = items.iterator();
-                while (iter.hasNext()) {
-                    Item item = iter.next();
-                    System.out.println(item.toString());
+        public class MoviesScan {
+        
+            public static void main(String[] args) throws Exception {
+        
+                AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+                    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
+                    .build();
+        
+                DynamoDB dynamoDB = new DynamoDB(client);
+        
+                Table table = dynamoDB.getTable("Movies");
+        
+                ScanSpec scanSpec = new ScanSpec().withProjectionExpression("#yr, title, info.rating")
+                    .withFilterExpression("#yr between :start_yr and :end_yr").withNameMap(new NameMap().with("#yr", "year"))
+                    .withValueMap(new ValueMap().withNumber(":start_yr", 1950).withNumber(":end_yr", 1959));
+        
+                try {
+                    ItemCollection<ScanOutcome> items = table.scan(scanSpec);
+        
+                    Iterator<Item> iter = items.iterator();
+                    while (iter.hasNext()) {
+                        Item item = iter.next();
+                        System.out.println(item.toString());
+                    }
+        
                 }
-    
-            }
-            catch (Exception e) {
-                System.err.println("Unable to scan the table:");
-                System.err.println(e.getMessage());
+                catch (Exception e) {
+                    System.err.println("Unable to scan the table:");
+                    System.err.println(e.getMessage());
+                }
             }
         }
-    }
 
 ## 3.2 AWS SDK support 
 
