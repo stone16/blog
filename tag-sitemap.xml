@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/ECS/</loc>
+        <lastmod>2020-01-30T04:37:41.857Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-30T04:37:41.857Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Elastic-Search/</loc>
         <lastmod>2020-01-30T04:36:06.778Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +25,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/Distributed-Tracing/</loc>
-        <lastmod>2020-01-30T04:35:00.897Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-01-30T04:35:00.897Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -67,13 +74,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/Security/</loc>
-        <lastmod>2020-01-29T07:21:59.366Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/ECS/</loc>
         <lastmod>2020-01-29T07:21:59.366Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

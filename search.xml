@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>ECS - Elastic Container Service</title>
+      <link href="/ECS-Elastic-Container-Service/"/>
+      <url>/ECS-Elastic-Container-Service/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><ul><li>Highly scalable, fast, container management service that makes it easy to run, stop and maange docker containers on a cluster. </li></ul><p><img src="https://i.loli.net/2020/01/30/bgWNQv1M27fEza3.png" alt="fig1.png"></p><h1 id="2-Concepts"><a href="#2-Concepts" class="headerlink" title="2. Concepts"></a>2. Concepts</h1><ul><li><p>Containers</p><ul><li>Application components must be architected to run in containers </li><li>a standardized unit of development </li><li>contain everything application needs<ul><li>code </li><li>runtime </li><li>system tools </li><li>libraries </li></ul></li></ul></li><li><p>Images</p><ul><li>containers are created here</li><li>A read only templates</li></ul></li><li><p>Registry</p><ul><li>used to store images  </li></ul></li><li><p>Task </p><ul><li>text file in JSON </li><li>describes 1-10 containers to form your application </li></ul></li><li><p>Cluster </p><ul><li>logical group of resources  </li></ul></li><li><p>ECS Task scheduler</p><ul><li>responsible for placing tasks within cluster  <h1 id="3-Features"><a href="#3-Features" class="headerlink" title="3. Features"></a>3. Features</h1></li></ul></li><li><p>Regional service </p></li></ul><h1 id="4-Steps-for-starting-with-Fargate"><a href="#4-Steps-for-starting-with-Fargate" class="headerlink" title="4. Steps for starting with Fargate"></a>4. Steps for starting with Fargate</h1><ul><li>Create a task definition </li><li>Configure the service <ul><li>a service launches and maintains a specified number of copies of the task definition in cluster   </li></ul></li><li>configure the cluster </li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> ECS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Elasticsearch Overview</title>
       <link href="/Elasticsearch-Overview/"/>
       <url>/Elasticsearch-Overview/</url>
