@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>AWS-VPC | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , VPC ">
+  <meta name="description" content="AWS-VPC | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -607,12 +607,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-AWS-VPC" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">AWS-VPC</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color4">VPC</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-29 20:33:39'>2020-01-29 20:32</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-What-is-a-VPC"><span class="toc-text">1. What is a VPC?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Protection-through-Security-Groups-and-Control-Lists"><span class="toc-text">2. Protection through Security Groups and Control Lists</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Primary-Components-needed-to-configure-networking-in-a-VPC"><span class="toc-text">3. Primary Components needed to configure networking in a VPC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Network-Interfaces"><span class="toc-text">3.1 Network Interfaces</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Route-Tables"><span class="toc-text">3.2 Route Tables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Internet-Gateway"><span class="toc-text">3.3 Internet Gateway</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-Egress-Only-Internet-Gateway"><span class="toc-text">3.4 Egress-Only Internet Gateway</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-DHCP-Options-Sets"><span class="toc-text">3.5 DHCP Options Sets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-Domain-Name-System"><span class="toc-text">3.6 Domain Name System</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-Elastic-IP-Addresses"><span class="toc-text">3.7 Elastic IP Addresses</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-VPC-Endpoints"><span class="toc-text">3.8 VPC Endpoints</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9-NAT-Gateways"><span class="toc-text">3.9 NAT Gateways</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-10-VPC-Peering"><span class="toc-text">3.10 VPC Peering</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Securing-VPCs"><span class="toc-text">4. Securing VPCs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Security-Groups"><span class="toc-text">4.1 Security Groups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Network-Access-Control-Lists"><span class="toc-text">4.2 Network Access Control Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Flow-Logs"><span class="toc-text">4.3 Flow Logs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Route-Tables"><span class="toc-text">4.4 Route Tables</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Default-VPC"><span class="toc-text">5. Default VPC</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -625,26 +683,127 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-What-is-a-VPC"><a href="#1-What-is-a-VPC" class="headerlink" title="1. What is a VPC?"></a>1. What is a VPC?</h1><p>A virtual private cloud (VPC) is a <strong>virtual network</strong> dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS. </p>
+<p><img src="https://i.loli.net/2020/01/30/iduxJISlrmp5h2s.jpg" alt="fig1.jpg"></p>
+<p>It allows you to provision a <strong>logically isolated section</strong> of the AWS cloud, where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment including: </p>
+<ul>
+<li>selection of your own IP address ranges</li>
+<li>creation of subnets </li>
+<li>configuration of route tables and network gateways </li>
+<li>create a hardware Virtual Private Network(VPN) connection between your corporate datacenter and your VPC and leverage the AWS cloud as an extension of your corporate datacenter. </li>
+</ul>
+<p><img src="https://i.loli.net/2020/01/30/kjVFzSHfdcyUspB.jpg" alt="fig2.jpg"></p>
+<h1 id="2-Protection-through-Security-Groups-and-Control-Lists"><a href="#2-Protection-through-Security-Groups-and-Control-Lists" class="headerlink" title="2. Protection through Security Groups and Control Lists"></a>2. Protection through Security Groups and Control Lists</h1><p>We can leverage multiple layers of security, including security groups and network access control lists, to help control access to Amazon EC2 instances in each subnet. <strong>Security groups</strong> act as a firewall for the Amazon EC2 instances controlling both inbound and outbound traffic <strong>at the instance level</strong>. <strong>Network Acess Control Lists</strong>(NACL’s) act as a firewall for associated subnets controlling both inbound and outbound traffic <strong>at the subnet level</strong>. </p>
+<table>
+<thead>
+<tr>
+<th><strong>Security Group</strong></th>
+<th><strong>Network ACL</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operates at the instance level (first layer of defense).</td>
+<td>Operates at the subnet level (second layer of defense)</td>
+</tr>
+<tr>
+<td>Is stateful. Return traffic is automatically allowed, regardless of any rules.</td>
+<td>Is stateless. Return traffic must be explicitly allowed by rules.</td>
+</tr>
+<tr>
+<td>Applies to an instance only if someone specifies the security group when launching the instance, or associates the security group with the instance later on.</td>
+<td>Automatically applies to all instances in the subnets associated with it (backup layer of defense, so you don’t have to rely on someone specifying the security group).</td>
+</tr>
+</tbody></table>
+<h1 id="3-Primary-Components-needed-to-configure-networking-in-a-VPC"><a href="#3-Primary-Components-needed-to-configure-networking-in-a-VPC" class="headerlink" title="3. Primary Components needed to configure networking in a VPC"></a>3. Primary Components needed to configure networking in a VPC</h1><h2 id="3-1-Network-Interfaces"><a href="#3-1-Network-Interfaces" class="headerlink" title="3.1 Network Interfaces"></a>3.1 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html" target="_blank" rel="noopener">Network Interfaces</a></h2><p>A logical networking component in a VPC that represents a virtual network card. Includes attributes as following: </p>
+<ul>
+<li><p>a primary private IPv4 address</p>
+</li>
+<li><p>one or more secondary private IPv4 addresses</p>
+</li>
+<li><p>one Elastic IP address per private IPv4 address</p>
+</li>
+<li><p>one public IPv4 address, which can be auto-assigned to the network interface for eth0 when you launch an instance</p>
+</li>
+<li><p>one or more IPv6 addresses</p>
+</li>
+<li><p>one or more security groups</p>
+</li>
+<li><p>a MAC address</p>
+</li>
+<li><p>a source/destination check flag</p>
+</li>
+<li><p>a description</p>
+</li>
+</ul>
+<p>You can create a network interface, attach it to an instance, detach it from an instance, and attach it to another instance. A network interface’s attributes follow it as it is attached or detached from an instance and reattached to another instance. When you move a network interface from one instance to another, network traffic is redirected to the new instance.</p>
+<h2 id="3-2-Route-Tables"><a href="#3-2-Route-Tables" class="headerlink" title="3.2 Route Tables"></a>3.2 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html" target="_blank" rel="noopener">Route Tables</a></h2><p>A route table contains a set of rules, called routes, that are used to determine where network traffic is directed.</p>
+<p>Each subnet in your VPC must be associated with a route table; the table controls the routing for the subnet. A subnet can only be associated with one route table at a time, but you can associate multiple subnets with the same route table.</p>
+<h2 id="3-3-Internet-Gateway"><a href="#3-3-Internet-Gateway" class="headerlink" title="3.3 Internet Gateway"></a>3.3 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html" target="_blank" rel="noopener">Internet Gateway</a></h2><p>A VPC component that allows communication between instances in your VPC and the Internet. In theory, it is what the traffic between your VPC and the public internet flows through.</p>
+<h2 id="3-4-Egress-Only-Internet-Gateway"><a href="#3-4-Egress-Only-Internet-Gateway" class="headerlink" title="3.4 Egress-Only Internet Gateway"></a>3.4 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html" target="_blank" rel="noopener">Egress-Only Internet Gateway</a></h2><p>An egress-only Internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the Internet, and prevents the Internet from initiating an IPv6 connection with your instances.</p>
+<h2 id="3-5-DHCP-Options-Sets"><a href="#3-5-DHCP-Options-Sets" class="headerlink" title="3.5 DHCP Options Sets"></a>3.5 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP Options Sets</a></h2><p>Dynamoc Host Configuration Protocol provides a standard for passing configuraion information to hosts on a TCP/IP network. The options field of a DHCP message contains the configuration parameters. Some of those parameters are the domain name, domain name server, and the netbios-node-type.</p>
+<h2 id="3-6-Domain-Name-System"><a href="#3-6-Domain-Name-System" class="headerlink" title="3.6 Domain Name System"></a>3.6 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html" target="_blank" rel="noopener">Domain Name System</a></h2><p>Domain Name System (DNS) is a standard by which names used on the Internet are resolved to their corresponding IP addresses. A DNS hostname is a name that uniquely and absolutely names a computer; it’s composed of a host name and a domain name. DNS servers resolve DNS hostnames to their corresponding IP addresses.</p>
+<p>Public IPv4 addresses enable communication over the Internet, while private IPv4 addresses enable communication within the network of the instance (either EC2-Classic or a VPC).</p>
+<h2 id="3-7-Elastic-IP-Addresses"><a href="#3-7-Elastic-IP-Addresses" class="headerlink" title="3.7 Elastic IP Addresses"></a>3.7 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html" target="_blank" rel="noopener">Elastic IP Addresses</a></h2><p>An Elastic IP address is a static public IPv4 address designed for dynamic cloud computing. You can associate an Elastic IP address with any instance or network interface for any VPC in your account. </p>
+<p>With an Elastic IP address, <strong>you can mask the failure of an instance by rapidly remapping the address to another instance in your VPC.</strong> Note that the advantage of associating the Elastic IP address with the network interface instead of directly with the instance is that you can move all the attributes of the network interface from one instance to another in a single step.</p>
+<h2 id="3-8-VPC-Endpoints"><a href="#3-8-VPC-Endpoints" class="headerlink" title="3.8 VPC Endpoints"></a>3.8 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html" target="_blank" rel="noopener">VPC Endpoints</a></h2><p>Enables private connectivity to services hosted in AWS, from within your VPC without using an Internet Gateway, VPN, Network Address Translation (NAT) devices, or firewall proxies.</p>
+<h2 id="3-9-NAT-Gateways"><a href="#3-9-NAT-Gateways" class="headerlink" title="3.9 NAT Gateways"></a>3.9 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat.html" target="_blank" rel="noopener">NAT Gateways</a></h2><p>A highly available, managed Network Address Translation (NAT) service for your resources in a private subnet to access the Internet. A NAT device forwards traffic from the instances in the private subnet to the internet or other AWS services, and then sends the response back to the instances. When traffic goes to the internet, the source IPv4 address is replaced with the NAT device’s address and similarly, when the response traffic goes to those instances, the NAT device translates the address back to those instances’ private IPv4 addresses.</p>
+<h2 id="3-10-VPC-Peering"><a href="#3-10-VPC-Peering" class="headerlink" title="3.10 VPC Peering"></a>3.10 <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html" target="_blank" rel="noopener">VPC Peering</a></h2><p>A peering connection enables you to route traffic via private IP addresses between two peered VPCs.</p>
+<p>A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them privately. Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region.</p>
+<h1 id="4-Securing-VPCs"><a href="#4-Securing-VPCs" class="headerlink" title="4. Securing VPCs"></a>4. Securing VPCs</h1><h2 id="4-1-Security-Groups"><a href="#4-1-Security-Groups" class="headerlink" title="4.1 Security Groups"></a>4.1 Security Groups</h2><p>A firewall for associated Amazon EC2 instances, controlling both inbound and outbound traffic at the instance level</p>
+<h2 id="4-2-Network-Access-Control-Lists"><a href="#4-2-Network-Access-Control-Lists" class="headerlink" title="4.2 Network Access Control Lists"></a>4.2 Network Access Control Lists</h2><p>A firewall for associated subnets, controlling both inbound and outbound traffic at the subnet level.</p>
+<h2 id="4-3-Flow-Logs"><a href="#4-3-Flow-Logs" class="headerlink" title="4.3 Flow Logs"></a>4.3 Flow Logs</h2><p>Capture information about the IP traffic going to and from network interfaces in your VPC.</p>
+<h2 id="4-4-Route-Tables"><a href="#4-4-Route-Tables" class="headerlink" title="4.4 Route Tables"></a>4.4 Route Tables</h2><p>A set of rules, called routes, that are used to determine where network traffic is directed</p>
+<p>The following diagram illustrates the layers of security provided by security groups and network ACLs. In this example, traffic from an Internet gateway is routed to the appropriate subnet using the routes in the routing table. The rules of the network ACL associated with the subnet control which traffic is allowed to the subnet. The rules of the security group associated with an instance control which traffic is allowed to the instance.</p>
+<p><img src="https://i.loli.net/2020/01/30/aeb1wYkCq2c9QXr.png" alt="fig3.png"></p>
+<h1 id="5-Default-VPC"><a href="#5-Default-VPC" class="headerlink" title="5. Default VPC"></a>5. Default VPC</h1><p>The default VPC is suitable for getting started quickly, and for launching public instances such as a blog or simple website. With a default VPC, you don’t have to deal with VPC creation and configuration. You can immediately start launching Amazon EC2 instances into your default VPC. You can also use services such as Elastic Load Balancing, Amazon RDS, and Amazon EMR in your default VPC.</p>
+<p>You can use a default VPC as you would use any other VPC by: </p>
+<ul>
+<li>Adding additional non-default subnets</li>
+<li>Modifying the main route table </li>
+<li>Adding additional route tables </li>
+<li>Associating additional security groups </li>
+<li>Updating the rules of the default security group</li>
+<li>Adding VPN connections</li>
+<li>Adding more IPv4 CIDR blocks </li>
+</ul>
+<p>The following figure illustrates the key components that we set up for a default VPC. </p>
+<p><img src="https://i.loli.net/2020/01/30/ig6ZwzSrFmqojPk.png" alt="fig4.png"></p>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>AWS-VPC</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 20:32:16</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 20:33:39</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-VPC/" title="AWS-VPC">https://www.llchen60.com/AWS-VPC/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/CloudTrail/index.html';
+            this.page.url = 'https://www.llchen60.com/AWS-VPC/';
+            this.page.identifier = 'AWS-VPC/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -660,8 +819,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/CloudTrail/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-VPC/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-VPC/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
