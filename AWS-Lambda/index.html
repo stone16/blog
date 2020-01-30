@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>AWS Lambda | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS , Lambda ">
+  <meta name="description" content="AWS Lambda | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -595,12 +595,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-AWS-Lambda" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">AWS Lambda</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Cloud">Cloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">AWS</a>
+            
+            <a class="color2">Lambda</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-29 20:19:17'>2020-01-29 20:18</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Overview"><span class="toc-text">1. Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Getting-started"><span class="toc-text">2. Getting started</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Configuration-on-console-page"><span class="toc-text">2.1 Configuration on console page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Lambda-concept"><span class="toc-text">2.2 Lambda concept</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Programming-Model"><span class="toc-text">2.3 Programming Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-Handler"><span class="toc-text">2.3.1 Handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-Context"><span class="toc-text">2.3.2 Context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-Logging"><span class="toc-text">2.3.3 Logging</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-Exceptions"><span class="toc-text">2.3.4 Exceptions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-Concurrency"><span class="toc-text">2.3.5 Concurrency</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Building-Lambda-Functions-with-Java"><span class="toc-text">3. Building Lambda Functions with Java</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Handler-Input-Output-Types"><span class="toc-text">3.1 Handler Input&#x2F; Output Types</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-Handler-input-output-String-Type"><span class="toc-text">3.1.1 Handler input&#x2F; output: String Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-Handler-Input-Output-POJO"><span class="toc-text">3.1.2 Handler Input&#x2F; Output: POJO</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Context-Object-in-Java"><span class="toc-text">3.2 Context Object in Java</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -613,26 +671,187 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言啊！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>A compute service that lets you run code without provisioning or managing servers. It can executes your code thousands per second. You pay for the compute time you consume.</p>
+<p>Lambda executes your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging.</p>
+<p>You can run AWS lambda to run your code in response to events, such as changes to data in an Amazon S3 bucket or an Amazon DynamoDB table; to run your code in response to HTTP requests using Amazon API gateway; or invoke your code using API calls made using AWS SDKs. </p>
+<h1 id="2-Getting-started"><a href="#2-Getting-started" class="headerlink" title="2. Getting started"></a>2. Getting started</h1><h2 id="2-1-Configuration-on-console-page"><a href="#2-1-Configuration-on-console-page" class="headerlink" title="2.1 Configuration on console page"></a>2.1 Configuration on console page</h2><ul>
+<li>environment variables: for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code.</li>
+<li>Tags: are key-value pairs that you attach to AWS resources to better organize them. </li>
+<li>Execution role: which allows you to administer security on your function, using defined roles and policies or creating new ones.</li>
+<li>Basic settings: allows you to dictate the memory allocation and timeout limit for your Lambda function.</li>
+<li>Network: allow you to select a VPC your function will access</li>
+<li>Debugging and error handling: allow you to select a AWS <a href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html" target="_blank" rel="noopener">Lambda Function Dead Letter Queues</a> resource to analyze failed function invocation retries. </li>
+<li>Concurrency: allows you to allocate a specific limit of concurrent executions allowed for this function</li>
+<li>Auditing and compliance: logs function invocations for operational and risk auditing, governance and compliance. </li>
+</ul>
+<h2 id="2-2-Lambda-concept"><a href="#2-2-Lambda-concept" class="headerlink" title="2.2 Lambda concept"></a>2.2 Lambda concept</h2><p>Lambda can automatically scales up the number of instances of your function to handle high number of events. </p>
+<ul>
+<li>Function: A script or program that runs in AWS lambda. Lambda passes invocation events to your function. The function processes an event and returns a response</li>
+<li>Runtimes: Lambda runtimes allow functions in different languages to run in the same base execution environment, you configure your function to use a runtime that matches your programming language. The runtime sits in between the Lambda service and your function code, relaying invocation events, context information and responses between the two. </li>
+<li>Layers: Lambda layers are a distribution mechanism for libraries, custom runtimes and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers.</li>
+<li>Event source: An AWS service that triggers your function and executes its logic. </li>
+<li>Downstream resources: An AWS service that your lambda function calls once it is triggered</li>
+<li>Log streams: While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function to ensure it’s working properly.</li>
+</ul>
+<h2 id="2-3-Programming-Model"><a href="#2-3-Programming-Model" class="headerlink" title="2.3 Programming Model"></a>2.3 Programming Model</h2><p>Regardless of the language you choose, there is a common pattern ti write code for a Lambda Function includes concepts as follow:</p>
+<h3 id="2-3-1-Handler"><a href="#2-3-1-Handler" class="headerlink" title="2.3.1 Handler"></a>2.3.1 Handler</h3><p>The function AWS Lambda calls to start execution of your lambda function. When a Lambda function is invoked, Lambda starts executing your code by calling the handler function</p>
+<h3 id="2-3-2-Context"><a href="#2-3-2-Context" class="headerlink" title="2.3.2 Context"></a>2.3.2 Context</h3><p>Lambda also passes a context object to the handler function, as the second parameter. Via this context object your code can interact with Lambda</p>
+<h3 id="2-3-3-Logging"><a href="#2-3-3-Logging" class="headerlink" title="2.3.3 Logging"></a>2.3.3 Logging</h3><p>Function can contain logging statements, it writes these logs to cloudWatch logs. </p>
+<h3 id="2-3-4-Exceptions"><a href="#2-3-4-Exceptions" class="headerlink" title="2.3.4 Exceptions"></a>2.3.4 Exceptions</h3><p>Function needs to communicate the result of the function execution to AWS Lambda. Many ways to end a request or to notify AWS Lambda an error occured during execution</p>
+<h3 id="2-3-5-Concurrency"><a href="#2-3-5-Concurrency" class="headerlink" title="2.3.5 Concurrency"></a>2.3.5 Concurrency</h3><p>When your function is invoked more quickly than a single instance of your function can process events, Lambda scales by running additional instances. Each instance of your function handles only one request at a time, so you don’t need to worry about synchronizing threads or processes. You can, however, use asynchronous language features to process batches of events in parallel, and save data to the /tmp directory for use in future invocations on the same instance. </p>
+<h1 id="3-Building-Lambda-Functions-with-Java"><a href="#3-Building-Lambda-Functions-with-Java" class="headerlink" title="3. Building Lambda Functions with Java"></a>3. Building Lambda Functions with Java</h1><h2 id="3-1-Handler-Input-Output-Types"><a href="#3-1-Handler-Input-Output-Types" class="headerlink" title="3.1 Handler Input/ Output Types"></a>3.1 Handler Input/ Output Types</h2><p>When AWS lambda executes the Lambda function, it invokes the handler. First parameter is the input to the handler which can be event data (published by an event source) or custom input you provide such as a string or any custom data object. </p>
+<p>AWS Lambda supports the following input/ output types for a handler: </p>
+<ul>
+<li><p>Simple Java types (AWS Lambda supports the String, Integer, Boolean, Map and List types )</p>
+</li>
+<li><p>POJO</p>
+</li>
+<li><p>stream type </p>
+<h3 id="3-1-1-Handler-input-output-String-Type"><a href="#3-1-1-Handler-input-output-String-Type" class="headerlink" title="3.1.1 Handler input/ output: String Type"></a>3.1.1 Handler input/ output: String Type</h3><p>  package example;</p>
+<p>  import com.amazonaws.services.lambda.runtime.Context; </p>
+<p>  public class Hello {</p>
+<pre><code>public String myHandler(String name, Context context) {
+    return String.format(&quot;Hello %s.&quot;, name);
+}</code></pre><p>  }</p>
+</li>
+</ul>
+<p>When you invoke a Lambda function asynchronously, any return value by your Lambda function will be ignored. Therefore you might want to <strong><em>set the return type to void</em></strong> to make this clear in your code </p>
+<h3 id="3-1-2-Handler-Input-Output-POJO"><a href="#3-1-2-Handler-Input-Output-POJO" class="headerlink" title="3.1.2 Handler Input/ Output: POJO"></a>3.1.2 Handler Input/ Output: POJO</h3><pre><code>package example;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+import com.amazonaws.services.lambda.runtime.Context; 
+
+public class HelloPojo {
+
+    // Define two classes/POJOs for use with Lambda function.
+    public static class RequestClass {
+      ...
+    }
+
+    public static class ResponseClass {
+      ...
+    }
+
+    public static ResponseClass myHandler(RequestClass request, Context context) {
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.getFirstName(), request.getLastName());
+        return new ResponseClass(greetingString);
+    }
+}</code></pre><p>Suppose your application events generate data that includes first name and last name as shown:</p>
+<pre><code>{ &quot;firstName&quot;: &quot;John&quot;, &quot;lastName&quot;: &quot;Doe&quot; }  </code></pre><p>For this example, the handler receives this JSON and returns the string “Hello John Doe”.</p>
+<pre><code>public static ResponseClass handleRequest(RequestClass request, Context context){
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.firstName, request.lastName);
+        return new ResponseClass(greetingString);
+}</code></pre><p>To create a Lambda function with this handler, you must provide implementation of the input and output types as shown in the following Java example. The HelloPojo class defines the handler method.</p>
+<pre><code>package example;
+
+import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
+public class HelloPojo implements RequestHandler&lt;RequestClass, ResponseClass&gt;{   
+
+    public ResponseClass handleRequest(RequestClass request, Context context){
+        String greetingString = String.format(&quot;Hello %s, %s.&quot;, request.firstName, request.lastName);
+        return new ResponseClass(greetingString);
+    }
+}</code></pre><p>In order to implement the input type, add the following code to a separate file and name it RequestClass.java. Place it next to the HelloPojo.java class in your directory structure:</p>
+<pre><code>package example;
+
+     public class RequestClass {
+        String firstName;
+        String lastName;
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public RequestClass(String firstName, String lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public RequestClass() {
+        }
+    }</code></pre><p>In order to implement the output type, add the following code to a separate file and name it ResponseClass.java. Place it next to the HelloPojo.java class in your directory structure:</p>
+<pre><code>package example;
+
+ public class ResponseClass {
+    String greetings;
+
+    public String getGreetings() {
+        return greetings;
+    }
+
+    public void setGreetings(String greetings) {
+        this.greetings = greetings;
+    }
+
+    public ResponseClass(String greetings) {
+        this.greetings = greetings;
+    }
+
+    public ResponseClass() {
+    }
+
+}</code></pre><h2 id="3-2-Context-Object-in-Java"><a href="#3-2-Context-Object-in-Java" class="headerlink" title="3.2 Context Object in Java"></a>3.2 Context Object in Java</h2><p>When Lambda runs your function, it passes a context object to the handler. The object provides methods and properties that provide information about the invocation, function and execution environment. </p>
+<ul>
+<li>getRemainingTimeInMillis()</li>
+<li>getFunctionName()</li>
+<li>getFunctionVersion()</li>
+<li>getInvokedFunctionArn() - Returns the Amazon Resource Name(ARN) used to invoke the function. Indicates if the invoker specified a version number or alias. </li>
+<li>getMemoryLimitInMB()</li>
+<li>getAwsRequestId()</li>
+<li>getLogGroupName()</li>
+<li>getIdentity()</li>
+<li>getClientContext()</li>
+<li>getLogger() </li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>AWS Lambda</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.3k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 20:18:52</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 20:19:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-Lambda/" title="AWS Lambda">https://www.llchen60.com/AWS-Lambda/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'archives/index.html';
+            this.page.url = 'https://www.llchen60.com/AWS-Lambda/';
+            this.page.identifier = 'AWS-Lambda/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -648,8 +867,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="archives/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-Lambda/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-Lambda/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
