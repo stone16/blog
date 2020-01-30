@@ -3,14 +3,21 @@
 
 
     <url>
-        <loc>https://www.llchen60.com/tags/VPC/</loc>
-        <lastmod>2020-01-30T04:33:39.416Z</lastmod>
+        <loc>https://www.llchen60.com/tags/Distributed-Tracing/</loc>
+        <lastmod>2020-01-30T04:35:00.897Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-30T04:35:00.897Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/VPC/</loc>
         <lastmod>2020-01-30T04:33:39.416Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -39,13 +46,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/System-Design/</loc>
-        <lastmod>2020-01-29T07:40:33.929Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/Distributed-Tracing/</loc>
         <lastmod>2020-01-29T07:40:33.929Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
