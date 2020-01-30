@@ -400,11 +400,11 @@
             
             <tag> AWS </tag>
             
+            <tag> Security </tag>
+            
             <tag> Docker </tag>
             
             <tag> ECS </tag>
-            
-            <tag> Security </tag>
             
         </tags>
       
@@ -551,9 +551,9 @@
             
             <tag> AWS </tag>
             
-            <tag> NoSQL </tag>
-            
             <tag> DynamoDB </tag>
+            
+            <tag> NoSQL </tag>
             
         </tags>
       
@@ -692,8 +692,6 @@
       
         <tags>
             
-            <tag> FrontEnd </tag>
-            
             <tag> Network </tag>
             
             <tag> HTTP </tag>
@@ -701,6 +699,8 @@
             <tag> Batch Processing </tag>
             
             <tag> Web Development </tag>
+            
+            <tag> FrontEnd </tag>
             
         </tags>
       
