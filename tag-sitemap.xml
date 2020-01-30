@@ -3,8 +3,36 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Reliability/</loc>
+        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Elasticity/</loc>
+        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Agility/</loc>
+        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Security/</loc>
+        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/AWS/</loc>
-        <lastmod>2020-01-30T04:46:13.284Z</lastmod>
+        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -68,13 +96,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/CI-CD/</loc>
         <lastmod>2020-01-29T07:23:08.576Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/Security/</loc>
-        <lastmod>2020-01-29T07:21:59.366Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
