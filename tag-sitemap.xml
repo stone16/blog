@@ -3,8 +3,15 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Security/</loc>
+        <lastmod>2020-01-30T05:06:18.305Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/AWS/</loc>
-        <lastmod>2020-01-30T05:05:12.841Z</lastmod>
+        <lastmod>2020-01-30T05:06:18.305Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -25,13 +32,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/Agility/</loc>
-        <lastmod>2020-01-30T04:47:36.957Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/Security/</loc>
         <lastmod>2020-01-30T04:47:36.957Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

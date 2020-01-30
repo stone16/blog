@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>AWS essential(4)-Security</title>
+      <link href="/AWS-essential-4-Security/"/>
+      <url>/AWS-essential-4-Security/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Introduction-to-AWS-security"><a href="#1-Introduction-to-AWS-security" class="headerlink" title="1. Introduction to AWS security"></a>1. Introduction to AWS security</h1><ul><li>Approach to security <ul><li>resilient infrastructure </li><li>high security </li><li>strong safeguards </li></ul></li><li>Controls </li><li>AWS products and features </li></ul><ul><li><p>Network Security </p><ul><li>build in firewalls </li><li>encryption in transit </li><li>private dedicated connections </li><li>ddos mitigation </li></ul></li><li><p>Data Encryption </p><ul><li>encrption capabilities for aws storage/ database </li><li>key management options </li><li>hardware based cryptographic key storage options </li></ul></li><li><p>Access Control and management </p><ul><li>Identity and access management </li><li>Multifactor authentication </li><li>integration and federation with corporate directories </li></ul></li><li><p>Monitoring and Logging </p><ul><li>deep visibility into API calls </li><li>log aggregation and options </li><li>alerts </li></ul></li></ul><h1 id="2-The-AWS-Shared-Responsibility-Model"><a href="#2-The-AWS-Shared-Responsibility-Model" class="headerlink" title="2. The AWS Shared Responsibility Model"></a>2. The AWS Shared Responsibility Model</h1><p>Share responsibility for securing data. </p><p>AWS responsible of — security of the cloud </p><ul><li>compute </li><li>storage </li><li>databse </li><li>networking </li></ul><p>Customer responsible of —- security in the cloud </p><ul><li>what to store </li><li>which aws services </li><li>location </li><li>content format </li></ul><h1 id="3-AWS-Access-Control-and-Management"><a href="#3-AWS-Access-Control-and-Management" class="headerlink" title="3. AWS Access Control and Management"></a>3. AWS Access Control and Management</h1><h2 id="3-1-IAM-overview"><a href="#3-1-IAM-overview" class="headerlink" title="3.1 IAM overview -"></a>3.1 IAM overview -</h2><h3 id="3-1-1-Functions"><a href="#3-1-1-Functions" class="headerlink" title="3.1.1 Functions"></a>3.1.1 Functions</h3><ul><li>Control access to AWS resources </li><li>authentication<ul><li>who can access resources</li><li>use AWS IAM policy </li></ul></li><li>Authorization <ul><li>how they can use resources </li></ul></li></ul><p>Manage accesses to: </p><ul><li>compute </li><li>storage </li><li>database </li><li>application services </li></ul><h3 id="3-1-2-Roles"><a href="#3-1-2-Roles" class="headerlink" title="3.1.2 Roles"></a>3.1.2 Roles</h3><ul><li>User</li><li>Group </li><li>Permissions </li><li>Role </li></ul><h3 id="3-1-3-Features"><a href="#3-1-3-Features" class="headerlink" title="3.1.3 Features"></a>3.1.3 Features</h3><ul><li>Shared access to your AWS account </li><li>Granular permissions </li></ul><p>You can grant different permissions to different people for different resources. </p><ul><li>secure access to AWS resources for applications that run on Amazon EC2 </li></ul><p>You can use IAM features to securely provide credentials for applications that run on EC2 instances. These credentials provide permissions for your application to access other AWS resources. </p><ul><li>Multi-factor authentication(MFA)</li><li>Identity federation </li></ul><p>You can allow users who already have passwords elsewhere—for example, in your corporate network or with an internet identity provider—to get temporary access to your AWS account.</p><h3 id="3-1-4-functionalities"><a href="#3-1-4-functionalities" class="headerlink" title="3.1.4 functionalities"></a>3.1.4 functionalities</h3><ul><li>manage users and their access </li><li>manage roles and their permissions </li><li>manage federated users and their permissions </li></ul><h2 id="3-2-How-IAM-works"><a href="#3-2-How-IAM-works" class="headerlink" title="3.2 How IAM works"></a>3.2 How IAM works</h2><h3 id="3-2-1-Elements-contained"><a href="#3-2-1-Elements-contained" class="headerlink" title="3.2.1 Elements contained"></a>3.2.1 Elements contained</h3><ul><li>Resources <ul><li>The user, role, group and policy objects that are stored in IAM. </li></ul></li><li>Identities <ul><li>The IAM resource objects taht are used to identofy and group.  </li></ul></li></ul><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/intro-structure.html" target="_blank" rel="noopener">Understanding how IAM works</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> Security </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AWS essentials(3) - Core Services</title>
       <link href="/AWS-essentials-3-Core-Services/"/>
       <url>/AWS-essentials-3-Core-Services/</url>
