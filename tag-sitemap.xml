@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/society/</loc>
+        <lastmod>2020-01-30T06:21:03.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/reading/</loc>
+        <lastmod>2020-01-30T06:21:03.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/diet/</loc>
         <lastmod>2020-01-30T05:42:46.274Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +25,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/food/</loc>
-        <lastmod>2020-01-30T05:42:46.274Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/reading/</loc>
         <lastmod>2020-01-30T05:42:46.274Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
