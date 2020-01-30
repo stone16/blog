@@ -4,7 +4,21 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/thought/</loc>
-        <lastmod>2020-01-30T06:32:20.981Z</lastmod>
+        <lastmod>2020-01-30T06:34:46.880Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/DynamoDB/</loc>
+        <lastmod>2020-01-30T06:33:54.114Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-01-30T06:33:54.114Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -180,20 +194,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/ECS/</loc>
         <lastmod>2020-01-30T05:19:14.359Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
-        <lastmod>2020-01-30T05:19:14.359Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/DynamoDB/</loc>
-        <lastmod>2020-01-30T05:19:14.358Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
