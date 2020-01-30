@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>AWS essentials(1) - introduction</title>
+      <link href="/AWS-essentials-1-introduction/"/>
+      <url>/AWS-essentials-1-introduction/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-AWS-Cloud-Concepts"><a href="#1-AWS-Cloud-Concepts" class="headerlink" title="1. AWS Cloud Concepts"></a>1. AWS Cloud Concepts</h1><ol><li>Introduction to cloud</li><li>Introduction to the AWS Cloud</li></ol><h1 id="2-AWS-Core-Services"><a href="#2-AWS-Core-Services" class="headerlink" title="2. AWS Core Services"></a>2. AWS Core Services</h1><ol><li>Overview of Services and Categories </li><li>Introduction to the AWS Global Infrastructure </li><li>Introduction to Amazon VPC </li><li>Introduction to Security Groups </li><li>Introduction to Amazon EC2</li><li>Introduction to Amazon Elastic Block Store </li><li>Introduction to Amazon S3</li><li>Introduction to AWS Database Solutions </li></ol><h1 id="3-AWS-Security"><a href="#3-AWS-Security" class="headerlink" title="3. AWS Security"></a>3. AWS Security</h1><ol><li>Introduction to AWS Security </li><li>The AWS Shared Responsibility Model </li><li>AWS Access Control and Management </li><li>AWS Security Compliance Programs </li><li>AWS Security Resources </li></ol><h1 id="4-AWS-architecting"><a href="#4-AWS-architecting" class="headerlink" title="4. AWS architecting"></a>4. AWS architecting</h1><ol><li>Introduction to the Well-Architected Framework </li><li>Reference Architecture: Fault Tolerance and High Availability </li><li>Reference Architecture: Web Hosting </li></ol><h1 id="5-AWS-Pricing-and-Support"><a href="#5-AWS-Pricing-and-Support" class="headerlink" title="5. AWS Pricing and Support"></a>5. AWS Pricing and Support</h1><ol><li>Fundamentals of Pricing </li><li>Pricing details for EC2, S3, EBS, RDS, CloudFront </li><li>TCO calculator Overview </li><li>AWS support Plans Overview </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ECS - Elastic Container Service</title>
       <link href="/ECS-Elastic-Container-Service/"/>
       <url>/ECS-Elastic-Container-Service/</url>

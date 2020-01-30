@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" AWS , CloudWatch , CloudTrail ">
-  <meta name="description" content="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail | Leilei&#39;s Blog | 磊磊的博客">
+  <title>AWS essentials(1) - introduction | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" AWS ">
+  <meta name="description" content="AWS essentials(1) - introduction | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言啊！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your self-introduction and Job ID (s">
 <meta property="og:type" content="website">
@@ -645,9 +645,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-AWS-essentials-1-introduction" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</h1>
+        <h1 class="article-title">AWS essentials(1) - introduction</h1>
     
     <div class="article-meta">
         
@@ -664,21 +664,17 @@
             
             <a class="color4">AWS</a>
             
-            <a class="color1">CloudWatch</a>
-            
-            <a class="color1">CloudTrail</a>
-            
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-28 23:03:01'>2020-01-28 23:02</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-29 20:46:13'>2020-01-29 20:45</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:522</span>
+        <span>字数:121</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -708,7 +704,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-CloudWatch"><span class="toc-text">1. CloudWatch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-use-Amazon-CloudWatch"><span class="toc-text">Why use Amazon CloudWatch?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-CloudTrail"><span class="toc-text">2. CloudTrail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Best-practices-of-developing-cloud-apps"><span class="toc-text">3. Best practices of developing cloud apps</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AWS-Cloud-Concepts"><span class="toc-text">1. AWS Cloud Concepts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-AWS-Core-Services"><span class="toc-text">2. AWS Core Services</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AWS-Security"><span class="toc-text">3. AWS Security</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-AWS-architecting"><span class="toc-text">4. AWS architecting</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-AWS-Pricing-and-Support"><span class="toc-text">5. AWS Pricing and Support</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -724,65 +720,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-CloudWatch"><a href="#1-CloudWatch" class="headerlink" title="1. CloudWatch"></a>1. CloudWatch</h1><h2 id="Why-use-Amazon-CloudWatch"><a href="#Why-use-Amazon-CloudWatch" class="headerlink" title="Why use Amazon CloudWatch?"></a>Why use Amazon CloudWatch?</h2><p>Need it to: </p>
-<ul>
-<li>monitor CPU, memory, disk I/O, network  -&gt; metrics</li>
-<li>react to application log events and availability -&gt; logs/ event</li>
-<li>automatically scale ec2 instance fleet -&gt; logs/ event</li>
-<li>view operational status and identify issues -&gt; alarms, dashboard </li>
-</ul>
-<p>Actually, we could use Amazon CloudWatch to gain <strong>system-wide visibility</strong> into <strong>resource utilization</strong>, <strong>application performance</strong>, and <strong>operational health</strong>. You can use these insights to react and keep your application running smoothly. Amazon CloudWatch monitors your AWS Cloud resources and your cloud-powered applications. It tracks the metrics so that you can visualize and review them. You can also set alarms that will fire when a metric goes beyond a limit that you specified. CloudWatch gives you visibility into resource utilization, application performance, and operational health.</p>
-<h1 id="2-CloudTrail"><a href="#2-CloudTrail" class="headerlink" title="2. CloudTrail"></a>2. CloudTrail</h1><p>CloudTrail is integrated with several AWS services. </p>
-<ul>
-<li>EC2</li>
-<li>VPC</li>
-<li>S3</li>
-<li>EBS</li>
-<li>DDB</li>
-<li>RDS</li>
-<li>Redshift</li>
-<li>CloudFormation </li>
-<li>IAM</li>
-<li>…etc. </li>
-</ul>
-<p>AWS CloudTrail is an AWS service that generates logs of calls to the AWS API. AWS CloudTrail can <strong>record all activity</strong> against the services it monitors. Here are questions that you can answer using CloudTrail logs: <strong>who, when, what, which, where</strong>? While the coverage is extensive, not all services are covered in CloudTrail logs. You can use the AWS API <strong>call history produced by CloudTrail to track changes to AWS resources</strong>, including creation, modification, and deletion of AWS resources such as Amazon EC2 instances, Amazon VPC security groups, and Amazon EBS volumes.</p>
-<p>You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS region. You can also download a file with that info, or a subset of info based on the filter and time range you choose</p>
-<h1 id="3-Best-practices-of-developing-cloud-apps"><a href="#3-Best-practices-of-developing-cloud-apps" class="headerlink" title="3. Best practices of developing cloud apps"></a>3. Best practices of developing cloud apps</h1><ul>
-<li>consider designing applications that are <strong>loosely coupled</strong>. <ul>
-<li>think of your application as a consumer and provider of services </li>
-<li>design and develop app as <strong>granular components</strong> that can be delivered and scaled independently. </li>
-</ul>
-</li>
-<li>Architect for resilience; <ul>
-<li>Set up your servers to scale automatically based on the number of users concurrently visiting your application.</li>
-<li>Autoscaling would enable your application to handle a surge in volumn during a sale or propmotion and go back to normal </li>
-<li>set up a <strong>cluster of nodes</strong> such that when one node fails, another node automatically picks up all the traffic. </li>
-<li>Consider setting up <strong>read replicas for your database</strong>. </li>
-</ul>
-</li>
-<li>design for failure<ul>
-<li>In case of service failure, your application may log the failure and retry at a later time.</li>
-<li>If the service is slow to respond, your application could retry by using an exponential backoff algorithm: retry after increasing amounts of time between attempts.<ul>
-<li>This approach attempts to <strong>reach the service without overwhelming it</strong> with repeated requests and potentially aggravating the latency issue. </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>log metrics and monitor performance </li>
-<li>implement a strong DevOps model<ul>
-<li>Operationalize the development and deployment process for your application</li>
-<li>Develop a <strong>modular, automated, and continuous build</strong> process. </li>
-<li>Ensure <strong>consistency</strong> in the development, staging, and production environments. Set up scripts or use robust tools to consistently configure your environments.</li>
-</ul>
-</li>
-<li>implement security in every layer <ul>
-<li>infrastructure</li>
-<li>application</li>
-<li>data at transit and at rest </li>
-<li>user authentication and authorization</li>
-</ul>
-</li>
-</ul>
+        <h1 id="1-AWS-Cloud-Concepts"><a href="#1-AWS-Cloud-Concepts" class="headerlink" title="1. AWS Cloud Concepts"></a>1. AWS Cloud Concepts</h1><ol>
+<li>Introduction to cloud</li>
+<li>Introduction to the AWS Cloud</li>
+</ol>
+<h1 id="2-AWS-Core-Services"><a href="#2-AWS-Core-Services" class="headerlink" title="2. AWS Core Services"></a>2. AWS Core Services</h1><ol>
+<li>Overview of Services and Categories </li>
+<li>Introduction to the AWS Global Infrastructure </li>
+<li>Introduction to Amazon VPC </li>
+<li>Introduction to Security Groups </li>
+<li>Introduction to Amazon EC2</li>
+<li>Introduction to Amazon Elastic Block Store </li>
+<li>Introduction to Amazon S3</li>
+<li>Introduction to AWS Database Solutions </li>
+</ol>
+<h1 id="3-AWS-Security"><a href="#3-AWS-Security" class="headerlink" title="3. AWS Security"></a>3. AWS Security</h1><ol>
+<li>Introduction to AWS Security </li>
+<li>The AWS Shared Responsibility Model </li>
+<li>AWS Access Control and Management </li>
+<li>AWS Security Compliance Programs </li>
+<li>AWS Security Resources </li>
+</ol>
+<h1 id="4-AWS-architecting"><a href="#4-AWS-architecting" class="headerlink" title="4. AWS architecting"></a>4. AWS architecting</h1><ol>
+<li>Introduction to the Well-Architected Framework </li>
+<li>Reference Architecture: Fault Tolerance and High Availability </li>
+<li>Reference Architecture: Web Hosting </li>
+</ol>
+<h1 id="5-AWS-Pricing-and-Support"><a href="#5-AWS-Pricing-and-Support" class="headerlink" title="5. AWS Pricing and Support"></a>5. AWS Pricing and Support</h1><ol>
+<li>Fundamentals of Pricing </li>
+<li>Pricing details for EC2, S3, EBS, RDS, CloudFront </li>
+<li>TCO calculator Overview </li>
+<li>AWS support Plans Overview </li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -796,12 +765,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">522</span></p>
+    <p><span class="copy-title">文章标题:</span>AWS essentials(1) - introduction</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">121</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:02:31</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-28, 23:03:01</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 20:45:54</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 20:46:13</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-essentials-1-introduction/" title="AWS essentials(1) - introduction">https://www.llchen60.com/AWS-essentials-1-introduction/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -814,8 +783,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/';
-            this.page.identifier = 'Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/';
+            this.page.url = 'https://www.llchen60.com/AWS-essentials-1-introduction/';
+            this.page.identifier = 'AWS-essentials-1-introduction/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -831,8 +800,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-essentials-1-introduction/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-essentials-1-introduction/"></span>
 
 
 
