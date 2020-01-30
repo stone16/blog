@@ -3,8 +3,15 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/rafactor/</loc>
+        <lastmod>2020-01-30T06:42:06.105Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/reading/</loc>
-        <lastmod>2020-01-30T06:40:35.289Z</lastmod>
+        <lastmod>2020-01-30T06:42:06.105Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>重构笔记 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" reading , rafactor ">
+  <meta name="description" content="重构笔记 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Network">Network<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="笔记">笔记<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+<input type="hidden" id="yelog_site_word_count" value="61k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="笔记 "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Network "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="笔记 "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-重构笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">重构笔记</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="笔记">笔记</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">reading</a>
+            
+            <a class="color4">rafactor</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-29 22:42:06'>2020-01-29 22:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-什么是重构？"><span class="toc-text">1. 什么是重构？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Tips"><span class="toc-text">1.1 Tips</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-重构原则"><span class="toc-text">2. 重构原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-为何重构"><span class="toc-text">2.1 为何重构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-代码的坏味道"><span class="toc-text">3. 代码的坏味道</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Duplicated-Code-重复代码"><span class="toc-text">3.1 Duplicated Code 重复代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Long-Method-过长函数"><span class="toc-text">3.2 Long Method (过长函数)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Large-Class-过大的类"><span class="toc-text">3.3 Large Class (过大的类)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-Long-Parameter-List-过长参数列"><span class="toc-text">3.4 Long Parameter List (过长参数列)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-Divergent-Change-发散式变化"><span class="toc-text">3.5 Divergent Change (发散式变化)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-Shotgun-Surgery"><span class="toc-text">3.6 Shotgun Surgery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-Feature-Envy"><span class="toc-text">3.7 Feature Envy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-Data-Clumps"><span class="toc-text">3.8 Data Clumps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9-Primitive-Obsession"><span class="toc-text">3.9 Primitive Obsession</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-10-switch"><span class="toc-text">3.10 switch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-11-Parallel-Inheritance-Hierarchies-平行继承关系"><span class="toc-text">3.11 Parallel Inheritance Hierarchies (平行继承关系)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-12-Lazy-Class"><span class="toc-text">3.12 Lazy Class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-13-Speculative-Generality"><span class="toc-text">3.13 Speculative Generality</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-14-Temporary-Field"><span class="toc-text">3.14 Temporary Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-15-Message-Chains"><span class="toc-text">3.15 Message Chains</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-16-Middle-Man"><span class="toc-text">3.16 Middle Man</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-17-Inappropriate-Intimacy"><span class="toc-text">3.17 Inappropriate Intimacy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-18-Alternative-Classes-with-Different-Interfaces"><span class="toc-text">3.18 Alternative Classes with Different Interfaces</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-19-Incomplete-Library-Class"><span class="toc-text">3.19 Incomplete Library Class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-20-Data-Class"><span class="toc-text">3.20 Data Class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-21-Refused-Bequest"><span class="toc-text">3.21 Refused Bequest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-22-Comments"><span class="toc-text">3.22 Comments</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-构筑测试体系"><span class="toc-text">4. 构筑测试体系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-重构列表"><span class="toc-text">5. 重构列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-重新组织函数"><span class="toc-text">6. 重新组织函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Extract-Methods"><span class="toc-text">6.1 Extract Methods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-Inline-Method-内联函数"><span class="toc-text">6.2 Inline Method 内联函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-Inline-Temp-内联临时变量"><span class="toc-text">6.3 Inline Temp 内联临时变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-Replace-Temp-with-Query-以查询取代临时变量"><span class="toc-text">6.4 Replace Temp with Query  以查询取代临时变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-Introduce-Explaining-Variable-引入解释性变量"><span class="toc-text">6.5 Introduce Explaining Variable 引入解释性变量</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-什么是重构？"><a href="#1-什么是重构？" class="headerlink" title="1. 什么是重构？"></a>1. 什么是重构？</h1><blockquote>
+<p>在不改变软件可观察行为的前提下改善其内部结构，提高其可理解性，降低其修改成本</p>
+</blockquote>
+<p>当面对历史遗留问题的时候，规模很大，历史超久，使得增加单元测试或者理解逻辑成为不可能的任务，那么我们有的工具就是那些已经被证明是<strong>行为保持的重构手法</strong>，整理出可测试的接口，并添加测试，以此作为继续重构的立足点。</p>
+<h2 id="1-1-Tips"><a href="#1-1-Tips" class="headerlink" title="1.1 Tips"></a>1.1 Tips</h2><ol>
+<li>以微小的步伐修改程序，以期更好的发现错误。</li>
+<li>代码应该表现自己的目的！！！</li>
+<li>大多数情况下，函数应该放在它所使用的数据的所属对象当中</li>
+<li>尽量去除临时变量，因为其很容易产生问题，导致大量参数被传来传去。  Replace Temp with Query </li>
+<li>注意将变化的东西放到一块去，一块来解决</li>
+</ol>
+<h1 id="2-重构原则"><a href="#2-重构原则" class="headerlink" title="2. 重构原则"></a>2. 重构原则</h1><p>使用重构原则开发软件的时候，实质上是将自己的时间分配给了两种截然不同的行为：添加新功能以及重构。添加新功能的时候就不修改既有代码；重构时不添加新功能，只管改进程序结构。</p>
+<h2 id="2-1-为何重构"><a href="#2-1-为何重构" class="headerlink" title="2.1 为何重构"></a>2.1 为何重构</h2><ul>
+<li>改进软件设计<ul>
+<li>整理代码，让代码回到应有的位置上去</li>
+<li>减少代码量，消除重复代码</li>
+</ul>
+</li>
+<li>使得软件更容易理解</li>
+<li>更容易找到Big</li>
+<li>提高编程速度<ul>
+<li>良好的设计是快速开发的根本</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>当重复做一件事情三次的时候，请重构。</p>
+</blockquote>
+<ul>
+<li>在添加功能的时候重构<ul>
+<li>帮助理解需要修改的代码</li>
+</ul>
+</li>
+<li>修补错误时重构</li>
+<li>修改接口<ul>
+<li>当接口不得不被修改的时候</li>
+<li>deprecate掉旧接口，并且让旧接口Internally调用新接口</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-代码的坏味道"><a href="#3-代码的坏味道" class="headerlink" title="3. 代码的坏味道"></a>3. 代码的坏味道</h1><p>本章比较大概，但里面又提及了很多细节性的方法，建议先去了解这些方法，再来看这一章！ </p>
+<p>量度规矩 vs 见识广博者的直觉</p>
+<h2 id="3-1-Duplicated-Code-重复代码"><a href="#3-1-Duplicated-Code-重复代码" class="headerlink" title="3.1 Duplicated Code 重复代码"></a>3.1 Duplicated Code 重复代码</h2><ul>
+<li>同一个类的两个函数有相同表达式<ul>
+<li>extract method</li>
+</ul>
+</li>
+<li>两个互为兄弟的子类内的相同表达式<ul>
+<li>extract method to super class</li>
+</ul>
+</li>
+<li>两个不相关的类， duplicate code<ul>
+<li>对其中一个使用extract class，将重复代码提炼到一个独立类当中 </li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-Long-Method-过长函数"><a href="#3-2-Long-Method-过长函数" class="headerlink" title="3.2 Long Method (过长函数)"></a>3.2 Long Method (过长函数)</h2><p>间接层所能带来的全部利益 - 解释能力，共享能力，选择能力都是由小型函数支持的</p>
+<p>给函数一个好名字，让代码阅读者可以很迅速地了解到这个函数是做什么的。</p>
+<p>每当感觉需要以注释来说明点什么的时候，我们就需要把说明的东西写进一个独立函数中。</p>
+<h2 id="3-3-Large-Class-过大的类"><a href="#3-3-Large-Class-过大的类" class="headerlink" title="3.3 Large Class (过大的类)"></a>3.3 Large Class (过大的类)</h2><p>如果用单个类做太多事情，往往会出现大量的实例变量，一旦如此，duplicated code也就会接踵而至了。</p>
+<p>extract class or extract subclass </p>
+<h2 id="3-4-Long-Parameter-List-过长参数列"><a href="#3-4-Long-Parameter-List-过长参数列" class="headerlink" title="3.4 Long Parameter List (过长参数列)"></a>3.4 Long Parameter List (过长参数列)</h2><p>replace parameter with method </p>
+<p>introduce paramter object </p>
+<h2 id="3-5-Divergent-Change-发散式变化"><a href="#3-5-Divergent-Change-发散式变化" class="headerlink" title="3.5 Divergent Change (发散式变化)"></a>3.5 Divergent Change (发散式变化)</h2><p>针对某一外界变化的所有的相应修改都只应该发生在单一类当中，并且新类内的所有内容都应该反应此变化。应找到导致变化的原因，然后运用Extact Class将其提炼到另一个类当中。</p>
+<h2 id="3-6-Shotgun-Surgery"><a href="#3-6-Shotgun-Surgery" class="headerlink" title="3.6 Shotgun Surgery"></a>3.6 Shotgun Surgery</h2><p>如果每遇到某种变化，都必须在很多不同的类内做许多小修改，那么就应该使用move method和move field把所有需要的修改都放到一个类里去。努力使外界变化和需要修改的类能够一一对应。</p>
+<h2 id="3-7-Feature-Envy"><a href="#3-7-Feature-Envy" class="headerlink" title="3.7 Feature Envy"></a>3.7 Feature Envy</h2><h2 id="3-8-Data-Clumps"><a href="#3-8-Data-Clumps" class="headerlink" title="3.8 Data Clumps"></a>3.8 Data Clumps</h2><p>将经常绑在一起出现的数据放到一起，创建属于他们的对象</p>
+<h2 id="3-9-Primitive-Obsession"><a href="#3-9-Primitive-Obsession" class="headerlink" title="3.9 Primitive Obsession"></a>3.9 Primitive Obsession</h2><h2 id="3-10-switch"><a href="#3-10-switch" class="headerlink" title="3.10 switch"></a>3.10 switch</h2><p>少用switch，应该考虑用多态来做替换</p>
+<h2 id="3-11-Parallel-Inheritance-Hierarchies-平行继承关系"><a href="#3-11-Parallel-Inheritance-Hierarchies-平行继承关系" class="headerlink" title="3.11 Parallel Inheritance Hierarchies (平行继承关系)"></a>3.11 Parallel Inheritance Hierarchies (平行继承关系)</h2><h2 id="3-12-Lazy-Class"><a href="#3-12-Lazy-Class" class="headerlink" title="3.12 Lazy Class"></a>3.12 Lazy Class</h2><h2 id="3-13-Speculative-Generality"><a href="#3-13-Speculative-Generality" class="headerlink" title="3.13 Speculative Generality"></a>3.13 Speculative Generality</h2><h2 id="3-14-Temporary-Field"><a href="#3-14-Temporary-Field" class="headerlink" title="3.14 Temporary Field"></a>3.14 Temporary Field</h2><h2 id="3-15-Message-Chains"><a href="#3-15-Message-Chains" class="headerlink" title="3.15 Message Chains"></a>3.15 Message Chains</h2><h2 id="3-16-Middle-Man"><a href="#3-16-Middle-Man" class="headerlink" title="3.16 Middle Man"></a>3.16 Middle Man</h2><h2 id="3-17-Inappropriate-Intimacy"><a href="#3-17-Inappropriate-Intimacy" class="headerlink" title="3.17 Inappropriate Intimacy"></a>3.17 Inappropriate Intimacy</h2><h2 id="3-18-Alternative-Classes-with-Different-Interfaces"><a href="#3-18-Alternative-Classes-with-Different-Interfaces" class="headerlink" title="3.18 Alternative Classes with Different Interfaces"></a>3.18 Alternative Classes with Different Interfaces</h2><h2 id="3-19-Incomplete-Library-Class"><a href="#3-19-Incomplete-Library-Class" class="headerlink" title="3.19 Incomplete Library Class"></a>3.19 Incomplete Library Class</h2><h2 id="3-20-Data-Class"><a href="#3-20-Data-Class" class="headerlink" title="3.20 Data Class"></a>3.20 Data Class</h2><h2 id="3-21-Refused-Bequest"><a href="#3-21-Refused-Bequest" class="headerlink" title="3.21 Refused Bequest"></a>3.21 Refused Bequest</h2><h2 id="3-22-Comments"><a href="#3-22-Comments" class="headerlink" title="3.22 Comments"></a>3.22 Comments</h2><h1 id="4-构筑测试体系"><a href="#4-构筑测试体系" class="headerlink" title="4. 构筑测试体系"></a>4. 构筑测试体系</h1><p>对于程序员来说，写代码的时间实际上很少，大部分时间是用在了调试代码上。实际上，每个类都应该有一个测试函数，并以它来测试自己。</p>
+<p>写好一点功能就立即去进行测试。事实上，最好能在添加特性之前先写测试代码，使得将注意力集中于接口而非实现。</p>
+<p>编写代码时，应该先让代码失败，以此证明测试机制的确可以运行，并且正确测试了其该测试的东西。</p>
+<p>观察类该做的所有事情，然后针对任何一项功能的任何一种可能失败情况，进行测试。</p>
+<h1 id="5-重构列表"><a href="#5-重构列表" class="headerlink" title="5. 重构列表"></a>5. 重构列表</h1><ul>
+<li>方法</li>
+<li>动机</li>
+</ul>
+<h1 id="6-重新组织函数"><a href="#6-重新组织函数" class="headerlink" title="6. 重新组织函数"></a>6. 重新组织函数</h1><p>重构手法大部分都针对函数，而问题往往源自于Long Methods。因为其包含了太多信息。</p>
+<h2 id="6-1-Extract-Methods"><a href="#6-1-Extract-Methods" class="headerlink" title="6.1 Extract Methods"></a>6.1 Extract Methods</h2><ul>
+<li>将一段代码放进一个独立函数当中，并且用函数名称来解释该函数的用途</li>
+<li>动机  <ul>
+<li>当函数过长，或者需要注释才能让人理解用途，就放到独立函数当中</li>
+<li>函数粒度小意味着更容易进行复用</li>
+<li>使得高层函数读起来就像一些列注释</li>
+</ul>
+</li>
+<li>做法<ul>
+<li>创造一个函数，根据这个函数的意图来对其进行命名，以做什么而不是怎么做来命名</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-2-Inline-Method-内联函数"><a href="#6-2-Inline-Method-内联函数" class="headerlink" title="6.2 Inline Method 内联函数"></a>6.2 Inline Method 内联函数</h2><ul>
+<li>在函数调用点插入函数本体，然后移除该函数</li>
+<li>动机<ul>
+<li>移除没有太大价值的间接层</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-3-Inline-Temp-内联临时变量"><a href="#6-3-Inline-Temp-内联临时变量" class="headerlink" title="6.3 Inline Temp 内联临时变量"></a>6.3 Inline Temp 内联临时变量</h2><ul>
+<li>你有一个临时变量，只被简单表达式赋值一次，而它妨碍了其他重构手法</li>
+<li>动机<ul>
+<li>一般作为Replace Temp with Query的一部分使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-4-Replace-Temp-with-Query-以查询取代临时变量"><a href="#6-4-Replace-Temp-with-Query-以查询取代临时变量" class="headerlink" title="6.4 Replace Temp with Query  以查询取代临时变量"></a>6.4 Replace Temp with Query  以查询取代临时变量</h2><ul>
+<li>现象<ul>
+<li>你的程序以一个临时变量保存某一表达式的运算结果</li>
+</ul>
+</li>
+<li>将这个表达式提炼到一个独立函数当中，将这个临时变量的所有引用点替换为对新函数的调用。此后，新函数就可以被其他函数调用了。</li>
+<li>动机<ul>
+<li>临时变量的问题是他们是暂时的，很可能你需要写出更长的函数来访问到需要的临时变量 </li>
+</ul>
+</li>
+</ul>
+<h2 id="6-5-Introduce-Explaining-Variable-引入解释性变量"><a href="#6-5-Introduce-Explaining-Variable-引入解释性变量" class="headerlink" title="6.5 Introduce Explaining Variable 引入解释性变量"></a>6.5 Introduce Explaining Variable 引入解释性变量</h2><ul>
+<li>将该复杂表达式(或其中一部分)的结果放进一个临时变量，以此变量名称来解释表达式用途。</li>
+<li>动机<ul>
+<li>表达式有可能非常复杂且难以阅读，临时变量可以帮助你将表达式分解为比较容易管理的形式</li>
+<li>这样子我们就可以运用临时变量来解释每一步的意义，在执行一些比较长的判断逻辑的时候很关键</li>
+</ul>
+</li>
+<li>做法<ul>
+<li>和 extract method 有可替换的潜在部分的</li>
+<li>使用introduce explaining variable是在extract method需要花费更大工作量的时候</li>
+</ul>
+</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>重构笔记</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-29, 22:41:38</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-29, 22:42:06</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/" title="重构笔记">https://www.llchen60.com/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/';
+            this.page.identifier = '重构笔记/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="重构笔记/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
