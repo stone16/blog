@@ -1,1 +1,1 @@
-https://www.llchen60.com/Distributed-Tracing/
+https://www.llchen60.com/AWS-DynamoDBClient-vs-DynamoDBMapper/

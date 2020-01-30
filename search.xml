@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>AWS DynamoDBClient vs DynamoDBMapper</title>
+      <link href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"/>
+      <url>/AWS-DynamoDBClient-vs-DynamoDBMapper/</url>
+      
+        <content type="html"><![CDATA[<p>Recently just did a project related with DynamoDB, use both DynamoDBClient and DynamoDBMapper in different circumstances. In this post, will compare those two, regarding with its convenience, latency, and their differences by nature. </p><h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>DynamoDBClient is Service client for accessing DynamoDB; while DynamoDBMapper use ORM (Object relational mapping) for converting data between incompatible type systems using object-oriented programming languages. </p><h2 id="1-1-How-to-use-DDBClient"><a href="#1-1-How-to-use-DDBClient" class="headerlink" title="1.1 How to use DDBClient"></a>1.1 How to use DDBClient</h2><pre><code>// Create POJO@Datapublic class Whitelist {    private String id;    private String content;    private String status;}// Create DDBClientAmazonDynamoDB ddbCLient = AmazonDynamoDBClientBuilder.standard()    .withCredentials(new AWSCredentialsProvider(KEY))    .withRegion(&quot;aaabbb&quot;)    .build();// Convert whitelist into MapMap&lt;String, AttributeValue&gt; whitelistMap = new HashMap&lt;&gt;();whitelistMap.put(&quot;id&quot;, &quot;123&quot;);whitelistMap.put(&quot;content&quot;, &quot;hello world&quot;);whitelistMap.put(&quot;status&quot;, &quot;onSale&quot;);// UpdateItem RequestUpdateItemRequest request = new UpdateItemRequest()    .withTableName(&quot;WhitelistTable&quot;)    .withItem(whitelistMap);// Use updateItem operationddbClient.updateItem(request);</code></pre><p>As you can see here, we need to build a String, AttributeValue map, which is a bit annoying. </p><h2 id="1-2-How-to-use-DynamoDBMapper"><a href="#1-2-How-to-use-DynamoDBMapper" class="headerlink" title="1.2 How to use DynamoDBMapper"></a>1.2 How to use DynamoDBMapper</h2><p>We can define the table schema when we define the POJO using DynamoDBMapper’s annotations. </p><pre><code>// Notice: lombok may not work well here, especially when you use GSI and LSI, it cannot retrive info correctly@DynamoDBTable(tableName = &quot;whitelistTable&quot;)public class Whitelist {    @DynamoDBHashKey    private String id;    @DynamoDBRangeKey    private String status;    @DynamoDBAttribute    private String content;}// Create DDBClientAmazonDynamoDB ddbCLient = AmazonDynamoDBClientBuilder.standard()    .withCredentials(new AWSCredentialsProvider(KEY))    .withRegion(&quot;aaabbb&quot;)    .build();//Create DDBMapperAmazonDynamoDBMapper ddbMapper = new AmazonDynamoDBMapper(ddbClient);// updateItemddbMapper.save(whitelistItem);</code></pre><p>Code looks much more succinct, isn’t it! As you can see above, you can think DDBMapper wraps DDBCLient in some way, and help you implement the String-AttributeValue map for you. </p><h1 id="2-Comparision"><a href="#2-Comparision" class="headerlink" title="2. Comparision"></a>2. Comparision</h1><ul><li>DynamoDBMapper <ul><li>Benefits<ul><li>Code look better</li><li>less dev work</li></ul></li><li>weakness<ul><li>it runs slower than using DDBClient<ul><li>E.G when using DDBClient::getItem, the average latency is about 2ms; whereas it comes to be around 8ms in DDBMapper.  </li></ul></li></ul></li></ul></li><li>DynamoDBClient<ul><li>Benefits<ul><li>As said above, run much faster</li></ul></li><li>weakness<ul><li>verbose code</li><li>easier for mistakes, typos </li></ul></li></ul></li></ul><p>So how to choose from those two – it depends. Suppose you have a daily job to put 100 millions items into one table and want to write faster, DDBClient should definitely be your choice in this situation. Otherwise, use DynamoDBMapper to save your life, lol. </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> DynamoDB </tag>
+            
+            <tag> Mapper </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Distributed Tracing</title>
       <link href="/Distributed-Tracing/"/>
       <url>/Distributed-Tracing/</url>
