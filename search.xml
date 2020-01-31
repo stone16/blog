@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Linux常用指令(2)</title>
+      <link href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"/>
+      <url>/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/</url>
+      
+        <content type="html"><![CDATA[<p>继续上篇来介绍一些基本的指令</p><h1 id="1-tr指令"><a href="#1-tr指令" class="headerlink" title="1. tr指令"></a>1. tr指令</h1><ul><li>tr是用来对从stdin进入的字符进行相关的翻译和转换的，并且将其呈现在stdout当中</li><li>tr会接收两个字符set，然后用第二个set里面的字符来替换第一个set里面的字符</li><li>tr预定义了一些sets供用户来直接使用<ul><li>alnum: 字母数字组成的字符集</li><li>alpha：按字母顺序的字符集</li><li>blank: 空白字符集</li><li>cntrl: 控制字符集</li><li>digit: 数字字符集</li><li>graph: 图像字符集</li><li>lower: 小写字母字符集</li><li>print: 可以写出的字符集</li><li>punct: 标点符号字符集</li><li>space: 空格字符集</li><li>upper: 大写字母字符集</li><li>xdigit: 十六进制字符集</li></ul></li><li>tr -d [blabla] 删除[]里面定义的字符</li></ul><h1 id="2-colrm-指令"><a href="#2-colrm-指令" class="headerlink" title="2. colrm 指令"></a>2. colrm 指令</h1><ul><li>用来删除行的指令</li></ul><pre><code>// 删除从第四行开始到末尾的所有$ cat grocery.list | colrm 4 </code></pre><h1 id="3-expand-和-unexpand-指令"><a href="#3-expand-和-unexpand-指令" class="headerlink" title="3. expand 和 unexpand 指令"></a>3. expand 和 unexpand 指令</h1><ul><li>expand指令能够将tabs变成空格</li><li>unexpand 指令能够将空格变成tab</li></ul><h1 id="4-comm-cmp以及diff指令"><a href="#4-comm-cmp以及diff指令" class="headerlink" title="4. comm, cmp以及diff指令"></a>4. comm, cmp以及diff指令</h1><ul><li>diff指令比较两个文件，并且告知二者之间的不同<ul><li>-w 忽视空格上的不同</li><li>-i 忽视大小写的不同</li></ul></li><li>comm 也是比较两个文件，但是行为不太一样。会生成三行输出<ul><li>只在第一个文件当中出现的行</li><li>只在第二个文件当中出现的行</li><li>在两个文件当中都出现的行</li></ul></li><li>cmp 比较两个文件<ul><li>显示出两个文件不同的byte和行号 </li></ul></li></ul><h1 id="5-bc指令"><a href="#5-bc指令" class="headerlink" title="5. bc指令"></a>5. bc指令</h1><ul><li>使用bc来做基础运算 - basic calculator </li></ul><pre><code>$ echo 2+3 | bc </code></pre><h1 id="6-sed-指令"><a href="#6-sed-指令" class="headerlink" title="6. sed 指令"></a>6. sed 指令</h1><p><a href="https://coolshell.cn/articles/9104.html" target="_blank" rel="noopener">https://coolshell.cn/articles/9104.html</a></p><ul><li><p>sed指令可以用来对文件或者数据流进行转化</p><ul><li>一次读取一行的数据</li><li>对这一行数据实行特定的操作</li><li>一般来说输出到stdout</li></ul></li><li><p>功能</p><ul><li>从buffer里面删除文字</li><li>在buffer附上文本或者插入文本</li><li>写入文件</li><li>用regex定义的规则来转化文本</li></ul></li><li><p>-e: 指定表达式或者编辑的脚本   用来做替换</p><ul><li>s 表示这是个替换命令</li><li>用 / 作为分隔符 </li><li>前面是待替换的文本，后面是替换的文本</li><li>g 便是让这个替换在现在的整个buffer里都生效</li></ul></li></ul><pre><code>$ echo &quot;IBM 174.99&quot; |sed –e &#39;s/IBM/International Business Machines/g&#39; International Business Machines 174.99$ echo &quot;Oracle DB&quot;|sed -e &#39;s/Oracle/IBM/g&#39; -e &#39;s/DB/DB2/g&#39;IBM DB2$ echo &quot;C:\Program Files\PuTTY\putty.exe&quot;| sed -e &#39;s/\\/\//g&#39; -e &#39;s/ /_/g&#39; -e &#39;s/://g&#39;C/Program_Files/PuTTY/putty.exe</code></pre><ul><li>用来做漏斗<ul><li>d 表示要删除的东西</li><li>然后中间跟着的是正则表达式 表示的一个string pattern</li></ul></li></ul><pre><code>cat &lt;&lt; EOF &gt; dummy_sed.txt# top of file  # the next line here# Last Name, PhoneSmith, 555-1212Jones, 555-5555 # last numberEOF$ sed &#39;/^[[:space:]]*#/d&#39; dummy_sed.txtSmith, 555-1212Jones, 555-5555 # last number$ grep -v  ^[[:space:]]*# dummy_sed.txtSmith, 555-1212Jones, 555-5555 # last number</code></pre><h1 id="7-awk指令"><a href="#7-awk指令" class="headerlink" title="7. awk指令"></a>7. awk指令</h1><h2 id="7-1-指令范式"><a href="#7-1-指令范式" class="headerlink" title="7.1 指令范式"></a>7.1 指令范式</h2><pre><code>// $1 表示第1列，$4表示第4列  注意$0表示整行$ awk &#39;{print $1, $4}&#39;  netstat.txt </code></pre><p><a href="https://coolshell.cn/tag/awk" target="_blank" rel="noopener">https://coolshell.cn/tag/awk</a> </p><ul><li>用来做转换，漏斗，格式化等</li><li>从stdin拿数据，然后展示在stdout当中</li></ul><h2 id="7-2-格式化输出"><a href="#7-2-格式化输出" class="headerlink" title="7.2 格式化输出"></a>7.2 格式化输出</h2><p>格式化输出的样式基本上和c语言的一样</p><pre><code>$ awk &#39;{printf &quot;%-8s %-8s %-8s %-18s %-22s %-15s\n&quot;,$1,$2,$3,$4,$5,$6}&#39; netstat.txt</code></pre><h2 id="7-3-过滤记录的功能"><a href="#7-3-过滤记录的功能" class="headerlink" title="7.3 过滤记录的功能"></a>7.3 过滤记录的功能</h2><pre><code>$ awk &#39;$3==0 &amp;&amp; $6==&quot;LISTEN&quot; &#39; netstat.txt// 内建变量NR来展示表头$ awk &#39;$3==0 &amp;&amp; $6==&quot;LISTEN&quot; || NR==1 &#39; netstat.txt$ awk &#39;$3==0 &amp;&amp; $6==&quot;LISTEN&quot; || NR==1 {printf &quot;%-20s %-20s %s\n&quot;,$4,$5,$6}&#39; netstat.txt</code></pre><h2 id="7-4-awk的内建变量"><a href="#7-4-awk的内建变量" class="headerlink" title="7.4 awk的内建变量"></a>7.4 awk的内建变量</h2><ul><li>$0 当前记录 </li><li>$1 - $n 当前记录的第n个字段</li><li>FS  输入字段分隔符，默认是空格或者Tab</li><li>NF  当前记录当中的字段个数</li><li>NR  已经读出的记录数，行号</li><li>FNR 当前记录数，与NR不同的是，这个值会是各个文件自己的行号</li><li>RS  输入的记录分隔符，默认为换行符</li><li>OFS 输出字段分隔符，默认空格</li><li>ORS 输出记录分隔符，默认换行符</li><li>FILENAME 当前输入文件的名字</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Cli </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux 常用指令(1)</title>
       <link href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"/>
       <url>/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/</url>
