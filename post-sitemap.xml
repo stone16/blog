@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>https://www.llchen60.com/Curl-tutorial/</loc>
+        <lastmod>2020-01-31T04:43:03.059Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/</loc>
+        <lastmod>2020-01-31T04:42:26.456Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/</loc>
         <lastmod>2020-01-31T04:41:12.578Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -146,14 +162,6 @@
     <url>
         <loc>https://www.llchen60.com/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/</loc>
         <lastmod>2020-01-30T05:19:14.364Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/</loc>
-        <lastmod>2020-01-30T05:19:14.363Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
