@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript 教程 - part 2 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" JavaScript , Object Oriented ">
+  <meta name="description" content="JavaScript 教程 - part 2 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(59)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="59">
+<input type="hidden" id="yelog_site_word_count" value="105.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,i18next,JavaScript"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Japan,Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-JavaScript-教程-part-2" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">JavaScript 教程 - part 2</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">JavaScript</a>
+            
+            <a class="color1">Object Oriented</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 22:29:36'>2020-01-30 22:28</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:8.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-面向对象编程"><span class="toc-text">1. 面向对象编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-实例对象与New命令"><span class="toc-text">1.1 实例对象与New命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-构造函数"><span class="toc-text">1.1.1 构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-New"><span class="toc-text">1.1.2 New</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-this关键字"><span class="toc-text">1.2 this关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-this实质"><span class="toc-text">1.2.1 this实质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-使用场合"><span class="toc-text">1.2.2 使用场合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-Tips"><span class="toc-text">1.2.3 Tips</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-绑定this的方法"><span class="toc-text">1.2.4 绑定this的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-对象的继承"><span class="toc-text">1.3 对象的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-原型对象概述"><span class="toc-text">1.3.1 原型对象概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-Object对象的相关方法"><span class="toc-text">1.4 Object对象的相关方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-严格模式"><span class="toc-text">1.5 严格模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-异步操作"><span class="toc-text">2. 异步操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-General"><span class="toc-text">2.1 General</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-单线程模型"><span class="toc-text">2.1.1 单线程模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-同步任务与异步任务"><span class="toc-text">2.1.2 同步任务与异步任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-任务队列和事件循环"><span class="toc-text">2.1.3 任务队列和事件循环</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-4-异步操作的模式"><span class="toc-text">2.1.4 异步操作的模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-异步操作的流程控制"><span class="toc-text">2.1.5 异步操作的流程控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-定时器"><span class="toc-text">2.2 定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-Debounce-函数"><span class="toc-text">2.2.1 Debounce 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-运行机制"><span class="toc-text">2.2.2 运行机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-setTimeout-f-0-及其应用"><span class="toc-text">2.2.3 setTimeout(f,0) 及其应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Promise对象"><span class="toc-text">2.3 Promise对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-Promise对象的状态"><span class="toc-text">2.3.1 Promise对象的状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-Promise-prototype-then"><span class="toc-text">2.3.2 Promise.prototype.then()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-DOM"><span class="toc-text">3. DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Intro"><span class="toc-text">3.1 Intro</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Node简述"><span class="toc-text">3.2 Node简述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-Node接口"><span class="toc-text">3.2.1 Node接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-node方法"><span class="toc-text">3.2.2 node方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Document节点"><span class="toc-text">3.3 Document节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-快捷方式属性"><span class="toc-text">3.3.1 快捷方式属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-节点集合属性"><span class="toc-text">3.3.2 节点集合属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-文档静态信息属性"><span class="toc-text">3.3.3 文档静态信息属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-4-文档状态属性"><span class="toc-text">3.3.4 文档状态属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-5-Document相关方法"><span class="toc-text">3.3.5 Document相关方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-Element-节点"><span class="toc-text">3.4 Element 节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-实例属性"><span class="toc-text">3.4.1 实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-实例方法"><span class="toc-text">3.4.2 实例方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-3-事件相关方法"><span class="toc-text">3.4.3 事件相关方法</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-面向对象编程"><a href="#1-面向对象编程" class="headerlink" title="1. 面向对象编程"></a>1. 面向对象编程</h1><h2 id="1-1-实例对象与New命令"><a href="#1-1-实例对象与New命令" class="headerlink" title="1.1 实例对象与New命令"></a>1.1 实例对象与New命令</h2><ul>
+<li><p>对象</p>
+<ul>
+<li>对世界各种复杂关系的抽象</li>
+<li>是一个容器，封装了属性和方法</li>
+</ul>
+</li>
+<li><p>构造函数</p>
+<ul>
+<li>java c++是通过类的概念来作为对象的模板，而对象就是类的实例</li>
+<li>而在js当中，对象体系是基于构造函数和原型链的<h3 id="1-1-1-构造函数"><a href="#1-1-1-构造函数" class="headerlink" title="1.1.1 构造函数"></a>1.1.1 构造函数</h3>构造函数是用来专门生成实例对象的函数，它就是对象的模板，描述了对象的基本结构。</li>
+</ul>
+</li>
+<li><p>构造函数的特点：</p>
+<ul>
+<li>函数体内部使用<strong>this关键字</strong>，代表了所要生成的对象实例</li>
+<li>生成对象的时候，必须使用new命令</li>
+</ul>
+</li>
+</ul>
+<pre><code>var Vehicle = function () {
+  this.price = 1000;
+};</code></pre><h3 id="1-1-2-New"><a href="#1-1-2-New" class="headerlink" title="1.1.2 New"></a>1.1.2 New</h3><ul>
+<li>new命令的作用就是执行构造函数返回一个实例对象</li>
+<li>new指令执行的时候，构造函数内部的this就代表了新生成的实例对象</li>
+<li>new指令的原理<ul>
+<li>构建一个空对象，作为要返回的对象的实例</li>
+<li>将这个空对象的原型，指向构造函数的prototype属性</li>
+<li>将这个空对象赋值给函数内部的this关键字</li>
+<li>开始执行构造函数内部的代码</li>
+</ul>
+</li>
+</ul>
+<pre><code>var Vehicle = function () {
+  this.price = 1000;
+};
+
+var v = new Vehicle();
+v.price // 1000</code></pre><ul>
+<li>new.target<ul>
+<li>使用new.target关键字</li>
+<li>如果当前函数式new命令调用的，指向当前函数，否则为undefined</li>
+</ul>
+</li>
+<li><code>Object.create()</code>创建实例对象<ul>
+<li>构造函数作为模板，可以生成实例对象。但是，有时拿不到构造函数，只能拿到一个现有的对象。我们希望以这个现有的对象作为模板，生成新的实例对象，这时就可以使用Object.create()方法。</li>
+</ul>
+</li>
+</ul>
+<pre><code>var person1 = {
+  name: &#39;张三&#39;,
+  age: 38,
+  greeting: function() {
+    console.log(&#39;Hi! I\&#39;m &#39; + this.name + &#39;.&#39;);
+  }
+};
+
+var person2 = Object.create(person1);
+
+person2.name // 张三
+person2.greeting() // Hi! I&#39;m 张三.</code></pre><h2 id="1-2-this关键字"><a href="#1-2-this关键字" class="headerlink" title="1.2 this关键字"></a>1.2 this关键字</h2><p>this是属性或者方法当前所在的对象。</p>
+<p>对象的属性可以赋给另外一个对象，所以属性所在的当前对象是可变的，this的指向是可变的</p>
+<pre><code>function f() {
+  return &#39;姓名：&#39;+ this.name;
+}
+
+var A = {
+  name: &#39;张三&#39;,
+  describe: f
+};
+
+var B = {
+  name: &#39;李四&#39;,
+  describe: f
+};
+
+A.describe() // &quot;姓名：张三&quot;
+B.describe() // &quot;姓名：李四&quot;
+
+
+
+&lt;input type=&quot;text&quot; name=&quot;age&quot; size=3 onChange=&quot;validate(this, 18, 99);&quot;&gt;
+
+&lt;script&gt;
+function validate(obj, lowval, hival){
+  if ((obj.value &lt; lowval) || (obj.value &gt; hival))
+    console.log(&#39;Invalid Value!&#39;);
+}
+&lt;/script&gt;</code></pre><ul>
+<li>JS当中一切都是对象，运行环境也是对象，所以函数总归是在某个对象之中运行的，this就是函数运行时所在的对象</li>
+<li>this为的是在函数体内可以获得函数的当前运行环境的相关信息</li>
+</ul>
+<h3 id="1-2-1-this实质"><a href="#1-2-1-this实质" class="headerlink" title="1.2.1 this实质"></a>1.2.1 this实质</h3><ul>
+<li>首先需要看我们是如何在内存当中进行数据存储的<ul>
+<li><code>var obj = { foo: 5}</code>;<ul>
+<li>将一个对象赋值给变量obj</li>
+<li>JS引擎会先在内存里面生成一个对象</li>
+<li>将这个对象的内存地址赋值给变量obj</li>
+<li>—-&gt; 变量obj是一个地址 reference。后面如果要读取obj.foo， 引擎先从obj拿到内存地址，然后再从该地址读出原始对象，返回其foo属性</li>
+</ul>
+</li>
+<li>原始的对象以字典结构存储，每一个属性名都对应一个属性描述对象<ul>
+<li>如果对象的属性是一个函数的话</li>
+<li>JS引擎会将函数单独保存在内存当中，然后将函数的地址赋值给foo的value属性</li>
+<li>因为<strong>函数是一个单独的值，所以它可以在不同的上下文去执行</strong></li>
+</ul>
+</li>
+<li>this的想法，或者说目的就是在函数体内部，指代函数当前的运行环境</li>
+</ul>
+</li>
+</ul>
+<pre><code>// 对象的实际保存形式
+{
+  foo: {
+    [[value]]: 5
+    [[writable]]: true
+    [[enumerable]]: true
+    [[configurable]]: true
+  }
+}
+
+var f = function () {
+    console.log(this.x);
+}</code></pre><h3 id="1-2-2-使用场合"><a href="#1-2-2-使用场合" class="headerlink" title="1.2.2 使用场合"></a>1.2.2 使用场合</h3><ul>
+<li>全局环境<ul>
+<li>指顶层对象window</li>
+</ul>
+</li>
+<li>构造函数<ul>
+<li>指实例对象 </li>
+<li>在构造函数当中使用this，定义了属性，那就意味着定义了实例对象有一个p属性</li>
+</ul>
+</li>
+</ul>
+<pre><code>// this指实例对象，这个时候为实例对象定义了p属性
+var Obj = function(p) {
+    this.p = p;
+};</code></pre><ul>
+<li>对象方法<ul>
+<li>this指向是方法运行时所在的对象，该方法赋值给另一个对象，就会改变this的指向</li>
+<li>这是因为obj.foo就是一个值，这个值真正调用的时候，运行环境已经不是obj了，而是全局环境，所以this不再指向obj</li>
+</ul>
+</li>
+</ul>
+<pre><code>// 指向obj
+var obj ={
+  foo: function () {
+    console.log(this);
+  }
+};
+
+obj.foo() // obj
+
+// 以下情况都会改变this的指向
+// 情况一
+(obj.foo = obj.foo)() // window
+// 情况二
+(false || obj.foo)() // window
+// 情况三
+(1, obj.foo)() // window</code></pre><h3 id="1-2-3-Tips"><a href="#1-2-3-Tips" class="headerlink" title="1.2.3 Tips"></a>1.2.3 Tips</h3><ul>
+<li>避免多层this<ul>
+<li>因为this的指向是不确定的，所以不应该在函数当中包含多层的this</li>
+<li>如果是多层的话，可以在第二层增加一个指向外层this的变量来做</li>
+</ul>
+</li>
+</ul>
+<pre><code>var o = {
+  f1: function () {
+    console.log(this);
+    var f2 = function () {
+      console.log(this);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Window
+
+var o = {
+  f1: function() {
+    console.log(this);
+    var that = this;
+    var f2 = function() {
+      console.log(that);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Object</code></pre><ul>
+<li>数组处理方法当中的this<ul>
+<li>还是需要使用中间变量来固定住this </li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-4-绑定this的方法"><a href="#1-2-4-绑定this的方法" class="headerlink" title="1.2.4 绑定this的方法"></a>1.2.4 绑定this的方法</h3><p>this的动态切换，可以为JS提供灵活性，但也使得编程变得困难和模糊，因此我们需要将this固定下来，避免出现意想不到的情况。JS提供了call, apply, bind三个方法，来切换和固定this的指向</p>
+<ul>
+<li><code>Function.prototype.call()</code><ul>
+<li>call方法可以指定函数内部的this的指向，(函数执行时所在的作用域)，然后在所指定的作用域当中，调用该函数</li>
+<li>call可以接受多个参数 <code>func.call(thisValue, arg1, arg2)</code> </li>
+<li>第一个参数是this所要指向的那个对象，后面的参数则是函数调用时所需的参数</li>
+</ul>
+</li>
+</ul>
+<pre><code>var obj = {};
+
+var f = function () {
+  return this;
+};
+
+f() === window // true
+// call可以带个对象，然后这个时候就将this的指向固定下来了
+f.call(obj) === obj // true</code></pre><ul>
+<li><code>Function.prototype.apply()</code><ul>
+<li>apply接收一个数组作为函数执行时的参数，其他和call函数是一致的</li>
+<li><code>func.apply(thisValue, [arg1, arg2, ...])</code></li>
+</ul>
+</li>
+</ul>
+<pre><code>function f(x, y){
+  console.log(x + y);
+}
+
+f.call(null, 1, 1) // 2
+f.apply(null, [1, 1]) // 2</code></pre><ul>
+<li><code>Function.prototype.bind()</code><ul>
+<li>bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数</li>
+<li>bind方法每次都会返回一个新函数</li>
+</ul>
+</li>
+</ul>
+<pre><code>// 上面代码中，bind方法将getTime方法内部的this绑定到d对象，这时就可以安全地将这个方法赋值给其他变量了。
+var d = new Date();
+d.getTime() // 1481869925657
+
+var print = d.getTime;
+print() // Uncaught TypeError: this is not a Date object.
+
+var print = d.getTime.bind(d);
+print() // 1481869925657</code></pre><h2 id="1-3-对象的继承"><a href="#1-3-对象的继承" class="headerlink" title="1.3 对象的继承"></a>1.3 对象的继承</h2><p>A对象通过继承B对象，就能直接拥有B对象的所有属性和方法，这对于代码的复用很有帮助。JavaScript通过原型对象(prototype)来实现继承关系。</p>
+<p>注意ES6当中引入了class语法，可以做基于class的继承了</p>
+<h3 id="1-3-1-原型对象概述"><a href="#1-3-1-原型对象概述" class="headerlink" title="1.3.1 原型对象概述"></a>1.3.1 原型对象概述</h3><ul>
+<li><p>构造函数</p>
+<ul>
+<li><p>JS通过构造函数生成新对象，因此构造函数可以视为对象的模板</p>
+</li>
+<li><p>实例对象的属性和方法定义在构造函数的内部</p>
+</li>
+<li><p>属性实际上是定义在了实例对象上的，但是同一个构造函数的多个实例之间，无法共享属性，从而造成了资源的浪费</p>
+</li>
+<li><p>JavaScript使用原型对象来解决这个问题  – prototype </p>
+<ul>
+<li>其作用就是定义所有实例对象共享的属性和方法 </li>
+</ul>
+<p>function Cat (name, color) {<br>this.name = name;<br>this.color = color;<br>}</p>
+<p>var cat1 = new Cat(‘大毛’, ‘白色’);</p>
+<p>cat1.name // ‘大毛’<br>cat1.color // ‘白色’</p>
+</li>
+</ul>
+</li>
+<li><p>prototype属性的作用</p>
+<ul>
+<li>原型对象的所有属性和方法都能被实例对象共享</li>
+<li>如果属性和方法定义在原型上，那么所有实例对象都能共享<ul>
+<li>节省内存</li>
+<li>体现实例对象之间的联系</li>
+</ul>
+</li>
+<li>原型对象的属性不是实例对象自身的属性，只要修改原型对象，变动就立刻会体现在所有实例对象上</li>
+<li>当实例对象没有某个属性或者方法的时候，会与原型对象上去找，如果有，就用自己的</li>
+</ul>
+</li>
+</ul>
+<pre><code>function Animal(name) {
+  this.name = name;
+}
+Animal.prototype.color = &#39;white&#39;;
+
+var cat1 = new Animal(&#39;大毛&#39;);
+var cat2 = new Animal(&#39;二毛&#39;);
+
+cat1.color // &#39;white&#39;
+cat2.color // &#39;white&#39;
+
+cat1.color = &#39;black&#39;;
+cat1.color // &#39;black&#39;</code></pre><ul>
+<li>原型链<ul>
+<li>JS规定所有对象都有自己的原型对象(prototype)</li>
+<li>一层层回溯，所有对象的原型最终上溯到Object.prototype,即Object构造函数的prototype属性</li>
+<li>而Object.prototype的原型是null</li>
+<li>读取对象的某个属性时，先寻找对象本身的属性，如果找不到，就去原型找，如果还是找不到，就去原型的原型，一层层溯源。一直没有就返回undefined</li>
+<li>如果对象自身和它的原型<strong>都定义了同名属性，那么优先读取对象自身的属性</strong>， – overriding </li>
+</ul>
+</li>
+</ul>
+<pre><code>var MyArray = function () {};
+
+MyArray.prototype = new Array();
+MyArray.prototype.constructor = MyArray;
+
+// mine是MyArray的一个实例对象，由于MyArray.protutype指向一个数组实例，使得mine可以调用数组方法
+var mine = new MyArray();
+mine.push(1, 2, 3);
+mine.length // 3
+mine instanceof Array // true</code></pre><ul>
+<li><p>constructor属性</p>
+<ul>
+<li>prototype对象的constructor属性，默认指向prototype对象所在的构造函数</li>
+<li>constructor属性的作用是可以得知某个是力度向，到底是哪一个构造函数产生的</li>
+</ul>
+</li>
+<li><p>instanceof运算符</p>
+<ul>
+<li>返回一个布尔值，表示对象是否为某个构造函数的实例 </li>
+</ul>
+</li>
+<li><p>构造函数的继承</p>
+<ul>
+<li>让一个构造函数继承另一个构造函数<ul>
+<li>在子类的构造函数当中，调用父类的构造函数</li>
+<li>让子类的原型指向父类的原型，使得子类继承父类的原型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>// Sub是构造函数，this是子类的实例
+// 子类上调用父类的构造函数super，使得子类实例具有父类实例的属性
+function Sub(value) {
+  Super.call(this);
+  this.prop = value;
+}
+
+// 让子类的原型指向父类的原型，使得子类继承父类的原型
+// 使用Object.create是为了不对父类原型造成修改
+Sub.prototype = Object.create(Super.prototype);
+Sub.prototype.constructor = Sub;
+Sub.prototype.method = &#39;...&#39;;</code></pre><p>一个继承的实例:</p>
+<pre><code>function Shape() {
+  this.x = 0;
+  this.y = 0;
+}
+
+Shape.prototype.move = function (x, y) {
+  this.x += x;
+  this.y += y;
+  console.info(&#39;Shape moved.&#39;);
+};
+
+// 第一步，子类继承父类的实例
+function Rectangle() {
+  Shape.call(this); // 调用父类构造函数
+}
+// 另一种写法
+function Rectangle() {
+  this.base = Shape;
+  this.base();
+}
+
+// 第二步，子类继承父类的原型
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;</code></pre><h2 id="1-4-Object对象的相关方法"><a href="#1-4-Object对象的相关方法" class="headerlink" title="1.4 Object对象的相关方法"></a>1.4 Object对象的相关方法</h2><ul>
+<li>Object.getPrototypeOf()<ul>
+<li>返回参数对象的原型</li>
+</ul>
+</li>
+</ul>
+<pre><code>// 空对象的原型是 Object.prototype
+Object.getPrototypeOf({}) === Object.prototype // true
+
+// Object.prototype 的原型是 null
+Object.getPrototypeOf(Object.prototype) === null // true
+
+// 函数的原型是 Function.prototype
+function f() {}
+Object.getPrototypeOf(f) === Function.prototype // true</code></pre><ul>
+<li>Object.setPrototypeOf() <ul>
+<li>为参数对象设置原型，返回该参数的对象</li>
+<li>第一个参数为现有对象，第二个为原型对象</li>
+</ul>
+</li>
+</ul>
+<pre><code>var a = {};
+var b = {x: 1};
+Object.setPrototypeOf(a, b);
+
+Object.getPrototypeOf(a) === b // true
+a.x // 1</code></pre><ul>
+<li>Object.create()<ul>
+<li>接受一个对象作为参数，然后以它为原型，返回一个实例对象。该实例完全继承原型对象的属性</li>
+</ul>
+</li>
+<li>Object.prototype.<strong>proto</strong><ul>
+<li>实例对象的该属性，返回该对象的原型 </li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-严格模式"><a href="#1-5-严格模式" class="headerlink" title="1.5 严格模式"></a>1.5 严格模式</h2><p>该种模式采用更加严格的JavaScript语法</p>
+<ul>
+<li>明确机制不合理，不严谨的语法</li>
+<li>增加更多的报错场合，消除代码运行的不安全之处，保证代码的运行安全</li>
+<li>提高编译器效率，增加运行速度</li>
+</ul>
+<p>开启的话，使用<code>use strict</code></p>
+<ul>
+<li>use strict放在脚本的第一行，整个脚本都将以严格模式来运行，如果不在第一行就无效，会以正常模式运行</li>
+<li>显式报错<ul>
+<li>只读属性不可写</li>
+<li>只设置了getter的不可写</li>
+</ul>
+</li>
+<li>安全措施<ul>
+<li>全局变量显式声明</li>
+<li>禁止this关键字指向全局对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-异步操作"><a href="#2-异步操作" class="headerlink" title="2. 异步操作"></a>2. 异步操作</h1><h2 id="2-1-General"><a href="#2-1-General" class="headerlink" title="2.1 General"></a>2.1 General</h2><h3 id="2-1-1-单线程模型"><a href="#2-1-1-单线程模型" class="headerlink" title="2.1.1 单线程模型"></a>2.1.1 单线程模型</h3><p>JS只在一个线程上运行的  单个脚本只能在一个线程上运行，其他线程都是在后台配合的</p>
+<p>好吃执行简单，坏处就是慢，只要一个任务耗时很长，那么后面的任务就都需要排队等着，会拖延整个程序的执行。</p>
+<p>JS本身不慢，慢的是读写外部数据，等待Ajax请求返回结果。这个时候如果对方服务器一直没有反应，或者网络不通畅，就会导致脚本的长时间停滞。</p>
+<p>因为很多时候慢在IO操作，而CPU实际上是处于闲置状态的，因此CPU这个时候完全可以不管IO操作，挂起处于等待中的任务，先运行排在后面的任务，等到IO操作返回结果，再回头将挂起的任务继续执行下去</p>
+<h3 id="2-1-2-同步任务与异步任务"><a href="#2-1-2-同步任务与异步任务" class="headerlink" title="2.1.2 同步任务与异步任务"></a>2.1.2 同步任务与异步任务</h3><ul>
+<li>同步任务<ul>
+<li>没有被引擎挂起，在主线程上排队执行的任务</li>
+<li>只有前一个任务执行完毕，后一个任务才能开始执行</li>
+</ul>
+</li>
+<li>异步任务<ul>
+<li>被引擎放在一边，不进入主线程，而进入任务队列的任务</li>
+<li>只有引擎认为某个异步任务可以执行了，该任务才会进入主线程执行</li>
+<li>排在异步任务后面的代码。不用等待异步任务结束会马上运行，也就是说，异步任务不具有堵塞效应</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-3-任务队列和事件循环"><a href="#2-1-3-任务队列和事件循环" class="headerlink" title="2.1.3 任务队列和事件循环"></a>2.1.3 任务队列和事件循环</h3><ul>
+<li>任务队列<ul>
+<li>存储需要当前程序处理的异步任务</li>
+<li>主线程会执行所有的同步任务，等到同步任务执行完以后，就会去看任务队列里面的异步任务</li>
+<li>如果满足条件，异步任务就重新进入主线程进行执行，此时变成了同步任务了</li>
+<li>异步任务的写法即回调函数</li>
+</ul>
+</li>
+<li>事件循环<ul>
+<li>主线程来看异步任务是否有结果的方式</li>
+<li>就是不断检查，去看挂起来的任务们有没有结果了</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-1-4-异步操作的模式"><a href="#2-1-4-异步操作的模式" class="headerlink" title="2.1.4 异步操作的模式"></a>2.1.4 异步操作的模式</h1><ul>
+<li>回调函数</li>
+</ul>
+<pre><code>function f1(callback) {
+  // ...
+  callback();
+}
+
+function f2() {
+  // ...
+}
+
+f1(f2);</code></pre><ul>
+<li>事件监听<ul>
+<li>异步任务的执行不取决于代码的顺序，而取决于某个事件是否发生</li>
+</ul>
+</li>
+</ul>
+<pre><code>f1.on(&#39;done&#39;, f2);
+function f1() {
+  setTimeout(function () {
+    // ...
+    f1.trigger(&#39;done&#39;);
+  }, 1000);
+}</code></pre><ul>
+<li>发布订阅<ul>
+<li>某个任务执行完成，向信号中心发布一个信号</li>
+<li>其他任务向信号中心订阅这个信号，来知道什么时候自己可以开始执行</li>
+</ul>
+</li>
+</ul>
+<pre><code>jQuery.subscribe(&#39;done&#39;, f2);
+
+function f1() {
+  setTimeout(function () {
+    // ...
+    jQuery.publish(&#39;done&#39;);
+  }, 1000);
+}</code></pre><h3 id="2-1-5-异步操作的流程控制"><a href="#2-1-5-异步操作的流程控制" class="headerlink" title="2.1.5 异步操作的流程控制"></a>2.1.5 异步操作的流程控制</h3><ul>
+<li>串行执行</li>
+</ul>
+<pre><code>var items = [ 1, 2, 3, 4, 5, 6 ];
+var results = [];
+
+function async(arg, callback) {
+  console.log(&#39;参数为 &#39; + arg +&#39; , 1秒后返回结果&#39;);
+  setTimeout(function () { callback(arg * 2); }, 1000);
+}
+
+function final(value) {
+  console.log(&#39;完成: &#39;, value);
+}
+
+function series(item) {
+  if(item) {
+    async( item, function(result) {
+      results.push(result);
+      return series(items.shift());
+    });
+  } else {
+    return final(results[results.length - 1]);
+  }
+}
+
+series(items.shift());</code></pre><ul>
+<li>并行执行<ul>
+<li>并行会快，但是如果并行任务太多，很容易耗尽系统的资源，拖慢运行速度 </li>
+</ul>
+</li>
+</ul>
+<pre><code>var items = [ 1, 2, 3, 4, 5, 6 ];
+var results = [];
+
+function async(arg, callback) {
+  console.log(&#39;参数为 &#39; + arg +&#39; , 1秒后返回结果&#39;);
+  setTimeout(function () { callback(arg * 2); }, 1000);
+}
+
+function final(value) {
+  console.log(&#39;完成: &#39;, value);
+}
+
+items.forEach(function(item) {
+  async(item, function(result){
+    results.push(result);
+    if(results.length === items.length) {
+      final(results[results.length - 1]);
+    }
+  })
+});</code></pre><ul>
+<li>并行与串行相结合!!!!!<ul>
+<li>设置一个门槛，每次最多只能并行执行n个异步任务</li>
+</ul>
+</li>
+</ul>
+<pre><code>var items = [ 1, 2, 3, 4, 5, 6 ];
+var results = [];
+var running = 0;
+var limit = 2;
+
+function async(arg, callback) {
+  console.log(&#39;参数为 &#39; + arg +&#39; , 1秒后返回结果&#39;);
+  setTimeout(function () { callback(arg * 2); }, 1000);
+}
+
+function final(value) {
+  console.log(&#39;完成: &#39;, value);
+}
+
+function launcher() {
+  while(running &lt; limit &amp;&amp; items.length &gt; 0) {
+    var item = items.shift();
+    async(item, function(result) {
+      results.push(result);
+      running--;
+      if(items.length &gt; 0) {
+        launcher();
+      } else if(running == 0) {
+        final(results);
+      }
+    });
+    running++;
+  }
+}
+
+launcher();</code></pre><h2 id="2-2-定时器"><a href="#2-2-定时器" class="headerlink" title="2.2 定时器"></a>2.2 定时器</h2><p>JS提供定时执行代码的功能，由setTimeout()以及setInterval()两个函数来完成，它们可以向任务队列添加定时任务。</p>
+<ul>
+<li>setTimeout()<ul>
+<li>指定某个函数或者某段代码，在多少毫秒之后执行</li>
+<li>返回一个整数，表示定时器的编号</li>
+<li><code>var timerId = setTimeout(func|code, delay)</code></li>
+</ul>
+</li>
+</ul>
+<pre><code>// 1,1是回调函数的参数
+setTimeout(function (a,b) {
+  console.log(a + b);
+}, 1000, 1, 1);</code></pre><ul>
+<li>setInterval()<ul>
+<li>setInterval是设置某个任务每隔一段时间就执行一次，为无限次的执行的</li>
+<li>指定的是开始执行之间的间隔，没有考虑每次任务执行本身所消耗的时间</li>
+<li>为了确定两次执行之间的固定间隔，可以使用setTimeout来指定下一次执行的具体时间</li>
+</ul>
+</li>
+</ul>
+<pre><code>var i = 1;
+var timer = setTimeout(function f() {
+  // ...
+  timer = setTimeout(f, 2000);
+}, 2000);</code></pre><ul>
+<li>clearTimeout() clearInterval()<ul>
+<li>传入对应的计数器编号，就可以取消对应的定时器了</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-1-Debounce-函数"><a href="#2-2-1-Debounce-函数" class="headerlink" title="2.2.1 Debounce 函数"></a>2.2.1 Debounce 函数</h3><p>想要解决的问题：不希望回调函数被频繁调用，即当用户填入网页输入框的内容以后，用户会点击button希望能传回数据，但是很有可能是在多次重复相同的信息的。</p>
+<p>因此我们应该加一个门槛，表示两次Ajax通信的最小间隔时间。如果在间隔时间内发生了新的keydown时间，就不触发Ajax通信，并且开始重新计时。如果过了指定时间，没有发生新的keydown事件，再将数据发送出去。</p>
+<pre><code>// 在2.5秒内，当用户再次敲击的时候，会取消上次定时器，然后再新建一个定时器
+$(&#39;textarea&#39;).on(&#39;keydown&#39;, debounce(ajaxAction, 2500));
+
+function debounce(fn, delay){
+  var timer = null; // 声明计时器
+  return function() {
+    var context = this;
+    var args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+}</code></pre><h3 id="2-2-2-运行机制"><a href="#2-2-2-运行机制" class="headerlink" title="2.2.2 运行机制"></a>2.2.2 运行机制</h3><p>setTimeout和setInterval都是将指定的代码移出本轮事件循环，等到下一轮事件循环，再检查时间是否到了指定的时间。如果到了，就执行对应的代码，如果不到，就继续等待。</p>
+<p>这意味着，setTimeout 和 setInterval指定的回调函数，必须等到<strong>本轮事件循环</strong>的所有同步任务都执行完. 由于前面的任务到底需要多少时间执行完，是不确定的，所以我们是无法保证二者指定的任务一定会按照预定时间执行</p>
+<pre><code>setInterval(function () {
+  console.log(2);
+}, 1000);
+
+sleep(3000);
+
+function sleep(ms) {
+  var start = Date.now();
+  while ((Date.now() - start) &lt; ms) {
+  }
+}</code></pre><p>上面例子会先sleep 3秒然后才会输出2，注意是不累计的，即只输出一个2的</p>
+<h3 id="2-2-3-setTimeout-f-0-及其应用"><a href="#2-2-3-setTimeout-f-0-及其应用" class="headerlink" title="2.2.3 setTimeout(f,0) 及其应用"></a>2.2.3 setTimeout(f,0) 及其应用</h3><p>setTimeout(f,0)也不会直接执行的，因为它必须要等待当前脚本的同步任务全部处理完以后，才会执行setTimeout指定的回调函数f，即setTimeout(f,0)会在下一轮事件循环开始的时候执行</p>
+<pre><code>setTimeout(function () {
+  console.log(1);
+}, 0);
+console.log(2);
+// 2
+// 1</code></pre><p><strong>setTimeout的应用</strong></p>
+<ul>
+<li>调整事件的发生顺序</li>
+<li>调整用户自定义的回调函数和浏览器默认动作之间的执行顺序</li>
+<li>setTimeout(f,0)意味着将任务放到浏览器最早可得的空闲时段执行，所以那些计算量大，耗时长的任务通常可以分成几个小部分分别方法这个方法当中去</li>
+</ul>
+<pre><code>// HTML 代码如下
+// &lt;input type=&quot;button&quot; id=&quot;myButton&quot; value=&quot;click&quot;&gt;
+
+var input = document.getElementById(&#39;myButton&#39;);
+
+input.onclick = function A() {
+  setTimeout(function B() {
+    input.value +=&#39; input&#39;;
+  }, 0)
+};
+
+document.body.onclick = function C() {
+  input.value += &#39; body&#39;
+};
+
+
+// HTML 代码如下
+// &lt;input type=&quot;text&quot; id=&quot;input-box&quot;&gt;
+
+document.getElementById(&#39;input-box&#39;).onkeypress = function (event) {
+  this.value = this.value.toUpperCase();
+}
+
+
+document.getElementById(&#39;input-box&#39;).onkeypress = function() {
+  var self = this;
+  setTimeout(function() {
+    self.value = self.value.toUpperCase();
+  }, 0);
+}
+
+
+
+var div = document.getElementsByTagName(&#39;div&#39;)[0];
+
+// 写法一
+for (var i = 0xA00000; i &lt; 0xFFFFFF; i++) {
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+}
+
+// 写法二
+var timer;
+var i=0x100000;
+
+function func() {
+  timer = setTimeout(func, 0);
+  div.style.backgroundColor = &#39;#&#39; + i.toString(16);
+  if (i++ == 0xFFFFFF) clearTimeout(timer);
+}
+
+timer = setTimeout(func, 0);</code></pre><h2 id="2-3-Promise对象"><a href="#2-3-Promise对象" class="headerlink" title="2.3 Promise对象"></a>2.3 Promise对象</h2><p>JS的异步操作解决方案，为异步操作提供统一的接口，起到代理的作用，充当异步操作与回调函数之间的中介，使得异步操作具备同步操作的接口。Promise可以让异步操作写法和写同步操作相似，不必一层层地嵌套回调函数</p>
+<pre><code>function f1(resolve, reject) {
+    // 异步代码
+}
+
+var p1 = new Promise(f1);</code></pre><p>上述例子当中接受一个回调函数f1作为参数，f1里面是异步操作的代码，然后返回p1为一个Promise实例。</p>
+<p>所有异步任务都返回一个Promise实例，然后通过自带的then方法，来指定下一步的回调函数。通过then的写法，来减少函数和函数之间的嵌套的写法。</p>
+<h3 id="2-3-1-Promise对象的状态"><a href="#2-3-1-Promise对象的状态" class="headerlink" title="2.3.1 Promise对象的状态"></a>2.3.1 Promise对象的状态</h3><ul>
+<li>异步操作未完成 - pending</li>
+<li>resolved<ul>
+<li>异步操作成功 - fulfilled</li>
+<li>异步操作失败 - rejected</li>
+</ul>
+</li>
+</ul>
+<p>一旦状态发生变化，就不会再有新的状态变化了，即Promise的实例的状态变化只可能发生一次</p>
+<p>Promise原生构造函数接受一个函数作为参数，有两个参数，分别为resolve还有reject。</p>
+<h3 id="2-3-2-Promise-prototype-then"><a href="#2-3-2-Promise-prototype-then" class="headerlink" title="2.3.2 Promise.prototype.then()"></a>2.3.2 Promise.prototype.then()</h3><ul>
+<li>then方法用来添加回调函数<ul>
+<li>第一个回调函数是异步操作成功用的</li>
+<li>第二个是异步操作失败使用</li>
+</ul>
+</li>
+<li>Promise的报错具有传递性</li>
+</ul>
+<pre><code>p1
+  .then(step1)
+  .then(step2)
+  .then(step3)
+  .then(
+    console.log,
+    console.error
+  );</code></pre><p>在上述的例子里面，console.log 只显示step3的内容，但是console.error会显示出step1，2，3出现的任意错误。Promise对象的报错具有传递性 </p>
+<h1 id="3-DOM"><a href="#3-DOM" class="headerlink" title="3. DOM"></a>3. DOM</h1><h2 id="3-1-Intro"><a href="#3-1-Intro" class="headerlink" title="3.1 Intro"></a>3.1 Intro</h2><p>DOM是JavaScript操作网页的接口，全称为文档对象模型(Document Object Model).它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行各种操作。</p>
+<p>浏览器根据DOM模型，将结构化文档解析成一系列的节点，再由这些节点组成一个树状结构 - DOM tree。所有的节点和最终的树状架构，都有规范的对外接口。</p>
+<ul>
+<li><p>节点  </p>
+<ul>
+<li>DOM的最小组成单位</li>
+</ul>
+</li>
+<li><p>节点类型</p>
+<ul>
+<li>Document 文档树的顶层节点</li>
+<li>DocumentType doctype标签，比如    <code>&lt;!DOCTYPE html&gt;</code></li>
+<li>Element 网页的各种HTML标签</li>
+<li>Attribute  网页元素的属性</li>
+<li>Text  标签之间或标签包含的文本</li>
+<li>comment 注释</li>
+<li>DocumentFragment  文档片段<h2 id="3-2-Node简述"><a href="#3-2-Node简述" class="headerlink" title="3.2 Node简述"></a>3.2 Node简述</h2><h3 id="3-2-1-Node接口"><a href="#3-2-1-Node接口" class="headerlink" title="3.2.1 Node接口"></a>3.2.1 Node接口</h3></li>
+</ul>
+</li>
+<li><p>nodeType </p>
+<ul>
+<li>返回一个整数值，表示节点的类型<ul>
+<li>document 9 </li>
+<li>element  1</li>
+<li>attr     2</li>
+<li>text     3</li>
+<li>documentFragment 11 </li>
+<li>documentType     10</li>
+<li>Comment          8</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>nodeName</p>
+<ul>
+<li>返回节点的名称</li>
+</ul>
+</li>
+<li><p>nodeValue</p>
+<ul>
+<li>返回一个字符串，表示当前节点本身的文本值，该属性可读写</li>
+</ul>
+</li>
+</ul>
+<pre><code>var div = document.getElementById(&#39;d1&#39;);
+div.nodeValue // null
+div.firstChild.nodeValue // &quot;hello world&quot;</code></pre><ul>
+<li>Node.prototype.textContent<ul>
+<li>textContent属性返回当前节点和它的所有后代节点的文本内容</li>
+<li>该属性是可读写的，设置该属性的值，会用一个新的文本节点代替原有的子节点</li>
+<li>注意转译的时候HTML标签会被忽略掉的</li>
+</ul>
+</li>
+</ul>
+<pre><code>document.getElementById(&#39;foo&#39;).textContent = &#39;&lt;p&gt;GoodBye!&lt;/p&gt;&#39;;</code></pre><ul>
+<li>Node.prototype.baseURI<ul>
+<li>返回一个字符串，表示当前网页的绝对路径</li>
+<li>浏览器会根据这个属性计算网页上的相对路径的URL  </li>
+<li>该属性为只读 </li>
+</ul>
+</li>
+</ul>
+<pre><code>document.baseURI
+// &quot;http://www.example.com/index.html&quot;</code></pre><ul>
+<li><p>Node.prototype.ownerDocument </p>
+<ul>
+<li>返回当前节点所在的顶层文档对象，即document对象</li>
+</ul>
+</li>
+<li><p>Node.prototype.nextSibling </p>
+<ul>
+<li>返回紧跟在当前节点后面的第一个同级节点 </li>
+<li>如果当前节点后面没有同级节点，就返回null </li>
+<li>该属性可以用来遍历所有子节点</li>
+</ul>
+</li>
+</ul>
+<pre><code>var d1 = document.getElementById(&#39;d1&#39;);
+var d2 = document.getElementById(&#39;d2&#39;);
+
+d1.nextSibling === d2 // true
+
+// 遍历所有同级节点
+var el = document.getElementById(&#39;div1&#39;).firstChild;
+
+while (el !== null) {
+  console.log(el.nodeName);
+  el = el.nextSibling;
+}</code></pre><ul>
+<li>Node.prototype.previousSibling <ul>
+<li>返回倩倩节点前面的，距离最近的，同级的节点</li>
+<li>如果没有同级节点，就返回null </li>
+</ul>
+</li>
+<li>Node.prototype.parentNode<ul>
+<li>返回当前节点的父节点</li>
+<li>对于一个节点来说，其父节点可能为：<ul>
+<li>element </li>
+<li>document </li>
+<li>documentFragment </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Node.prototype.parentElement </li>
+<li>Node.prototype.firstChild</li>
+<li>Node.prototype.lastChild</li>
+<li>Node.prototype.childNodes<ul>
+<li>返回Nodelist集合，包括当前节点的所有子节点</li>
+</ul>
+</li>
+<li>Node.prototype.isConnected<ul>
+<li>返回一个布尔值，表示当前节点是否在文档当中</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-2-node方法"><a href="#3-2-2-node方法" class="headerlink" title="3.2.2 node方法"></a>3.2.2 node方法</h3><ul>
+<li>appendChild()<ul>
+<li>接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点</li>
+<li>如果参数节点是DOM已经存在的节点，appendChild方法会将其从原来的位置移动到新位置</li>
+</ul>
+</li>
+<li>hasChildNodes()<ul>
+<li>返回一个布尔值，表示当前节点是否有子节点</li>
+</ul>
+</li>
+<li>cloneNode()<ul>
+<li>克隆一个节点，接受一个布尔值作为参数， 表示是否同时克隆子节点</li>
+<li>返回值为一个克隆出来的新节点</li>
+</ul>
+</li>
+<li>insertBefore()<ul>
+<li>用来将某个节点插入父节点内部的指定位置</li>
+<li><code>var insertedNode = parentNode.insertBefore(newNode, referenceNode);</code></li>
+</ul>
+</li>
+<li>removeChild()<ul>
+<li>接受一个子节点作为参数，用于从当前节点移除该子节点</li>
+</ul>
+</li>
+<li>replaceChild()<ul>
+<li>用于将一个新的节点替换当前节点的某一个子节点</li>
+</ul>
+</li>
+<li>contains()<ul>
+<li>返回布尔值，看参数节点是否满足以下条件<ul>
+<li>参数节点为当前节点</li>
+<li>为当前节点的子节点</li>
+<li>为当前节点的后代节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getRootNode()<ul>
+<li>返回当前节点所在文档的根节点document,与ownerDocument属性的作用相同 </li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-Document节点"><a href="#3-3-Document节点" class="headerlink" title="3.3 Document节点"></a>3.3 Document节点</h2><p>document节点对象代表整个文档，每个网页都有自己的document对象，<code>window.document</code>属性就指向这个对象</p>
+<ul>
+<li>正常网页可以直接使用docuemnt 还有window.document</li>
+<li>iframe框架里面的网页，使用iframe节点的contentDocument属性</li>
+<li>Ajax操作返回的文档，使用XMLHttpRequest对象的responseXML属性</li>
+</ul>
+<h3 id="3-3-1-快捷方式属性"><a href="#3-3-1-快捷方式属性" class="headerlink" title="3.3.1 快捷方式属性"></a>3.3.1 快捷方式属性</h3><ul>
+<li>document.defaultView <ul>
+<li>返回document对象所属的window对象</li>
+</ul>
+</li>
+<li>document.doctype</li>
+</ul>
+<pre><code>var doctype = document.doctype;
+doctype // &quot;&lt;!DOCTYPE html&gt;&quot;
+doctype.name // &quot;html&quot;</code></pre><ul>
+<li>document.documentElement <ul>
+<li>返回当前文档的根元素节点</li>
+<li>通常为document节点的第二个子节点，紧跟在document.doctype节点后面</li>
+</ul>
+</li>
+<li>document.body<ul>
+<li>指向body节点</li>
+</ul>
+</li>
+<li>document.head<ul>
+<li>指向head节点</li>
+</ul>
+</li>
+<li>document.scrollingElement <ul>
+<li>返回文档的滚动元素</li>
+</ul>
+</li>
+<li>document.activeElement <ul>
+<li>返回获得当前焦点的DOM元素</li>
+<li>通常这个属性返回的是<code>&lt;input&gt; &lt;textarea&gt; &lt;select&gt;</code>这类表单元素</li>
+</ul>
+</li>
+<li>document.fullscreenElement <ul>
+<li>返回当前以全屏状态展示的DOM元素 </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-2-节点集合属性"><a href="#3-3-2-节点集合属性" class="headerlink" title="3.3.2 节点集合属性"></a>3.3.2 节点集合属性</h3><p>返回一个HTMLCollection实例，表示文档内部特定元素的集合。这些集合是动态的，原节点有任何变化，立刻会反映在集合当中 </p>
+<ul>
+<li>document.links </li>
+<li>document.forms</li>
+<li>document.images </li>
+<li>document.embeds  / document.plugins <ul>
+<li>返回所有<embed>节点</li>
+</ul>
+</li>
+<li>document.scripts</li>
+<li>document.styleSheets</li>
+</ul>
+<h3 id="3-3-3-文档静态信息属性"><a href="#3-3-3-文档静态信息属性" class="headerlink" title="3.3.3 文档静态信息属性"></a>3.3.3 文档静态信息属性</h3><ul>
+<li>document.documentURI / document.URL<ul>
+<li>返回一个字符串，表示当前文档的网址</li>
+<li>不同之处在于他们继承自不同的接口</li>
+<li>documentURI 继承自Document接口，可用于所有文档</li>
+<li>URL 继承自HTMLDocument接口，只可用于HTML文档</li>
+</ul>
+</li>
+<li>document.domain<ul>
+<li>返回当前文档的域名 </li>
+<li>比如，网页的网址是<a href="http://www.example.com:80/hello.html，那么document.domain属性就等于www.example.com" target="_blank" rel="noopener">http://www.example.com:80/hello.html，那么document.domain属性就等于www.example.com</a></li>
+</ul>
+</li>
+<li>document.location <ul>
+<li>浏览器原生对象，提供URL相关的信息和操作方法</li>
+<li>通过window.location 和document.location属性，可以拿到这个对象</li>
+</ul>
+</li>
+<li>document.lastModified <ul>
+<li>返回当前文档的问候修改时间</li>
+</ul>
+</li>
+<li>document.title </li>
+<li>document.characterSet <ul>
+<li>UTF-8</li>
+<li>ISO-8859-1</li>
+<li>etc.</li>
+</ul>
+</li>
+<li>document.referrer <ul>
+<li>返回字符串，表示当前文档的访问者来的地方</li>
+</ul>
+</li>
+<li>document.dir <ul>
+<li>返回一个字符串<ul>
+<li>rtl</li>
+<li>ltr</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>document.compatMode<ul>
+<li>返回浏览器处理文档的模式 </li>
+<li>BackCompat 向后兼容模式</li>
+<li>CSS1Compat 严格模式</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-4-文档状态属性"><a href="#3-3-4-文档状态属性" class="headerlink" title="3.3.4 文档状态属性"></a>3.3.4 文档状态属性</h3><ul>
+<li>hidden<ul>
+<li>返回一个布尔值</li>
+</ul>
+</li>
+<li>visibilityState  返回当前文档的可见状态<ul>
+<li>visible</li>
+<li>hidden</li>
+<li>prerender 正在渲染的状态，对于用户来说，这个页面不可见</li>
+<li>unloaded 从内存中卸载了</li>
+</ul>
+</li>
+<li>readyState  返回当前文档的状态<ul>
+<li>loading 加载HTML代码阶段</li>
+<li>interactive  加载外部资源阶段</li>
+<li>complete  加载完成</li>
+</ul>
+</li>
+<li>cookie</li>
+<li>designMode <ul>
+<li>on/ off</li>
+<li>当开启以后，用户就可以编辑整个文档的内容了</li>
+</ul>
+</li>
+<li>implementation <ul>
+<li>返回一个DOMImplementation对象 </li>
+<li>DOMImplementation.createDocument()</li>
+<li>DOMImplementation.createHTMLDocument()</li>
+<li>DOMImplementation.createDocumentType() </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-5-Document相关方法"><a href="#3-3-5-Document相关方法" class="headerlink" title="3.3.5 Document相关方法"></a>3.3.5 Document相关方法</h3><ul>
+<li>document.open()  document.close() <ul>
+<li>open用来清除当前文档的所有内容，使得文档处于可写状态</li>
+<li>document.close用来关闭打开的文档</li>
+</ul>
+</li>
+<li>document.write()  document.writeln()<ul>
+<li>write用于向当前文档写入内容</li>
+<li>当页面已经解析完成以后，再调用write会先调用open方法，这样所有文档的内容就已经被擦除了</li>
+<li>在页面渲染过程中的调用write方法，并不会自动调用open方法</li>
+<li>writeln是在末尾会添加换行符</li>
+</ul>
+</li>
+</ul>
+<pre><code>document.addEventListener(&#39;DOMContentLoaded&#39;, function (event) {
+  document.write(&#39;&lt;p&gt;Hello World!&lt;/p&gt;&#39;);
+});
+
+// 等同于
+document.addEventListener(&#39;DOMContentLoaded&#39;, function (event) {
+  document.open();
+  document.write(&#39;&lt;p&gt;Hello World!&lt;/p&gt;&#39;);
+  document.close();
+});</code></pre><ul>
+<li>document.querySelector()  document.querySelectorAll()<ul>
+<li>接受一个CSS选择器作为参数，返回匹配该选择器的元素节点。如果多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回null</li>
+<li>querySelectorAll方法与querySelector类似，区别在于返回的是NodeList对象，包含所有匹配给定选择器的节点</li>
+</ul>
+</li>
+</ul>
+<pre><code>var el1 = document.querySelector(&#39;.myclass&#39;);
+var el2 = document.querySelector(&#39;#myParent &gt; [ng-click]&#39;);
+
+// 选中 data-foo-bar 属性等于 someval 的元素
+document.querySelectorAll(&#39;[data-foo-bar=&quot;someval&quot;]&#39;);
+
+// 选中 myForm 表单中所有不通过验证的元素
+document.querySelectorAll(&#39;#myForm :invalid&#39;);
+
+// 选中div元素，那些 class 含 ignore 的除外
+document.querySelectorAll(&#39;DIV:not(.ignore)&#39;);
+
+// 同时选中 div，a，script 三类元素
+document.querySelectorAll(&#39;DIV, A, SCRIPT&#39;);</code></pre><ul>
+<li>document.getElementsByTagName()<ul>
+<li>搜索HTML标签名，返回符合条件的元素</li>
+<li>返回的为一个HTMLCollection对象</li>
+<li>可以实时反映HTML文档的变化</li>
+</ul>
+</li>
+<li>document.getElementsByClassName()<ul>
+<li>返回一个类似数组的对象，包括了所有class名字符合指定条件的元素，元素的变化实时反映在返回结果当中</li>
+</ul>
+</li>
+<li>document.getElementsByName()<ul>
+<li>用于选择拥有name属性的HTML元素，返回一个类似数组的对象</li>
+</ul>
+</li>
+<li>document.getElementById()<ul>
+<li>返回匹配指定id属性的元素节点</li>
+<li>如果没有发现匹配的节点，则返回null</li>
+</ul>
+</li>
+<li>document.elementFromPoint()  document.elementsFromPoint()<ul>
+<li>返回位于页面指定位置最上层的元素节点 </li>
+<li><code>var element = document.elementFromPoint(50, 50);</code></li>
+<li>该代码就会选中在这个坐标上的最上层的HTML元素</li>
+<li>两个参数是相对于左上角的横坐标和纵坐标，单位是像素</li>
+</ul>
+</li>
+<li>document.createElement()<ul>
+<li>用来生成元素节点，并返回该节点</li>
+<li>方法的参数为元素的标签名，即元素节点的tagName属性</li>
+</ul>
+</li>
+<li>document.createTextNode()<ul>
+<li>用来生成文本节点，并返回该节点</li>
+<li>参数是文本节点的内容</li>
+</ul>
+</li>
+</ul>
+<pre><code>var newDiv = document.createElement(&#39;div&#39;);
+var newContent = document.createTextNode(&#39;Hello&#39;);
+newDiv.appendChild(newContent);</code></pre><ul>
+<li>document.createAttribute() <ul>
+<li>生成一个新的属性节点</li>
+</ul>
+</li>
+</ul>
+<pre><code>var node = document.getElementById(&#39;div1&#39;);
+
+var a = document.createAttribute(&#39;my_attrib&#39;);
+a.value = &#39;newVal&#39;;
+
+node.setAttributeNode(a);
+// 或者
+node.setAttribute(&#39;my_attrib&#39;, &#39;newVal&#39;);</code></pre><ul>
+<li>document.createComment() </li>
+<li>document.createDocumentFragment()<ul>
+<li>生成一个空的文档片段对象 </li>
+<li>是存于内存的DOM片段，不属于当前文档，常常用来生成一段较为复杂的DOM结构，然后再插入到文档当中</li>
+<li>因为DocumentFragment不属于当前文档，对其任何改动都不会引发网页的重新渲染，比直接修改当前文档的DOM有更好的性能表现</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>document.createEvent() <ul>
+<li>生成一个事件对象</li>
+<li>其参数为事件类型，比如<ul>
+<li>MouseEvents</li>
+<li>MutationEvents</li>
+<li>HTMLEvents </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>var event = document.createEvent(&#39;Event&#39;);
+event.initEvent(&#39;build&#39;, true, true);
+document.addEventListener(&#39;build&#39;, function (e) {
+  console.log(e.type); // &quot;build&quot;
+}, false);
+document.dispatchEvent(event);</code></pre><ul>
+<li>document.addEventListener() <ul>
+<li>添加事件监听函数 </li>
+</ul>
+</li>
+<li>document.removeEventListner()<ul>
+<li>移除事件监听函数 </li>
+</ul>
+</li>
+<li>document.dispatchEvent()<ul>
+<li>触发事件</li>
+</ul>
+</li>
+<li>document.hasFocus()<ul>
+<li>返回一个布尔值，表示当前文档是否有元素被激活或者获得了焦点</li>
+</ul>
+</li>
+<li>document.adoptNode()<ul>
+<li>document.adoptNode方法将某个节点及其子节点，从原来所在的文档或DocumentFragment里面移除，归属当前document对象，返回插入后的新节点。插入的节点对象的ownerDocument属性，会变成当前的document对象，而parentNode属性是null</li>
+</ul>
+</li>
+</ul>
+<pre><code>var node = document.adoptNode(externalNode);
+document.appendChild(node);</code></pre><h2 id="3-4-Element-节点"><a href="#3-4-Element-节点" class="headerlink" title="3.4 Element 节点"></a>3.4 Element 节点</h2><p>Element结点对应网页的HTML元素，每个HTML原色，在DOM树上都会转化成一个ELement节点对象</p>
+<h3 id="3-4-1-实例属性"><a href="#3-4-1-实例属性" class="headerlink" title="3.4.1 实例属性"></a>3.4.1 实例属性</h3><ul>
+<li>Element.id</li>
+<li>Element.tagName <ul>
+<li>返回指定元素的大写标签名</li>
+</ul>
+</li>
+<li>Element.dir<ul>
+<li>用于读写当前元素的文字方向</li>
+</ul>
+</li>
+<li>Element.accessKey<ul>
+<li>用于读写分配给当前元素的快捷键</li>
+</ul>
+</li>
+</ul>
+<pre><code>// HTML 代码为 &lt;p id=&quot;foo&quot;&gt;
+var p = document.querySelector(&#39;p&#39;);
+p.id // &quot;foo&quot;
+
+// HTML代码为
+// &lt;span id=&quot;myspan&quot;&gt;Hello&lt;/span&gt;
+var span = document.getElementById(&#39;myspan&#39;);
+span.id // &quot;myspan&quot;
+span.tagName // &quot;SPAN&quot;
+
+// HTML 代码如下
+// &lt;button accesskey=&quot;h&quot; id=&quot;btn&quot;&gt;点击&lt;/button&gt;
+var btn = document.getElementById(&#39;btn&#39;);
+btn.accessKey // &quot;h&quot;</code></pre><ul>
+<li><p>Element.draggable</p>
+<ul>
+<li>返回一个布尔值，表示当前元素是否可拖动，该属性可读写</li>
+</ul>
+</li>
+<li><p>Element.lang</p>
+<ul>
+<li>返回当前元素的语言设置 </li>
+</ul>
+</li>
+<li><p>Element.tabIndex</p>
+<ul>
+<li>返回一个整数值，表示当前元素在tab键遍历的时候的顺序</li>
+<li>如果为负值，在tab不会遍历到这个原色</li>
+<li>对于正整数，按照顺序从小到大进行遍历</li>
+</ul>
+</li>
+<li><p>Element.title</p>
+<ul>
+<li>用于读写当前元素HTML属性的title </li>
+<li>用于指定鼠标悬浮时弹出的文字提示框</li>
+</ul>
+</li>
+<li><p>Element.hidden</p>
+<ul>
+<li>控制当前元素是否可见</li>
+<li>CSS的设置高于hidden  即如果css层规定了<code>display:none</code>或者<code>display:hidden</code> 那么element.hidden是无法改变其可见性的</li>
+</ul>
+</li>
+<li><p>Element.contentEditable  Element.isContentEditable </p>
+</li>
+<li><p>Element.attributes </p>
+<ul>
+<li>返回一个类似数组的对象，成员是当前元素节点的所有属性节点</li>
+</ul>
+</li>
+<li><p>Element.className Element.classList</p>
+<ul>
+<li>用来读写当前原色节点的class属性</li>
+<li>其值为一个字符串，每个class之间用空格来分割</li>
+<li>st</li>
+<li>返回一个类似数组的对象</li>
+</ul>
+</li>
+</ul>
+<pre><code>// HTML 代码 &lt;div class=&quot;one two three&quot; id=&quot;myDiv&quot;&gt;&lt;/div&gt;
+var div = document.getElementById(&#39;myDiv&#39;);
+
+div.className
+// &quot;one two three&quot;
+
+div.classList
+// {
+//   0: &quot;one&quot;
+//   1: &quot;two&quot;
+//   2: &quot;three&quot;
+//   length: 3
+// }</code></pre><ul>
+<li>Element.innerHTML <ul>
+<li>返回一个字符串，等同于该元素包含的所有HTML代码</li>
+<li>可以读写</li>
+<li>用于设定某个节点的内容</li>
+<li>能够改变所有元素结点的内容，包括HTML body这类元素</li>
+</ul>
+</li>
+</ul>
+<pre><code>// HTML代码如下 &lt;p id=&quot;para&quot;&gt; 5 &gt; 3 &lt;/p&gt;
+document.getElementById(&#39;para&#39;).innerHTML
+// 5 &amp;gt; 3</code></pre><ul>
+<li>Element.outerHTML <ul>
+<li>返回一个字符串，表示当前元素结点的所有HTML代码，包括该元素本身和所有子元素</li>
+</ul>
+</li>
+<li>Element.clientHeight Element.clientWidth<ul>
+<li>返回一个整数值表示元素节点的CSS高度和宽度</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-2-实例方法"><a href="#3-4-2-实例方法" class="headerlink" title="3.4.2 实例方法"></a>3.4.2 实例方法</h3><ul>
+<li>getAttribute()</li>
+<li>getAttributeNames() </li>
+<li>setAttribute()</li>
+<li>hasAttribute()</li>
+<li>hasAttributes()</li>
+<li>removeAttribute() </li>
+</ul>
+<h3 id="3-4-3-事件相关方法"><a href="#3-4-3-事件相关方法" class="headerlink" title="3.4.3 事件相关方法"></a>3.4.3 事件相关方法</h3><ul>
+<li>Element.addEventListener()</li>
+<li>Element.removeEventListener()</li>
+<li>Element.dispatchEvent()</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>JavaScript 教程 - part 2</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">8.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-30, 22:28:48</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-30, 22:29:36</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/" title="JavaScript 教程 - part 2">https://www.llchen60.com/JavaScript-%E6%95%99%E7%A8%8B-part-2/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/JavaScript-%E6%95%99%E7%A8%8B-part-2/';
+            this.page.identifier = 'JavaScript-教程-part-2/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="JavaScript-教程-part-2/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/JavaScript-%E6%95%99%E7%A8%8B-part-2/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor','#Japan','#Reading','#Thought','#Tips','#GPS','#Uber','#Curl','#Linux','#Cli','#平均负载','#Context Switch','#CPU Utilization','#CSS','#i18next','#JavaScript','#Callback','#Object Oriented',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
