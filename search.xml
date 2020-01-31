@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Google搜索技巧</title>
+      <link href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"/>
+      <url>/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-使用-tabs"><a href="#1-使用-tabs" class="headerlink" title="1. 使用 tabs"></a>1. 使用 tabs</h2><p>在google的搜索栏下方是有分类的，使用特定的分类可以给我们更好的结果</p><h2 id="2-使用双引号"><a href="#2-使用双引号" class="headerlink" title="2. 使用双引号"></a>2. 使用双引号</h2><p>双引号内的词语会成为一个特定的搜索词语，比如你搜索”Hello World”， 没有双引号的话goole会搜索包含这两个词语的link，但是有了双引号就会搜索按照这样的顺序，并且是连在一起的出现的link。</p><h2 id="3-使用连字符去排除关键字"><a href="#3-使用连字符去排除关键字" class="headerlink" title="3. 使用连字符去排除关键字"></a>3. 使用连字符去排除关键字</h2><p>比如搜索mustang -cars 表示希望搜真的马，不能包括车这个关键字</p><h2 id="4-使用冒号去搜索特定的网站"><a href="#4-使用冒号去搜索特定的网站" class="headerlink" title="4. 使用冒号去搜索特定的网站"></a>4. 使用冒号去搜索特定的网站</h2><pre><code>leileichen site:llchen60.com</code></pre><p>表示只在llchen60.com这个网址搜索leileichen这个关键字</p><h2 id="5-找到一个link到其他页面的页面"><a href="#5-找到一个link到其他页面的页面" class="headerlink" title="5. 找到一个link到其他页面的页面"></a>5. 找到一个link到其他页面的页面</h2><p>用来找到谁引用了这个页面</p><pre><code>link:llchen60.com</code></pre><p>来找到那些引用了这个网址的页面们</p><h2 id="6-使用星号通配符"><a href="#6-使用星号通配符" class="headerlink" title="6. 使用星号通配符"></a>6. 使用星号通配符</h2><pre><code>来自*的你</code></pre><p>google会帮你找到符合上述通配符的词条/ 页面。</p><h2 id="7-找到与一个网站相似的网站"><a href="#7-找到与一个网站相似的网站" class="headerlink" title="7. 找到与一个网站相似的网站"></a>7. 找到与一个网站相似的网站</h2><pre><code>related:llchen60.com</code></pre><p>找到和这个网站类似的网站们 </p><h2 id="8-同时寻找多个关键词"><a href="#8-同时寻找多个关键词" class="headerlink" title="8. 同时寻找多个关键词"></a>8. 同时寻找多个关键词</h2><pre><code>“first word&quot; OR &quot;second word&quot;</code></pre><h2 id="9-搜索一系列的数据"><a href="#9-搜索一系列的数据" class="headerlink" title="9. 搜索一系列的数据"></a>9. 搜索一系列的数据</h2><pre><code>nba championship ..2008nba chanpionship 2006..2008</code></pre><p>第一个是只搜索2008年的nba冠军，第二个是搜索2006到2008年的nba冠军</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.lifehack.org/articles/technology/20-tips-use-google-search-efficiently.html" target="_blank" rel="noopener">https://www.lifehack.org/articles/technology/20-tips-use-google-search-efficiently.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tips </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>硅谷增长黑客实战笔记</title>
       <link href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"/>
       <url>/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/</url>
