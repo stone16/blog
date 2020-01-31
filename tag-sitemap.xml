@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Cli/</loc>
+        <lastmod>2020-01-31T04:44:01.085Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Linux/</loc>
+        <lastmod>2020-01-31T04:44:01.085Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Curl/</loc>
         <lastmod>2020-01-31T04:43:03.059Z</lastmod>
         <changefreq>weekly</changefreq>

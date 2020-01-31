@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Linux 常用指令(1)</title>
+      <link href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"/>
+      <url>/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/</url>
+      
+        <content type="html"><![CDATA[<p>Unix的一大哲学就是创建只做一件事情的程序块，并且将这件事情做好。在这种哲学下，仔细思考需要的接口，并且用pipeline联结起来并最终产生了有用的结果就变成一件很重要的事情了。想象一下数据通过管道在不同的指令之间流动的过程，很难不用优美来形容，哈哈。本文总结一些基本的文本处理的命令，注意这些命令一般来说也是可以串联起来实现一些相对复杂且完成度比较高的功能的。</p><p>下面将逐个介绍各个指令：</p><h1 id="1-Cat"><a href="#1-Cat" class="headerlink" title="1. Cat"></a>1. Cat</h1><ul><li>用来创建，连接，展示文件的</li></ul><pre><code>// 创建新文件，在本行命令以后就可以输入想存储的内容了$ cat &gt; grocery.list// 将新输入的内容附在原文件尾$ cat &gt;&gt; grocery.list // 查看文件当中的内容$ cat grocery.list// 查看文件当中的内容，带行数的$ cat -n grocery.list </code></pre><h1 id="2-nl"><a href="#2-nl" class="headerlink" title="2. nl"></a>2. nl</h1><p>nl可以从stdin或者文件里读取行。输出会写到stdout或者重指向到一个文件，或者通过管道将内容传输到其他指令处。</p><ul><li><p>nl</p><ul><li><p>-b 指定要计数的行</p><ul><li>a : 所有行都算</li><li>t : 不计空行，或者只有空格的行</li><li>n : 全都不计</li><li>p : 根据某种特征</li></ul></li><li><p>-s 指定行号和具体内容的分隔符</p><p>// nl 类似于 cat -n<br>$ nl grocery.list </p><p>// 根据 p定义的特征：这里是只记录起始字母为a或b的<br>$ nl -b p^[ba] grocery.list</p><p>// 让行号和具体内容之间的分隔符变成等号<br>$ nl -s= grocery.list </p></li></ul></li></ul><h1 id="3-wc"><a href="#3-wc" class="headerlink" title="3. wc"></a>3. wc</h1><p>wc是wordcount的简称，顾名思义，用来统计行数，词语数量，或者是字母的数量</p><ul><li>wc<ul><li>-l 行数</li><li>-w 词语数</li><li>-c 字母数</li></ul></li></ul><h1 id="4-grep"><a href="#4-grep" class="headerlink" title="4. grep"></a>4. grep</h1><p>会搜索特定的文件，或者从stdin里，去寻找符合定义的某种特征的表达</p><ul><li>grep<ul><li>-c 统计出现了的行数</li><li>-h 搜索多个文件的时候不再显示出文件名字</li><li>-i 忽略大小写的不同</li><li>-l 只打印满足指定特征的文件名</li><li>-n 打印所在的行位置</li><li>-v 输出所有不满足特征的行</li><li>-w </li></ul></li></ul><h1 id="5-streams-pipes-redirects-tee"><a href="#5-streams-pipes-redirects-tee" class="headerlink" title="5. streams, pipes, redirects, tee"></a>5. streams, pipes, redirects, tee</h1><p>在Unix当中，一个terminal常规是包含三个流的，一个为了输入，两个为了输出。输入流，指的是stdin,一般来说是指向keyboard的；标准输出流一般指的是stdout， 会将结果输出到terminal。每个流都有自己的文件描述符，每一个都可以做管道化，分开来做重定向到其他命令当中去。 </p><ul><li>stdin 0  &lt; </li><li>stdout 1 &gt; </li><li>stderr 2 </li></ul><p>“|” 指一个管道，会将前一个指令的输出作为下一个指令的输入</p><pre><code>$ cat grocery.list | nl </code></pre><ul><li>&lt;&lt; <ul><li>可以进行多行的输入</li></ul></li></ul><h1 id="6-Using-head-and-tail"><a href="#6-Using-head-and-tail" class="headerlink" title="6. Using head and tail"></a>6. Using head and tail</h1><p>这两个指令是用来看一个文件的头部或者尾部的部分</p><ul><li><p>-n</p><ul><li>用上述指令加想要显示的行数</li></ul></li><li><p>-c</p><ul><li><p>显示的字符的数量 </p><p>//显示grocery文件的前10行<br>$ head -n10 grocery.list</p><p>//显示grocery文件最后12的个字符<br>$ tail -c12 grocery.list</p></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Cli </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Curl tutorial</title>
       <link href="/Curl-tutorial/"/>
       <url>/Curl-tutorial/</url>
