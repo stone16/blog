@@ -1,7 +1,7 @@
 ---
 title: 创造估值上亿的公司的方式们(share)
 date: 2020-01-29 22:34:25
-categories: 笔记
+categories: Notes
 tags:
     - thought
 top:

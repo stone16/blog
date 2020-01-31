@@ -1,7 +1,7 @@
 ---
 title: 如何成功(From Sam Altman)
 date: 2020-01-29 22:35:20
-categories: 笔记
+categories: Notes
 tags:
     - reading
     - Sam Altman

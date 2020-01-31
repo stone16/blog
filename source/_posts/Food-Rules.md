@@ -1,7 +1,7 @@
 ---
 title: Food Rules
 date: 2020-01-29 21:41:19
-categories: 笔记
+categories: Notes
 tags:
     - food
     - diet

@@ -1,7 +1,7 @@
 ---
 title: 学习观 from Yjango
 date: 2020-01-29 22:36:47
-categories: 笔记
+categories: Notes
 tags:
     - reading
     - thought
