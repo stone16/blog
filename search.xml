@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>JavaScript - callback function</title>
+      <link href="/JavaScript-callback-function/"/>
+      <url>/JavaScript-callback-function/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-What-is"><a href="#1-What-is" class="headerlink" title="1. What is"></a>1. What is</h1><ul><li>A function that is to be executed after another function has finished executing – hence the name call back </li><li>In JavaScript, functions are <strong>objects</strong>. Because of this, <strong>functions can take functions as arguments</strong>, and can be returned by other functions. Functions that do this are called <strong>higher-order functions</strong>. Any function that is passed as an argument is called a callback function.</li></ul><h1 id="2-Why-need"><a href="#2-Why-need" class="headerlink" title="2. Why need"></a>2. Why need</h1><p>JS is an event driven language, instead of waiting for a response before moving on, JS will keep executing while listening for other events. </p><pre><code>function first(){  // Simulate a code delay  setTimeout( function(){    console.log(1);  }, 500 );}function second(){  console.log(2);}first();second();// 2, 1</code></pre><p>The above example shows JS didn’t wait for a response from first() before moving on to execute second() </p><h1 id="3-How-to"><a href="#3-How-to" class="headerlink" title="3. How to"></a>3. How to</h1><pre><code>function doHomework(subject, callback) {  alert(`Starting my ${subject} homework.`);  callback();}doHomework(&#39;math&#39;, function() {  alert(&#39;Finished my homework&#39;);});</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Glossary/Callback_function</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FrontEnd </tag>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> Callback </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>i18next tutorial</title>
       <link href="/i18next-tutorial/"/>
       <url>/i18next-tutorial/</url>
