@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Scaling webapps</title>
+      <link href="/Scaling-webapps/"/>
+      <url>/Scaling-webapps/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-How-scaling-works"><a href="#1-How-scaling-works" class="headerlink" title="1. How scaling works"></a>1. How scaling works</h1><h2 id="1-1-Vertical-scaling"><a href="#1-1-Vertical-scaling" class="headerlink" title="1.1 Vertical scaling"></a>1.1 Vertical scaling</h2><p>Run same things on a more powerful computer</p><h2 id="1-2-Horizontal-scaling"><a href="#1-2-Horizontal-scaling" class="headerlink" title="1.2 Horizontal scaling"></a>1.2 Horizontal scaling</h2><p>Means run many processes in parallel. </p><p>Nowadays, mostly we use horizontal scaling, since every computer internally have multi processors, we could do parallel programming to make whole thing work faster by nature.</p><h1 id="2-Scaling-process"><a href="#2-Scaling-process" class="headerlink" title="2. Scaling process"></a>2. Scaling process</h1><h2 id="2-1-Initialization-single-server-and-database"><a href="#2-1-Initialization-single-server-and-database" class="headerlink" title="2.1 Initialization: single server and database"></a>2.1 Initialization: single server and database</h2><p><img src="https://i.loli.net/2020/01/31/klA2HgITCiwtRPc.png" alt="fig1.png"></p><h2 id="2-2-Reverse-proxy"><a href="#2-2-Reverse-proxy" class="headerlink" title="2.2 Reverse proxy"></a>2.2 Reverse proxy</h2><p><img src="https://i.loli.net/2020/01/31/CgBvyKAW938H1Un.png" alt="fig2.png"></p><ul><li>Check if guests are allowed to enter </li><li>A proxy is a process that receives and forwards requests </li><li>Reverse means reqeust comes from teh internet and needs to be routed to our server </li></ul><p>Reverse proxy does following tasks: </p><ul><li>health check<ul><li>make sure actual server is still up and running </li></ul></li><li>routing <ul><li>forward a request to the right endpoint </li></ul></li><li>authentication <ul><li>make sure that a user is actually permitted to access the server </li></ul></li><li>firewall<ul><li>ensure users only have access to the parts they are allowed to use </li></ul></li></ul><h2 id="2-3-Load-balancer"><a href="#2-3-Load-balancer" class="headerlink" title="2.3 Load balancer"></a>2.3 Load balancer</h2><p><img src="https://i.loli.net/2020/01/31/YR6kcGwTFC8JQf3.png" alt="fig3.png"></p><p>Most reverse proxy can also act as load balancers. Load balancer’s job is to split incoming requests among those servers</p><h2 id="2-4-Grow-database"><a href="#2-4-Grow-database" class="headerlink" title="2.4 Grow database"></a>2.4 Grow database</h2><p><img src="https://i.loli.net/2020/01/31/LVqBUhFscRAgt9w.png" alt="fig4.png"></p><ul><li>Scaling database needs to deal with consistency </li><li>Master - slace setup or write with read-replicas <ul><li>one part is exclusively responsible for receiving data and storing it </li><li>all other parts are responsible for retrieving the stored data </li></ul></li></ul><h2 id="2-5-Microservices"><a href="#2-5-Microservices" class="headerlink" title="2.5 Microservices"></a>2.5 Microservices</h2><p><img src="https://i.loli.net/2020/01/31/Qj5ibmHAzLSWeqJ.png" alt="fig5.png"></p><ul><li><p>why we need microservices? </p><ul><li>different part use server to different extends </li><li>development - might have more overlaps in singe service </li></ul></li><li><p>break server down into functional units and deploy them as individual, inter connected mini servers </p></li></ul><h2 id="2-6-Caching-amp-Content-Delivery-Networks"><a href="#2-6-Caching-amp-Content-Delivery-Networks" class="headerlink" title="2.6 Caching &amp; Content Delivery Networks"></a>2.6 Caching &amp; Content Delivery Networks</h2><p><img src="https://i.loli.net/2020/01/31/NRO6oguPe8JHMWb.png" alt="fig6.png"></p><ul><li>Large portion of our web app consists of static assets - almost never change <ul><li>use cache to speed it up </li></ul></li></ul><h2 id="2-7-Message-Queues"><a href="#2-7-Message-Queues" class="headerlink" title="2.7 Message Queues"></a>2.7 Message Queues</h2><p><img src="https://i.loli.net/2020/01/31/yXA4rKHbvw7cfuF.png" alt="fig7.png"></p><ul><li>deal with the waiting E.G fackbook deal with uploaded images <ul><li>store the raw, unprocessed image </li><li>confirm the upload to users </li><li>add to queue to process in the near future (async)</li></ul></li><li>benefits <ul><li>decouple tasks and processors </li><li>scale on demand </li></ul></li></ul><h2 id="2-8-sharding"><a href="#2-8-sharding" class="headerlink" title="2.8 sharding"></a>2.8 sharding</h2><p><img src="https://i.loli.net/2020/01/31/dXanh3b217s4Miq.png" alt="fig8.png"></p><ul><li>A technique of parallelizing an application’s stacks by separating them into multiple units, each responsible for a certain key or namespace </li><li>shard based on location, use frequency and so on</li></ul><h2 id="2-9-load-balancer"><a href="#2-9-load-balancer" class="headerlink" title="2.9 load balancer"></a>2.9 load balancer</h2><p><img src="https://i.loli.net/2020/01/31/4FblrsEOeP6982U.png" alt="fig9.png"></p><p>Load balancer has hard limit of how many requests they can handle</p><ul><li>DNS<ul><li>free load balancers </li><li>registry allows you to specify multiple IPs per domain name, each leading to a different load balancer </li></ul></li></ul><h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://arcentry.com/blog/scaling-webapps-for-newbs-and-non-techies/" target="_blank" rel="noopener">https://arcentry.com/blog/scaling-webapps-for-newbs-and-non-techies/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web </tag>
+            
+            <tag> Scalibility </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React - capture click outside component</title>
       <link href="/React-capture-click-outside-component/"/>
       <url>/React-capture-click-outside-component/</url>
