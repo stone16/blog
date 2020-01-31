@@ -1,7 +1,7 @@
 ---
 title: 为什么要合并HTTP请求?
 date: 2020-01-28 20:37:15
-categories: Network
+categories: Web
 tags:
     - Network
     - HTTP
