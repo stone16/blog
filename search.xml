@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Run your first Puppeteer with recorder</title>
+      <link href="/Run-your-first-Puppeteer-with-recorder/"/>
+      <url>/Run-your-first-Puppeteer-with-recorder/</url>
+      
+        <content type="html"><![CDATA[<p>This blog wanna give you some introduction on how to write and run your first puppeteer script. </p><p>I love puppeteer over selenium cause it could use js to interact with browser in almost all ways. It’s super easy to write some scripts to free you from repetive browser work (click, save, blabla…). I learnt this merely cause I don’t want to waste too much of my time on ops work. I believe you guys have the thought with me :) </p><h1 id="1-Install-puppeteer"><a href="#1-Install-puppeteer" class="headerlink" title="1. Install puppeteer"></a>1. Install puppeteer</h1><p>In your command line tool, run </p><pre><code>npm i puppeteer </code></pre><p>It will show you if you have succeeded install puppeteer there. </p><h1 id="2-Write-some-basic-script"><a href="#2-Write-some-basic-script" class="headerlink" title="2. Write some basic script"></a>2. Write some basic script</h1><p>Let’s write some basic code to interact with one page: </p><pre><code>&gt; vim firstPuppeteer.js// in the js file, input // Require the node module, our pre installed puppeteer const puppeteer = require(&#39;puppeteer&#39;);(async () =&gt; {  // launch a browser   const browser = await puppeteer.launch();  // launch a page   const page = await browser.newPage();  // Go to some link you wanna go  await page.goto(&#39;https://www.llchen60.com&#39;);  // Get the &quot;viewport&quot; of the page, as reported by the page.  const dimensions = await page.evaluate(() =&gt; {    return {      width: document.documentElement.clientWidth,      height: document.documentElement.clientHeight,      deviceScaleFactor: window.devicePixelRatio    };  });  console.log(&#39;Dimensions:&#39;, dimensions);  await browser.close();})();</code></pre><p>Well, this start script could get the dimension of the page you want. To execute it, run command <code>node firstPuppeteer.js</code></p><p>The output would be : <code>Dimensions: { width: 800, height: 600, deviceScaleFactor: 1 }</code></p><h1 id="3-Write-your-own-interaction-with-Puppeteer-Recorder"><a href="#3-Write-your-own-interaction-with-Puppeteer-Recorder" class="headerlink" title="3. Write your own interaction with Puppeteer Recorder"></a>3. Write your own interaction with Puppeteer Recorder</h1><p>Here, I wanna introduce you a chrome extension named: <strong>Puppeteer Recorder</strong>. Basically, you could start your interaction with browser and this extension can record all your behavior. </p><ul><li>It uses ES6 syntax to await for your selected component to be available</li><li>With recorder, it comes to be super easy to write puppeteer scripts, no more need to inspect all elements in browser and tracing down one by one! </li></ul><p>Still using my blog as an example, I start record when I’m at the home page, and look around, click on the puppeteer turorial link and then try to leave some comments there, the auto generated script are shown below: </p><pre><code>const puppeteer = require(&#39;puppeteer&#39;);(async () =&gt; {  const browser = await puppeteer.launch()  const page = await browser.newPage()  let frames = await page.frames()  const frame_35 = frames.find(f =&gt; f.url() === &#39;https://disqus.com/embed/comments/?base=default&amp;f=leilei-blog&amp;t_u=https%3A%2F%2Fwww.llchen60.com%2FPupperteer-Tutorial%2F&amp;t_d=Pupperteer%20Tutorial%20-%20Leilei%20%7C%20%E7%A3%8A%E7%A3%8A%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;t_t=Pupperteer%20Tutorial%20-%20Leilei%20%7C%20%E7%A3%8A%E7%A3%8A%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;s_o=default#version=50739766d3d12616cb0b6361b7b2fd85&#39;)  const navigationPromise = page.waitForNavigation()  await page.goto(&#39;https://llchen60.com/&#39;)  await page.setViewport({ width: 1080, height: 1809 })  await page.waitForSelector(&#39;.row &gt; .col-lg-8 &gt; .post-preview:nth-child(17) &gt; a &gt; .post-title&#39;)  await page.click(&#39;.row &gt; .col-lg-8 &gt; .post-preview:nth-child(17) &gt; a &gt; .post-title&#39;)  await navigationPromise  await frame_35.waitForSelector(&#39;.postbox &gt; .textarea-outer-wrapper &gt; .textarea-wrapper &gt; div &gt; .placeholder&#39;)  await frame_35.click(&#39;.postbox &gt; .textarea-outer-wrapper &gt; .textarea-wrapper &gt; div &gt; .placeholder&#39;)  await frame_35.waitForSelector(&#39;div #view27_display_name&#39;)  await frame_35.click(&#39;div #view27_display_name&#39;)  await browser.close()})();</code></pre><p>As you see, it auto generates the code we need, usually we could some modifications and put it on our existing scripts. </p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://llchen60.com/Pupperteer-Tutorial/" target="_blank" rel="noopener">https://llchen60.com/Pupperteer-Tutorial/</a></li><li><a href="https://chrome.google.com/webstore/search/puppeteer?hl=en-US" target="_blank" rel="noopener">https://chrome.google.com/webstore/search/puppeteer?hl=en-US</a></li><li><a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener">https://github.com/GoogleChrome/puppeteer</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FrontEnd </tag>
+            
+            <tag> UI Test </tag>
+            
+            <tag> Puppeteer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React Advanced(4)</title>
       <link href="/React-Advanced-4/"/>
       <url>/React-Advanced-4/</url>

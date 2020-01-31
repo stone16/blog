@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Run your first Puppeteer with recorder | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" FrontEnd , UI Test , Puppeteer ">
+  <meta name="description" content="Run your first Puppeteer with recorder | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1111,12 +1111,72 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Run-your-first-Puppeteer-with-recorder" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Run your first Puppeteer with recorder</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">FrontEnd</a>
+            
+            <a class="color3">UI Test</a>
+            
+            <a class="color5">Puppeteer</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 23:17:03'>2020-01-30 23:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:627</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Install-puppeteer"><span class="toc-text">1. Install puppeteer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Write-some-basic-script"><span class="toc-text">2. Write some basic script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Write-your-own-interaction-with-Puppeteer-Recorder"><span class="toc-text">3. Write your own interaction with Puppeteer Recorder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1129,26 +1189,116 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This blog wanna give you some introduction on how to write and run your first puppeteer script. </p>
+<p>I love puppeteer over selenium cause it could use js to interact with browser in almost all ways. It’s super easy to write some scripts to free you from repetive browser work (click, save, blabla…). I learnt this merely cause I don’t want to waste too much of my time on ops work. I believe you guys have the thought with me :) </p>
+<h1 id="1-Install-puppeteer"><a href="#1-Install-puppeteer" class="headerlink" title="1. Install puppeteer"></a>1. Install puppeteer</h1><p>In your command line tool, run </p>
+<pre><code>npm i puppeteer </code></pre><p>It will show you if you have succeeded install puppeteer there. </p>
+<h1 id="2-Write-some-basic-script"><a href="#2-Write-some-basic-script" class="headerlink" title="2. Write some basic script"></a>2. Write some basic script</h1><p>Let’s write some basic code to interact with one page: </p>
+<pre><code>&gt; vim firstPuppeteer.js
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+// in the js file, input 
+
+// Require the node module, our pre installed puppeteer 
+const puppeteer = require(&#39;puppeteer&#39;);
+
+(async () =&gt; {
+
+  // launch a browser 
+  const browser = await puppeteer.launch();
+
+  // launch a page 
+  const page = await browser.newPage();
+
+  // Go to some link you wanna go
+  await page.goto(&#39;https://www.llchen60.com&#39;);
+
+  // Get the &quot;viewport&quot; of the page, as reported by the page.
+  const dimensions = await page.evaluate(() =&gt; {
+    return {
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+      deviceScaleFactor: window.devicePixelRatio
+    };
+  });
+
+  console.log(&#39;Dimensions:&#39;, dimensions);
+
+  await browser.close();
+})();</code></pre><p>Well, this start script could get the dimension of the page you want. To execute it, run command <code>node firstPuppeteer.js</code></p>
+<p>The output would be : <code>Dimensions: { width: 800, height: 600, deviceScaleFactor: 1 }</code></p>
+<h1 id="3-Write-your-own-interaction-with-Puppeteer-Recorder"><a href="#3-Write-your-own-interaction-with-Puppeteer-Recorder" class="headerlink" title="3. Write your own interaction with Puppeteer Recorder"></a>3. Write your own interaction with Puppeteer Recorder</h1><p>Here, I wanna introduce you a chrome extension named: <strong>Puppeteer Recorder</strong>. Basically, you could start your interaction with browser and this extension can record all your behavior. </p>
+<ul>
+<li>It uses ES6 syntax to await for your selected component to be available</li>
+<li>With recorder, it comes to be super easy to write puppeteer scripts, no more need to inspect all elements in browser and tracing down one by one! </li>
+</ul>
+<p>Still using my blog as an example, I start record when I’m at the home page, and look around, click on the puppeteer turorial link and then try to leave some comments there, the auto generated script are shown below: </p>
+<pre><code>const puppeteer = require(&#39;puppeteer&#39;);
+(async () =&gt; {
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+
+  let frames = await page.frames()
+  const frame_35 = frames.find(f =&gt; f.url() === &#39;https://disqus.com/embed/comments/?base=default&amp;f=leilei-blog&amp;t_u=https%3A%2F%2Fwww.llchen60.com%2FPupperteer-Tutorial%2F&amp;t_d=Pupperteer%20Tutorial%20-%20Leilei%20%7C%20%E7%A3%8A%E7%A3%8A%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;t_t=Pupperteer%20Tutorial%20-%20Leilei%20%7C%20%E7%A3%8A%E7%A3%8A%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;s_o=default#version=50739766d3d12616cb0b6361b7b2fd85&#39;)
+  const navigationPromise = page.waitForNavigation()
+
+  await page.goto(&#39;https://llchen60.com/&#39;)
+
+  await page.setViewport({ width: 1080, height: 1809 })
+
+  await page.waitForSelector(&#39;.row &gt; .col-lg-8 &gt; .post-preview:nth-child(17) &gt; a &gt; .post-title&#39;)
+  await page.click(&#39;.row &gt; .col-lg-8 &gt; .post-preview:nth-child(17) &gt; a &gt; .post-title&#39;)
+
+  await navigationPromise
+
+  await frame_35.waitForSelector(&#39;.postbox &gt; .textarea-outer-wrapper &gt; .textarea-wrapper &gt; div &gt; .placeholder&#39;)
+  await frame_35.click(&#39;.postbox &gt; .textarea-outer-wrapper &gt; .textarea-wrapper &gt; div &gt; .placeholder&#39;)
+
+  await frame_35.waitForSelector(&#39;div #view27_display_name&#39;)
+  await frame_35.click(&#39;div #view27_display_name&#39;)
+
+  await browser.close()
+})();</code></pre><p>As you see, it auto generates the code we need, usually we could some modifications and put it on our existing scripts. </p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://llchen60.com/Pupperteer-Tutorial/" target="_blank" rel="noopener">https://llchen60.com/Pupperteer-Tutorial/</a></li>
+<li><a href="https://chrome.google.com/webstore/search/puppeteer?hl=en-US" target="_blank" rel="noopener">https://chrome.google.com/webstore/search/puppeteer?hl=en-US</a></li>
+<li><a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener">https://github.com/GoogleChrome/puppeteer</a></li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Run your first Puppeteer with recorder</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">627</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-30, 23:16:31</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-30, 23:17:03</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Run-your-first-Puppeteer-with-recorder/" title="Run your first Puppeteer with recorder">https://www.llchen60.com/Run-your-first-Puppeteer-with-recorder/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/Reliability/index.html';
+            this.page.url = 'https://www.llchen60.com/Run-your-first-Puppeteer-with-recorder/';
+            this.page.identifier = 'Run-your-first-Puppeteer-with-recorder/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1164,8 +1314,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/Reliability/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Run-your-first-Puppeteer-with-recorder/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Run-your-first-Puppeteer-with-recorder/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
