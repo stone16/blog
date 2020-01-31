@@ -5,6 +5,7 @@ categories: FrontEnd
 tags:
     - JavaScript
     - Object Oriented
+    - FrontEnd
 top:
 ---
 
