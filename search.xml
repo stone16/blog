@@ -4,6 +4,85 @@
   
     
     <entry>
+      <title>Linux性能优化(2)-平均负载</title>
+      <link href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"/>
+      <url>/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-如何理解平均负载"><a href="#1-如何理解平均负载" class="headerlink" title="1. 如何理解平均负载"></a>1. 如何理解平均负载</h1><pre><code>$uptime14:35:36 up 62 days,  2:51,  2 users,  load average: 0.02, 0.70, 1.06</code></pre><p>当前时间，系统运行时间，正在登录用户数</p><p>后面的三个数字是过去1min, 5min, 15min的平均负载。</p><blockquote><p>平均负载时指单位时间内，系统处于可运行状态和不可中断状态的平均进程数，也就是平均活跃进程数，它和CPU使用率没有直接关系。</p></blockquote><blockquote><p>可运行状态的进程：指正在使用CPU或者正在等待CPU的进程, 也就是我们用<code>ps</code>看到的处于Running/ Runnable状态的进程。</p></blockquote><blockquote><p>不可中断状态的进程：指正处于内核态关键流程中的进程，并且这些进程是不可以被打断的。比如等待硬件设备的I/O响应，即我们在<code>ps</code>命令下看到的D(Uninerruptible Sleep/ Disk Sleep)状态.</p></blockquote><p>例如当一个进程向磁盘读写数据时，为了一致，在得到磁盘回复之前，是不能被其他进程或者中断打断的。否则容易出现磁盘数据与进程数据不一致的问题。</p><p>不可中断状态实际上是系统对进程和硬件设备的一种保护机制。</p><p>平均负载 -&gt; 平均活跃进程数 -&gt; 单位时间内的活跃进程数.最理想的情况就是每个CPU都刚好运行着一个进程，这样每一个CPU都能得到充分的利用。</p><h1 id="2-平均负载为多少时比较合理？"><a href="#2-平均负载为多少时比较合理？" class="headerlink" title="2. 平均负载为多少时比较合理？"></a>2. 平均负载为多少时比较合理？</h1><p>首先需要知道系统有几个CPU，可以通过top命令或者从文件/proc/cpuinfo中读取</p><pre><code>$grep &#39;model name&#39; /proc/cpuinfo | wc -l</code></pre><p>当平均负载高于CPU数量70%的时候，就应该分析和排查负载高的问题了。</p><h1 id="3-平均负载与CPU使用率"><a href="#3-平均负载与CPU使用率" class="headerlink" title="3. 平均负载与CPU使用率"></a>3. 平均负载与CPU使用率</h1><p>二者不一定会完全一致，因为平均负载指单位时间内处于可运行状态和不可中断状态的进程数，不仅包括了<strong><em>正在使用CPU的进程，还包括等待CPU和等待I/O的进程</em></strong>。</p><p>而CPU使用率，是根据单位时间内CPU的繁忙情况进行统计的，举例：</p><ul><li>CPU密集进程</li></ul><p>使用大量CPU使得平均负载升高，此时二者是一致的</p><ul><li>IO密集型进程</li></ul><p>等待I/O也会导致平均负载升高，但CPU使用率不一定会很高</p><h1 id="4-案例分析"><a href="#4-案例分析" class="headerlink" title="4. 案例分析"></a>4. 案例分析</h1><h2 id="4-1-使用工具"><a href="#4-1-使用工具" class="headerlink" title="4.1 使用工具"></a>4.1 使用工具</h2><h3 id="4-1-1-stress"><a href="#4-1-1-stress" class="headerlink" title="4.1.1 stress"></a>4.1.1 stress</h3><p>Linux 系统压力测试工具，可以用作异常进程模拟平均负载升高的场景。</p><h3 id="4-1-2-sysstat"><a href="#4-1-2-sysstat" class="headerlink" title="4.1.2 sysstat"></a>4.1.2 sysstat</h3><p>包含了常用的多核CPU性能分析工具，用来实时查看进程的CPU、内存、I/O以及上下文切换等性能指标。</p><h2 id="4-2-场景分析-CPU密集型进程"><a href="#4-2-场景分析-CPU密集型进程" class="headerlink" title="4.2 场景分析-CPU密集型进程"></a>4.2 场景分析-CPU密集型进程</h2><p>terminal 1: </p><pre><code>$ stress --cpu 1 --timeout 600</code></pre><p>terminal 2: </p><pre><code># -d 参数表示高亮显示变化的区域$ watch -d uptime...,  load average: 1.00, 0.75, 0.39</code></pre><p>terminal 3: run mpstat to see CPU usage </p><pre><code># -P ALL 表示监控所有 CPU，后面数字 5 表示间隔 5 秒后输出一组数据$ mpstat -P ALL 5Linux 4.15.0 (ubuntu) 09/22/18 _x86_64_ (2 CPU)13:30:06     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle13:30:11     all   50.05    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   49.9513:30:11       0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.0013:30:11       1  100.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00</code></pre><p>Use pidstat to see process usage </p><pre><code># 间隔 5 秒后输出一组数据$ pidstat -u 5 113:37:07      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command13:37:12        0      2962  100.00    0.00    0.00    0.00  100.00     1  stress</code></pre><h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h1><ol><li>mpstat -P ALL 5</li><li>pidstat -u 5 1</li></ol><ul><li>-u : cpu usage</li><li>-r : memory usage</li><li>-d : I/O usage</li><li>-p : specific process id </li></ul><ol start="3"><li>watch -d uptime </li></ol><p>watch可以帮你检测一个命令的运行结果，在Linux下，watch是周期性的执行下个程序，并全屏显示执行结果。你可以拿他来监测你想要的一切命令的结果变化，比如 tail 一个 log 文件，ls 监测某个文件的大小变化。</p><ul><li>-n : interval</li><li>-d : highlight </li><li>‘’ : command</li></ul><p>e.g : <code>watch -n 1 -d &#39;pstree|grep http&#39;</code></p><ol start="4"><li>uptime </li></ol><h1 id="6-Reference"><a href="#6-Reference" class="headerlink" title="6. Reference"></a>6. Reference</h1><ol><li><a href="https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858775.html" target="_blank" rel="noopener">Linux CPU 实时监控mpstat命令详解</a></li><li><a href="http://www.cnblogs.com/peida/archive/2012/12/31/2840241.html" target="_blank" rel="noopener">watch命令</a></li><li><a href="https://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858874.html" target="_blank" rel="noopener">Linux运行进程实时监控pidstat命令详解</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 平均负载 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux性能优化(1)-概述</title>
+      <link href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"/>
+      <url>/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-性能问题"><a href="#1-性能问题" class="headerlink" title="1. 性能问题"></a>1. 性能问题</h1><p>性能调优的困难主要在于：其与系统原理相联系，把系统从应用程序、库函数、系统调用、再到内核和硬件等不同的层级贯穿起来。</p><p>这个系列会讲Linux性能的基本指标，工具，相应的观测、分析和调优方法。主要研究CPU性能、磁盘I/O性能、内存性能以及网络性能四个方面的内容。</p><p>对于自己来说，其实遇到过一些性能上的问题了，但是颇有点不求甚解，有stackoverflow这个工具以后，就有点难脱离这个脚手架了。学习方法上有问题，这也是想写这么个系列，学习这样的课程的初衷。需要去了解应用程序和系统的基本原理，进行实战练习，建立一个整体性能的全局观。</p><p>想要调整性能，可能不需要了解每个组件的所有实现细节，只要能理解他们最基本的工作原理和协作方式就可以了。</p><h1 id="2-性能指标"><a href="#2-性能指标" class="headerlink" title="2. 性能指标"></a>2. 性能指标</h1><p>高并发(吞吐)，响应快(延迟)。这两个指标是从应用负载的角度来考察性能的，从系统资源的视角出发的指标，就是资源使用率，饱和度等。</p><p><img src="https://i.loli.net/2020/01/31/rvfmJx3eMwdntlW.png" alt="1.png"></p><p>随着应用负载的增加，系统资源的使用也会升高，甚至达到极限。而性能问题的本质，就是<strong>系统资源已经达到瓶颈，但请求的处理还不够快，无法支撑更多的请求</strong>。</p><p>性能分析，就是找出应用或者系统的瓶颈，并设法去避免或者缓解它们。包含一系列步骤：</p><ol><li>选择指标评估应用程序和系统的性能</li><li>为应用程序和系统设置性能目标</li><li>进行性能基准测试</li><li>性能分析定位瓶颈</li><li>优化系统和应用程序</li><li>性能监控和告警</li></ol><h1 id="3-性能工具"><a href="#3-性能工具" class="headerlink" title="3. 性能工具"></a>3. 性能工具</h1><p><img src="https://i.loli.net/2020/01/31/5uRyNxQUhdpWAOY.png" alt="2.png"><br>Brendan Greff的性能工具图谱</p><p><img src="https://i.loli.net/2020/01/31/TtXop59L7BwxmFY.png" alt="3.png"><br>性能优化思维导图</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</title>
+      <link href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"/>
+      <url>/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h1><ul><li><code>apropos</code>查找文档</li><li><code>type [cmd]</code> 看这个命令是可执行文件、shell还是别名</li><li>任务管理工具们<ul><li>&amp;</li><li>ctrl + z</li><li>ctrl + c</li><li>jobs</li><li>fg</li><li>bg</li><li>kill</li></ul></li><li>文件管理工具<ul><li>ls    ls -l</li><li>less </li><li>head</li><li>tail   tail -f</li><li>chown </li><li>chmod </li><li>du -hs*</li></ul></li><li>文件系统管理<ul><li>df</li><li>mount </li><li>fdisk</li><li>mkfs</li><li>lsblk</li></ul></li><li>网络知识<ul><li>ip</li><li>ipconfig</li><li>dig</li></ul></li><li>grep<ul><li>-i</li><li>-o</li><li>-v</li><li>-A</li><li>-B</li><li>-C</li></ul></li></ul><h1 id="2-日常使用"><a href="#2-日常使用" class="headerlink" title="2. 日常使用"></a>2. 日常使用</h1><ul><li>补全<ul><li>tab 自动补全</li><li>ctrl-r 搜索命令行历史记录 <ul><li>enter 执行</li><li>鼠标右键 edit</li></ul></li></ul></li><li>删除 &amp; 移动<ul><li>ctrl-w 删除键入的最后一个单词</li><li>ctrl-u 删除行内光标所在位置之前的内容</li><li>alt-b alt-f以单词为单位移动光标</li><li>ctrl-a 到行的开始</li><li>ctrl-e 到行的结尾</li></ul></li><li>xargs <ul><li>接收pipeline的输入，然后用这个输入继续做操作</li></ul></li><li>pgrep, pkill <ul><li>通过名字或者属性来找到进程</li></ul></li><li>netstat -ltnp <ul><li>看现在处在listening 状态下的进程们 </li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#" target="_blank" rel="noopener">https://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#</a></li><li><a href="https://coolshell.cn/articles/7829.html" target="_blank" rel="noopener">https://coolshell.cn/articles/7829.html</a></li><li><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md" target="_blank" rel="noopener">https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Cli </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux常用指令(2)</title>
       <link href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"/>
       <url>/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/</url>
