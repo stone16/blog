@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>React Advanced(3) | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" FrontEnd , React ">
+  <meta name="description" content="React Advanced(3) | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1095,12 +1095,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-React-Advanced-3" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">React Advanced(3)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">FrontEnd</a>
+            
+            <a class="color1">React</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 23:15:07'>2020-01-30 23:14</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Error-Boundaries"><span class="toc-text">1. Error Boundaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Why-need-error-boundaries"><span class="toc-text">1.1 Why need error boundaries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Intro"><span class="toc-text">1.2 Intro</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Notifications"><span class="toc-text">1.3 Notifications</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Forwarding-Refs"><span class="toc-text">2. Forwarding Refs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Forwarding-Refs-to-DOM-components"><span class="toc-text">2.1 Forwarding Refs to DOM components</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Higher-Order-Components-KEY-FACTOR"><span class="toc-text">3. Higher-Order Components (KEY FACTOR)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Use-HOCs-For-cross-cutting-concerns"><span class="toc-text">3.1 Use HOCs For cross cutting concerns</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Fragments"><span class="toc-text">4. Fragments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Why-introduce-Fragments"><span class="toc-text">4.1 Why introduce Fragments</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1113,26 +1171,259 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Error-Boundaries"><a href="#1-Error-Boundaries" class="headerlink" title="1. Error Boundaries"></a>1. Error Boundaries</h1><h2 id="1-1-Why-need-error-boundaries"><a href="#1-1-Why-need-error-boundaries" class="headerlink" title="1.1 Why need error boundaries"></a>1.1 Why need error boundaries</h2><p>In the past, JavaScript errors inside components used to corrupt React’s internal state and cause it to emit cryptic errors on next renders. These errors were always caused by an earlier error in the application code,** but React did not provide a way to handle them gracefully in components, and could not recover from them**.</p>
+<h2 id="1-2-Intro"><a href="#1-2-Intro" class="headerlink" title="1.2 Intro"></a>1.2 Intro</h2><p>A js error in a part of the UI shouldn’t break the whole app. </p>
+<blockquote>
+<p>Error boundaries are React components that catch JS errors anywhere in their child component tree,log these errors, and display a fallback UI instead of the component tree, log those errors, and display a fallback UI instead of the component tree that crashed. </p>
+</blockquote>
+<p>Notice: Error boundaries do not catch errors for: </p>
+<ol>
+<li>Event handler</li>
+<li>Asynchrounous code </li>
+<li>server side rendering </li>
+<li>errors thrown in the error boundary itself </li>
+</ol>
+<p>A class component becomes an error boundary if it defines either (or both) of the lifecycle methods <code>static getDerivedStateFromError()</code> or <code>componentDidCatch()</code>. Use <code>static getDerivedStateFromError()</code> to render a fallback UI after an error has been thrown. Use <code>componentDidCatch()</code> to log error information.</p>
+<pre><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    // You can also log the error to an error reporting service
+    logErrorToMyService(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+
+    return this.props.children; 
+  }
+}</code></pre><p>We can use it as a regular component: </p>
+<pre><code>&lt;ErrorBoundary&gt;
+  &lt;MyWidget /&gt;
+&lt;/ErrorBoundary&gt;</code></pre><h2 id="1-3-Notifications"><a href="#1-3-Notifications" class="headerlink" title="1.3 Notifications"></a>1.3 Notifications</h2><ol>
+<li>Error boundaries work like a JS <code>catch {}</code> block, but for components. </li>
+<li>Only calss components can be error boundaries.</li>
+<li>Error boundaries only catch errors in the components below them in the tree. </li>
+<li>It cannot catch an error within itself.</li>
+</ol>
+<h1 id="2-Forwarding-Refs"><a href="#2-Forwarding-Refs" class="headerlink" title="2. Forwarding Refs"></a>2. Forwarding Refs</h1><p>Ref forwarding is a tech for <strong><em>automatically passing a ref through a component to one of its children</em></strong></p>
+<h2 id="2-1-Forwarding-Refs-to-DOM-components"><a href="#2-1-Forwarding-Refs-to-DOM-components" class="headerlink" title="2.1 Forwarding Refs to DOM components"></a>2.1 Forwarding Refs to DOM components</h2><pre><code>function FancyButton(props) {
+  return (
+    &lt;button className=&quot;FancyButton&quot;&gt;
+      {props.children}
+    &lt;/button&gt;
+  );
+}</code></pre><p>In this example, FancyButton wrap a button, and we can reuse in our dev work. But the problem is FancyButton is expected to be used in a similar manner as a regular DOM button. We might need to access their DOM nodes for <strong><em>managing focus, selection, or animations</em></strong>.</p>
+<blockquote>
+<p>Ref forwarding is an opt-in feature that lets some components take a ref they receive, and pass it further down to a child. </p>
+</blockquote>
+<pre><code>const FancyButton = React.forwardRef((props, ref) =&gt; (
+  &lt;button ref={ref} className=&quot;FancyButton&quot;&gt;
+    {props.children}
+  &lt;/button&gt;
+));
+
+// You can now get a ref directly to the DOM button:
+const ref = React.createRef();
+&lt;FancyButton ref={ref}&gt;Click me!&lt;/FancyButton&gt;;</code></pre><p>Here, use <code>React.forwardRef()</code> to obtain the ref passed to it, and then forward it to the DOM button that it renders. </p>
+<p>Here is a step-by-step explanation of what happens in the above example:</p>
+<ol>
+<li>We create a React ref by calling <code>React.createRef</code> and assign it to a ref variable.</li>
+<li>We pass our ref down to <code>&lt;FancyButton ref={ref}&gt;</code> by specifying it as a JSX attribute.</li>
+<li>React passes the ref to the <code>(props, ref) =&gt; ...</code> function inside forwardRef as a second argument.</li>
+<li>We forward this ref argument down to <code>&lt;button ref={ref}&gt;</code> by specifying it as a JSX attribute.</li>
+<li>When the ref is attached, <code>ref.current</code> will point to the <button> DOM node.</li>
+</ol>
+<h1 id="3-Higher-Order-Components-KEY-FACTOR"><a href="#3-Higher-Order-Components-KEY-FACTOR" class="headerlink" title="3. Higher-Order Components (KEY FACTOR)"></a>3. Higher-Order Components (KEY FACTOR)</h1><blockquote>
+<p>A higher order component(HOC) is an advanced technique in React for reusing component logic. It’s a pattern that emerges from React’s compositional nature. </p>
+</blockquote>
+<blockquote>
+<p>Concretely, <strong><em>a higher order component is a function that takes a component and returns a new component</em></strong></p>
+</blockquote>
+<p>Whereas a component transforms props into UI, a higher-order component transforms a component into another component.</p>
+<h2 id="3-1-Use-HOCs-For-cross-cutting-concerns"><a href="#3-1-Use-HOCs-For-cross-cutting-concerns" class="headerlink" title="3.1 Use HOCs For cross cutting concerns"></a>3.1 Use HOCs For cross cutting concerns</h2><p>CommentList component that subscribes to an external data source to render a list of comments: </p>
+<pre><code>class CommentList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      // &quot;DataSource&quot; is some global data source
+      comments: DataSource.getComments()
+    };
+  }
+
+  componentDidMount() {
+    // Subscribe to changes
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    // Clean up listener
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    // Update component state whenever the data source changes
+    this.setState({
+      comments: DataSource.getComments()
+    });
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        {this.state.comments.map((comment) =&gt; (
+          &lt;Comment comment={comment} key={comment.id} /&gt;
+        ))}
+      &lt;/div&gt;
+    );
+  }
+}</code></pre><p>A component for subscribing to a single blog post:</p>
+<pre><code>class BlogPost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      blogPost: DataSource.getBlogPost(props.id)
+    };
+  }
+
+  componentDidMount() {
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    this.setState({
+      blogPost: DataSource.getBlogPost(this.props.id)
+    });
+  }
+
+  render() {
+    return &lt;TextBlock text={this.state.blogPost} /&gt;;
+  }
+}</code></pre><p>Much of those two component are similar, need an abstraction that allows us to define the logic in a single place and share it across many components.</p>
+<p>Write a function that creates components, like CommentList and BlogList, that subscribe to DataSourse. </p>
+<pre><code>const CommentListWithSubscription = withSubscription(
+  CommentList,
+  (DataSource) =&gt; DataSource.getComments()
+);
+
+const BlogPostWithSubscription = withSubscription(
+  BlogPost,
+  (DataSource, props) =&gt; DataSource.getBlogPost(props.id)
+);</code></pre><p>When CommentListWithSubscription and BlogPostWithSubscription are rendered, <strong>CommentList and BlogPost will be passed a data prop with the most current data retrieved from DataSource</strong>:</p>
+<pre><code>// This function takes a component...
+function withSubscription(WrappedComponent, selectData) {
+  // ...and returns another component...
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        data: selectData(DataSource, props)
+      };
+    }
+
+    componentDidMount() {
+      // ... that takes care of the subscription...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      });
+    }
+
+    render() {
+      // ... and renders the wrapped component with the fresh data!
+      // Notice that we pass through any additional props
+      return &lt;WrappedComponent data={this.state.data} {...this.props} /&gt;;
+    }
+  };
+}</code></pre><p>Note that a HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC composes the original component by wrapping it in a container component. A HOC is a pure function with zero side-effects.</p>
+<p>The wrapped component receives all the props of the container, along with a new prop, data, which it uses to render its output. The HOC isn’t concerned with how or why the data is used, and the wrapped component isn’t concerned with where the data came from. </p>
+<h1 id="4-Fragments"><a href="#4-Fragments" class="headerlink" title="4. Fragments"></a>4. Fragments</h1><p>Fragments let you group a list of children without adding extra nodes to the DOM. </p>
+<pre><code>render() {
+  return (
+    &lt;React.Fragment&gt;
+      &lt;ChildA /&gt;
+      &lt;ChildB /&gt;
+      &lt;ChildC /&gt;
+    &lt;/React.Fragment&gt;
+  );
+}</code></pre><h2 id="4-1-Why-introduce-Fragments"><a href="#4-1-Why-introduce-Fragments" class="headerlink" title="4.1 Why introduce Fragments"></a>4.1 Why introduce <code>Fragments</code></h2><pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;div&gt;
+      &lt;td&gt;Hello&lt;/td&gt;
+      &lt;td&gt;World&lt;/td&gt;
+    &lt;/div&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre><p>In this example, if there are two components, and we want to seperate it, and make <code>&lt;div&gt;</code> doesn’t work(group elements inside, but keep table format works), we can modify it to: </p>
+<pre><code>class Columns extends React.Component {
+  render() {
+    return (
+      &lt;React.Fragment&gt;
+        &lt;td&gt;Hello&lt;/td&gt;
+        &lt;td&gt;World&lt;/td&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+}</code></pre>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>React Advanced(3)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-30, 23:14:44</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-30, 23:15:07</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/React-Advanced-3/" title="React Advanced(3)">https://www.llchen60.com/React-Advanced-3/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/NightWatch/index.html';
+            this.page.url = 'https://www.llchen60.com/React-Advanced-3/';
+            this.page.identifier = 'React-Advanced-3/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1148,8 +1439,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/NightWatch/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="React-Advanced-3/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/React-Advanced-3/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
