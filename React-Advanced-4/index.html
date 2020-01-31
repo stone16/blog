@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>React Advanced(4) | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" FrontEnd , React ">
+  <meta name="description" content="React Advanced(4) | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1103,12 +1103,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-React-Advanced-4" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">React Advanced(4)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">FrontEnd</a>
+            
+            <a class="color1">React</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 23:15:55'>2020-01-30 23:15</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:378</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-The-component-lifecycle"><span class="toc-text">1. The component lifecycle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Mounting"><span class="toc-text">1.1 Mounting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Updating"><span class="toc-text">1.2 Updating</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Unmounting"><span class="toc-text">1.3 Unmounting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-Error-Handling"><span class="toc-text">1.4 Error Handling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-JSX-in-Depth"><span class="toc-text">2. JSX in Depth</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Specifying-the-react-element-type"><span class="toc-text">2.1 Specifying the react element type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-User-defined-components-must-be-capitalized"><span class="toc-text">2.2 User defined components must be capitalized</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Spread-Attributes"><span class="toc-text">2.3 Spread Attributes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Children-in-JSX"><span class="toc-text">2.4 Children in JSX</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1121,26 +1179,96 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-The-component-lifecycle"><a href="#1-The-component-lifecycle" class="headerlink" title="1. The component lifecycle"></a>1. The component lifecycle</h1><p>Each component has several lifecycle methods that you can override to run code at perticular times in the process. </p>
+<h2 id="1-1-Mounting"><a href="#1-1-Mounting" class="headerlink" title="1.1 Mounting"></a>1.1 Mounting</h2><p>Methods are called <strong>in this order</strong> when an instance of a component is being created and inserted into the DOM. </p>
+<ol>
+<li>constructor()</li>
+<li>static getDerivedStateFromProps(): exists for use cases where the state depends on changes in props over time </li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ol>
+<h2 id="1-2-Updating"><a href="#1-2-Updating" class="headerlink" title="1.2 Updating"></a>1.2 Updating</h2><ol>
+<li>static getDerivedStateFromProps()</li>
+<li>shouldComponentUpdate(): judge if a component’s output is not affected by the current change in state or props</li>
+<li>render()</li>
+<li>getSnapshotBeforeUpdate()</li>
+<li>componentDidUpdate() </li>
+</ol>
+<h2 id="1-3-Unmounting"><a href="#1-3-Unmounting" class="headerlink" title="1.3 Unmounting"></a>1.3 Unmounting</h2><ol>
+<li>ComponentWillUnmount()</li>
+</ol>
+<h2 id="1-4-Error-Handling"><a href="#1-4-Error-Handling" class="headerlink" title="1.4 Error Handling"></a>1.4 Error Handling</h2><ol>
+<li>static getDerivedStateFromError()</li>
+<li>componentDidCatch() </li>
+</ol>
+<h1 id="2-JSX-in-Depth"><a href="#2-JSX-in-Depth" class="headerlink" title="2. JSX in Depth"></a>2. JSX in Depth</h1><h2 id="2-1-Specifying-the-react-element-type"><a href="#2-1-Specifying-the-react-element-type" class="headerlink" title="2.1 Specifying the react element type"></a>2.1 Specifying the react element type</h2><p>Capitalized types indicate that the JSX tag is <strong>referring to a React component</strong>. These tages get compiled into a direct reference to the named variable, so if you use the JSX <code>&lt;Foo/&gt;</code> expression, Foo must be in scope. </p>
+<p>E.G Here: </p>
+<pre><code>import React from &#39;react&#39;;
+import CustomButton from &#39;./CustomButton&#39;;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+function WarningButton() {
+  // return React.createElement(CustomButton, {color: &#39;red&#39;}, null);
+  return &lt;CustomButton color=&quot;red&quot; /&gt;;
+}</code></pre><p>Need to import those things before truly use it in function scope. </p>
+<h2 id="2-2-User-defined-components-must-be-capitalized"><a href="#2-2-User-defined-components-must-be-capitalized" class="headerlink" title="2.2 User defined components must be capitalized"></a>2.2 User defined components must be capitalized</h2><p>When an element type starts with a lowercase letter, it refers to a build-in component like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> passed to React.createElement.  </p>
+<p>***Types that start with a capital letter like <code>&lt;Foo/&gt;</code> compile to React.createElement(Foo) and correspond to a component defined or imported in your js file. </p>
+<h2 id="2-3-Spread-Attributes"><a href="#2-3-Spread-Attributes" class="headerlink" title="2.3 Spread Attributes"></a>2.3 Spread Attributes</h2><p>If you already have props as an object, and you want to pass it in JSX, you can use <code>...</code> as a spread operator to pass the whole props object. </p>
+<p>Equivalent expressions: </p>
+<pre><code>function App1() {
+  return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot; /&gt;;
+}
+
+function App2() {
+  const props = {firstName: &#39;Ben&#39;, lastName: &#39;Hector&#39;};
+  return &lt;Greeting {...props} /&gt;;
+}</code></pre><h2 id="2-4-Children-in-JSX"><a href="#2-4-Children-in-JSX" class="headerlink" title="2.4 Children in JSX"></a>2.4 Children in JSX</h2><p>In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: <code>props.children</code>. Several different ways to pass children: </p>
+<ol>
+<li>String literals </li>
+</ol>
+<p><code>&lt;div&gt;Hello World!&lt;/div&gt;</code></p>
+<ol start="2">
+<li><p>JSX children</p>
+</li>
+<li><p>JS Expressions as Children</p>
+</li>
+</ol>
+<p>Wrap it within <code>{}</code></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>React Advanced(4)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">378</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-30, 23:15:33</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-30, 23:15:55</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/React-Advanced-4/" title="React Advanced(4)">https://www.llchen60.com/React-Advanced-4/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'archives/2020/01/page/2/index.html';
+            this.page.url = 'https://www.llchen60.com/React-Advanced-4/';
+            this.page.identifier = 'React-Advanced-4/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1156,8 +1284,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="archives/2020/01/page/2/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="React-Advanced-4/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/React-Advanced-4/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
