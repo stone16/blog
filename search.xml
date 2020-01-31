@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>网络知识必知必会</title>
+      <link href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"/>
+      <url>/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</url>
+      
+        <content type="html"><![CDATA[<p>这里希望将大部分网络知识做个总结，redirect到各篇博文当中去。</p><p>首先当我们谈及整个网络的时候，我们讨论的到底是什么呢？ 我想大家想要了解网络知识往往开始于遇到Server, Client端的交互问题，遇到Tomcat, Socket编程这类东西。关于如何了解网络学习网络知识，势必需要先有个宏观的view，而后再分到各个部分去了解更多的细节。整个体系应该就是这样慢慢建立起来的，这里做个索引，带一些我认为最最关键的知识点们。</p><h1 id="1-网络层级模型"><a href="#1-网络层级模型" class="headerlink" title="1. 网络层级模型"></a>1. 网络层级模型</h1><ul><li><a href="https://llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/" target="_blank" rel="noopener">物理层</a><ul><li>LAN, WAN </li></ul></li><li><a href="https://llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/" target="_blank" rel="noopener">链路层</a><ul><li>MAC - Medium Access Control  </li><li>ARP协议 - 已知目标IP地址，寻求MAC地址 </li><li>交换机 - 带有记忆功能的集线器 - 记录MAC地址<ul><li>转发表 - 过期时间 </li></ul></li></ul></li><li><a href="https://llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/" target="_blank" rel="noopener">网络层</a><ul><li>IP协议<ul><li>CIDR无类型域间选路   <ul><li>网络号 + 主机号 </li></ul></li><li>DHCP动态主机配置协议</li></ul></li><li>ICMP协议 Inernet Control Message Protocol<ul><li>互联网控制报文协议</li></ul></li><li>跨网关访问 </li></ul></li><li><a href="https://llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/" target="_blank" rel="noopener">传输层</a><ul><li>UDP协议</li><li>TCP协议</li><li>套接字Socket</li></ul></li><li><a href="https://llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/" target="_blank" rel="noopener">应用层</a><ul><li>HTTP协议 </li><li>HTTPS</li><li>QUIC</li></ul></li></ul><h1 id="2-网络相关的应用"><a href="#2-网络相关的应用" class="headerlink" title="2. 网络相关的应用"></a>2. 网络相关的应用</h1><ul><li>流媒体协议</li><li>数据中心</li><li>VPN</li><li>移动网络</li><li>云</li><li>RPC SOAP RESTFul</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>正则表达式</title>
       <link href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
       <url>/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
