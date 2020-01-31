@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Typescript Tutorial | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" FrontEnd , TypeScript ">
+  <meta name="description" content="Typescript Tutorial | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(61)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="61">
+<input type="hidden" id="yelog_site_word_count" value="115.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,i18next,JavaScript"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Japan,Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Typescript-Tutorial" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Typescript Tutorial</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">FrontEnd</a>
+            
+            <a class="color1">TypeScript</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-30 22:32:08'>2020-01-30 22:31</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Overview"><span class="toc-text">1. Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Basic-Syntax"><span class="toc-text">2. Basic Syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Types"><span class="toc-text">2.1 Types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Variables"><span class="toc-text">2.2 Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-Type-assertion"><span class="toc-text">2.2.1 Type assertion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-Variable-Scope"><span class="toc-text">2.2.2 Variable Scope</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Operators"><span class="toc-text">2.3 Operators</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Functions"><span class="toc-text">2.4 Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-Optional-Parameters"><span class="toc-text">2.4.1 Optional Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-Rest-Parameters"><span class="toc-text">2.4.2 Rest Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-Default-Parameters"><span class="toc-text">2.4.3 Default Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-4-Function-Overloads"><span class="toc-text">2.4.4 Function Overloads</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Numbers"><span class="toc-text">2.5 Numbers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Strings"><span class="toc-text">2.6 Strings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-Arrays"><span class="toc-text">2.7 Arrays</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-Tuples"><span class="toc-text">2.8 Tuples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-9-Union"><span class="toc-text">2.9 Union</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-OOP-related"><span class="toc-text">3. OOP related</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Interfaces"><span class="toc-text">3.1 Interfaces</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Classes"><span class="toc-text">3.2 Classes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Objects"><span class="toc-text">3.3 Objects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-namespace"><span class="toc-text">3.4 namespace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-Modules"><span class="toc-text">3.5 Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-1-Selecting-a-Module-Loader"><span class="toc-text">3.5.1 Selecting a Module Loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-2-Defining-external-Module"><span class="toc-text">3.5.2 Defining external Module</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-Ambient"><span class="toc-text">3.6 Ambient</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul>
+<li>A typed superset of JavaScript that compiles to plain JavaScript</li>
+<li>Pure object oriented with classes, interfaces </li>
+<li>for application scale development </li>
+<li>benefits<ul>
+<li>provides the error checking feature </li>
+<li>will compile the code and generate compilation errors </li>
+<li>strong static typing </li>
+<li>supports type definitions for existing JS libraries<ul>
+<li>TS definition file (with <code>.d.ts</code> extension) provides definition for external JS libraries</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>components<ul>
+<li>language <ul>
+<li>comprises of <ul>
+<li>syntax</li>
+<li>keywords</li>
+<li>type annotations</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>the typeScript Compiler <ul>
+<li>The TypeScript Comiler converts the instructions written in TypeScript to its JavaScript equivalent </li>
+</ul>
+</li>
+<li>the typeScript Language Service<ul>
+<li>expose an additional layer around the core compiler pipeline that are editor-like applications</li>
+<li>language service supports <ul>
+<li>statement completions</li>
+<li>signature help</li>
+<li>code formatting and outlining</li>
+<li>colorization </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>declaration files <ul>
+<li>declaration file <ul>
+<li>interface to the components in the compiled javaScript</li>
+<li>analogous to the header files </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-Basic-Syntax"><a href="#2-Basic-Syntax" class="headerlink" title="2. Basic Syntax"></a>2. Basic Syntax</h1><ul>
+<li>composed of <ul>
+<li>module </li>
+<li>fucntions </li>
+<li>variables</li>
+<li>statements and expressions</li>
+<li>comments</li>
+</ul>
+</li>
+<li>tsc will translate ts file to js </li>
+<li>ts and oop<ul>
+<li>object <ul>
+<li>state </li>
+<li>behavior </li>
+<li>identity </li>
+</ul>
+</li>
+<li>class</li>
+<li>method</li>
+</ul>
+</li>
+</ul>
+<pre><code>class Greeting { 
+   greet():void { 
+      console.log(&quot;Hello World!!!&quot;) 
+   } 
+} 
+var obj = new Greeting(); 
+obj.greet();</code></pre><h2 id="2-1-Types"><a href="#2-1-Types" class="headerlink" title="2.1 Types"></a>2.1 Types</h2><p>Represents the different types of values supported by the language, The type system checks the validity of the supplied values, before they are stored or manipulated by the program. </p>
+<p>The type system further allows for <strong>richer code hinting</strong> and <strong>automated documentation</strong> too. </p>
+<ul>
+<li>any type<ul>
+<li>super type of all types in TS </li>
+<li>denotes a dynamic type </li>
+<li>use the any type is equivalent to opting out of type checking for a variable </li>
+</ul>
+</li>
+<li>built-in types<ul>
+<li>Number <ul>
+<li>double precision 64 bit floating point values </li>
+</ul>
+</li>
+<li>String <ul>
+<li>a sequence of Unicode characters </li>
+</ul>
+</li>
+<li>Boolean <ul>
+<li>logical values </li>
+</ul>
+</li>
+<li>Void <ul>
+<li>used on function return types to represent non-returning functions </li>
+</ul>
+</li>
+<li>Null <ul>
+<li>represents an intentional absense of an object value </li>
+</ul>
+</li>
+<li>Undefined <ul>
+<li>denotes value given to all uninitialized variables </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-Variables"><a href="#2-2-Variables" class="headerlink" title="2.2 Variables"></a>2.2 Variables</h2><ul>
+<li>Variable - name space in the memory that stores values.</li>
+<li>acts as a container for values in a program </li>
+<li>use the <code>var</code> keyword to declare variables </li>
+</ul>
+<pre><code>var [identifier] : [type-annotation] = value;</code></pre><h3 id="2-2-1-Type-assertion"><a href="#2-2-1-Type-assertion" class="headerlink" title="2.2.1 Type assertion"></a>2.2.1 Type assertion</h3><ul>
+<li>to change a variable from one type to another </li>
+</ul>
+<pre><code>var str = &#39;1&#39;;
+var str:number = &lt;number&gt; str;</code></pre><ul>
+<li>if you doesn’t add type for variables, ts will determine the type of the variable on the basis of the value assigned to it</li>
+</ul>
+<h3 id="2-2-2-Variable-Scope"><a href="#2-2-2-Variable-Scope" class="headerlink" title="2.2.2 Variable Scope"></a>2.2.2 Variable Scope</h3><ul>
+<li>global scope<ul>
+<li>declare outside the programming constructs</li>
+<li>can be accessed from anywhere within code</li>
+</ul>
+</li>
+<li>class scope<ul>
+<li>called fields </li>
+<li>are declared within the class but outside the methods </li>
+<li>can be accessed using the object of the class </li>
+</ul>
+</li>
+</ul>
+<pre><code>var global_num = 12          //global variable 
+class Numbers { 
+   num_val = 13;             //class variable 
+   static sval = 10;         //static field 
+
+   storeNum():void { 
+      var local_num = 14;    //local variable 
+   } 
+} 
+console.log(&quot;Global num: &quot;+global_num)  
+console.log(Numbers.sval)   //static variable  
+var obj = new Numbers(); 
+console.log(&quot;Global num: &quot;+obj.num_val) </code></pre><h2 id="2-3-Operators"><a href="#2-3-Operators" class="headerlink" title="2.3 Operators"></a>2.3 Operators</h2><ul>
+<li>Defines some function that will be performed on the data <ul>
+<li>arithmetic operators </li>
+<li>relational operators </li>
+<li>logical operators </li>
+<li>bitwise operators </li>
+<li>assignment operators </li>
+<li>type operators<ul>
+<li>typeof <ul>
+<li>return the type of variable</li>
+</ul>
+</li>
+<li>instance of <ul>
+<li>return the class of an object  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-Functions"><a href="#2-4-Functions" class="headerlink" title="2.4 Functions"></a>2.4 Functions</h2><ul>
+<li>building blocks of readable, maintainable and reusable code </li>
+<li>organize the program into logical blocks of code </li>
+<li>function declaration tells the compiler about a function’s name, return type, and parameters </li>
+</ul>
+<h3 id="2-4-1-Optional-Parameters"><a href="#2-4-1-Optional-Parameters" class="headerlink" title="2.4.1 Optional Parameters"></a>2.4.1 Optional Parameters</h3><ul>
+<li>Add a question mark to its name indicating as optional </li>
+<li>should be set as the last argument in a function </li>
+</ul>
+<pre><code>function disp_details(id:number,name:string,mail_id?:string) { 
+   console.log(&quot;ID:&quot;, id); 
+   console.log(&quot;Name&quot;,name); 
+
+   if(mail_id!=undefined)  
+   console.log(&quot;Email Id&quot;,mail_id); 
+}
+disp_details(123,&quot;John&quot;);
+disp_details(111,&quot;mary&quot;,&quot;mary@xyz.com&quot;);</code></pre><h3 id="2-4-2-Rest-Parameters"><a href="#2-4-2-Rest-Parameters" class="headerlink" title="2.4.2 Rest Parameters"></a>2.4.2 Rest Parameters</h3><ul>
+<li>not restrict the number of values that you can pass to a function </li>
+<li>values passed in mush be the same type </li>
+<li>parameter is prefixed with three periods , non rest parameters should come before the rest parameter </li>
+<li>a function can have at most one rest parameter </li>
+</ul>
+<pre><code>function addNumbers(...nums:number[]) {
+    var i;
+    var sum:number = 0;
+
+    for (i = 0; i &lt; nums.length; i++) {
+        sum += nums[i];
+    }
+    console.log(&quot;sum of numbers&quot;, sum);
+}</code></pre><h3 id="2-4-3-Default-Parameters"><a href="#2-4-3-Default-Parameters" class="headerlink" title="2.4.3 Default Parameters"></a>2.4.3 Default Parameters</h3><ul>
+<li>you could assign paramters with default values  </li>
+</ul>
+<pre><code>function calculate_discount(price:number,rate:number = 0.50) { 
+   var discount = price * rate; 
+   console.log(&quot;Discount Amount: &quot;,discount); 
+} 
+calculate_discount(1000) 
+calculate_discount(1000,0.30)</code></pre><h3 id="2-4-4-Function-Overloads"><a href="#2-4-4-Function-Overloads" class="headerlink" title="2.4.4 Function Overloads"></a>2.4.4 Function Overloads</h3><ul>
+<li>have different data type </li>
+<li>have different number of parameters </li>
+</ul>
+<pre><code>function disp(string):void; 
+function disp(number):void;
+
+function disp(n1:number):void; 
+function disp(x:number,y:number):void;
+
+function disp(n1:number,s1:string):void; 
+function disp(s:string,n:number):void;</code></pre><h2 id="2-5-Numbers"><a href="#2-5-Numbers" class="headerlink" title="2.5 Numbers"></a>2.5 Numbers</h2><ul>
+<li>Number class acts as a wrapper and enables manipulation of numeric literals as they are objects </li>
+<li><code>var var_name = new Number(value)</code></li>
+<li>property <ul>
+<li>MAX_VALUE</li>
+<li>MIN_VALUE</li>
+<li>NaN</li>
+<li>NEGATIVE_INFINITY</li>
+<li>POSITIVE_INFINITY</li>
+<li>prototype <ul>
+<li>a static property of the Number object </li>
+<li>use the prototype property to assign new properties and methods to the Number object in the current document </li>
+</ul>
+</li>
+<li>constructor <ul>
+<li>returns the function that created this object’s instance</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>method <ul>
+<li>toExponential()</li>
+<li>toFixed()<ul>
+<li>formats a number with a specific number of digits to the right of the decimal </li>
+</ul>
+</li>
+<li>toLocaleString()</li>
+<li>toPrecision()</li>
+<li>toString()</li>
+<li>valueOf() </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-6-Strings"><a href="#2-6-Strings" class="headerlink" title="2.6 Strings"></a>2.6 Strings</h2><ul>
+<li>String objects lets you work with a series of characters.</li>
+<li>Wraps the string primitive data type with a number of helper methods </li>
+<li><code>var var_name = new String(string)</code></li>
+<li>property <ul>
+<li>constructor </li>
+<li>length</li>
+<li>prototype <ul>
+<li>allow you to add properties and methods to an object </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>method<ul>
+<li>charAt()</li>
+<li>charCodeAt()</li>
+<li>concat()</li>
+<li>indexOf()</li>
+<li>lastIndexOf()</li>
+<li>localeCompare()</li>
+<li>match()<ul>
+<li>use to match a regular expression against a string </li>
+</ul>
+</li>
+<li>replace()</li>
+<li>search()</li>
+<li>slice()</li>
+<li>split()</li>
+<li>substr()</li>
+<li>substring()</li>
+<li>toLocaleLowerCase()</li>
+<li>toLocaleUpperCase()</li>
+<li>toString()</li>
+<li>toUpperCase()</li>
+<li>valueOf()</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-7-Arrays"><a href="#2-7-Arrays" class="headerlink" title="2.7 Arrays"></a>2.7 Arrays</h2><ul>
+<li>array is a collection of values of the <strong>same</strong> data type </li>
+<li>features <ul>
+<li>allocates sequential memory blocks </li>
+<li>arrays are static, once initialized cannot be resized </li>
+<li>each memory block represents an array element </li>
+<li>array elements are identified by a unique integer called as the subscript/ index of the element </li>
+<li>should be declared before they are used with <code>var</code></li>
+<li>array element values can be updated or modified but cannot be deleted </li>
+</ul>
+</li>
+</ul>
+<pre><code>var arr_name:number[] = [2,4,6];
+var arr_name:number[] = new Array(4);</code></pre><ul>
+<li><p>methods</p>
+<ul>
+<li>concat() </li>
+<li>every()<ul>
+<li>return true if every element in this array satisfies the provided testing function </li>
+</ul>
+</li>
+<li>filter()</li>
+<li>forEach()</li>
+<li>indexOf()</li>
+<li>join()</li>
+<li>lastIndexOf()</li>
+<li>map()</li>
+<li>pop()</li>
+<li>push()</li>
+<li>reduce()<ul>
+<li>apply a function simultaneously against two values of the array as to reduce it to a single value - from left to right</li>
+</ul>
+</li>
+<li>reduceRight()<ul>
+<li>from right to left</li>
+</ul>
+</li>
+<li>reverse()</li>
+<li>shift()<ul>
+<li>removes the first element from an array and returns the element </li>
+</ul>
+</li>
+<li>slice()</li>
+<li>some()<ul>
+<li>Returns true if at least one element in this array satisfies the provided testing function </li>
+</ul>
+</li>
+<li>sort()</li>
+<li>splice()<ul>
+<li>add or remove elements from an array </li>
+</ul>
+</li>
+<li>toString()</li>
+<li>unshift()<h2 id="2-8-Tuples"><a href="#2-8-Tuples" class="headerlink" title="2.8 Tuples"></a>2.8 Tuples</h2></li>
+</ul>
+</li>
+<li><p>To store a collection of values of varied types </p>
+</li>
+<li><p>represents a heterogeneous collection of values </p>
+</li>
+</ul>
+<pre><code>// accessing 
+var tuple1 = [10, &quot;hello&quot;];</code></pre><h2 id="2-9-Union"><a href="#2-9-Union" class="headerlink" title="2.9 Union"></a>2.9 Union</h2><ul>
+<li>Give program the ability to combine one or two types </li>
+<li>Union can be used to express a value that can be one of the several types </li>
+<li>two or more types are combined with <code>|</code></li>
+</ul>
+<h1 id="3-OOP-related"><a href="#3-OOP-related" class="headerlink" title="3. OOP related"></a>3. OOP related</h1><h2 id="3-1-Interfaces"><a href="#3-1-Interfaces" class="headerlink" title="3.1 Interfaces"></a>3.1 Interfaces</h2><p>An interface defines the syntex that any entity must adhere to.</p>
+<ul>
+<li>Interface define properties, methods and events</li>
+<li>only contain the decalration of the members </li>
+<li>responsibility of the deriving class to define the members </li>
+</ul>
+<pre><code>interface IPerson { 
+   firstName:string, 
+   lastName:string, 
+   sayHi: ()=&gt;string 
+} 
+
+var customer:IPerson = { 
+   firstName:&quot;Tom&quot;,
+   lastName:&quot;Hanks&quot;, 
+   sayHi: ():string =&gt;{return &quot;Hi there&quot;} 
+} 
+
+console.log(&quot;Customer Object &quot;) 
+console.log(customer.firstName) 
+console.log(customer.lastName) 
+console.log(customer.sayHi())  
+
+var employee:IPerson = { 
+   firstName:&quot;Jim&quot;,
+   lastName:&quot;Blakes&quot;, 
+   sayHi: ():string =&gt;{return &quot;Hello!!!&quot;} 
+} 
+
+console.log(&quot;Employee  Object &quot;) 
+console.log(employee.firstName);
+console.log(employee.lastName);</code></pre><ul>
+<li>An interface can be extended by other interfaces </li>
+<li>an interface can inherit from other interface </li>
+</ul>
+<pre><code>interface Person { 
+   age:number 
+} 
+
+interface Musician extends Person { 
+   instrument:string 
+} 
+
+var drummer = &lt;Musician&gt;{}; 
+drummer.age = 27 
+drummer.instrument = &quot;Drums&quot; 
+console.log(&quot;Age:  &quot;+drummer.age) console.log(&quot;Instrument:  &quot;+drummer.instrument)</code></pre><h2 id="3-2-Classes"><a href="#3-2-Classes" class="headerlink" title="3.2 Classes"></a>3.2 Classes</h2><ul>
+<li>Object oriented JavaScript </li>
+<li>class can contain<ul>
+<li>fields</li>
+<li>constructors </li>
+<li>functions </li>
+</ul>
+</li>
+<li>class Inheritance <ul>
+<li>create new class from an existing one </li>
+<li>the class that is extended to create newer classes is called the parent class/ super class </li>
+<li>child class inherit all properties and methods except private members and constructors from the parent class </li>
+</ul>
+</li>
+<li>data hiding <ul>
+<li>public </li>
+<li>private <ul>
+<li>only accessible within the class that defines these members  </li>
+</ul>
+</li>
+<li>protected <ul>
+<li>A protected data member is accessible by the members within the same class as that of the former and also by the members of the child classes.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-Objects"><a href="#3-3-Objects" class="headerlink" title="3.3 Objects"></a>3.3 Objects</h2><ul>
+<li>Object is an instance which contains set of key value pairs</li>
+<li>the values can be scalar values or functions or even array of other objects </li>
+</ul>
+<h2 id="3-4-namespace"><a href="#3-4-namespace" class="headerlink" title="3.4 namespace"></a>3.4 namespace</h2><ul>
+<li>a way to logically group related code </li>
+<li>resolve the possibility of overwriting or miscontrucing the same variables </li>
+</ul>
+<pre><code>namespace SomeNameSpaceName { 
+   export interface ISomeInterfaceName {      }  
+   export class SomeClassName {      }  
+} </code></pre><ul>
+<li>marked classes or interfaces with keyword export to indicate they should be accessed outside the namespace </li>
+</ul>
+<h2 id="3-5-Modules"><a href="#3-5-Modules" class="headerlink" title="3.5 Modules"></a>3.5 Modules</h2><p>Module is designed to organize code written in typeScript. Divided into Internal Modules and External Modules. </p>
+<ul>
+<li>Internal Modules<ul>
+<li>logically group classes, interfaces, functions into one unit and can be exported in another module </li>
+<li>now it names namespace in new version of ts</li>
+</ul>
+</li>
+<li>External Module <ul>
+<li>exist to specify and load dependencies between multiple external js files  </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-1-Selecting-a-Module-Loader"><a href="#3-5-1-Selecting-a-Module-Loader" class="headerlink" title="3.5.1 Selecting a Module Loader"></a>3.5.1 Selecting a Module Loader</h3><ul>
+<li>for browser <ul>
+<li>RequireJS <ul>
+<li>an implementation of AMD (asynchronous module definition) specification </li>
+<li>AMD can load js files all separately </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-2-Defining-external-Module"><a href="#3-5-2-Defining-external-Module" class="headerlink" title="3.5.2 Defining external Module"></a>3.5.2 Defining external Module</h3><p>syntax for declaring an external module is using keyword export and import </p>
+<h2 id="3-6-Ambient"><a href="#3-6-Ambient" class="headerlink" title="3.6 Ambient"></a>3.6 Ambient</h2><ul>
+<li>tell the TS compiler that the actual source code exists elsewhere </li>
+<li>kept in extension <code>d.ts</code></li>
+<li>When you are consuming a bunch of third party js libraries like jquery/angularjs/nodejs you can’t rewrite it in TypeScript.</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Typescript Tutorial</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-30, 22:31:34</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-30, 22:32:08</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Typescript-Tutorial/" title="Typescript Tutorial">https://www.llchen60.com/Typescript-Tutorial/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/Typescript-Tutorial/';
+            this.page.identifier = 'Typescript-Tutorial/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Typescript-Tutorial/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Typescript-Tutorial/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor','#Japan','#Reading','#Thought','#Tips','#GPS','#Uber','#Curl','#Linux','#Cli','#平均负载','#Context Switch','#CPU Utilization','#CSS','#i18next','#JavaScript','#Callback','#Object Oriented','#TypeScript',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
