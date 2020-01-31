@@ -1,1 +1,1 @@
-https://www.llchen60.com/Run-your-first-Puppeteer-with-recorder/
+https://www.llchen60.com/React-capture-click-outside-component/

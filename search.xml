@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>React - capture click outside component</title>
+      <link href="/React-capture-click-outside-component/"/>
+      <url>/React-capture-click-outside-component/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Use-case"><a href="#1-Use-case" class="headerlink" title="1. Use case"></a>1. Use case</h1><p>Suppose you create your own pop up modal, or you invent your own dropdown, you will need to deal/ capture with click outside of the component. This blog will illustrate how to do so. </p><h1 id="2-Handy-instructions"><a href="#2-Handy-instructions" class="headerlink" title="2. Handy instructions"></a>2. Handy instructions</h1><h2 id="2-1-Create-a-ref-to-div"><a href="#2-1-Create-a-ref-to-div" class="headerlink" title="2.1 Create a ref to div"></a>2.1 Create a ref to div</h2><pre><code>render() {    return (        &lt;div ref = {node =&gt; this.node = node}&gt; &lt;/div&gt;    );}</code></pre><h2 id="2-2-Add-event-listener"><a href="#2-2-Add-event-listener" class="headerlink" title="2.2 Add event listener"></a>2.2 Add event listener</h2><pre><code>componentWillMount() {    document.addEventListener(&#39;mousedown&#39;, this.handleClick, false);}componentWillUnmount() {    document.removeEventListener(&#39;mousedown&#39;, this.handleClick, false);}handleClick = (e) =&gt; {    if (this.node.contains(e.target)) {        // inside this component, do whatever you want        return;    }    // handle outside click    this.handleOutsideClick();}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FrontEnd </tag>
+            
+            <tag> React </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Run your first Puppeteer with recorder</title>
       <link href="/Run-your-first-Puppeteer-with-recorder/"/>
       <url>/Run-your-first-Puppeteer-with-recorder/</url>
