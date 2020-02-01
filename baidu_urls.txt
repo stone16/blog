@@ -1,1 +1,1 @@
-https://www.llchen60.com/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/
+https://www.llchen60.com/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/

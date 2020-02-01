@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Tomcat - Servlet规范和Servlet容器 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Tomcat ">
+  <meta name="description" content="Tomcat - Servlet规范和Servlet容器 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1355,12 +1355,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Tomcat-Servlet规范和Servlet容器" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Tomcat - Servlet规范和Servlet容器</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color2">Tomcat</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 14:23:31'>2020-02-01 14:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Servlet规范"><span class="toc-text">1. Servlet规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Servlet接口"><span class="toc-text">2. Servlet接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Servlet容器"><span class="toc-text">3. Servlet容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Servlet容器工作流程"><span class="toc-text">3.1 Servlet容器工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Web应用的目录格式"><span class="toc-text">3.2 Web应用的目录格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-如何扩展和定制化Servlet容器的功能"><span class="toc-text">3.3 如何扩展和定制化Servlet容器的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-Filter"><span class="toc-text">3.3.1 Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-Listener"><span class="toc-text">3.3.2 Listener</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1373,26 +1429,133 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Servlet规范"><a href="#1-Servlet规范" class="headerlink" title="1. Servlet规范"></a>1. Servlet规范</h1><p>浏览器给服务端一个HTTP格式的请求，HTTP服务器收到这个请求之后，需要调用服务端程序来做处理。</p>
+<p>为了解决耦合问题 -&gt; 采用面向接口编程，就定义了一个接口，各种业务类都必须实现这个接口，这个接口就叫Servlet接口。</p>
+<p>为了实例化Servlet，出现了Servlet容器，Servlet容器用来加载和管理业务类。</p>
+<p>HTTP服务器并不直接跟业务类打交道，而是将请求交给Servlet容器去处理，Servlet容器会将请求转发到具体的Servlet，如果这个Servlet还没有创建，就去加载并且实例化这个Servlet，然后调用这个Servlet的接口方法。</p>
+<p>Servlet接口其实是Servlet容器跟具体业务类之间的接口。</p>
+<p><img src="https://i.loli.net/2020/02/02/Gfnmrp9AFldWq1s.jpg" alt="fig1.jpg"></p>
+<p>Servlet接口和Servlet容器这一整套规范就叫做Servlet规范。 Tomcat和Jetty都按照Servlet规范的要求实现了Servlet容器，同时它们也具有HTTP服务器的功能。</p>
+<p>作为开发者，我们只需要实现一个Servlet，并将其注册到容器当中，剩下的事情就交由Tomcat来帮助我们解决了。</p>
+<h1 id="2-Servlet接口"><a href="#2-Servlet接口" class="headerlink" title="2. Servlet接口"></a>2. Servlet接口</h1><p>Servlet接口定义了以下的方法：</p>
+<pre><code>public interface Servlet {
+    void init(ServletConfig config) throws ServletException;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+    ServletConfig getServletConfig();
+
+    void service(ServletRequest req, ServletResponse res）throws ServletException, IOException;
+
+    String getServletInfo();
+
+    void destroy();
+}</code></pre><p>最重要的是Service方法，具体业务类在这个方法里实现处理逻辑。</p>
+<ul>
+<li>参数 - 本质上这两个参数是对通信协议的封装<ul>
+<li>ServletRequest <ul>
+<li>封装请求信息 </li>
+<li>其中包含所有请求的相关信息<ul>
+<li>请求路径</li>
+<li>Cookie</li>
+<li>HTTP头</li>
+<li>请求参数</li>
+<li>Session</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ServletResponse<ul>
+<li>封装响应信息 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Servlet容器在加载Servlet类的时候会调用init方法，卸载的时候会调用destroy方法。</li>
+<li>ServletConfig的作用是封装Servlet的初始化参数，可以在web.xml中给Servlet配置参数，并在程序里通过getServletConfig方法拿到这些参数</li>
+</ul>
+<h1 id="3-Servlet容器"><a href="#3-Servlet容器" class="headerlink" title="3. Servlet容器"></a>3. Servlet容器</h1><h2 id="3-1-Servlet容器工作流程"><a href="#3-1-Servlet容器工作流程" class="headerlink" title="3.1 Servlet容器工作流程"></a>3.1 Servlet容器工作流程</h2><ul>
+<li>客户请求某个资源的时候，</li>
+<li>HTTP服务器会用一个ServletRequest对象将客户的请求信息封装起来</li>
+<li>调用Servlet容器的Service方法</li>
+<li>Servlet容器接到请求</li>
+<li>根据请求的URL和Servlet的映射关系，找到响应的Servlet</li>
+<li>如果Servlet还没有被加载，就用反射机制创建这个Servlet，并调用Servlet的init方法来完成初始化，接着调用Servlet的service方法处理请求</li>
+<li>将ServletResponse对象返回给HTTP服务器</li>
+<li>HTTP服务器将响应发送给客户端</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/02/jvc2pThotnA8J59.jpg" alt="fig2.jpg"></p>
+<h2 id="3-2-Web应用的目录格式"><a href="#3-2-Web应用的目录格式" class="headerlink" title="3.2 Web应用的目录格式"></a>3.2 Web应用的目录格式</h2><p>Servlet是以Web应用程式的方式来进行部署的，而根据Servlet规范，WEB应用程序需要有一定的目录结构，在这个目录下放置了：</p>
+<ul>
+<li><p>Servlet的类文件</p>
+</li>
+<li><p>配置文件</p>
+</li>
+<li><p>静态资源</p>
+<p>  | -  MyWebApp</p>
+<pre><code>    | -  WEB-INF/web.xml        -- 配置文件，用来配置 Servlet 等
+    | -  WEB-INF/lib/           -- 存放 Web 应用所需各种 JAR 包
+    | -  WEB-INF/classes/       -- 存放你的应用类，比如 Servlet 类
+    | -  META-INF/              -- 目录存放工程的一些信息</code></pre></li>
+</ul>
+<p>Servlet容器通过读取配置文件，就能找到并加载Servlet。</p>
+<p>ServletContext这个接口用来对应一个Web应用，web应用部署好之后，Servlet容器在启动时会加载web应用，并为每个Web应用创建唯一的ServletContext对象。</p>
+<p>ServletContext是个全局对象，一个Web应用可能有多个Servlet，这些Servlet可以通过全局的ServletContext来共享数据，包括Web应用的初始化参数，应用目录下的文件资源等</p>
+<h2 id="3-3-如何扩展和定制化Servlet容器的功能"><a href="#3-3-如何扩展和定制化Servlet容器的功能" class="headerlink" title="3.3 如何扩展和定制化Servlet容器的功能"></a>3.3 如何扩展和定制化Servlet容器的功能</h2><p>Servlet规范提供了两中扩展机制，Filter and Listener</p>
+<h3 id="3-3-1-Filter"><a href="#3-3-1-Filter" class="headerlink" title="3.3.1 Filter"></a>3.3.1 Filter</h3><p>Filter干预过程，是过程的一部分，是基于过程来被触发的</p>
+<p>过滤器。允许你对请求和响应做一些统一的定制化处理，比如你可以根据请求的频率限制访问，或者根据不同国家修改响应内容。</p>
+<ul>
+<li>WEB应用完成部署</li>
+<li>Servlet容器实例化Filter</li>
+<li>Filter会被链接成一个FilterChain</li>
+<li>当请求进来，获取第一个Filter并调用doFilter方法</li>
+<li>doFilter方法负责调用这个FilterChain中的下一个Filter</li>
+</ul>
+<h3 id="3-3-2-Listener"><a href="#3-3-2-Listener" class="headerlink" title="3.3.2 Listener"></a>3.3.2 Listener</h3><p>Listener是基于状态的，任何行为改变同一个状态，触发的事件是一致的。</p>
+<ul>
+<li>Servlet容器提供一些默认的监听器来监听事件<ul>
+<li>web应用的启动停止</li>
+<li>用户请求到达等</li>
+</ul>
+</li>
+<li>事件发生，Servlet调动监听器的方法</li>
+<li>可以定义自己的监听器去监听你感兴趣的事件</li>
+<li>将监听器配置在web.xml中</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Tomcat - Servlet规范和Servlet容器</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 14:22:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 14:23:31</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/" title="Tomcat - Servlet规范和Servlet容器">https://www.llchen60.com/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/FrontEnd/index.html';
+            this.page.url = 'https://www.llchen60.com/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/';
+            this.page.identifier = 'Tomcat-Servlet规范和Servlet容器/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1408,8 +1571,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/FrontEnd/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Tomcat-Servlet规范和Servlet容器/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
