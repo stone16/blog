@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>HTTP API认证与授权(六) - OAuth 1.0</title>
+      <link href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"/>
+      <url>/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>API认证协议，主要是为了做委托授权的。应用场景，比如用户想用第三方服务商来打印照片，访问其云存储，但是不想把用户名密码给这家第三方公司。</p><p>在这个模型当中，client可以代表资源的拥有者去做一些事情，也就是说，OAuth需要不仅能够确认证实资源拥有者得到授权认证，并且需要能够识别出提出请求的客户端的身份。</p><p>为了让客户端去访问资源：</p><ol><li>得到资源拥有者的许可 - 终端用户授权给客户端去访问服务器资源的流程 </li><li>去服务器访问资源 - 利用两个证书（用于识别客户端生成的请求和用于识别请求所代表的资源拥有者）来生成已认证的Http请求。</li></ol><p>三个角色</p><ul><li>User  照片所有者 - 用户</li><li>Consumer 第三方照片打印服务</li><li>Service Provider 照片存储服务</li></ul><p>协议的三个阶段</p><ul><li>Consumer 获取Request Token</li><li>Service Provider认证用户并且授权Consumer</li><li>Consumer获取Access Token调用API访问用户的照片</li></ul><p>整个授权流程： </p><ul><li>Consumer（第三方照片打印服务）需要先上Service Provider获得开发的 Consumer Key 和 Consumer Secret</li><li>当 User 访问 Consumer 时，Consumer 向 Service Provider 发起请求请求Request Token （需要对HTTP请求签名）</li><li>Service Provider 验明 Consumer 是注册过的第三方服务商后，返回 Request Token（oauth_token）和 Request Token Secret （oauth_token_secret）</li><li>Consumer 收到 Request Token 后，使用HTTP GET 请求把 User 切到 Service Provider 的认证页上（其中带上Request Token），让用户输入他的用户和口令。</li><li>Service Provider 认证 User 成功后，跳回 Consumer，并返回 Request Token （oauth_token）和 Verification Code（oauth_verifier）</li><li>接下来就是签名请求，用Request Token 和 Verification Code 换取 Access Token （oauth_token）和 Access Token Secret (oauth_token_secret)</li><li>最后使用Access Token访问用户授权访问的资源</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://blog.csdn.net/turkeyzhou/article/details/7628399" target="_blank" rel="noopener">https://blog.csdn.net/turkeyzhou/article/details/7628399</a></li><li><a href="https://oauth.net/1/" target="_blank" rel="noopener">https://oauth.net/1/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+            <tag> HTTP </tag>
+            
+            <tag> 认证授权 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTTP API认证与授权(五) - JWT</title>
       <link href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"/>
       <url>/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/</url>

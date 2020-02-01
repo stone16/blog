@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>HTTP API认证与授权(六) - OAuth 1.0 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Network , HTTP , 认证授权 ">
+  <meta name="description" content="HTTP API认证与授权(六) - OAuth 1.0 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1207,12 +1207,72 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-HTTP-API认证与授权-六-OAuth-1-0" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">HTTP API认证与授权(六) - OAuth 1.0</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Network</a>
+            
+            <a class="color5">HTTP</a>
+            
+            <a class="color5">认证授权</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-31 20:23:37'>2020-01-31 20:23</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:493</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Intro"><span class="toc-text">1. Intro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1225,26 +1285,75 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>API认证协议，主要是为了做委托授权的。应用场景，比如用户想用第三方服务商来打印照片，访问其云存储，但是不想把用户名密码给这家第三方公司。</p>
+<p>在这个模型当中，client可以代表资源的拥有者去做一些事情，也就是说，OAuth需要不仅能够确认证实资源拥有者得到授权认证，并且需要能够识别出提出请求的客户端的身份。</p>
+<p>为了让客户端去访问资源：</p>
+<ol>
+<li>得到资源拥有者的许可 - 终端用户授权给客户端去访问服务器资源的流程 </li>
+<li>去服务器访问资源 - 利用两个证书（用于识别客户端生成的请求和用于识别请求所代表的资源拥有者）来生成已认证的Http请求。</li>
+</ol>
+<p>三个角色</p>
+<ul>
+<li>User  照片所有者 - 用户</li>
+<li>Consumer 第三方照片打印服务</li>
+<li>Service Provider 照片存储服务</li>
+</ul>
+<p>协议的三个阶段</p>
+<ul>
+<li>Consumer 获取Request Token</li>
+<li>Service Provider认证用户并且授权Consumer</li>
+<li>Consumer获取Access Token调用API访问用户的照片</li>
+</ul>
+<p>整个授权流程： </p>
+<ul>
+<li>Consumer（第三方照片打印服务）需要先上Service Provider获得开发的 Consumer Key 和 Consumer Secret</li>
+<li>当 User 访问 Consumer 时，Consumer 向 Service Provider 发起请求请求Request Token （需要对HTTP请求签名）</li>
+<li>Service Provider 验明 Consumer 是注册过的第三方服务商后，返回 Request Token（oauth_token）和 Request Token Secret （oauth_token_secret）</li>
+<li>Consumer 收到 Request Token 后，使用HTTP GET 请求把 User 切到 Service Provider 的认证页上（其中带上Request Token），让用户输入他的用户和口令。</li>
+<li>Service Provider 认证 User 成功后，跳回 Consumer，并返回 Request Token （oauth_token）和 Verification Code（oauth_verifier）</li>
+<li>接下来就是签名请求，用Request Token 和 Verification Code 换取 Access Token （oauth_token）和 Access Token Secret (oauth_token_secret)</li>
+<li>最后使用Access Token访问用户授权访问的资源</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://blog.csdn.net/turkeyzhou/article/details/7628399" target="_blank" rel="noopener">https://blog.csdn.net/turkeyzhou/article/details/7628399</a></li>
+<li><a href="https://oauth.net/1/" target="_blank" rel="noopener">https://oauth.net/1/</a></li>
+</ol>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>HTTP API认证与授权(六) - OAuth 1.0</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">493</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-31, 20:23:15</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-31, 20:23:37</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/" title="HTTP API认证与授权(六) - OAuth 1.0">https://www.llchen60.com/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/ECS/index.html';
+            this.page.url = 'https://www.llchen60.com/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/';
+            this.page.identifier = 'HTTP-API认证与授权-六-OAuth-1-0/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1260,8 +1369,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/ECS/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="HTTP-API认证与授权-六-OAuth-1-0/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
