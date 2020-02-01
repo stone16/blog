@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Tomcat - 运行第一个 Servlet</title>
+      <link href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"/>
+      <url>/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/</url>
+      
+        <content type="html"><![CDATA[<p>这篇文章会带着大家从下载安装Tomcat开始，编写自己的servlet，并且将其在Tomcat （Servlet 容器）当中进行运行，展现这整个过程。</p><h1 id="1-安装Tomcat"><a href="#1-安装Tomcat" class="headerlink" title="1. 安装Tomcat"></a>1. 安装Tomcat</h1><p> <a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">官网链接</a></p><p> 解压以后的目录结构如下：</p><ul><li>bin<ul><li>存放在各个平台上启动和关闭Tomcat的脚本文件 </li></ul></li><li>conf<ul><li>存放Tomcat的全局配置文件，其中最重要的是server.xml  </li></ul></li><li>lib<ul><li>存放Tomcat以及所有Web应用都可以访问的JAR文件 </li></ul></li><li>logs<ul><li>存放Tomcat执行时产生的日志文件 </li></ul></li><li>work<ul><li>存放JSP编译后产生的Class文件 </li></ul></li><li>webapps<ul><li>Tomcat的web应用目录，默认情况下把Web应用放在这个目录下 </li></ul></li></ul><h1 id="2-Servlet类编写"><a href="#2-Servlet类编写" class="headerlink" title="2. Servlet类编写"></a>2. Servlet类编写</h1><pre><code>import java.io.IOException;import java.io.PrintWriter;import javax.servlet.ServletException;import javax.servlet.http.HttpServlet;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;public class MyServlet extends HttpServlet {    @Override    protected void doGet(HttpServletRequest request, HttpServletResponse response)            throws ServletException, IOException {        System.out.println(&quot;MyServlet 在处理 get（）请求...&quot;);        PrintWriter out = response.getWriter();        response.setContentType(&quot;text/html;charset=utf-8&quot;);        out.println(&quot;&lt;strong&gt;My Servlet!&lt;/strong&gt;&lt;br&gt;&quot;);    }    @Override    protected void doPost(HttpServletRequest request, HttpServletResponse response)            throws ServletException, IOException {        System.out.println(&quot;MyServlet 在处理 post（）请求...&quot;);        PrintWriter out = response.getWriter();        response.setContentType(&quot;text/html;charset=utf-8&quot;);        out.println(&quot;&lt;strong&gt;My Servlet!&lt;/strong&gt;&lt;br&gt;&quot;);    }}</code></pre><p>将编写好的类编译成.class文件</p><pre><code>javac -cp ./servlet-api.jar MyServlet.java</code></pre><h1 id="3-建立Web应用目录结构"><a href="#3-建立Web应用目录结构" class="headerlink" title="3. 建立Web应用目录结构"></a>3. 建立Web应用目录结构</h1><pre><code>WebApp/WEB-INF/web.xmlWebApp/WEB-INF/classes/MyServlet.class</code></pre><p>然后在web.xml里面配置Servlet</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;  version=&quot;4.0&quot;  metadata-complete=&quot;true&quot;&gt;    &lt;description&gt; Servlet Example. &lt;/description&gt;    &lt;display-name&gt; MyServlet Example &lt;/display-name&gt;    &lt;request-character-encoding&gt;UTF-8&lt;/request-character-encoding&gt;    &lt;servlet&gt;      &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;      &lt;servlet-class&gt;MyServlet&lt;/servlet-class&gt;    &lt;/servlet&gt;    &lt;servlet-mapping&gt;      &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;      &lt;url-pattern&gt;/myservlet&lt;/url-pattern&gt;    &lt;/servlet-mapping&gt;&lt;/web-app&gt;</code></pre><h1 id="4-运行"><a href="#4-运行" class="headerlink" title="4. 运行"></a>4. 运行</h1><p>将WebApp放到Tomcat的安装目录下的webapps目录里</p><p>在bin目录下，启动脚本 </p><ul><li>mac/ linux<ul><li>startup.sh</li></ul></li><li>windows<ul><li>startup.bat</li></ul></li></ul><p>而后我们可以在浏览器看到结果</p><pre><code>http://localhost:8080/WebApp/myServlet</code></pre><h1 id="5-查看日志"><a href="#5-查看日志" class="headerlink" title="5. 查看日志"></a>5. 查看日志</h1><ul><li>catalina.***.log<ul><li>主要记录Tomcat的启动过程</li><li>可以看到启动的JVM参数以及操作系统等日志信息</li></ul></li><li>catalina.out<ul><li>是Tomcat的标准输出和标准错误</li></ul></li><li>localhost.***.log<ul><li>主要记录Web应用在初始化过程中遇到的未处理的异常，会被Tomcat捕获而输出到这个日志文件当中</li></ul></li><li>localhost_access_log.***.txt<ul><li>存放访问Tomcat 请求的日志</li><li>包括<ul><li>IP地址</li><li>请求路径</li><li>请求时间</li><li>请求协议</li><li>状态码</li></ul></li></ul></li><li>manager.<strong><em>.log/host-manager.</em></strong>.log<ul><li>存放Tomcat自带的Manager项目的日志信息 </li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Tomcat - 整体架构</title>
       <link href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"/>
       <url>/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/</url>
