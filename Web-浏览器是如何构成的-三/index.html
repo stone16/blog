@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>Web 浏览器是如何构成的(三) | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Browser , Web ">
+  <meta name="description" content="Web 浏览器是如何构成的(三) | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1303,12 +1303,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Web-浏览器是如何构成的-三" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">Web 浏览器是如何构成的(三)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Browser</a>
+            
+            <a class="color4">Web</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 14:13:59'>2020-02-01 14:13</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-渲染进程处理web内容"><span class="toc-text">1. 渲染进程处理web内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Parsing"><span class="toc-text">2. Parsing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-DOM的构建"><span class="toc-text">2.1 DOM的构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-子资源的加载"><span class="toc-text">2.2 子资源的加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-自定义加载资源的方式"><span class="toc-text">3. 自定义加载资源的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-样式的处理"><span class="toc-text">4. 样式的处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-布局"><span class="toc-text">5. 布局</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-上色"><span class="toc-text">6. 上色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-更新渲染的管道消耗很大"><span class="toc-text">7. 更新渲染的管道消耗很大</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-拼合-Compositing"><span class="toc-text">8. 拼合 (Compositing)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1321,26 +1379,74 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在前面的两篇文章当中，我们覆盖了木偶进程的架构以及点击输入框以后发生的事情。在本文中，我们会深入去看看渲染进程当中发生了一些什么。</p>
+<p>渲染进程影响网络表现的很多方面。本文还是起到给一个大致脉络的作用，如果想更深入了解，可以看 <a href="https://developers.google.com/web/fundamentals/performance/why-performance-matters/" target="_blank" rel="noopener">Performance Section</a>.</p>
+<h1 id="1-渲染进程处理web内容"><a href="#1-渲染进程处理web内容" class="headerlink" title="1. 渲染进程处理web内容"></a>1. 渲染进程处理web内容</h1><p>渲染进程负责发生在tab当中的所有事情，主线程会处理你发送给用户的大部分代码。一些时候一部分你的js代码会被worker线程来处理(如果你使用web worker或者service worker的话)。Compositor 和 raster线程也是在渲染进程当中运行，使得整个渲染过程更加高效顺滑。</p>
+<p>渲染进程的核心工作就是将HTML，CSS以及JavaScript转换成用户可以进行交互的页面。</p>
+<h1 id="2-Parsing"><a href="#2-Parsing" class="headerlink" title="2. Parsing"></a>2. Parsing</h1><h2 id="2-1-DOM的构建"><a href="#2-1-DOM的构建" class="headerlink" title="2.1 DOM的构建"></a>2.1 DOM的构建</h2><p>当渲染进程收到一个commit信息，开始接受HTML的数据的时候，主线程就开始parseHTML，并且将其转化成Document Object Model了(DOM). </p>
+<p>DOM是浏览器内部的对一个页面，数据结构以及JS构成的API的表示。parse的规则则是由<a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener">HTML Standard</a>来进行定义的。Parser有很强的鲁棒性，因为他基本上可以处理绝大部分html本身写得时候的问题，比如忘记<code>&lt;/b&gt;</code>。都可以很优雅的进行解决。<a href="https://html.spec.whatwg.org/multipage/parsing.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser" target="_blank" rel="noopener">Introduction to error handling</a></p>
+<h2 id="2-2-子资源的加载"><a href="#2-2-子资源的加载" class="headerlink" title="2.2 子资源的加载"></a>2.2 子资源的加载</h2><p>一个网站经常会使用外部资源比如图像，CSS还有JavaScript. 这些文件需要从网络或者Cache里面加载出来。主线程可以在构建DOM树的时候依次去请求他们，但是为了加快整个过程，preload scanner 会同步运行这种加载任务。</p>
+<p>如果遇到像<code>&lt;img&gt; &lt;link&gt;</code>这种tag，preload scanner就会看一下HTML parser转化来的tiken，然后向浏览器进程里的网络线程提交请求。  </p>
+<p>当HTML parser发现一个<code>&lt;script&gt;</code>tag的时候，它会停止对于HTML文件的转译，然后必须要先去加载转译执行javascript代码。这样做的原因是JavaScript是可以去改变整个DOM树的结构的。需要先等其执行完以后再继续向下进行。</p>
+<h2 id="3-自定义加载资源的方式"><a href="#3-自定义加载资源的方式" class="headerlink" title="3. 自定义加载资源的方式"></a>3. 自定义加载资源的方式</h2><ul>
+<li>如果你的JS文件不包含document.write()这类指令，那么你就可以在script tag当中加上<code>async</code> or <code>defer</code> 属性。通过这种提示，浏览器在进行转译的时候就会异步执行js代码，不会阻止parsing的继续进行了。</li>
+<li><code>&lt;link rel=&quot;preload&quot;&gt;</code>会告知浏览器这个资源对于当前的页面导览是必需的，浏览器需要尽快将其下载下来。</li>
+</ul>
+<h2 id="4-样式的处理"><a href="#4-样式的处理" class="headerlink" title="4. 样式的处理"></a>4. 样式的处理</h2><p>只有DOM是远远不够描述页面会是什么样子的。因为我们可以使用CSS来处理页面的各部分的样式。主线程会转译CSS文件，并且决定计算过得各个DOM节点的样式。这种判断取决于CSS选择器给出的各部分需要的样式。</p>
+<p>而且即便你没有提供任何的CSS，每个DOM节点都会有一个计算过的本身的样式。<a href="https://cs.chromium.org/chromium/src/third_party/blink/renderer/core/html/resources/html.css" target="_blank" rel="noopener">Chrome默认样式文件</a></p>
+<h1 id="5-布局"><a href="#5-布局" class="headerlink" title="5. 布局"></a>5. 布局</h1><p>当前的渲染进程已经知道了整个文件的结构，以及每个节点的样式了。但是很可能这还不足以去渲染一个页面。因为除了各部分的分别的大小以外，我们还需要知道他们的相对位置，是如何布局，最终构成整个页面的。</p>
+<p>主线程会遍览DOM树和计算过的样式，然后创建布局样式树，包含了x,y坐标信息和包围的box的大小。注意布局树和DOM树非常相似，但是对于<code>display:none</code>具有这种属性的节点，就完全不会在布局树里出现了。然而，<code>visibility:hidden</code>依然会出现在布局树当中。</p>
+<h1 id="6-上色"><a href="#6-上色" class="headerlink" title="6. 上色"></a>6. 上色</h1><p>主线程会遍历样式树，去创建上色记录。这个记录里面包含了整个上色所需的过程，比如先背景，再文字，blabla </p>
+<h1 id="7-更新渲染的管道消耗很大"><a href="#7-更新渲染的管道消耗很大" class="headerlink" title="7. 更新渲染的管道消耗很大"></a>7. 更新渲染的管道消耗很大</h1><p>在前面所叙述的过程当中，你会发现上一步的结果会成为下一步的输入。换句话说，假设你现在在html里面加了一个节点，那么整个过程基本上就要完全重来一遍了。强烈建议访问<a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3#updating_rendering_pipeline_is_costly" target="_blank" rel="noopener">link</a>，里面有整个过程的动图，很有助于理解。</p>
+<h1 id="8-拼合-Compositing"><a href="#8-拼合-Compositing" class="headerlink" title="8. 拼合 (Compositing)"></a>8. 拼合 (Compositing)</h1><p>现在浏览器获得了整个文件的结构，每个成分的样式，整个页面的布局，上色的顺序。接下来就是拼接额过程了，这个将信息转化成像素的过程叫做rasterizing </p>
+<p>最最开始的时候采取的拼接方案就是随着下滑一点点来渲染的，但是现在方案变得越来越复杂了。</p>
+<p>首先会对整个页面做分层处理，然后分别对其进行渲染，像素化。<a href="https://blog.logrocket.com/eliminate-content-repaints-with-the-new-layers-panel-in-chrome-e2c306d4d752/?gi=cd6271834cea" target="_blank" rel="noopener">Layer 详解</a></p>
+<p>为了知道每个成分都在哪一层，主线程会遍历布局树，去创建一个层级树。</p>
+<p>一旦层级树被创建出来，主线程会将这些信息交给拼接线程。拼接线程接下来就会对每一层做像素化的处理。每一层可能都和整个页面一样大，相互之间是有重叠的，接下来拼接线程就会将他们分开，然后交给不同的像素化线程。像素化线程是在GPU下执行的，拼接线程会对像素胡线程进行优化，让相近的部分先一起像素化完。</p>
+<p>一旦像素化完，拼接线程就会聚集这一部分信息，去创建拼接片。拼接片中包含了内存地址，还有在整个页面当中应处的位置。</p>
+<p>拼接片然后会通过IPC被提交到浏览器进程当中。用拼合线程的好处是主线程不用参与，这样的话在主线程继续计算样式，执行javascript的时候拼接线程已经可以开始工作了。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part1" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part1</a></li>
+<li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part2" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part2</a></li>
+<li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part3</a></li>
+<li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part4" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part4</a> </li>
+</ol>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Web 浏览器是如何构成的(三)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 14:13:39</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 14:13:59</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/" title="Web 浏览器是如何构成的(三)">https://www.llchen60.com/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/ELB/index.html';
+            this.page.url = 'https://www.llchen60.com/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/';
+            this.page.identifier = 'Web-浏览器是如何构成的-三/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1356,8 +1462,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/ELB/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Web-浏览器是如何构成的-三/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
