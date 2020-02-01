@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>HTTP API认证与授权(二) - HTTP Basic</title>
+      <link href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"/>
+      <url>/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-HTTP-Basic-Intro"><a href="#1-HTTP-Basic-Intro" class="headerlink" title="1. HTTP Basic Intro"></a>1. HTTP Basic Intro</h1><p>传统的API认证技术，使用username和password来进行登录。</p><p>整个流程是：</p><ul><li>用户发送一个不带认证信息的请求</li><li>服务器返回401(unauthorized)状态，然后会在header里面包含一个<code>WWW-authenticate</code>域</li><li>用户如果想认证自己，就需要发一个携带有认证请求header的请求，其中包含了credentials的信息。</li><li>通常会让用户输入密码，然后将这些信息放到Authorization的header当中去</li></ul><p><img src="https://i.loli.net/2020/02/01/NE6ihK9GQpjrw7P.png" alt="fig1.png"></p><p>在上述的整个流程当中，因为相当于明文传输了，所以这整个过程必须发生在HTTPS(TLS)连接当中。</p><h1 id="2-技术原理"><a href="#2-技术原理" class="headerlink" title="2.技术原理"></a>2.技术原理</h1><ul><li>进行Base64编码<ul><li>Base64编码是为了处理特殊字符，方便在不同平台用不同方式进行传递的，其编码方式是可逆的，即可以很顺畅地被破解掉。 </li></ul></li><li>将编码后的字段放到HTTP头的Authorization字段中，发到服务端</li><li>服务端进行认证，成功则返回200；失败则返回401报错</li></ul><p>使用Base64是为了消除特殊字符带来的影响，这种传递方式最大的问题是将用户名和口令放到了网络上进行传递，因此一般需要配合TLS/ SSL的安全加密来使用。这种同时将用户名和密码进行明文传输的协议并不是很好，尽管有HTTPS作为安全保护，但还是很有风险的。 </p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Basic_access_authentication</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+            <tag> HTTP </tag>
+            
+            <tag> 认证授权 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTTP API认证与授权(一) - general</title>
       <link href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"/>
       <url>/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/</url>
