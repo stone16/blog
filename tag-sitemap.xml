@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/RPC/</loc>
+        <lastmod>2020-02-01T04:58:28.211Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/RESTFul/</loc>
+        <lastmod>2020-02-01T04:58:28.211Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/LDAP/</loc>
         <lastmod>2020-02-01T04:29:44.611Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -425,13 +439,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/Distributed-Tracing/</loc>
         <lastmod>2020-01-30T05:19:14.357Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/RESTFul/</loc>
-        <lastmod>2020-01-30T05:19:14.356Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
