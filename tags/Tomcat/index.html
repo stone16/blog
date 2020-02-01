@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Pupperteer Tutorial | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" FrontEnd , UI Test , Puppeteer ">
-  <meta name="description" content="Pupperteer Tutorial | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav">
+<aside class="nav mobile">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1323,72 +1323,12 @@
         </div>
     </div>
 </aside>
-<div class="post">
+<div class="post index">
     <div class="pjax">
-        <article id="post-Pupperteer-Tutorial" class="article article-type-post" itemscope itemprop="blogPost">
+        <article class="index">
+            <div class="toc-ref">
     
-        <h1 class="article-title">Pupperteer Tutorial</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            
-                <a  data-rel="FrontEnd">FrontEnd</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a class="color4">FrontEnd</a>
-            
-            <a class="color3">UI Test</a>
-            
-            <a class="color5">Puppeteer</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-        创建时间:<time class="date" title='更新时间: 2020-01-30 23:11:43'>2020-01-30 23:11</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>字数:1.5k</span>
-        
-        
-        <span id="busuanzi_container_page_pv">
-            阅读:<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-        <span class="top-comment" title="跳转至评论区">
-            <a href="#comments">
-                评论:<span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </a>
-        </span>
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-What-is-Pupperteer"><span class="toc-text">1. What is Pupperteer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Usage"><span class="toc-text">2. Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-General"><span class="toc-text">2.1 General</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Learn-by-doing"><span class="toc-text">3. Learn by doing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-See-an-example-to-learn-how-the-thing-works"><span class="toc-text">3.1 See an example to learn how the thing works</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-crawlsite-js"><span class="toc-text">3.2 crawlsite.js</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1401,356 +1341,26 @@
     }
 </style>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This post is merely some notes when I learnt pupperteer, basically contain similar info from google developer webpage. Try to organize those info in a personal understandable way here. </p>
-<h1 id="1-What-is-Pupperteer"><a href="#1-What-is-Pupperteer" class="headerlink" title="1. What is Pupperteer"></a>1. What is Pupperteer</h1><p>Most thins you can do manually in the browser now can be done with puppeteer. </p>
-<h1 id="2-Usage"><a href="#2-Usage" class="headerlink" title="2. Usage"></a>2. Usage</h1><h2 id="2-1-General"><a href="#2-1-General" class="headerlink" title="2.1 General"></a>2.1 General</h2><ul>
-<li>Create an instance of Browser </li>
-<li>Open pages </li>
-<li>manipulate them with Puppeteer’s API </li>
-</ul>
-<h1 id="3-Learn-by-doing"><a href="#3-Learn-by-doing" class="headerlink" title="3. Learn by doing"></a>3. Learn by doing</h1><h2 id="3-1-See-an-example-to-learn-how-the-thing-works"><a href="#3-1-See-an-example-to-learn-how-the-thing-works" class="headerlink" title="3.1 See an example to learn how the thing works"></a>3.1 See an example to learn how the thing works</h2><pre><code>/**
- * Copyright 2018 Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author ebidel@ (Eric Bidelman)
- */
+            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
+<p>感谢！</p>
+<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
+<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
+<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
 
-/**
- * Takes a screenshot of the latest tweet in a user&#39;s timeline and creates a
- * PDF of it. Shows how to use Puppeteer to:
- *
- *   1. screenshot a DOM element
- *   2. craft an HTML page on-the-fly
- *   3. produce an image of the element and PDF of the page with the image embedded
- *
- * Usage:
- *   node element-to-pdf.js
- *   USERNAME=ChromiumDev node element-to-pdf.js
- *
- *   --searchable makes &quot;find in page&quot; work:
- *   node element-to-pdf.js --searchable
- *
- * Output:
- *   tweet.png and tweet.pdf
- */
-
-// Include modules that exist in separate files, basically it reads a js file, executes the 
-// file and then proceed to return the exports object 
-const puppeteer = require(&#39;puppeteer&#39;);
-
-// process.env is a global variable, injected by node at runtime 
-// represent the state of the system environment application 
-// it will try to get from process env, if cannot get there, will fallback to default
-// here, means fallback to &#39;ebidel&#39;
-const username = process.env.USERNAME || &#39;ebidel&#39;;
-const searchable = process.argv.includes(&#39;--searchable&#39;);
-
-(async() =&gt; {
-
-// launch a chromium instance 
-const browser = await puppeteer.launch();
-
-// launch a new page 
-const page = await browser.newPage();
-
-// set a screen size 
-await page.setViewport({width: 1200, height: 800, deviceScaleFactor: 2});
-await page.goto(`https://twitter.com/${username}`);
-
-// Can&#39;t use elementHandle.click() because it clicks the center of the element
-// with the mouse. On tweets like https://twitter.com/ebidel/status/915996563234631680
-// there is an embedded card link to another tweet that it clicks.
-
-// find the component, and do some function there
-await page.$eval(`.tweet[data-screen-name=&quot;${username}&quot;]`, tweet =&gt; tweet.click());
-
-// wait for it to be available
-await page.waitForSelector(&#39;.tweet.permalink-tweet&#39;, {visible: true});
-
-// run document.querySelector within the page. If no element matches the selector, return 
-// value will be resolved to null
-const overlay = await page.$(&#39;.tweet.permalink-tweet&#39;);
-const screenshot = await overlay.screenshot({path: &#39;tweet.png&#39;});
-
-if (searchable) {
-  await page.evaluate(tweet =&gt; {
-    const width = getComputedStyle(tweet).width;
-    tweet = tweet.cloneNode(true);
-    tweet.style.width = width;
-    document.body.innerHTML = `
-      &lt;div style=&quot;display:flex;justify-content:center;align-items:center;height:100vh;&quot;&gt;;
-        ${tweet.outerHTML}
-      &lt;/div&gt;
-    `;
-  }, overlay);
-} else {
-  await page.setContent(`
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-      &lt;head&gt;
-        &lt;style&gt;
-          html, body {
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #fafafa;
-          }
-          img {
-            max-width: 60%;
-            box-shadow: 3px 3px 6px #eee;
-            border-radius: 6px;
-          }
-        &lt;/style&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-        &lt;img src=&quot;data:img/png;base64,${screenshot.toString(&#39;base64&#39;)}&quot;&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
-  `);
-}
-
-await page.pdf({path: &#39;tweet.pdf&#39;, printBackground: true});
-
-await browser.close();
-
-})();</code></pre><h2 id="3-2-crawlsite-js"><a href="#3-2-crawlsite-js" class="headerlink" title="3.2 crawlsite.js"></a>3.2 crawlsite.js</h2><pre><code>/**
- * Copyright 2018 Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author ebidel@ (Eric Bidelman)
- */
-
- /**
-  * Discovers all the pages in site or single page app (SPA) and creates
-  * a tree of the result in ./output/&lt;site slug/crawl.json. Optionally
-  * takes screenshots of each page as it is visited.
-  *
-  * Usage:
-  *   node crawlsite.js
-  *   URL=https://yourspa.com node crawlsite.js
-  *   URL=https://yourspa.com node crawlsite.js --screenshots
-  *
-  * Then open the visualizer in a browser:
-  *   http://localhost:8080/html/d3tree.html
-  *   http://localhost:8080/html/d3tree.html?url=../output/https___yourspa.com/crawl.json
-  *
-  *Start Server:
-  *   node server.js
-  *
-  */
-
-// provides an API for interacting with the file system 
-const fs = require(&#39;fs&#39;);
-
-// delete files 
-const del = require(&#39;del&#39;);
-
-// nodeJS util module
-const util = require(&#39;util&#39;);
-
-const puppeteer = require(&#39;puppeteer&#39;);
-
-// high performance Node.js image proccessing, fastest module to resize JPEG, PNG, etc. 
-const sharp = require(&#39;sharp&#39;);
-
-const URL = process.env.URL || &#39;https://news.polymer-project.org/&#39;;
-const SCREENSHOTS = process.argv.includes(&#39;--screenshots&#39;);
-const DEPTH = parseInt(process.env.DEPTH) || 2;
-const VIEWPORT = SCREENSHOTS ? {width: 1028, height: 800, deviceScaleFactor: 2} : null;
-const OUT_DIR = process.env.OUTDIR || `output/${slugify(URL)}`;
-
-const crawledPages = new Map();
-const maxDepth = DEPTH; // Subpage depth to crawl site.
-
-function slugify(str) {
-  return str.replace(/[\/:]/g, &#39;_&#39;);
-}
-
-function mkdirSync(dirPath) {
-  try {
-    dirPath.split(&#39;/&#39;).reduce((parentPath, dirName) =&gt; {
-      const currentPath = parentPath + dirName;
-      if (!fs.existsSync(currentPath)) {
-        fs.mkdirSync(currentPath);
-      }
-      return currentPath + &#39;/&#39;;
-    }, &#39;&#39;);
-  } catch (err) {
-    if (err.code !== &#39;EEXIST&#39;) {
-      throw err;
-    }
-  }
-}
-
-/**
- * Finds all anchors on the page, inclusive of those within shadow roots.
- * Note: Intended to be run in the context of the page.
- * @param {boolean=} sameOrigin When true, only considers links from the same origin as the app.
- * @return {!Array&lt;string&gt;} List of anchor hrefs.
- */
-function collectAllSameOriginAnchorsDeep(sameOrigin = true) {
-  const allElements = [];
-
-  const findAllElements = function(nodes) {
-    for (let i = 0, el; el = nodes[i]; ++i) {
-      allElements.push(el);
-      // If the element has a shadow root, dig deeper.
-      if (el.shadowRoot) {
-        findAllElements(el.shadowRoot.querySelectorAll(&#39;*&#39;));
-      }
-    }
-  };
-
-  findAllElements(document.querySelectorAll(&#39;*&#39;));
-
-  const filtered = allElements
-    .filter(el =&gt; el.localName === &#39;a&#39; &amp;&amp; el.href) // element is an anchor with an href.
-    .filter(el =&gt; el.href !== location.href) // link doesn&#39;t point to page&#39;s own URL.
-    .filter(el =&gt; {
-      if (sameOrigin) {
-        return new URL(location).origin === new URL(el.href).origin;
-      }
-      return true;
-    })
-    .map(a =&gt; a.href);
-
-  return Array.from(new Set(filtered));
-}
-
-/**
- * Crawls a URL by visiting an url, then recursively visiting any child subpages.
- * @param {!Browser} browser
- * @param {{url: string, title: string, img?: string, children: !Array<!Object>}} page Current page.
- * @param {number=} depth Current subtree depth of crawl.
- */
-async function crawl(browser, page, depth = 0) {
-  if (depth &gt; maxDepth) {
-    return;
-  }
-
-  // If we&#39;ve already crawled the URL, we know its children.
-  if (crawledPages.has(page.url)) {
-    console.log(`Reusing route: ${page.url}`);
-    const item = crawledPages.get(page.url);
-    page.title = item.title;
-    page.img = item.img;
-    page.children = item.children;
-    // Fill in the children with details (if they already exist).
-    page.children.forEach(c =&gt; {
-      const item = crawledPages.get(c.url);
-      c.title = item ? item.title : &#39;&#39;;
-      c.img = item ? item.img : null;
-    });
-    return;
-  } else {
-    console.log(`Loading: ${page.url}`);
-
-    const newPage = await browser.newPage();
-    await newPage.goto(page.url, {waitUntil: &#39;networkidle2&#39;});
-
-    let anchors = await newPage.evaluate(collectAllSameOriginAnchorsDeep);
-    anchors = anchors.filter(a =&gt; a !== URL) // link doesn&#39;t point to start url of crawl.
-
-    page.title = await newPage.evaluate(&#39;document.title&#39;);
-    page.children = anchors.map(url =&gt; ({url}));
-
-    if (SCREENSHOTS) {
-      const path = `./${OUT_DIR}/${slugify(page.url)}.png`;
-      let imgBuff = await newPage.screenshot({fullPage: false});
-      imgBuff = await sharp(imgBuff).resize(null, 150).toBuffer(); // resize image to 150 x auto.
-      util.promisify(fs.writeFile)(path, imgBuff); // async
-      page.img = `data:img/png;base64,${imgBuff.toString(&#39;base64&#39;)}`;
-    }
-
-    crawledPages.set(page.url, page); // cache it.
-
-    await newPage.close();
-  }
-
-  // Crawl subpages.
-  for (const childPage of page.children) {
-    await crawl(browser, childPage, depth + 1);
-  }
-}
-
-(async() =&gt; {
-
-mkdirSync(OUT_DIR); // create output dir if it doesn&#39;t exist.
-await del([`${OUT_DIR}/*`]); // cleanup after last run.
-
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
-if (VIEWPORT) {
-  await page.setViewport(VIEWPORT);
-}
-
-const root = {url: URL};
-await crawl(browser, root);
-
-await util.promisify(fs.writeFile)(`./${OUT_DIR}/crawl.json`, JSON.stringify(root, null, &#39; &#39;));
-
-await browser.close();
-
-})();</code></pre>
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
-    </div>
-</article>
-
-
-<p>
-    <a  class="dashang" onclick="dashangToggle()">赏</a>
-</p>
-
-
-<div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Pupperteer Tutorial</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
-    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-30, 23:11:07</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-30, 23:11:43</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Pupperteer-Tutorial/" title="Pupperteer Tutorial">https://www.llchen60.com/Pupperteer-Tutorial/</a>
-    <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-    </p>
-</div>
-
-
-
+        </article>
+        
+        <p>
+            <a  class="dashang" onclick="dashangToggle()">赏</a>
+        </p>
+        
+        
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Pupperteer-Tutorial/';
-            this.page.identifier = 'Pupperteer-Tutorial/';
+            this.page.url = 'https://www.llchen60.com/';
+            this.page.identifier = 'tags/Tomcat/index.html';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1766,15 +1376,8 @@ await browser.close();
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Pupperteer-Tutorial/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Pupperteer-Tutorial/"></span>
-
-
-
-    
-
-
-
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/Tomcat/index.html"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
 
     </div>
     <div class="copyright">
