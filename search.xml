@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>HTTP API认证与授权(一) - general</title>
+      <link href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"/>
+      <url>/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/</url>
+      
+        <content type="html"><![CDATA[<p>HTTP本身是无状态的，但我们常常需要检查用户的登录状态。一般来说，用户登录成功之后，服务器会发一个登录凭证(Token)。在计算机的世界当中，这个Token的相关数据会放到两个地方，一个在用户端，以Cookie的方式，另一个是放在服务器端，以Session的方式。</p><p>现实世界中验证登录会更为复杂一些，因为除了用户访问，还有用户委托的第三方的应用，还有企业之间的调用。</p><p>很多很有意思的问题： </p><ul><li>认证与授权各自指的是什么？ </li><li>在我们没有TLS/ SSL的时候我们是如何实现登录验证，并且对在网络中传递的信息进行加密的呢？ </li><li>HTTPS给整个认证与授权的过程带来了怎样的改变？ </li><li>我们常看到的通过微信/ google/ facebook/ amazon登录是如何实现的？<br>这一系列的博客会依次逐个解决上面描述的问题，inspired by <a href="https://coolshell.cn/articles/19395.html" target="_blank" rel="noopener">CoolShell-HTTP API 认证授权术</a>. 是对这篇博客的针对自己现有认知水平（啥都不懂）的有效扩充，希望通过这一系列的整理彻底搞懂整个API认证与授权的机制，敏感信息在client和server之间的传递。</li></ul><p>本系列的博客会大致上分为6部分，分别为：</p><ul><li>HTTP Basic </li><li>Digest Access</li><li>App Secret Key + HMAC</li><li>JWT</li><li>OAuth 1.0</li><li>OAuth 2.0 </li></ul><p>希望能对大家有所裨益。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://coolshell.cn/articles/19395.html" target="_blank" rel="noopener">https://coolshell.cn/articles/19395.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+            <tag> HTTP </tag>
+            
+            <tag> 认证授权 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网络知识必知必会</title>
       <link href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"/>
       <url>/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</url>
