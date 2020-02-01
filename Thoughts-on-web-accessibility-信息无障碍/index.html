@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Developing on AWS Note.11 Deploying Applications | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" AWS , CI/ CD ">
-  <meta name="description" content="Developing on AWS Note.11 Deploying Applications | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Thoughts on web accessibility(信息无障碍) | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" FrontEnd , Web Accessibility ">
+  <meta name="description" content="Thoughts on web accessibility(信息无障碍) | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -1261,9 +1261,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Developing-on-AWS-Note-11-Deploying-Applications" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Thoughts-on-web-accessibility-信息无障碍" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Developing on AWS Note.11 Deploying Applications</h1>
+        <h1 class="article-title">Thoughts on web accessibility(信息无障碍)</h1>
     
     <div class="article-meta">
         
@@ -1271,28 +1271,28 @@
         
         <span class="book">
             
-                <a  data-rel="Cloud">Cloud</a>
+                <a  data-rel="FrontEnd">FrontEnd</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">AWS</a>
+            <a class="color4">FrontEnd</a>
             
-            <a class="color2">CI/ CD</a>
+            <a class="color3">Web Accessibility</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-29 21:19:14'>2020-01-28 23:22</time>
+        创建时间:<time class="date" title='更新时间: 2020-01-31 21:01:32'>2020-01-31 21:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:552</span>
+        <span>字数:736</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1322,7 +1322,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-DevOps"><span class="toc-text">1. DevOps</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Release-Processes-Major-Phases"><span class="toc-text">2. Release Processes Major Phases</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Understanding-CI-amp-CD"><span class="toc-text">3. Understanding CI &amp; CD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-How-do-you-deploy-all-infrastructure-along-with-your-application"><span class="toc-text">4. How do you deploy all infrastructure along with your application?</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Accessibility-标准"><span class="toc-text">1. Accessibility 标准</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Tips-一些我们可以follow的东西"><span class="toc-text">2. Tips 一些我们可以follow的东西</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1338,103 +1338,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-DevOps"><a href="#1-DevOps" class="headerlink" title="1. DevOps"></a>1. DevOps</h1><ul>
-<li>Application is the application plus all of the associated infrastructure</li>
-<li>includes<ul>
-<li>VPCs </li>
-<li>load balancers</li>
-<li>auto scaling groups </li>
-<li>Amazon RDS databases</li>
-<li>Amazon S3 bucket </li>
-<li>elastiCache servers</li>
+        <p>我们在做前端的时候，实质上信息无障碍是很多工程师很容易忽视但又着实很重要的一部分，要知道在这个世界上是有很多人因为一些原因无法像正常人一样去浏览网页的，诸如色盲，盲人，老花等等，我们需要适配设计的网页，使其尽量对于各种人都是信息无障碍的。总觉得这是件大部分人都没有想到的事情，但是一旦想到了，那么就应该做点什么，来使这部分相对边缘的人也可以正常的去看我们设计的网页。</p>
+<p>以下是Wiki给出的定义: </p>
+<blockquote>
+<p>“ Web accessibility refers to the inclusive practice of removing barriers that prevent interaction with, or access to websites, by people with disabilities. When sites are correctly designed, developed and edited, all users have equal access to information and functionality.”</p>
+</blockquote>
+<h1 id="1-Accessibility-标准"><a href="#1-Accessibility-标准" class="headerlink" title="1. Accessibility 标准"></a>1. Accessibility 标准</h1><ul>
+<li>可感知<ul>
+<li>如果只提供凭借一种感官才能让用户感知到内容，无形中会失去很多用户</li>
 </ul>
 </li>
-<li>deploying in the cloud helps break down these traditional silos. Bugs due to different environment. </li>
-<li>practices<ul>
-<li>microservices</li>
-<li>CI/ CD</li>
-<li>Infrastructure as code </li>
-</ul>
-</li>
-<li>Tools <ul>
-<li>AWS Code Services </li>
-</ul>
-</li>
-<li>Under a DevOps model, development and operations are no longer siloed. </li>
-<li>Sometimes, those two functions are merged into a single team where engineers work across the entire application lifecycle, from development and test to deployment to operations, and develop a range of skills not limited to a single function. </li>
-<li>Quality assurance and security teams could become more tightly integrated with development and operations throughout the application lifecycle. </li>
-</ul>
-<h1 id="2-Release-Processes-Major-Phases"><a href="#2-Release-Processes-Major-Phases" class="headerlink" title="2. Release Processes Major Phases"></a>2. Release Processes Major Phases</h1><p>Each steps can be automated without the entire release process being automated. </p>
-<ul>
-<li>Source<ul>
-<li>Check in source code such as .java files </li>
-<li>Code review</li>
-</ul>
-</li>
-<li>Build<ul>
-<li>Compile code </li>
-<li>style checkers</li>
-<li>code metrics</li>
-<li>create container images </li>
-</ul>
-</li>
-<li>Test <ul>
-<li>Integration tests with other systems</li>
-<li>load testing</li>
-<li>UI tests</li>
-<li>penetration testing </li>
-</ul>
-</li>
-<li>Deploy<ul>
-<li>Deployment to production environments </li>
-</ul>
-</li>
-<li>Monitor<ul>
-<li>Monitor in production to quickly detect unusual activity or errors</li>
-</ul>
-</li>
-</ul>
-<h1 id="3-Understanding-CI-amp-CD"><a href="#3-Understanding-CI-amp-CD" class="headerlink" title="3. Understanding CI &amp; CD"></a>3. Understanding CI &amp; CD</h1><ul>
-<li><p>Continuous Integration </p>
-<ul>
-<li>The practice of checking code and verifying each change with an automated build and test process</li>
-<li>Require teams to write automated tests which can improve the quality of the software being released and reduce the time it takes to validate that the new version of software is good. </li>
-<li>Architecture for cloud Continuous Integration<ul>
-<li>Developer commits changes to the central repo. Pre-commit hooks should run and verify that the code meets specified requirements</li>
-<li>A CI server pulls the changes from the central repo and builds the code</li>
-<li>The CI server runs all required tests against the new branch or mainline change. </li>
-<li>The CI server returns a report to developer and stops the build job if a failure occurs. </li>
-<li>If the changes pass the required tests, the CI server builds the artifacts</li>
-<li>The CI server pushes artifacts to the package builder</li>
-<li>The <strong>package builder</strong> gets configuration information from the version control system </li>
-<li>The pacakge builder uses the configuration information and the artifacts to build the specified packages </li>
-<li>the packages are stored in a repository </li>
-<li>the repo uses a post-receive hook to deploy specific packages to staging. </li>
-<li>Do not fear rollbacks. Errors will happen, mistakes will be made, and the benefit of employing version control systems is that when appropriate, you can always revert to a previously working state and save yourself the time and effort of trying to debug </li>
+<li>可操作<ul>
+<li>能否正常使用每一个组件的功能<ul>
+<li>E.G 下拉菜单，很多网站设计的时候hover over的时候就有下拉效果，但是无法点击。 如果我们的用户无法看到这些东西，那很可能就无法继续交互下去了。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Continuous Delivery</p>
-<ul>
-<li>It extends continuous Integration to include testing out to production-like stages and running verification testing against those deployments. </li>
-<li>CD may extend all the way to a production deployment, but they have some form of manual intervention between a code check-in and when that code is available for customers to use</li>
-</ul>
-</li>
-<li><p>Continuous Deployment </p>
-<ul>
-<li>extends continuous delivery and is the automated release of software to customers from check in through to production without human intervention.  </li>
+<li>可理解<ul>
+<li>用户能否很好地理解呢？<ul>
+<li>需要考虑读屏软件的适用性</li>
 </ul>
 </li>
 </ul>
-<h1 id="4-How-do-you-deploy-all-infrastructure-along-with-your-application"><a href="#4-How-do-you-deploy-all-infrastructure-along-with-your-application" class="headerlink" title="4. How do you deploy all infrastructure along with your application?"></a>4. How do you deploy all infrastructure along with your application?</h1><ul>
-<li>Infrastructure as code <ul>
-<li>Define your AWS environment so that it can be created in a repeatable automated fashion </li>
-<li>stand up identical dev/ test environments on demand </li>
-<li>use the same code to create your production environment that you used to create your other environments</li>
+</li>
+<li>强健性<ul>
+<li>能否被多种User Agent使用<ul>
+<li>屏幕阅读器</li>
+<li>IE</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<p>WebAIM (web accessibility in mind) <a href="https://webaim.org/standards/wcag/checklist" target="_blank" rel="noopener">Checklist</a> </p>
+<h1 id="2-Tips-一些我们可以follow的东西"><a href="#2-Tips-一些我们可以follow的东西" class="headerlink" title="2. Tips 一些我们可以follow的东西"></a>2. Tips 一些我们可以follow的东西</h1><ul>
+<li>标题 段落 列表 保持良好的结构<ul>
+<li>屏幕阅读器在读到结构相对良好的标签的时候，会帮助用户更容易理解我们网站的内容</li>
+</ul>
+</li>
+<li>尽可能使用语义化标签<ul>
+<li>浏览器的调试工具当中有<strong>Accessibility tree</strong>,浏览器会获取DOM树，浏览器会获取DOM树，然后将其修改成适用于辅助技术的形式(无障碍树)，所以良好的使用语义化标签，能让辅助设备更合理地将我们网站的内容转化成Accessibility tree，从而解读给用户，确保页面中的重要的元素有正确的无障碍角色、状态和属性。</li>
+</ul>
+</li>
+<li>为所有非文本内容提供文本替代项<ul>
+<li>所有的图片都应当有alt属性，重要的图片应使用描述性替代文本简洁说明图像内容。</li>
+</ul>
+</li>
+<li>DOM顺序与Tab键顺序保持一致</li>
+<li>不要做<code>a {outline: none}</code>这种操作，因为这样的话这个小组件就是Unfocusable的了，对于不懂的人完全没法继续搞了</li>
+<li>对比度 最低要求 4.5:1 </li>
+<li>我们可以使用chrome浏览器的Audits找到自己的网站存在的所有无障碍问题，然后针对性的进行修改</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://insights.thoughtworks.cn/about-web-accessibility/" target="_blank" rel="noopener">https://insights.thoughtworks.cn/about-web-accessibility/</a></li>
+<li><a href="https://webaim.org/standards/wcag/checklist" target="_blank" rel="noopener">https://webaim.org/standards/wcag/checklist</a> </li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -1448,12 +1407,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Developing on AWS Note.11 Deploying Applications</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">552</span></p>
+    <p><span class="copy-title">文章标题:</span>Thoughts on web accessibility(信息无障碍)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">736</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 23:22:38</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-29, 21:19:14</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Developing-on-AWS-Note-11-Deploying-Applications/" title="Developing on AWS Note.11 Deploying Applications">https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/</a>
+    <p><span class="copy-title">发布时间:</span>2020-01-31, 21:00:52</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-31, 21:01:32</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/" title="Thoughts on web accessibility(信息无障碍)">https://www.llchen60.com/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1466,8 +1425,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/';
-            this.page.identifier = 'Developing-on-AWS-Note-11-Deploying-Applications/';
+            this.page.url = 'https://www.llchen60.com/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/';
+            this.page.identifier = 'Thoughts-on-web-accessibility-信息无障碍/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1483,8 +1442,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Developing-on-AWS-Note-11-Deploying-Applications/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Developing-on-AWS-Note-11-Deploying-Applications/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Thoughts-on-web-accessibility-信息无障碍/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"></span>
 
 
 
