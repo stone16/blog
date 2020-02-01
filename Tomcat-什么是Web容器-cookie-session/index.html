@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AWS essentials(3) - Core Services | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" AWS ">
-  <meta name="description" content="AWS essentials(3) - Core Services | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Tomcat - 什么是Web容器, cookie &amp; session | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Tomcat ">
+  <meta name="description" content="Tomcat - 什么是Web容器, cookie &amp; session | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -1349,9 +1349,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-AWS-essentials-3-Core-Services" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Tomcat-什么是Web容器-cookie-session" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">AWS essentials(3) - Core Services</h1>
+        <h1 class="article-title">Tomcat - 什么是Web容器, cookie &amp; session</h1>
     
     <div class="article-meta">
         
@@ -1359,26 +1359,26 @@
         
         <span class="book">
             
-                <a  data-rel="Cloud">Cloud</a>
+                <a  data-rel="Web">Web</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">AWS</a>
+            <a class="color2">Tomcat</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-29 21:19:14'>2020-01-29 20:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-01 14:22:18'>2020-02-01 14:22</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:4.1k</span>
+        <span>字数:586</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1408,7 +1408,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AWS-global-infrastructure"><span class="toc-text">1. AWS global infrastructure</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Regions"><span class="toc-text">1.1 Regions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Availability-Zones"><span class="toc-text">1.2 Availability Zones</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Edge-Locations"><span class="toc-text">1.3 Edge Locations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-Local-Regions"><span class="toc-text">1.4 Local Regions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Virtual-Private-Cloud-VPC"><span class="toc-text">2. Virtual Private Cloud (VPC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Introduction"><span class="toc-text">2.1 Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Features"><span class="toc-text">2.2 Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Subnets"><span class="toc-text">2.3 Subnets</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AWS-Security"><span class="toc-text">3. AWS Security</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-AWS-security-groups"><span class="toc-text">3.1 AWS security groups</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Compute-Services"><span class="toc-text">4. Compute Services</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Amazon-EC2"><span class="toc-text">4.1 Amazon EC2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-What-is-EC2"><span class="toc-text">4.1.1 What is EC2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-Amazon-EC2-instances-instructions"><span class="toc-text">4.1.2 Amazon EC2 instances instructions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-3-Features-of-EC2"><span class="toc-text">4.1.3 Features of EC2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-4-Security-best-practices"><span class="toc-text">4.1.4 Security best practices</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-5-Instance-types"><span class="toc-text">4.1.5 Instance types</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Lambda"><span class="toc-text">4.2 Lambda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-Overviews"><span class="toc-text">4.2.1 Overviews</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-benefits"><span class="toc-text">4.2.2 benefits :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-Use-cases"><span class="toc-text">4.2.3 Use cases</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-4-Lambda-Applications"><span class="toc-text">4.2.4 Lambda Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-5-Work-with-AWS-Lambda-Functions"><span class="toc-text">4.2.5 Work with AWS Lambda Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-6-Lambda-Concepts"><span class="toc-text">4.2.6 Lambda Concepts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-AWS-Elastic-Beanstalk"><span class="toc-text">4.3 AWS Elastic Beanstalk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-Overview"><span class="toc-text">4.3.1 Overview</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Application-Load-Balancer"><span class="toc-text">5 Application Load Balancer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Service-Introduction"><span class="toc-text">5.1 Service Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-Key-Concepts"><span class="toc-text">5.2 Key Concepts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer"><span class="toc-text">5.3 Benefits of using Application load balancer instead of classic load balancer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-Use-Cases"><span class="toc-text">5.4 Use Cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Elastic-Load-Balancer-classic-load-balancer"><span class="toc-text">6. Elastic Load Balancer - classic load balancer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Overview"><span class="toc-text">6.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-How-does-it-work"><span class="toc-text">6.2 How does it work?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-Cross-zone-load-balancing"><span class="toc-text">6.2.1 Cross zone load balancing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-Request-Routing"><span class="toc-text">6.2.2 Request Routing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-HTTP-Connections"><span class="toc-text">6.2.3 HTTP Connections</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-Use-cases"><span class="toc-text">6.3 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Auto-Scaling"><span class="toc-text">7. Auto Scaling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Service-Introduction"><span class="toc-text">7.1 Service Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-1-Scaling-out-and-scaling-in"><span class="toc-text">7.1.1 Scaling out and scaling in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2-Dynamic-auto-scaling"><span class="toc-text">7.1.2 Dynamic auto scaling</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Amazon-Elastic-Block-Store-EBS"><span class="toc-text">8. Amazon Elastic Block Store(EBS)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-General-Purpose-Volumes"><span class="toc-text">8.1 General Purpose Volumes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-Provisioned-IOPS-SSD-Volumes"><span class="toc-text">8.2 Provisioned IOPS (SSD) Volumes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-Magnetic-Volumes"><span class="toc-text">8.3 Magnetic Volumes</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Amazon-Simple-Storage-Service"><span class="toc-text">9. Amazon Simple Storage Service</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-Introduction"><span class="toc-text">9.1 Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-steps"><span class="toc-text">9.1.1 steps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-bucket"><span class="toc-text">9.1.2 bucket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-Use-cases"><span class="toc-text">9.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Amazon-Glacier"><span class="toc-text">10. Amazon Glacier</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-Overview"><span class="toc-text">10.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-Details"><span class="toc-text">10.2 Details</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-1-archive"><span class="toc-text">10.2.1 archive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-2-vault"><span class="toc-text">10.2.2 vault</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-3-access-policy"><span class="toc-text">10.2.3 access policy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-4-Job"><span class="toc-text">10.2.4 Job</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-use-cases"><span class="toc-text">10.3 use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Amazon-Relational-Database-Service-Amazon-RDS"><span class="toc-text">11. Amazon Relational Database Service (Amazon RDS)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-Overview"><span class="toc-text">11.1 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-1-Chanllenges-of-relational-databases"><span class="toc-text">11.1.1 Chanllenges of relational databases</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-2-RDS-intro"><span class="toc-text">11.1.2 RDS intro</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-Use-cases"><span class="toc-text">11.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Amazon-DynamoDB"><span class="toc-text">12. Amazon DynamoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-Overview"><span class="toc-text">12.1 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-1-Features"><span class="toc-text">12.1.1 Features</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-2-Partitioning"><span class="toc-text">12.1.2 Partitioning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-Use-cases"><span class="toc-text">12.2 Use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Redshift"><span class="toc-text">13. Redshift</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1-Redshift-introduction"><span class="toc-text">13.1 Redshift introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2-Overview"><span class="toc-text">13.2 Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-1-Cluster-management"><span class="toc-text">13.2.1 Cluster management</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-3-use-cases"><span class="toc-text">13.3 use cases</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Amazon-Aurora"><span class="toc-text">14. Amazon Aurora</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1-Overview"><span class="toc-text">14.1 Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2-benefits"><span class="toc-text">14.2 benefits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-Trused-Advisor"><span class="toc-text">15. Trused Advisor</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-什么是Web容器"><span class="toc-text">1. 什么是Web容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Cookie-amp-Session"><span class="toc-text">2. Cookie &amp; Session</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Cookie技术"><span class="toc-text">2.1 Cookie技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Session技术"><span class="toc-text">2.2 Session技术</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1424,386 +1424,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-AWS-global-infrastructure"><a href="#1-AWS-global-infrastructure" class="headerlink" title="1. AWS global infrastructure"></a>1. AWS global infrastructure</h1><h2 id="1-1-Regions"><a href="#1-1-Regions" class="headerlink" title="1.1 Regions"></a>1.1 Regions</h2><p>AWS Regions provide multiple, physically separated and isolated Availability Zones which are connected with low latency, high throughput, and highly redundant networking. </p>
-<p><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=gi&l=emea" target="_blank" rel="noopener">Region table</a></p>
-<h2 id="1-2-Availability-Zones"><a href="#1-2-Availability-Zones" class="headerlink" title="1.2 Availability Zones"></a>1.2 Availability Zones</h2><p>These Availability Zones offer AWS customers an easier and more effective way to design and operate applications and databases, making them more highly available, fault tolerant, and scalable than traditional single datacenter infrastructures or multi-datacenter infrastructures. </p>
-<p>Collection of data centers within a region. </p>
-<p>isolate - protect from failures </p>
-<p>AZs are pyhsically and logically seperated within a region. Own their own: </p>
-<ol>
-<li>uninterruptible power supply </li>
-<li>cooling equipment </li>
-<li>networking connectivity </li>
-<li>backup generators </li>
-</ol>
-<h2 id="1-3-Edge-Locations"><a href="#1-3-Edge-Locations" class="headerlink" title="1.3 Edge Locations"></a>1.3 Edge Locations</h2><p>Content Delivery Network  —- Amazon CloudFront </p>
-<p>Deliver content to customers </p>
-<p>When a user requests content that you’re serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.</p>
-<p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html" target="_blank" rel="noopener">CloudFront Developer Guide</a></p>
-<h2 id="1-4-Local-Regions"><a href="#1-4-Local-Regions" class="headerlink" title="1.4 Local Regions"></a>1.4 Local Regions</h2><p>An AWS Local Region is a single datacenter designed to complement an existing AWS Region. Like all AWS Regions, AWS Local Regions are completely isolated from other AWS Regions. </p>
-<h1 id="2-Virtual-Private-Cloud-VPC"><a href="#2-Virtual-Private-Cloud-VPC" class="headerlink" title="2. Virtual Private Cloud (VPC)"></a>2. Virtual Private Cloud (VPC)</h1><h2 id="2-1-Introduction"><a href="#2-1-Introduction" class="headerlink" title="2.1 Introduction"></a>2.1 Introduction</h2><p>Amazon VPC enables you to launch AWS resources into a virtual network that you’ve defined. This virtual network closely resembles a traditional network that you’d operate in your own data center, with the benefits of using the scalable infrastructure of AWS.Consists of such features: </p>
+        <h1 id="1-什么是Web容器"><a href="#1-什么是Web容器" class="headerlink" title="1. 什么是Web容器"></a>1. 什么是Web容器</h1><p>早期的Web应用主要用于浏览新闻等静态页面，HTTP服务器(比如Apache、Nginx)向浏览器返回静态HTML，浏览器负责解析HTML，将结果呈现给用户。 </p>
+<p>而后我们希望能够在页面上有一些交互操作，获取动态的结果，因此就需要一些扩展机制来使得HTTP服务器能够调用服务端的程序。于是Sun公司推出了Servlet技术，其没有main方法，需要被部署到Servlet容器当中，由容器来实例化并调用Servlet。</p>
+<p>Tomcat和Jetty就是HTTP服务器 + Servlet容器，又称为Web容器。</p>
+<h1 id="2-Cookie-amp-Session"><a href="#2-Cookie-amp-Session" class="headerlink" title="2. Cookie &amp; Session"></a>2. Cookie &amp; Session</h1><p>浏览器将请求打包成HTTP协议格式，当这个请求到达服务端的时候，会被Tomcat将HTTP请求数据字节流解析成一个Request对象，这个Request对象封装了HTTP所有的请求信息，接着Tomcat将这个请求交给Web应用去处理，处理完以后得到一个Response对象，Tomcat就会把这个Response对象转成HTTP格式的相应数据并发送给浏览器。</p>
+<p>HTTP协议是无状态的，请求之间没有关系，为了让请求之间建立联系，设计出了Cookie还有Session技术。</p>
+<h2 id="2-1-Cookie技术"><a href="#2-1-Cookie技术" class="headerlink" title="2.1 Cookie技术"></a>2.1 Cookie技术</h2><p>Cookie是HTTP报文的请求头，Web应用可以将用户的标识信息或者其他一些信息存储在Cookie中。用户通过验证之后，每次HTTP请求报文中都包含Cookie，这个服务器读取这个Cookie请求头就知道用户是谁了。</p>
+<p>其本质上就是一份存储在用户本地的文件，里面包含了每次请求中都需要传递的信息。</p>
+<h2 id="2-2-Session技术"><a href="#2-2-Session技术" class="headerlink" title="2.2 Session技术"></a>2.2 Session技术</h2><p>Cookie以明文的方式存储在本地，而Cookie中往往带有用户信息，Session就用来解决这个问题。是在服务端开辟的存储空间，里面保存了用户的状态。</p>
+<p>用户信息以Session的形式存储在服务端，当用户请求到来时，服务端可以把用户的请求和用户的Session对应起来。</p>
 <ul>
-<li>A private, virtual network in the AWS Cloud <ul>
-<li>Uses same concepts as on premise networking </li>
+<li>服务器创建Session的时候，生成Session ID</li>
+<li>当浏览器再次发送请求时，在Cookie里会带上Session ID</li>
+<li>服务器根据SessionID找到对应的Session，并在Session当中获取或者添加内容</li>
 </ul>
-</li>
-<li>Allows complete control of network configuration<ul>
-<li>Ability to isolate and expose resources inside VPC </li>
-</ul>
-</li>
-<li>Offers several layers of security controls <ul>
-<li>Ability to allow and deny specific internet and internal traffic </li>
-</ul>
-</li>
-<li>Other AWS services deploy into VPC <ul>
-<li>Services inherent security built into network </li>
-</ul>
-</li>
-</ul>
-<h2 id="2-2-Features"><a href="#2-2-Features" class="headerlink" title="2.2 Features"></a>2.2 Features</h2><ul>
-<li><p>Build upon high availabilty of AWS regions and availability zones </p>
-<ul>
-<li>Amazon VPC lives within a region </li>
-<li>Multiple VPCs per account </li>
-</ul>
-</li>
-<li><p>Subnets   </p>
-<ul>
-<li>Used to divide Amazon VPC </li>
-<li>Allow Amazon VPC to span multiple Azs </li>
-<li>seperate public and private network </li>
-</ul>
-</li>
-<li><p>Route tables </p>
-<ul>
-<li>Control traffic going out of the subnets </li>
-</ul>
-</li>
-<li><p>Internet Gateway (IGW)</p>
-<ul>
-<li>Allows private subnet resources to access internet </li>
-</ul>
-</li>
-<li><p>Network Access Control Lists(NACL)</p>
-<ul>
-<li>Control access to subnets; stateless </li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2020/01/30/3r4S8k2WYVHFqtf.png" alt="fig1.png"></p>
-<h2 id="2-3-Subnets"><a href="#2-3-Subnets" class="headerlink" title="2.3 Subnets"></a>2.3 Subnets</h2><p>A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won’t be connected to the internet. </p>
-<h1 id="3-AWS-Security"><a href="#3-AWS-Security" class="headerlink" title="3. AWS Security"></a>3. AWS Security</h1><h2 id="3-1-AWS-security-groups"><a href="#3-1-AWS-security-groups" class="headerlink" title="3.1 AWS security groups"></a>3.1 AWS security groups</h2><p>Filter traffic to your instances </p>
-<p><img src="https://i.loli.net/2020/01/30/nzFWc4MZ86HimgC.png" alt="fig2.png"></p>
-<p>Can configure the security rules, have multi rules. Web tier - application tier - database tier. </p>
-<p>A security group acts as a virtual firewall for instances to control inbound and outbound traffic. Security group act at the instance level , not the subnet level. For each security group, you add rules that control the inbound traffic to instances, and a separate set of riles that control the outbound traffic. </p>
-<h1 id="4-Compute-Services"><a href="#4-Compute-Services" class="headerlink" title="4. Compute Services"></a>4. Compute Services</h1><h2 id="4-1-Amazon-EC2"><a href="#4-1-Amazon-EC2" class="headerlink" title="4.1 Amazon EC2"></a>4.1 Amazon EC2</h2><p>Flexible configuration and control </p>
-<p>maintain complete control of envs </p>
-<p>EC2 overview </p>
-<h3 id="4-1-1-What-is-EC2"><a href="#4-1-1-What-is-EC2" class="headerlink" title="4.1.1 What is EC2"></a>4.1.1 What is EC2</h3><p>EC2: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" target="_blank" rel="noopener">Elastic compute cloud</a> </p>
-<p>Compute: different thing you can do with servers </p>
-<ul>
-<li>Application server </li>
-<li>Web server </li>
-<li>Database server </li>
-<li>Game server </li>
-<li>Mail server </li>
-<li>Media server </li>
-<li>Catalog server </li>
-<li>File server </li>
-<li>Computing server </li>
-<li>Proxy server </li>
-</ul>
-<h3 id="4-1-2-Amazon-EC2-instances-instructions"><a href="#4-1-2-Amazon-EC2-instances-instructions" class="headerlink" title="4.1.2 Amazon EC2 instances instructions"></a>4.1.2 Amazon EC2 instances instructions</h3><p>need to select AMI(Amazon Machine Image), present for software choices </p>
-<p>Select instance type(hard ware)</p>
-<p>Configure network, storage, key pairs (Use key value pair to access the instance)</p>
-<h3 id="4-1-3-Features-of-EC2"><a href="#4-1-3-Features-of-EC2" class="headerlink" title="4.1.3 Features of EC2"></a>4.1.3 Features of EC2</h3><ol>
-<li>virtual computing env. known as instances </li>
-<li>various comfigurations of CPU, memory, and networking capacity for your instances </li>
-<li>secure login information for your instances using key pairs(AWS stores the public key, and you store the private key)</li>
-<li>Sotrage volumes(temporory) and persistent storage volumes – Amazon Elastic Block Store</li>
-<li>Firewall that enables you to specify the protocols, ports and source IP ranges that can reach your instances using security groups </li>
-<li>static IPv4 addresses for dynamic cloud computing, known as Elastic IP adddresses</li>
-<li>metadata, known as tags, that you can create and assign to your Amazon EC2 resources </li>
-<li>Virtual networks you can create that are logically isolated from the rest of the AWS cloud</li>
-</ol>
-<h3 id="4-1-4-Security-best-practices"><a href="#4-1-4-Security-best-practices" class="headerlink" title="4.1.4 Security best practices"></a>4.1.4 Security best practices</h3><ol>
-<li>Use AWS identiry and access Management(IAM) to control access to AWS resources, including instances. You can create IAM users and groups under your AWS account, assign security credentials to each, and control the access that each has to resources and services in AWS. </li>
-<li>Restrict access by only allowing trusted hosts or networks to access ports on your instance. For example, you can restrict SSH access by restricting incoming traffic on port 22.</li>
-</ol>
-<h3 id="4-1-5-Instance-types"><a href="#4-1-5-Instance-types" class="headerlink" title="4.1.5 Instance types"></a>4.1.5 Instance types</h3><p>Instance type you specify determines the hardware of the host computer used for your instance. Each instance is provided with a consistent and predictable amount of CPU capacity, memory, storage. </p>
-<ul>
-<li>general purpose </li>
-<li>compute optimized </li>
-<li>memory optimized </li>
-<li>storage optimized </li>
-<li>accelerated computing </li>
-</ul>
-<h2 id="4-2-Lambda"><a href="#4-2-Lambda" class="headerlink" title="4.2 Lambda"></a>4.2 Lambda</h2><h3 id="4-2-1-Overviews"><a href="#4-2-1-Overviews" class="headerlink" title="4.2.1 Overviews"></a>4.2.1 Overviews</h3><p>AWS Lambda is a compute service that lets you run code without provisioning or managing servers. Pay for the compute time you consume. AWS Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, <strong>including server and operating system maintenance, capacity provisioning and automatic scaling</strong>, code monitoring and logging.</p>
-<p>fully managed serverless compute </p>
-<p>event driven execution, respond to event </p>
-<p>sub second metering </p>
-<h3 id="4-2-2-benefits"><a href="#4-2-2-benefits" class="headerlink" title="4.2.2 benefits :"></a>4.2.2 benefits :</h3><ol>
-<li>Lambda manages the compute fleet that offers a balance of memory, CPU, network and other resources. </li>
-</ol>
-<h3 id="4-2-3-Use-cases"><a href="#4-2-3-Use-cases" class="headerlink" title="4.2.3 Use cases"></a>4.2.3 Use cases</h3><ol>
-<li>Run code in response to events, such as changes to data in an Amazon S3 bucket or an DynamoDB table</li>
-<li>Run code in response to HTTP requests using Amazon API gateway</li>
-<li>Invoke code using API calls made using AWS SDKs </li>
-<li>Build serverless applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild. </li>
-</ol>
-<p><img src="https://i.loli.net/2020/01/30/FND9g628EpyeMfG.png" alt="fig3.png"><br><img src="https://i.loli.net/2020/01/30/KMJhXORqAIUNBt3.png" alt="fig4.png"><br><img src="https://i.loli.net/2020/01/30/8bv7jq5etdTKH1W.png" alt="fig5.png"></p>
-<h3 id="4-2-4-Lambda-Applications"><a href="#4-2-4-Lambda-Applications" class="headerlink" title="4.2.4 Lambda Applications"></a>4.2.4 Lambda Applications</h3><p>An AWS Lambda application is a combination of Lambda functions, event sources, and other resources that work together to perform tasks. You can use AWS CloudFormation and other tools to collect your application’s components into a single package that can be deployed and managed as one resource. </p>
-<h3 id="4-2-5-Work-with-AWS-Lambda-Functions"><a href="#4-2-5-Work-with-AWS-Lambda-Functions" class="headerlink" title="4.2.5 Work with AWS Lambda Functions"></a>4.2.5 Work with AWS Lambda Functions</h3><ol>
-<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html" target="_blank" rel="noopener">Working with AWS Lambda Functions</a></p>
-</li>
-<li><p><a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html" target="_blank" rel="noopener">AWS Lambda Limits</a></p>
-</li>
-</ol>
-<ul>
-<li>Concurrent Executions limit: 1000 </li>
-<li>function timeout: 15 minutes </li>
-<li>execution threads: 1024 </li>
-</ul>
-<ol start="3">
-<li>[Building Lambda Functions]</li>
-</ol>
-<ul>
-<li>Lifecycle for an AWS lambda-based application<ul>
-<li>authoring code<ul>
-<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html" target="_blank" rel="noopener">programing model</a> - the format of the code    </li>
-</ul>
-</li>
-<li>deploying code<ul>
-<li>Package code and dependencies in a deployment package</li>
-<li>upload the package to AWS Lambda to create Lambda function</li>
-</ul>
-</li>
-<li>monitoring<ul>
-<li>CloudWatch    </li>
-</ul>
-</li>
-<li>troubleshooting</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/use-cases.html" target="_blank" rel="noopener">Using AWS Lambda With Other Services</a></li>
-</ol>
-<h3 id="4-2-6-Lambda-Concepts"><a href="#4-2-6-Lambda-Concepts" class="headerlink" title="4.2.6 Lambda Concepts"></a>4.2.6 Lambda Concepts</h3><ul>
-<li>Function - A script or program that runs in AWS Lambda. Lambda passes invocation events to your function. The function processes an event and returns a response. </li>
-<li>Runtimes – Lambda runtimes allow functions in different languages to run in the same base execution environment. You configure your function to use a runtime that matches your programming language. The runtime sits in-between the Lambda service and your function code, relaying invocation events, context information, and responses between the two. You can use runtimes provided by Lambda, or build your own. </li>
-<li>Layers – Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers.</li>
-</ul>
-<p>A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank" rel="noopener">layer</a> is a ZIP archive that contains libraries, a custom runtime or other dependencies. With layers, you can use libraries in your function without needing to include them in your deployment package. Layers let you keep your deployment package small, which makes development easier. </p>
-<ul>
-<li>Event source – An AWS service, such as Amazon SNS, or a custom service, that triggers your function and executes its logic.</li>
-<li>Downstream resources – An AWS service, such as DynamoDB tables or Amazon S3 buckets, that your Lambda function calls once it is triggered.</li>
-<li>Log streams – While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function to ensure it’s working properly.</li>
-<li>AWS SAM – A model to define serverless applications. AWS SAM is natively supported by AWS CloudFormation and defines simplified syntax for expressing serverless resources. </li>
-</ul>
-<h2 id="4-3-AWS-Elastic-Beanstalk"><a href="#4-3-AWS-Elastic-Beanstalk" class="headerlink" title="4.3 AWS Elastic Beanstalk"></a>4.3 AWS Elastic Beanstalk</h2><h3 id="4-3-1-Overview"><a href="#4-3-1-Overview" class="headerlink" title="4.3.1 Overview"></a>4.3.1 Overview</h3><p>Quick get application into the cloud </p>
-<p>Platform as a service </p>
-<p>You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.</p>
-<p>Allow quick deployment of your applications </p>
-<p>Elastic Beanstalk provides:</p>
-<ul>
-<li>Application service</li>
-<li>HTTP service</li>
-<li>Operating system</li>
-<li>Language interpreter </li>
-<li>Host </li>
-</ul>
-<h1 id="5-Application-Load-Balancer"><a href="#5-Application-Load-Balancer" class="headerlink" title="5 Application Load Balancer"></a>5 Application Load Balancer</h1><h2 id="5-1-Service-Introduction"><a href="#5-1-Service-Introduction" class="headerlink" title="5.1 Service Introduction"></a>5.1 Service Introduction</h2><p>A load balancerr serves as the single point of contact for clients. The load balancer distributes incoming application traffic across multiple targets, such as EC2 instances in multiple Availability Zones. </p>
-<p>A listener checks for connection requests from clients, using the protocol and port that you configure, and forwards requests to one or more target groups, based on the rules that you define. Each rule specifies a target group, condition, and priority. When the condition is met, the traffic is forwarded to the target group. You must define a default rule for each listener, and you can add rules that specify different target groups based on the content of the request </p>
-<p>Each target group routes requests to one or more registered targets, such as EC2 instances, using the protocol and port number that you specify. You can register a target with multiple target groups. You can configure health checks on a per target group basis. Health checks are performed on all targets registered to a target group that is specified in a listener rule for your load balancer.</p>
-<p>An Application Load Balancer functions at the application layer, <strong>the seventh layer</strong> of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply, and then selects a target from the target group for the rule action. You can configure listener rules to route requests to different target groups based on the content of the application traffic. Routing is performed independently for each target group, even when a target is registered with multiple target groups.</p>
-<p>Part of the elastic load balancer service. Add some important features<br><img src="https://i.loli.net/2020/01/30/sHi7LhOGeYvw3Er.png" alt="fig6.png"></p>
-<ol>
-<li>Support more protocols  HTTP HTTPS HTTP/2 </li>
-<li>cloudWatch Metrics   </li>
-<li>Access logs </li>
-<li>Health Checks </li>
-</ol>
-<h2 id="5-2-Key-Concepts"><a href="#5-2-Key-Concepts" class="headerlink" title="5.2 Key Concepts"></a>5.2 Key Concepts</h2><ol>
-<li>Listeners: a process that cehcks for connection requests, using the protocol and port that you configure. Rules that you define for a listener determine how the load balancer routes requests to the targets in one or more target groups. </li>
-<li>Target: A target is a destination for traffic based on the established listener rules </li>
-<li>Target group: each target group routes requests to one or more registered targets using the protocol and port number specified. </li>
-</ol>
-<p><img src="https://i.loli.net/2020/01/30/8TBYo7tIHValjig.png" alt="fig7.png"></p>
-<h2 id="5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer"><a href="#5-3-Benefits-of-using-Application-load-balancer-instead-of-classic-load-balancer" class="headerlink" title="5.3 Benefits of using Application load balancer instead of classic load balancer"></a>5.3 Benefits of using Application load balancer instead of classic load balancer</h2><ul>
-<li>Support for path-based routing. You can configure rules for your listener that forward requests based on the URL in the request. This enables you to structure your application as smaller services, and route requests to the correct service based on the content of the URL.</li>
-<li>Support for host-based routing. You can configure rules for your listener that forward requests based on the host field in the HTTP header. This enables you to route requests to multiple domains using a single load balancer.</li>
-<li>Support for routing requests to multiple applications on a single EC2 instance. You can register each instance or IP address with the same target group using multiple ports.</li>
-<li>Support for redirecting requests from one URL to another </li>
-</ul>
-<h2 id="5-4-Use-Cases"><a href="#5-4-Use-Cases" class="headerlink" title="5.4 Use Cases"></a>5.4 Use Cases</h2><ol>
-<li>route request to different ports within a single instance.<br><img src="https://i.loli.net/2020/01/30/8125hJRUbkD3cwi.png" alt="fig8.png"></li>
-</ol>
-<h1 id="6-Elastic-Load-Balancer-classic-load-balancer"><a href="#6-Elastic-Load-Balancer-classic-load-balancer" class="headerlink" title="6. Elastic Load Balancer - classic load balancer"></a>6. Elastic Load Balancer - classic load balancer</h1><h2 id="6-1-Overview"><a href="#6-1-Overview" class="headerlink" title="6.1 Overview"></a>6.1 Overview</h2><p>A load balancer distributes workloads across multiple compute resources, such as virtual servers. Using a load balancer increases the availability and fault tolerance of your applications. </p>
-<p>You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.</p>
-<p>You can <strong>configure health checks</strong>, which are used to monitor the health of the compute resources so that the load balancer can send requests only to the healthy ones. You can also <strong>offload the work of encryption and decryption to your load balancer</strong> so that your compute resources can focus on their main work.</p>
-<p>Mainly consists of there types of load balancer: </p>
-<ol>
-<li>Application Load Balancer </li>
-<li>Network Load Balancer</li>
-<li>Classic Load Balancer </li>
-</ol>
-<p><a href="https://aws.amazon.com/elasticloadbalancing/features/#compare" target="_blank" rel="noopener">The comparison among those three</a></p>
-<h2 id="6-2-How-does-it-work"><a href="#6-2-How-does-it-work" class="headerlink" title="6.2 How does it work?"></a>6.2 How does it work?</h2><p>A load balancer accepts incoming traffic from clients and routes requests to its registered targets. It also monitors the health of its registered targets and ensures that it routes traffic tonly to healthy targets. You configure your load balancer to accept incoming traffic by specifying one or more listeners. A listener is a process that checks for connection requests. It is configured with a protocol and port number for connections from clients to the load balancer and a protocol and port number for connections from the load balancer to the targets.</p>
-<h3 id="6-2-1-Cross-zone-load-balancing"><a href="#6-2-1-Cross-zone-load-balancing" class="headerlink" title="6.2.1 Cross zone load balancing"></a>6.2.1 Cross zone load balancing</h3><p>The nodes for your load balancer distribute requests from clients to registered targets. When cross-zone load balancing is enabled, each load balancer node distributes traffic across the registered targets in all enabled Availability Zones. When cross-zone load balancing is disabled, each load balancer node distributes traffic across the registered targets in its Availability Zone only.</p>
-<h3 id="6-2-2-Request-Routing"><a href="#6-2-2-Request-Routing" class="headerlink" title="6.2.2 Request Routing"></a>6.2.2 Request Routing</h3><p>Before a client sends a request to your load balancer, it resolves the load balancer’s domain name using a Domain Name System (DNS) server. The DNS entry is controlled by Amazon, because your load balancers are in the amazonaws.com domain. The Amazon DNS servers return one or more IP addresses to the client, which are the IP addresses of the load balancer nodes for your load balancer. With Network Load Balancers, Elastic Load Balancing creates a network interface for each Availability Zone you enable. Each load balancer node in the Availability Zone uses this network interface to get a static IP address. You can optionally associate one Elastic IP address with each network interface when you create the load balancer.</p>
-<p>As traffic to your application changes over time, Elastic Load Balancing scales your load balancer and updates the DNS entry. Note that the DNS entry also specifies the time-to-live (TTL) as 60 seconds, which ensures that the IP addresses can be remapped quickly in response to changing traffic.</p>
-<p><img src="https://i.loli.net/2020/01/30/GRXtJqMcZyYvkAs.png" alt="fig9.png"></p>
-<p><img src="https://i.loli.net/2020/01/30/oG3uYZ6OExWiQS4.png" alt="fig10.png"></p>
-<p>Internet facing load balancers:<br><img src="https://i.loli.net/2020/01/30/OYdKufMSazqIbDQ.png" alt="fig11.png"></p>
-<p>Internal Load Balancers: have DNS name only resolve private nodes<br><img src="https://i.loli.net/2020/01/30/IO24SbGetLaMAfo.png" alt="fig12.png"></p>
-<h3 id="6-2-3-HTTP-Connections"><a href="#6-2-3-HTTP-Connections" class="headerlink" title="6.2.3 HTTP Connections"></a>6.2.3 HTTP Connections</h3><p>Classic Load Balancers use <strong>pre-open connections</strong> but Application Load Balancers do not. Both Classic Load Balancers and Application Load Balancers use <strong>connection multiplexing</strong>. This means that <strong>requests from multiple clients on multiple front-end connections can be routed to a given target through a single back-end connection</strong>. Connection multiplexing improves latency and reduces the load on your applications. To prevent connection multiplexing, disable HTTP keep-alives by setting the Connection: close header in your HTTP responses.</p>
-<h2 id="6-3-Use-cases"><a href="#6-3-Use-cases" class="headerlink" title="6.3 Use cases"></a>6.3 Use cases</h2><ol>
-<li>Access through single point </li>
-<li>Decouple appliation environment </li>
-<li>Provide high availability and fault tolerance </li>
-<li>Increase elasticity and scalability </li>
-</ol>
-<h1 id="7-Auto-Scaling"><a href="#7-Auto-Scaling" class="headerlink" title="7. Auto Scaling"></a>7. Auto Scaling</h1><h2 id="7-1-Service-Introduction"><a href="#7-1-Service-Introduction" class="headerlink" title="7.1 Service Introduction"></a>7.1 Service Introduction</h2><p>Auto scaling helps you ensure you have the correct number of EC2 instances available to handle the load for your application. </p>
-<p>Using cloudWatch to monitor </p>
-<h3 id="7-1-1-Scaling-out-and-scaling-in"><a href="#7-1-1-Scaling-out-and-scaling-in" class="headerlink" title="7.1.1 Scaling out and scaling in"></a>7.1.1 Scaling out and scaling in</h3><p><img src="https://i.loli.net/2020/01/30/cHXtoB9IOURiL52.png" alt="fig13.png"></p>
-<ul>
-<li>Auto scaling components<ul>
-<li>launch configuration </li>
-<li>auto scaling group <ul>
-<li>VPC and subnets </li>
-<li>load balancer</li>
-<li>minimum instances </li>
-<li>maximum instances </li>
-<li>desired capacity </li>
-</ul>
-</li>
-<li>auto scaling policy <ul>
-<li>scheduled</li>
-<li>on demand </li>
-<li>scale out policy</li>
-<li>scale in policy </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="7-1-2-Dynamic-auto-scaling"><a href="#7-1-2-Dynamic-auto-scaling" class="headerlink" title="7.1.2 Dynamic auto scaling"></a>7.1.2 Dynamic auto scaling</h3><p><img src="https://i.loli.net/2020/01/30/pKFL5YWvHVOtuJw.png" alt="fig14.png"></p>
-<p>CloudWatch detect the metrics and trigger auto scaling events. </p>
-<h1 id="8-Amazon-Elastic-Block-Store-EBS"><a href="#8-Amazon-Elastic-Block-Store-EBS" class="headerlink" title="8. Amazon Elastic Block Store(EBS)"></a>8. Amazon Elastic Block Store(EBS)</h1><p>Amazon Elastic Block Store (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available and reliable storage volumes that can be attached to any running instance that is in the same Availability Zone. </p>
-<p>Amazon EBS is recommended when data must be quickly accessible and requires long-term persistence. EBS volumes are particularly well-suited for use as the primary storage for file systems, databases, or for any applications that require fine granular updates and access to raw, unformatted, block-level storage. </p>
-<p>you can launch your EBS volumes as encrypted volumes.</p>
-<p>There are three types of volumes in Amazon EBS. To understand the difference, you need to know what IOPS is. <strong>“IOPS” stands for input/output operations per second or, put it simply, the maximum amount of read/write operations you are able to perform per second.</strong> To <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html" target="_blank" rel="noopener">choose the right Amazon EBS volume type</a> you need to know IOPS requirements for your application.</p>
-<h2 id="8-1-General-Purpose-Volumes"><a href="#8-1-General-Purpose-Volumes" class="headerlink" title="8.1 General Purpose Volumes"></a>8.1 General Purpose Volumes</h2><p>Designed for a broad range of tasks, General Purpose Volumes are backed with Solid State Drive (SSD). The baseline performance of 3 IOPS/GB and a possibility to burst up to 10,000 IOPS makes them a good fit for AWS databases that need a lot of read and write operations, like PostgreSQL, MS SQL or Oracle databases.</p>
-<h2 id="8-2-Provisioned-IOPS-SSD-Volumes"><a href="#8-2-Provisioned-IOPS-SSD-Volumes" class="headerlink" title="8.2 Provisioned IOPS (SSD) Volumes"></a>8.2 Provisioned IOPS (SSD) Volumes</h2><p>By expanding the bandwidth bottleneck, Provisioned IOPS Volumes allow buying read/write operations on demand regardless of the volume capacity. This type of EBS volumes is backed with the same SSD but designed for heavy workloads from 30 IOPS/GB up to 20,000 IOPS. Multiple Provisioned IOPS volumes can be striped thus ensuring up to 48,000 IOPS or 800 MBps of throughput.</p>
-<h2 id="8-3-Magnetic-Volumes"><a href="#8-3-Magnetic-Volumes" class="headerlink" title="8.3 Magnetic Volumes"></a>8.3 Magnetic Volumes</h2><p>The best way to think of the Magnetic Volumes type is as of a low-cost volume that can be used with testing and development environments on Amazon EC2. It can also be used with applications that don’t require a lot of read/write operations. Instead of SSD, this type is based on magnetic HDD drives, thus the IOPS baseline is within the range of 100 up to hundreds of IOPS. Magnetic Volumes can also become a starting point in working with Amazon EC2 — once you understand your IOPS demands, you can select the type of volume that fits best.</p>
-<h1 id="9-Amazon-Simple-Storage-Service"><a href="#9-Amazon-Simple-Storage-Service" class="headerlink" title="9. Amazon Simple Storage Service"></a>9. Amazon Simple Storage Service</h1><h2 id="9-1-Introduction"><a href="#9-1-Introduction" class="headerlink" title="9.1 Introduction"></a>9.1 Introduction</h2><p>No need to manage any infrastructure yourself. S3 help you manage your storage, it can store unlimited number of objects, access any time, from anywhere; rich security controls. </p>
-<p>Amazon Simple Storage Service (Amazon S3) is storage for the Internet. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web. You can accomplish these tasks using the AWS Management Console, which is a simple and intuitive web interface. </p>
-<h3 id="9-1-1-steps"><a href="#9-1-1-steps" class="headerlink" title="9.1.1 steps"></a>9.1.1 steps</h3><ol>
-<li>create a bucket </li>
-<li>add an object to a bucket </li>
-<li>view an object </li>
-<li>move an object </li>
-<li>delete an object and bucket </li>
-</ol>
-<h3 id="9-1-2-bucket"><a href="#9-1-2-bucket" class="headerlink" title="9.1.2 bucket"></a>9.1.2 bucket</h3><p>S3 stores data as objects within buckets. An object consists of a file and optionally any metadata that describes the file. </p>
-<p>To store an object in Amazon S3, you upload the file you want to store to a bucket. When you upload a file, you can <strong>set permissions</strong> on the object as well as any metadata.</p>
-<p>Buckets are the <strong>containers</strong> for objects. You can have one or more buckets. For each bucket, you can control access to it (who can create, delete, and list objects in the bucket), view access logs for it and its objects, and choose the geographical region where Amazon S3 will store the bucket and its contents.</p>
-<p>Need a bucket to hold the data </p>
-<p>associate in region, will make duplicate  </p>
-<p>disigned for seamless scaling </p>
-<h2 id="9-2-Use-cases"><a href="#9-2-Use-cases" class="headerlink" title="9.2 Use cases"></a>9.2 Use cases</h2><ol>
-<li>store application assets </li>
-<li>static web hosting </li>
-<li>backup and disaster recovery </li>
-<li>staging area for big data </li>
-</ol>
-<h1 id="10-Amazon-Glacier"><a href="#10-Amazon-Glacier" class="headerlink" title="10. Amazon Glacier"></a>10. Amazon Glacier</h1><h2 id="10-1-Overview"><a href="#10-1-Overview" class="headerlink" title="10.1 Overview"></a>10.1 Overview</h2><p>Data archiving solition </p>
-<p>long tern storage at low cost </p>
-<p>access limited by vault polocies </p>
-<p>for data not accessed frequently </p>
-<p><img src="https://i.loli.net/2020/01/30/gPXGKzaIuQBSpoy.png" alt="fig15.png"></p>
-<p>It can take a really long time to retrieve data from glacier. bulk, standard, expedited. </p>
-<p>Amazon Simple Storage Service Glacier (Amazon S3 Glacier) is a storage service optimized for infrequently used data, or “cold data.” The service provides durable and extremely low-cost storage with security features for data archiving and backup. With Amazon S3 Glacier, you can store your data cost effectively for months, years, or even decades. Amazon S3 Glacier enables you to offload the administrative burdens of operating and scaling storage to AWS, so you don’t have to worry about capacity planning, hardware provisioning, data replication, hardware failure detection and recovery, or time-consuming hardware migrations. </p>
-<h2 id="10-2-Details"><a href="#10-2-Details" class="headerlink" title="10.2 Details"></a>10.2 Details</h2><h3 id="10-2-1-archive"><a href="#10-2-1-archive" class="headerlink" title="10.2.1 archive"></a>10.2.1 archive</h3><p>An archive can be any data such as a photo, video, or document and is a base unit of storage in glacier. </p>
-<h3 id="10-2-2-vault"><a href="#10-2-2-vault" class="headerlink" title="10.2.2 vault"></a>10.2.2 vault</h3><p>Container to store archive. When creating a vault, you specify a name and choose an AWS region where you want to create the vault.  Within a Region, an account must use unique vault names. An AWS account can create same-named vaults in different Regions.</p>
-<h3 id="10-2-3-access-policy"><a href="#10-2-3-access-policy" class="headerlink" title="10.2.3 access policy"></a>10.2.3 access policy</h3><p>who can access </p>
-<h3 id="10-2-4-Job"><a href="#10-2-4-Job" class="headerlink" title="10.2.4 Job"></a>10.2.4 Job</h3><p>Glacier jobs can perform a select query on an archive, retrieve an archive, or get an inventory of a vault. When performing a query on an archive, you initiate a job providing a SQL query and list of Glacier archive objects. Glacier Select runs the query in place and writes the output results to Amazon S3.</p>
-<h2 id="10-3-use-cases"><a href="#10-3-use-cases" class="headerlink" title="10.3 use cases"></a>10.3 use cases</h2><ol>
-<li>archive database snapshots and log files </li>
-<li>low cost enables more comprehensive backups </li>
-<li>archive older documents, audio, video </li>
-</ol>
-<h1 id="11-Amazon-Relational-Database-Service-Amazon-RDS"><a href="#11-Amazon-Relational-Database-Service-Amazon-RDS" class="headerlink" title="11. Amazon Relational Database Service (Amazon RDS)"></a>11. Amazon Relational Database Service (Amazon RDS)</h1><h2 id="11-1-Overview"><a href="#11-1-Overview" class="headerlink" title="11.1 Overview"></a>11.1 Overview</h2><h3 id="11-1-1-Chanllenges-of-relational-databases"><a href="#11-1-1-Chanllenges-of-relational-databases" class="headerlink" title="11.1.1 Chanllenges of relational databases"></a>11.1.1 Chanllenges of relational databases</h3><ol>
-<li>server maintenance and energy footprint </li>
-<li>software install and patches </li>
-<li>database backups and high availability </li>
-<li>limits on scalability </li>
-<li>data security </li>
-<li>os install and patches </li>
-</ol>
-<h3 id="11-1-2-RDS-intro"><a href="#11-1-2-RDS-intro" class="headerlink" title="11.1.2 RDS intro"></a>11.1.2 RDS intro</h3><p>Amazon RDS is a managed service that sets up and operates a relational database in the cloud. </p>
-<p>AWS help you manage: </p>
-<ul>
-<li>OS installation and patches </li>
-<li>database software install and patches </li>
-<li>database backups </li>
-<li>high availability </li>
-<li>scaling </li>
-<li>power and rack &amp; stack </li>
-<li>server maintenance </li>
-</ul>
-<p>It support mainstream relation databases: </p>
-<p><img src="https://i.loli.net/2020/01/30/FZlbiXEhuYKSsJD.png" alt="fig16.png"></p>
-<h2 id="11-2-Use-cases"><a href="#11-2-Use-cases" class="headerlink" title="11.2 Use cases"></a>11.2 Use cases</h2><p><img src="https://i.loli.net/2020/01/30/k1PfHQxg7EYmyNp.png" alt="fig17.png"></p>
-<h1 id="12-Amazon-DynamoDB"><a href="#12-Amazon-DynamoDB" class="headerlink" title="12. Amazon DynamoDB"></a>12. Amazon DynamoDB</h1><h2 id="12-1-Overview"><a href="#12-1-Overview" class="headerlink" title="12.1 Overview"></a>12.1 Overview</h2><h3 id="12-1-1-Features"><a href="#12-1-1-Features" class="headerlink" title="12.1.1 Features"></a>12.1.1 Features</h3><ul>
-<li>NoSQL databse tables as a service </li>
-<li>store as many items as you want </li>
-<li>items may have differing attributes </li>
-<li>low latency queries </li>
-<li>scalable read/ write throughput </li>
-</ul>
-<h3 id="12-1-2-Partitioning"><a href="#12-1-2-Partitioning" class="headerlink" title="12.1.2 Partitioning"></a>12.1.2 Partitioning</h3><p>as table grows, table partitioned by key </p>
-<p>query by key to find items efficiently </p>
-<p>scan to find items by any attribute, less efficient </p>
-<h2 id="12-2-Use-cases"><a href="#12-2-Use-cases" class="headerlink" title="12.2 Use cases"></a>12.2 Use cases</h2><ul>
-<li>web </li>
-<li>mobile apps </li>
-<li>internet of things </li>
-<li>ad tech </li>
-</ul>
-<h1 id="13-Redshift"><a href="#13-Redshift" class="headerlink" title="13. Redshift"></a>13. Redshift</h1><h2 id="13-1-Redshift-introduction"><a href="#13-1-Redshift-introduction" class="headerlink" title="13.1 Redshift introduction"></a>13.1 Redshift introduction</h2><ul>
-<li>data warehouse, to analyze the data with query. </li>
-<li>parallel processing architecture </li>
-</ul>
-<p><img src="https://i.loli.net/2020/01/30/BJDCT718z9gPV3Q.png" alt="fig18.png"></p>
-<p>Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools. It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.</p>
-<h2 id="13-2-Overview"><a href="#13-2-Overview" class="headerlink" title="13.2 Overview"></a>13.2 Overview</h2><h3 id="13-2-1-Cluster-management"><a href="#13-2-1-Cluster-management" class="headerlink" title="13.2.1 Cluster management"></a>13.2.1 Cluster management</h3><p>A cluster is a set of nodes, which consists of a leader node and one or more compute nodes, The type and number of compute nodes that you need depends on the size of your data, the number of queries you will execute, and the query execution performance that you need.</p>
-<h2 id="13-3-use-cases"><a href="#13-3-use-cases" class="headerlink" title="13.3 use cases"></a>13.3 use cases</h2><ol>
-<li><p>Enterprise Data Warehouse (EDW)</p>
-</li>
-<li><p>Big Data </p>
-</li>
-<li><p>Saas </p>
-</li>
-</ol>
-<ul>
-<li>scale the data warehouse capacity as demand grows </li>
-<li>add analytic functionality to applications </li>
-<li>reduce hardware and software costs by an order of magnitude </li>
-</ul>
-<h1 id="14-Amazon-Aurora"><a href="#14-Amazon-Aurora" class="headerlink" title="14. Amazon Aurora"></a>14. Amazon Aurora</h1><h2 id="14-1-Overview"><a href="#14-1-Overview" class="headerlink" title="14.1 Overview"></a>14.1 Overview</h2><p>mysql relational database </p>
-<p>It is designed to deliver the speed and reliability of high-end commercial databases in a simple and cost-effective manner. Aurora is designed to be compatible with MySQL 5.6 and delivers five times the throughput of standard MySQL running on the same hardware. DBAs are able to save time on planning backup storage disks, as data is continuously backed up to AWS S3 in real time, with no performance impact to the end user. </p>
-<h2 id="14-2-benefits"><a href="#14-2-benefits" class="headerlink" title="14.2 benefits"></a>14.2 benefits</h2><p><img src="https://i.loli.net/2020/01/30/FLU3aykfVqnptX8.png" alt="fig19.png"></p>
-<p><img src="https://i.loli.net/2020/01/30/E6pSOTLwcXixBgP.png" alt="fig20.png"></p>
-<h2 id="15-Trused-Advisor"><a href="#15-Trused-Advisor" class="headerlink" title="15. Trused Advisor"></a>15. Trused Advisor</h2><p>Used to keep track of aws resources. – a dashboard for all the risks and warnings that you can take actions to save money </p>
-<p>Detect your usage in four categories: </p>
-<ol>
-<li>cost optimization </li>
-<li>performance </li>
-<li>security </li>
-<li>fault tolerance </li>
-</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -1817,12 +1451,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>AWS essentials(3) - Core Services</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">4.1k</span></p>
+    <p><span class="copy-title">文章标题:</span>Tomcat - 什么是Web容器, cookie &amp; session</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">586</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-29, 20:48:08</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-29, 21:19:14</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/AWS-essentials-3-Core-Services/" title="AWS essentials(3) - Core Services">https://www.llchen60.com/AWS-essentials-3-Core-Services/</a>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 14:22:02</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 14:22:18</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/" title="Tomcat - 什么是Web容器, cookie &amp; session">https://www.llchen60.com/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -1835,8 +1469,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/AWS-essentials-3-Core-Services/';
-            this.page.identifier = 'AWS-essentials-3-Core-Services/';
+            this.page.url = 'https://www.llchen60.com/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/';
+            this.page.identifier = 'Tomcat-什么是Web容器-cookie-session/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1852,8 +1486,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="AWS-essentials-3-Core-Services/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/AWS-essentials-3-Core-Services/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Tomcat-什么是Web容器-cookie-session/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"></span>
 
 
 
