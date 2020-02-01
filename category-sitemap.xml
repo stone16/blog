@@ -8,6 +8,13 @@
     </url>
 
     <url>
+        <loc>https://www.llchen60.com/categories/Notes/</loc>
+        <lastmod>2020-02-01T19:16:20.433Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/categories/Web/</loc>
         <lastmod>2020-02-01T05:03:40.952Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -24,13 +31,6 @@
     <url>
         <loc>https://www.llchen60.com/categories/Linux/</loc>
         <lastmod>2020-01-31T04:53:24.407Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/categories/Notes/</loc>
-        <lastmod>2020-01-31T04:41:12.578Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
