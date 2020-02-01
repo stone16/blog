@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Web 浏览器是如何构成的(一)</title>
+      <link href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"/>
+      <url>/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[<p>这一个小系列是看到了developers.google.com上的一系列讲inside look of modern web browser的文章，觉得写得很有意思，里面叙述了浏览器是如何一步一步将你的代码进行渲染的整个过程，并且提及了各种语言在浏览器当中表现不同的原因。就在这里翻译下，和大家一起分享。</p><h1 id="1-CPU-GPU"><a href="#1-CPU-GPU" class="headerlink" title="1. CPU, GPU"></a>1. CPU, GPU</h1><p>首先是CPU与GPU的说明：</p><ul><li>CPU<ul><li>中央处理单元</li><li>计算机大脑</li><li>可以处理多种不同的任务</li></ul></li><li>GPU<ul><li>图像处理单元</li><li>擅长解决简单的任务，但是需要跨多核心来进行处理</li></ul></li></ul><p>当你在电脑或者浏览器当中运行一个应用的时候，CPU或者GPU就是实际运行程序的东西，而如何运行 - 这种机制是由操作系统来定义的。</p><h1 id="2-进程与线程，-多进程架构"><a href="#2-进程与线程，-多进程架构" class="headerlink" title="2. 进程与线程， 多进程架构"></a>2. 进程与线程， 多进程架构</h1><p>进程可以成为一个应用的执行程序，一个线程是进程的一部分，执行进程程序的任意一部分。</p><p><img src="https://i.loli.net/2020/02/02/nBacm7IHfkLe6MQ.png" alt="fig1.png"></p><p>当你打开一个应用，一个进程就被创建了出来。程序有可能会建立多个线程来帮助进程进行工作（可选择的）。操作系统给进程一部分的内存空间使用，所用的应用内的状态都会存储在这一部分私人的内存空间当中。当你关闭应用，进程就会结束，操作系统也会将内存空间释放掉。</p><p>一个进程可以要求操作系统去开另外一个进程来跑其他的一些任务。当这发生时，另外的一部分内存就会被分配给新的进程使用。两个进程之间可以进行进程间通信。使用进程间通信的好处是如果一个进程不工作了，那么操作系统只需要重启这个进程就好，不会影响到其他的进程。</p><h1 id="3-浏览器架构"><a href="#3-浏览器架构" class="headerlink" title="3. 浏览器架构"></a>3. 浏览器架构</h1><p>浏览器是如何使用进程和线程的呢？ 两种方式，但并无好坏之分，完全是不同的浏览器内核选择了不同的实现方式。</p><ul><li>一个进程，内含多个线程</li><li>多个进程，少量线程负责进程间的通信</li></ul><p><img src="https://i.loli.net/2020/02/02/1TRsOX2fBFN3DEg.png" alt="fig2.png"></p><h2 id="3-1-Chrome的架构"><a href="#3-1-Chrome的架构" class="headerlink" title="3.1 Chrome的架构"></a>3.1 Chrome的架构</h2><p><img src="https://i.loli.net/2020/02/02/Z6f4QiHO1FJCjeL.png" alt="fig3.png"></p><p>如图所示，最上层是浏览器进程和其他进程合作来管理应用的不同部分。对于渲染进程，多个进程会被创建，并分配给每个tab。</p><h2 id="3-2-进程控制体系"><a href="#3-2-进程控制体系" class="headerlink" title="3.2 进程控制体系"></a>3.2 进程控制体系</h2><ul><li>浏览器进程<ul><li>控制浏览器本身的一些功能<ul><li>书签，收藏</li><li>前进，后退</li></ul></li><li>处理看不到的权限处理，网络请求的部分</li></ul></li><li>Renderer<ul><li>处理tab以内的网址展示的部分</li></ul></li><li>Plugin<ul><li>控制plugins</li></ul></li><li>GPU<ul><li>专门用来解决GPU相关的任务，和其他的进程分开。这样做是因为GPU是将从不同app来的请求放到一块进行处理的，然后放在一个界面上。 </li></ul></li></ul><p><img src="https://i.loli.net/2020/02/02/1BkHY7NX85uPhyI.png" alt="fig4.png"></p><h2 id="3-3-多进程架构的优势劣势"><a href="#3-3-多进程架构的优势劣势" class="headerlink" title="3.3 多进程架构的优势劣势"></a>3.3 多进程架构的优势劣势</h2><ul><li>互不影响，可以只崩一个tab，但是如果是同一个进程，所有tab就都崩掉了</li><li>安全，沙盒  可以实现tab/ process级别的控制</li><li>因为每个进程都有自己的内存空间，所以chrome会使用更多的内存(相比于友商们). 但是当chrome到达限制以后，其会让多个tab使用同一个进程来缓解这个问题的。</li><li>Chrome当前正在做的是，通过检测硬件的状态来决定是否将每个微服务放到一个单独的进程上来运行，或者全放到一块。</li></ul><h2 id="3-4-组件隔离-site-isolation"><a href="#3-4-组件隔离-site-isolation" class="headerlink" title="3.4 组件隔离 (site isolation)"></a>3.4 组件隔离 (site isolation)</h2><p>Chrome会运行一个单独的渲染进程对于来自不同的网站的请求（对于组件的渲染）。一个tab一个进程的方式可能会使得同一个页面内来自不同的网址的组件在同一个进程内分享同一个内存空间中的东西，这是很不安全的。我们需要确保一个网站不可以不经过同意就去访问另外一个网站携带/获取的数据。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part1" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part1</a></li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part2" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part2</a></li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part3</a></li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part4" target="_blank" rel="noopener">https://developers.google.com/web/updates/2018/09/inside-browser-part4</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Browser </tag>
+            
+            <tag> Web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于5G</title>
       <link href="/%E5%85%B3%E4%BA%8E5G/"/>
       <url>/%E5%85%B3%E4%BA%8E5G/</url>
