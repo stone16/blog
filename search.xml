@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>混沌工程</title>
+      <link href="/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"/>
+      <url>/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-微服务架构的挑战"><a href="#1-微服务架构的挑战" class="headerlink" title="1. 微服务架构的挑战"></a>1. 微服务架构的挑战</h1><p>当前的趋势就是微服务架构，将原有系统拆分为更加灵活、有业务边界、上下文、松散耦合、可独立部署的服务来应对快速变化的消费市场。</p><p>通常情况下，对于复杂业务或遗留系统，我们可以通过领域驱动设计(DDD:Domain-Driven Design)有效的解决限界上下文划分、服务边界定义以及组织结构调整等问题。除了这些，我们的开发团队还面临着其他的挑战：复杂的分布式系统、数据一致性、容错设计、限流设计、舱壁设计等问题。那么如此复杂的系统如何来保证系统“质量”呢？</p><p>长久以来，“测试金字塔”都是敏捷开发团队保证项目交付质量的守则，而“测试金字塔”也确实从不同的维度涵盖了方法调用、业务逻辑、用户行为等方面。</p><p>End2End test -&gt; API test -&gt; Unit test</p><p>除此以外，我们可以利用契约测试来保证调用方与提供方的一致性，然而七月测试只能覆盖到业务逻辑的维度，需要更深入的了解微服务特性以期更好的开发与改造。</p><p>譬如微服务系统的客户端负载均衡、微服务容错保护、API服务网关、分布式链路跟踪就无法被契约测试测试。</p><p>既然我们没有办法避免灾难的发生，最好的办法就是“探索系统故障边界，验证系统灾难恢复能力”。以往的“机房”时代的一些故障演练一般通过断网、断电模拟单点故障，来测试系统的恢复能力，而新型的分布式服务时代消除了单点故障，但也引入了更多复杂的问题，我们需要可靠性更强、容错性和扩容性更高的系统。一种解决方案就是，我们需要一种有策略的、有方法的实践方案对系统进行一定程度的“随机破坏”，通过让系统”感染“，来提升系统的”免疫力“。</p><h1 id="2-混沌工程"><a href="#2-混沌工程" class="headerlink" title="2. 混沌工程"></a>2. 混沌工程</h1><p>混沌工程是一种可试验的、基于系统的方法来处理大规模分布式系统中的混乱问题。通过不断试验，了解系统的实际能承受的韧性边界并建立信心，通过不同的试验方法和目的，观察分布式系统的行为和反应。一句话——以试验的方法尽早揭露系统弱点。</p><p>混沌工程类似于“故障演练”，不局限于测试，而更像是工程实践。为什么这么说，通常的测试用例会有“期望结果”和“实际结果”，通过将两个结果比较，或者对用户行为的预期，来判断测试通过或失败。而混沌试验类似于”<strong>探索性测试</strong>“，试验本身没有明确是输入和预期结果，通过对系统和服务的干预，来观察系统的”反应“。我们将混沌工程原则融入在试验过程中：在生产环境小规模模拟系统故障并定期自动化执行试验，通过试验结果与正常结果进行比对，观察系统”边界“。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://insights.thoughtworks.cn/microservice-architecture-chaotic-engineering/#utm_source=rss&amp;utm_medium=rss" target="_blank" rel="noopener">https://insights.thoughtworks.cn/microservice-architecture-chaotic-engineering/#utm_source=rss&amp;utm_medium=rss</a>   </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> System Design </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> BackEnd </tag>
+            
+            <tag> 混沌工程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>IOC容器和Dependency Injection模式</title>
       <link href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"/>
       <url>/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/</url>
