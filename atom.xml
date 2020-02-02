@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-02T22:58:46.233Z</updated>
+  <updated>2020-02-02T23:00:13.418Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>观察者模式</title>
+    <link href="https://www.llchen60.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-02-02T22:59:28.000Z</published>
+    <updated>2020-02-02T23:00:13.418Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h1><p>观察者模式旨在描述如下行为：即一个对象的状态或者行为的变化将导致其他对象的状态或者行为也发生变化，他们之间将产生联动。为了更好地描述对象之间这种一对多(一对一)的联动，观察者模式应运而生，其定义了对象之间一种一对多的依赖关系，让一个对象的改变能够影响其他对象。</p><ul><li>Publish/ subscribe</li><li>Model/ View</li><li>Source/ Listener </li></ul><h1 id="2-概述"><a href="#2-概述" class="headerlink" title="2. 概述"></a>2. 概述</h1><p><img src="https://i.loli.net/2020/02/03/M6poTJ5PChWrReB.jpg" alt="fig1.jpg"></p><ul><li>subject<ul><li>被观察的对象</li><li>在subject当中定义了一个观察者的集合</li><li>一个观察目标可以接受任意数量的观察者来观察</li><li>定义了通知方法notify() </li></ul></li><li>concreteSubject <ul><li>具体目标，目标类的子类</li><li>通常包含<strong>经常发生改变的数据</strong>，当其状态发生改变的时候，向它的各个观察者发出通知；同时它还实现了在目标类当中定义的抽象业务逻辑方法。</li></ul></li><li>observer<ul><li>观察者将对观察目标的改变做出反应，观察者一般定义为接口，该接口声明了更新数据的方法update()</li></ul></li><li>concreteObserver<ul><li>在具体观察者中维护一个指向具体目标的对象的引用，存储具体观察者的有关状态。这些状态需要和具体目标的状态保持一致，实现了update()方法。</li></ul></li></ul><pre><code>import java.util.*;abstract class Subject {    //定义一个观察者集合用于存储所有观察者对象    protected ArrayList&lt;Observer&gt; observers= new ArrayList();    //注册方法，用于向观察者集合中增加一个观察者    public void attach(Observer observer) {        observers.add(observer);    }    //注销方法，用于在观察者集合中删除一个观察者    public void detach(Observer observer) {        observers.remove(observer);    }    //声明抽象通知方法    public abstract void notify();}class ConcreteSubject extends Subject {    //实现通知方法    public void notify() {        //遍历观察者集合，调用每一个观察者的响应方法        for(Object obs:observers) {            ((Observer)obs).update();        }    }    }interface Observer {    //声明响应方法    public void update();}class ConcreteObserver implements Observer {    //实现响应方法    public void update() {        //具体响应代码    }}</code></pre><h1 id="3-JDK对观察者模式的支持"><a href="#3-JDK对观察者模式的支持" class="headerlink" title="3. JDK对观察者模式的支持"></a>3. JDK对观察者模式的支持</h1><p><img src="https://i.loli.net/2020/02/03/tv5Zh68AQiSfIXC.jpg" alt="fig2.jpg"></p><ul><li>Observable 类<ul><li>定义了一个List来存储观察者对象</li><li>addObserver(Observer o)</li><li>deleteObserver(Observer o)</li><li>notifyObservers()</li><li>deleteObservers()</li><li>setChanged()</li><li>clearChanged()</li><li>hasChanged()</li><li>countObservers()</li></ul></li></ul><p>Observer接口还有Observable类可以直接作为观察者模式的抽象层，再自定义具体观察者类和具体的观察目标类。</p><h1 id="4-Review"><a href="#4-Review" class="headerlink" title="4. Review"></a>4. Review</h1><ul><li>优点<ul><li>实现表示层和数据逻辑层的分离，定义了稳定的消息更新传递机制，并抽象了更新接口</li><li>在观察目标和观察者之间建立一个抽象的耦合</li><li>观察目标只需要维持一个抽象观察者的集合，无须了解其具体的观察者</li></ul></li><li>缺陷<ul><li>太多观察者，都通知很耗时的</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://blog.csdn.net/lovelion/article/details/7720232" target="_blank" rel="noopener">https://blog.csdn.net/lovelion/article/details/7720232</a></li><li><a href="https://blog.csdn.net/LoveLion/article/details/7720490" target="_blank" rel="noopener">https://blog.csdn.net/LoveLion/article/details/7720490</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-定义&quot;&gt;&lt;a href=&quot;#1-定义&quot; class=&quot;headerlink&quot; title=&quot;1. 定义&quot;&gt;&lt;/a&gt;1. 定义&lt;/h1&gt;&lt;p&gt;观察者模式旨在描述如下行为：即一个对象的状态或者行为的变化将导致其他对象的状态或者行为也发生变化，他们之间将产生联动。为
+      
+    
+    </summary>
+    
+    
+      <category term="System Design" scheme="https://www.llchen60.com/categories/System-Design/"/>
+    
+    
+      <category term="Design Pattern" scheme="https://www.llchen60.com/tags/Design-Pattern/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式概述</title>
@@ -568,40 +594,6 @@
     
     
       <category term="Network" scheme="https://www.llchen60.com/tags/Network/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Tomcat - 连接器</title>
-    <link href="https://www.llchen60.com/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"/>
-    <id>https://www.llchen60.com/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/</id>
-    <published>2020-02-01T22:24:18.000Z</published>
-    <updated>2020-02-02T06:06:58.001Z</updated>
-    
-    <content type="html"><![CDATA[<p>Unix系统下的I/O模型共有5种: </p><ul><li>同步阻塞I/O </li><li>同步非阻塞I/O</li><li>I/O多路复用</li><li>信号驱动I/O</li><li>异步I/O</li></ul><p>关于连接器，我们将主要从Tomcat如何实现几种I/O手段来入手进行详解。</p><h1 id="1-Java-I-O-模型"><a href="#1-Java-I-O-模型" class="headerlink" title="1. Java I/O 模型"></a>1. Java I/O 模型</h1><p>I/O是指计算机内存与外部设备之间拷贝数据的过程。CPU是先把外部设备的数据读到内存里，然后再进行处理的。</p><p>Java I/O模型之间的不同之处在于在数据从外部设备拷贝到内存的过程当中，CPU闲置，是继续给当前进程使用，还是把CPU给其他进程使用呢。</p><p>在Java I/O模型当中，网络通信过程会涉及到两个对象：</p><ul><li>调用该I/O操作的用户线程<ul><li>用户线程等待内核将数据从网卡拷贝到内核空间</li><li>内核将数据从内核空间拷贝到用户空间</li></ul></li><li>操作系统内核</li></ul><p>各个I/O模型实现这两个步骤的方式是不一样的。</p><h2 id="1-1-同步阻塞I-O"><a href="#1-1-同步阻塞I-O" class="headerlink" title="1.1 同步阻塞I/O"></a>1.1 同步阻塞I/O</h2><p>用户线程发起read调用吼就阻塞了，让出CPU。内核等待网卡数据到来，把数据从网卡拷贝到内核空间，接着把数据拷贝到用户空间，再把用户线程叫醒。</p><p><img src="https://i.loli.net/2020/02/02/nPOsYLSymTGZKBf.jpg" alt="fig1.jpg"></p><h2 id="1-2-同步非阻塞I-O"><a href="#1-2-同步非阻塞I-O" class="headerlink" title="1.2 同步非阻塞I/O"></a>1.2 同步非阻塞I/O</h2><p>用户线程不断发起read调用，数据没到内核空间时，每次都返回失败，直到数据到了内核空间，这一次read调用后，在等待数据从内核空间拷贝到用户空间这段时间，线程还是阻塞的，等数据到了用户空间再把线程叫醒。 </p><p><img src="https://i.loli.net/2020/02/02/8eqioQx14zkZWjK.jpg" alt="fig2.jpg"></p><h2 id="1-3-I-O多路复用"><a href="#1-3-I-O多路复用" class="headerlink" title="1.3 I/O多路复用"></a>1.3 I/O多路复用</h2><p>用户线程的读取操作分为两步，线程首先发起select调用，目的是问内核数据准备好了没有，等内核把数据准备好，用户线程再发起read调用。在等待数据从内核空间拷贝到用户空间的这段时间里，线程还是阻塞的。</p><p>多路复用的意思是一次select调用会向内核查多个数据通道的状态，因此叫做多路复用。</p><p><img src="https://i.loli.net/2020/02/02/I3GH1PBRrwnfE9Q.jpg" alt="fig3.jpg"></p><h2 id="1-4-异步I-O"><a href="#1-4-异步I-O" class="headerlink" title="1.4 异步I/O"></a>1.4 异步I/O</h2><p>用户线程发起read调用的同时注册一个回调函数，read立即返回，等内核将数据准备好以后，再调用指定的回调函数完成处理。这个过程中，用户线程一直没有阻塞。</p><h1 id="2-NioEndpoint组件"><a href="#2-NioEndpoint组件" class="headerlink" title="2. NioEndpoint组件"></a>2. NioEndpoint组件</h1><p>Tomcat的NioEndpoint组件实现了I/O多路复用模型。</p><h2 id="2-1-总体工作流程"><a href="#2-1-总体工作流程" class="headerlink" title="2.1 总体工作流程"></a>2.1 总体工作流程</h2><ul><li>创建一个selector，注册各种事件，然后调用select方法，等待感兴趣的事情发生</li><li>感兴趣的事情发生了，就创建一个新的线程从Channel中读取数据。</li></ul><p><img src="https://i.loli.net/2020/02/02/8caQkFDGKJinjgy.jpg" alt="fig4.jpg"></p><p>NioEndpoint共有5个组件，分别是：</p><ul><li><p>LimitLatch</p><ul><li>连接控制器<ul><li>负责控制最大连接数</li><li>一般设定为10000</li></ul></li></ul></li><li><p>Acceptor</p><ul><li>跑在一个独立的线程当中</li><li>在一个死循环里调用accept方法来接收新连接，一旦有新的连接请求到来，accept方法返回一个Channel对象，接着把Channel对象交给Poller去处理</li></ul></li><li><p>Poller</p><ul><li>Poller本质上是一个selector, 也跑在单独线程里。Poller在内部维护一个Channel数组，在一个死循环里不断检测Channel的数据就绪状态，一旦有Channel可读，就生成一个SocketProcessor任务对象扔给Executor去处理 </li></ul></li><li><p>SocketProcessor</p><ul><li>run方法会调用Http11Processor来读取和解析请求数据 </li></ul></li><li><p>Executor </p><ul><li>线程池</li><li>负责运行SocketProcessor任务类</li></ul></li></ul><h2 id="2-2-LimitLatch"><a href="#2-2-LimitLatch" class="headerlink" title="2.2 LimitLatch"></a>2.2 LimitLatch</h2><p>用来控制连接个数，当连接数到达最大时阻塞线程，直到后续组件处理完一个连接后才将连接数减1.到达最大连接数以后操作系统底层还是会接收客户端连接，但用户层已经不再接收了。</p><pre><code>public class LimitLatch {// AbstractQueuedSynchronizer在内部维护一个状态和一个线程队列// 用来控制线程什么时候挂起，什么时候唤醒    private class Sync extends AbstractQueuedSynchronizer {        @Override        protected int tryAcquireShared() {            long newCount = count.incrementAndGet();            if (newCount &gt; limit) {                count.decrementAndGet();                return -1;            } else {                return 1;            }        }        // 定义合适唤醒被阻塞的用户线程        @Override        protected boolean tryReleaseShared(int arg) {            count.decrementAndGet();            return true;        }    }    private final Sync sync;    private final AtomicLong count;    private volatile long limit;    // 线程调用这个方法来获得接收新连接的许可，线程可能被阻塞     // AQS知道是否需要阻塞的逻辑在tryAcquireShared方法当中定义了    public void countUpOrAwait() throws InterruptedException {      sync.acquireSharedInterruptibly(1);    }    // 调用这个方法来释放一个连接许可，那么前面阻塞的线程可能被唤醒    //     public long countDown() {      sync.releaseShared(0);      long result = getCount();      return result;   }}</code></pre><h2 id="2-3-Acceptor"><a href="#2-3-Acceptor" class="headerlink" title="2.3 Acceptor"></a>2.3 Acceptor</h2><p>Acceptor实现了Runnable接口，一个端口号只能对应一个ServerSocketChannel，故而这个Channel是在多个Acceptor线程之间共享的。</p><pre><code>serverSock = ServerSocketChannel.open();serverSock.socket().bind(addr,getAcceptCount());serverSock.configureBlocking(true);</code></pre><ul><li>bind 方法的第二个参数表示操作系统的等待队列长度，我在上面提到，当应用层面的连接数到达最大值时，操作系统可以继续接收连接，那么操作系统能继续接收的最大连接数就是这个队列长度，可以通过 acceptCount 参数配置，默认是 100。</li><li>ServerSocketChannel 被设置成阻塞模式，也就是说它是以阻塞的方式接收连接的。</li></ul><p>ServerSocketChannel通过accept()接受新的连接，accept()方法返回获得SocketChannel对象，然后将SocketChannel对象封装在一个PollerEvent对象当中，并将PollerEvent对象压入Poller的Queue当中。</p><h2 id="2-4-Poller"><a href="#2-4-Poller" class="headerlink" title="2.4 Poller"></a>2.4 Poller</h2><p>本质是一个Selector，内部维护一个Queue </p><pre><code>private final SynchronizedQueue&lt;PollerEvent&gt; events = new SynchronizedQueue&lt;&gt;();</code></pre><p>使用synchronized关键字来保证在同一时刻只有一个Acceptor线程对Queue进行读写。</p><p>Poller不断通过内部的selector对象向内核查询Channel的状态，一旦可读就生成任务类SocketProcessor交给Executor去处理。Poller的另一个重要任务是循环遍历检查自己所管理的SocketChannel是否已经超时，若超时就关闭这个Channel。</p><h2 id="2-5-SocketProcessor"><a href="#2-5-SocketProcessor" class="headerlink" title="2.5 SocketProcessor"></a>2.5 SocketProcessor</h2><p>SocketProcessor任务类会被交给线程池去处理，processor内主要是调用Http11Processor组件来处理请求，http11Processor读取Channel的数据来生成ServletRequest对象</p><h2 id="2-6-NioEndpoint的高并发思路"><a href="#2-6-NioEndpoint的高并发思路" class="headerlink" title="2.6 NioEndpoint的高并发思路"></a>2.6 NioEndpoint的高并发思路</h2><p>对于三大方面的事情各自有一个线程组，可以配置线程数量。</p><ul><li>接受连接      Acceptor </li><li>检测I/O事件   Poller</li><li>处理请求      Executor </li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Unix系统下的I/O模型共有5种: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;同步阻塞I/O &lt;/li&gt;
-&lt;li&gt;同步非阻塞I/O&lt;/li&gt;
-&lt;li&gt;I/O多路复用&lt;/li&gt;
-&lt;li&gt;信号驱动I/O&lt;/li&gt;
-&lt;li&gt;异步I/O&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;关于连接器，我们将主要从To
-      
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="https://www.llchen60.com/categories/Web/"/>
-    
-    
-      <category term="Tomcat" scheme="https://www.llchen60.com/tags/Tomcat/"/>
     
   </entry>
   
