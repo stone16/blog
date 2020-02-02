@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>UML - Class Diagram</title>
+      <link href="/UML-Class-Diagram/"/>
+      <url>/UML-Class-Diagram/</url>
+      
+        <content type="html"><![CDATA[<p>Alright, some basic knowledge collecting from wiki, uml tutorial websites. Merely regrad this blog as a reference, when you creating/ reading some class disgram, you might wanna look at the blog for better understanding. </p><h1 id="1-Visibility"><a href="#1-Visibility" class="headerlink" title="1. Visibility"></a>1. Visibility</h1><ul><li>+ public </li><li>- private </li><li># protected </li><li>~ package </li></ul><h1 id="2-Relationships"><a href="#2-Relationships" class="headerlink" title="2. Relationships"></a>2. Relationships</h1><p>Types of logical connections found on class and object diagrams. </p><p><img src="https://i.loli.net/2020/02/03/EHNIMsw3hv142yd.png" alt="fig1.png"></p><h2 id="2-1-Dependency"><a href="#2-1-Dependency" class="headerlink" title="2.1 Dependency"></a>2.1 Dependency</h2><p>A sementic connection between dependent and independent model elements. </p><h2 id="2-2-Association"><a href="#2-2-Association" class="headerlink" title="2.2 Association"></a>2.2 Association</h2><p>A binary association </p><h2 id="2-3-Aggregation"><a href="#2-3-Aggregation" class="headerlink" title="2.3 Aggregation"></a>2.3 Aggregation</h2><p>Has a assocation relationship </p><h2 id="2-4-Compostion"><a href="#2-4-Compostion" class="headerlink" title="2.4 Compostion"></a>2.4 Compostion</h2><p>Has a, and without parent, child will not exist </p><h2 id="2-5-Inheritance"><a href="#2-5-Inheritance" class="headerlink" title="2.5 Inheritance"></a>2.5 Inheritance</h2><h2 id="2-6-Realization-Implementation"><a href="#2-6-Realization-Implementation" class="headerlink" title="2.6 Realization/ Implementation"></a>2.6 Realization/ Implementation</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://en.wikipedia.org/wiki/Class_diagram" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Class_diagram</a></li><li><a href="https://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html" target="_blank" rel="noopener">https://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> System Design </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> System Design </tag>
+            
+            <tag> UML </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Event Storming</title>
       <link href="/Event-Storming/"/>
       <url>/Event-Storming/</url>

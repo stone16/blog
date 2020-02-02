@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/UML/</loc>
+        <lastmod>2020-02-02T21:58:37.744Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/System-Design/</loc>
+        <lastmod>2020-02-02T21:58:37.744Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/DDD/</loc>
         <lastmod>2020-02-02T21:57:04.636Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -558,13 +572,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-02-02T06:06:57.981Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/System-Design/</loc>
-        <lastmod>2020-02-02T06:06:57.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
