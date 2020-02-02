@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/System-Design/</loc>
+        <lastmod>2020-02-02T22:06:25.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/%25E6%25B7%25B7%25E6%25B2%258C%25E5%25B7%25A5%25E7%25A8%258B/</loc>
         <lastmod>2020-02-02T22:02:05.692Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -39,13 +46,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/UML/</loc>
-        <lastmod>2020-02-02T21:58:37.744Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/System-Design/</loc>
         <lastmod>2020-02-02T21:58:37.744Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
