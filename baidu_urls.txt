@@ -1,1 +1,1 @@
-https://www.llchen60.com/UML-Class-Diagram/
+https://www.llchen60.com/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/
