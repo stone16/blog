@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/VPN/</loc>
+        <lastmod>2020-02-02T03:51:11.145Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/Data-Center/</loc>
+        <lastmod>2020-02-02T03:51:11.145Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/DNS/</loc>
         <lastmod>2020-02-02T03:43:42.460Z</lastmod>
         <changefreq>weekly</changefreq>
