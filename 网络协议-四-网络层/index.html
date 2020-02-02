@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>网络协议(四)-网络层 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Network , IP Protocol , CIDR , DHCP , ICMP , Router ">
+  <meta name="description" content="网络协议(四)-网络层 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(99)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(19)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(29)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="99">
+<input type="hidden" id="yelog_site_word_count" value="160.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NightWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">UI Test</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Puppeteer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Scalibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Regex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">认证授权</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">LDAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Web Accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">5G</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">IP Protocol</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">CIDR</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">DHCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ICMP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Router</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="Network,IP Protocol,CIDR,DHCP,ICMP,Router"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2020-02-01 16:45:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2020-02-01 16:43:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2020-02-01 16:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2020-02-01 16:42:04">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2020-02-01 14:24:18">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2020-02-01 14:22:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2020-02-01 14:22:02">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2020-02-01 14:20:22">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2020-02-01 14:19:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2020-02-01 14:15:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2020-02-01 14:14:28">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2020-02-01 14:13:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2020-02-01 14:12:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2020-02-01 11:39:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="Network,5G"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2020-02-01 11:15:52">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="RESTFul,Web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2020-01-31 21:02:19">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="FrontEnd,Web Accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2020-01-31 21:00:52">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="Web,RPC"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2020-01-31 20:59:08">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RESTful-vs-RPC/"
+           data-tag="RESTFul,RPC"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2020-01-31 20:58:01">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/LDAP-Intro/"
+           data-tag="Web,LDAP"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2020-01-31 20:25:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2020-01-31 20:24:28">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2020-01-31 20:23:15">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2020-01-31 18:58:09">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2020-01-31 18:56:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2020-01-31 18:55:56">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2020-01-31 18:54:18">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2020-01-31 18:52:42">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2020-01-31 09:32:22">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd,Regex"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2020-01-30 23:25:28">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Scaling-webapps/"
+           data-tag="Web,Scalibility"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2020-01-30 23:20:10">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2020-01-30 23:19:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2020-01-30 23:16:31">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(4)">React Advanced(4)</span>
+            <span class="post-date" title="2020-01-30 23:15:33">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(3)">React Advanced(3)</span>
+            <span class="post-date" title="2020-01-30 23:14:44">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(2)">React Advanced(2)</span>
+            <span class="post-date" title="2020-01-30 23:13:49">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(1)">React Advanced(1)</span>
+            <span class="post-date" title="2020-01-30 23:12:13">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2020-01-30 23:11:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/NightWatch-JavaScript-Tutorial/"
+           data-tag="FrontEnd,JavaScript,NightWatch,UI Test"
+           data-author="" >
+            <span class="post-title" title="NightWatch JavaScript Tutorial">NightWatch JavaScript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:32:53">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,i18next,JavaScript"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Japan,Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-网络协议-四-网络层" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">网络协议(四)-网络层</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Network</a>
+            
+            <a class="color2">IP Protocol</a>
+            
+            <a class="color5">CIDR</a>
+            
+            <a class="color5">DHCP</a>
+            
+            <a class="color5">ICMP</a>
+            
+            <a class="color2">Router</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 16:49:51'>2020-02-01 16:45</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-IP协议"><span class="toc-text">1. IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-CIDR-无类型域间选路"><span class="toc-text">1.1 CIDR 无类型域间选路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-CIDR的斜杆-数字的表示方式"><span class="toc-text">1.1.1 CIDR的斜杆+数字的表示方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-广播地址"><span class="toc-text">1.1.2 广播地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-子网掩码"><span class="toc-text">1.1.3 子网掩码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-公有IP地址和私有IP地址"><span class="toc-text">1.2 公有IP地址和私有IP地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-动态主机配置协议-DHCP"><span class="toc-text">1.3 动态主机配置协议(DHCP)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-DHCP的工作方式"><span class="toc-text">1.3.1 DHCP的工作方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-IP地址的收回和续租"><span class="toc-text">1.3.2 IP地址的收回和续租</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-DHCP协议-自动安装操作系统-PXE-预启动执行环境"><span class="toc-text">1.3.3 DHCP协议- 自动安装操作系统 - PXE(预启动执行环境)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ICMP协议"><span class="toc-text">2. ICMP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-查询报文类型"><span class="toc-text">2.1 查询报文类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-差错报文类型"><span class="toc-text">2.2 差错报文类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Ping的使用-查询报文类型的使用"><span class="toc-text">2.3 Ping的使用 查询报文类型的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-traceroute-差错报文类型的使用"><span class="toc-text">2.4 traceroute 差错报文类型的使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-跨网关访问"><span class="toc-text">3. 跨网关访问</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-静态路由"><span class="toc-text">3.1 静态路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-转发网关"><span class="toc-text">3.1.1 转发网关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-NAT网关-Network-Address-Translation"><span class="toc-text">3.1.2 NAT网关 (Network Address Translation)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-动态路由"><span class="toc-text">3.2 动态路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-路由表"><span class="toc-text">3.2.1 路由表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-策略路由"><span class="toc-text">3.2.2 策略路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-动态路由算法"><span class="toc-text">3.2.3 动态路由算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-动态路由协议"><span class="toc-text">3.2.4 动态路由协议</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-IP协议"><a href="#1-IP协议" class="headerlink" title="1. IP协议"></a>1. IP协议</h1><pre><code>root@test:~# ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether fa:16:3e:c7:79:75 brd ff:ff:ff:ff:ff:ff
+    inet 10.100.122.2/24 brd 10.100.122.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f816:3eff:fec7:7975/64 scope link 
+       valid_lft forever preferred_lft forever</code></pre><p>10.100.122.2是一个IP地址，inet6 fe80::f816:3eff:fec7:7975/64是IPv6地址。IP地址分为五类： </p>
+<p><img src="https://i.loli.net/2020/02/02/D9CGtkc5s1TKfN4.jpg" alt="fig1.jpg"></p>
+<p>D类是组播地址，使用这一类地址，属于某个组的机器都能收到。</p>
+<p>下面这个表展示了ABC三类地址所能包含的主机的数量：</p>
+<p><img src="https://i.loli.net/2020/02/02/ztmCUuYxdwejnfS.jpg" alt="fig2.jpg"></p>
+<p>C类地址只能包含254的主机，而B类地址又太大了，能包含65534个主机，因此采用了CIDR方式进行优化</p>
+<h2 id="1-1-CIDR-无类型域间选路"><a href="#1-1-CIDR-无类型域间选路" class="headerlink" title="1.1 CIDR 无类型域间选路"></a>1.1 CIDR 无类型域间选路</h2><h3 id="1-1-1-CIDR的斜杆-数字的表示方式"><a href="#1-1-1-CIDR的斜杆-数字的表示方式" class="headerlink" title="1.1.1 CIDR的斜杆+数字的表示方式"></a>1.1.1 CIDR的斜杆+数字的表示方式</h3><p>这种方式打破了上述的分成几类地址的方式，将32位地址一分为二，前面是网络号，后面是主机号，例如：</p>
+<pre><code>10.100.122.2/24</code></pre><p>斜杠和24表示对于这个32位地址而言，前24位是其网络号，后8位是其主机号。</p>
+<h3 id="1-1-2-广播地址"><a href="#1-1-2-广播地址" class="headerlink" title="1.1.2 广播地址"></a>1.1.2 广播地址</h3><p>继续以上述的地址为例，其广播地址为</p>
+<pre><code>10.100.122.255</code></pre><p>如果发送这个地址，所有10.100.122网络里的机器都可以收到</p>
+<h3 id="1-1-3-子网掩码"><a href="#1-1-3-子网掩码" class="headerlink" title="1.1.3 子网掩码"></a>1.1.3 子网掩码</h3><p>继续以上述的地址为例，其子网掩码为</p>
+<pre><code>255.255.255.0</code></pre><p>与IP地址按位与，就可以得到网络号</p>
+<h2 id="1-2-公有IP地址和私有IP地址"><a href="#1-2-公有IP地址和私有IP地址" class="headerlink" title="1.2 公有IP地址和私有IP地址"></a>1.2 公有IP地址和私有IP地址</h2><p>这是按类对IP地址进行划分的时候的概念，私有地址，即允许组织内部的IT人员自己进行管理分配的地址。公有IP的资源有组织统一分配的，需要去买。</p>
+<p><img src="https://i.loli.net/2020/02/02/KF8xGTD7mnwOBob.jpg" alt="fig3.jpg"></p>
+<p>表格中就有我们很常见的<code>192.168.0.0</code>,一般来说，整个网络的第一个地址<code>192.168.0.1</code>就是你这个私有网络的出口地址，比如你家的路由器地址就是这个；而<code>192.1678.0.255</code>就是广播地址。</p>
+<h2 id="1-3-动态主机配置协议-DHCP"><a href="#1-3-动态主机配置协议-DHCP" class="headerlink" title="1.3 动态主机配置协议(DHCP)"></a>1.3 动态主机配置协议(DHCP)</h2><p>网络管理员需要做的是，配置一段共享的IP地址，每一台新接入的机器都会通过DHCP协议，来这个共享的IP地址里申请，然后自动配置好。</p>
+<h3 id="1-3-1-DHCP的工作方式"><a href="#1-3-1-DHCP的工作方式" class="headerlink" title="1.3.1 DHCP的工作方式"></a>1.3.1 DHCP的工作方式</h3><ol>
+<li>新机器加入进网络 – DHCP discover</li>
+</ol>
+<p>新机器使用IP地址<code>0.0.0.0</code>发送一个广播包，目的IP地址是<code>255.255.255.255</code>. 广播包封装了UDP， UDP封装了BOOTP，DHCP是BOOTP的增强版。</p>
+<p>在这个广播包里，新机器会说我是新来的(Boot Request), 我的MAC地址是blabla，我还没有IP地址，需要租一个！</p>
+<p><img src="https://i.loli.net/2020/02/02/8U3bkmHJVsXzfgu.jpg" alt="fig4.jpg"></p>
+<ol start="2">
+<li>DHCP offer</li>
+</ol>
+<p>DHCP server 为客户保留一个IP地址，不会再给别的客户用这个IP地址了。DHCP的offer的格式如下，里面有给新人分配的地址：</p>
+<p><img src="https://i.loli.net/2020/02/02/JgBRu5WK9QvYFdG.jpg" alt="fig5.jpg"></p>
+<p>这个时候仍然使用广播IP作为目的地址，因为此时新机器还没有IP地址呢。值得注意的是，有可能在配置的时候会有多个DHCP server，这个新机器可能收到多个DHCP Offer，新机器会选择一般是最近的一个，然后向网络发送一个告知信息的信息包，成为DHCP request</p>
+<ol start="3">
+<li>DHCP request</li>
+</ol>
+<p>这个广播数据包里面包含客户端的MAC地址，接受的租约中的IP地址，提供此租约的DHCP服务器地址等信息。</p>
+<p><img src="https://i.loli.net/2020/02/02/nzURpgrOsjeIJmd.jpg" alt="fig6.jpg"></p>
+<p>注意这个时候新机器的IP还没有得到确认，所以客户端仍然使用0.0.0.0作为源地址</p>
+<ol start="4">
+<li>DHCP ACK</li>
+</ol>
+<p>当DHCP server接收到客户机的DHCP request之后，会广播返回给客户机一个DHCP ACK消息，表示已经接受客户机的选择</p>
+<p><img src="https://i.loli.net/2020/02/02/fYRICBnTgHGqF6c.jpg" alt="fig7.jpg"></p>
+<h3 id="1-3-2-IP地址的收回和续租"><a href="#1-3-2-IP地址的收回和续租" class="headerlink" title="1.3.2 IP地址的收回和续租"></a>1.3.2 IP地址的收回和续租</h3><p>客户机会在租期过去 50% 的时候，直接向为其提供 IP 地址的 DHCP Server 发送 DHCP request 消息包。客户机接收到该服务器回应的 DHCP ACK 消息包，会根据包中所提供的新的租期以及其他已经更新的 TCP/IP 参数，更新自己的配置。这样，IP 租用更新就完成了。</p>
+<h3 id="1-3-3-DHCP协议-自动安装操作系统-PXE-预启动执行环境"><a href="#1-3-3-DHCP协议-自动安装操作系统-PXE-预启动执行环境" class="headerlink" title="1.3.3 DHCP协议- 自动安装操作系统 - PXE(预启动执行环境)"></a>1.3.3 DHCP协议- 自动安装操作系统 - PXE(预启动执行环境)</h3><p>其实，这个过程和操作系统启动的过程有点儿像。首先，启动 BIOS。这是一个特别小的小系统，只能干特别小的一件事情。其实就是读取硬盘的 MBR 启动扇区，将 GRUB 启动起来；然后将权力交给 GRUB，GRUB 加载内核、加载作为根文件系统的 initramfs 文件；然后将权力交给内核；最后内核启动，初始化整个操作系统。那我们安装操作系统的过程，只能插在 BIOS 启动之后了。因为没安装系统之前，连启动扇区都没有。因而这个过程叫做<strong>预启动执行环境（Pre-boot Execution Environment）</strong></p>
+<p>PXE协议会先把客户端放到BIOS里面，当计算机启动的时候，BIOS把PXE客户端调入内存里面，就可以连接到服务端做一些操作了。</p>
+<p>首先，PXE 客户端自己也需要有个 IP 地址。因为 PXE 的客户端启动起来，就可以发送一个 DHCP 的请求，让 DHCP Server 给它分配一个地址。PXE 客户端有了自己的地址，那它怎么知道 PXE 服务器在哪里呢？对于其他的协议，都好办，要么人告诉他。例如，告诉浏览器要访问的 IP 地址，或者在配置中告诉它；例如，微服务之间的相互调用。</p>
+<p>但是 PXE 客户端启动的时候，啥都没有。好在 DHCP Server 除了分配 IP 地址以外，还可以做一些其他的事情。这里有一个 DHCP Server 的一个样例配置：</p>
+<pre><code>ddns-update-style interim;
+ignore client-updates;
+allow booting;
+allow bootp;
+subnet 192.168.1.0 netmask 255.255.255.0
+{
+option routers 192.168.1.1;
+option subnet-mask 255.255.255.0;
+option time-offset -18000;
+default-lease-time 21600;
+max-lease-time 43200;
+range dynamic-bootp 192.168.1.240 192.168.1.250;
+filename &quot;pxelinux.0&quot;;
+next-server 192.168.1.180;
+}</code></pre><p>按照上面的原理，默认的 DHCP Server 是需要配置的，无非是我们配置 IP 的时候所需要的 IP 地址段、子网掩码、网关地址、租期等。如果想使用 PXE，则需要配置 next-server，指向 PXE 服务器的地址，另外要配置初始启动文件 filename。</p>
+<p><img src="https://i.loli.net/2020/02/02/jzfUBDdHvXFOorq.jpg" alt="fig8.jpg"></p>
+<h1 id="2-ICMP协议"><a href="#2-ICMP协议" class="headerlink" title="2. ICMP协议"></a>2. ICMP协议</h1><p>ping的工作原理，ping是基于ICMP协议来工作的，ICMP全称为: Internet Control Message Protocol，就是互联网控制报文协议。</p>
+<p>ICMP报文是封装在IP包里面的。如图所示</p>
+<p><img src="https://i.loli.net/2020/02/02/msIXOvPpSal59h3.jpg" alt="fig9.jpg"></p>
+<h2 id="2-1-查询报文类型"><a href="#2-1-查询报文类型" class="headerlink" title="2.1 查询报文类型"></a>2.1 查询报文类型</h2><p>ICMP主动发起的，对于ping的主动请求，进行网络抓包，称为ICMP ECHO REQUEST. 同理主动请求的回复称为ICMP ECHO REPLY. 比起原生的ICMP多了标识符和序号两个字段。</p>
+<h2 id="2-2-差错报文类型"><a href="#2-2-差错报文类型" class="headerlink" title="2.2 差错报文类型"></a>2.2 差错报文类型</h2><ol>
+<li>终点不可达 3</li>
+</ol>
+<ul>
+<li>网络不可达 0</li>
+<li>主机不可达 1</li>
+<li>协议不可达 2</li>
+<li>端口不可达 3</li>
+<li>需要进行分片但设置了不分片</li>
+</ul>
+<ol start="2">
+<li>源抑制 4</li>
+</ol>
+<p>源站放慢了速度</p>
+<ol start="3">
+<li>超时 11</li>
+</ol>
+<p>超过了网络包的生存时间，但是还没到</p>
+<ol start="4">
+<li>重定向 5</li>
+</ol>
+<p>换下次发送使用的路由器</p>
+<h2 id="2-3-Ping的使用-查询报文类型的使用"><a href="#2-3-Ping的使用-查询报文类型的使用" class="headerlink" title="2.3 Ping的使用 查询报文类型的使用"></a>2.3 Ping的使用 查询报文类型的使用</h2><p>下图描述了ping的整个发送和接收过程。<br><img src="https://i.loli.net/2020/02/02/myJlI8dY1rju3sw.jpg" alt="fig10.jpg"></p>
+<p>假定主机 A 的 IP 地址是 192.168.1.1，主机 B 的 IP 地址是 192.168.1.2，它们都在同一个子网。那当你在主机 A 上运行“ping 192.168.1.2”后，会发生什么呢?</p>
+<p>ping 命令执行的时候，源主机首先会构建一个 ICMP 请求数据包，ICMP 数据包内包含多个字段。最重要的是两个，第一个是类型字段，对于请求数据包而言该字段为 8；另外一个是顺序号，主要用于区分连续 ping 的时候发出的多个数据包。每发出一个请求数据包，顺序号会自动加 1。为了能够计算往返时间 RTT，它会在报文的数据部分插入发送时间。</p>
+<p>然后，由 ICMP 协议将这个数据包连同地址 192.168.1.2 一起交给 IP 层。IP 层将以 192.168.1.2 作为目的地址，本机 IP 地址作为源地址，加上一些其他控制信息，构建一个 IP 数据包。</p>
+<p>接下来，需要加入 MAC 头。如果在本节 ARP 映射表中查找出 IP 地址 192.168.1.2 所对应的 MAC 地址，则可以直接使用；如果没有，则需要发送 ARP 协议查询 MAC 地址，获得 MAC 地址后，由数据链路层构建一个数据帧，目的地址是 IP 层传过来的 MAC 地址，源地址则是本机的 MAC 地址；还要附加上一些控制信息，依据以太网的介质访问规则，将它们传送出去。</p>
+<p>主机 B 收到这个数据帧后，先检查它的目的 MAC 地址，并和本机的 MAC 地址对比，如符合，则接收，否则就丢弃。接收后检查该数据帧，将 IP 数据包从帧中提取出来，交给本机的 IP 层。同样，IP 层检查后，将有用的信息提取后交给 ICMP 协议。</p>
+<p>主机 B 会构建一个 ICMP 应答包，应答数据包的类型字段为 0，顺序号为接收到的请求数据包中的顺序号，然后再发送出去给主机 A。</p>
+<p>在规定的时候间内，源主机如果没有接到 ICMP 的应答包，则说明目标主机不可达；如果接收到了 ICMP 应答包，则说明目标主机可达。此时，源主机会检查，用当前时刻减去该数据包最初从源主机上发出的时刻，就是 ICMP 数据包的时间延迟。</p>
+<h2 id="2-4-traceroute-差错报文类型的使用"><a href="#2-4-traceroute-差错报文类型的使用" class="headerlink" title="2.4 traceroute 差错报文类型的使用"></a>2.4 traceroute 差错报文类型的使用</h2><p>traceroute会故意设置特殊的TTL，来追踪去往目的地沿途经过的路由器。Traceroute 的参数指向某个目的 IP 地址，它会发送一个 UDP 的数据包。将 TTL 设置成 1，也就是说一旦遇到一个路由器或者一个关卡，就表示它“牺牲”了。</p>
+<p>如果中间的路由器不止一个，当然碰到第一个就“牺牲”。于是，返回一个 ICMP 包，也就是网络差错包，类型是时间超时。那大军前行就带一顿饭，试一试走多远会被饿死，然后找个哨探回来报告，那我就知道大军只带一顿饭能走多远了。接下来，将 TTL 设置为 2。第一关过了，第二关就“牺牲”了，那我就知道第二关有多远。如此反复，直到到达目的主机。这样，Traceroute 就拿到了所有的路由器 IP。当然，有的路由器压根不会回这个 ICMP。这也是 Traceroute 一个公网的地址，看不到中间路由的原因。</p>
+<p>怎么知道 UDP 有没有到达目的主机呢？Traceroute 程序会发送一份 UDP 数据报给目的主机，但它会选择一个不可能的值作为 UDP 端口号（大于 30000）。当该数据报到达时，将使目的主机的 UDP 模块产生一份“端口不可达”错误 ICMP 报文。如果数据报没有到达，则可能是超时。</p>
+<p>Traceroute 还有一个作用是故意设置不分片，从而确定路径的 MTU。</p>
+<p>要做的工作首先是发送分组，并设置“不分片”标志。发送的第一个分组的长度正好与出口 MTU 相等。如果中间遇到窄的关口会被卡住，会发送 ICMP 网络差错包，类型为“需要进行分片但设置了不分片位”。其实，这是人家故意的好吧，每次收到 ICMP“不能分片”差错时就减小分组的长度，直到到达目标主机。</p>
+<h1 id="3-跨网关访问"><a href="#3-跨网关访问" class="headerlink" title="3. 跨网关访问"></a>3. 跨网关访问</h1><p><img src="https://i.loli.net/2020/02/02/RY9W3aixfpqEtOc.jpg" alt="fig16.jpg"><br>一旦配置了IP地址和网关，往往就能够指定目标地址进行访问了。在跨网关访问的时候，会牵扯到MAC地址和IP地址的变化。</p>
+<p>在 MAC 头里面，先是目标 MAC 地址，然后是源 MAC 地址，然后有一个协议类型，用来说明里面是 IP 协议。IP 头里面的版本号，目前主流的还是 IPv4，服务类型 TOS 在第三节讲 ip addr 命令的时候讲过，TTL 在第 7 节讲 ICMP 协议的时候讲过。另外，还有 8 位标识协议。这里到了下一层的协议，也就是，是 TCP 还是 UDP。最重要的就是源 IP 和目标 IP。先是源 IP 地址，然后是目标 IP 地址。</p>
+<p>在任何一台机器上，当要访问另外一个IP地址的时候，都会先判断这个目标地址和当前机器的IP地址是否在同一个网段当中。使用CIDR和子网掩码来进行判断。</p>
+<p>如果不是同一个网段的，就需要将请求发往默认网关gateway. Gateway的地址一定和源IP地址是一个网段的。例如192.168.1.0/24这个网段，Gateway往往是192.168.1.1/24或者192.168.1.2/24 </p>
+<p>如何发往默认网关呢？网关不是和源 IP 地址是一个网段的么？这个过程就和发往同一个网段的其他机器是一样的：将源地址和目标 IP 地址放入 IP 头中，通过 ARP 获得网关的 MAC 地址，将源 MAC 和网关的 MAC 放入 MAC 头中，发送出去。网关所在的端口，例如 192.168.1.1/24 将网络包收进来，然后接下来怎么做，就完全看网关的了。</p>
+<p>网关往往是一个<strong><em>路由器</em></strong>，是个三层转发设备（<strong><em>就是把MAC头和IP头都取下来，然后根据里面的内容，看看接下来把包往哪里转发的设备</em></strong>）</p>
+<h2 id="3-1-静态路由"><a href="#3-1-静态路由" class="headerlink" title="3.1 静态路由"></a>3.1 静态路由</h2><p>在路由器上配置一条条规则，通过网关进行转发</p>
+<h3 id="3-1-1-转发网关"><a href="#3-1-1-转发网关" class="headerlink" title="3.1.1 转发网关"></a>3.1.1 转发网关</h3><p>只改变MAC地址，不改变IP的网关</p>
+<p><img src="https://i.loli.net/2020/02/02/QJE7CzFcOVjDuTp.jpg" alt="fig11.jpg"></p>
+<p>服务器 A 要访问服务器 B。首先，服务器 A 会思考，192.168.4.101 和我不是一个网段的，因而需要先发给网关。那网关是谁呢？已经静态配置好了，网关是 192.168.1.1。网关的 MAC 地址是多少呢？发送 ARP 获取网关的 MAC 地址，然后发送包。包的内容是这样的：</p>
+<ul>
+<li>源MAC: server A MAC addr</li>
+<li>目标MAC: 192.168.1.1 这个网口的MAC</li>
+<li>源IP： 192.168.1.101</li>
+<li>目标IP: 192.168.4.101 </li>
+</ul>
+<p>包到达 192.168.1.1 这个网口，发现 MAC 一致，将包收进来，开始思考往哪里转发。在路由器 A 中配置了静态路由之后，要想访问 192.168.4.0/24，要从 192.168.56.1 这个口出去，下一跳为 192.168.56.2。</p>
+<p>于是，路由器 A 思考的时候，匹配上了这条路由，要从 192.168.56.1 这个口发出去，发给 192.168.56.2，那 192.168.56.2 的 MAC 地址是多少呢？路由器 A 发送 ARP 获取 192.168.56.2 的 MAC 地址，然后发送包。包的内容是这样的：</p>
+<ul>
+<li>源MAC: 192.168.56.1 MAC addr</li>
+<li>目标MAC: 192.168.56.2 这个网口的MAC</li>
+<li>源IP： 192.168.1.101</li>
+<li>目标IP: 192.168.4.101 </li>
+</ul>
+<p>包到达 192.168.56.2 这个网口，发现 MAC 一致，将包收进来，开始思考往哪里转发。在路由器 B 中配置了静态路由，要想访问 192.168.4.0/24，要从 192.168.4.1 这个口出去，没有下一跳了。</p>
+<p>于是，路由器 B 思考的时候，匹配上了这条路由，要从 192.168.4.1 这个口发出去，发给 192.168.4.101。那 192.168.4.101 的 MAC 地址是多少呢？路由器 B 发送 ARP 获取 192.168.4.101 的 MAC 地址，然后发送包。包的内容是这样的：</p>
+<ul>
+<li>源MAC: 192.168.4.1 MAC addr</li>
+<li>目标MAC: 192.168.4.101 这个网口的MAC</li>
+<li>源IP： 192.168.1.101</li>
+<li>目标IP: 192.168.4.101 </li>
+</ul>
+<p>包到达服务器B，由上述过程可以看出，MAC地址一直都是变的，而IP地址一直都不会变。</p>
+<h3 id="3-1-2-NAT网关-Network-Address-Translation"><a href="#3-1-2-NAT网关-Network-Address-Translation" class="headerlink" title="3.1.2 NAT网关 (Network Address Translation)"></a>3.1.2 NAT网关 (Network Address Translation)</h3><p>NAT网关出现的原因是IP冲突，如下图所示，各个局域网在设值的时候IP是一样的情况。</p>
+<p><img src="https://i.loli.net/2020/02/02/tymIY6pk3iwNz1a.jpg" alt="fig12.jpg"></p>
+<p>这里遇见的第一个问题是，局域网之间没有商量过，各定各的网段，因而 IP 段冲突了。最左面源地址是 192.168.1.101，最右面目标地址也是 192.168.1.101，如果单从 IP 地址上看，简直是自己访问自己，其实是源的 192.168.1.101 要访问目标的 192.168.1.101。</p>
+<p>解决这个问题，就是在中间的局域网中使用另外的地址，来进行区分。有点像身份证和护照的关系。</p>
+<p>首先，目标服务器 B 在国际上要有一个国际的身份，我们给它一个 192.168.56.2。在网关 B 上，我们记下来，国际身份 192.168.56.2 对应国内身份 192.168.1.101。凡是要访问 192.168.56.2，都转成 192.168.1.101。</p>
+<p>于是，源服务器 A 要访问目标服务器 B，要指定的目标地址为 192.168.56.2。这是它的国际身份。服务器 A 想，192.168.56.2 和我不是一个网段的，因而需要发给网关，网关是谁？已经静态配置好了，网关是 192.168.1.1，网关的 MAC 地址是多少？发送 ARP 获取网关的 MAC 地址，然后发送包。包的内容是这样的：</p>
+<ul>
+<li>源MAC: 服务器A 的 MAC addr</li>
+<li>目标MAC: 192.168.1.1 这个网口的MAC</li>
+<li>源IP： 192.168.1.101</li>
+<li>目标IP: 192.168.56.2</li>
+</ul>
+<p>包到达 192.168.1.1 这个网口，发现 MAC 一致，将包收进来，开始思考往哪里转发。</p>
+<p>在路由器 A 中配置了静态路由：要想访问 192.168.56.2/24，要从 192.168.56.1 这个口出去，没有下一跳了。</p>
+<p>于是，路由器 A 思考的时候，匹配上了这条路由，要从 192.168.56.1 这个口发出去，发给 192.168.56.2。那 192.168.56.2 的 MAC 地址是多少呢？路由器 A 发送 ARP 获取 192.168.56.2 的 MAC 地址。</p>
+<p>当网络包发送到中间的局域网的时候，服务器 A 也需要有个国际身份，因而在国际上，源 IP 地址也不能用 192.168.1.101，需要改成 192.168.56.1。发送包的内容是这样的：</p>
+<ul>
+<li>源MAC: 192.168.1.1 MAC addr</li>
+<li>目标MAC: 192.168.1.101 这个网口的MAC</li>
+<li>源IP： 192.168.56.1</li>
+<li>目标IP: 192.168.1.101</li>
+</ul>
+<p>从服务器B接收的包可以看出，源IP是服务器A的国际身份，发送包回去的时候，也是发给这个国际身份，由路由器A做NAT，转换为国内身份。</p>
+<h2 id="3-2-动态路由"><a href="#3-2-动态路由" class="headerlink" title="3.2 动态路由"></a>3.2 动态路由</h2><h3 id="3-2-1-路由表"><a href="#3-2-1-路由表" class="headerlink" title="3.2.1 路由表"></a>3.2.1 路由表</h3><p>路由器是一台网络设备，有多张网卡，当一个入口的网络包送到路由器时，它会根据一个本地的转发信息库，来决定如何正确地转发流量。这个转发信息库通常被称为路由表。</p>
+<p>一张路由表会有多个路由规则，每一天规则至少包含这三项信息： </p>
+<ul>
+<li>目的网络</li>
+<li>出口设备</li>
+<li>下一跳网关</li>
+</ul>
+<h3 id="3-2-2-策略路由"><a href="#3-2-2-策略路由" class="headerlink" title="3.2.2 策略路由"></a>3.2.2 策略路由</h3><p>根据多个参数来配置路由，这样来使得不同来源的包走不同的路由。</p>
+<p>家里的网络呢，就是普通的家用网段 192.168.1.x/24。家里有两个租户，分别把线连到路由器上。IP 地址为 192.168.1.101/24 和 192.168.1.102/24，网关都是 192.168.1.1/24，网关在路由器上。两个运营商都要为这个网关配置一个公网的 IP 地址。如果你去查看你们家路由器里的网段，基本就是我图中画的样子。</p>
+<p><img src="https://i.loli.net/2020/02/02/ZCbyHwg8prBSIz2.jpg" alt="fig13.jpg"></p>
+<p>运行商里面也有一个 IP 地址，在运营商网络里面的网关。不同的运营商方法不一样，有的是 /32 的，也即一个一对一连接。例如，运营商 1 给路由器分配的地址是 183.134.189.34/32，而运营商网络里面的网关是 183.134.188.1/32。有的是 /30 的，也就是分了一个特别小的网段。运营商 2 给路由器分配的地址是 60.190.27.190/30，运营商网络里面的网关是 60.190.27.189/30。</p>
+<pre><code>$ ip route list table main 
+60.190.27.189/30 dev eth3  proto kernel  scope link  src 60.190.27.190
+183.134.188.1 dev eth2  proto kernel  scope link  src 183.134.189.34
+192.168.1.0/24 dev eth1  proto kernel  scope link  src 192.168.1.1
+127.0.0.0/8 dev lo  scope link
+default via 183.134.188.1 dev eth2</code></pre><ul>
+<li>如果去运营商二，就走 eth3；</li>
+<li>如果去运营商一呢，就走 eth2；</li>
+<li>如果访问内网，就走 eth1；</li>
+<li>如果所有的规则都匹配不上，默认走运营商一，也即走快的网络。</li>
+</ul>
+<p>如何让IP默认走运营商2？</p>
+<p>添加一个新的table， chao</p>
+<pre><code># echo 200 chao &gt;&gt; /etc/iproute2/rt_tables</code></pre><p>添加一条规则：</p>
+<pre><code># ip rule add from 192.168.1.101 table chao
+# ip rule ls
+0:    from all lookup local 
+32765:    from 10.0.0.10 lookup chao
+32766:    from all lookup main 
+32767:    from all lookup default</code></pre><p>设定规则为：从 192.168.1.101 来的包都查看个 chao 这个新的路由表。<br>在chao路由表中添加规则： </p>
+<pre><code># ip route add default via 60.190.27.189 dev eth3 table chao
+# ip route flush cache</code></pre><h3 id="3-2-3-动态路由算法"><a href="#3-2-3-动态路由算法" class="headerlink" title="3.2.3 动态路由算法"></a>3.2.3 动态路由算法</h3><p>寻找最短路径，主要使用Bellman-Ford算法和Dijkstra算法。</p>
+<ol>
+<li>距离矢量路由算法</li>
+</ol>
+<p>这种算法的基本思路是，每个路由器都保存一个路由表，包含多行，每行对应网络中的一个路由器，每一行包含两部分信息，一个是要到目标路由器，从那条线出去，另一个是到目标路由器的距离。</p>
+<p>由此可以看出，每个路由器都是知道全局信息的。那这个信息如何更新呢？每个路由器都知道自己和邻居之间的距离，每过几秒，每个路由器都将自己所知的到达所有的路由器的距离告知邻居，每个路由器也能从邻居那里得到相似的信息。</p>
+<p>每个路由器根据新收集的信息，计算和其他路由器的距离，比如自己的一个邻居距离目标路由器的距离是 M，而自己距离邻居是 x，则自己距离目标路由器是 x+M。</p>
+<p>存在的问题1： <strong><em>好消息传得快，坏消息传得慢</em></strong> 如果有个路由器加入了这个网络，它的邻居就能很快发现它，然后将消息广播出去。要不了多久，整个网络就都知道了。但是一旦一个路由器挂了，挂的消息是没有广播的。当每个路由器发现原来的道路到不了这个路由器的时候，感觉不到它已经挂了，而是试图通过其他的路径访问，直到试过了所有的路径，才发现这个路由器是真的挂了。</p>
+<p>原来的网络包括两个节点，B 和 C。A 加入了网络，它的邻居 B 很快就发现 A 启动起来了。于是它将自己和 A 的距离设为 1，同样 C 也发现 A 起来了，将自己和 A 的距离设置为 2。但是如果 A 挂掉，情况就不妙了。B 本来和 A 是邻居，发现连不上 A 了，但是 C 还是能够连上，只不过距离远了点，是 2，于是将自己的距离设置为 3。殊不知 C 的距离 2 其实是基于原来自己的距离为 1 计算出来的。C 发现自己也连不上 A，并且发现 B 设置为 3，于是自己改成距离 4。依次类推，数越来越大，直到超过一个阈值，我们才能判定 A 真的挂了。</p>
+<p>存在的问题2： <strong><em>每次发送的时候，要发送整个全局路由表</em></strong> </p>
+<p>当网络规模比较小的时候，全局路由表比较小（15跳以内）；如果网络规模比较大，就不适用了。</p>
+<p>(不相关的分割线： 感觉很像区块链在做的事情，行为上的类似，目的上的不同)</p>
+<ol start="2">
+<li>链路状态路由算法</li>
+</ol>
+<p>Link state routing </p>
+<p>这种算法的基本思路是：当一个路由器启动的时候，首先是发现邻居，向邻居 say hello，邻居都回复。然后计算和邻居的距离，发送一个 echo，要求马上返回，除以二就是距离。然后将自己和邻居之间的链路状态包广播出去，发送到整个网络的每个路由器。这样每个路由器都能够收到它和邻居之间的关系的信息。因而，每个路由器都能在自己本地构建一个完整的图，然后针对这个图使用 Dijkstra 算法，找到两点之间的最短路径。</p>
+<p>不像距离距离矢量路由协议那样，更新时发送整个路由表。链路状态路由协议只广播更新的或改变的网络拓扑，这使得更新信息更小，节省了带宽和 CPU 利用率。而且一旦一个路由器挂了，它的邻居都会广播这个消息，可以使得坏消息迅速收敛。</p>
+<h3 id="3-2-4-动态路由协议"><a href="#3-2-4-动态路由协议" class="headerlink" title="3.2.4 动态路由协议"></a>3.2.4 动态路由协议</h3><ol>
+<li>基于链路状态路由算法的OSPF</li>
+</ol>
+<p>OSPF - Open Shortest Path First 开放式最短路径优先）就是基于链路状态路由协议，广泛应用在数据中心中的协议。由于主要用在数据中心内部，用于路由决策，因而称为内部网关协议Interior Gateway Protocol </p>
+<p>内部网关协议的重点就是找到最短的路径。在一个组织内部，路径最短往往最优。当然有时候 OSPF 可以发现多个最短的路径，可以在这多个路径中进行负载均衡，这常常被称为等价路由。</p>
+<p><img src="https://i.loli.net/2020/02/02/tbrWjqNz2swxkVY.jpg" alt="fig14.jpg"></p>
+<ol start="2">
+<li>基于距离矢量路由算法的BGP(Border Gateway Protocol)</li>
+</ol>
+<p>外部政策的问题，每个数据中心都会设值自己的Policy：</p>
+<ul>
+<li>哪些外部IP可以让内部知道</li>
+<li>哪些内部IP可以让外部知道</li>
+</ul>
+<p>每个都为一个自治系统AS, Autonomous System,自治系统分为几种类型：</p>
+<ul>
+<li>Stub AS：对外只有一个连接。这类 AS 不会传输其他 AS 的包。例如，个人或者小公司的网络。</li>
+<li>Multihomed AS：可能有多个连接连到其他的 AS，但是大多拒绝帮其他的 AS 传输包。例如一些大公司的网络。</li>
+<li>Transit AS：有多个连接连到其他的 AS，并且可以帮助其他的 AS 传输包。例如主干网。</li>
+</ul>
+<p>每个自治系统都有<strong>* 边界路由器*</strong>，来和外界进行联系。</p>
+<p><img src="https://i.loli.net/2020/02/02/2CgFAUMGohak7OJ.jpg" alt="fig15.jpg"></p>
+<p>BGP协议使用的是路径矢量路由协议，（path-vector protocol）。它是距离矢量路由协议的升级版。</p>
+<p>前面说了距离矢量路由协议的缺点。其中一个是收敛慢。在 BGP 里面，除了下一跳 hop 之外，还包括了自治系统 AS 的路径，从而可以避免坏消息传的慢的问题，也即上面所描述的，B 知道 C 原来能够到达 A，是因为通过自己，一旦自己都到达不了 A 了，就不用假设 C 还能到达 A 了。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>网络协议(四)-网络层</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">7.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 16:45:42</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 16:49:51</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/" title="网络协议(四)-网络层">https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/';
+            this.page.identifier = '网络协议-四-网络层/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="网络协议-四-网络层/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor','#Japan','#Reading','#Thought','#Tips','#GPS','#Uber','#Curl','#Linux','#Cli','#平均负载','#Context Switch','#CPU Utilization','#CSS','#i18next','#JavaScript','#Callback','#Object Oriented','#TypeScript','#NightWatch','#UI Test','#Puppeteer','#Web','#Scalibility','#Regex','#认证授权','#LDAP','#RPC','#Web Accessibility','#5G','#Tomcat','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

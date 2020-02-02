@@ -3,8 +3,43 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/Router/</loc>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/ICMP/</loc>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/DHCP/</loc>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/CIDR/</loc>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/IP-Protocol/</loc>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Network/</loc>
-        <lastmod>2020-02-02T00:45:05.021Z</lastmod>
+        <lastmod>2020-02-02T00:49:51.482Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
