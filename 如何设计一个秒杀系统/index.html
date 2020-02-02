@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>如何设计一个秒杀系统 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" 秒杀 ">
+  <meta name="description" content="如何设计一个秒杀系统 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-02-02T06:06:58.021Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(113)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(36)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(19)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="System Design">System Design<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="113">
+<input type="hidden" id="yelog_site_word_count" value="234.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">认证授权</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">LDAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NightWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">UI Test</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Puppeteer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Scalibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Web Accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">5G</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Regex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Cloud</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">流媒体协议</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">P2P</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">HTTP 2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">QUIC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">HTTPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Data Center</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UDP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Socket</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">SOAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Distributed System</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">IP Protocol</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">CIDR</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">DHCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ICMP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Router</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DDD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UML</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">IOC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Dependency Injection</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">混沌工程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">秒杀</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="System Design "
+           href="/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
+           data-tag="秒杀"
+           data-author="" >
+            <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
+            <span class="post-date" title="2020-02-02 14:44:35">2020/02/02</span>
+        </a>
+        
+        <a  class="System Design "
+           href="/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"
+           data-tag="System Design"
+           data-author="" >
+            <span class="post-title" title="面向对象设计原则">面向对象设计原则</span>
+            <span class="post-date" title="2020-02-02 14:03:01">2020/02/02</span>
+        </a>
+        
+        <a  class="System Design "
+           href="/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"
+           data-tag="BackEnd,混沌工程"
+           data-author="" >
+            <span class="post-title" title="混沌工程">混沌工程</span>
+            <span class="post-date" title="2020-02-02 14:01:23">2020/02/02</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"
+           data-tag="Java,BackEnd,IOC,Dependency Injection"
+           data-author="" >
+            <span class="post-title" title="IOC容器和Dependency Injection模式">IOC容器和Dependency Injection模式</span>
+            <span class="post-date" title="2020-02-02 13:59:46">2020/02/02</span>
+        </a>
+        
+        <a  class="System Design "
+           href="/UML-Class-Diagram/"
+           data-tag="System Design,UML"
+           data-author="" >
+            <span class="post-title" title="UML - Class Diagram">UML - Class Diagram</span>
+            <span class="post-date" title="2020-02-02 13:57:47">2020/02/02</span>
+        </a>
+        
+        <a  class="System Design "
+           href="/Event-Storming/"
+           data-tag="DDD"
+           data-author="" >
+            <span class="post-title" title="Event Storming">Event Storming</span>
+            <span class="post-date" title="2020-02-02 13:56:24">2020/02/02</span>
+        </a>
+        
+        <a  class="System Design "
+           href="/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"
+           data-tag="DDD"
+           data-author="" >
+            <span class="post-title" title="DDD-领域驱动设计">DDD-领域驱动设计</span>
+            <span class="post-date" title="2020-02-02 08:04:32">2020/02/02</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"
+           data-tag="Network,Distributed System"
+           data-author="" >
+            <span class="post-title" title="网络协议(十一)-用双十一理顺起来的网络协议">网络协议(十一)-用双十一理顺起来的网络协议</span>
+            <span class="post-date" title="2020-02-01 21:58:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81-RPC-SOAP-RESTful/"
+           data-tag="RESTFul,RPC,SOAP"
+           data-author="" >
+            <span class="post-title" title="网络协议(十) - RPC, SOAP, RESTful">网络协议(十) - RPC, SOAP, RESTful</span>
+            <span class="post-date" title="2020-02-01 21:53:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/"
+           data-tag="Cloud"
+           data-author="" >
+            <span class="post-title" title="网络协议(九)-云">网络协议(九)-云</span>
+            <span class="post-date" title="2020-02-01 19:52:09">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AB-%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83-VPN-%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/"
+           data-tag="Data Center,VPN"
+           data-author="" >
+            <span class="post-title" title="网络协议(八)-数据中心, VPN, 移动网络">网络协议(八)-数据中心, VPN, 移动网络</span>
+            <span class="post-date" title="2020-02-01 19:44:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"
+           data-tag="Network,CDN,流媒体协议,P2P,DNS"
+           data-author="" >
+            <span class="post-title" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</span>
+            <span class="post-date" title="2020-02-01 19:38:44">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="HTTP,Network,HTTP 2.0,QUIC,HTTPS"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2020-02-01 17:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="Network,UDP,TCP,Socket"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2020-02-01 16:50:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="Network,IP Protocol,CIDR,DHCP,ICMP,Router"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2020-02-01 16:45:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2020-02-01 16:43:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2020-02-01 16:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2020-02-01 16:42:04">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2020-02-01 14:24:18">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2020-02-01 14:22:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2020-02-01 14:22:02">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2020-02-01 14:20:22">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2020-02-01 14:19:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2020-02-01 14:15:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2020-02-01 14:14:28">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2020-02-01 14:13:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2020-02-01 14:12:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2020-02-01 11:39:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="Network,5G"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2020-02-01 11:15:52">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="RESTFul,Web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2020-01-31 21:02:19">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="FrontEnd,Web Accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2020-01-31 21:00:52">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="Web,RPC"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2020-01-31 20:59:08">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RESTful-vs-RPC/"
+           data-tag="RESTFul,RPC"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2020-01-31 20:58:01">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/LDAP-Intro/"
+           data-tag="Web,LDAP"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2020-01-31 20:25:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2020-01-31 20:24:28">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2020-01-31 20:23:15">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2020-01-31 18:58:09">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2020-01-31 18:56:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2020-01-31 18:55:56">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2020-01-31 18:54:18">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2020-01-31 18:52:42">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2020-01-31 09:32:22">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd,Regex"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2020-01-30 23:25:28">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Scaling-webapps/"
+           data-tag="Web,Scalibility"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2020-01-30 23:20:10">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2020-01-30 23:19:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2020-01-30 23:16:31">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(4)">React Advanced(4)</span>
+            <span class="post-date" title="2020-01-30 23:15:33">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(3)">React Advanced(3)</span>
+            <span class="post-date" title="2020-01-30 23:14:44">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(2)">React Advanced(2)</span>
+            <span class="post-date" title="2020-01-30 23:13:49">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(1)">React Advanced(1)</span>
+            <span class="post-date" title="2020-01-30 23:12:13">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2020-01-30 23:11:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/NightWatch-JavaScript-Tutorial/"
+           data-tag="FrontEnd,JavaScript,NightWatch,UI Test"
+           data-author="" >
+            <span class="post-title" title="NightWatch JavaScript Tutorial">NightWatch JavaScript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:32:53">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,JavaScript,i18next"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Thought,Reading"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Thought,Reading"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Thought,Reading,Japan"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="food,diet,reading"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="RESTFul,AWS,Gateway"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="FrontEnd,HTTP,Network,Batch Processing,Web Development"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="Java,Concurrency,BackEnd"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="Java,Concurrency,BackEnd"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-如何设计一个秒杀系统" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">如何设计一个秒杀系统</h1>
+    
+    <div class="article-meta">
+        
+        <span class="top"><a>置顶</a></span>
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="System Design">System Design</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">秒杀</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-02 14:51:03'>2020-02-02 14:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:14.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Overview"><span class="toc-text">1. Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-并发读写"><span class="toc-text">1.1 并发读写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-API设计原则"><span class="toc-text">1.2 API设计原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-秒杀架构原则"><span class="toc-text">1.3 秒杀架构原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-高可用"><span class="toc-text">1.3.1 高可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-一致性"><span class="toc-text">1.3.2 一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-高可用"><span class="toc-text">1.3.3 高可用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-架构原则"><span class="toc-text">2. 架构原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-数据尽量少"><span class="toc-text">2.1 数据尽量少</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-请求数尽量少"><span class="toc-text">2.2 请求数尽量少</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-路径要尽量短"><span class="toc-text">2.3 路径要尽量短</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-依赖要尽量少"><span class="toc-text">2.4 依赖要尽量少</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-不要有单点"><span class="toc-text">2.5 不要有单点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-不同场景下的不同架构案例"><span class="toc-text">3. 不同场景下的不同架构案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-动静分离的方案"><span class="toc-text">4. 动静分离的方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-何为动静数据"><span class="toc-text">4.1 何为动静数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-如何对静态数据做缓存？"><span class="toc-text">4.2 如何对静态数据做缓存？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-距离用户最近"><span class="toc-text">4.2.1 距离用户最近</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-静态化改造要直接缓存HTTP连接"><span class="toc-text">4.2.2 静态化改造要直接缓存HTTP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-缓存语言"><span class="toc-text">4.2.3 缓存语言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-静态数据处理方案"><span class="toc-text">4.3 静态数据处理方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-URL唯一化"><span class="toc-text">4.3.1 URL唯一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-分离浏览者相关的因素"><span class="toc-text">4.3.2 分离浏览者相关的因素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-分离时间因素"><span class="toc-text">4.3.3 分离时间因素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-异步化地域因素"><span class="toc-text">4.3.4 异步化地域因素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-5-去掉Cookie"><span class="toc-text">4.3.5 去掉Cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-动态数据处理方案"><span class="toc-text">4.4 动态数据处理方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-ESI-Edge-Side-Includes"><span class="toc-text">4.4.1 ESI (Edge Side Includes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-2-CSI-Client-Side-Include"><span class="toc-text">4.4.2 CSI (Client Side Include)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-动静分离架构方案"><span class="toc-text">4.5 动静分离架构方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1-实体机单机部署"><span class="toc-text">4.5.1 实体机单机部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2-统一Cache层"><span class="toc-text">4.5.2 统一Cache层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3-使用CDN"><span class="toc-text">4.5.3 使用CDN</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-如何处理热点数据"><span class="toc-text">5. 如何处理热点数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-什么是热点"><span class="toc-text">5.1 什么是热点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-热点操作"><span class="toc-text">5.1.1 热点操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-热点数据"><span class="toc-text">5.1.2 热点数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-发现热点数据"><span class="toc-text">5.2 发现热点数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-发现静态热点数据"><span class="toc-text">5.2.1 发现静态热点数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-发现动态热点数据"><span class="toc-text">5.2.2 发现动态热点数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-如何处理热点数据"><span class="toc-text">5.3 如何处理热点数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-1-优化"><span class="toc-text">5.3.1 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-2-限制"><span class="toc-text">5.3.2 限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-3-隔离"><span class="toc-text">5.3.3 隔离</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-流量削峰"><span class="toc-text">6. 流量削峰</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-削峰的原因"><span class="toc-text">6.1 削峰的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-无损削峰方式"><span class="toc-text">6.2 无损削峰方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-排队"><span class="toc-text">6.2.1 排队</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-答题"><span class="toc-text">6.2.2 答题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-分层过滤"><span class="toc-text">6.2.3 分层过滤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-影响性能的因素"><span class="toc-text">7. 影响性能的因素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-性能的定义"><span class="toc-text">7.1 性能的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-1-响应时间"><span class="toc-text">7.1.1 响应时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2-线程数"><span class="toc-text">7.1.2 线程数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-如何发现瓶颈"><span class="toc-text">7.2 如何发现瓶颈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-如何优化系统"><span class="toc-text">7.3 如何优化系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-1-减少编码"><span class="toc-text">7.3.1 减少编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-2-减少序列化"><span class="toc-text">7.3.2 减少序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-3-Java-秒杀场景的针对性优化"><span class="toc-text">7.3.3 Java 秒杀场景的针对性优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-4-并发读优化"><span class="toc-text">7.3.4 并发读优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-减库存设计的核心逻辑"><span class="toc-text">8. 减库存设计的核心逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-减库存的方式"><span class="toc-text">8.1 减库存的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-1-下单减库存"><span class="toc-text">8.1.1 下单减库存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-2-付款减库存"><span class="toc-text">8.1.2 付款减库存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-3-预扣库存"><span class="toc-text">8.1.3 预扣库存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-可能存在的问题"><span class="toc-text">8.2 可能存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-大型秒杀中如何减库存"><span class="toc-text">8.3 大型秒杀中如何减库存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-如何设计兜底方案？"><span class="toc-text">9. 如何设计兜底方案？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-高可用建设应该从哪里着手？"><span class="toc-text">9.1 高可用建设应该从哪里着手？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-降级"><span class="toc-text">9.2 降级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-限流"><span class="toc-text">9.3 限流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-拒绝服务"><span class="toc-text">9.4 拒绝服务</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><h2 id="1-1-并发读写"><a href="#1-1-并发读写" class="headerlink" title="1.1 并发读写"></a>1.1 并发读写</h2><p>秒杀要解决的主要问题是：并发读与并发写。</p>
+<p>并发读的优化理念是尽量减少用户到服务端来读数据，或者让他们读更少的数据；并发写的处理原则一样，要求我们在数据库层面独立出一个库，做特殊的处理。</p>
+<p>其次，还需要针对秒杀系统做一些保护，针对意料之外的情况设计兜底方案，以防止最坏的情况发生。</p>
+<h2 id="1-2-API设计原则"><a href="#1-2-API设计原则" class="headerlink" title="1.2 API设计原则"></a>1.2 API设计原则</h2><p>值得注意的地方是：如果想打造并维护一个超大流量并发读写、高性能、高可用的系统，在整个用户请求路径上从浏览器到服务端我们要遵循几个原则，就是保证<strong><em>用户请求的数据尽量少、请求数尽量少、路径尽量短、依赖尽量少，不要有单点</em></strong></p>
+<h2 id="1-3-秒杀架构原则"><a href="#1-3-秒杀架构原则" class="headerlink" title="1.3 秒杀架构原则"></a>1.3 秒杀架构原则</h2><h3 id="1-3-1-高可用"><a href="#1-3-1-高可用" class="headerlink" title="1.3.1 高可用"></a>1.3.1 高可用</h3><p>整个系统架构需要满足高可用性，流量符合预期的时候肯定要稳定，就是超出预期也同样不能掉链子，保证秒杀产品顺利卖出。</p>
+<h3 id="1-3-2-一致性"><a href="#1-3-2-一致性" class="headerlink" title="1.3.2 一致性"></a>1.3.2 一致性</h3><p>数据必须一致，即成交总量必须和设定的数量一致。</p>
+<h3 id="1-3-3-高可用"><a href="#1-3-3-高可用" class="headerlink" title="1.3.3 高可用"></a>1.3.3 高可用</h3><p>系统的性能要足够强，支撑足够大的流量，不仅是服务端要做极致的性能优化，而且在整个请求链路上都要做协同的优化，每个地方都要快一点，整个系统就完美了。</p>
+<p>本文将从这三个原则上来分别进行详细说明。</p>
+<h1 id="2-架构原则"><a href="#2-架构原则" class="headerlink" title="2. 架构原则"></a>2. 架构原则</h1><p>秒杀系统本质上是一个满足大并发、高性能和高可用的分布式系统。</p>
+<h2 id="2-1-数据尽量少"><a href="#2-1-数据尽量少" class="headerlink" title="2.1 数据尽量少"></a>2.1 数据尽量少</h2><p>用户请求的数据能少就少，请求的数据包括上传给系统的数据和系统返回给用户的数据。</p>
+<p>因为这些数据在网络上传输需要时间，其次不管是请求数据还是返回数据都需要服务器处理，而服务器在写网络的时候通常都要做压缩和字符编码，这些都非常消耗CPU，所以减少传输的数据量可以显著减少CPU的使用。</p>
+<p>同样，数据尽量少还要求系统依赖的数据能少就少，包括系统完成某些业务逻辑需要读取和保存的数据，这些数据一般是和后台服务以及数据库打交道的。调用其他服务会涉及数据的序列化和反序列化，这也是CPU的一大杀手，同样也会增加延时。而且数据库本身也很容易成为瓶颈，因此越少和数据库打交道越好。</p>
+<h2 id="2-2-请求数尽量少"><a href="#2-2-请求数尽量少" class="headerlink" title="2.2 请求数尽量少"></a>2.2 请求数尽量少</h2><p>用户请求的页面返回后，浏览器渲染这个页面还要包含其他的额外请求，比如说，这个页面依赖的 CSS/JavaScript、图片，以及 Ajax 请求等等都定义为“额外请求”，这些额外请求应该尽量少。因为浏览器每发出一个请求都多少会有一些消耗，例如建立连接要做三次握手，有的时候有页面依赖或者连接数限制，一些请求（例如 JavaScript）还需要串行加载等。另外，如果不同请求的域名不一样的话，还涉及这些域名的 DNS 解析，可能会耗时更久。所以你要记住的是，减少请求数可以显著减少以上这些因素导致的资源消耗。</p>
+<p>例如，减少请求数最常用的一个实践就是合并 CSS 和 JavaScript 文件，把多个 JavaScript 文件合并成一个文件，在 URL 中用逗号隔开（<code>https://g.xxx.com/tm/xx-b/4.0.94/mods/??module-preview/index.xtpl.js,module-jhs/index.xtpl.js,module-focus/index.xtpl.js</code>）。这种方式在服务端仍然是单个文件各自存放，只是服务端会有一个组件解析这个 URL，然后动态把这些文件合并起来一起返回。</p>
+<h2 id="2-3-路径要尽量短"><a href="#2-3-路径要尽量短" class="headerlink" title="2.3 路径要尽量短"></a>2.3 路径要尽量短</h2><p>路径指的是用户发出请求到返回数据这个过程中需要经过的中间节点的数量。</p>
+<p>通常，这些节点可以表示为一个系统或者一个新的 Socket 连接（比如代理服务器只是创建一个新的 Socket 连接来转发请求）。每经过一个节点，一般都会产生一个新的 Socket 连接。</p>
+<p>然而，每增加一个连接都会增加新的不确定性。从概率统计上来说，假如一次请求经过 5 个节点，每个节点的可用性是 99.9% 的话，那么整个请求的可用性是：99.9% 的 5 次方，约等于 99.5%。</p>
+<p>所以缩短请求路径不仅可以增加可用性，同样可以有效提升性能（减少中间节点可以减少数据的序列化与反序列化），并减少延时（可以减少网络传输耗时）。</p>
+<p>要缩短访问路径可以将多个相互有强依赖的应用合并部署在一起，将远程过程调用变成JVM内部的方法调用。</p>
+<h2 id="2-4-依赖要尽量少"><a href="#2-4-依赖要尽量少" class="headerlink" title="2.4 依赖要尽量少"></a>2.4 依赖要尽量少</h2><p>所谓依赖，指的是要完成一次用户请求必须依赖的系统或者服务。 </p>
+<p>举个例子，比如说你要展示秒杀页面，而这个页面必须强依赖商品信息、用户信息，还有其他如优惠券、成交列表等这些对秒杀不是非要不可的信息（弱依赖），这些弱依赖在紧急情况下就可以去掉。</p>
+<p>要减少依赖，我们可以给系统进行分级，比如 0 级系统、1 级系统、2 级系统、3 级系统，0 级系统如果是最重要的系统，那么 0 级系统强依赖的系统也同样是最重要的系统，以此类推。</p>
+<p>注意，0 级系统要尽量减少对 1 级系统的强依赖，防止重要的系统被不重要的系统拖垮。例如支付系统是 0 级系统，而优惠券是 1 级系统的话，在极端情况下可以把优惠券给降级，防止支付系统被优惠券这个 1 级系统给拖垮。</p>
+<h2 id="2-5-不要有单点"><a href="#2-5-不要有单点" class="headerlink" title="2.5 不要有单点"></a>2.5 不要有单点</h2><p>不能有单点，因为单点意味着没有备份，风险不可控，设计分布式系统的一个最重要的原则就是消除单点。</p>
+<p>如何避免单点？ —-&gt; 避免将服务的状态和机器绑定，即把服务无状态化，这样服务就可以在机器中随意移动了。 </p>
+<p>如何那把服务的状态和机器解耦呢？这里也有很多实现方式。例如把和机器相关的配置动态化，这些参数可以通过配置中心来动态推送，在服务启动时动态拉取下来，我们在这些配置中心设置一些规则来方便地改变这些映射关系。</p>
+<p>应用无状态化是有效避免单点的一种方式，但是像存储服务本身很难无状态化，因为数据要存储在磁盘上，本身就要和机器绑定，那么这种场景一般要通过冗余多个备份的方式来解决单点问题。</p>
+<h1 id="3-不同场景下的不同架构案例"><a href="#3-不同场景下的不同架构案例" class="headerlink" title="3. 不同场景下的不同架构案例"></a>3. 不同场景下的不同架构案例</h1><p>如果你想快速搭建一个简单的秒杀系统，只需要把你的商品购买页面增加一个“定时上架”功能，仅在秒杀开始时才让用户看到购买按钮，当商品的库存卖完了也就结束了。这就是当时第一个版本的秒杀系统实现方式。</p>
+<p>但随着请求量的加大（比如从 1w/s 到了 10w/s 的量级），这个简单的架构很快就遇到了瓶颈，因此需要做架构改造来提升系统性能。这些架构改造包括：</p>
+<ol>
+<li>把秒杀系统独立出来单独打造一个系统，这样可以有针对性地做优化，例如这个独立出来的系统就减少了店铺装修的功能，减少了页面的复杂度；</li>
+<li>在系统部署上也独立做一个机器集群，这样秒杀的大流量就不会影响到正常的商品购买集群的机器负载；</li>
+<li>将热点数据（如库存数据）单独放到一个缓存系统中，以提高“读性能”；</li>
+<li>增加秒杀答题，防止有秒杀器抢单。</li>
+</ol>
+<p>此时秒杀已经成为了一个独立的新系统，另外核心的一些数据放到了缓存当中，其他的关联系统也都以独立集群的方式进行部署。</p>
+<p><img src="https://i.loli.net/2020/02/03/9RJsCGFtgbcyrhZ.jpg" alt="fig1.jpg"></p>
+<p>但是这个架构仍然无法支持超过100w/s的请求量，因此为了进一步提高秒杀系统的性能，又对架构做了进一步的升级，比如：</p>
+<ol>
+<li>对页面进行彻底的动静分离，使得用户秒杀时不需要刷新整个页面，而只需要点击抢宝按钮，借此把页面刷新的数据降到最少；</li>
+<li>在服务端对秒杀商品进行本地缓存，不需要再调用依赖系统的后台服务获取数据，甚至不需要去公共的缓存集群中查询数据，这样不仅可以减少系统调用，而且能够避免压垮公共缓存集群。</li>
+<li>增加系统限流保护，防止最坏的情况发生</li>
+</ol>
+<p>此时整个系统架构变成了这个样子，已经对页面进行了进一步的静态化，秒杀过程当中就不需要刷新整个页面了，只需要向服务端请求很少的动态数据。而且最关键的详情和交易系统都增加了本地缓存，来提前缓存秒杀商品的信息，热点数据库也做了独立部署。</p>
+<p><img src="https://i.loli.net/2020/02/03/46cK3CdURO8Yngp.jpg" alt="fig2.jpg"></p>
+<p>从前面的几次升级来看，其实越到后面需要定制的地方越多，也就是越“不通用”。例如，把秒杀商品缓存在每台机器的内存中，这种方式显然不适合太多的商品同时进行秒杀的情况，因为单机的内存始终有限。所以要取得极致的性能，就要在其他地方（比如，通用性、易用性、成本等方面）有所牺牲。</p>
+<h1 id="4-动静分离的方案"><a href="#4-动静分离的方案" class="headerlink" title="4. 动静分离的方案"></a>4. 动静分离的方案</h1><p>秒杀系统需要让请求效率足够高 - 提高单次请求的效率，减少没必要的请求。</p>
+<h2 id="4-1-何为动静数据"><a href="#4-1-何为动静数据" class="headerlink" title="4.1 何为动静数据"></a>4.1 何为动静数据</h2><p>将用户请求的数据（如HTML）划分为动态数据和静态数据。而动态静态数据的划分，在于看页面中输出的数据是否和URL，浏览者，时间，地域相关，以及是否含有Cookie等私密数据。</p>
+<ol>
+<li>对很多媒体类的网站来说，无论谁来看文章，展示的数据都是一样的，那么哪怕这是个动态页面，它仍然是个典型的静态数据。</li>
+<li>访问淘宝的首页，每个人看到的页面可能都是不一样的，其中包含了很多根据访问者个人信息进行的推荐，这些个性化的数据就称为动态数据。</li>
+</ol>
+<p>这里再强调一下，我们所说的静态数据，不能仅仅理解为传统意义上完全存在磁盘上的 HTML 页面，它也可能是经过 Java 系统产生的页面，但是它输出的页面本身不包含上面所说的那些因素。也就是所谓“动态”还是“静态”，并不是说数据本身是否动静，而是数据中是否含有和访问者相关的个性化数据。</p>
+<p>这样做动静分离的时候，我们就可以对分离出来的静态数据做缓存，有了缓存以后，静态数据的访问效率肯定就提高了。</p>
+<h2 id="4-2-如何对静态数据做缓存？"><a href="#4-2-如何对静态数据做缓存？" class="headerlink" title="4.2 如何对静态数据做缓存？"></a>4.2 如何对静态数据做缓存？</h2><h3 id="4-2-1-距离用户最近"><a href="#4-2-1-距离用户最近" class="headerlink" title="4.2.1 距离用户最近"></a>4.2.1 距离用户最近</h3><p>将静态数据缓存到离用户最近的地方。静态数据就是那些相对不会变化的数据，因此可以做缓存。常见的，我们可以缓存在：</p>
+<ol>
+<li>用户浏览器</li>
+<li>CDN上</li>
+<li>服务端的Cache中</li>
+</ol>
+<h3 id="4-2-2-静态化改造要直接缓存HTTP连接"><a href="#4-2-2-静态化改造要直接缓存HTTP连接" class="headerlink" title="4.2.2 静态化改造要直接缓存HTTP连接"></a>4.2.2 静态化改造要直接缓存HTTP连接</h3><p>系统的静态化改造是直接缓存HTTP连接而不仅仅是数据了。如下图所示，Web代理服务器根据请求URL直接去除对应的HTTP响应头和响应体然后直接返回，这个响应过程连HTTP协议都不用重新组装，甚至连HTTP请求头也不需要解析。</p>
+<p><img src="https://i.loli.net/2020/02/03/ydBbWKCeip8jGm5.jpg" alt="fig3.jpg"></p>
+<h3 id="4-2-3-缓存语言"><a href="#4-2-3-缓存语言" class="headerlink" title="4.2.3 缓存语言"></a>4.2.3 缓存语言</h3><p>不同语言写的cache软件处理缓存数据的效率也各不相同。以Java为例，Java不擅长处理大量连接请求，每个连接消耗的内存会比较多，Servlet容器解析HTTP协议比较慢。所以可以不在Java层做缓存，而是直接在Web服务器层上做，这样就可以屏蔽Java的一些弱点；而相比起来，Web服务器(Nginx, Apache, Varnish)会更加擅长处理大并发的静态文件请求。</p>
+<h2 id="4-3-静态数据处理方案"><a href="#4-3-静态数据处理方案" class="headerlink" title="4.3 静态数据处理方案"></a>4.3 静态数据处理方案</h2><p>以商品详情页为例：</p>
+<h3 id="4-3-1-URL唯一化"><a href="#4-3-1-URL唯一化" class="headerlink" title="4.3.1 URL唯一化"></a>4.3.1 URL唯一化</h3><p>要缓存整个HTTP连接，以URL作为缓存的key</p>
+<h3 id="4-3-2-分离浏览者相关的因素"><a href="#4-3-2-分离浏览者相关的因素" class="headerlink" title="4.3.2 分离浏览者相关的因素"></a>4.3.2 分离浏览者相关的因素</h3><p>分离用户的相关信息，是否登录以及登录身份等等。</p>
+<h3 id="4-3-3-分离时间因素"><a href="#4-3-3-分离时间因素" class="headerlink" title="4.3.3 分离时间因素"></a>4.3.3 分离时间因素</h3><p>服务端输出的是哪也通过动态请求获取</p>
+<h3 id="4-3-4-异步化地域因素"><a href="#4-3-4-异步化地域因素" class="headerlink" title="4.3.4 异步化地域因素"></a>4.3.4 异步化地域因素</h3><p>详情页面上与地域相关的因素做成异步获取的方式</p>
+<h3 id="4-3-5-去掉Cookie"><a href="#4-3-5-去掉Cookie" class="headerlink" title="4.3.5 去掉Cookie"></a>4.3.5 去掉Cookie</h3><p>服务端输出的页面包含的 Cookie 可以通过代码软件来删除，如 Web 服务器 Varnish 可以通过 unset req.http.cookie 命令去掉 Cookie。注意，这里说的去掉 Cookie 并不是用户端收到的页面就不含 Cookie 了，而是说，在缓存的静态数据中不含有 Cookie。</p>
+<h2 id="4-4-动态数据处理方案"><a href="#4-4-动态数据处理方案" class="headerlink" title="4.4 动态数据处理方案"></a>4.4 动态数据处理方案</h2><h3 id="4-4-1-ESI-Edge-Side-Includes"><a href="#4-4-1-ESI-Edge-Side-Includes" class="headerlink" title="4.4.1 ESI (Edge Side Includes)"></a>4.4.1 ESI (Edge Side Includes)</h3><p>在Web代理服务器上做动态内容请求，并将请求插入到静态页面中，当用户拿到页面时已经是一个完整的页面了。对服务端性能有影响，但是用户体验会比较好</p>
+<h3 id="4-4-2-CSI-Client-Side-Include"><a href="#4-4-2-CSI-Client-Side-Include" class="headerlink" title="4.4.2 CSI (Client Side Include)"></a>4.4.2 CSI (Client Side Include)</h3><p>单独发出异步Javascript请求，向服务端获取动态内容。这种方式服务端性能更好，但是用户端可能会有延时，体验会差一些</p>
+<h2 id="4-5-动静分离架构方案"><a href="#4-5-动静分离架构方案" class="headerlink" title="4.5 动静分离架构方案"></a>4.5 动静分离架构方案</h2><h3 id="4-5-1-实体机单机部署"><a href="#4-5-1-实体机单机部署" class="headerlink" title="4.5.1 实体机单机部署"></a>4.5.1 实体机单机部署</h3><p>这种方案是将虚拟机改为实体机，以增大 Cache 的容量，并且采用了一致性 Hash 分组的方式来提升命中率。这里将 Cache 分成若干组，是希望能达到命中率和访问热点的平衡。Hash 分组越少，缓存的命中率肯定就会越高，但短板是也会使单个商品集中在一个分组中，容易导致 Cache 被击穿，所以我们应该适当增加多个相同的分组，来平衡访问热点和命中率的问题。</p>
+<p>Nginx+Cache+Java结构实体机单机部署<br><img src="https://i.loli.net/2020/02/03/m6GuWRPxrk4hvK8.jpg" alt="fig4.jpg"></p>
+<p>这种部署方式有以下几个优点：</p>
+<ol>
+<li>没有网络瓶颈，而且能使用大内存；</li>
+<li>既能提升命中率，又能减少 Gzip 压缩；</li>
+<li>减少 Cache 失效压力，因为采用定时失效方式，例如只缓存 3 秒钟，过期即自动失效。</li>
+</ol>
+<p>这个方案中，虽然把通常只需要虚拟机或者容器运行的 Java 应用换成实体机，优势很明显，它会增加单机的内存容量，但是一定程度上也造成了 CPU 的浪费，因为单个的 Java 进程很难用完整个实体机的 CPU。</p>
+<p>另外就是，一个实体机上部署了 Java 应用又作为 Cache 来使用，这造成了运维上的高复杂度，所以这是一个折中的方案。如果你的公司里，没有更多的系统有类似需求，那么这样做也比较合适，如果你们有多个业务系统都有静态化改造的需求，那还是建议把 Cache 层单独抽出来公用比较合理，如下面的方案 2 所示。</p>
+<h3 id="4-5-2-统一Cache层"><a href="#4-5-2-统一Cache层" class="headerlink" title="4.5.2 统一Cache层"></a>4.5.2 统一Cache层</h3><p>所谓统一 Cache 层，就是将单机的 Cache 统一分离出来，形成一个单独的 Cache 集群。统一 Cache 层是个更理想的可推广方案，该方案的结构图如下：</p>
+<p><img src="https://i.loli.net/2020/02/03/oJjRUqAkN8PVGaM.jpg" alt="fig5.jpg"></p>
+<p>统一Cache层，可以减少运维成本，也方便接入其他静态化系统，还有以下优点：</p>
+<ol>
+<li>单独一个 Cache 层，可以减少多个应用接入时使用 Cache 的成本。这样接入的应用只要维护自己的 Java 系统就好，不需要单独维护 Cache，而只关心如何使用即可。</li>
+<li>统一 Cache 的方案更易于维护，如后面加强监控、配置的自动化，只需要一套解决方案就行，统一起来维护升级也比较方便。</li>
+<li>可以共享内存，最大化利用内存，不同系统之间的内存可以动态切换，从而能够有效应对各种攻击。</li>
+</ol>
+<p>这种方案也会带来一些问题。比如：</p>
+<ol>
+<li>Cache 层内部交换网络成为瓶颈；</li>
+<li>缓存服务器的网卡也会是瓶颈；</li>
+<li>机器少风险较大，挂掉一台就会影响很大一部分缓存数据。</li>
+</ol>
+<p>要解决上面这些问题，可以再对 Cache 做 Hash 分组，即一组 Cache 缓存的内容相同，这样能够避免热点数据过度集中导致新的瓶颈产生。</p>
+<h3 id="4-5-3-使用CDN"><a href="#4-5-3-使用CDN" class="headerlink" title="4.5.3 使用CDN"></a>4.5.3 使用CDN</h3><p>在将整个系统做动静分离后，我们自然会想到更进一步的方案，就是将 Cache 进一步前移到 CDN 上，因为 CDN 离用户最近，效果会更好。</p>
+<p>有几个问题需要解决： </p>
+<ol>
+<li>失效问题</li>
+</ol>
+<p>前面我们也有提到过缓存时效的问题，不知道你有没有理解，我再来解释一下。谈到静态数据时，我说过一个关键词叫“相对不变”，它的言外之意是“可能会变化”。比如一篇文章，现在不变，但如果你发现个错别字，是不是就会变化了？如果你的缓存时效很长，那用户端在很长一段时间内看到的都是错的。所以，这个方案中也是，我们需要保证 CDN 可以在秒级时间内，让分布在全国各地的 Cache 同时失效，这对 CDN 的失效系统要求很高。</p>
+<ol start="2">
+<li>命中率问题</li>
+</ol>
+<p>Cache 最重要的一个衡量指标就是“高命中率”，不然 Cache 的存在就失去了意义。同样，如果将数据全部放到全国的 CDN 上，必然导致 Cache 分散，而 Cache 分散又会导致访问请求命中同一个 Cache 的可能性降低，那么命中率就成为一个问题。</p>
+<ol start="3">
+<li>发布更新问题</li>
+</ol>
+<p>如果一个业务系统每周都有日常业务需要发布，那么发布系统必须足够简洁高效，而且你还要考虑有问题时快速回滚和排查问题的简便性。</p>
+<p>从前面的分析来看，将商品详情系统放到全国的所有 CDN 节点上是不太现实的，因为存在失效问题、命中率问题以及系统的发布更新问题。那么是否可以选择若干个节点来尝试实施呢？答案是“可以”，但是这样的节点需要满足几个条件：</p>
+<ol>
+<li>靠近访问量比较集中的地区</li>
+<li>离主站相对较远</li>
+<li>节点到主站间的网络比较好，比较稳定</li>
+<li>节点容量大，不会占用其他CDN太多的资源</li>
+</ol>
+<p>基于上面几个因素，选择 CDN 的二级 Cache 比较合适，因为二级 Cache 数量偏少，容量也更大，让用户的请求先回源的 CDN 的二级 Cache 中，如果没命中再回源站获取数据，部署方式如下图所示：</p>
+<p><img src="https://i.loli.net/2020/02/03/Eu5q7bATK4xFkSW.jpg" alt="fig6.jpg"></p>
+<p>使用 CDN 的二级 Cache 作为缓存，可以达到和当前服务端静态化 Cache 类似的命中率，因为节点数不多，Cache 不是很分散，访问量也比较集中，这样也就解决了命中率问题，同时能够给用户最好的访问体验，是当前比较理想的一种 CDN 化方案。</p>
+<h1 id="5-如何处理热点数据"><a href="#5-如何处理热点数据" class="headerlink" title="5. 如何处理热点数据"></a>5. 如何处理热点数据</h1><p>有一部分数据是会被大量用户访问的热卖商品，这部分商品是需要特殊关注的，因为其会对系统产生一系列的影响。</p>
+<p>首先，热点请求会大量占用服务器处理资源，虽然这个热点可能占总量的很小的一部分，然而却可能抢占90%以上的服务器资源，如果这个热点请求还是没有价值的无效请求，那么对系统资源来说完全是浪费。</p>
+<h2 id="5-1-什么是热点"><a href="#5-1-什么是热点" class="headerlink" title="5.1 什么是热点"></a>5.1 什么是热点</h2><h3 id="5-1-1-热点操作"><a href="#5-1-1-热点操作" class="headerlink" title="5.1.1 热点操作"></a>5.1.1 热点操作</h3><p>例如大量的刷新页面，大量添加购物车，零点大量的下单等。这些操作可以抽象为“读请求”和“写请求”，这两种请求的处理方式大相径庭，读请求的优化空间比较大，而写请求的瓶颈一般都在存储层，优化的思路就是根据CAP理论做平衡。</p>
+<h3 id="5-1-2-热点数据"><a href="#5-1-2-热点数据" class="headerlink" title="5.1.2 热点数据"></a>5.1.2 热点数据</h3><p>热点数据就是用户的热点请求对应的数据，又可以分为静态热点数据和动态热点数据。</p>
+<p>静态热点数据，就是能够提前预测的热点数据。动态热点数据，就是不能被提前预测到的，系统在运行过程中临时产生的热点。</p>
+<h2 id="5-2-发现热点数据"><a href="#5-2-发现热点数据" class="headerlink" title="5.2 发现热点数据"></a>5.2 发现热点数据</h2><h3 id="5-2-1-发现静态热点数据"><a href="#5-2-1-发现静态热点数据" class="headerlink" title="5.2.1 发现静态热点数据"></a>5.2.1 发现静态热点数据</h3><p>如前面讲的，静态热点数据可以通过商业手段，例如强制让卖家通过报名参加的方式提前把热点商品筛选出来，实现方式是通过一个运营系统，把参加活动的商品数据进行打标，然后通过一个后台系统对这些热点商品进行预处理，如提前进行缓存。但是这种通过报名提前筛选的方式也会带来新的问题，即增加卖家的使用成本，而且实时性较差，也不太灵活。</p>
+<p>不过，除了提前报名筛选这种方式，你还可以通过技术手段提前预测，例如对买家每天访问的商品进行大数据计算，然后统计出 TOP N 的商品，我们可以认为这些 TOP N 的商品就是热点商品。</p>
+<h3 id="5-2-2-发现动态热点数据"><a href="#5-2-2-发现动态热点数据" class="headerlink" title="5.2.2 发现动态热点数据"></a>5.2.2 发现动态热点数据</h3><p>具体实现</p>
+<ol>
+<li>构建异步系统，用来收集交易链路上各个环节中的中间件产品的热点Key，例如Nginx、缓存、RPC服务框架</li>
+<li>建立一个热点上报和可以按照需求订阅的热点服务的下发规范。因为交易链路上各个系统(包括详情，购物车，交易，优惠，库存等等)会有访问上的时间差，需要将上游已经发现的热点透传给下游系统，提前做好保护。例如，对于大促高峰期，详情系统是最早知道的。</li>
+<li>将上游系统收集的热点数据发送到热点服务台，让下游系统提前知道信息，做热电保护</li>
+</ol>
+<p><img src="https://i.loli.net/2020/02/03/hGd5HWVLaEKAwZS.jpg" alt="fig7.jpg"></p>
+<p>我们通过部署在每台机器上的 Agent 把日志汇总到聚合和分析集群中，然后把符合一定规则的热点数据，通过订阅分发系统再推送到相应的系统中。你可以是把热点数据填充到 Cache 中，或者直接推送到应用服务器的内存中，还可以对这些数据进行拦截，总之下游系统可以订阅这些数据，然后根据自己的需求决定如何处理这些数据。</p>
+<p>Tips:</p>
+<ol>
+<li>热点服务的后台抓取热点数据日志的方式最好采用异步的方式；可以保证通过性，不会影响业务系统和中间件产品的主流程。</li>
+<li>热点服务和中间件自身需要有热电保护模块，每个中间件和应用和需要保护自己</li>
+<li>热点发现需要接近实时，因为只有接近实时才有意义，能及时对下游系统提供保护</li>
+</ol>
+<h2 id="5-3-如何处理热点数据"><a href="#5-3-如何处理热点数据" class="headerlink" title="5.3 如何处理热点数据"></a>5.3 如何处理热点数据</h2><h3 id="5-3-1-优化"><a href="#5-3-1-优化" class="headerlink" title="5.3.1 优化"></a>5.3.1 优化</h3><p>缓存热点数据，如果热点数据做了动静分离，那么可以长期缓存静态数据。</p>
+<h3 id="5-3-2-限制"><a href="#5-3-2-限制" class="headerlink" title="5.3.2 限制"></a>5.3.2 限制</h3><p>保护机制，比如对商品的ASIN做一致性hash，然后根据hash做分桶，每个分桶处置一个处理队列，通过这种方式将热点商品限制在一个请求队列当中，防止因为某些热点商品占用太多的服务器资源，而使得其他请求始终得不到服务器的处理资源。 </p>
+<h3 id="5-3-3-隔离"><a href="#5-3-3-隔离" class="headerlink" title="5.3.3 隔离"></a>5.3.3 隔离</h3><p>将热点数据隔离出来，针对热点数据可以再做优化</p>
+<ol>
+<li>业务隔离 - 商业逻辑上运行上的隔离</li>
+<li>系统隔离 - 运行时的隔离</li>
+<li>数据隔离 - 单独数据库 Cache集群</li>
+</ol>
+<h1 id="6-流量削峰"><a href="#6-流量削峰" class="headerlink" title="6. 流量削峰"></a>6. 流量削峰</h1><p>秒杀请求在时间上是高度集中于某一特定的时间点的，这样一来会有一个特别高的流量峰值，它对资源的消耗是瞬时的。</p>
+<p>但是对于秒杀这个场景来说，最终能够抢到的商品的人数是固定的，并发读越高，无效请求也就越多了。</p>
+<p>从业务角度上来说，秒杀希望更多的人能够参与进来，更多的人来刷新页面，但是真正开始下单的时候，秒杀请求就不是越多越好了，可以设计一些规则，让并发的请求更多的延缓，甚至我们可以过滤掉一些无效请求。</p>
+<h2 id="6-1-削峰的原因"><a href="#6-1-削峰的原因" class="headerlink" title="6.1 削峰的原因"></a>6.1 削峰的原因</h2><p>我们知道服务器的处理资源是恒定的，你用或者不用它的处理能力都是一样的，所以出现峰值的话，很容易导致忙到处理不过来，闲的时候却又没有什么要处理。但是由于要保证服务质量，我们的很多处理资源只能按照忙的时候来预估，而这会导致资源的一个浪费。</p>
+<p>削峰主要是为了能够让服务端处理变得更加平稳，也为了能够节省服务器的资源成本。从秒杀这个场景来说，就是更多延缓用户请求的发出，以便减少或者过滤掉一些无效请求，遵从请求数要尽量少的原则。</p>
+<h2 id="6-2-无损削峰方式"><a href="#6-2-无损削峰方式" class="headerlink" title="6.2 无损削峰方式"></a>6.2 无损削峰方式</h2><h3 id="6-2-1-排队"><a href="#6-2-1-排队" class="headerlink" title="6.2.1 排队"></a>6.2.1 排队</h3><p>用消息队列缓冲瞬时流量，将同步的直接调用转换成异步的间接推送，中间通过一个队列在一端承接瞬时的流量洪峰，在另外一端平滑地将信息推送出去。</p>
+<p><img src="https://i.loli.net/2020/02/03/dyp5UfOgsSHC3hi.jpg" alt="fig8.jpg"></p>
+<p>但是如果流量峰值持续一段时间，超过了消息队列的处理上限，还是会被压垮的。</p>
+<p>其他常见的排队方式有：</p>
+<ol>
+<li>利用线程池加锁等待</li>
+<li>先进先出、先进后出等常用的内存排队算法的实现</li>
+<li>将请求序列化到文件当中，然后再顺序读文件</li>
+</ol>
+<h3 id="6-2-2-答题"><a href="#6-2-2-答题" class="headerlink" title="6.2.2 答题"></a>6.2.2 答题</h3><p>第一个目的是防止部分买家使用秒杀器在参加秒杀时作弊。2011 年秒杀非常火的时候，秒杀器也比较猖獗，因而没有达到全民参与和营销的目的，所以系统增加了答题来限制秒杀器。增加答题后，下单的时间基本控制在 2s 后，秒杀器的下单比例也大大下降。</p>
+<p>第二个目的其实就是延缓请求，起到对请求流量进行削峰的作用，从而让系统能够更好地支持瞬时的流量高峰。这个重要的功能就是把峰值的下单请求拉长，从以前的 1s 之内延长到 2s~10s。这样一来，请求峰值基于时间分片了。这个时间的分片对服务端处理并发非常重要，会大大减轻压力。而且，由于请求具有先后顺序，靠后的请求到来时自然也就没有库存了，因此根本到不了最后的下单步骤，所以真正的并发写就非常有限了。这种设计思路目前用得非常普遍，如当年支付宝的“咻一咻”、微信的“摇一摇”都是类似的方式。</p>
+<h3 id="6-2-3-分层过滤"><a href="#6-2-3-分层过滤" class="headerlink" title="6.2.3 分层过滤"></a>6.2.3 分层过滤</h3><p>采用漏斗式的设计</p>
+<p><img src="https://i.loli.net/2020/02/03/GCXLQ2UsIqElavZ.jpg" alt="fig9.jpg"></p>
+<p>假如请求分别经过 CDN、前台读系统（如商品详情系统）、后台系统（如交易系统）和数据库这几层，那么：</p>
+<ul>
+<li>大部分数据和流量在用户浏览器或者 CDN 上获取，这一层可以拦截大部分数据的读取</li>
+<li>经过第二层（即前台系统）时数据（包括强一致性的数据）尽量得走 Cache，过滤一些无效的请求</li>
+<li>再到第三层后台系统，主要做数据的二次检验，对系统做好保护和限流，这样数据量和请求就进一步减少</li>
+<li>最后在数据层完成数据的强一致性校验</li>
+</ul>
+<p>分层过滤的核心思想是：在不同的层次尽可能地过滤掉无效请求，让漏斗最末端的才是有效的请求。而达到这种效果，我们就必须对数据做分层的校验。</p>
+<p>分层校验的基本原则有：</p>
+<ol>
+<li>将动态请求的读数据缓存在Web端，过滤掉无效的数据读</li>
+<li>对读数据不做强一致性校验，减少因为一致性校验产生的瓶颈问题</li>
+<li>对写数据进行基于时间的合理分片，过滤掉过期的失效请求</li>
+<li>对写请求做限流保护，将超出系统承载能力的请求过滤掉</li>
+<li>对写数据进行强一致性校验，只保留最后有效的数据</li>
+</ol>
+<p>分层校验的目的是：在读系统中，尽量减少由于一致性校验带来的系统瓶颈，但是尽量将不影响性能的检查条件提前，如用户是否具有秒杀资格、商品状态是否正常、用户答题是否正确、秒杀是否已经结束、是否非法请求、营销等价物是否充足等；在写数据系统中，主要对写的数据（如“库存”）做一致性检查，最后在数据库层保证数据的最终准确性（如“库存”不能减为负数）。</p>
+<h1 id="7-影响性能的因素"><a href="#7-影响性能的因素" class="headerlink" title="7. 影响性能的因素"></a>7. 影响性能的因素</h1><h2 id="7-1-性能的定义"><a href="#7-1-性能的定义" class="headerlink" title="7.1 性能的定义"></a>7.1 性能的定义</h2><p>服务设备的不同对于性能的定义也是不一样的，例如CPU主要看主频，磁盘主要看IOPS(Input/ output Operations Per Second, 即每秒进行读写操作的次数)。</p>
+<p>关于秒杀，我们主要讨论系统服务端的性能，一般使用QPS来衡量，还有一个影响和QPS息息相关，即响应时间(Response Time, RT)，可以理解为服务器处理响应的耗时。</p>
+<p>正常情况下响应时间越短，一秒钟处理的请求数就会越多，这在单线程处理的情况下看起来是线性关系，即我们只要把每个请求的响应时间降到最低，那么性能就会最高。而在多线程当中，总QPS = （1000ms/ 响应时间）x 线程数，从这个角度上来看，性能和两个因素相关，一个是一次响应的服务端的耗时，一个是处理请求的线程数。</p>
+<h3 id="7-1-1-响应时间"><a href="#7-1-1-响应时间" class="headerlink" title="7.1.1 响应时间"></a>7.1.1 响应时间</h3><p>对于大部分的Web系统而言，响应时间一般是由CPU执行时间和线程等待时间组成的，即服务器在处理一个请求时，一部分是CPU本身在做运算，还有一部分是各种等待。</p>
+<p>理解了服务器处理请求的逻辑，估计你会说为什么我们不去减少这种等待时间。很遗憾，根据我们实际的测试发现，减少线程等待时间对提升性能的影响没有我们想象得那么大，它并不是线性的提升关系，这点在很多代理服务器（Proxy）上可以做验证。</p>
+<p>如果代理服务器本身没有CPU消耗，我们在每次给代理服务器代理的请求加个延时，即增加响应时间，但是这对代理服务器本身的吞吐量并没有多大的影响，因为代理服务器本身的资源并没有被消耗，可以通过增加代理服务器的处理线程数，来弥补响应时间对代理服务器的 QPS 的影响。</p>
+<p>其实，真正对性能有影响的是 CPU 的执行时间。这也很好理解，因为 CPU 的执行真正消耗了服务器的资源。经过实际的测试，如果减少 CPU 一半的执行时间，就可以增加一倍的 QPS。</p>
+<h3 id="7-1-2-线程数"><a href="#7-1-2-线程数" class="headerlink" title="7.1.2 线程数"></a>7.1.2 线程数</h3><p>并不是线程数越多越好，总QPS就会越大，因为线程本身也消耗资源，会受到其他因素的制约。例如，线程越多系统的线程切换成本就会越高，而且每个线程都会耗费一定的内存。</p>
+<p>默认的配置一般为：</p>
+<blockquote>
+<p>线程数 = 2 x CPU核数 + 1</p>
+</blockquote>
+<p>还有一个根据最佳实践得出来的公式为：</p>
+<blockquote>
+<p>线程数 = [(线程等待时间 + 线程CPU时间) / 线程CPU时间] x CPU数量</p>
+</blockquote>
+<p>因此要提升性能，我们就要减少CPU的执行时间，另外就是要设置一个合理的并发线程数量，通过这两方面来显著提升服务器的性能。</p>
+<h2 id="7-2-如何发现瓶颈"><a href="#7-2-如何发现瓶颈" class="headerlink" title="7.2 如何发现瓶颈"></a>7.2 如何发现瓶颈</h2><p>服务器会出现瓶颈的地方很多，例如CPU， 内存， 磁盘以及网络等可能都会导致瓶颈。另外不同的系统对于瓶颈的关注度不一样，例如对缓存系统来说，制约的是内存，而对存储型的系统来说I/O 更容易出现瓶颈。</p>
+<p>而对于秒杀，瓶颈更容易发生在CPU上。</p>
+<p>那么，如何发现 CPU 的瓶颈呢？其实有很多 CPU 诊断工具可以发现 CPU 的消耗，最常用的就是 JProfiler 和 Yourkit 这两个工具，它们可以列出整个请求中每个函数的 CPU 执行时间，可以发现哪个函数消耗的 CPU 时间最多，以便你有针对性地做优化。</p>
+<p>当然还有一些办法也可以近似地统计 CPU 的耗时，例如通过 jstack 定时地打印调用栈，如果某些函数调用频繁或者耗时较多，那么那些函数就会多次出现在系统调用栈里，这样相当于采样的方式也能够发现耗时较多的函数。</p>
+<p>虽说秒杀系统的瓶颈大部分在 CPU，但这并不表示其他方面就一定不出现瓶颈。例如，如果海量请求涌过来，你的页面又比较大，那么网络就有可能出现瓶颈。</p>
+<p>怎样简单地判断 CPU 是不是瓶颈呢？一个办法就是看当 QPS 达到极限时，你的服务器的 CPU 使用率是不是超过了 95%，如果没有超过，那么表示 CPU 还有提升的空间，要么是有锁限制，要么是有过多的本地 I/O 等待发生。</p>
+<h2 id="7-3-如何优化系统"><a href="#7-3-如何优化系统" class="headerlink" title="7.3 如何优化系统"></a>7.3 如何优化系统</h2><p>针对Java来说的：</p>
+<h3 id="7-3-1-减少编码"><a href="#7-3-1-减少编码" class="headerlink" title="7.3.1 减少编码"></a>7.3.1 减少编码</h3><p>Java的编码运行比较慢，在很多场景下，只要涉及字符串的操作都会比较消耗CPU资源，不管是磁盘IO还是网络IO，因为都需要将字符转换成字节，这个转换必须编码。</p>
+<p>每个字符的编码都需要查表，而这种查表的操作非常耗资源，所以减少字符到字节或者相反的转换、减少字符编码会非常有成效。减少编码就可以大大提升性能。</p>
+<p>那么如何才能减少编码呢？例如，网页输出是可以直接进行流输出的，即用 resp.getOutputStream() 函数写数据，把一些静态的数据提前转化成字节，等到真正往外写的时候再直接用 OutputStream() 函数写，就可以减少静态数据的编码转换。</p>
+<h3 id="7-3-2-减少序列化"><a href="#7-3-2-减少序列化" class="headerlink" title="7.3.2 减少序列化"></a>7.3.2 减少序列化</h3><p>序列化也是Java性能的一大天敌，减少Java当中的序列化操作也能大大提升性能。又因为序列化往往是和编码同时发生的，所以减少序列化也就减少了编码。</p>
+<p>序列化大部分是在 RPC 中发生的，因此避免或者减少 RPC 就可以减少序列化，当然当前的序列化协议也已经做了很多优化来提升性能。有一种新的方案，就是可以将多个关联性比较强的应用进行“合并部署”，而减少不同应用之间的 RPC 也可以减少序列化的消耗。</p>
+<p>所谓“合并部署”，就是把两个原本在不同机器上的不同应用合并部署到一台机器上，当然不仅仅是部署在一台机器上，还要在同一个 Tomcat 容器中，且不能走本机的 Socket，这样才能避免序列化的产生。</p>
+<h3 id="7-3-3-Java-秒杀场景的针对性优化"><a href="#7-3-3-Java-秒杀场景的针对性优化" class="headerlink" title="7.3.3 Java 秒杀场景的针对性优化"></a>7.3.3 Java 秒杀场景的针对性优化</h3><p>Java 和通用的 Web 服务器（如 Nginx 或 Apache 服务器）相比，在处理大并发的 HTTP 请求时要弱一点，所以一般我们都会对大流量的 Web 系统做静态化改造，让大部分请求和数据直接在 Nginx 服务器或者 Web 代理服务器（如 Varnish、Squid 等）上直接返回（这样可以减少数据的序列化与反序列化），而 Java 层只需处理少量数据的动态请求。针对这些请求，我们可以使用以下手段进行优化：</p>
+<ul>
+<li>直接使用 Servlet 处理请求。避免使用传统的 MVC 框架，这样可以绕过一大堆复杂且用处不大的处理逻辑，节省 1ms 时间（具体取决于你对 MVC 框架的依赖程度）。</li>
+<li>直接输出流数据。使用 resp.getOutputStream() 而不是 resp.getWriter() 函数，可以省掉一些不变字符数据的编码，从而提升性能；数据输出时推荐使用 JSON 而不是模板引擎（一般都是解释执行）来输出页面。</li>
+</ul>
+<h3 id="7-3-4-并发读优化"><a href="#7-3-4-并发读优化" class="headerlink" title="7.3.4 并发读优化"></a>7.3.4 并发读优化</h3><p>也许有读者会觉得这个问题很容易解决，无非就是放到 Tair 缓存里面。集中式缓存为了保证命中率一般都会采用一致性 Hash，所以同一个 key 会落到同一台机器上。虽然单台缓存机器也能支撑 30w/s 的请求，但还是远不足以应对像“大秒”这种级别的热点商品。那么，该如何彻底解决单点的瓶颈呢？</p>
+<p>答案是采用应用层的 LocalCache，即在秒杀系统的单机上缓存商品相关的数据。</p>
+<p>那么，又如何缓存（Cache）数据呢？你需要划分成动态数据和静态数据分别进行处理：</p>
+<ul>
+<li>像商品中的“标题”和“描述”这些本身不变的数据，会在秒杀开始之前全量推送到秒杀机器上，并一直缓存到秒杀结束；</li>
+<li>像库存这类动态数据，会采用“被动失效”的方式缓存一定时间（一般是数秒），失效后再去缓存拉取最新的数据。</li>
+</ul>
+<p>还有关于一致性的问题，因为库存是在不断更新的，这就要用到前面介绍的读数据的分层校验原则了，读的场景可以允许一定的脏数据，因为这里的误判只会导致少量原本无库存的下单请求被误认为有库存，可以等到真正写数据时再保证最终的一致性，通过在数据的高可用性和一致性之间的平衡，来解决高并发的数据读取问题。</p>
+<h1 id="8-减库存设计的核心逻辑"><a href="#8-减库存设计的核心逻辑" class="headerlink" title="8. 减库存设计的核心逻辑"></a>8. 减库存设计的核心逻辑</h1><p>不超卖是秒杀系统的前提。减库存到底应该是在下单阶段还是付款阶段呢？ </p>
+<h2 id="8-1-减库存的方式"><a href="#8-1-减库存的方式" class="headerlink" title="8.1 减库存的方式"></a>8.1 减库存的方式</h2><h3 id="8-1-1-下单减库存"><a href="#8-1-1-下单减库存" class="headerlink" title="8.1.1 下单减库存"></a>8.1.1 下单减库存</h3><p>即当买家下单之后，在商品的总库存中减去买家购买的数量。这种方式控制最精确，下单时直接通过数据库的事务机制控制商品库存，这样一定不会出现超卖的现象。但是有些人下完单以后并不会付款。</p>
+<h3 id="8-1-2-付款减库存"><a href="#8-1-2-付款减库存" class="headerlink" title="8.1.2 付款减库存"></a>8.1.2 付款减库存</h3><p>即买家下单后，并不立即减库存，而是等到有用户付款后才真正减库存，否则库存一直保留给其他买家。但因为付款时才减库存，如果并发比较高，有可能出现买家下单后付不了款的情况，因为可能商品已经被其他人买走了。</p>
+<h3 id="8-1-3-预扣库存"><a href="#8-1-3-预扣库存" class="headerlink" title="8.1.3 预扣库存"></a>8.1.3 预扣库存</h3><p>这种方式相对复杂一些，买家下单后，库存为其保留一定的时间（如 10 分钟），超过这个时间，库存将会自动释放，释放后其他买家就可以继续购买。在买家付款前，系统会校验该订单的库存是否还有保留：如果没有保留，则再次尝试预扣；如果库存不足（也就是预扣失败）则不允许继续付款；如果预扣成功，则完成付款并实际地减去库存。</p>
+<h2 id="8-2-可能存在的问题"><a href="#8-2-可能存在的问题" class="headerlink" title="8.2 可能存在的问题"></a>8.2 可能存在的问题</h2><p>假如我们采用“下单减库存”的方式，即用户下单后就减去库存，正常情况下，买家下单后付款的概率会很高，所以不会有太大问题。但是有一种场景例外，就是当卖家参加某个活动时，此时活动的有效时间是商品的黄金售卖时间，如果有竞争对手通过恶意下单的方式将该卖家的商品全部下单，让这款商品的库存减为零，那么这款商品就不能正常售卖了。要知道，这些恶意下单的人是不会真正付款的，这正是“下单减库存”方式的不足之处。</p>
+<p>既然“下单减库存”可能导致恶意下单，从而影响卖家的商品销售，那么有没有办法解决呢？你可能会想，采用“付款减库存”的方式是不是就可以了？的确可以。但是，“付款减库存”又会导致另外一个问题：库存超卖。</p>
+<p>假如有 100 件商品，就可能出现 300 人下单成功的情况，因为下单时不会减库存，所以也就可能出现下单成功数远远超过真正库存数的情况，这尤其会发生在做活动的热门商品上。这样一来，就会导致很多买家下单成功但是付不了款，买家的购物体验自然比较差。</p>
+<p>那么，既然“下单减库存”和“付款减库存”都有缺点，我们能否把两者相结合，将两次操作进行前后关联起来，下单时先预扣，在规定时间内不付款再释放库存，即采用“预扣库存”这种方式呢？</p>
+<p>这种方案确实可以在一定程度上缓解上面的问题。但是否就彻底解决了呢？其实没有！针对恶意下单这种情况，虽然把有效的付款时间设置为 10 分钟，但是恶意买家完全可以在 10 分钟后再次下单，或者采用一次下单很多件的方式把库存减完。针对这种情况，解决办法还是要结合安全和反作弊的措施来制止。</p>
+<p>例如，给经常下单不付款的买家进行识别打标（可以在被打标的买家下单时不减库存）、给某些类目设置最大购买件数（例如，参加活动的商品一人最多只能买 3 件），以及对重复下单不付款的操作进行次数限制等。</p>
+<p>针对“库存超卖”这种情况，在 10 分钟时间内下单的数量仍然有可能超过库存数量，遇到这种情况我们只能区别对待：对普通的商品下单数量超过库存数量的情况，可以通过补货来解决；但是有些卖家完全不允许库存为负数的情况，那只能在买家付款时提示库存不足。</p>
+<h2 id="8-3-大型秒杀中如何减库存"><a href="#8-3-大型秒杀中如何减库存" class="headerlink" title="8.3 大型秒杀中如何减库存"></a>8.3 大型秒杀中如何减库存</h2><p>对于一般业务系统而言，一般是预扣库存的方案，超出有效付款时间订单就会自动释放。而对于秒杀场景，一般采用下单减库存。</p>
+<p>“下单减库存”在数据一致性上，主要就是保证大并发请求时库存数据不能为负数，也就是要保证数据库中的库存字段值不能为负数，一般我们有多种解决方案：一种是在应用程序中通过事务来判断，即保证减后库存不能为负数，否则就回滚；另一种办法是直接设置数据库的字段数据为无符号整数，这样减后库存字段值小于零时会直接执行 SQL 语句来报错；再有一种就是使用 CASE WHEN 判断语句，例如这样的 SQL 语句：</p>
+<pre><code>UPDATE item SET inventory = CASE WHEN inventory &gt;= xxx THEN inventory-xxx ELSE inventory END</code></pre><p>秒杀商品和普通商品的减库存还是有些差异的，例如商品数量比较少，交易时间段也比较短，因此这里有一个大胆的假设，即能否把秒杀商品减库存直接放到缓存系统中实现，也就是直接在缓存中减库存或者在一个带有持久化功能的缓存系统（如 Redis）中完成呢？</p>
+<p>如果你的秒杀商品的减库存逻辑非常单一，比如没有复杂的 SKU 库存和总库存这种联动关系的话，我觉得完全可以。但是如果有比较复杂的减库存逻辑，或者需要使用事务，你还是必须在数据库中完成减库存。</p>
+<p>由于 MySQL 存储数据的特点，同一数据在数据库里肯定是一行存储（MySQL），因此会有大量线程来竞争 InnoDB 行锁，而并发度越高时等待线程会越多，TPS（Transaction Per Second，即每秒处理的消息数）会下降，响应时间（RT）会上升，数据库的吞吐量就会严重受影响。</p>
+<p>这就可能引发一个问题，就是单个热点商品会影响整个数据库的性能， 导致 0.01% 的商品影响 99.99% 的商品的售卖，这是我们不愿意看到的情况。一个解决思路是遵循前面介绍的原则进行隔离，把热点商品放到单独的热点库中。但是这无疑会带来维护上的麻烦，比如要做热点数据的动态迁移以及单独的数据库等。</p>
+<p>而分离热点商品到单独的数据库还是没有解决并发锁的问题，我们应该怎么办呢？要解决并发锁的问题，有两种办法：</p>
+<ol>
+<li>应用层排队</li>
+</ol>
+<p>按照商品维度设置队列顺序执行，这样能减少同一台机器对数据库同一行记录进行操作的并发度，同时也能控制单个商品占用数据库连接的数量，防止热点商品占用太多的数据库连接。</p>
+<ol start="2">
+<li>数据库排队</li>
+</ol>
+<p>应用层只能做到单机的排队，但是应用机器数本身很多，这种排队方式控制并发的能力仍然有限，所以如果能在数据库层做全局排队是最理想的。阿里的数据库团队开发了针对这种 MySQL 的 InnoDB 层上的补丁程序（patch），可以在数据库层上对单行记录做到并发排队。</p>
+<h1 id="9-如何设计兜底方案？"><a href="#9-如何设计兜底方案？" class="headerlink" title="9. 如何设计兜底方案？"></a>9. 如何设计兜底方案？</h1><h2 id="9-1-高可用建设应该从哪里着手？"><a href="#9-1-高可用建设应该从哪里着手？" class="headerlink" title="9.1 高可用建设应该从哪里着手？"></a>9.1 高可用建设应该从哪里着手？</h2><p><img src="https://i.loli.net/2020/02/03/pJX2oIyCGUVY7H5.jpg" alt="fig10.jpg"></p>
+<ol>
+<li>架构阶段 - 考虑系统的可扩展性和容错性，要避免出现单点问题。例如多机房单元化部署，即使某个城市的某个机房出现整体故障，仍然不会影响整体网站的运转。</li>
+<li>编码阶段 - 保证代码的健壮性，例如涉及到远程调用的问题的时候，要设置合理的超时退出机制，防止被其他系统拖垮，也要对调用的返回结果集有预期，防止返回的结果超出程序处理的范围。即对错误异常进行捕获，对无法预料的错误要有默认处理结果。</li>
+<li>测试阶段 - 测试主要是保证测试用例的覆盖度，保证最坏情况发生的时候，我们也有相应的处理流程。</li>
+<li>发布阶段 - 要有紧急的回滚机制</li>
+<li>运行阶段 - 运行态是常态，重要的是对系统的监控要准确及时，发现问题能够准确报警并且报警数据要准确详细，以便于排查问题。</li>
+<li>故障发生 - 及时止损，例如由于程序问题导致商品价格错误，就要及时下架商品或者关闭购买链接，防止造成重大资产损失。</li>
+</ol>
+<p>为什么系统的高可用建设要放到整个生命周期中全面考虑？因为我们在每个环节中都可能犯错，而有些环节犯的错，你在后面是无法弥补的。例如在架构阶段，你没有消除单点问题，那么系统上线后，遇到突发流量把单点给挂了，你就只能干瞪眼，有时候想加机器都加不进去。所以高可用建设是一个系统工程，必须在每个环节都做好。</p>
+<p>那么针对秒杀系统，我们重点介绍在遇到大流量时，应该从哪些方面来保障系统的稳定运行，所以更多的是看如何针对运行阶段进行处理，这就引出了接下来的内容：降级、限流和拒绝服务。</p>
+<h2 id="9-2-降级"><a href="#9-2-降级" class="headerlink" title="9.2 降级"></a>9.2 降级</h2><p>所谓“降级”，就是当系统的容量达到一定程度时，限制或者关闭系统的某些非核心功能，从而把有限的资源保留给更核心的业务。它是一个有目的、有计划的执行过程，所以对降级我们一般需要有一套预案来配合执行。如果我们把它系统化，就可以通过预案系统和开关系统来实现降级。</p>
+<p>降级方案可以这样设计：当秒杀流量达到 5w/s 时，把成交记录的获取从展示 20 条降级到只展示 5 条。“从 20 改到 5”这个操作由一个开关来实现，也就是设置一个能够从开关系统动态获取的系统参数。</p>
+<p>这里，我给出开关系统的示意图。它分为两部分，一部分是开关控制台，它保存了开关的具体配置信息，以及具体执行开关所对应的机器列表；另一部分是执行下发开关数据的 Agent，主要任务就是保证开关被正确执行，即使系统重启后也会生效。</p>
+<p><img src="https://i.loli.net/2020/02/03/MsuI54DXOFAKU7G.jpg" alt="fig11.jpg"></p>
+<h2 id="9-3-限流"><a href="#9-3-限流" class="headerlink" title="9.3 限流"></a>9.3 限流</h2><p>如果说降级是牺牲了一部分次要的功能和用户的体验效果，那么限流就是更极端的一种保护措施了。限流就是当系统容量达到瓶颈时，我们需要通过限制一部分流量来保护系统，并做到既可以人工执行开关，也支持自动化保护的措施。</p>
+<p>这里，我同样给出了限流系统的示意图。总体来说，限流既可以是在客户端限流，也可以是在服务端限流。此外，限流的实现方式既要支持 URL 以及方法级别的限流，也要支持基于 QPS 和线程的限流。</p>
+<ul>
+<li>客户端限流</li>
+</ul>
+<p>好处可以限制请求的发出，通过减少发出无用请求从而减少对系统的消耗。缺点就是当客户端比较分散时，没法设置合理的限流阈值：如果阈值设的太小，会导致服务端没有达到瓶颈时客户端已经被限制；而如果设的太大，则起不到限制的作用。</p>
+<ul>
+<li>服务端限流</li>
+</ul>
+<p>好处是可以根据服务端的性能设置合理的阈值，而缺点就是被限制的请求都是无效的请求，处理这些无效的请求本身也会消耗服务器资源。</p>
+<p><img src="https://i.loli.net/2020/02/03/zm8P6fRyoUsclSj.jpg" alt="fig12.jpg"></p>
+<p>在限流的实现手段上来讲，基于 QPS 和线程数的限流应用最多，最大 QPS 很容易通过压测提前获取，例如我们的系统最高支持 1w QPS 时，可以设置 8000 来进行限流保护。线程数限流在客户端比较有效，例如在远程调用时我们设置连接池的线程数，超出这个并发线程请求，就将线程进行排队或者直接超时丢弃。</p>
+<p>限流无疑会影响用户的正常请求，所以必然会导致一部分用户请求失败，因此在系统处理这种异常时一定要设置超时时间，防止因被限流的请求不能 fast fail（快速失败）而拖垮系统。</p>
+<h2 id="9-4-拒绝服务"><a href="#9-4-拒绝服务" class="headerlink" title="9.4 拒绝服务"></a>9.4 拒绝服务</h2><p>当系统负载达到一定阈值时，例如 CPU 使用率达到 90% 或者系统 load 值达到 2*CPU 核数时，系统直接拒绝所有请求，这种方式是最暴力但也最有效的系统保护方式。例如秒杀系统，我们在如下几个环节设计过载保护：</p>
+<p>在最前端的 Nginx 上设置过载保护，当机器负载达到某个值时直接拒绝 HTTP 请求并返回 503 错误码，在 Java 层同样也可以设计过载保护。</p>
+<p>拒绝服务可以说是一种不得已的兜底方案，用以防止最坏情况发生，防止因把服务器压跨而长时间彻底无法提供服务。像这种系统过载保护虽然在过载时无法提供服务，但是系统仍然可以运作，当负载下降时又很容易恢复，所以每个系统和每个环节都应该设置这个兜底方案，对系统做最坏情况下的保护。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>如何设计一个秒杀系统</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">14.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-02, 14:44:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-02, 14:51:03</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/" title="如何设计一个秒杀系统">https://www.llchen60.com/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/';
+            this.page.identifier = '如何设计一个秒杀系统/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="如何设计一个秒杀系统/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
