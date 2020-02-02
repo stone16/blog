@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>网络协议(六)-应用层 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Network , HTTP , HTTP 2.0 , QUIC , HTTPS ">
+  <meta name="description" content="网络协议(六)-应用层 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(101)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(19)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(31)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="101">
+<input type="hidden" id="yelog_site_word_count" value="175.8k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NightWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">UI Test</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Puppeteer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Scalibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Regex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">认证授权</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">LDAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Web Accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">5G</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">IP Protocol</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">CIDR</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">DHCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ICMP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Router</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UDP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Socket</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">HTTP 2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">QUIC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">HTTPS</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="Network,HTTP,HTTP 2.0,QUIC,HTTPS"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2020-02-01 17:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="Network,UDP,TCP,Socket"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2020-02-01 16:50:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="Network,IP Protocol,CIDR,DHCP,ICMP,Router"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2020-02-01 16:45:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2020-02-01 16:43:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2020-02-01 16:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2020-02-01 16:42:04">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2020-02-01 14:24:18">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2020-02-01 14:22:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2020-02-01 14:22:02">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2020-02-01 14:20:22">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2020-02-01 14:19:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2020-02-01 14:15:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2020-02-01 14:14:28">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2020-02-01 14:13:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2020-02-01 14:12:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2020-02-01 11:39:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="Network,5G"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2020-02-01 11:15:52">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="RESTFul,Web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2020-01-31 21:02:19">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="FrontEnd,Web Accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2020-01-31 21:00:52">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="Web,RPC"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2020-01-31 20:59:08">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RESTful-vs-RPC/"
+           data-tag="RESTFul,RPC"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2020-01-31 20:58:01">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/LDAP-Intro/"
+           data-tag="Web,LDAP"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2020-01-31 20:25:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2020-01-31 20:24:28">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2020-01-31 20:23:15">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2020-01-31 18:58:09">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2020-01-31 18:56:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2020-01-31 18:55:56">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2020-01-31 18:54:18">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2020-01-31 18:52:42">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2020-01-31 09:32:22">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd,Regex"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2020-01-30 23:25:28">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Scaling-webapps/"
+           data-tag="Web,Scalibility"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2020-01-30 23:20:10">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2020-01-30 23:19:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2020-01-30 23:16:31">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(4)">React Advanced(4)</span>
+            <span class="post-date" title="2020-01-30 23:15:33">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(3)">React Advanced(3)</span>
+            <span class="post-date" title="2020-01-30 23:14:44">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(2)">React Advanced(2)</span>
+            <span class="post-date" title="2020-01-30 23:13:49">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(1)">React Advanced(1)</span>
+            <span class="post-date" title="2020-01-30 23:12:13">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2020-01-30 23:11:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/NightWatch-JavaScript-Tutorial/"
+           data-tag="FrontEnd,JavaScript,NightWatch,UI Test"
+           data-author="" >
+            <span class="post-title" title="NightWatch JavaScript Tutorial">NightWatch JavaScript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:32:53">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,i18next,JavaScript"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Japan,Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-网络协议-六-应用层" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">网络协议(六)-应用层</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Network</a>
+            
+            <a class="color5">HTTP</a>
+            
+            <a class="color4">HTTP 2.0</a>
+            
+            <a class="color5">QUIC</a>
+            
+            <a class="color1">HTTPS</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 17:45:34'>2020-02-01 17:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-HTTP协议"><span class="toc-text">1. HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-HTTP请求的准备"><span class="toc-text">1.1 HTTP请求的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-HTTP请求的构建"><span class="toc-text">1.2 HTTP请求的构建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-请求行"><span class="toc-text">1.2.1 请求行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-首部字段"><span class="toc-text">1.2.2 首部字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-HTTP请求的发送"><span class="toc-text">1.2.3 HTTP请求的发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-HTTP返回的构建"><span class="toc-text">1.2.4 HTTP返回的构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-HTTP-2-0"><span class="toc-text">1.3 HTTP 2.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-QUIC协议"><span class="toc-text">1.4 QUIC协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-自定义连接机制"><span class="toc-text">1.4.1 自定义连接机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-自定义重传机制"><span class="toc-text">1.4.2 自定义重传机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-3-无阻塞的多路复用"><span class="toc-text">1.4.3 无阻塞的多路复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-4-自定义流量控制"><span class="toc-text">1.4.4 自定义流量控制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTTPS-协议"><span class="toc-text">2.HTTPS 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-加密方式"><span class="toc-text">2.1 加密方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-对称加密"><span class="toc-text">2.1.1 对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-非对称加密"><span class="toc-text">2.1.2 非对称加密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-HTTPS的工作模式"><span class="toc-text">2.2 HTTPS的工作模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-RTMP协议"><span class="toc-text">3. RTMP协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-HTTP的历史"><span class="toc-text">4. HTTP的历史</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-HTTP-0-9-1-0"><span class="toc-text">4.1 HTTP 0.9&#x2F; 1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-HTTP-1-1"><span class="toc-text">4.2 HTTP&#x2F;1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-HTTP-2"><span class="toc-text">4.3 HTTP&#x2F;2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-HTTP协议"><a href="#1-HTTP协议" class="headerlink" title="1. HTTP协议"></a>1. HTTP协议</h1><p>以输入一个网址<a href="http://www.google.com为例。这是一个URL，称为统一资源定位符。HTTP是一个协议，www.google.com是一个域名，表示互联网上的一个位置。因为有规范，浏览器才知道如何统一进行处理。" target="_blank" rel="noopener">http://www.google.com为例。这是一个URL，称为统一资源定位符。HTTP是一个协议，www.google.com是一个域名，表示互联网上的一个位置。因为有规范，浏览器才知道如何统一进行处理。</a></p>
+<h2 id="1-1-HTTP请求的准备"><a href="#1-1-HTTP请求的准备" class="headerlink" title="1.1 HTTP请求的准备"></a>1.1 HTTP请求的准备</h2><p>浏览器会将域名发送给DNS服务器，将其解析为IP地址。而后因为HTTP是基于TCP协议的，所以需要先通过三次握手来建立TCP连接。目前使用的HTTP协议大多数是1.1版本的，在1.1的协议当中，默认开启了Keep-alive，这意味着建立的TCP连接可以在多次请求中复用。</p>
+<h2 id="1-2-HTTP请求的构建"><a href="#1-2-HTTP请求的构建" class="headerlink" title="1.2 HTTP请求的构建"></a>1.2 HTTP请求的构建</h2><p>连接建立以后，浏览器就要发送HTTP请求。</p>
+<p>请求的格式如下图所示：</p>
+<p><img src="https://i.loli.net/2020/02/02/9UN4fDEwdcCV8qZ.jpg" alt="fig1.jpg"></p>
+<p>HTTP的请求分为三部分，分别为请求行，请求的首部，请求的正文实体。</p>
+<h3 id="1-2-1-请求行"><a href="#1-2-1-请求行" class="headerlink" title="1.2.1 请求行"></a>1.2.1 请求行</h3><p>方法 + sp + URL + sp + 版本 + cr + If</p>
+<p>在请求行中，URL就是<code>http://www.google.com</code>, 版本是HTTP1.1。</p>
+<p>方法有几个类型：</p>
+<ol>
+<li>GET</li>
+</ol>
+<p>GET就是去服务器获取一些资源。对于访问网页来讲，要获取的往往是一个页面，也会有很多其他的格式，比如返回一个JSON字符串等等。返回的状态是由服务器的实现来决定的。</p>
+<ol start="2">
+<li>POST</li>
+</ol>
+<p>主动告诉服务端一些信息，而非获取。一般是将这些信息放在正文当中。</p>
+<ol start="3">
+<li>PUT</li>
+</ol>
+<p>向指定资源位置上传最新的内容，但是HTTP的服务器往往不允许上传文件，所以PUT和POST就都变成了要传给服务器东西的方法。POST往往是用来创建一个资源的，而PUT往往是用来修改一个资源的。</p>
+<ol start="4">
+<li>DELETE</li>
+</ol>
+<p>用来删除资源的。</p>
+<h3 id="1-2-2-首部字段"><a href="#1-2-2-首部字段" class="headerlink" title="1.2.2 首部字段"></a>1.2.2 首部字段</h3><p>首部字段首先是key value，通过冒号分隔。这里往往保存了一些非常重要的字段，比如：</p>
+<ul>
+<li>Accept-Charset： 这里表示客户端可以接受的字符集，防止传过来的是另外的字符集，从而导致出现乱码。</li>
+<li>Content-Type: 正文的格式。例如如果正文是JSON，那这里我们就应该将其设为JSON。</li>
+<li>缓存</li>
+</ul>
+<p>为什么要使用缓存呢？因为一个大的页面会有很多的东西。图片和大段的介绍内容往往是不会太经常发生变化的，因此我们每次更新页面的时候，不应该刷新整个页面，完全的从服务器重新获取一遍数据，应该做局部的刷新的。</p>
+<p>对于这种高并发场景下的系统，在真正的业务逻辑之前，都会有一个<strong>接入层</strong>，将这些静态资源的请求拦在最外面。架构图如下所示：</p>
+<p><img src="https://i.loli.net/2020/02/02/7BHNARp3Lg8Yuav.jpg" alt="fig2.jpg"></p>
+<p>基本上是客户端和DNS还有CDN相连，再联系负载均衡模块 - nginx。将资源划分为动态资源和静态资源，对于静态资源，使用Varnish缓存层；对于动态资源，使用Redis，Varnish和Redis都和Tomcat应用集群相连，这意味着如果无法从缓存中拿到数据，那就访问服务器，调取数据。</p>
+<p>在HTTP头里面，Cache-control是用来控制缓存的，当客户端发送的请求中包含max-age指令时，如果判定缓存层中资源的缓存时间数值比指定时间的数值小，那么客户端可以接受缓存的资源；当指定max-age值为0，那么缓存层通常需要将请求转发给应用集群。</p>
+<ul>
+<li>If-Modified-Since</li>
+</ul>
+<p>如果服务器的资源在某个时间之后更新了，那么客户端就应该下载最新的资源；如果没有更新，服务端会返回”304 Not Modified”的响应，那客户端就不用下载了，也会节省带宽。</p>
+<p>到目前为止，我们有了HTTP请求的报文格式，接下来，浏览器会通过Socket将其交给传输层。</p>
+<h3 id="1-2-3-HTTP请求的发送"><a href="#1-2-3-HTTP请求的发送" class="headerlink" title="1.2.3 HTTP请求的发送"></a>1.2.3 HTTP请求的发送</h3><p>HTTP协议是基于TCP协议的。使用面向连接的方式发送请求，通过stream二进制流的方式传给对方。到了TCP层，它会把二进制流变成一个报文段发送给服务器。</p>
+<p>在发送每一个报文段的时候，都需要对方回应一个ACK，来保证报文可靠地到达对方。如果没有回应，那么TCP这一层会重新传输，直到可以到达。</p>
+<p>TCP 层发送每一个报文的时候，都需要加上自己的地址（即源地址）和它想要去的地方（即目标地址），将这两个信息放到 IP 头里面，交给 IP 层进行传输。</p>
+<p>IP 层需要查看目标地址和自己是否是在同一个局域网。如果是，就发送 ARP 协议来请求这个目标地址对应的 MAC 地址，然后将源 MAC 和目标 MAC 放入 MAC 头，发送出去即可；如果不在同一个局域网，就需要发送到网关，还要需要发送 ARP 协议，来获取网关的 MAC 地址，然后将源 MAC 和网关 MAC 放入 MAC 头，发送出去。</p>
+<p>网关收到包发现 MAC 符合，取出目标 IP 地址，根据路由协议找到下一跳的路由器，获取下一跳路由器的 MAC 地址，将包发给下一跳路由器。这样路由器一跳一跳终于到达目标的局域网。这个时候，最后一跳的路由器能够发现，目标地址就在自己的某一个出口的局域网上。于是，在这个局域网上发送 ARP，获得这个目标地址的 MAC 地址，将包发出去。</p>
+<p>目标的机器发现 MAC 地址符合，就将包收起来；发现 IP 地址符合，根据 IP 头中协议项，知道自己上一层是 TCP 协议，于是解析 TCP 的头，里面有序列号，需要看一看这个序列包是不是我要的，如果是就放入缓存中然后返回一个 ACK，如果不是就丢弃。</p>
+<p>TCP 头里面还有端口号，HTTP 的服务器正在监听这个端口号。于是，目标机器自然知道是 HTTP 服务器这个进程想要这个包，于是将包发给 HTTP 服务器。HTTP 服务器的进程看到，原来这个请求是要访问一个网页，于是就把这个网页发给客户端。</p>
+<h3 id="1-2-4-HTTP返回的构建"><a href="#1-2-4-HTTP返回的构建" class="headerlink" title="1.2.4 HTTP返回的构建"></a>1.2.4 HTTP返回的构建</h3><p>基于HTTP/1.1的返回报文：</p>
+<p><img src="https://i.loli.net/2020/02/02/2nmbaI9hzYTKUr1.jpg" alt="fig3.jpg"></p>
+<p>状态码会返回HTTP请求的结果。</p>
+<p>而后是返回首部的key value。 </p>
+<ul>
+<li>Retry-After表示告诉客户端应该在多长时间以后再次尝试一下。</li>
+<li>Content-Type: 表示返回的是HTML，还是JSON。</li>
+</ul>
+<p>构造好了返回的HTTP报文，接下来就是把这个报文发送出去。交给Socket去发送，交给TCP层，让TCP层将返回的HTML分成一个个小段，并且保证每个段都可靠到达。这些段加上TCP头后会交给IP层，然后将刚才的发送过程反方向来一遍。两次的逻辑基本相同，一直到达客户端。</p>
+<p>客户端发现 MAC 地址符合、IP 地址符合，于是就会交给 TCP 层。根据序列号看是不是自己要的报文段，如果是，则会根据 TCP 头中的端口号，发给相应的进程。这个进程就是浏览器，浏览器作为客户端也在监听某个端口。</p>
+<p>当浏览器拿到了 HTTP 的报文。发现返回“200”，一切正常，于是就从正文中将 HTML 拿出来。HTML 是一个标准的网页格式。浏览器只要根据这个格式，展示出一个绚丽多彩的网页。</p>
+<p>这是一个正常的HTTP请求和返回的完整过程。</p>
+<h2 id="1-3-HTTP-2-0"><a href="#1-3-HTTP-2-0" class="headerlink" title="1.3 HTTP 2.0"></a>1.3 HTTP 2.0</h2><p>HTTP 1.1 在应用层以纯文本的形式进行通信。每次通信都要带完整的 HTTP 的头，而且不考虑 pipeline 模式的话，每次的过程总是像上面描述的那样一去一回。这样在实时性、并发性上都存在问题。</p>
+<p>为了解决这些问题，HTTP 2.0 会对 HTTP 的头进行一定的压缩，将原来每次都要携带的大量 key  value 在两端建立一个索引表，对相同的头只发送索引表中的索引。</p>
+<p>另外，HTTP 2.0 协议将一个 TCP 的连接中，切分成多个流，每个流都有自己的 ID，而且流可以是客户端发往服务端，也可以是服务端发往客户端。它其实只是一个虚拟的通道。流是有优先级的。</p>
+<p>HTTP 2.0 还将所有的传输信息分割为更小的消息和帧，并对它们采用二进制格式编码。常见的帧有Header帧，用于传输Header内容，并且会开启一个新的流。再就是Data帧，用来传输正文实体。多个帧属于同一个流。</p>
+<p>通过这两种机制，HTTP 2.0 的客户端可以将多个请求分到不同的流中，然后将请求内容拆成帧，进行二进制传输。这些帧可以打散乱序发送， 然后根据每个帧首部的流标识符重新组装，并且可以根据优先级，决定优先处理哪个流的数据。</p>
+<p>我们来举一个例子。假设我们的一个页面要发送三个独立的请求，一个获取 css，一个获取 js，一个获取图片 jpg。如果使用 HTTP 1.1 就是串行的，但是如果使用 HTTP 2.0，就可以在一个连接里，客户端和服务端都可以同时发送多个请求或回应，而且不用按照顺序一对一对应。</p>
+<p><img src="https://i.loli.net/2020/02/02/eyvpNZfrz3ClsnT.jpg" alt="fig4.jpg"></p>
+<p>HTTP2.0实际上是将三个请求变成三个流，将数据分成帧，乱序发送到一个TCP连接当中。</p>
+<p><img src="https://i.loli.net/2020/02/02/ymohztOPXklU84f.jpg" alt="fig5.jpg"></p>
+<p>HTTP 2.0 成功解决了 HTTP 1.1 的队首阻塞问题，同时，也不需要通过 HTTP 1.x 的 pipeline 机制用多条 TCP 连接来实现并行请求与响应；减少了 TCP 连接数对服务器性能的影响，同时将页面的多个数据 css、js、 jpg 等通过一个数据链接进行传输，能够加快页面组件的传输速度。</p>
+<p>HTTP2.0虽然大大增加了并发性，但是还存在问题，因为HTTP2.0还是基于TCP协议的，TCP协议在处理包时是有严格顺序的。当其中一个数据包遇到问题，TCP连接需要等待这个包完成重传之后才能继续进行。因此Google引入QUIC协议来加速整个过程。</p>
+<h2 id="1-4-QUIC协议"><a href="#1-4-QUIC协议" class="headerlink" title="1.4 QUIC协议"></a>1.4 QUIC协议</h2><p>从TCP切换到了UDP！</p>
+<h3 id="1-4-1-自定义连接机制"><a href="#1-4-1-自定义连接机制" class="headerlink" title="1.4.1 自定义连接机制"></a>1.4.1 自定义连接机制</h3><p>我们都知道，一条 TCP 连接是由四元组标识的，分别是源 IP、源端口、目的 IP、目的端口。一旦一个元素发生变化时，就需要断开重连，重新连接。在移动互联情况下，当手机信号不稳定或者在 WIFI 和 移动网络切换时，都会导致重连，从而进行再次的三次握手，导致一定的时延。</p>
+<p>这在 TCP 是没有办法的，但是基于 UDP，就可以在 QUIC 自己的逻辑里面维护连接的机制，不再以四元组标识，而是以一个 64 位的随机数作为 ID 来标识，而且 UDP 是无连接的，所以当 IP 或者端口变化的时候，只要 ID 不变，就不需要重新建立连接。</p>
+<h3 id="1-4-2-自定义重传机制"><a href="#1-4-2-自定义重传机制" class="headerlink" title="1.4.2 自定义重传机制"></a>1.4.2 自定义重传机制</h3><p>TCP使用序号和应答机制来解决顺序问题和丢包问题。任何一个序号的包发过去，都要在一定的时间内得到应答，否则一旦超时，就会重发这个序号的包。那怎么样才算超时呢？通过使用自适应重传算法，通过采样往返时间RTT不断调整。</p>
+<p>其实，在 TCP 里面超时的采样存在不准确的问题。例如，发送一个包，序号为 100，发现没有返回，于是再发送一个 100，过一阵返回一个 ACK101。这个时候客户端知道这个包肯定收到了，但是往返时间是多少呢？是 ACK 到达的时间减去后一个 100 发送的时间，还是减去前一个 100 发送的时间呢？事实是，第一种算法把时间算短了，第二种算法把时间算长了。</p>
+<p>QUIC 也有个序列号，是递增的。任何一个序列号的包只发送一次，下次就要加一了。例如，发送一个包，序号是 100，发现没有返回；再次发送的时候，序号就是 101 了；如果返回的 ACK  100，就是对第一个包的响应。如果返回 ACK  101 就是对第二个包的响应，RTT 计算相对准确。</p>
+<p>但是这里有一个问题，就是怎么知道包 100 和包 101 发送的是同样的内容呢？QUIC 定义了一个 offset 概念。QUIC 既然是面向连接的，也就像 TCP 一样，是一个数据流，发送的数据在这个数据流里面有个偏移量 offset，可以通过 offset 查看数据发送到了哪里，这样只要这个 offset 的包没有来，就要重发；如果来了，按照 offset 拼接，还是能够拼成一个流。</p>
+<p><img src="https://i.loli.net/2020/02/02/p2nxwzvTsV1toX9.jpg" alt="fig6.jpg"></p>
+<h3 id="1-4-3-无阻塞的多路复用"><a href="#1-4-3-无阻塞的多路复用" class="headerlink" title="1.4.3 无阻塞的多路复用"></a>1.4.3 无阻塞的多路复用</h3><p>有了自定义的连接和重传机制，我们就可以解决HTTP2.0的多路复用问题。同 HTTP 2.0 一样，同一条 QUIC 连接上可以创建多个 stream，来发送多个 HTTP 请求。但是，QUIC 是基于 UDP 的，一个连接上的多个 stream 之间没有依赖。这样，假如 stream2 丢了一个 UDP 包，后面跟着 stream3 的一个 UDP 包，虽然 stream2 的那个包需要重传，但是 stream3 的包无需等待，就可以发给用户。</p>
+<h3 id="1-4-4-自定义流量控制"><a href="#1-4-4-自定义流量控制" class="headerlink" title="1.4.4 自定义流量控制"></a>1.4.4 自定义流量控制</h3><p>TCP的流量控制是通过滑动窗口协议。QUIC的流量控制是通过window_update，来告诉对方它可以接收的字节数。但是QUIC的窗口是适应自己的多路复用机制的，可以在一个连接中的每一个stream控制窗口大小。</p>
+<p>在 TCP 协议中，接收端的窗口的起始点是下一个要接收并且 ACK 的包，即便后来的包都到了，放在缓存里面，窗口也不能右移，因为 TCP 的 ACK 机制是基于序列号的累计应答，一旦 ACK 了一个系列号，就说明前面的都到了，所以只要前面的没到，后面的到了也不能 ACK，就会导致后面的到了，也有可能超时重传，浪费带宽。</p>
+<p>QUIC 的 ACK 是基于 offset 的，每个 offset 的包来了，进了缓存，就可以应答，应答后就不会重发，中间的空挡会等待到来或者重发即可，而窗口的起始位置为当前收到的最大 offset，从这个 offset 到当前的 stream 所能容纳的最大缓存，是真正的窗口大小。显然，这样更加准确。</p>
+<p><img src="https://i.loli.net/2020/02/02/k4weK82tcO7yfuq.jpg" alt="fig7.jpg"></p>
+<h1 id="2-HTTPS-协议"><a href="#2-HTTPS-协议" class="headerlink" title="2.HTTPS 协议"></a>2.HTTPS 协议</h1><p>HTTPS协议的适用场景：我们可以用HTTP协议来看新闻，但是放到下单支付的应用场景中会存在很多的风险。如果适用HTTP，假设点外卖支付，网络包被截获了，于是在服务器回复你之前，黑客假装是外卖网站，然后给你回复一个假消息让你发送银行卡号和密码。</p>
+<p>为了解决在这种应用场景下的安全问题，需要进行加密，分为对称加密和非对称加密两种：</p>
+<h2 id="2-1-加密方式"><a href="#2-1-加密方式" class="headerlink" title="2.1 加密方式"></a>2.1 加密方式</h2><h3 id="2-1-1-对称加密"><a href="#2-1-1-对称加密" class="headerlink" title="2.1.1 对称加密"></a>2.1.1 对称加密</h3><p>在对称加密算法中，加密和解密使用的密钥是相同的。也就是说，加密和解密使用的是同一个密钥。因此，对称加密算法要保证安全性的话，密钥要做好保密。只能让使用的人知道，不能对外公开。</p>
+<p>在上述场景当中的问题变成了：如何让用户和银行之间进行交流，来传递公钥，对称加密下这种交流非常的困难。</p>
+<h3 id="2-1-2-非对称加密"><a href="#2-1-2-非对称加密" class="headerlink" title="2.1.2 非对称加密"></a>2.1.2 非对称加密</h3><p>在非对称加密算法中，加密使用的密钥和解密使用的密钥是不相同的。一把是作为公开的公钥，另一把是作为谁都不能给的私钥。公钥加密的信息，只有私钥才能解密。私钥加密的信息，只有公钥才能解密。</p>
+<p>依旧以上述为例，非对称加密的私钥放在银行网站上，不在互联网上传播，这样就可以保证私钥的私密性；银行网站传播对应私钥的公钥。</p>
+<p>这样，客户端给外卖网站发送的时候，用外卖网站的公钥加密。而外卖网站给客户端发送消息的时候，使用客户端的公钥。这样就算有黑客企图模拟客户端获取一些信息，或者半路截获回复信息，但是由于它没有私钥，这些信息它还是打不开。</p>
+<p>非对称加密的另一个问题是如何将公钥给对方： </p>
+<ol>
+<li>放在一个公网的地址上，供下载使用</li>
+<li>在建立连接的时候，传给对方</li>
+</ol>
+<p>需要权威部门的认证来证明我的公钥是官方的，需要证书。证书里面包含公钥还有证书的所有者。注意权威部门是分层级的，通过层层授信背书的方式，来保证非对称加密模式的正常运转。</p>
+<h2 id="2-2-HTTPS的工作模式"><a href="#2-2-HTTPS的工作模式" class="headerlink" title="2.2 HTTPS的工作模式"></a>2.2 HTTPS的工作模式</h2><p>利用非对称加密来传输对称加密的密钥，而真正的双方大数据量的通信都是通过对称加密来进行的。 </p>
+<p><img src="https://i.loli.net/2020/02/02/9o2gqFN1pmkKSte.jpg" alt="fig8.jpg"></p>
+<p>当你登录一个外卖网站的时候，由于是 HTTPS，客户端会发送 Client Hello 消息到服务器，以明文传输 TLS 版本信息、加密套件候选列表、压缩算法候选列表等信息。另外，还会有一个随机数，在协商对称密钥的时候使用。</p>
+<p>然后，外卖网站返回 Server Hello 消息, 告诉客户端，服务器选择使用的协议版本、加密套件、压缩算法等，还有一个随机数，用于后续的密钥协商。</p>
+<p>然后，外卖网站会给你一个服务器端的证书，然后说：“Server Hello Done，我这里就这些信息了。”</p>
+<p>你当然不相信这个证书，于是你从自己信任的 CA 仓库中，拿 CA 的证书里面的公钥去解密外卖网站的证书。如果能够成功，则说明外卖网站是可信的。这个过程中，你可能会不断往上追溯 CA、CA 的 CA、CA 的 CA 的 CA，反正直到一个授信的 CA，就可以了。</p>
+<p>证书验证完毕之后，觉得这个外卖网站可信，于是客户端计算产生随机数字 Pre-master，发送 Client Key Exchange，用证书中的公钥加密，再发送给服务器，服务器可以通过私钥解密出来。</p>
+<p>此时无论是客户端还是服务器都有三个随机数：自己的，对端的，以及刚生成的Pre-Master随机数。通过这三个随机数，可以在客户端和服务器产生相同的对称密钥。</p>
+<p>客户端Change Cipher Spec, 开始采用协商的通信密钥和加密算法进行加密通信了。然后发送一个 Encrypted Handshake Message，将已经商定好的参数等，采用协商密钥进行加密，发送给服务器用于数据与握手验证。</p>
+<h1 id="3-RTMP协议"><a href="#3-RTMP协议" class="headerlink" title="3. RTMP协议"></a>3. RTMP协议</h1><p>Real Time Messaging </p>
+<p>RTMP协议是应用层协议，是要靠底层可靠的传输层协议（通常是TCP）来保证信息传输的可靠性的。在基于传输层协议的链接建立完成后，RTMP协议也要客户端和服务器通过“握手”来建立基于传输层链接之上的RTMP Connection链接，在Connection链接上会传输一些控制信息，如SetChunkSize,SetACKWindowSize。其中CreateStream命令会创建一个Stream链接，用于传输具体的音视频数据和控制这些信息传输的命令信息。RTMP协议传输时会对数据做自己的格式化，这种格式的消息我们称之为RTMP Message，而实际传输的时候为了更好地实现多路复用、分包和信息的公平性，发送端会把Message划分为带有Message ID的Chunk，每个Chunk可能是一个单独的Message，也可能是Message的一部分，在接受端会根据chunk中包含的data的长度，message id和message的长度把chunk还原成完整的Message，从而实现信息的收发。</p>
+<p>详细应用见<a href="https://www.llchen60.com/2019/01/06/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/">网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题</a></p>
+<h1 id="4-HTTP的历史"><a href="#4-HTTP的历史" class="headerlink" title="4. HTTP的历史"></a>4. HTTP的历史</h1><h2 id="4-1-HTTP-0-9-1-0"><a href="#4-1-HTTP-0-9-1-0" class="headerlink" title="4.1 HTTP 0.9/ 1.0"></a>4.1 HTTP 0.9/ 1.0</h2><ul>
+<li>0.9协议十分简单<ul>
+<li>不支持请求头</li>
+<li>只支持GET方法</li>
+</ul>
+</li>
+<li>1.0 扩展了0.9<ul>
+<li>请求中加入了HTTP版本号</li>
+<li>有Header，不管是request还是response都有header<ul>
+<li>将元数据和业务数据解耦，也可以成为业务逻辑和控制逻辑的分离 </li>
+</ul>
+</li>
+<li>增加了HTTP status code标识相关的状态码</li>
+<li>content-type可以传输其它文件了</li>
+<li>缺点是<ul>
+<li>每请求一个资源就要新建一个TCP连接，而且是串行请求的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-HTTP-1-1"><a href="#4-2-HTTP-1-1" class="headerlink" title="4.2 HTTP/1.1"></a>4.2 HTTP/1.1</h2><p>主要目的在于解决HTTP1.0的网络性能问题，以及：</p>
+<ul>
+<li>增加<code>keepalive</code>来让HTTP重用TCP连接，重用TCP连接可以省去每次建立连接时需要的TCP三次握手的开销 – 又名 HTTP长连接 - HTTP Persistent Connection </li>
+<li>支持pipeline网络传输<ul>
+<li>只要第一个请求发出，不用等到拿到响应就可以发出第二个请求了</li>
+</ul>
+</li>
+<li>支持 Chunked Responses 在response的时候不必说明Context-length。这样客户端就直到收到服务端的EOF标识才可以断连接了。</li>
+<li>增加了cache control机制</li>
+<li>协议头增加了language, encoding, type等等，让客户端可以跟服务器端进行更多的协商</li>
+<li>加了<code>Host</code> 头，这样子服务器就可以直到你要请求的网站了</li>
+</ul>
+<h2 id="4-3-HTTP-2"><a href="#4-3-HTTP-2" class="headerlink" title="4.3 HTTP/2"></a>4.3 HTTP/2</h2><p>HTTP/1.1虽然说可以重用TCP连接，但是请求依旧串行的，需要保证其顺序。然而，大量的网页请求中都是些资源类的东西，如果我们能并行这类请求，那就会大大增加网络吞吐量和性能。</p>
+<p>另外1.1是以文本的方式来传输数据，然后做zip压缩减少网络带宽，但是这样做就会消耗前端和后端的CPU了。HTTP/2就是为了解决上述的性能问题的。</p>
+<ul>
+<li>二进制协议，增加数据传输的效率</li>
+<li>可以在一个TCP连接中并发请求多个HTTP请求</li>
+<li>压缩头，如果同时发送多个请求，他们的头是一样的或者是类似的，那么协议就会帮助你消除重复的部分</li>
+<li>允许服务端在客户端放cache，又叫做服务端push。也就是说，你没有请求的东西，我服务端可以先送给你放在本地的缓存当中。</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://coolshell.cn/articles/19840.html" target="_blank" rel="noopener">https://coolshell.cn/articles/19840.html</a> </p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>网络协议(六)-应用层</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">6k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 17:42:56</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 17:45:34</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/" title="网络协议(六)-应用层">https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/';
+            this.page.identifier = '网络协议-六-应用层/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="网络协议-六-应用层/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor','#Japan','#Reading','#Thought','#Tips','#GPS','#Uber','#Curl','#Linux','#Cli','#平均负载','#Context Switch','#CPU Utilization','#CSS','#i18next','#JavaScript','#Callback','#Object Oriented','#TypeScript','#NightWatch','#UI Test','#Puppeteer','#Web','#Scalibility','#Regex','#认证授权','#LDAP','#RPC','#Web Accessibility','#5G','#Tomcat','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#UDP','#TCP','#Socket','#HTTP 2.0','#QUIC','#HTTPS',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
