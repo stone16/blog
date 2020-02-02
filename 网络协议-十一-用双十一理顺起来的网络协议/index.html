@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>网络协议(十一)-用双十一理顺起来的网络协议 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Network ">
+  <meta name="description" content="网络协议(十一)-用双十一理顺起来的网络协议 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1523,12 +1523,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-网络协议-十一-用双十一理顺起来的网络协议" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">网络协议(十一)-用双十一理顺起来的网络协议</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Network</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 22:01:17'>2020-02-01 21:58</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-部署高可用高并发的电商平台"><span class="toc-text">1. 部署高可用高并发的电商平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-广播给全网"><span class="toc-text">2. 广播给全网</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-域名解析地址"><span class="toc-text">3. 域名解析地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-购物前浏览的过程-静态资源CDN"><span class="toc-text">4. 购物前浏览的过程 - 静态资源CDN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-下单过程，双方建立连接"><span class="toc-text">5. 下单过程，双方建立连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-发送下单请求的网络包"><span class="toc-text">6. 发送下单请求的网络包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-流控拥塞与重传"><span class="toc-text">7. 流控拥塞与重传</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-从数据中心进网关，公网NAT成私网"><span class="toc-text">8. 从数据中心进网关，公网NAT成私网</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-进入隧道，RPC远程调用下单"><span class="toc-text">9. 进入隧道，RPC远程调用下单</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-下单扣减库存，数据入库返回成功"><span class="toc-text">10. 下单扣减库存，数据入库返回成功</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1541,26 +1597,319 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文会尽可能详细描述双十一的技术栈，希望对大家能有所裨益。</p>
+<p>整个过程会分为十个阶段，接下来也会分别从这十个方面进行讲述： </p>
+<ul>
+<li>部署高可用高并发的电商平台</li>
+<li>广播全网</li>
+<li>域名解析</li>
+</ul>
+<h1 id="1-部署高可用高并发的电商平台"><a href="#1-部署高可用高并发的电商平台" class="headerlink" title="1. 部署高可用高并发的电商平台"></a>1. 部署高可用高并发的电商平台</h1><p><img src="https://i.loli.net/2020/02/02/6AuPT1RQZilKpcB.jpg" alt="fig1.jpg"></p>
+<ul>
+<li>主站点</li>
+<li>多机房，多Available zone </li>
+<li>数据中心，一个AZ<ul>
+<li>汇聚交换机 <ul>
+<li>机柜<ul>
+<li>接入交换机 </li>
+<li>服务器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>这些服务器上部署的都是计算节点，每台上面都有Open vSwitch创建的虚拟交换机，将来在这台机器上创建的虚拟机，都会连到Open vSwitch上。</p>
+<p><img src="https://i.loli.net/2020/02/02/JCiMoL1DwbGcqQB.jpg" alt="fig2.jpg"></p>
+<ul>
+<li>创建VPC</li>
+<li>指定IP段<ul>
+<li>这样以后部署的所有应用都会在这个虚拟网络当中，使用你分配的这个IP段</li>
+<li>即使同一台物理机，不同的VPC也不会相通</li>
+<li>多个可用区，为每个可用区分配Subnet<ul>
+<li>在两个可用区里面网段不同的时候，就可以配置路由策略，访问另一个可用区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建数据库持久化层<ul>
+<li>云平台给每个Subnet的数据库实例分配一个域名，在创建的时候，需要指定可用区和Subnet，这样创建出来的数据库实例可以通过这个Subnet的私网IP进行访问。 </li>
+<li>各个可用区都要有数据库，主从数据库，云平台会提供数据库同步工具，将应用写入的主数据同步给备数据库集群</li>
+</ul>
+</li>
+<li>创建缓存集群<ul>
+<li>每个可用区，Subnet有一套</li>
+<li>缓存的数据写在内存中</li>
+<li>因为较高的读写性能要求，一般不需要跨可用区读写</li>
+</ul>
+</li>
+<li>写的程序们…<ul>
+<li>相互关系<ul>
+<li>之间通过RPC相互调用</li>
+<li>需要到注册中心去进行注册</li>
+<li>网络通信是虚拟机和虚拟机之间的</li>
+<li>不同的可用区之间，通过核心交换机连在一起，核心交换机之外是边界路由器。</li>
+</ul>
+</li>
+<li>基础服务层</li>
+<li>组合服务层</li>
+<li>Controller层</li>
+<li>Nginx层<ul>
+<li>负载均衡也是云平台提供的 PaaS 服务，也是属于某个 VPC 的，部署在虚拟机里面的，但是负载均衡有个外网的 IP，这个外网的 IP 地址就是在网关节点的外网网口上的。在网关节点上，会有 NAT 规则，将外网 IP 地址转换为 VPC 里面的私网 IP 地址，通过这些私网 IP 地址访问到虚拟机上的负载均衡节点，然后通过负载均衡节点转发到 API 网关的节点。 </li>
+</ul>
+</li>
+<li>API网关<ul>
+<li>网关节点的外网网口是带公网IP地址的，里面有一个虚拟网关转发模块，还会有一个OVS，将私网IP地址放到VXLAN隧道里面，转发到虚拟机上，从而实现外网和虚拟机网络之间的互通。</li>
+</ul>
+</li>
+<li>智能DNS<ul>
+<li>对于不同地区和不同运营商的用户，保证访问速度</li>
+</ul>
+</li>
+<li>CDN与边缘节点<ul>
+<li>存储静态资源到对象存储里</li>
+<li>通过CDN下发到边缘节点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-广播给全网"><a href="#2-广播给全网" class="headerlink" title="2. 广播给全网"></a>2. 广播给全网</h1><p><img src="https://i.loli.net/2020/02/02/padlBADogKVHhGI.jpg" alt="fig3.jpg"></p>
+<p>外网IP是放在虚拟网关的外网网口上的，通过BGP路由协议让全世界知道。</p>
+<p>BGP路由协议 Border Gateway Protocol， 去中心化自治路由协议，通过维护IP路由表来实现自治系统之间的可达性，属于矢量路由协议</p>
+<p>每个可用区都有自己的汇聚交换机，每个Region也有自己的核心交换区域。</p>
+<p>在核心交换外面是安全设备，然后是边界路由器。边界路由器会和多个运营商连接，从而每个运营商都能够访问到这个网站。边界路由器可以通过BGP协议，将自己的数据中心里面的外网IP向外广播。</p>
+<h1 id="3-域名解析地址"><a href="#3-域名解析地址" class="headerlink" title="3. 域名解析地址"></a>3. 域名解析地址</h1><p><img src="https://i.loli.net/2020/02/02/HoziVPFMukRL9wa.jpg" alt="fig4.jpg"></p>
+<p>客户的手机开机以后，在附近寻找基站 eNodeB，发送请求，申请上网。基站将请求发给 MME，MME 对手机进行认证和鉴权，还会请求 HSS 看有没有钱，看看是在哪里上网。</p>
+<p>当 MME 通过了手机的认证之后，开始建立隧道，建设的数据通路分两段路，其实是两个隧道。一段是从 eNodeB 到 SGW，第二段是从 SGW 到 PGW，在 PGW 之外，就是互联网。</p>
+<p>PGW 会为手机分配一个 IP 地址，手机上网都是带着这个 IP 地址的。当在手机上面打开一个 App 的时候，首先要做的事情就是解析这个网站的域名。</p>
+<p>在手机运营商所在的互联网区域里，有一个本地的 DNS，手机会向这个 DNS 请求解析 DNS。当这个 DNS 本地有缓存，则直接返回；如果没有缓存，本地 DNS 才需要递归地从根 DNS 服务器，查到.com 的顶级域名服务器，最终查到权威 DNS 服务器。</p>
+<p>如果配置了DNS和全局负载均衡，在权威DNS服务中，我们可以通过配置CNAME的方式，起一个别名，然后告诉本地 DNS 服务器，让它请求 GSLB 解析这个域名，GSLB 就可以在解析这个域名的过程中，通过自己的策略实现负载均衡。</p>
+<p>GSLB 通过查看请求它的本地 DNS 服务器所在的运营商和地址，就知道用户所在的运营商和地址，然后将距离用户位置比较近的 Region 里面，三个负载均衡 SLB 的公网 IP 地址，返回给本地 DNS 服务器。本地 DNS 解析器将结果缓存后，返回给客户端。</p>
+<p>对于手机 App 来说，可以绕过刚才的传统 DNS 解析机制，直接只要 HTTPDNS 服务，通过直接调用 HTTPDNS 服务器，得到这三个 SLB 的公网 IP 地址。</p>
+<h1 id="4-购物前浏览的过程-静态资源CDN"><a href="#4-购物前浏览的过程-静态资源CDN" class="headerlink" title="4. 购物前浏览的过程 - 静态资源CDN"></a>4. 购物前浏览的过程 - 静态资源CDN</h1><p><img src="https://i.loli.net/2020/02/02/HmRsg9l7X1yzF4q.jpg" alt="fig5.jpg"></p>
+<p>DNS -&gt; CDN -&gt; Cloud </p>
+<p>我们部署电商应用的时候，一般会将静态资源保存在两个地方： </p>
+<ul>
+<li>接入层nginx后面的varnish缓存里</li>
+<li>对于比较大，不常更新的静态图片，会保存在对象存储里面</li>
+</ul>
+<p>这两个地方的静态资源都会配置CDN，将资源下发到边缘节点。</p>
+<p>配置了CDN之后，权威DNS服务器上，会为<strong>静态资源设置一个CNAME别名</strong>，指向另外一个域名，cdn.com，返回给本地的DNS服务器。当本地 DNS 服务器拿到这个新的域名时，需要继续解析这个新的域名。这个时候，再访问的时候就不是原来的权威 DNS 服务器了，而是cdn.com的权威DNS服务器，这是CDN自己的。</p>
+<p>在这个服务器上，还是会设置一个 CNAME，指向另外一个域名，也即 CDN 网络的全局负载均衡器。</p>
+<p>本地 DNS 服务器去请求 CDN 的全局负载均衡器解析域名，全局负载均衡器会为用户选择一台合适的缓存服务器提供服务，将 IP 返回给客户端，客户端去访问这个边缘节点，下载资源。缓存服务器响应用户请求，将用户所需内容传送到用户终端。</p>
+<p><strong><em>如果这台缓存服务器上并没有用户想要的内容，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器，将内容拉到本地</em></strong></p>
+<h1 id="5-下单过程，双方建立连接"><a href="#5-下单过程，双方建立连接" class="headerlink" title="5. 下单过程，双方建立连接"></a>5. 下单过程，双方建立连接</h1><p>对于下单，网站会提供RESTful的下单接口，这种操作有很强的私密性，因此需要通过HTTPS协议进行请求。</p>
+<p><img src="https://i.loli.net/2020/02/02/ENjJD3su5RIHdAk.jpg" alt="fig6.jpg"></p>
+<p>建立TCP连接的行为是在手机的APP和负载均衡器SLB之间发生的。</p>
+<p>对于TCP连接来讲，需要通过三次握手建立连接，为了维护这个连接，双方都需要在TCP层维护一个连接的状态机。</p>
+<p>一开始，客户端和服务端都处于 CLOSED 状态。服务端先是主动监听某个端口，处于 LISTEN 状态。然后客户端主动发起连接 SYN，之后处于 SYN-SENT 状态。服务端收到发起的连接，返回 SYN，并且 ACK 客户端的 SYN，之后处于 SYN-RCVD 状态。</p>
+<p>客户端收到服务端发送的 SYN 和 ACK 之后，发送 ACK 的 ACK，之后处于 ESTABLISHED 状态。这是因为，它一发一收成功了。服务端收到 ACK 的 ACK 之后，处于 ESTABLISHED 状态，因为它的一发一收也成功了。</p>
+<p>TCP层连接建立完毕之后，接下来是在HTTPS层建立连接，在HTTPS的交换过程中，TCP层始终处于ESTABLISHED状态。</p>
+<p>对于 HTTPS，客户端会发送 Client Hello 消息到服务器，用明文传输 TLS 版本信息、加密套件候选列表、压缩算法候选列表等信息。另外，还会有一个随机数，在协商对称密钥的时候使用。</p>
+<p>然后，服务器会返回 Server Hello 消息，告诉客户端，服务器选择使用的协议版本、加密套件、压缩算法等。这也有一个随机数，用于后续的密钥协商。</p>
+<p>然后，服务器会给你一个服务器端的证书，然后说：“Server Hello Done，我这里就这些信息了。”</p>
+<p>客户端当然不相信这个证书，于是从自己信任的 CA 仓库中，拿 CA 的证书里面的公钥去解密电商网站的证书。如果能够成功，则说明电商网站是可信的。这个过程中，你可能会不断往上追溯 CA、CA 的 CA、CA 的 CA 的 CA，反正直到一个授信的 CA，就可以了。</p>
+<p>证书验证完毕之后，觉得这个服务端是可信的，于是客户端计算产生随机数字 Pre-master，发送 Client Key Exchange，用证书中的公钥加密，再发送给服务器，服务器可以通过私钥解密出来。</p>
+<p>接下来，无论是客户端还是服务器，都有了三个随机数，分别是：自己的、对端的，以及刚生成的 Pre-Master 随机数。通过这三个随机数，可以在客户端和服务器产生相同的对称密钥。</p>
+<p>有了对称密钥，客户端就可以说：“Change Cipher Spec，咱们以后都采用协商的通信密钥和加密算法进行加密通信了。”</p>
+<p>然后客户端发送一个 Encrypted Handshake Message，将已经商定好的参数等，采用协商密钥进行加密，发送给服务器用于数据与握手验证。</p>
+<p>同样，服务器也可以发送 Change Cipher Spec，说：“没问题，咱们以后都采用协商的通信密钥和加密算法进行加密通信了”，并且也发送 Encrypted Handshake Message 的消息试试。</p>
+<p>当双方握手结束之后，就可以通过对称密钥进行加密传输了。</p>
+<h1 id="6-发送下单请求的网络包"><a href="#6-发送下单请求的网络包" class="headerlink" title="6. 发送下单请求的网络包"></a>6. 发送下单请求的网络包</h1><p>客户端和服务端之间建立连接之后，接下来就是发送下单请求的网络包了。</p>
+<p>在用户层发送的是 HTTP 的网络包，因为服务端提供的是 RESTful API，因而 HTTP 层发送的就是一个请求。</p>
+<pre><code>POST /purchaseOrder HTTP/1.1
+Host: www.llchen60.com
+Content-Type: application/json; charset=utf-8
+Content-Length: nnn
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+{
+ &quot;order&quot;: {
+  &quot;date&quot;: &quot;2018-07-01&quot;,
+  &quot;className&quot;: &quot; 趣谈网络协议 &quot;,
+  &quot;Author&quot;: &quot; leilei &quot;
+ }
+}</code></pre><p>HTTP报文分为三个部分</p>
+<ul>
+<li>请求行<ul>
+<li><a href="http://www.llchen60.com/purchaseOrder">www.llchen60.com/purchaseOrder</a></li>
+</ul>
+</li>
+<li>请求首部<ul>
+<li>key value的形式， 通过冒号分隔 </li>
+</ul>
+</li>
+<li>请求的正文实体</li>
+</ul>
+<p>HTTP请求的报文格式搞好了以后，浏览器会将其交给传输层，交给的方式是用socket进行程序设计。</p>
+<p>HTTP协议是基于TCP协议的，所以使用面向连接的方式发送请求，通过Stream二进制流的方式传给对方。到了TCP层，它会把二进制流变成一个报文段发送给服务器。</p>
+<p>在 TCP 头里面，会有源端口号和目标端口号，<strong>目标端口号一般是服务端监听的端口号</strong>，源端口号在手机端，往往是随机分配一个端口号。这个端口号在客户端和服务端用于区分请求和返回，发给那个应用。</p>
+<p>在 IP 头里面，都需要加上自己的地址（即源地址）和它想要去的地方（即目标地址）。当一个手机上线的时候，PGW 会给这个手机分配一个 IP 地址，这就是源地址，而目标地址则是云平台的负载均衡器的外网 IP 地址。</p>
+<p>在 IP 层，客户端需要查看目标地址和自己是否是在同一个局域网，计算是否是同一个网段，往往需要通过 CIDR 子网掩码来计算。</p>
+<p>对于这个下单场景，目标 IP 和源 IP 不会在同一个网段，因而需要发送到默认的网关。一般通过 DHCP 分配 IP 地址的时候，同时配置默认网关的 IP 地址。</p>
+<p>但是客户端不会直接使用默认网关的 IP 地址，而是发送 ARP 协议，来获取网关的 MAC 地址，然后将网关 MAC 作为目标 MAC，自己的 MAC 作为源 MAC，放入 MAC 头，发送出去。</p>
+<p>完整的网络包如下所示： </p>
+<p><img src="https://i.loli.net/2020/02/02/MfVQxW1XCzjuLN7.jpg" alt="fig7.jpg"></p>
+<h1 id="7-流控拥塞与重传"><a href="#7-流控拥塞与重传" class="headerlink" title="7. 流控拥塞与重传"></a>7. 流控拥塞与重传</h1><p>对于手机来讲，默认的网关在 PGW 上。在移动网络里面，从手机到 SGW，到 PGW 是有一条隧道的。在这条隧道里面，会将上面的这个包作为隧道的乘客协议放在里面，外面 SGW 和 PGW 在核心网机房的 IP 地址。网络包直到 PGW（PGW 是隧道的另一端）才将里面的包解出来，转发到外部网络。</p>
+<p>从手机发送出来的网络包的结构如下：</p>
+<ul>
+<li>源MAC地址</li>
+<li>目标MAC地址： 网关PGW上面的隧道端点的MAC</li>
+<li>源IP： UE的IP地址</li>
+<li>目标IP： SLB的公网IP地址</li>
+</ul>
+<p>进入隧道之后，要封装外层的网络地址，因而网络包的格式为：</p>
+<ul>
+<li>外层源MAC： E-NodeB的MAC</li>
+<li>外层目标MAC： SGW的MAC</li>
+<li>外层源IP： E-NodeB的IP</li>
+<li>外层目标IP： SGW的IP</li>
+<li>内层源 MAC：手机也即 UE 的 MAC</li>
+<li>内层目标 MAC：网关 PGW 上面的隧道端点的 MAC</li>
+<li>内层源 IP：UE 的 IP 地址</li>
+<li>内层目标 IP：SLB 的公网 IP 地址</li>
+</ul>
+<p>当隧道在 SGW 的时候，切换了一个隧道，会从 SGW 到 PGW 的隧道，因而网络包的格式为：</p>
+<ul>
+<li>外层源 MAC：SGW 的 MAC</li>
+<li>外层目标 MAC：PGW 的 MAC</li>
+<li>外层源 IP：SGW 的 IP</li>
+<li>外层目标 IP：PGW 的 IP</li>
+<li>内层源 MAC：手机也即 UE 的 MAC</li>
+<li>内层目标 MAC：网关 PGW 上面的隧道端点的 MAC</li>
+<li>内层源 IP：UE 的 IP 地址</li>
+<li>内层目标 IP：SLB 的公网 IP 地址</li>
+</ul>
+<p>在 PGW 的隧道端点将包解出来，转发出去的时候，一般在 PGW 出外部网络的路由器上，会部署 NAT 服务，将手机的 IP 地址转换为公网 IP 地址，当请求返回的时候，再 NAT 回来。因而在PGW之后，网络包格式为： </p>
+<ul>
+<li>源 MAC：PGW 出口的 MAC；</li>
+<li>目标 MAC：NAT 网关的 MAC；</li>
+<li>源 IP：UE 的 IP 地址；</li>
+<li>目标 IP：SLB 的公网 IP 地址。</li>
+</ul>
+<p>在NAT网关，网络包的格式变成： </p>
+<ul>
+<li>源 MAC：NAT 网关的 MAC</li>
+<li>目标 MAC：A2 路由器的 MAC</li>
+<li>源 IP：UE 的公网 IP 地址</li>
+<li>目标 IP：SLB 的公网 IP 地址</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/02/GMPYBduQXoiTgcW.jpg" alt="fig8.jpg"></p>
+<p>出了 NAT 网关，就从核心网到达了互联网。在网络世界，每一个运营商的网络成为自治系统 AS。每个自治系统都有边界路由器，通过它和外面的世界建立联系。</p>
+<p>如何从出口的运营商到达云平台的边界路由器？在路由器之间需要通过 BGP 协议实现，BGP 又分为两类，eBGP 和 iBGP。自治系统之间、边界路由器之间使用 eBGP 广播路由。内部网络也需要访问其他的自治系统。</p>
+<p>边界路由器如何将 BGP 学习到的路由导入到内部网络呢？通过运行 iBGP，使内部的路由器能够找到到达外网目的地最好的边界路由器。</p>
+<p>网站的 SLB 的公网 IP 地址早已经通过云平台的边界路由器，让全网都知道了。于是这个下单的网络包选择的下一跳是 A2，也即将 A2 的 MAC 地址放在目标 MAC 地址中。</p>
+<p>到达 A2 之后，从路由表中找到下一跳是路由器 C1，于是将目标 MAC 换成 C1 的 MAC 地址。到达 C1 之后，找到下一跳是 C2，将目标 MAC 地址设置为 C2 的 MAC。到达 C2 后，找到下一跳是云平台的边界路由器，于是将目标 MAC 设置为边界路由器的 MAC 地址。</p>
+<p>你会发现，这一路，都是只换 MAC，不换目标 IP 地址。这就是所谓下一跳的概念。在云平台的边界路由器，会将下单的包转发进来，经过核心交换，汇聚交换，到达外网网关节点上的 SLB 的公网 IP 地址。</p>
+<p>我们可以看到，手机到 SLB 的公网 IP，是一个端到端的连接，连接的过程发送了很多包。所有这些包，无论是 TCP 三次握手，还是 HTTPS 的密钥交换，都是要走如此复杂的过程到达 SLB 的，当然每个包走的路径不一定一致。</p>
+<p>网络包走在这个复杂的道路上，很可能一不小心就丢了，怎么办？这就需要借助 TCP 的机制重新发送。</p>
+<p>既然 TCP 要对包进行重传，就需要维护 Sequence Number，看哪些包到了，哪些没到，哪些需要重传，传输的速度应该控制到多少，这就是TCP的滑动窗口协议。</p>
+<p><img src="https://i.loli.net/2020/02/02/uKBpG8RZn5lHeEU.jpg" alt="fig9.jpg"></p>
+<p>整个 TCP 的发送，一开始会协商一个 Sequence Number，从这个 Sequence Number 开始，每个包都有编号。滑动窗口将接收方的网络包分成四个部分：</p>
+<ul>
+<li>已经接收，已经 ACK，已经交给应用层的包</li>
+<li>已经接收，已经 ACK，未发送给应用层</li>
+<li>已经接收，尚未发送 ACK</li>
+<li>未接收，尚有空闲的缓存区域</li>
+</ul>
+<p>对于 TCP 层来讲，每一个包都有 ACK。ACK 需要从 SLB 回复到手机端，将上面的那个过程反向来一遍，当然路径不一定一致，可见 ACK 也不是那么轻松的事情。</p>
+<p>如果发送方超过一定的时间没有收到 ACK，就会重新发送。只有 TCP 层 ACK 过的包，才会发给应用层，并且只会发送一份，对于下单的场景，应用层是 HTTP 层。</p>
+<p>你可能会问了，TCP 老是重复发送，会不会导致一个单下了两遍？是否要求服务端实现幂等？从 TCP 的机制来看，是不会的。只有收不到 ACK 的包才会重复发，发到接收端，在窗口里面只保存一份，所以在同一个 TCP 连接中，不用担心重传导致二次下单。</p>
+<p>但是 TCP 连接会因为某种原因断了，例如手机信号不好，这个时候手机把所有的动作重新做一遍，建立一个新的 TCP 连接，在 HTTP 层调用两次 RESTful API。这个时候可能会导致两遍下单的情况，因而 RESTful API 需要实现幂等。</p>
+<p>当 ACK 过的包发给应用层之后，TCP 层的缓存就空了出来，这会导致上面图中的大三角，也即接收方能够容纳的总缓存，整体顺时针滑动。小的三角形，也即接收方告知发送方的窗口总大小，也即还没有完全确认收到的缓存大小，如果把这些填满了，就不能再发了，因为没确认收到，所以一个都不能扔。</p>
+<h1 id="8-从数据中心进网关，公网NAT成私网"><a href="#8-从数据中心进网关，公网NAT成私网" class="headerlink" title="8. 从数据中心进网关，公网NAT成私网"></a>8. 从数据中心进网关，公网NAT成私网</h1><p>包从手机端到了SLB公网IP所在的公网网口，由于匹配上了MAC地址和IP地址，因而将网络包收了起来。</p>
+<p><img src="https://i.loli.net/2020/02/02/I4NUqCcgnXFZ5TQ.jpg" alt="fig10.jpg"></p>
+<p>在虚拟网关节点的外网网口上，会有一个 NAT 规则，将公网 IP 地址转换为 VPC 里面的私网 IP 地址，这个私网 IP 地址就是 SLB 的 HAProxy 所在的虚拟机的私网 IP 地址。</p>
+<p>当然为了承载比较大的吞吐量，虚拟网关节点会有多个，物理网络会将流量分发到不同的虚拟网关节点。同样 HAProxy 也会是一个大的集群，虚拟网关会选择某个负载均衡节点，将某个请求分发给它，负载均衡之后是 Controller 层，也是部署在虚拟机里面的。</p>
+<p>当网络包里面的目标 IP 变成私有 IP 地址之后，虚拟路由会查找路由规则，将网络包从下方的私网网口发出来。这个时候包的格式为：</p>
+<ul>
+<li>源 MAC：网关 MAC；</li>
+<li>目标 MAC：HAProxy 虚拟机的 MAC；</li>
+<li>源 IP：UE 的公网 IP；</li>
+<li>目标 IP：HAProxy 虚拟机的私网 IP。</li>
+</ul>
+<h1 id="9-进入隧道，RPC远程调用下单"><a href="#9-进入隧道，RPC远程调用下单" class="headerlink" title="9. 进入隧道，RPC远程调用下单"></a>9. 进入隧道，RPC远程调用下单</h1><p>在虚拟路由节点上，也会有 OVS，将网络包封装在 VXLAN 隧道里面，VXLAN ID 就是给你的租户创建 VPC 的时候分配的。包的格式为：</p>
+<ul>
+<li>外层源 MAC：网关物理机 MAC；</li>
+<li>外层目标 MAC：物理机 A 的 MAC；</li>
+<li>外层源 IP：网关物理机 IP；</li>
+<li>外层目标 IP：物理机 A 的 IP；</li>
+<li>内层源 MAC：网关 MAC；</li>
+<li>内层目标 MAC：HAProxy 虚拟机的 MAC；</li>
+<li>内层源 IP：UE 的公网 IP；</li>
+<li>内层目标 IP：HAProxy 虚拟机的私网 IP。</li>
+</ul>
+<p>在物理机 A 上，OVS 会将包从 VXLAN 隧道里面解出来，发给 HAProxy 所在的虚拟机。HAProxy 所在的虚拟机发现 MAC 地址匹配，目标 IP 地址匹配，就根据 TCP 端口，将包发给 HAProxy 进程，因为 HAProxy 是在监听这个 TCP 端口的。因而 HAProxy 就是这个 TCP 连接的服务端，客户端是手机。对于 TCP 的连接状态、滑动窗口等，都是在 HAProxy 上维护的。</p>
+<p>在这里 HAProxy 是一个四层负载均衡，也即它只解析到 TCP 层，里面的 HTTP 协议它不关心，就将请求转发给后端的多个 Controller 层的一个。</p>
+<p>HAProxy 发出去的网络包就认为 HAProxy 是客户端了，看不到手机端了。网络包格式如下：</p>
+<ul>
+<li>源 MAC：HAProxy 所在虚拟机的 MAC；</li>
+<li>目标 MAC：Controller 层所在虚拟机的 MAC；</li>
+<li>源 IP：HAProxy 所在虚拟机的私网 IP；</li>
+<li>目标 IP：Controller 层所在虚拟机的私网 IP。</li>
+</ul>
+<p>这个包发出去之后，会被物理机上的OVS放入VXLAN隧道里面，网络包格式为;</p>
+<ul>
+<li>外层源 MAC：物理机 A 的 MAC；</li>
+<li>外层目标 MAC：物理机 B 的 MAC；</li>
+<li>外层源 IP：物理机 A 的 IP；</li>
+<li>外层目标 IP：物理机 B 的 IP；</li>
+<li>内层源 MAC：HAProxy 所在虚拟机的 MAC；</li>
+<li>内层目标 MAC：Controller 层所在虚拟机的 MAC；</li>
+<li>内层源 IP：HAProxy 所在虚拟机的私网 IP；</li>
+<li>内层目标 IP：Controller 层所在虚拟机的私网 IP。</li>
+</ul>
+<p>在物理机 B 上，OVS 会将包从 VXLAN 隧道里面解出来，发给 Controller 层所在的虚拟机。Controller 层所在的虚拟机发现 MAC 地址匹配，目标 IP 地址匹配，就根据 TCP 端口，将包发给 Controller 层的进程，因为它在监听这个 TCP 端口。</p>
+<p>在 HAProxy 和 Controller 层之间，维护一个 TCP 的连接。</p>
+<p>Controller 层收到包之后，它是关心 HTTP 里面是什么的，于是解开 HTTP 的包，发现是一个 POST 请求，内容是下单购买一个课程。</p>
+<h1 id="10-下单扣减库存，数据入库返回成功"><a href="#10-下单扣减库存，数据入库返回成功" class="headerlink" title="10. 下单扣减库存，数据入库返回成功"></a>10. 下单扣减库存，数据入库返回成功</h1><p>一般在组合服务层会有专门管理下单的服务，Controller层会通过RPC调用这个组合服务层。</p>
+<p>假设我们使用的是 Dubbo，则 Controller 层需要读取注册中心，将下单服务的进程列表拿出来，选出一个来调用。Dubbo 中默认的 RPC 协议是 Hessian2。Hessian2 将下单的远程调用序列化为二进制进行传输。</p>
+<p>Netty 是一个非阻塞的基于事件的网络传输框架。Controller 层和下单服务之间，使用了 Netty 的网络传输框架。有了 Netty，就不用自己编写复杂的异步 Socket 程序了。Netty 使用的方式，就是IO多路复用。</p>
+<p>Netty 还是工作在 Socket 这一层的，发送的网络包还是基于 TCP 的。在 TCP 的下层，还是需要封装上 IP 头和 MAC 头。如果跨物理机通信，还是需要封装的外层的 VXLAN 隧道里面。当然底层的这些封装，Netty 都不感知，它只要做好它的异步通信即可。</p>
+<p>在 Netty 的服务端，也即下单服务中，收到请求后，先用 Hessian2 的格式进行解压缩。然后将请求分发到线程中进行处理，在线程中，会调用下单的业务逻辑。</p>
+<p>下单的业务逻辑比较复杂，往往要调用基础服务层里面的库存服务、优惠券服务等，将多个服务调用完毕，才算下单成功。下单服务调用库存服务和优惠券服务，也是通过 Dubbo 的框架，通过注册中心拿到库存服务和优惠券服务的列表，然后选一个调用。</p>
+<p>调用的时候，统一使用 Hessian2 进行序列化，使用 Netty 进行传输，底层如果跨物理机，仍然需要通过 VXLAN 的封装和解封装。</p>
+<p>咱们以库存为例子的时候，讲述过幂等的接口实现的问题。因为如果扣减库存，仅仅是谁调用谁减一。这样存在的问题是，如果扣减库存因为一次调用失败，而多次调用，这里指的不是 TCP 多次重试，而是应用层调用的多次重试，就会存在库存扣减多次的情况。</p>
+<p>这里常用的方法是，使用乐观锁（Compare and Set，简称 CAS）。CAS 要考虑三个方面，当前的库存数、预期原来的库存数和版本，以及新的库存数。在操作之前，查询出原来的库存数和版本，真正扣减库存的时候，判断如果当前库存的值与预期原值和版本相匹配，则将库存值更新为新值，否则不做任何操作。</p>
+<p>这是一种基于状态而非基于动作的设计，符合 RESTful 的架构设计原则。这样的设计有利于高并发场景。当多个线程尝试使用 CAS 同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。</p>
+<p>最终，当下单更新到分布式数据库当中之后，整个下单过程结束。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>网络协议(十一)-用双十一理顺起来的网络协议</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">6.8k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 21:58:42</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 22:01:17</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" title="网络协议(十一)-用双十一理顺起来的网络协议">https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/CloudTrail/index.html';
+            this.page.url = 'https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/';
+            this.page.identifier = '网络协议-十一-用双十一理顺起来的网络协议/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1576,8 +1925,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/CloudTrail/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="网络协议-十一-用双十一理顺起来的网络协议/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
