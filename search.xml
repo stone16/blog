@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>网络协议(一) -- 框架</title>
+      <link href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"/>
+      <url>/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-协议"><a href="#1-协议" class="headerlink" title="1. 协议"></a>1. 协议</h1><p>协议是由语法，语义，顺序三部分构成。内容要符合一定的规则和格式。内容要代表某种意义，要有先做再做的先后顺序。</p><h1 id="2-框架"><a href="#2-框架" class="headerlink" title="2.框架"></a>2.框架</h1><h2 id="2-1-应用层"><a href="#2-1-应用层" class="headerlink" title="2.1 应用层"></a>2.1 应用层</h2><p>DHCP HTTP HTTPS RTMP P2P DNS GTP RPC </p><h2 id="2-2-传输层"><a href="#2-2-传输层" class="headerlink" title="2.2 传输层"></a>2.2 传输层</h2><p>UDP TCP</p><h2 id="2-3-网络层"><a href="#2-3-网络层" class="headerlink" title="2.3 网络层"></a>2.3 网络层</h2><p>ICMP IP OSPF BGP IPSec GRE</p><h2 id="2-4-链路层"><a href="#2-4-链路层" class="headerlink" title="2.4 链路层"></a>2.4 链路层</h2><p>ARP VLAN STP</p><h2 id="2-5-物理层"><a href="#2-5-物理层" class="headerlink" title="2.5 物理层"></a>2.5 物理层</h2><p>网络跳线</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Network </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Tomcat - 连接器</title>
       <link href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"/>
       <url>/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/</url>
