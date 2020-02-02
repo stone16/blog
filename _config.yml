@@ -97,6 +97,7 @@ theme: 3-hexo
 
 plugin:
 - hexo-generator-feed
+- hexo-generator-sitemap
 
 #Feed Atom
 feed:
