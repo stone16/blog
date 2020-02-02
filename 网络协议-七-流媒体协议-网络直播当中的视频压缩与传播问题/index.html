@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题) | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Network , CDN , 流媒体协议 , P2P , DNS ">
+  <meta name="description" content="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题) | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-01-30T06:33:41.696Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(102)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(19)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(32)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="102">
+<input type="hidden" id="yelog_site_word_count" value="184.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NightWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">UI Test</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Puppeteer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Scalibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Regex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">认证授权</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">LDAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Web Accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">5G</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">IP Protocol</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">CIDR</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">DHCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ICMP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Router</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UDP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Socket</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">HTTP 2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">QUIC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">HTTPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">流媒体协议</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">P2P</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DNS</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"
+           data-tag="Network,CDN,流媒体协议,P2P,DNS"
+           data-author="" >
+            <span class="post-title" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</span>
+            <span class="post-date" title="2020-02-01 19:38:44">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="Network,HTTP,HTTP 2.0,QUIC,HTTPS"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2020-02-01 17:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="Network,UDP,TCP,Socket"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2020-02-01 16:50:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="Network,IP Protocol,CIDR,DHCP,ICMP,Router"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2020-02-01 16:45:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2020-02-01 16:43:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2020-02-01 16:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2020-02-01 16:42:04">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2020-02-01 14:24:18">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2020-02-01 14:22:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2020-02-01 14:22:02">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2020-02-01 14:20:22">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2020-02-01 14:19:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2020-02-01 14:15:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2020-02-01 14:14:28">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2020-02-01 14:13:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2020-02-01 14:12:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="Browser,Web"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2020-02-01 11:39:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="Network,5G"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2020-02-01 11:15:52">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="RESTFul,Web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2020-01-31 21:02:19">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="FrontEnd,Web Accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2020-01-31 21:00:52">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="Web,RPC"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2020-01-31 20:59:08">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RESTful-vs-RPC/"
+           data-tag="RESTFul,RPC"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2020-01-31 20:58:01">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/LDAP-Intro/"
+           data-tag="Web,LDAP"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2020-01-31 20:25:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2020-01-31 20:24:28">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2020-01-31 20:23:15">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2020-01-31 18:58:09">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2020-01-31 18:56:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2020-01-31 18:55:56">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2020-01-31 18:54:18">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="Network,HTTP,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2020-01-31 18:52:42">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2020-01-31 09:32:22">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd,Regex"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2020-01-30 23:25:28">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Scaling-webapps/"
+           data-tag="Web,Scalibility"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2020-01-30 23:20:10">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2020-01-30 23:19:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2020-01-30 23:16:31">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(4)">React Advanced(4)</span>
+            <span class="post-date" title="2020-01-30 23:15:33">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(3)">React Advanced(3)</span>
+            <span class="post-date" title="2020-01-30 23:14:44">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(2)">React Advanced(2)</span>
+            <span class="post-date" title="2020-01-30 23:13:49">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(1)">React Advanced(1)</span>
+            <span class="post-date" title="2020-01-30 23:12:13">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2020-01-30 23:11:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/NightWatch-JavaScript-Tutorial/"
+           data-tag="FrontEnd,JavaScript,NightWatch,UI Test"
+           data-author="" >
+            <span class="post-title" title="NightWatch JavaScript Tutorial">NightWatch JavaScript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:32:53">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,i18next,JavaScript"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Japan,Reading,Thought"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="reading,food,diet"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="AWS,Gateway,RESTFul"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="Network,HTTP,Batch Processing,Web Development,FrontEnd"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="BackEnd,Java,Concurrency"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Web">Web</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">Network</a>
+            
+            <a class="color4">CDN</a>
+            
+            <a class="color1">流媒体协议</a>
+            
+            <a class="color4">P2P</a>
+            
+            <a class="color4">DNS</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-01 19:43:42'>2020-02-01 19:38</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:8.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-视频压缩"><span class="toc-text">1. 视频压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-视频和图片压缩过程特征"><span class="toc-text">1.1 视频和图片压缩过程特征</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-空间冗余"><span class="toc-text">1.1.1 空间冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-时间冗余"><span class="toc-text">1.1.2 时间冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-视觉冗余"><span class="toc-text">1.1.3 视觉冗余</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-4-编码冗余"><span class="toc-text">1.1.4 编码冗余</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-视频编码的两大种类-流派"><span class="toc-text">1.2 视频编码的两大种类&#x2F; 流派</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-ITU-International-Telecommunications-Union"><span class="toc-text">1.2.1 ITU International Telecommunications Union</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-ISO-International-Standards-Organization"><span class="toc-text">1.2.2 ISO International Standards Organization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-网络直播"><span class="toc-text">1.2 网络直播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-视频图片压缩过程详解"><span class="toc-text">1.3 视频图片压缩过程详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-编码"><span class="toc-text">1.3.1 编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-推流"><span class="toc-text">1.3.2 推流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-拉流"><span class="toc-text">1.3.3 拉流</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-P2P"><span class="toc-text">2. P2P</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-传输大文件的现有方式"><span class="toc-text">2.1 传输大文件的现有方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-HTTP方式"><span class="toc-text">2.1.1 HTTP方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-FTP方式"><span class="toc-text">2.1.2 FTP方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-P2P概念"><span class="toc-text">2.2 P2P概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-种子-torrent-文件"><span class="toc-text">2.3 种子(.torrent) 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-文件信息"><span class="toc-text">2.3.1 文件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-下载过程"><span class="toc-text">2.3.2 下载过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-去中心化网络-Distributed-Hash-Table"><span class="toc-text">2.4 去中心化网络(Distributed Hash Table)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-Kademlia-协议"><span class="toc-text">2.4.1 Kademlia 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-哈希值"><span class="toc-text">2.4.2 哈希值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-DNS"><span class="toc-text">3. DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-DNS服务器"><span class="toc-text">3.1 DNS服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-DNS解析流程"><span class="toc-text">3.2 DNS解析流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-DNS-负载均衡"><span class="toc-text">3.3 DNS 负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-DNS内部负载均衡"><span class="toc-text">3.3.1 DNS内部负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-全局负载均衡"><span class="toc-text">3.3.2 全局负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-DNS访问数据中心中对象存储上的静态资源"><span class="toc-text">3.3.3 DNS访问数据中心中对象存储上的静态资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-DNS功能"><span class="toc-text">3.4 DNS功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-传统DNS的问题"><span class="toc-text">3.5 传统DNS的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-1-域名缓存问题"><span class="toc-text">3.5.1 域名缓存问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-2-域名转发问题"><span class="toc-text">3.5.2 域名转发问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-3-出口NAT问题"><span class="toc-text">3.5.3 出口NAT问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-4-域名更新问题"><span class="toc-text">3.5.4 域名更新问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-HTTPDNS"><span class="toc-text">3.6 HTTPDNS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-CDN"><span class="toc-text">4. CDN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-CDN缓存的内容"><span class="toc-text">4.1 CDN缓存的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-防盗链问题"><span class="toc-text">4.2 防盗链问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-refer机制"><span class="toc-text">4.2.1 refer机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-时间戳防盗链"><span class="toc-text">4.2.2 时间戳防盗链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-动态CDN"><span class="toc-text">4.3 动态CDN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-边缘计算模式"><span class="toc-text">4.3.1 边缘计算模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-路径优化模式"><span class="toc-text">4.3.2 路径优化模式</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-视频压缩"><a href="#1-视频压缩" class="headerlink" title="1. 视频压缩"></a>1. 视频压缩</h1><p>网络直播,视频压缩是一个很关键的技术，因为假设每一张图片大小为1024 * 768，每个像素由RGB组成，其中每个占8位，共24位。那么每秒钟的视频大小为：</p>
+<p>30帧 x 1024 x 768 x 24 = 70,778,880 Bytes<br>如果一分钟的视频，就已经是4个G了。</p>
+<p>解决的方式是编码，通过对图片的压缩，使播放的时候画面看起来仍然足够精美。</p>
+<h2 id="1-1-视频和图片压缩过程特征"><a href="#1-1-视频和图片压缩过程特征" class="headerlink" title="1.1 视频和图片压缩过程特征"></a>1.1 视频和图片压缩过程特征</h2><h3 id="1-1-1-空间冗余"><a href="#1-1-1-空间冗余" class="headerlink" title="1.1.1 空间冗余"></a>1.1.1 空间冗余</h3><p>图像的相邻像素之间有较强的相关性，一张图片相邻像素往往是渐变的，不是突变的，没必要每个像素都完整地保存，可以隔几个保存一个，中间的用算法计算出来。</p>
+<h3 id="1-1-2-时间冗余"><a href="#1-1-2-时间冗余" class="headerlink" title="1.1.2 时间冗余"></a>1.1.2 时间冗余</h3><p>视频序列的相邻图像之间内容相似。一个视频中连续出现的图片也不是突变的，可以根据已有的图片进行预测和推断。</p>
+<h3 id="1-1-3-视觉冗余"><a href="#1-1-3-视觉冗余" class="headerlink" title="1.1.3 视觉冗余"></a>1.1.3 视觉冗余</h3><p>人的视觉系统对某些细节不敏感，因此不会每一个细节都注意到，可以允许丢失一些数据。</p>
+<h3 id="1-1-4-编码冗余"><a href="#1-1-4-编码冗余" class="headerlink" title="1.1.4 编码冗余"></a>1.1.4 编码冗余</h3><p>不同像素值出现的概率不同，概率高的用的字节少，概率低的用的字节多</p>
+<p>整个压缩过程如下图所示：</p>
+<p><img src="https://i.loli.net/2020/02/02/s1dCD9uOXyP7t4E.jpg" alt="fig1.jpg"></p>
+<h2 id="1-2-视频编码的两大种类-流派"><a href="#1-2-视频编码的两大种类-流派" class="headerlink" title="1.2 视频编码的两大种类/ 流派"></a>1.2 视频编码的两大种类/ 流派</h2><h3 id="1-2-1-ITU-International-Telecommunications-Union"><a href="#1-2-1-ITU-International-Telecommunications-Union" class="headerlink" title="1.2.1 ITU International Telecommunications Union"></a>1.2.1 ITU International Telecommunications Union</h3><p>VCEG(Video Conding Experts Group),视频编码，侧重于传输</p>
+<h3 id="1-2-2-ISO-International-Standards-Organization"><a href="#1-2-2-ISO-International-Standards-Organization" class="headerlink" title="1.2.2 ISO International Standards Organization"></a>1.2.2 ISO International Standards Organization</h3><p>MPEG(Moving Picture Experts Group)，视频存储</p>
+<h2 id="1-2-网络直播"><a href="#1-2-网络直播" class="headerlink" title="1.2 网络直播"></a>1.2 网络直播</h2><p>网络协议将编码好的视频流，从主播端推送到服务器，在服务器上有个运行了同样协议的服务端来接收这些网络包，从而得到里面的视频流。</p>
+<p>服务端接到视频流以后，对视频流进行转码，保证用各种客户端都能看到直播。</p>
+<p>如果有非常多的观众，同时看一个视频直播，都从一个服务器上拉流，压力太大了，因而需要一个视频的分发网络，将视频预先加载到就近的边缘节点，来降低服务器的压力。</p>
+<p><img src="https://i.loli.net/2020/02/02/CqdINFefH17Pvph.jpg" alt="fig2.jpg"></p>
+<h2 id="1-3-视频图片压缩过程详解"><a href="#1-3-视频图片压缩过程详解" class="headerlink" title="1.3 视频图片压缩过程详解"></a>1.3 视频图片压缩过程详解</h2><h3 id="1-3-1-编码"><a href="#1-3-1-编码" class="headerlink" title="1.3.1 编码"></a>1.3.1 编码</h3><p>会将视频序列分为三种帧，来分别进行压缩行为：</p>
+<ul>
+<li>I 帧</li>
+</ul>
+<p>也称关键帧。里面是完整的图片，只需要本帧数据，就可以完成解码。</p>
+<ul>
+<li>P 帧</li>
+</ul>
+<p>前向预测编码帧。P 帧表示的是这一帧跟之前的一个关键帧（或 P 帧）的差别，解码时需要用之前缓存的画面，叠加上和本帧定义的差别，生成最终画面。</p>
+<ul>
+<li>B 帧</li>
+</ul>
+<p>双向预测内插编码帧。B 帧记录的是本帧与前后帧的差别。要解码 B 帧，不仅要取得之前的缓存画面，还要解码之后的画面，通过前后画面的数据与本帧数据的叠加，取得最终的画面。</p>
+<p>可以看出，I 帧最完整，B 帧压缩率最高，而压缩后帧的序列，应该是在 IBBP 的间隔出现的。这就是通过时序进行编码</p>
+<p><img src="https://i.loli.net/2020/02/02/yS8dkhIKF5Xaf3w.jpg" alt="fig3.jpg"></p>
+<p>在一帧中，分成多个片，每个片中分成多个宏块，每个宏块分成多个子块，这样将一张大的图分解成一个个小块，可以方便进行空间上的编码。</p>
+<p>帧 -&gt; 片 -&gt; 宏块 -&gt; 子块</p>
+<p>编码后的整个序列是要压缩为一个二进制流在网络上传播的，因此需要分割成一个个网络提取单元(NALU, network abstraction layer unit). </p>
+<p><img src="https://i.loli.net/2020/02/02/dMZ329Vrgj6ynex.jpg" alt="fig4.jpg"></p>
+<p>每一个 NALU 首先是一个起始标识符，用于标识 NALU 之间的间隔；然后是 NALU 的头，里面主要配置了 NALU 的类型；最终 Payload 里面是 NALU 承载的数据。</p>
+<p>在 NALU 头里面，主要的内容是类型NAL Type.</p>
+<ul>
+<li>0x07 表示 SPS，是序列参数集， 包括一个图像序列的所有信息，如图像尺寸、视频格式等。</li>
+<li>0x08 表示 PPS，是图像参数集，包括一个图像的所有分片的所有相关信息，包括图像类型、序列号等。</li>
+<li>在传输视频流之前，必须要传输这两类参数，不然无法解码。为了保证容错性，每一个 I 帧前面，都会传一遍这两个参数集合。</li>
+</ul>
+<p>如果 NALU Header 里面的表示类型是 SPS 或者 PPS，则 Payload 中就是真正的参数集的内容。</p>
+<p>如果类型是帧，则 Payload 中才是正的视频数据，当然也是一帧一帧存放的，前面说了，一帧的内容还是挺多的，因而每一个 NALU 里面保存的是一片。对于每一片，到底是 I 帧，还是 P 帧，还是 B 帧，在片结构里面也有个 Header，这里面有个类型，然后是片的内容。</p>
+<p><strong>一个视频，可以拆分成一系列的帧，每一帧拆分成一系列的片，每一片都放在一个 NALU 里面，NALU 之间都是通过特殊的起始标识符分隔，在每一个 I 帧的第一片前面，要插入单独保存 SPS 和 PPS 的 NALU，最终形成一个长长的 NALU 序列</strong></p>
+<h3 id="1-3-2-推流"><a href="#1-3-2-推流" class="headerlink" title="1.3.2 推流"></a>1.3.2 推流</h3><p>需要将这个二进制流打包成网络包进行发送，一般使用RTMP协议。</p>
+<p>RTMP协议是基于TCP的，因此肯定需要双方建立一个TCP的连接。在有TCP的连接的基础上，还需要建立一个RTMP的连接，即在程序当中，需要调用RTMP类库的Connect函数显示创建一个连接。</p>
+<p>RTMP需要单独一个连接的原因在于：双方需要互相知道版本号，时间戳(看时间戳的差值)</p>
+<p>未来沟通这些事情，需要发送六条消息：客户端发送 C0、C1、  C2，服务器发送 S0、  S1、  S2。首先，客户端发送 C0 表示自己的版本号，不必等对方的回复，然后发送 C1 表示自己的时间戳。服务器只有在收到 C0 的时候，才能返回 S0，表明自己的版本号，如果版本不匹配，可以断开连接。<br>服务器发送完 S0 后，也不用等什么，就直接发送自己的时间戳 S1。客户端收到 S1 的时候，发一个知道了对方时间戳的 ACK  C2。同理服务器收到 C1 的时候，发一个知道了对方时间戳的 ACK  S2。<br>握手完成。</p>
+<p><img src="https://i.loli.net/2020/02/02/4DgIibdfYF9xmPl.jpg" alt="fig5.jpg"></p>
+<p>握手之后，双方需要互相传递一些控制信息，比如Chunk块的大小，窗口大小等。真正传输数据的时候，还是需要创建一个流Stream，然后通过这个Stream来推流publish。 </p>
+<p>推流的过程，就是将NALU放在message里面发送，称为RTMP Packet包。格式如下图所示：</p>
+<p><img src="https://i.loli.net/2020/02/02/id8BeJZkDrVbpQX.jpg" alt="fig6.jpg"></p>
+<p>发送的时候，去掉 NALU 的起始标识符。因为这部分对于 RTMP 协议来讲没有用。接下来，将 SPS 和 PPS 参数集封装成一个 RTMP 包发送，然后发送一个个片的 NALU。</p>
+<p>RTMP 在收发数据的时候并不是以 Message 为单位的，而是把 Message 拆分成 Chunk 发送，而且必须在一个 Chunk 发送完成之后，才能开始发送下一个 Chunk。每个 Chunk 中都带有 Message  ID，表示属于哪个 Message，接收端也会按照这个 ID 将 Chunk 组装成 Message。</p>
+<p>前面连接的时候，设置的 Chunk 块大小就是指这个 Chunk。将大的消息变为小的块再发送，可以在低带宽的情况下，减少网络拥塞。</p>
+<p>举一个分块的例子：</p>
+<p>假设一个视频的消息长度为 307，但是 Chunk 大小约定为 128，于是会拆分为三个 Chunk。</p>
+<p>第一个 Chunk 的 Type＝0，表示 Chunk 头是完整的；头里面 Timestamp 为 1000，总长度 Length 为 307，类型为 9，是个视频，Stream  ID 为 12346，正文部分承担 128 个字节的 Data。</p>
+<p>第二个 Chunk 也要发送 128 个字节，Chunk 头由于和第一个 Chunk 一样，因此采用 Chunk Type＝3，表示头一样就不再发送了。</p>
+<p>第三个 Chunk 要发送的 Data 的长度为 307-128-128=51 个字节，还是采用 Type＝3。</p>
+<p><img src="https://i.loli.net/2020/02/02/TvqDHjO9eQ8bcBo.jpg" alt="fig7.jpg"></p>
+<p>这样数据就能源源不断到达流媒体服务器</p>
+<p><img src="https://i.loli.net/2020/02/02/7gvWiSIFkPX64Oe.jpg" alt="fig8.jpg"></p>
+<p>这个时候，大量观看直播的观众就可以通过 RTMP 协议从流媒体服务器上拉取，但是这么多的用户量，都去同一个地方拉取，服务器压力会很大，而且用户分布在全国甚至全球，如果都去统一的一个地方下载，也会时延比较长，需要有分发网络。</p>
+<p>分发网络分为中心和边缘两层。边缘层服务器部署在全国各地及横跨各大运营商里，和用户距离很近。中心层是流媒体服务集群，负责内容的转发。智能负载均衡系统，根据用户的地理位置信息，就近选择边缘服务器，为用户提供推 / 拉流服务。中心层也负责转码服务，例如，把 RTMP 协议的码流转换为 HLS 码流。</p>
+<p><img src="https://i.loli.net/2020/02/02/tcimUEH6WRv8wsA.jpg" alt="fig9.jpg"></p>
+<h3 id="1-3-3-拉流"><a href="#1-3-3-拉流" class="headerlink" title="1.3.3 拉流"></a>1.3.3 拉流</h3><p>观众的客户端通过RTMP拉流的过程：</p>
+<p><img src="https://i.loli.net/2020/02/02/9Br2WsplhnkzvjK.jpg" alt="fig10.jpg"></p>
+<h1 id="2-P2P"><a href="#2-P2P" class="headerlink" title="2. P2P"></a>2. P2P</h1><h2 id="2-1-传输大文件的现有方式"><a href="#2-1-传输大文件的现有方式" class="headerlink" title="2.1 传输大文件的现有方式"></a>2.1 传输大文件的现有方式</h2><h3 id="2-1-1-HTTP方式"><a href="#2-1-1-HTTP方式" class="headerlink" title="2.1.1 HTTP方式"></a>2.1.1 HTTP方式</h3><p>最简单的是通过HTTP进行下载，但是通过浏览器下载速度非常慢。</p>
+<h3 id="2-1-2-FTP方式"><a href="#2-1-2-FTP方式" class="headerlink" title="2.1.2 FTP方式"></a>2.1.2 FTP方式</h3><p>还可以通过FTP，即文件传输协议，FTP通过两个TCP连接来传输一个文件。</p>
+<ul>
+<li>控制连接</li>
+</ul>
+<p>服务器以被动的方式，打开用于FTP的端口21，客户端则主动发起连接。该连接将命令从客户端传给服务器，并传回服务器的应答。</p>
+<ul>
+<li>数据连接</li>
+</ul>
+<p>每当一个文件在客户端与服务器之间传输时，就创建一个数据连接</p>
+<p>FTP有两种工作模式</p>
+<ul>
+<li>主动模式 PORT</li>
+</ul>
+<p>客户端随机打开一个大于1024的端口N，向服务器的命令端口21发起连接，同时开放N+1端口监听，并向服务器发出 prot N+1的命令，由服务器从自己的数据端口20主动连接到客户端指定的数据端口N+1 </p>
+<ul>
+<li>被动模式 PASV</li>
+</ul>
+<p>当开启一个FTP连接时，客户端打开两个任意的本地端口N（仍然需要大于1024）和N+1.第一个端口连接服务器的21端口，提交PASV命令。然后，服务器会开启一个任意的端口P（大于1024），返回”227 entering passive mode”信息，其中有FTP服务器开放的用来进行数据传输的端口。客户端收到信息获取端口号以后，会通过N+1号端口连接服务器的端口P，然后在两个端口之间进行数据传输。</p>
+<h2 id="2-2-P2P概念"><a href="#2-2-P2P概念" class="headerlink" title="2.2 P2P概念"></a>2.2 P2P概念</h2><p>首先无论是HTTP的方式还是FTP的方式，都难以解决单一服务器的带宽压力的问题，因为它们使用的都是传统的客户端服务器方式。P2P是指peer-to-peer。资源开始并不集中地存储在某些设备上，而是分散地存储在多台设备上。</p>
+<p>想要下载一个文件的时候，需要得到那些已经存在了文件的peer，并和这些peer之间建立点对点的连接，而不需要到中心服务器上，就可以就近下载文件。同时在做下载和上传。</p>
+<h2 id="2-3-种子-torrent-文件"><a href="#2-3-种子-torrent-文件" class="headerlink" title="2.3 种子(.torrent) 文件"></a>2.3 种子(.torrent) 文件</h2><p>需要知道哪些peer有这些文件，因此需要用到种子，就是我们熟悉的.torrent文件。由两部分组成：分别是announce(tracker URL) 和文件信息</p>
+<h3 id="2-3-1-文件信息"><a href="#2-3-1-文件信息" class="headerlink" title="2.3.1 文件信息"></a>2.3.1 文件信息</h3><ul>
+<li>info区</li>
+</ul>
+<p>指定该中西有几个文件、文件有多长、目录结构，以及目录和文件的名字。</p>
+<ul>
+<li>name字段</li>
+</ul>
+<p>指定顶层目录的名字</p>
+<ul>
+<li>每个段的大小</li>
+</ul>
+<p>BitTorrent协议把一个文件分成很多小段，然后分段下载。</p>
+<ul>
+<li>段哈希值</li>
+</ul>
+<p>将整个种子种，每个段的SHA-1哈希值拼在一起。</p>
+<h3 id="2-3-2-下载过程"><a href="#2-3-2-下载过程" class="headerlink" title="2.3.2 下载过程"></a>2.3.2 下载过程</h3><p>下载时，BT 客户端首先解析.torrent 文件，得到 tracker 地址，然后连接 tracker 服务器。tracker 服务器回应下载者的请求，将其他下载者（包括发布者）的 IP 提供给下载者。下载者再连接其他下载者，根据.torrent 文件，两者分别对方告知自己已经有的块，然后交换对方没有的数据。此时不需要其他服务器参与，并分散了单个线路上的数据流量，因此减轻了服务器的负担。</p>
+<p>下载者每得到一个块，需要算出下载块的 Hash 验证码，并与.torrent 文件中的对比。如果一样，则说明块正确，不一样则需要重新下载这个块。这种规定是为了解决下载内容的准确性问题。</p>
+<p>从这个过程也可以看出，这种方式特别依赖 tracker。tracker 需要收集下载者信息的服务器，并将此信息提供给其他下载者，使下载者们相互连接起来，传输数据。虽然下载的过程是非中心化的，但是加入这个 P2P 网络的时候，都需要借助 tracker 中心服务器，这个服务器是用来登记有哪些用户在请求哪些资源。</p>
+<p>所以，这种工作方式有一个弊端，一旦 tracker 服务器出现故障或者线路遭到屏蔽，BT 工具就无法正常工作了。</p>
+<h2 id="2-4-去中心化网络-Distributed-Hash-Table"><a href="#2-4-去中心化网络-Distributed-Hash-Table" class="headerlink" title="2.4 去中心化网络(Distributed Hash Table)"></a>2.4 去中心化网络(Distributed Hash Table)</h2><p>每个加入这个DHT网络的人都要负责存储这个网络里的资源信息和其它成员的联系信息，相当于所有人一起构成了一个庞大的分布式存储数据库。</p>
+<h3 id="2-4-1-Kademlia-协议"><a href="#2-4-1-Kademlia-协议" class="headerlink" title="2.4.1 Kademlia 协议"></a>2.4.1 Kademlia 协议</h3><p>任何一个BitTorrent启动之后，都有两个角色：一个是peer，监听一个TCP端口，用来上传和下载文件；另一个角色DHT node，监听一个UDP端口，通过这个角色，这个节点就可以加入到一个DHT网络当中。</p>
+<p><img src="https://i.loli.net/2020/02/02/573ksTWaqClEcJo.jpg" alt="fig11.jpg"></p>
+<p>在 DHT 网络里面，每一个 DHT node 都有一个 ID。这个 ID 是一个很长的串。每个 DHT node 都有责任掌握一些知识，也就是文件索引，即它应该知道某些文件时保存在哪些节点上的，这些信息就足够了，而它自己本身不一定就是保存这个文件的节点。</p>
+<h3 id="2-4-2-哈希值"><a href="#2-4-2-哈希值" class="headerlink" title="2.4.2 哈希值"></a>2.4.2 哈希值</h3><p>每个文件可以计算出一个哈希值，而DHT node的ID是和哈希值相同长度的串。</p>
+<p>DHT 算法是这样规定的：如果一个文件计算出一个哈希值，则和这个哈希值一样的那个 DHT node，就有责任知道从哪里下载这个文件，即便它自己没保存这个文件。</p>
+<p>当然不一定这么巧，总能找到和哈希值一模一样的，有可能一模一样的 DHT node 也下线了，所以 DHT 算法还规定：除了一模一样的那个 DHT node 应该知道，ID 和这个哈希值非常接近的 N 个 DHT node 也应该知道。</p>
+<p>什么叫和哈希值接近呢？例如只修改了最后一位，就很接近；修改了倒数 2 位，也不远；修改了倒数 3 位，也可以接受。总之，凑齐了规定的 N 这个数就行。</p>
+<p>在这种模式下，种子.torrent 文件里面就不再是 tracker 的地址了，而是一个 list 的 node 的地址，而所有这些 node 都是已经在 DHT 网络里面的。当然随着时间的推移，很可能有退出的，有下线的，但是我们假设，不会所有的都联系不上，总有一个能联系上。</p>
+<p>node new 只要在种子里面找到一个 DHT node，就加入了网络。</p>
+<p>node new 会计算文件 1 的哈希值，并根据这个哈希值了解到，和这个哈希值匹配，或者很接近的 node 上知道如何下载这个文件，例如计算出来的哈希值就是 node C。</p>
+<p>但是 node new 不知道怎么联系上 node C，因为种子里面的 node 列表里面很可能没有 node C，但是它可以问，DHT 网络特别像一个社交网络，node new 只有去它能联系上的 node 问，你们知道不知道 node C 的联系方式呀？</p>
+<p>在 DHT 网络中，每个 node 都保存了一定的联系方式，但是肯定没有 node 的所有联系方式。DHT 网络中，节点之间通过互相通信，也会交流联系方式，也会删除联系方式。</p>
+<p>在 node C 上，告诉 node new，下载文件 1，要去 B、D、 F，于是 node new 选择和 node B 进行 peer 连接，开始下载，它一旦开始下载，自己本地也有文件 1 了，于是 node new 告诉 node C 以及和 node C 的 ID 很像的那些节点，我也有文件 1 了，可以加入那个文件拥有者列表了。</p>
+<p>但是你会发现 node new 上没有文件索引，但是根据哈希算法，一定会有某些文件的哈希值是和 node new 的 ID 匹配上的。在 DHT 网络中，会有节点告诉它，你既然加入了咱们这个网络，你也有责任知道某些文件的下载地址。</p>
+<h1 id="3-DNS"><a href="#3-DNS" class="headerlink" title="3. DNS"></a>3. DNS</h1><h2 id="3-1-DNS服务器"><a href="#3-1-DNS服务器" class="headerlink" title="3.1 DNS服务器"></a>3.1 DNS服务器</h2><p>DNS服务器很重要，根据名称来查找对应的IP地址的协议。DNS服务器，一定要设置成高可用、高并发和分布式的。</p>
+<p><img src="https://i.loli.net/2020/02/02/7nKk5iPVNmQRdot.jpg" alt="fig12.jpg"></p>
+<ul>
+<li>根DNS服务器：返回顶级域DNS服务器的IP地址</li>
+<li>顶级域DNS服务器：返回权威DNS服务器的IP地址</li>
+<li>权威DNS服务器：返回相应主机的IP地址</li>
+</ul>
+<h2 id="3-2-DNS解析流程"><a href="#3-2-DNS解析流程" class="headerlink" title="3.2 DNS解析流程"></a>3.2 DNS解析流程</h2><p><img src="https://i.loli.net/2020/02/02/oRQapO7AxS3jKqt.jpg" alt="fig13.jpg"></p>
+<ol>
+<li>电脑客户端会发出一个 DNS 请求，问 <a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 的 IP 是啥啊，并发给本地域名服务器 (本地 DNS)。那本地域名服务器 (本地 DNS) 是什么呢？如果是通过 DHCP 配置，本地 DNS 由你的网络服务商（ISP），如电信、移动等自动分配，它通常就在你网络服务商的某个机房。</li>
+<li>本地 DNS 收到来自客户端的请求。你可以想象这台服务器上缓存了一张域名与之对应 IP 地址的大表格。如果能找到 <a href="http://www.163.com，它直接就返回" target="_blank" rel="noopener">www.163.com，它直接就返回</a> IP 地址。如果没有，本地 DNS 会去问它的根域名服务器：“老大，能告诉我 <a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 的 IP 地址吗？”根域名服务器是最高层次的，全球共有 13 套。它不直接用于域名解析，但能指明一条道路。</li>
+<li>根 DNS 收到来自本地 DNS 的请求，发现后缀是 .com，说：“哦，<a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 啊，这个域名是由.com 区域管理，我给你它的顶级域名服务器的地址，你去问问它吧。”</li>
+<li>本地 DNS 转向问顶级域名服务器：“老二，你能告诉我 <a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 的 IP 地址吗？”顶级域名服务器就是大名鼎鼎的比如 .com、.net、 .org 这些一级域名，它负责管理二级域名，比如 163.com，所以它能提供一条更清晰的方向。</li>
+<li>顶级域名服务器说：“我给你负责 <a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 区域的权威 DNS 服务器的地址，你去问它应该能问到。”</li>
+<li>本地 DNS 转向问权威 DNS 服务器：“您好，<a href="http://www.163.com" target="_blank" rel="noopener">www.163.com</a> 对应的 IP 是啥呀？”163.com 的权威 DNS 服务器，它是域名解析结果的原出处。为啥叫权威呢？就是我的域名我做主。</li>
+<li>权限 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。</li>
+<li>本地 DNS 再将 IP 地址返回客户端，客户端和目标建立连接。</li>
+</ol>
+<h2 id="3-3-DNS-负载均衡"><a href="#3-3-DNS-负载均衡" class="headerlink" title="3.3 DNS 负载均衡"></a>3.3 DNS 负载均衡</h2><p>DNS通过名称映射为IP地址的时候，并不会都映射到同一个IP地址，会根据距离选择最近的。</p>
+<h3 id="3-3-1-DNS内部负载均衡"><a href="#3-3-1-DNS内部负载均衡" class="headerlink" title="3.3.1 DNS内部负载均衡"></a>3.3.1 DNS内部负载均衡</h3><p>例如，一个应用要访问数据库，在这个应用里面应该配置这个数据库的 IP 地址，还是应该配置这个数据库的域名呢？显然应该配置域名，因为一旦这个数据库，因为某种原因，换到了另外一台机器上，而如果有多个应用都配置了这台数据库的话，一换 IP 地址，就需要将这些应用全部修改一遍。但是如果配置了域名，则只要在 DNS 服务器里，将域名映射为新的 IP 地址，这个工作就完成了，大大简化了运维。</p>
+<p>都尽量用域名进行配置，然后就可以在DNS层面上对其进行限制，比如轮询不同的IP地址，达到负载均衡的目的。</p>
+<h3 id="3-3-2-全局负载均衡"><a href="#3-3-2-全局负载均衡" class="headerlink" title="3.3.2 全局负载均衡"></a>3.3.2 全局负载均衡</h3><p>为了保证我们的应用高可用，往往会部署在多个机房，每个地方都会有自己的 IP 地址。当用户访问某个域名的时候，这个 IP 地址可以轮询访问多个数据中心。如果一个数据中心因为某种原因挂了，只要在 DNS 服务器里面，将这个数据中心对应的 IP 地址删除，就可以实现一定的高可用。</p>
+<h3 id="3-3-3-DNS访问数据中心中对象存储上的静态资源"><a href="#3-3-3-DNS访问数据中心中对象存储上的静态资源" class="headerlink" title="3.3.3 DNS访问数据中心中对象存储上的静态资源"></a>3.3.3 DNS访问数据中心中对象存储上的静态资源</h3><p>我们通过 DNS 访问数据中心中对象存储上的静态资源为例，看一看整个过程。</p>
+<p>假设全国有多个数据中心，托管在多个运营商，每个数据中心三个可用区（Available Zone）。对象存储通过跨可用区部署，实现高可用性。在每个数据中心中，都至少部署两个内部负载均衡器，内部负载均衡器后面对接多个对象存储的前置服务器（Proxy-server）。</p>
+<p><img src="https://i.loli.net/2020/02/02/ZJqxP9mMeatDEjo.jpg" alt="fig14.jpg"></p>
+<ol>
+<li>当一个客户端要访问 object.yourcompany.com 的时候，需要将域名转换为 IP 地址进行访问，所以它要请求本地 DNS 解析器。</li>
+<li>本地 DNS 解析器先查看看本地的缓存是否有这个记录。如果有则直接使用，因为上面的过程太复杂了，如果每次都要递归解析，就太麻烦了。</li>
+<li>如果本地无缓存，则需要请求本地的 DNS 服务器。</li>
+<li>本地的 DNS 服务器一般部署在你的数据中心或者你所在的运营商的网络中，本地 DNS 服务器也需要看本地是否有缓存，如果有则返回，因为它也不想把上面的递归过程再走一遍。</li>
+<li>至 7. 如果本地没有，本地 DNS 才需要递归地从根 DNS 服务器，查到.com 的顶级域名服务器，最终查到 yourcompany.com 的权威 DNS 服务器，给本地 DNS 服务器，权威 DNS 服务器按说会返回真实要访问的 IP 地址。</li>
+</ol>
+<p>对于不需要进行全局负载均衡的简单应用来讲，权威DNS服务器就可以直接将域名解析为一个或者多个IP地址，然后客户端可以通过多个IP地址进行简单的轮询，实现简单的负载均衡。</p>
+<p>但是对于复杂的应用，尤其是跨地域运营商的大型应用，需要专门的设备或者服务器来做这件事情，这就是全局负载均衡器。(GSLB, Global Server Load Balance)</p>
+<p>在 yourcompany.com 的 DNS 服务器中，一般是通过配置 CNAME 的方式，给 object.yourcompany.com 起一个别名，例如 object.vip.yourcomany.com，然后告诉本地 DNS 服务器，让它请求 GSLB 解析这个域名，GSLB 就可以在解析这个域名的过程中，通过自己的策略实现负载均衡。</p>
+<ol>
+<li>第一层 GSLB，通过查看请求它的本地 DNS 服务器所在的运营商，就知道用户所在的运营商。假设是移动，通过 CNAME 的方式，通过另一个别名 object.yd.yourcompany.com，告诉本地 DNS 服务器去请求第二层的 GSLB。</li>
+<li>第二层 GSLB，通过查看请求它的本地 DNS 服务器所在的地址，就知道用户所在的地理位置，然后将距离用户位置比较近的 Region 里面，六个内部负载均衡的地址返回给本地DNS服务器</li>
+<li>本地DNS服务器将结果返回给本地DNS解析器</li>
+<li>本地DNS解析器将结果缓存后，返回给客户端</li>
+<li>客户端开始访问属于相同运营商的距离较近的 Region 1 中的对象存储，当然客户端得到了六个 IP 地址，它可以通过负载均衡的方式，随机或者轮询选择一个可用区进行访问。对象存储一般会有三个备份，从而可以实现对存储读写的负载均衡。</li>
+</ol>
+<h2 id="3-4-DNS功能"><a href="#3-4-DNS功能" class="headerlink" title="3.4 DNS功能"></a>3.4 DNS功能</h2><ol>
+<li>根据名称找具体地址</li>
+<li>针对多个地址做负载均衡</li>
+</ol>
+<p>在多个地址中选择一个距离你近的地方访问。</p>
+<h2 id="3-5-传统DNS的问题"><a href="#3-5-传统DNS的问题" class="headerlink" title="3.5 传统DNS的问题"></a>3.5 传统DNS的问题</h2><h3 id="3-5-1-域名缓存问题"><a href="#3-5-1-域名缓存问题" class="headerlink" title="3.5.1 域名缓存问题"></a>3.5.1 域名缓存问题</h3><p>DNS会对域名做缓存，在访问过一次以后会把结果缓存到本地，当其他人来问的时候，直接就返回这个缓存数据。某些运营商会将静态页面缓存到本运营商的服务器内，这样用户请求的时候，就不用跨运营商进行访问了。既加快了速度，也减少了运营商之间流量计算的成本。 在做域名解析的时候，<strong>不会将用户导向真正的网址，而是指向这个缓存的服务器。</strong></p>
+<p>还有就是本地的缓存往往会使全局负载失败，因为上次进行缓存的时候，缓存中的地址不一定是这次访问离客户最近的地方。</p>
+<h3 id="3-5-2-域名转发问题"><a href="#3-5-2-域名转发问题" class="headerlink" title="3.5.2 域名转发问题"></a>3.5.2 域名转发问题</h3><p>运营商可能不是直接和DNS服务器交流的，可能用转发给了其他的做解析，自己只是外包了出去。</p>
+<h3 id="3-5-3-出口NAT问题"><a href="#3-5-3-出口NAT问题" class="headerlink" title="3.5.3 出口NAT问题"></a>3.5.3 出口NAT问题</h3><p>网络地址转换，使得从网关出去的包都换成了新的IP地址，当请求返回的时候，在这个网关，再将IP地址转换回去。但一旦做了网络地址转换，权威DNS服务器就没法通过这个地址来判断客户到底来自哪个运营商，极有可能误判运营商，导致跨运营商的访问</p>
+<h3 id="3-5-4-域名更新问题"><a href="#3-5-4-域名更新问题" class="headerlink" title="3.5.4 域名更新问题"></a>3.5.4 域名更新问题</h3><p>本地 DNS 服务器是由不同地区、不同运营商独立部署的。对域名解析缓存的处理上，实现策略也有区别，有的会偷懒，忽略域名解析结果的 TTL 时间限制，在权威 DNS 服务器解析变更的时候，解析结果在全网生效的周期非常漫长。但是有的时候，在 DNS 的切换中，场景对生效时间要求比较高。</p>
+<p>例如双机房部署的时候，跨机房的负载均衡和容灾多使用 DNS 来做。当一个机房出问题之后，需要修改权威 DNS，将域名指向新的 IP 地址，但是如果更新太慢，那很多用户都会出现访问异常。</p>
+<h2 id="3-6-HTTPDNS"><a href="#3-6-HTTPDNS" class="headerlink" title="3.6 HTTPDNS"></a>3.6 HTTPDNS</h2><p>HTTPDNS就是不走传统的DNS解析，而是自己搭建基于HTTP协议的DNS服务器集群，分布在多个地点和多个运营商。当客户端需要DNS解析的时候，直接通过HTTP协议进行请求这个服务器集群，得到就近的地址。大部分应用在手机中，在手机端嵌入支持HTTPDNS的客户端SDK来进行使用。 </p>
+<h1 id="4-CDN"><a href="#4-CDN" class="headerlink" title="4. CDN"></a>4. CDN</h1><p>当一个用户想访问一个网址的时候，指定这个网站的域名，DNS就会将这个域名解析为地址，然后用户请求这个地址，返回一个网页。</p>
+<p>但是还有很多可以优化的地方： </p>
+<p>借鉴快递的就近配送的原则/思路，在数据中心里部署几台机器，形成一个缓存的集群来缓存部分数据。 </p>
+<p>这些分布在各个地方的各个数据中心的节点，称为边缘节点。</p>
+<p>由于边缘节点数目比较多，但是每个集群规模比较小，不可能缓存下来所有东西，因而可能无法命中，这样就会在边缘节点之上。有区域节点，规模就要更大，缓存的数据会更多，命中的概率也就更大。在区域节点之上是中心节点，规模更大，缓存数据更多。如果还不命中，就只好回源网站访问了。</p>
+<p><img src="https://i.loli.net/2020/02/02/71hNwRIfryiuJHb.jpg" alt="fig15.jpg"></p>
+<p>在没有CDN的情况下，用户向浏览器输入 <a href="http://www.web.com" target="_blank" rel="noopener">www.web.com</a> 这个域名，客户端访问本地 DNS 服务器的时候，如果本地 DNS 服务器有缓存，则返回网站的地址；如果没有，递归查询到网站的权威 DNS 服务器，这个权威 DNS 服务器是负责 web.com 的，它会返回网站的 IP 地址。本地 DNS 服务器缓存下 IP 地址，将 IP 地址返回，然后客户端直接访问这个 IP 地址，就访问到了这个网站。</p>
+<p>当CDN存在的时候，在web.com这个权威DNS服务器上，会设置一个CNAME别名，指向另一个域名 <a href="http://www.web.cdn.com,并返回给本地DNS服务器。" target="_blank" rel="noopener">www.web.cdn.com,并返回给本地DNS服务器。</a></p>
+<p><img src="https://i.loli.net/2020/02/02/KPOFwGSbZcgsqr9.jpg" alt="fig16.jpg"></p>
+<p>当本地 DNS 服务器拿到这个新的域名时，需要继续解析这个新的域名。这个时候，再访问的就不是 web.com 的权威 DNS 服务器了，而是 web.cdn.com 的权威 DNS 服务器，这是 CDN 自己的权威 DNS 服务器。在这个服务器上，还是会设置一个 CNAME，指向另外一个域名，也即 CDN 网络的全局负载均衡器。接下来，本地 DNS 服务器去请求 CDN 的全局负载均衡器解析域名，全局负载均衡器会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：</p>
+<ol>
+<li>根据用户 IP 地址，判断哪一台服务器距用户最近；</li>
+<li>用户所处的运营商；</li>
+<li>根据用户所请求的 URL 中携带的内容名称，判断哪一台服务器上有用户所需的内容；</li>
+<li>查询各个服务器当前的负载情况，判断哪一台服务器尚有服务能力。</li>
+</ol>
+<p>基于以上这些条件，进行综合分析之后，全局负载均衡器会返回一台缓存服务器的 IP 地址。</p>
+<p>本地 DNS 服务器缓存这个 IP 地址，然后将 IP 返回给客户端，客户端去访问这个边缘节点，下载资源。缓存服务器响应用户请求，将用户所需内容传送到用户终端。如果这台缓存服务器上并没有用户想要的内容，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。</p>
+<h2 id="4-1-CDN缓存的内容"><a href="#4-1-CDN缓存的内容" class="headerlink" title="4.1 CDN缓存的内容"></a>4.1 CDN缓存的内容</h2><p><img src="https://i.loli.net/2020/02/02/1dZ6rmyNulOwSbY.jpg" alt="fig17.jpg"></p>
+<p>会保存静态页面，图片等，因为这些东西变化的可能性不高。</p>
+<p>在进入数据中心的时候，我们希望通过最外层接入层的缓存，将大部分静态资源的访问拦在边缘。而CDN则更进一步，将这些静态资源缓存到离用户更近的数据中心外。越接近客户，访问性能越好，时延越低。</p>
+<p>静态资源中，流媒体也大量使用了CDN技术。CDN支持流媒体协议，例如前面讲过的 RTMP 协议。在很多情况下，这相当于一个代理，从上一级缓存读取内容，转发给用户。由于流媒体往往是连续的，因而可以进行预先缓存的策略，也可以预先推送到用户的客户端。</p>
+<p>对于静态页面来讲，内容的分发往往采取拉取的方式，即未命中的时候，向上一级进行拉取，但流媒体数据量很大，如果出现回源，压力会比较大，因此往往采取主动推送的模式，将热点数据主动推送到边缘节点。</p>
+<p>对于流媒体来讲，很多CDN还提供预处理服务，即在文件分发之前，经过一定的处理。例如将视频转换为不同的码流，以适应不同的网络带宽的用户需求；再比如对视频进行分片，降低存储压力，也使得客户端可以选择使用不同的码率加载不同的分片。</p>
+<h2 id="4-2-防盗链问题"><a href="#4-2-防盗链问题" class="headerlink" title="4.2 防盗链问题"></a>4.2 防盗链问题</h2><p>对于流媒体来说，防盗链很重要，即视频都有版权的，只能在自己的网站里播才可以的。</p>
+<h3 id="4-2-1-refer机制"><a href="#4-2-1-refer机制" class="headerlink" title="4.2.1 refer机制"></a>4.2.1 refer机制</h3><p>HTTP头的refer字段，告诉服务器这个请求从哪里来的，服务器基于此可以获得一些信息用于处理。如果referer的信息不是来自本站，就阻止访问或者调到其它链接当中。</p>
+<h3 id="4-2-2-时间戳防盗链"><a href="#4-2-2-时间戳防盗链" class="headerlink" title="4.2.2 时间戳防盗链"></a>4.2.2 时间戳防盗链</h3><p>使用 CDN 的管理员可以在配置界面上，和 CDN 厂商约定一个加密字符串。客户端取出当前的时间戳，要访问的资源及其路径，连同加密字符串进行签名算法得到一个字符串，然后生成一个下载链接，带上这个签名字符串和截止时间戳去访问 CDN。在 CDN 服务端，根据取出过期时间，和当前 CDN 节点时间进行比较，确认请求是否过期。然后 CDN 服务端有了资源及路径，时间戳，以及约定的加密字符串，根据相同的签名算法计算签名，如果匹配则一致，访问合法，才会将资源返回给客户。</p>
+<h2 id="4-3-动态CDN"><a href="#4-3-动态CDN" class="headerlink" title="4.3 动态CDN"></a>4.3 动态CDN</h2><h3 id="4-3-1-边缘计算模式"><a href="#4-3-1-边缘计算模式" class="headerlink" title="4.3.1 边缘计算模式"></a>4.3.1 边缘计算模式</h3><p>既然数据时动态生成的，那数据的逻辑计算和存储也应当相应的放在边缘节点。其中定时从源数据哪里同步存储的数据，然后再边缘进行计算得到结果。 </p>
+<h3 id="4-3-2-路径优化模式"><a href="#4-3-2-路径优化模式" class="headerlink" title="4.3.2 路径优化模式"></a>4.3.2 路径优化模式</h3><p>数据不是在边缘计算生成的，而是在源站生成的，数据的下发则可以通过CDN网络，对路径进行优化。因为CDN节点较多，能够找到离源站很近的边缘节点，也能找到离用户很近的边缘节点。中间的链路完全由CDN规划，选择一个更加可靠的路径，使用类似专线的方式进行访问。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">8.8k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-01, 19:38:44</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-01, 19:43:42</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/';
+            this.page.identifier = '网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="网络协议-七-流媒体协议-网络直播当中的视频压缩与传播问题/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#AWS','#DynamoDB','#Mapper','#Lambda','#Distributed Tracing','#VPC','#Security','#Agility','#Elasticity','#Reliability','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#NoSQL','#System Design','#Serverless','#SQS','#SNS','#Notification Service','#Queue','#Gateway','#RESTFul','#Step Functions','#ElasticCache','#Elastic Search','#BackEnd','#Java','#Concurrency','#Synchronized','#Lock','#Network','#HTTP','#Batch Processing','#Web Development','#FrontEnd','#history','#world war','#React','#Browser','#CDN','#network','#TCP/ IP','#reading','#finance','#stock','#food','#diet','#society','#thought','#Sam Altman','#time management','#rafactor','#Japan','#Reading','#Thought','#Tips','#GPS','#Uber','#Curl','#Linux','#Cli','#平均负载','#Context Switch','#CPU Utilization','#CSS','#i18next','#JavaScript','#Callback','#Object Oriented','#TypeScript','#NightWatch','#UI Test','#Puppeteer','#Web','#Scalibility','#Regex','#认证授权','#LDAP','#RPC','#Web Accessibility','#5G','#Tomcat','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#UDP','#TCP','#Socket','#HTTP 2.0','#QUIC','#HTTPS','#流媒体协议','#P2P','#DNS',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
