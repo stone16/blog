@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81-RPC-SOAP-RESTful/</loc>
+        <lastmod>2020-02-02T05:58:01.646Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/</loc>
         <lastmod>2020-02-02T03:54:24.503Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -640,7 +648,7 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/</loc>
+        <loc>https://www.llchen60.com/Java-Synchronized%E6%96%B9%E6%B3%95/</loc>
         <lastmod>2020-01-30T05:19:14.361Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -648,7 +656,7 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Java-Synchronized%E6%96%B9%E6%B3%95/</loc>
+        <loc>https://www.llchen60.com/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/</loc>
         <lastmod>2020-01-30T05:19:14.361Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -704,7 +712,7 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Developing-on-AWS-Note-5-DynamoDB/</loc>
+        <loc>https://www.llchen60.com/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/</loc>
         <lastmod>2020-01-30T05:19:14.355Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -712,7 +720,7 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/</loc>
+        <loc>https://www.llchen60.com/Developing-on-AWS-Note-5-DynamoDB/</loc>
         <lastmod>2020-01-30T05:19:14.355Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -736,14 +744,6 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Developing-on-AWS-Note-2-IAM/</loc>
-        <lastmod>2020-01-30T05:19:14.353Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://www.llchen60.com/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/</loc>
         <lastmod>2020-01-30T05:19:14.353Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -752,8 +752,8 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/</loc>
-        <lastmod>2020-01-30T05:19:14.352Z</lastmod>
+        <loc>https://www.llchen60.com/Developing-on-AWS-Note-2-IAM/</loc>
+        <lastmod>2020-01-30T05:19:14.353Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -761,6 +761,14 @@
 
     <url>
         <loc>https://www.llchen60.com/Developing-on-AWS-Note-10-Docker-ECS-Security/</loc>
+        <lastmod>2020-01-30T05:19:14.352Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/</loc>
         <lastmod>2020-01-30T05:19:14.352Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -776,14 +784,6 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/AWS-essentials-1-introduction/</loc>
-        <lastmod>2020-01-30T05:19:14.350Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://www.llchen60.com/AWS-essentials-2-Cloud-Concepts/</loc>
         <lastmod>2020-01-30T05:19:14.350Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -792,8 +792,8 @@
     </url>
 
     <url>
-        <loc>https://www.llchen60.com/AWS-essential-4-Security/</loc>
-        <lastmod>2020-01-30T05:19:14.349Z</lastmod>
+        <loc>https://www.llchen60.com/AWS-essentials-1-introduction/</loc>
+        <lastmod>2020-01-30T05:19:14.350Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -801,6 +801,14 @@
 
     <url>
         <loc>https://www.llchen60.com/AWS-essential-5-Architecting/</loc>
+        <lastmod>2020-01-30T05:19:14.349Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/AWS-essential-4-Security/</loc>
         <lastmod>2020-01-30T05:19:14.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
