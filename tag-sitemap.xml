@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/world-war/</loc>
+        <lastmod>2020-02-02T06:51:35.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/history/</loc>
+        <lastmod>2020-02-02T06:51:35.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Distributed-System/</loc>
         <lastmod>2020-02-02T06:07:29.953Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -292,20 +306,6 @@
     <url>
         <loc>https://www.llchen60.com/tags/5G/</loc>
         <lastmod>2020-02-02T06:06:58.008Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/world-war/</loc>
-        <lastmod>2020-02-02T06:06:58.006Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/history/</loc>
-        <lastmod>2020-02-02T06:06:58.006Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
