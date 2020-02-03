@@ -4,6 +4,7 @@ date: 2020-01-30 21:12:39
 categories: FrontEnd
 tags:
     - JavaScript
+    - FrontEnd
 top:
 ---
 发现前面看的JS还是不太成系统，遇到的这方面的问题越来越多，需要好好的深入研究下这块内容了。
