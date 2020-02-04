@@ -1,7 +1,7 @@
 ---
 title: Event Storming
 date: 2020-02-02 13:56:24
-categories: System Design
+categories: SystemDesign
 tags:
     - DDD
 top:
