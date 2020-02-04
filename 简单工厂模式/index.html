@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>简单工厂模式 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Design Pattern ">
+  <meta name="description" content="简单工厂模式 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -1716,12 +1716,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-简单工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">简单工厂模式</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="SystemDesign">SystemDesign</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">Design Pattern</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-03 19:30:42'>2020-02-03 19:29</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-问题描述"><span class="toc-text">1. 问题描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-简单工程模式概述"><span class="toc-text">2. 简单工程模式概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-定义"><span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-结构"><span class="toc-text">2.2 结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-代码实现"><span class="toc-text">3 代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-结构图"><span class="toc-text">3.1 结构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-完整方案"><span class="toc-text">3.2 完整方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-改进"><span class="toc-text">3.3 改进</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-总结"><span class="toc-text">4.总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-优势"><span class="toc-text">4.1 优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-缺陷"><span class="toc-text">4.2 缺陷</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1734,26 +1790,242 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>静态/简单工厂模式是工厂模式中最简单的一种实现，但是它实现了工厂模式的精髓，即将对象的创建和使用分离开，客户端通过调用工厂来创建具体的产品类。</p>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a>1. 问题描述</h1><pre><code>class Chart {
+    private String type; //图表类型
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+    public Chart(Object[][] data, String type) {
+        this.type = type;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //初始化柱状图
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //初始化饼状图
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            //初始化折线图
+        }
+    }
+
+    public void display() {
+        if (this.type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            //显示柱状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;pie&quot;)) {
+            //显示饼状图
+        }
+        else if (this.type.equalsIgnoreCase(&quot;line&quot;)) {
+            //显示折线图
+        }    
+    }
+}</code></pre><p>问题：</p>
+<ol>
+<li>冗长</li>
+<li>职责太重</li>
+<li>Constructor构建会非常耗时</li>
+</ol>
+<h1 id="2-简单工程模式概述"><a href="#2-简单工程模式概述" class="headerlink" title="2. 简单工程模式概述"></a>2. 简单工程模式概述</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>首先将需要创建的各种不同对象（例如各种不同的Chart对象）的相关代码封装到不同的类中，这些类称为具体产品类，而将它们公共的代码进行抽象和提取后封装在一个抽象产品类中，每一个具体产品类都是抽象产品类的子类；然后提供一个工厂类用于创建各种产品，在工厂类中提供一个创建产品的工厂方法，该方法可以根据所传入的参数不同创建不同的具体产品对象；客户端只需调用工厂类的工厂方法并传入相应的参数即可得到一个产品对象。</p>
+<ul>
+<li>具体产品类</li>
+<li>抽象产品类</li>
+<li>工厂类 - 创建产品，工厂方法</li>
+<li>客户端 调用工厂类的工厂方法得到产品对象</li>
+</ul>
+<blockquote>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是<strong>静态(static)<em>方法</em></strong>，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</p>
+</blockquote>
+<h2 id="2-2-结构"><a href="#2-2-结构" class="headerlink" title="2.2 结构"></a>2.2 结构</h2><p><img src="https://i.loli.net/2020/02/04/N5tmV9o1EPlgFLr.jpg" alt="sf1.jpeg"></p>
+<ul>
+<li>Factory</li>
+</ul>
+<p>工厂角色即工厂类，它是简单工厂模式的核心，负责实现创建所有产品实例的内部逻辑；工厂类可以被外界直接调用，创建所需的产品对象；在工厂类中提供了静态的工厂方法factoryMethod()，它的返回类型为抽象产品类型Product。</p>
+<ul>
+<li>Product 抽象产品</li>
+</ul>
+<p>它是工厂类所创建的所有对象的父类，封装了各种产品对象的公有方法，它的引入将提高系统的灵活性，使得在工厂类中只需定义一个通用的工厂方法，因为所有创建的具体产品对象都是其子类对象。</p>
+<ul>
+<li>ConcreteProduct 具体产品</li>
+</ul>
+<p>它是简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体类的实例。每一个具体产品角色都继承了抽象产品角色，需要实现在抽象产品中声明的抽象方法。</p>
+<h1 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3 代码实现"></a>3 代码实现</h1><pre><code>abstract class Product {
+    //所有产品类的公共业务方法
+    public void methodSame() {
+        //公共方法的实现
+    }
+
+    //声明抽象业务方法
+    public abstract void methodDiff();
+}
+
+
+class ConcreteProduct extends Product {
+//实现业务方法
+    public void methodDiff() {
+    //业务方法的实现
+    }
+}
+
+class Factory {
+    //静态工厂方法
+    public static Product getProduct(String arg) {
+        Product product = null;
+        if (arg.equalsIgnoreCase(&quot;A&quot;)) {
+            product = new ConcreteProductA();
+            //初始化设置product
+        }
+        else if (arg.equalsIgnoreCase(&quot;B&quot;)) {
+            product = new ConcreteProductB();
+            //初始化设置product
+        }
+        return product;
+    }
+}
+
+//客户端代码，直接调用工厂类的工厂方法来得到产品对象
+class Client {
+    public static void main(String args[]) {
+        Product product; 
+        product = Factory.getProduct(&quot;A&quot;); //通过工厂类创建产品对象
+        product.methodSame();
+        product.methodDiff();
+    }
+}</code></pre><h2 id="3-1-结构图"><a href="#3-1-结构图" class="headerlink" title="3.1 结构图"></a>3.1 结构图</h2><p><img src="https://i.loli.net/2020/02/04/FdsgZtQ27rE1NTU.jpg" alt="sf2.jpeg"></p>
+<h2 id="3-2-完整方案"><a href="#3-2-完整方案" class="headerlink" title="3.2 完整方案"></a>3.2 完整方案</h2><pre><code>//抽象图表接口：抽象产品类
+interface Chart {
+    public void display();
+}
+
+//柱状图类：具体产品类
+class HistogramChart implements Chart {
+    public HistogramChart() {
+        System.out.println(&quot;创建柱状图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示柱状图！&quot;);
+    }
+}
+
+//饼状图类：具体产品类
+class PieChart implements Chart {
+    public PieChart() {
+        System.out.println(&quot;创建饼状图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示饼状图！&quot;);
+    }
+}
+
+//折线图类：具体产品类
+class LineChart implements Chart {
+    public LineChart() {
+        System.out.println(&quot;创建折线图！&quot;);
+    }
+
+    public void display() {
+        System.out.println(&quot;显示折线图！&quot;);
+    }
+}
+
+//图表工厂类：工厂类
+class ChartFactory {
+    //静态工厂方法
+    public static Chart getChart(String type) {
+        Chart chart = null;
+        if (type.equalsIgnoreCase(&quot;histogram&quot;)) {
+            chart = new HistogramChart();
+            System.out.println(&quot;初始化设置柱状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;pie&quot;)) {
+            chart = new PieChart();
+            System.out.println(&quot;初始化设置饼状图！&quot;);
+        }
+        else if (type.equalsIgnoreCase(&quot;line&quot;)) {
+            chart = new LineChart();
+            System.out.println(&quot;初始化设置折线图！&quot;);            
+        }
+        return chart;
+    }
+}</code></pre><h2 id="3-3-改进"><a href="#3-3-改进" class="headerlink" title="3.3 改进"></a>3.3 改进</h2><p>将选择具体的chart类的代码封装到xml文件里，然后写一个相应的方法去读取XML参数。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;config&gt;
+    &lt;chartType&gt;histogram&lt;/chartType&gt;
+&lt;/config&gt;</code></pre><p>写一个工具类，来获取XML文件里的参数</p>
+<pre><code>import javax.xml.parsers.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import java.io.*;
+
+public class XMLUtil {
+    //该方法用于从XML配置文件中提取图表类型，并返回类型名
+    public static String getChartType() {
+        try {
+            //创建文档对象
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dFactory.newDocumentBuilder();
+            Document doc;                            
+            doc = builder.parse(new File(&quot;config.xml&quot;)); 
+
+            //获取包含图表类型的文本节点
+            NodeList nl = doc.getElementsByTagName(&quot;chartType&quot;);
+            Node classNode = nl.item(0).getFirstChild();
+            String chartType = classNode.getNodeValue().trim();
+            return chartType;
+        }   
+           catch(Exception e) {
+               e.printStackTrace();
+            return null;
+        }
+    }
+}</code></pre><h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h1><p><img src="https://i.loli.net/2020/02/04/aSZD7Iv5A1wsN2C.jpg" alt="sf3.jpeg"></p>
+<h2 id="4-1-优势"><a href="#4-1-优势" class="headerlink" title="4.1 优势"></a>4.1 优势</h2><ol>
+<li>将对象的创建和使用分离</li>
+<li>客户端不再直接创建产品对象，仅仅消费产品</li>
+<li>配置文件，提高系统灵活性</li>
+</ol>
+<h2 id="4-2-缺陷"><a href="#4-2-缺陷" class="headerlink" title="4.2 缺陷"></a>4.2 缺陷</h2><ol>
+<li>工厂类集中了所有的创建逻辑，职责太重。一旦不能正常工作，整个系统都要受影响。</li>
+<li>势必增加类的个数，引入新的工厂类，增加了系统的复杂度和理解程度</li>
+<li>系统扩展困难！！！一旦添加新产品就必须修改工厂逻辑</li>
+<li>使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构</li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>简单工厂模式</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-03, 19:29:53</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-03, 19:30:42</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="简单工厂模式">https://www.llchen60.com/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/ELB/index.html';
+            this.page.url = 'https://www.llchen60.com/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/';
+            this.page.identifier = '简单工厂模式/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -1769,8 +2041,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/ELB/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="简单工厂模式/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
