@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Cost of abstraction</title>
+      <link href="/Cost-of-abstraction/"/>
+      <url>/Cost-of-abstraction/</url>
+      
+        <content type="html"><![CDATA[<p>Duplicate is definitely something we are trying to get rid of, however, what’s the cost of abstraction? It seems some problem we could think for a while. </p><p>We should think of the tradeoff between code duplication and increased level of abstraction. </p><h1 id="1-Definition-cost-of-abstraction"><a href="#1-Definition-cost-of-abstraction" class="headerlink" title="1. Definition - cost of abstraction"></a>1. Definition - cost of abstraction</h1><ul><li>An abstraction is adding to the cognitive load of whoever works with the code </li><li>The main cost of abstraction: separating the implementation from the specification. Or we say separate the letter of function from the spirit of the function</li><li>The former being what the function does, the latter being what everybody believes it should do </li><li>Should involve everybody to consider what the code does, or we say what the function does </li></ul><h1 id="2-Thought"><a href="#2-Thought" class="headerlink" title="2. Thought"></a>2. Thought</h1><ul><li>The decision about creating an abstraction should not be taken lightly.</li><li>There’s a large social cost to every abstraction, may lead the project to be unmaintainable.</li><li>lambda is also a way to reduce the abstraction layers in some way </li><li>Abstraction is a good way to get rid of verbose code, but itself may bring uncertainty to some extent. Only implement <strong><em>necessary</em></strong> abstraction. </li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CacheLoader 教程</title>
       <link href="/CacheLoader-%E6%95%99%E7%A8%8B/"/>
       <url>/CacheLoader-%E6%95%99%E7%A8%8B/</url>
