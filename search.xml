@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Handling overload effectively with load balancers</title>
+      <link href="/Handling-overload-effectively-with-load-balancers/"/>
+      <url>/Handling-overload-effectively-with-load-balancers/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Fail-Smarter"><a href="#1-Fail-Smarter" class="headerlink" title="1. Fail Smarter"></a>1. Fail Smarter</h1><ul><li>Average latency has a spike, availability down</li><li>reasons <ul><li>dependencies </li><li>cascading effect </li><li>client change   peak </li></ul></li></ul><h1 id="2-Load-balancers"><a href="#2-Load-balancers" class="headerlink" title="2. Load balancers"></a>2. Load balancers</h1><ul><li>clients - load balancers - servers </li><li>hardware devices </li><li>multi tenant - use VIP - for efficiency </li><li>used for (features)<ul><li>scaling </li><li>even traffic distribution </li><li>overload protection</li></ul></li><li>how<ul><li>how to pick a server <ul><li>random dice </li><li>round robin </li><li>least conns </li></ul></li><li>desired algorithm - we use least conns <ul><li>simple </li><li>reliable </li><li>even </li></ul></li><li>max conns? </li><li>how to deal with overload? <ul><li>attributes <ul><li>cheap </li><li>local </li><li>buffering - having capacity soon </li><li>priority </li></ul></li><li>reject requests  - spillover - choose! <ul><li>close the TCP connection </li><li>no buffer </li></ul></li><li>hang on, wait in a queue - surge queue <ul><li>may mkes it take longer</li></ul></li></ul></li></ul></li><li>some default we set - maxConns - perhost setting <ul><li>little’s law <ul><li>arrival rate * time shopping = people in the store </li></ul></li><li>see load balancers how many services we have </li><li>fleet-wide concurrent requests / host count = <strong>avg conns</strong></li></ul></li></ul><ul><li>metrics matter <ul><li>latency netwrok latency + 25% <ul><li>client side </li><li>server side </li></ul></li><li>request rate </li></ul></li><li>coral server <ul><li>concurrent requests - outstanding request - in one host </li></ul></li><li>33% overhead room - dependency failures </li></ul><h1 id="3-Actual-behave"><a href="#3-Actual-behave" class="headerlink" title="3. Actual behave"></a>3. Actual behave</h1><ul><li>increase load to see average latency </li><li>run actual test </li><li>generate graph with outstanding requests <ul><li>see the cross of client timeout and p99 </li></ul></li></ul><h1 id="4-Abnormal-cases"><a href="#4-Abnormal-cases" class="headerlink" title="4. Abnormal cases"></a>4. Abnormal cases</h1><ul><li>dependency latency, timeout </li><li>network  packet loss </li></ul><ul><li>let server decide what’s the maxCon should be </li><li>coral has<ul><li>connection </li><li>worker  work thread </li></ul></li><li>classify requests <ul><li>importance <ul><li>droppable </li></ul></li><li>priority <ul><li>order  </li></ul></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Load Balancers </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Google Dagger Tutorial</title>
       <link href="/Google-Dagger-Tutorial/"/>
       <url>/Google-Dagger-Tutorial/</url>
@@ -21,6 +46,10 @@
         <tags>
             
             <tag> Java </tag>
+            
+            <tag> Dagger </tag>
+            
+            <tag> DI </tag>
             
         </tags>
       
