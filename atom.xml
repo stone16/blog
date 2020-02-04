@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-04T03:30:42.723Z</updated>
+  <updated>2020-02-04T03:59:05.578Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>架构学习-general</title>
+    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-general/"/>
+    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-general/</id>
+    <published>2020-02-04T03:58:33.000Z</published>
+    <updated>2020-02-04T03:59:05.578Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-架构Intro"><a href="#1-架构Intro" class="headerlink" title="1. 架构Intro"></a>1. 架构Intro</h1><ul><li>架构设计的关键思维是<strong>判断和取舍</strong>，程序设计的关键思维是<strong>逻辑和实现</strong>。</li></ul><h2 id="1-1-架构世界的历史背景"><a href="#1-1-架构世界的历史背景" class="headerlink" title="1.1 架构世界的历史背景"></a>1.1 架构世界的历史背景</h2><ul><li>机器语言 <ul><li>01书写</li><li>难读，难写，难改</li></ul></li><li>汇编语言<ul><li>用地址符号或标号代替指令或操作数的地址</li><li>面向机器的语言，不够友好</li></ul></li><li>高级语言<ul><li>Fortran 公式翻译器</li><li>LISP 枚举处理器</li><li>Cobol 通用商业导向语言</li></ul></li></ul><h1 id="2-概念梳理"><a href="#2-概念梳理" class="headerlink" title="2. 概念梳理"></a>2. 概念梳理</h1><h2 id="2-1-系统与子系统"><a href="#2-1-系统与子系统" class="headerlink" title="2.1 系统与子系统"></a>2.1 系统与子系统</h2><blockquote><p>系统泛指由一群有关联的个体组成，根据某种规则运作，能完成个别元件不能单独完成的工作的群体</p></blockquote><ul><li>系统<ul><li>关联：相互之间有关联</li><li>规则：按照指定的规则运作</li><li>能力：产生了新的个体不具备的能力</li></ul></li><li>子系统<ul><li>更大系统的一部分</li></ul></li></ul><p>划分系统的时候一般是按照业务系统来划分的，可能一个子系统里面会有服务层，数据层，blabla. </p><h2 id="2-2-模块与组件"><a href="#2-2-模块与组件" class="headerlink" title="2.2 模块与组件"></a>2.2 模块与组件</h2><ul><li><p>模块</p><ul><li>互相有紧密关联的软件组织</li><li>程序和数据结构两部分</li><li>模块作为合成的单位</li><li>模块的接口表达了由该模块提供的功能和调用它所需的元素</li><li>模块是可以分开来编写的单位</li></ul></li><li><p>组件</p><ul><li>自包含的，可编程的，可重用的与语言无关的软件单元</li></ul></li><li><p>Summary</p><ul><li>模块和组件都是系统的组成部分，只是从不同角度来拆分了系统</li><li>逻辑角度拆分系统，得到的就是模块；划分模块的主要目的是职责分离</li><li>划分组件的主要目的是单元复用</li></ul></li><li><p>E.G</p><ul><li>一个信息管理系统，逻辑角度，可以划分成登录注册模块，个人信息模块，个人成绩模块</li><li>物理角度，Nginx，Web服务器，Mysql</li></ul></li></ul><h2 id="2-3-框架与架构"><a href="#2-3-框架与架构" class="headerlink" title="2.3 框架与架构"></a>2.3 框架与架构</h2><ul><li>框架<ul><li>为了实现某个业界标准或完成特定的基本任务的软件组件规范，也指为了实现某个软件组件规范时，提供规范锁要求的基础功能的软件产品</li><li>框架是组件规范 - MVC MVVM J2EE</li><li>提供基础功能的产品</li><li>面向编程或配置的半成品</li></ul></li></ul><blockquote><p>架构指软件系统的基础结构，创造这些基础结构的准则以及对这些结构的描述</p></blockquote><ul><li>软件架构指软件系统的顶层结构<ul><li>系统是一群关联个体组成，可以使子系统，模块，组件等</li><li>系统中的个体需要根据某种规则运作</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-架构Intro&quot;&gt;&lt;a href=&quot;#1-架构Intro&quot; class=&quot;headerlink&quot; title=&quot;1. 架构Intro&quot;&gt;&lt;/a&gt;1. 架构Intro&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;架构设计的关键思维是&lt;strong&gt;判断和取舍&lt;/strong&gt;，程
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>简单工厂模式</title>
@@ -532,32 +559,6 @@
       <category term="RPC" scheme="https://www.llchen60.com/tags/RPC/"/>
     
       <category term="SOAP" scheme="https://www.llchen60.com/tags/SOAP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络协议(九)-云</title>
-    <link href="https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/"/>
-    <id>https://www.llchen60.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/</id>
-    <published>2020-02-02T03:52:09.000Z</published>
-    <updated>2020-02-02T06:06:58.014Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-虚拟网卡"><a href="#1-虚拟网卡" class="headerlink" title="1. 虚拟网卡"></a>1. 虚拟网卡</h1><p>数据中心的维护非常复杂麻烦，主要体现在采购，运维，规格，复用等方面。为了解决这个问题，我们发明了虚拟机，并基于它产生了云计算技术。</p><h2 id="1-1-物理机到虚拟机"><a href="#1-1-物理机到虚拟机" class="headerlink" title="1.1 物理机到虚拟机"></a>1.1 物理机到虚拟机</h2><p>软件模拟硬件的方式，数据中心里面用的是qumu-kvm，能让你在一台巨大的物理机里面，掏出一台台小机器。这套软件就能解决上面的问题：一点就能创建，一点就能销毁。想多大就有多大，每次创建的系统都还是新的。</p><p>其实做的事情就和OS做的事情一样，让虚拟机觉得自己在使用独立的设备，占有所有的内存，CPU，网络，硬盘。</p><p>实质上是多个虚拟机轮流使用物理CPU，内存也是使用虚拟内存映射的方式，最终映射到物理内存上。硬盘在一块大的文件系统上创建一个N个G的文件，作为虚拟机的硬盘。</p><h2 id="1-2-虚拟网卡的原理-如何将虚拟机的网络和物理机的网络连接起来？"><a href="#1-2-虚拟网卡的原理-如何将虚拟机的网络和物理机的网络连接起来？" class="headerlink" title="1.2 虚拟网卡的原理 - 如何将虚拟机的网络和物理机的网络连接起来？"></a>1.2 虚拟网卡的原理 - 如何将虚拟机的网络和物理机的网络连接起来？</h2><p><img src="https://i.loli.net/2020/02/02/PkNpQgShKDFRtyx.jpg" alt="fig1.jpg"></p><p>虚拟机是物理机上跑着的一个软件，这个软件可以像其他应用打开文件一样，打开一个称谓TUN/TAP的Char Dev(字符设备文件)。打开了这个字符设备文件之后，在物理机上就能看到一张虚拟TAP网卡。</p><p>虚拟机会打开这个文件，然后在自己的虚拟的身上(hhhh)虚拟出一张网卡，让虚拟机里的应用觉得它们真的有一张网卡。然后，所有的网络包都往这里发。</p><p>当然，网络包会到虚拟化软件这里。它会将网络包转换成为<strong>文件</strong>流，写入字符设备，就像写一个文件一样。内核中 TUN/TAP 字符设备驱动会收到这个写入的文件流，交给 TUN/TAP 的虚拟网卡驱动。这个驱动将文件流再次转成网络包，交给 TCP/IP 协议栈，最终从虚拟 TAP 网卡发出来，成为标准的网络包。这样数据就能从虚拟机里面最终发送到虚拟机的外面。</p><h2 id="1-3-虚拟网卡的连接"><a href="#1-3-虚拟网卡的连接" class="headerlink" title="1.3 虚拟网卡的连接"></a>1.3 虚拟网卡的连接</h2><h3 id="1-3-1-云计算中的网络问题"><a href="#1-3-1-云计算中的网络问题" class="headerlink" title="1.3.1 云计算中的网络问题"></a>1.3.1 云计算中的网络问题</h3><ul><li>共享： 尽管每个虚拟机都会有一个或者多个虚拟网卡，但是物理机可能只有有限的网卡。这么多虚拟网卡如何共享同一个出口？ </li><li>隔离： 安全隔离-同一个机器上的两个虚拟机属于两个用户，怎么保证相互之间不会被窃听？  流量隔离-同一个机器上的两个虚拟机，一个占用大量带宽，另外一个还能上网么？ </li><li>互通： 同一个机器两个虚拟机，同一用户，如何通信？ 不同物理机上两个虚拟机，属于同一个用户的话，这两个如何相互通信？ </li><li>灵活： 虚拟机会经常有创建，删除的操作，或者所有配置的迁移搬运，需要能够进行灵活配置。</li></ul><h3 id="1-3-2-共享与互通的问题"><a href="#1-3-2-共享与互通的问题" class="headerlink" title="1.3.2 共享与互通的问题"></a>1.3.2 共享与互通的问题</h3><ul><li>一台物理机上有多个虚拟机，多个虚拟网卡，这些虚拟网卡如何连接在一起，进行相互访问，并且能够访问外网的呢？ </li></ul><h4 id="1-3-2-1-网桥"><a href="#1-3-2-1-网桥" class="headerlink" title="1.3.2.1 网桥"></a>1.3.2.1 网桥</h4><p>物理机上应该有一个虚拟的交换机，通过创建虚拟的网桥  <code>brctl addbr br0</code> 将几个虚拟机的虚拟网卡都连接到虚拟网桥brctl addif br0 tap0上，这样讲两个虚拟机配置相同的子网网段，两台虚拟机就能够相互通信了。</p><p><img src="https://i.loli.net/2020/02/02/f9AW6sK2tF4qNMO.jpg" alt="fig2.jpg"></p><p>要让几台虚拟机都能访问外网，可以采用桥接的方式，形成以下的结构：</p><p><img src="https://i.loli.net/2020/02/02/WA1KMhrXbvt4ke9.jpg" alt="fig3.jpg"></p><p>这个时候如果你去看你的IP地址，会发现你的虚拟机的地址和你的笔记本电脑和你旁边的人的网段是一致的。因为网桥将这几个都连接起来了。在数据中心里面，采取的也是类似的技术，只不过都是 Linux，在每台机器上都创建网桥 br0，虚拟机的网卡都连到 br0 上，物理网卡也连到br0上，所有的br0都通过物理网卡出来连接到物理交换机上。</p><p><img src="https://i.loli.net/2020/02/02/HyPYxt9M5Ob2gJd.jpg" alt="fig4.jpg"><br><img src="https://i.loli.net/2020/02/02/nkVRqf7bU1YtDPi.jpg" alt="fig9.jpg"></p><p>你还记得吗？在一个二层网络里面，最大的问题是广播。一个数据中心的物理机已经很多了，广播已经非常严重，需要通过 VLAN 进行划分。如果使用了虚拟机，假设一台物理机里面创建 10 台虚拟机，全部在一个二层网络里面，那广播就会很严重，所以除非是你的桌面虚拟机或者数据中心规模非常小，才可以使用这种相对简单的方式。</p><h4 id="1-3-2-2-NAT"><a href="#1-3-2-2-NAT" class="headerlink" title="1.3.2.2 NAT"></a>1.3.2.2 NAT</h4><p><img src="https://i.loli.net/2020/02/02/rnV3TutSEp9Z72B.jpg" alt="fig5.jpg"></p><p>在这种方式下，你登录到虚拟机里面查看 IP 地址，会发现虚拟机的网络是虚拟机的，物理机的网络是物理机的，两个不相同。虚拟机要想访问物理机的时候，需要将地址 NAT 成为物理机的地址。</p><p>除此之外，它还会在你的笔记本电脑里内置一个 DHCP 服务器，为笔记本电脑上的虚拟机动态分配 IP 地址。因为虚拟机的网络自成体系，需要进行 IP 管理。为什么桥接方式不需要呢？因为桥接将网络打平了，虚拟机的 IP 地址应该由物理网络的 DHCP 服务器分配。</p><p><img src="https://i.loli.net/2020/02/02/9PSTLm8MdbO6f3v.jpg" alt="fig6.jpg"></p><p>虚拟机是你的电脑，路由器和 DHCP Server 相当于家用路由器或者寝室长的电脑，物理网卡相当于你们宿舍的外网网口，用于访问互联网。所有电脑都通过内网网口连接到一个网桥 br0 上，虚拟机要想访问互联网，需要通过 br0 连到路由器上，然后通过路由器将请求 NAT 成为物理网络的地址，转发到物理网络。</p><p>如果是你自己登录到物理机上做个简单配置，你可以简化一下。例如将虚拟机所在网络的网关的地址直接配置到 br0 上，不用 DHCP Server，手动配置每台虚拟机的 IP 地址，通过命令 iptables -t nat -A POSTROUTING -o ethX -j MASQUERADE，直接在物理网卡 ethX 上进行 NAT，所有从这个网卡出去的包都 NAT 成这个网卡的地址。通过设置 net.ipv4.ip_forward = 1，开启物理机的转发功能，直接做路由器，而不用单独的路由器，这样虚拟机就能直接上网了。</p><p><img src="https://i.loli.net/2020/02/02/6nB4Z2ekyQMivqP.jpg" alt="fig7.jpg"></p><h2 id="1-3-3-隔离问题"><a href="#1-3-3-隔离问题" class="headerlink" title="1.3.3 隔离问题"></a>1.3.3 隔离问题</h2><p>如果一台机器上的两个虚拟机不属于同一个用户，怎么办呢？好在 brctl 创建的网桥也是支持 VLAN 功能的，可以设置两个虚拟机的 tag，这样在这个虚拟网桥上，两个虚拟机是不互通的。</p><p>但是如何跨物理机互通，并且实现 VLAN 的隔离呢？由于 brctl 创建的网桥上面的 tag 是没办法在网桥之外的范围内起作用的，于是我们需要寻找其他的方式。</p><p>有一个命令<code>vconfig</code>，可以基于物理网卡eth0创建带VLAN的虚拟网卡，所有从这个虚拟网卡出去的包，都带这个VLAN，如果这样跨物理机的互通和隔离就可以通过这个网卡来实现了。</p><p><img src="https://i.loli.net/2020/02/02/HtvwWh5iqmpDfze.jpg" alt="fig8.jpg"></p><p>首先为每个用户分配不同的 VLAN，例如有一个用户 VLAN 10，一个用户 VLAN 20。在一台物理机上，基于物理网卡，为每个用户用 vconfig 创建一个带 VLAN 的网卡。不同的用户使用不同的虚拟网桥，带 VLAN 的虚拟网卡也连接到虚拟网桥上。</p><p>这样是否能保证两个用户的隔离性呢？不同的用户由于网桥不通，不能相互通信，一旦出了网桥，由于 VLAN 不同，也不会将包转发到另一个网桥上。另外，出了物理机，也是带着 VLAN ID 的。只要物理交换机也是支持 VLAN 的，到达另一台物理机的时候，VLAN ID 依然在，它只会将包转发给相同 VLAN 的网卡和网桥，所以跨物理机，不同的 VLAN 也不会相互通信。</p><p>使用 brctl 创建出来的网桥功能是简单的，基于 VLAN 的虚拟网卡也能实现简单的隔离。但是这都不是大规模云平台能够满足的，一个是 VLAN 的隔离，数目太少。前面我们学过，VLAN ID 只有 4096 个，明显不够用。另外一点是这个配置不够灵活。谁和谁通，谁和谁不通，流量的隔离也没有实现，还有大量改进的空间。</p><h1 id="2-云中网络Qos"><a href="#2-云中网络Qos" class="headerlink" title="2. 云中网络Qos"></a>2. 云中网络Qos</h1><p>流量控制技术，来实现Quality of Service,从而保障大多数人的服务质量</p><p><img src="https://i.loli.net/2020/02/02/joSwOU5tpml7a6n.jpg" alt="fig10.jpg"></p><p>我们能控制的只有出方向，通过Shaping，将出的流量控制成自己想要的模样。而进入的方向无法控制，只能通过Policy将包丢弃。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-虚拟网卡&quot;&gt;&lt;a href=&quot;#1-虚拟网卡&quot; class=&quot;headerlink&quot; title=&quot;1. 虚拟网卡&quot;&gt;&lt;/a&gt;1. 虚拟网卡&lt;/h1&gt;&lt;p&gt;数据中心的维护非常复杂麻烦，主要体现在采购，运维，规格，复用等方面。为了解决这个问题，我们发明了虚拟机，
-      
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="https://www.llchen60.com/categories/Web/"/>
-    
-    
-      <category term="Cloud" scheme="https://www.llchen60.com/tags/Cloud/"/>
     
   </entry>
   
