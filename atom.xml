@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-04T04:06:41.922Z</updated>
+  <updated>2020-02-04T04:11:33.749Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>架构学习 - 实战</title>
+    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%AE%9E%E6%88%98/"/>
+    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%AE%9E%E6%88%98/</id>
+    <published>2020-02-04T04:10:07.000Z</published>
+    <updated>2020-02-04T04:11:33.749Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-技术演进的动力-企业发展"><a href="#1-技术演进的动力-企业发展" class="headerlink" title="1. 技术演进的动力 - 企业发展"></a>1. 技术演进的动力 - 企业发展</h1><h2 id="1-1-业务和技术之间的关系"><a href="#1-1-业务和技术之间的关系" class="headerlink" title="1.1 业务和技术之间的关系"></a>1.1 业务和技术之间的关系</h2><ul><li>产品类<ul><li>技术创新推动业务发展 </li><li>用户选择产品的根本驱动力是功能</li></ul></li><li>服务类<ul><li>业务发展推动技术创新 </li><li>用户选择服务的根本驱动力是规模</li></ul></li></ul><h1 id="2-技术演进的模式-（复杂性，用户规模）"><a href="#2-技术演进的模式-（复杂性，用户规模）" class="headerlink" title="2. 技术演进的模式 （复杂性，用户规模）"></a>2. 技术演进的模式 （复杂性，用户规模）</h1><ul><li>业务时期分类<ul><li>初创期</li><li>发展期</li><li>竞争期</li><li>成熟期</li></ul></li></ul><h2 id="2-1-初创期"><a href="#2-1-初创期" class="headerlink" title="2.1 初创期"></a>2.1 初创期</h2><p>创新出新的理念，通过用户使用，快速迭代，不断完善。对于业务的要求就是快。</p><h2 id="2-2-发展期"><a href="#2-2-发展期" class="headerlink" title="2.2 发展期"></a>2.2 发展期</h2><p>大量加入功能，技术方面的核心工作就是快速实现各种需求。</p><ul><li>堆功能</li><li>优化 vs 重新架构</li><li>架构期 - 拆分</li></ul><h2 id="2-3-竞争期"><a href="#2-3-竞争期" class="headerlink" title="2.3 竞争期"></a>2.3 竞争期</h2><p>更迅速的发展，但是很容易出现重复造轮子，以及系统交互很乱等问题</p><p>因此一般都是做平台化以及服务化的操作。</p><ul><li>平台化<ul><li>存储平台化</li><li>数据库平台化</li><li>缓存平台化</li></ul></li></ul><h2 id="2-4-成熟期"><a href="#2-4-成熟期" class="headerlink" title="2.4 成熟期"></a>2.4 成熟期</h2><p>系统性的针对性优化</p><h1 id="3-General"><a href="#3-General" class="headerlink" title="3. General"></a>3. General</h1><p><img src="https://i.loli.net/2020/02/04/ViqLHs2aExQUAru.png" alt="fig1.png"></p><ul><li>纵向排列<ul><li>测试平台</li><li>运维平台</li><li>数据平台</li><li>管理平台</li></ul></li><li>横向<ul><li>业务层</li><li>用户层<ul><li>用户管理</li><li>消息推送</li><li>存储云</li><li>图片云</li></ul></li><li>网络层<ul><li>负载均衡</li><li>CDN</li></ul></li><li>服务层<ul><li>配置中心</li><li>服务中心</li><li>消息队列</li></ul></li><li>开发层<ul><li>开发框架</li><li>服务器</li><li>容器</li></ul></li><li>存储层<ul><li>SQL</li><li>NoSQL</li><li>小文件</li><li>大文件</li></ul></li></ul></li></ul><h1 id="4-存储层技术"><a href="#4-存储层技术" class="headerlink" title="4. 存储层技术"></a>4. 存储层技术</h1><h2 id="4-1-SQL"><a href="#4-1-SQL" class="headerlink" title="4.1 SQL"></a>4.1 SQL</h2><ul><li>NoSQL - Not only SQL </li><li>数据库拆分满足性能要求，但是会带来复杂度问题<ul><li>数据如何拆分</li><li>数据如何组合</li></ul></li><li>当业务发展到一定阶段之后，会将这部分功能独立成中间件</li><li>而后在SQL集群上构建SQL存储平台，以对业务透明的形式提供资源分配、数据备份、迁移、容灾、读写分离、分库分表等一系列服务</li></ul><h2 id="4-2-NoSQL"><a href="#4-2-NoSQL" class="headerlink" title="4.2 NoSQL"></a>4.2 NoSQL</h2><p>在NoSQL集群的基础上实现统一的存储平台，实现以下的功能：</p><ul><li>资源按需动态分配</li><li>资源自动化管理</li><li>故障自动化管理</li></ul><h2 id="4-3-小文件存储"><a href="#4-3-小文件存储" class="headerlink" title="4.3 小文件存储"></a>4.3 小文件存储</h2><p>展示性质的数据，比如商品图片，商品描述；特征是数据小，但数量巨大</p><h2 id="4-4-大文件存储"><a href="#4-4-大文件存储" class="headerlink" title="4.4 大文件存储"></a>4.4 大文件存储</h2><ul><li>业务上的大数据<ul><li>youtube的视频</li><li>电影</li></ul></li><li>海量日志数据<ul><li>访问日志</li><li>操作日志</li><li>用户轨迹日志</li></ul></li></ul><p>几个开源方案</p><ul><li>Hadoop</li><li>HBase</li><li>Storm</li><li>Hive</li></ul><h1 id="5-开发层技术"><a href="#5-开发层技术" class="headerlink" title="5. 开发层技术"></a>5. 开发层技术</h1><h2 id="5-1-开发框架"><a href="#5-1-开发框架" class="headerlink" title="5.1 开发框架"></a>5.1 开发框架</h2><p>整个公司使用同样的框架和技术可以解决组和组之间沟通的问题，大大提升组织和团队的开发效率。</p><p>对于框架，应该选择成熟的框架，避免盲目追逐新技术。</p><ul><li>java<ul><li>SSH</li><li>SpringMVC</li><li>Play </li></ul></li><li>Ruby<ul><li>Ruby on Rails</li></ul></li><li>PHP<ul><li>ThinkPHP</li></ul></li><li>Python <ul><li>Django </li></ul></li></ul><h2 id="5-2-Web服务器"><a href="#5-2-Web服务器" class="headerlink" title="5.2 Web服务器"></a>5.2 Web服务器</h2><ul><li>Java<ul><li>Tomcat</li><li>JBoss </li><li>Besin </li></ul></li><li>PHP/ Python <ul><li>Nginx</li></ul></li><li>Apache </li></ul><h2 id="5-3-容器"><a href="#5-3-容器" class="headerlink" title="5.3 容器"></a>5.3 容器</h2><p>Docker技术，不跨平台，但是启动快，几乎不占资源</p><p>可以基于Docker打造自动化运维</p><h1 id="6-服务层技术"><a href="#6-服务层技术" class="headerlink" title="6. 服务层技术"></a>6. 服务层技术</h1><p>服务层的主要目标就是降低系统间相互关联的复杂度。</p><h2 id="6-1-配置中心"><a href="#6-1-配置中心" class="headerlink" title="6.1 配置中心"></a>6.1 配置中心</h2><ul><li>集中管理各个系统的配置</li><li>各系统管理自己的配置会带来一些问题<ul><li>需要多个系统配合的时候，配置分散，则配置检查和沟通协调都会比较费时间</li><li>处理线上问题，需要查询多个配置文件，相互比较，很麻烦</li><li>各系统自己配置，往往用文本方式，没有自动的校验机制，就比较容易出现错误</li></ul></li><li>配置中心，做成通用系统，给所有系统来使用<ul><li>集中配置</li><li>程序化的规则检查，避免常见错误，可以用正则表达式来检查</li><li>备份了系统的配置，便于快速搭建系统和恢复业务</li></ul></li></ul><h2 id="6-2-服务中心"><a href="#6-2-服务中心" class="headerlink" title="6.2 服务中心"></a>6.2 服务中心</h2><p>服务中心是用来解决跨系统依赖的配置和调度问题的。</p><h3 id="6-2-1-服务名字系统-–-Service-Name-System"><a href="#6-2-1-服务名字系统-–-Service-Name-System" class="headerlink" title="6.2.1 服务名字系统 – Service Name System"></a>6.2.1 服务名字系统 – Service Name System</h3><p>将Service的名称解析为<code>host+port+接口名称</code></p><p><img src="https://i.loli.net/2020/02/04/HqVy9UlC35ceauY.png" alt="fig2.png"></p><h3 id="6-2-2-服务总线系统-–-Service-Bus-System"><a href="#6-2-2-服务总线系统-–-Service-Bus-System" class="headerlink" title="6.2.2 服务总线系统 – Service Bus System"></a>6.2.2 服务总线系统 – Service Bus System</h3><p>有总线系统完成调用，服务请求方不需要直接和服务提供方进行交互了。</p><p><img src="https://i.loli.net/2020/02/04/G2UmVfZCIBpcLSD.png" alt="fig3.png"></p><p><img src="https://i.loli.net/2020/02/04/D5QZEIuiFAWoN1s.png" alt="fig4.png"></p><h2 id="6-3-消息队列"><a href="#6-3-消息队列" class="headerlink" title="6.3 消息队列"></a>6.3 消息队列</h2><p>很多业务处理需要采用异步的方式，消息队列就是为了实现这种跨系统异步通知的中间件系统。</p><h1 id="7-网络层技术"><a href="#7-网络层技术" class="headerlink" title="7. 网络层技术"></a>7. 网络层技术</h1><h2 id="7-1-负载均衡"><a href="#7-1-负载均衡" class="headerlink" title="7.1 负载均衡"></a>7.1 负载均衡</h2><ul><li>DNS<ul><li>地理级别的负载均衡 </li></ul></li><li>Nginx, LVS, F5 <ul><li>同一个地点内机器级别的负载均衡</li></ul></li><li>CDN<h2 id="7-2-多机房-跨国多机房"><a href="#7-2-多机房-跨国多机房" class="headerlink" title="7.2 多机房 + 跨国多机房"></a>7.2 多机房 + 跨国多机房</h2><h2 id="7-3-多中心"><a href="#7-3-多中心" class="headerlink" title="7.3 多中心"></a>7.3 多中心</h2></li></ul><p>每个中心都可以对外提供服务，且业务可以自动在多中心之间切换。</p><h1 id="8-用户层技术"><a href="#8-用户层技术" class="headerlink" title="8. 用户层技术"></a>8. 用户层技术</h1><h2 id="8-1-用户管理"><a href="#8-1-用户管理" class="headerlink" title="8.1 用户管理"></a>8.1 用户管理</h2><ul><li>单点登录 (SSO) - 统一登录<ul><li>cookie</li><li>Json</li><li>token </li><li>CAS </li></ul></li></ul><p><img src="https://i.loli.net/2020/02/04/y9ScKCkWZvTomLY.png" alt="fig5.png"></p><ul><li>授权登录<ul><li>OAuth 2.0</li></ul></li></ul><h2 id="8-2-消息推送"><a href="#8-2-消息推送" class="headerlink" title="8.2 消息推送"></a>8.2 消息推送</h2><ul><li>根据途径<ul><li>短信</li><li>邮件</li><li>站内信</li><li>App推送</li></ul></li><li>消息推送的功能<ul><li>设备管理<ul><li>唯一标识</li><li>注册</li><li>注销</li></ul></li><li>连接管理</li><li>消息管理</li></ul></li></ul><p>技术上的挑战：</p><ul><li><p>海量设备和用户管理</p><ul><li>需要将用户和设备关联起来</li><li>提取用户特征对用户进行分类或者打标签</li></ul></li><li><p>连接保活</p><ul><li>想推送消息必须有连接通道</li><li>但是手机等终端都会限制后台应用的运行</li><li>应用找厂商拉白名单，hhhh</li></ul></li><li><p>消息管理</p><ul><li>根据用户的特征，选择一些用户进行消息推送</li><li>这部分的逻辑的设计必须十分灵活<h2 id="8-3-存储云，图片云"><a href="#8-3-存储云，图片云" class="headerlink" title="8.3 存储云，图片云"></a>8.3 存储云，图片云</h2></li></ul></li><li><p>小文件存储</p></li></ul><h1 id="9-业务层技术"><a href="#9-业务层技术" class="headerlink" title="9. 业务层技术"></a>9. 业务层技术</h1><p>主要是随着发展业务层变得越来越大了，需要做的最主要的就是拆分了，将整体复杂性分散到多个子业务或者子系统当中。</p><p>当子系统太多的时候，再做高内聚，低耦合的操作，即将职责关联比较强的子系统合成一个虚拟业务域，然后通过网关对外统一呈现。</p><h1 id="10-平台技术"><a href="#10-平台技术" class="headerlink" title="10. 平台技术"></a>10. 平台技术</h1><h2 id="10-1-运维平台"><a href="#10-1-运维平台" class="headerlink" title="10.1 运维平台"></a>10.1 运维平台</h2><ul><li>配置<ul><li>主要负责资源的管理<ul><li>机器管理</li><li>IP地址管理</li><li>虚拟机管理</li></ul></li></ul></li><li>部署<ul><li>主要负责将系统发布到线上<ul><li>包管理</li><li>灰度发布管理</li><li>回滚</li></ul></li></ul></li><li>监控<ul><li>主要负责收集系统上线运行之后的相关数据并进行监控，以便及时发现问题 </li></ul></li><li>应急<ul><li>主要负责系统出故障以后的处理<ul><li>停止程序</li><li>下线故障机器</li><li>切换IP</li></ul></li></ul></li></ul><h2 id="10-2-测试平台"><a href="#10-2-测试平台" class="headerlink" title="10.2 测试平台"></a>10.2 测试平台</h2><ul><li>单元测试</li><li>集成测试</li><li>接口测试</li><li>性能测试</li></ul><p>重点就是自动化测试，使测试用例能够重复执行，无须人工参与，以提高测试效率。</p><h3 id="10-2-1-用例管理"><a href="#10-2-1-用例管理" class="headerlink" title="10.2.1 用例管理"></a>10.2.1 用例管理</h3><p>测试自动化的主要手段就是通过脚本或者代码来进行测试，为了重复执行此类代码，测试平台需要将用例进行管理，管理的维度有业务、系统、测试类型、用例代码。例如网购业务的订单系统的接口测试用例。</p><h3 id="10-2-2-资源管理"><a href="#10-2-2-资源管理" class="headerlink" title="10.2.2 资源管理"></a>10.2.2 资源管理</h3><p>具体的运行环境的配置，包括</p><ul><li>硬件<ul><li>服务器</li><li>手机</li><li>平板</li></ul></li><li>软件<ul><li>操作系统</li><li>数据库</li><li>Java虚拟机</li></ul></li><li>业务系统</li></ul><h3 id="10-2-3-任务管理"><a href="#10-2-3-任务管理" class="headerlink" title="10.2.3 任务管理"></a>10.2.3 任务管理</h3><p>将测试用例分配到具体的资源上来执行，跟踪任务的执行情况。任务管理是测试平台设计的核心，其将测试平台的各个部分串联起来从而完成自动化测试</p><h3 id="10-2-4-数据管理"><a href="#10-2-4-数据管理" class="headerlink" title="10.2.4 数据管理"></a>10.2.4 数据管理</h3><p>记录各种相关的数据</p><ul><li>执行时间</li><li>执行结果</li><li>用例执行期间的CPU，内存占用情况</li></ul><h2 id="10-3-数据平台"><a href="#10-3-数据平台" class="headerlink" title="10.3 数据平台"></a>10.3 数据平台</h2><ul><li>数据管理<ul><li>数据采集<ul><li>日志</li><li>用户行为</li><li>业务数据</li></ul></li><li>数据存储<ul><li>将从业务系统采集的数据存储到数据平台，用于后续数据分析 </li></ul></li><li>数据访问<ul><li>负责对外提供各种协议用于读写数据 </li></ul></li><li>数据安全</li></ul></li><li>数据分析<ul><li>数据统计</li><li>数据挖掘</li><li>机器学习</li><li>深度学习</li></ul></li><li>数据应用</li></ul><h2 id="10-4-管理平台"><a href="#10-4-管理平台" class="headerlink" title="10.4 管理平台"></a>10.4 管理平台</h2><p>管理平台的核心职责就是权限管理，要做身份认证以及权限控制。</p><ul><li>身份认证<ul><li>确定当前的操作人员身份，防止非法人员进入系统</li></ul></li><li>权限控制<ul><li>根据身份确定权限 </li></ul></li></ul><h1 id="11-Some-tips"><a href="#11-Some-tips" class="headerlink" title="11. Some tips"></a>11. Some tips</h1><h2 id="11-1-如何选择开源项目"><a href="#11-1-如何选择开源项目" class="headerlink" title="11.1 如何选择开源项目"></a>11.1 如何选择开源项目</h2><ul><li>不要重复造轮子</li><li>但要找到合适的轮子</li></ul><h3 id="11-1-1-选择方法"><a href="#11-1-1-选择方法" class="headerlink" title="11.1.1 选择方法"></a>11.1.1 选择方法</h3><ul><li>聚焦于是否满足业务，而不是聚焦于开源项目本身是否足够优秀</li><li>聚焦于该项目是否足够成熟<ul><li>版本号</li><li>使用的公司数量</li><li>社区活跃程度</li></ul></li><li>聚焦于运维能力<ul><li>开源项目日志是否齐全</li><li>是否有命令行，管理控制台等维护工具</li><li>是否有故障检测和恢复的能力，例如告警，切换等</li></ul></li></ul><h3 id="11-1-2-如何深入了解一个开源项目"><a href="#11-1-2-如何深入了解一个开源项目" class="headerlink" title="11.1.2 如何深入了解一个开源项目"></a>11.1.2 如何深入了解一个开源项目</h3><ul><li>通读开源项目的设计文档，白皮书，了解其设计原理</li><li>核对每个配置项的作用和影响，识别出关键配置项</li><li>进行多种场景的性能测试</li><li>进行压力测试，观察CPU、内存、磁盘I/O等关键指标</li><li>进行故障测试</li></ul><h3 id="11-1-3-如何基于开源项目做二次开发"><a href="#11-1-3-如何基于开源项目做二次开发" class="headerlink" title="11.1.3 如何基于开源项目做二次开发"></a>11.1.3 如何基于开源项目做二次开发</h3><ul><li>不改动原系统，因为还要要能够合并，与原来的能够兼容就再好不过了</li><li>开发辅助系统<ul><li>监控</li><li>报警</li><li>负载均衡</li><li>管理</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-技术演进的动力-企业发展&quot;&gt;&lt;a href=&quot;#1-技术演进的动力-企业发展&quot; class=&quot;headerlink&quot; title=&quot;1. 技术演进的动力 - 企业发展&quot;&gt;&lt;/a&gt;1. 技术演进的动力 - 企业发展&lt;/h1&gt;&lt;h2 id=&quot;1-1-业务和技术之间
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>架构学习-复杂度来源</title>
+    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/"/>
+    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/</id>
+    <published>2020-02-04T04:09:13.000Z</published>
+    <updated>2020-02-04T04:09:32.574Z</updated>
+    
+    <content type="html"><![CDATA[<p>架构设计的主要目的是为了解决软件系统复杂度带来的问题，那么复杂度的来源到底在哪里呢？ </p><h1 id="1-高性能"><a href="#1-高性能" class="headerlink" title="1. 高性能"></a>1. 高性能</h1><h2 id="1-1-单机复杂度"><a href="#1-1-单机复杂度" class="headerlink" title="1.1 单机复杂度"></a>1.1 单机复杂度</h2><p>操作系统 - 是将硬件性能充分发挥出来的关键。</p><ul><li>最初是只有输入计算以及输出功能</li><li>批处理 - 将要执行的指令预先写下来，形成一个指令清单，然后将任务交给计算机执行，读取任务中的指令清单并进行处理</li><li>进程 - 进程对应任务，都有自己的内存空间，进程间互不相关</li><li>进程间的通信<ul><li>管道</li><li>消息队列</li><li>信号量</li><li>共享存储</li></ul></li><li>线程<ul><li>进程内部的子任务，都共享同一份进程数据。为保证数据的正确性，有了互斥锁机制。有了多线程以后，操作系统调度的最小单位就变成了线程，而进程变成了操作系统分配资源的最小单位。</li></ul></li><li>多个CPU真正同时执行计算任务<ul><li>SMP symmetric multi processor </li><li>NUMA  Non uniform memory access </li><li>MPP  Massive Parallel Processing </li></ul></li></ul><h2 id="1-2-集群复杂度"><a href="#1-2-集群复杂度" class="headerlink" title="1.2 集群复杂度"></a>1.2 集群复杂度</h2><p>突然发现双十一峰值，支付宝能到每秒12万笔；红包能达到76万。通过大量机器来提升性能，并不仅仅是增加机器这么简单，让多台机器来配合达到高性能的目的，是一个复杂的任务，复杂在于：</p><ul><li>任务分配<ul><li>任务分配器<ul><li>硬件网络设备 交换机</li><li>软件网络设备  LVS</li><li>负载均衡软件  Nginix  HAProxy</li><li>分配算法<ul><li>轮询</li><li>按权重分配</li><li>按负载分配</li></ul></li></ul></li><li>任务分配器和业务服务器的连接<ul><li>选择合适的连接方式</li><li>管理连接<ul><li>连接建立，检测，中断后的处理 </li></ul></li></ul></li><li>继续拓展 -&gt; 任务分配器也要变成多台了<ul><li>此时需要将不同的用户分配到不同的任务分配器上<ul><li>DNS轮询，CDN， GSLB(Global Server Load Balance)</li></ul></li><li>任务分配器和业务服务器，多对多的网状结构</li></ul></li></ul></li><li>任务分解<ul><li>任务分配到不同的机器上带来的帮助会递减的，因为当业务越来越复杂，单台机器的性能不够用了，所以就需要进行任务分解来做优化</li><li>可以从逻辑上将各个子业务进行拆分，将一整个业务系统拆分成小而简单，但是需要多个系统配合的业务系统</li><li>为什么能提升性能？ 代码还是那些代码哇？<ul><li>简单的系统更容易分析出瓶颈，更容易做到高性能</li><li>可以针对单个任务进行拓展</li><li>当然不能划分的太细，因为网络的调用性能远比系统内的函数调用要低</li></ul></li></ul></li></ul><h1 id="2-高可用"><a href="#2-高可用" class="headerlink" title="2. 高可用"></a>2. 高可用</h1><blockquote><p>系统无中断地执行其功能的能力，代表系统的可用性程度</p></blockquote><blockquote><p>通过冗余来实现高可用，与高性能的区别在于，高性能增加机器的目的在于扩展处理性能；高可用增加机器的目的在于冗余处理单元</p></blockquote><h2 id="2-1-计算高可用"><a href="#2-1-计算高可用" class="headerlink" title="2.1 计算高可用"></a>2.1 计算高可用</h2><p>多台服务器时主备的选择，具体采用什么方式，主备分别的个数，结合实际业务需求来分析和判断。</p><h2 id="2-2-存储高可用"><a href="#2-2-存储高可用" class="headerlink" title="2.2 存储高可用"></a>2.2 存储高可用</h2><p>高可用设计的关键点就在于存储高可用了，区别在于将数据从一台机器搬到另一台机器，需要经过线路进行传输</p><p>无论是正常情况下的传输延迟，还是异常情况下的传输中断，都会导致系统的数据在某个时间点或者时间段是不一致的，而数据的不一致又会导致业务问题；存储高可用的难点不在于如何备份数据，而在于如何减少或者规避数据不一致对业务造成的影响。</p><p>分布式领域的CAP定理，存储高可用性不可能同时满足一致性，可用性，分区容错性，最多满足其中两个，这就要求我们在做架构设计的时候结合业务进行取舍。</p><h2 id="2-3-高可用状态决策"><a href="#2-3-高可用状态决策" class="headerlink" title="2.3 高可用状态决策"></a>2.3 高可用状态决策</h2><p>无论是计算高可用还是存储高可用，其基础都是状态决策，即系统需要能够判断当前的状态是正常还是异常的，如果出现异常就要采取行动来保证高可用。但一个矛盾点在于： </p><p><strong>通过冗余实现的高可用，状态决策本质上就不可能做到完全正确</strong></p><p>常见的决策方式：</p><ul><li>独裁式<ul><li>只有一个决策者</li><li>n个上报者</li><li>不会出现决策混乱，但是决策者本身故障的时候，系统就崩了</li></ul></li><li>协商式<ul><li>两个独立的个体通过交流信息，根据规则进行决策</li><li>主备决策</li><li>2台服务器启动时都是备机</li><li>建立连接</li><li>交换状态信息</li><li>某1台服务器做出决策，成为主机；另一台继续保持备机身份</li><li>协商式 当连接出问题的时候，采用哪个？ 两主？ 多连接？ 仍然存在问题的</li></ul></li><li>民主式<ul><li>多个独立个体通过投票的方式进行状态决策</li><li>ZooKeeper集群在选举leader时就采用这种方式</li><li>对于连接断开，可能出现多个leader的问题的解决<ul><li>投票节点数必须超过系统总结点数的一半的规则 </li></ul></li></ul></li></ul><h1 id="3-可拓展性"><a href="#3-可拓展性" class="headerlink" title="3. 可拓展性"></a>3. 可拓展性</h1><ul><li>可拓展性指系统为了应对将来的需求变化而提供的一种扩展能力，当有新的需求出现的时候，系统不需要或者仅仅需要少量修改就可以支持，无须整个系统的重构或者重建。</li><li>面向对象的思想以及设计模式的诞生与演化，都是在努力提升代码的可拓展性</li><li>设计具备良好可拓展性的系统的基本条件<ul><li>正确预测变化<ul><li>不能每个点都考虑可拓展性</li><li>不能完全不考虑可拓展性</li><li>所有的预测都存在出错的可能性</li></ul></li><li>完美封装变化<ul><li>一般来说会将变化封装在一个变化层，将不变的部分封装在一个独立的稳定层</li><li>或者提炼出一个抽象层和一个实现层</li></ul></li></ul></li></ul><h1 id="4-低成本，安全，规模"><a href="#4-低成本，安全，规模" class="headerlink" title="4. 低成本，安全，规模"></a>4. 低成本，安全，规模</h1><ul><li>低成本<ul><li>通过减少服务器的数量来达成低成本的目标</li><li>首先指定一个成本目标，当我们根据高性能、高可用的要求设计出方案时，评估一下方案能否满足成本目标，如果不行，就要重新设计架构</li><li>通过引入新技术来达到目标<ul><li>NoSQL 解决关系型数据库无法应对高并发情况下的访问压力的问题</li><li>全文搜索引擎是为了解决关系型数据库like搜索的低效的问题</li><li>Hadoop的出现是为了解决传统文件体统无法应对海量数据存储和计算的问题</li></ul></li></ul></li><li>安全<ul><li>功能安全<ul><li>XSS攻击</li><li>CSRF攻击</li><li>SQL注入</li><li>Windows漏洞</li><li>密码破解</li></ul></li><li>架构安全<ul><li>防火墙<ul><li>隔离网络</li><li>通过将网络划分成不同的区域，制定出不同区域之间的访问控制策略来控制不同信任程度区域间传送的数据流</li><li>太贵，很难实现</li></ul></li><li>一般还是靠运营商或者云服务商强大的带宽和流量清洗能力</li></ul></li></ul></li><li>规模<ul><li>规模带来的复杂度 - 量变带来的质变</li><li>功能越来越多，复杂度指数级增加</li><li>数据越来越多</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;架构设计的主要目的是为了解决软件系统复杂度带来的问题，那么复杂度的来源到底在哪里呢？ &lt;/p&gt;
+&lt;h1 id=&quot;1-高性能&quot;&gt;&lt;a href=&quot;#1-高性能&quot; class=&quot;headerlink&quot; title=&quot;1. 高性能&quot;&gt;&lt;/a&gt;1. 高性能&lt;/h1&gt;&lt;h2 id=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>架构学习-可扩展架构模式</title>
@@ -494,58 +547,6 @@
       <category term="System Design" scheme="https://www.llchen60.com/tags/System-Design/"/>
     
       <category term="UML" scheme="https://www.llchen60.com/tags/UML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Event Storming</title>
-    <link href="https://www.llchen60.com/Event-Storming/"/>
-    <id>https://www.llchen60.com/Event-Storming/</id>
-    <published>2020-02-02T21:56:24.000Z</published>
-    <updated>2020-02-04T03:22:18.168Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-什么是事件风暴？"><a href="#1-什么是事件风暴？" class="headerlink" title="1. 什么是事件风暴？"></a>1. 什么是事件风暴？</h1><p>通过便签而不是代码来理解你的整个系统，并不断革新你的商业逻辑和需求。</p><p>构建一个能够对事件及时作出反应的系统</p><p>事件风暴是一种组织架构的方法，他是在讨论事件在你的组织里的流动，并将其用一种易于理解的方式模型化。</p><p>实质上想做的事情是通过交流，能够更加迅速的了解到在这个简单事情的背后都发生了什么，了解到数据/信息究竟是如何在多个系统间进行流动的。</p><p>想达到的目标就是通过便签纸在白板上展现出在每个步骤当中想要做的事情，这样能更好的理解商业需求，不需要太过于关注技术细节。</p><h1 id="2-关键的几个概念"><a href="#2-关键的几个概念" class="headerlink" title="2. 关键的几个概念"></a>2. 关键的几个概念</h1><h2 id="2-1-Events-and-Reactions"><a href="#2-1-Events-and-Reactions" class="headerlink" title="2.1 Events and Reactions"></a>2.1 Events and Reactions</h2><p>可以简化为因果关系，或者说是起因及其影响。重要的事件会在系统当中引发一些影响，我们需要理解为什么这些反应会发生，以及其是怎么样发生的。</p><h2 id="2-2-事件流"><a href="#2-2-事件流" class="headerlink" title="2.2 事件流"></a>2.2 事件流</h2><p>单独的事件没有什么太大的影响，我们需要考虑的是事件流，即事件在一段时间内的变化。我们要做的实际上就是使用便签纸，从左到右，按照时间顺序，记录下事件的发生。当我们有了这样的一个线性的事件流以后，下一步是去思考事件是因何而发生的。</p><h2 id="2-3-Reactions"><a href="#2-3-Reactions" class="headerlink" title="2.3 Reactions"></a>2.3 Reactions</h2><p>反馈是在其他事件发生以后发生的事件。 – this happens whenever that happens. </p><h2 id="2-4-Policy"><a href="#2-4-Policy" class="headerlink" title="2.4 Policy"></a>2.4 Policy</h2><p>Policy是指事件和其反馈的整体流动。我们称其为policy 是因为这个流动捕捉到了核心的商业逻辑和规则。</p><h2 id="2-5-Commands"><a href="#2-5-Commands" class="headerlink" title="2.5 Commands"></a>2.5 Commands</h2><p>来代表用户的某些行为，这些行为可以触发某些事件的发生，或者说这些行为本身很有可能就是某些事件，而这些事件会触发某些reaction，然后再度触发事件，一以贯之。</p><h1 id="3-背后逻辑"><a href="#3-背后逻辑" class="headerlink" title="3. 背后逻辑"></a>3. 背后逻辑</h1><p>个人感觉这不仅仅是应用在技术架构和模型上，任何商业上的事务，想要明晰商业逻辑，都可以用这一套逻辑链条来进行分析。核心就是用户行为，事件，平台/app 对事件作出的反应，三者形成一个可以循环往复的圈，不停带来新的行为和新的反馈。这是行为环，还有利益环，即每个角色在这整个过程当中交换了什么，获得了什么。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://ziobrando.blogspot.com/2013/11/introducing-event-storming.html" target="_blank" rel="noopener">https://ziobrando.blogspot.com/2013/11/introducing-event-storming.html</a></li><li><a href="https://blog.redelastic.com/corporate-arts-crafts-modelling-reactive-systems-with-event-storming-73c6236f5dd7" target="_blank" rel="noopener">https://blog.redelastic.com/corporate-arts-crafts-modelling-reactive-systems-with-event-storming-73c6236f5dd7</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-什么是事件风暴？&quot;&gt;&lt;a href=&quot;#1-什么是事件风暴？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是事件风暴？&quot;&gt;&lt;/a&gt;1. 什么是事件风暴？&lt;/h1&gt;&lt;p&gt;通过便签而不是代码来理解你的整个系统，并不断革新你的商业逻辑和需求。&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="DDD" scheme="https://www.llchen60.com/tags/DDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DDD-领域驱动设计</title>
-    <link href="https://www.llchen60.com/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"/>
-    <id>https://www.llchen60.com/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/</id>
-    <published>2020-02-02T16:04:32.000Z</published>
-    <updated>2020-02-04T03:22:06.695Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><h2 id="1-1-什么是领域驱动设计"><a href="#1-1-什么是领域驱动设计" class="headerlink" title="1.1 什么是领域驱动设计"></a>1.1 什么是领域驱动设计</h2><p>、】=op90q`</p><blockquote><p>DDD是面向对象的一套方言，提供了一种基于业务领域的对象划分和分类方法，其最大的价值就在于对于软件开发过程全生命周期使用语言的统一。</p></blockquote><h2 id="1-2-常用名词"><a href="#1-2-常用名词" class="headerlink" title="1.2 常用名词"></a>1.2 常用名词</h2><ul><li>Controller </li><li>Service </li><li>Repository </li><li>Entity </li></ul><h2 id="1-3-为什么使用DDD"><a href="#1-3-为什么使用DDD" class="headerlink" title="1.3 为什么使用DDD?"></a>1.3 为什么使用DDD?</h2><p>我们在使用面向对象语言来解决实际问题的时候，知道所有东西都是对象，但我们并没有明确的关于对象应当如何组织和划分的规范。</p><p>作为技术人员，我们习惯于从技术角度来出发进行思考，出现了用<strong>技术语言</strong>定义对象的习惯，例如DAO(Data Access Objects), DTO(Data Transfer Object)这类对象及其体现出来的划分方式。</p><p>但是我们日常工作当中很多时间需要做大量的业务语言和技术语言的相互翻译。DDD - Domain Driven Design 就是想解决这样的相互翻译的问题，希望能通过一套面向对象的分类方法，从领域触发，实现软件开发过程当中各个角色和环境的统一语言(Ubiquitous Language).例如使用Repository（仓库）替代数据访问对象（DAO），就更能让业务和技术同时理解这个对象的作用了。</p><p>DDD分为战术和战略两部分，恰好可以用在微服务的划分当中。我们需要利用DDD的战略部分，划分问题域，来合理对微服务进行划分。</p><h1 id="2-事件风暴-EventStorming"><a href="#2-事件风暴-EventStorming" class="headerlink" title="2. 事件风暴 EventStorming"></a>2. 事件风暴 EventStorming</h1><blockquote><p>是一套独立的通过协作基于事件还原系统全貌，从而快速分析复杂业务领域，完成领域建模的方法。</p></blockquote><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://insights.thoughtworks.cn/ddd-eventstorming-zhongtai/#utm_source=rss&amp;utm_medium=rss" target="_blank" rel="noopener">https://insights.thoughtworks.cn/ddd-eventstorming-zhongtai/#utm_source=rss&amp;utm_medium=rss</a></li><li><a href="https://www.eventstorming.com/#services" target="_blank" rel="noopener">https://www.eventstorming.com/#services</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; title=&quot;1. Intro&quot;&gt;&lt;/a&gt;1. Intro&lt;/h1&gt;&lt;h2 id=&quot;1-1-什么是领域驱动设计&quot;&gt;&lt;a href=&quot;#1-1-什么是领域驱动设计&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="DDD" scheme="https://www.llchen60.com/tags/DDD/"/>
     
   </entry>
   
