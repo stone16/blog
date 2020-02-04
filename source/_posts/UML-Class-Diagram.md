@@ -1,7 +1,7 @@
 ---
 title: UML - Class Diagram
 date: 2020-02-02 13:57:47
-categories: System Design
+categories: SystemDesign
 tags:
     - UML
     - System Design
