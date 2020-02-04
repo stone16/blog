@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>编程范式系列-基于原型的编程</title>
+      <link href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"/>
+      <url>/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p>基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 </p><h1 id="1-与传统面向对象编程的比较"><a href="#1-与传统面向对象编程的比较" class="headerlink" title="1. 与传统面向对象编程的比较"></a>1. 与传统面向对象编程的比较</h1><h2 id="1-1-关注对象实例行为，而后对类进行划分"><a href="#1-1-关注对象实例行为，而后对类进行划分" class="headerlink" title="1.1 关注对象实例行为，而后对类进行划分"></a>1.1 关注对象实例行为，而后对类进行划分</h2><p>在基于类的编程当中，对象总共有两种类型。</p><ol><li>类</li></ol><p>定义了对象的基本布局，函数特性。—-&gt; 是行为和结构的集合，对所有的接口来说这些类的行为和结构都是相同的。</p><ol start="2"><li>接口</li></ol><p>是可以使用的对象,定义了一些行为，基于特定类的样式。</p><p>在这种模式下，类的划分是基于行为和结构，而不是状态。原型编程的主张者提倡关注一系列对象实例的行为，而后关注将其划分到使用方式相似的原型对象。实际上说，不同之处在于对于状态的看重程度。</p><h2 id="1-2-创建实例的时间"><a href="#1-2-创建实例的时间" class="headerlink" title="1.2 创建实例的时间"></a>1.2 创建实例的时间</h2><p>对于基于类的系统，新的实例是通过类构造器以及参数来构造，实例是由类的行为和结构来定义的。</p><p>对于基于原型的系统，可以通过复制已有的对象或者通过扩展空对象来创建，是在<strong>运行时</strong>对原型进行修改的。</p><h1 id="2-JavaScript-原型的概念"><a href="#2-JavaScript-原型的概念" class="headerlink" title="2. JavaScript 原型的概念"></a>2. JavaScript 原型的概念</h1><pre><code>var foo = {name: &quot;foo&quot;, one: 1, two: 2};var bar = {three: 3};bar.__proto__ = foo; // foo is...// If we try to access foo&#39;s properties from bar // from now on, we&#39;ll succeed. bar.one // Resolves to 1.// The child object&#39;s properties are also accessible.bar.three // Resolves to 3.// Own properties shadow prototype propertiesbar.name = &quot;bar&quot;;foo.name; // unaffected, resolves to &quot;foo&quot;bar.name; // Resolves to &quot;bar&quot;</code></pre><p>每个对象都有个<code>_proto_</code>属性，通过赋值操作，bar的原型现在是foo了。因此我们可以在bar里面访问foo的属性。</p><h2 id="2-1-区分-proto-以及prototype"><a href="#2-1-区分-proto-以及prototype" class="headerlink" title="2.1 区分_proto_以及prototype"></a>2.1 区分<code>_proto_</code>以及<code>prototype</code></h2><ul><li><p><code>_proto_</code><br>主要安放在一个实际的对象当中，用它来产生一个链接，用于寻找方法名或属性。用于链接原型的一个指针。</p></li><li><p><code>prototype</code><br>当用new来构造一个新的对象的时候构造<code>_proto_</code>的时候用的，是构造函数的一个属性。</p></li></ul><h2 id="2-2-对象的表现形式"><a href="#2-2-对象的表现形式" class="headerlink" title="2.2 对象的表现形式"></a>2.2 对象的表现形式</h2><ul><li>Object </li><li>Function </li></ul><h1 id="3-Conclusion"><a href="#3-Conclusion" class="headerlink" title="3. Conclusion"></a>3. Conclusion</h1><p>其实是一种委托方式，通过一个序列的指针来定位属性，寻找数据。可以带来运行时的灵活性，数据方法都可以进行修改了。 </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程范式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>编程范式系列-函数式编程</title>
       <link href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
       <url>/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
