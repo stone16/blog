@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>建造者模式</title>
+      <link href="/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p>建造者模式，又称为生成器模式，为客户端返回一个由多个部件组成的复杂产品。</p><h1 id="1-建造者模式概述"><a href="#1-建造者模式概述" class="headerlink" title="1. 建造者模式概述"></a>1. 建造者模式概述</h1><p>小例子，设计游戏角色病可以快速生成。对于各种角色来说，创建步骤相对比较类似，逐步创建其组成部分，再将各组成部分装配成一个完整的游戏角色。</p><p>建造者模式将客户端和包含各个组成部分的复杂对象的创建过程分离，客户端无须知道复杂对象的内部组成部分与装配方式，只需要知道所需建造者的类型即可。</p><blockquote><p>建造者模式，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。</p></blockquote><h2 id="1-1-建造者模式结构"><a href="#1-1-建造者模式结构" class="headerlink" title="1.1 建造者模式结构"></a>1.1 建造者模式结构</h2><p><img src="https://i.loli.net/2020/02/04/Tl4oLzhx16i9Uvq.gif" alt="1.gif"><br>建造者模式结构图</p><h2 id="1-2-建造者模式角色"><a href="#1-2-建造者模式角色" class="headerlink" title="1.2 建造者模式角色"></a>1.2 建造者模式角色</h2><ol><li>Builder(抽象建造者)</li></ol><p>为创建一个产品Product对象的各个部件指定抽象接口，包含两类方法。一是buildPart()， 二是getResult()方法</p><ol start="2"><li>ConcreteBuilder(具体建造者)</li></ol><p>实现了Builder接口，实现各个部件的具体构造和装配方法，定义并明确其所创建的复杂对象。</p><ol start="3"><li>Product(产品角色)</li></ol><p>是被构建的复杂对象，包含多个组成部件，具体建造者创建该产品，并定义其装配过程</p><ol start="4"><li>Director(指挥者)</li></ol><p>指挥者又称为导演类，它负责安排<strong>复杂对象的建造次序</strong>，指挥者与抽象建造者之间存在关联关系，可以在其construct()建造方法中调用建造者对象的部件构造与装配方法，完成复杂对象的建造。客户端一般只需要与指挥者进行交互，在客户端确定具体建造者的类型，并实例化具体建造者对象（也可以通过配置文件和反射机制），然后通过指挥者类的构造函数或者Setter方法将该对象传入指挥者类中。</p><p>在建造者模式的结构中还引入了一个指挥者类Director，该类主要有两个作用：一方面它隔离了客户与创建过程；另一方面它控制产品的创建过程，包括某个buildPartX()方法是否被调用以及多个buildPartX()方法调用的先后次序等。指挥者针对抽象建造者编程，客户端只需要知道具体建造者的类型，即可通过指挥者类调用建造者的相关方法，返回一个完整的产品对象。</p><h1 id="2-游戏角色创建解决方案"><a href="#2-游戏角色创建解决方案" class="headerlink" title="2. 游戏角色创建解决方案"></a>2. 游戏角色创建解决方案</h1><p><img src="https://i.loli.net/2020/02/04/R7D3qoj6ugxTIiQ.gif" alt="2.gif"><br>角色创建结构图</p><p>Actor角色类</p><pre><code>// import lombok@Dataclass Actor{    private String type;    private String sex;    private String face;    private String costume;    private String hairstyle;}</code></pre><p>角色建造起：抽象建造者</p><pre><code>abstract class ActorBuilder {    public void buildType() {        actor.setType(&quot;Charm&quot;);    }}</code></pre><p>指挥者类<br>    class ActorController {<br>        public Actor construct(ActorBuilder ab) {<br>            Actor actor;<br>            ab.buildType();<br>            ab.buildSex();<br>            …<br>            actor = ab.createActor();<br>            return actor;<br>        }<br>    }</p><h1 id="3-关于Director的讨论"><a href="#3-关于Director的讨论" class="headerlink" title="3. 关于Director的讨论"></a>3. 关于Director的讨论</h1><h2 id="3-1-省略Director"><a href="#3-1-省略Director" class="headerlink" title="3.1 省略Director"></a>3.1 省略Director</h2><p>将Director和抽象建造者Builder进行合并，在Builder中提供逐步构建复杂产品对象的construct()方法，控制调用的先后次序。</p><pre><code>abstract class ActorBuilder{       protected static Actor actor = new  Actor();       public  abstract void buildType();       public  abstract void buildSex();       public  abstract void buildFace();       public  abstract void buildCostume();       public  abstract void buildHairstyle();       public static Actor  construct(ActorBuilder ab)       {              ab.buildType();              ab.buildSex();              ab.buildFace();              ab.buildCostume();              ab.buildHairstyle();              return actor;       }}</code></pre><h2 id="3-2-设值钩子方法"><a href="#3-2-设值钩子方法" class="headerlink" title="3.2 设值钩子方法"></a>3.2 设值钩子方法</h2><p>来控制对BuilderPart的调用</p><h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><h2 id="4-1-优点"><a href="#4-1-优点" class="headerlink" title="4.1 优点"></a>4.1 优点</h2><ol><li>产品本身与创建过程解耦</li><li>具体建造者之间相对独立</li></ol><h2 id="4-2-缺点"><a href="#4-2-缺点" class="headerlink" title="4.2 缺点"></a>4.2 缺点</h2><ol><li>同一个Builder建的很类似啊，需要产品本身相似程度比较高，否则会很受限</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Design Pattern </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>工厂方法模式</title>
       <link href="/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</url>
