@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Executor, ExecutorService and Executors</title>
+      <link href="/Executor-ExecutorService-and-Executors/"/>
+      <url>/Executor-ExecutorService-and-Executors/</url>
+      
+        <content type="html"><![CDATA[<p>Executor, ExecutorService and Executors, they are all part of Java’s Executor framework, this framework offers a threadpool. Thus we don’t need to manage threads on our own, the pool can help us manage themselves. </p><p>A thread pool which is created when an application is a startup solves both of these problems. It has <strong>ready threads</strong> to serve clients when needed and it also has a bound on how many threads to create under load.</p><h1 id="1-Executor"><a href="#1-Executor" class="headerlink" title="1. Executor"></a>1. Executor</h1><p><strong>the core interface</strong> which is an abstraction for parallel execution</p><p>It separates task from execution, this is different from java.lang.Thread class which <strong>combines both task and its execution</strong>. </p><h1 id="2-ExecutorService"><a href="#2-ExecutorService" class="headerlink" title="2. ExecutorService"></a>2. ExecutorService</h1><p>ExecutorService is an extension of Executor interface and provides a facility for returning a Future object and terminate, or shut down the thread pool. Once the shutdown is called, the thread pool will not accept new task but complete any pending task. It also provides a submit() method which extends Executor.execute() method and returns a Future.</p><p>The Future object provides the facility of asynchronous execution, which means you don’t need to wait until the execution finishes, you can just submit the task and go around, come back and check if Future object has the result, if execution is completed then it would have result which you can access by using the Future.get() method. Just remember that this method is a <strong>blocking method</strong> i.e. it will wait until execution finish and the result is available if it’s not finished already.</p><p>By using the Future object returned by ExecutorService.submit() method, you can also cancel the execution if you are not interested anymore. It provides cancel() method to cancel any pending execution.</p><h1 id="3-Executors"><a href="#3-Executors" class="headerlink" title="3. Executors"></a>3. Executors</h1><p>Third one Executors is a utility class similar to Collections, which provides <strong>factory methods</strong> to create different types of thread pools e.g. fixed and cached thread pools. Let’s see some more difference between these three classes.</p><h1 id="4-Difference"><a href="#4-Difference" class="headerlink" title="4. Difference"></a>4. Difference</h1><p>1) One of the key difference between Executor and ExecutorService interface is that <strong>former is a parent interface while ExecutorService extends Executor</strong> i.e. it’s a sub-interface of Executor.</p><p>2) Another important difference between ExecutorService and Executor is that Executor defines execute() method which accepts an object of the Runnable interface, while submit() method can accept objects of both Runnable and Callable interfaces.</p><p>3) The third difference between Executor and ExecutorService interface is that execute() method doesn’t return any result, its return type is void but submit() method returns the result of computation via a Future object. This is also the key difference between submit() and execute() method, which is one of the frequently asked Java concurrency interview questions.</p><p>4) The fourth difference between ExecutorService and Executor interface is that apart from allowing a client to submit a task, <strong>ExecutorService also provides methods to control the thread pool</strong> e.g. terminate the thread pool by calling the shutDown() method. You should also read “Java Concurrency in Practice” to learn more about the graceful shutdown of a thread-pool and how to handle pending tasks.</p><p>5) Executors class provides factory methods to create different kinds of thread pools e.g. newSingleThreadExecutor() creates a thread pool of just one thread, newFixedThreadPool(int numOfThreads) creates a thread pool of fixed number of threads and newCachedThreadPool() creates new threads when needed but reuse the existing threads if they are available.</p><h1 id="5-Differences-between-Executor-and-Thread"><a href="#5-Differences-between-Executor-and-Thread" class="headerlink" title="5. Differences between Executor and Thread"></a>5. Differences between Executor and Thread</h1><ol><li>Executor provides a thread pool in java, while Thread not. </li><li>java.lang.Thread is a class in Java while java.util.concurrent.Executor is an interface.</li><li>The Executor concept is actually an abstraction over parallel computation. It allows concurrent code to be run in managed way. On the other hand, Thread is a concrete way to run the code in parallel.</li><li>Executor decouples a task (the code which needs to be executed in parallel) from execution, while in the case of a Thread, both task and execution are tightly coupled.</li><li>The Executor concept allows your task is to be executed by a worker thread from the thread pool, while Thread itself execute your task</li><li>a Thread can only execute one Runnable task but an Executor can execute any number of Runnable task.</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>EnumMap vs HashMap</title>
       <link href="/EnumMap-vs-HashMap/"/>
       <url>/EnumMap-vs-HashMap/</url>
