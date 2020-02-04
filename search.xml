@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>EnumMap vs HashMap</title>
+      <link href="/EnumMap-vs-HashMap/"/>
+      <url>/EnumMap-vs-HashMap/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-EnumMap"><a href="#1-EnumMap" class="headerlink" title="1. EnumMap"></a>1. EnumMap</h1><ul><li>Can only be used with <strong>enum type</strong> keys </li><li>It’s specialized implementation of Map Interface for use with enum type keys</li><li>Internally using <strong>arrays</strong> </li><li>stored in <strong>natural order</strong></li><li>not possible for collision </li><li>much efficient compared with HashMap </li></ul><h1 id="2-HashMap"><a href="#2-HashMap" class="headerlink" title="2. HashMap"></a>2. HashMap</h1><ul><li>Extends AbstrctMap and implement Map interface </li><li>Internally using hashTable</li><li>Possible for collision </li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.geeksforgeeks.org/enummap-class-java-example/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/enummap-class-java-example/</a> </li><li><a href="https://walkingtechie.blogspot.com/2017/03/difference-between-enummap-and-hashmap.html" target="_blank" rel="noopener">https://walkingtechie.blogspot.com/2017/03/difference-between-enummap-and-hashmap.html</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Effective Java</title>
       <link href="/Effective-Java/"/>
       <url>/Effective-Java/</url>
