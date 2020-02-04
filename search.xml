@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>CacheLoader 教程</title>
+      <link href="/CacheLoader-%E6%95%99%E7%A8%8B/"/>
+      <url>/CacheLoader-%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-LoadingCache"><a href="#1-LoadingCache" class="headerlink" title="1. LoadingCache"></a>1. LoadingCache</h1><p>LoadingCache是指用CacheLoader建立的缓存。想要使用LoadingCache的话，就是使用方法<code>get(K)</code>。如果不在LoadingCache里面的话，就会使用CacheLoader做一次加载；如果有的话就直接拿回结果了。</p><h1 id="2-使用CacheLoader以及LoadingCache"><a href="#2-使用CacheLoader以及LoadingCache" class="headerlink" title="2. 使用CacheLoader以及LoadingCache"></a>2. 使用CacheLoader以及LoadingCache</h1><pre><code>LoadingCache&lt;String, String&gt; loadingCache = CacheBuilder.newBuilder()    .build(new CacheLoader&lt;String, String&gt;() {        @Override        public String load(final String s) throws Exception {            return response;        }    });</code></pre><ul><li>CacheLoader在使用newBuilder()创造新实例的时候还可以做很多的设置，比如<ul><li><code>expireAfterAccess(long duration, TimeUnit unit)</code><ul><li>在每个entry被创建以后，经过一段固定的时间做自动移除操作</li></ul></li><li><code>maximumSize(long size)</code><ul><li>定义cache能有的最大entry数量 </li></ul></li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.baeldung.com/guava-cacheloader" target="_blank" rel="noopener">https://www.baeldung.com/guava-cacheloader</a> </li><li><a href="https://stackoverflow.com/questions/43993731/what-is-a-loadingcache" target="_blank" rel="noopener">https://stackoverflow.com/questions/43993731/what-is-a-loadingcache</a></li><li><a href="https://guava.dev/releases/21.0/api/docs/com/google/common/cache/LoadingCache.html" target="_blank" rel="noopener">https://guava.dev/releases/21.0/api/docs/com/google/common/cache/LoadingCache.html</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Cache </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Apache-Ant</title>
       <link href="/Apache-Ant/"/>
       <url>/Apache-Ant/</url>
