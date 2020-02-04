@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>编程范式系列-面向对象编程</title>
+      <link href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
+      <url>/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-函数式编程-vs-面向对象编程"><a href="#1-函数式编程-vs-面向对象编程" class="headerlink" title="1. 函数式编程 vs 面向对象编程"></a>1. 函数式编程 vs 面向对象编程</h1><p>函数式编程主要是把一些功能或逻辑代码通过函数的拼装方式来组织。尽量无状态，但是状态总归是需要一些地方来存放的。</p><p>对于状态和数据的处理，常用面向对象编程这个范式。</p><p>面向对象编程三大特性： </p><ul><li>封装</li><li>继承</li><li>多态</li></ul><h1 id="2-面向对象编程"><a href="#2-面向对象编程" class="headerlink" title="2. 面向对象编程"></a>2. 面向对象编程</h1><p>对象是类的实例，将对象作为程序的基本单元。对象里的程序可以访问及修改对象相关联的数据。</p><p>在程序中包含各种独立又相互调用的对象的思想。面向对象设计中的每一个对象都应该能够<strong>接受数据，处理数据并将数据传达给其它对象</strong>。</p><h2 id="2-1-面向对象的核心理念"><a href="#2-1-面向对象的核心理念" class="headerlink" title="2.1 面向对象的核心理念"></a>2.1 面向对象的核心理念</h2><ol><li>Program to an interface, not an implementation </li></ol><ul><li>使用者不需要知道数据类型，结构，算法的细节</li><li>使用者不需要知道实现细节，只需要知道提供的接口</li><li>利于抽象、封装、动态绑定、多态</li></ul><ol start="2"><li>Favor object composition over class inheritance <ul><li>继承需要给子类暴露一些父类的设计和实现细节</li><li>父类的改变会造成子类也需要改变</li><li>继承更多是为了多态</li></ul></li></ol><h2 id="2-2-tips"><a href="#2-2-tips" class="headerlink" title="2.2 tips"></a>2.2 tips</h2><ol><li>使用接口实现具体类</li><li>其他类耦合的是接口而不是实现类。这就是多态，其增加了程序的可扩展性</li><li>接口编程</li></ol><h2 id="2-3-缺点"><a href="#2-3-缺点" class="headerlink" title="2.3 缺点"></a>2.3 缺点</h2><p>超级重的代码粘合层，大量的封装</p><h1 id="3-控制反转"><a href="#3-控制反转" class="headerlink" title="3. 控制反转"></a>3. 控制反转</h1><p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</p><p>传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对象的创建；IoC容器控制了对象；主要控制了外部资源获取。</p><p>有了IoC容器后，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程范式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>编程范式系列-泛型编程</title>
       <link href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"/>
       <url>/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</url>
