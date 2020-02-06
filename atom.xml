@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-06T02:57:33.469Z</updated>
+  <updated>2020-02-06T02:58:23.254Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java - callback</title>
+    <link href="https://www.llchen60.com/Java-callback/"/>
+    <id>https://www.llchen60.com/Java-callback/</id>
+    <published>2020-02-06T02:57:58.000Z</published>
+    <updated>2020-02-06T02:58:23.254Z</updated>
+    
+    <content type="html"><![CDATA[<p>In C/ C++, callback refers to the mechanism of calling a function from another function. Memory address of a function is represented as function pointer here. SO the callback is achieved by passing the pointer of func1() to func2().</p><p>However, in java, there is no function pointer existing. And we use a callback object or a callback interface, and the interface is passed that refers to the location of a function. </p><p>Below is an example to compute tax by state tax and fedaral tax. Suppose federal tax keeps same while state tax vary by state. We can build interface and implements interface to realize it.<br>    // Java program to demonstrate callback mechanism<br>    // using interface is Java </p><pre><code>// Create interface import java.util.Scanner; interface STax {     double stateTax(); } // Implementation class of Punjab state tax class Punjab implements STax {     public double stateTax()     {         return 3000.0;     } } // Implementation class of Himachal Pardesh state tax class HP implements STax {     public double stateTax()     {         return 1000.0;     } } class TAX {     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException     {         Scanner sc = new Scanner(System.in);         System.out.println(&quot;Enter the state name&quot;);         String state = sc.next(); // name of the state         // The state name is then stored in an object c         Class c = Class.forName(state);         // Create the new object of the class whose name is in c         // Stax interface reference is now referencing that new object         STax ref = (STax)c.newInstance();         /*Call the method to calculate total tax         and pass interface reference - this is callback .         Here, ref may refer to stateTax() of Punjab or HP classes         depending on the class for which the object is created         in the previous step         */        calculateTax(ref);     }     static void calculateTax(STax t)     {         // calculate central tax         double ct = 2000.0;         // calculate state tax         double st = t.stateTax();         double totaltax = st + ct;         // display total tax         System.out.println(&quot;Total tax =&quot; + totaltax);     } } </code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;In C/ C++, callback refers to the mechanism of calling a function from another function. Memory address of a function is represented as f
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Callback" scheme="https://www.llchen60.com/tags/Callback/"/>
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java Annotations 注解详解</title>
@@ -530,33 +558,6 @@
       
       
         &lt;h1 id=&quot;1-识别复杂度&quot;&gt;&lt;a href=&quot;#1-识别复杂度&quot; class=&quot;headerlink&quot; title=&quot;1. 识别复杂度&quot;&gt;&lt;/a&gt;1. 识别复杂度&lt;/h1&gt;&lt;p&gt;具体情况需要具体分析，即这个系统的复杂度体现在哪一个方面。一个系统的复杂度主要来源于高性能，高可
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构学习 - 架构设计文档模板</title>
-    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF/"/>
-    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF/</id>
-    <published>2020-02-04T04:12:55.000Z</published>
-    <updated>2020-02-04T04:13:14.588Z</updated>
-    
-    <content type="html"><![CDATA[<p>整个流程应当是在刚开始的时候有几个方案，然后在经过讨论和分析以后整理出唯一可以的方案，然后再创建架构设计的详细文档，这个时候理论上应该</p><h1 id="1-备选方案模板"><a href="#1-备选方案模板" class="headerlink" title="1. 备选方案模板"></a>1. 备选方案模板</h1><h2 id="1-1-需求介绍"><a href="#1-1-需求介绍" class="headerlink" title="1.1 需求介绍"></a>1.1 需求介绍</h2><ul><li>需求的背景</li><li>需求的目标</li><li>需求的范围</li></ul><h2 id="1-2-需求分析"><a href="#1-2-需求分析" class="headerlink" title="1.2 需求分析"></a>1.2 需求分析</h2><h3 id="1-2-1-5W"><a href="#1-2-1-5W" class="headerlink" title="1.2.1 5W"></a>1.2.1 5W</h3><ul><li>Who 开发者 使用者 购买者 决策者等</li><li>When 需求使用时间，包括季节，时间，里程碑等</li><li>What 需求的产出是什么，包括系统，数据，文件，开发库，平台等</li><li>Where  需求的应用场景，包括国家，地点，环境等</li><li>Why  需求需要解决的问题，通常和需求背景相关</li></ul><h3 id="1-2-2-1H"><a href="#1-2-2-1H" class="headerlink" title="1.2.2 1H"></a>1.2.2 1H</h3><p>How指的是关键业务流程</p><h3 id="1-2-3-8C"><a href="#1-2-3-8C" class="headerlink" title="1.2.3 8C"></a>1.2.3 8C</h3><p>8个约束和限制，包括</p><ul><li>performance</li><li>cost</li><li>time</li><li>reliability</li><li>security</li><li>compliance</li><li>technology</li><li>compatibility</li></ul><h2 id="1-3-复杂度分析"><a href="#1-3-复杂度分析" class="headerlink" title="1.3 复杂度分析"></a>1.3 复杂度分析</h2><h3 id="1-3-1-高可用"><a href="#1-3-1-高可用" class="headerlink" title="1.3.1 高可用"></a>1.3.1 高可用</h3><h3 id="1-3-2-高性能"><a href="#1-3-2-高性能" class="headerlink" title="1.3.2 高性能"></a>1.3.2 高性能</h3><h3 id="1-3-3-可扩展"><a href="#1-3-3-可扩展" class="headerlink" title="1.3.3 可扩展"></a>1.3.3 可扩展</h3><h2 id="1-4-其他备选方案及评估"><a href="#1-4-其他备选方案及评估" class="headerlink" title="1.4 其他备选方案及评估"></a>1.4 其他备选方案及评估</h2><h1 id="2-架构设计模板"><a href="#2-架构设计模板" class="headerlink" title="2. 架构设计模板"></a>2. 架构设计模板</h1><h2 id="2-1-总体方案"><a href="#2-1-总体方案" class="headerlink" title="2.1 总体方案"></a>2.1 总体方案</h2><p>整体描述方案的结构，架构图，以及针对架构图的描述，包括模块或者子系统的职责描述，核心流程</p><h2 id="2-2-架构总览"><a href="#2-2-架构总览" class="headerlink" title="2.2 架构总览"></a>2.2 架构总览</h2><p>架构图以及架构的描述</p><h2 id="2-3-核心流程"><a href="#2-3-核心流程" class="headerlink" title="2.3 核心流程"></a>2.3 核心流程</h2><h2 id="2-4-详细设计"><a href="#2-4-详细设计" class="headerlink" title="2.4 详细设计"></a>2.4 详细设计</h2><h3 id="2-4-1-高可用设计"><a href="#2-4-1-高可用设计" class="headerlink" title="2.4.1 高可用设计"></a>2.4.1 高可用设计</h3><h3 id="2-4-2-高性能设计"><a href="#2-4-2-高性能设计" class="headerlink" title="2.4.2 高性能设计"></a>2.4.2 高性能设计</h3><h3 id="2-4-3-可扩展设计"><a href="#2-4-3-可扩展设计" class="headerlink" title="2.4.3 可扩展设计"></a>2.4.3 可扩展设计</h3><h3 id="2-4-4-安全设计"><a href="#2-4-4-安全设计" class="headerlink" title="2.4.4 安全设计"></a>2.4.4 安全设计</h3><h2 id="2-5-部署方案"><a href="#2-5-部署方案" class="headerlink" title="2.5 部署方案"></a>2.5 部署方案</h2><ul><li>硬件要求</li><li>服务器部署方式</li><li>组网方式</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;整个流程应当是在刚开始的时候有几个方案，然后在经过讨论和分析以后整理出唯一可以的方案，然后再创建架构设计的详细文档，这个时候理论上应该&lt;/p&gt;
-&lt;h1 id=&quot;1-备选方案模板&quot;&gt;&lt;a href=&quot;#1-备选方案模板&quot; class=&quot;headerlink&quot; title=&quot;1
       
     
     </summary>
