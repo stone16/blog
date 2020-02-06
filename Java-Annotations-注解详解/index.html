@@ -1,0 +1,2534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Java Annotations 注解详解 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Java , Annotations ">
+  <meta name="description" content="Java Annotations 注解详解 | Leilei&#39;s Blog | 磊磊的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
+<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-02-02T06:06:58.021Z">
+<meta property="article:author" content="Leilei Chen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+<script id="dsq-count-scr" src="//leilei-blog.disqus.com/count.js" async></script>
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="true">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Leilei Chen</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/stone16" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/leilei-chen-837870b4/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:stone2paul@gmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(148)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Web">Web<small>(36)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="FrontEnd">FrontEnd<small>(19)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Notes">Notes<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Tools">Tools<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="BackEnd">BackEnd<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="SystemDesign">SystemDesign<small>(29)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="148">
+<input type="hidden" id="yelog_site_word_count" value="292.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color3">RESTFul</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Web</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">AWS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DynamoDB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Mapper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Lambda</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Distributed Tracing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Security</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Agility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Elasticity</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Reliability</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">FrontEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CSS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Curl</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">EC2</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELB</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">AutoScaling</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ECS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">CI/ CD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Identity and Access Management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CloudTrail</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">S3</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Serverless</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NoSQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Gateway</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SQS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Notification Service</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Queue</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Step Functions</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">ElasticCache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">System Design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Elastic Search</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">food</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">diet</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Tips</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">HTTP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">认证授权</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">JavaScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Callback</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Concurrency</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Synchronized</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Lock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">BackEnd</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">LDAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Object Oriented</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Cli</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">平均负载</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">CPU Utilization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Context Switch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">NightWatch</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">UI Test</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">RPC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Puppeteer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">React</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Scalibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Web Accessibility</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Tomcat</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">TypeScript</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Browser</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Batch Processing</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Web Development</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">i18next</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">society</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">world war</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">5G</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">GPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Uber</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">time management</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Sam Altman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Regex</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CDN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">network</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">TCP/ IP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Thought</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Reading</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Cloud</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">流媒体协议</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">P2P</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DNS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">HTTP 2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">QUIC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">HTTPS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Data Center</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">VPN</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UDP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">TCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Socket</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">SOAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Distributed System</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">rafactor</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">IP Protocol</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">CIDR</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">DHCP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ICMP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Router</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Japan</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">finance</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">stock</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">DDD</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">UML</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">IOC</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Dependency Injection</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">混沌工程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">秒杀</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Design Pattern</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">CAP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">编程范式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Apache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Cache</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Load Balancers</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Dagger</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">DI</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">HashMap</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Jackson</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Serialization</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Annotations</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="SystemDesign "
+           href="/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/"
+           data-tag="秒杀"
+           data-author="" >
+            <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
+            <span class="post-date" title="2020-02-02 14:44:35">2020/02/02</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/"
+           data-tag="Java,Annotations"
+           data-author="" >
+            <span class="post-title" title="Java Annotations 注解详解">Java Annotations 注解详解</span>
+            <span class="post-date" title="2020-02-05 18:57:11">2020/02/05</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Jackson-java-json-parser/"
+           data-tag="Java,Jackson,Serialization"
+           data-author="" >
+            <span class="post-title" title="Jackson  java-json parser">Jackson  java-json parser</span>
+            <span class="post-date" title="2020-02-05 18:55:49">2020/02/05</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/HashMap%E5%9C%A8Java%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+           data-tag="Java,HashMap"
+           data-author="" >
+            <span class="post-title" title="HashMap在Java中是如何工作的">HashMap在Java中是如何工作的</span>
+            <span class="post-date" title="2020-02-04 09:15:10">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Handling-overload-effectively-with-load-balancers/"
+           data-tag="Load Balancers"
+           data-author="" >
+            <span class="post-title" title="Handling overload effectively with load balancers">Handling overload effectively with load balancers</span>
+            <span class="post-date" title="2020-02-04 09:13:39">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Google-Dagger-Tutorial/"
+           data-tag="Java,Dagger,DI"
+           data-author="" >
+            <span class="post-title" title="Google Dagger Tutorial">Google Dagger Tutorial</span>
+            <span class="post-date" title="2020-02-04 09:12:52">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Executor-ExecutorService-and-Executors/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Executor, ExecutorService and Executors">Executor, ExecutorService and Executors</span>
+            <span class="post-date" title="2020-02-04 09:11:48">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/EnumMap-vs-HashMap/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="EnumMap vs HashMap">EnumMap vs HashMap</span>
+            <span class="post-date" title="2020-02-04 09:10:34">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Effective-Java/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Effective Java">Effective Java</span>
+            <span class="post-date" title="2020-02-04 09:09:44">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Cost-of-abstraction/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Cost of abstraction">Cost of abstraction</span>
+            <span class="post-date" title="2020-02-04 09:08:47">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/CacheLoader-%E6%95%99%E7%A8%8B/"
+           data-tag="Java,Cache"
+           data-author="" >
+            <span class="post-title" title="CacheLoader 教程">CacheLoader 教程</span>
+            <span class="post-date" title="2020-02-04 09:07:09">2020/02/04</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Apache-Ant/"
+           data-tag="Java,Apache"
+           data-author="" >
+            <span class="post-title" title="Apache-Ant">Apache-Ant</span>
+            <span class="post-date" title="2020-02-04 08:32:50">2020/02/04</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"
+           data-tag="编程范式"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-面向对象编程">编程范式系列-面向对象编程</span>
+            <span class="post-date" title="2020-02-03 20:32:33">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"
+           data-tag="编程范式"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-泛型编程">编程范式系列-泛型编程</span>
+            <span class="post-date" title="2020-02-03 20:31:42">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B/"
+           data-tag="编程范式"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-基于原型的编程">编程范式系列-基于原型的编程</span>
+            <span class="post-date" title="2020-02-03 20:30:57">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"
+           data-tag="编程范式"
+           data-author="" >
+            <span class="post-title" title="编程范式系列-函数式编程">编程范式系列-函数式编程</span>
+            <span class="post-date" title="2020-02-03 20:29:45">2020/02/03</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%AC%94%E8%AE%B0-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-by-Eric-Evans/"
+           data-tag="System Design,BackEnd,DDD"
+           data-author="" >
+            <span class="post-title" title="笔记 - 领域驱动设计 by Eric Evans">笔记 - 领域驱动设计 by Eric Evans</span>
+            <span class="post-date" title="2020-02-03 20:28:36">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-高性能架构模式">架构学习-高性能架构模式</span>
+            <span class="post-date" title="2020-02-03 20:25:06">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构,CAP"
+           data-author="" >
+            <span class="post-title" title="架构学习-高可用架构模式">架构学习-高可用架构模式</span>
+            <span class="post-date" title="2020-02-03 20:21:29">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-架构设计流程">架构学习-架构设计流程</span>
+            <span class="post-date" title="2020-02-03 20:14:02">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 架构设计文档模板">架构学习 - 架构设计文档模板</span>
+            <span class="post-date" title="2020-02-03 20:12:55">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%AE%9E%E6%88%98/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习 - 实战">架构学习 - 实战</span>
+            <span class="post-date" title="2020-02-03 20:10:07">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-复杂度来源">架构学习-复杂度来源</span>
+            <span class="post-date" title="2020-02-03 20:09:13">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-可扩展架构模式">架构学习-可扩展架构模式</span>
+            <span class="post-date" title="2020-02-03 20:05:31">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%8E%9F%E5%88%99/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-原则">架构学习-原则</span>
+            <span class="post-date" title="2020-02-03 20:04:42">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-general/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="架构学习-general">架构学习-general</span>
+            <span class="post-date" title="2020-02-03 19:58:33">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="简单工厂模式">简单工厂模式</span>
+            <span class="post-date" title="2020-02-03 19:29:53">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="抽象工厂模式">抽象工厂模式</span>
+            <span class="post-date" title="2020-02-03 19:27:19">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="微信红包高并发架构设计">微信红包高并发架构设计</span>
+            <span class="post-date" title="2020-02-03 19:24:04">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="建造者模式">建造者模式</span>
+            <span class="post-date" title="2020-02-03 19:20:11">2020/02/03</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="工厂方法模式">工厂方法模式</span>
+            <span class="post-date" title="2020-02-02 15:06:53">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="如何确定一个服务器的最大连接数">如何确定一个服务器的最大连接数</span>
+            <span class="post-date" title="2020-02-02 15:05:38">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="原型模式">原型模式</span>
+            <span class="post-date" title="2020-02-02 15:02:53">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="单例模式">单例模式</span>
+            <span class="post-date" title="2020-02-02 15:00:48">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="观察者模式">观察者模式</span>
+            <span class="post-date" title="2020-02-02 14:59:28">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"
+           data-tag="Design Pattern"
+           data-author="" >
+            <span class="post-title" title="设计模式概述">设计模式概述</span>
+            <span class="post-date" title="2020-02-02 14:58:10">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"
+           data-tag="System Design"
+           data-author="" >
+            <span class="post-title" title="面向对象设计原则">面向对象设计原则</span>
+            <span class="post-date" title="2020-02-02 14:03:01">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"
+           data-tag="BackEnd,混沌工程"
+           data-author="" >
+            <span class="post-title" title="混沌工程">混沌工程</span>
+            <span class="post-date" title="2020-02-02 14:01:23">2020/02/02</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/"
+           data-tag="Java,BackEnd,IOC,Dependency Injection"
+           data-author="" >
+            <span class="post-title" title="IOC容器和Dependency Injection模式">IOC容器和Dependency Injection模式</span>
+            <span class="post-date" title="2020-02-02 13:59:46">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/UML-Class-Diagram/"
+           data-tag="System Design,UML"
+           data-author="" >
+            <span class="post-title" title="UML - Class Diagram">UML - Class Diagram</span>
+            <span class="post-date" title="2020-02-02 13:57:47">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/Event-Storming/"
+           data-tag="DDD"
+           data-author="" >
+            <span class="post-title" title="Event Storming">Event Storming</span>
+            <span class="post-date" title="2020-02-02 13:56:24">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/"
+           data-tag="DDD"
+           data-author="" >
+            <span class="post-title" title="DDD-领域驱动设计">DDD-领域驱动设计</span>
+            <span class="post-date" title="2020-02-02 08:04:32">2020/02/02</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81%E4%B8%80-%E7%94%A8%E5%8F%8C%E5%8D%81%E4%B8%80%E7%90%86%E9%A1%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"
+           data-tag="Network,Distributed System"
+           data-author="" >
+            <span class="post-title" title="网络协议(十一)-用双十一理顺起来的网络协议">网络协议(十一)-用双十一理顺起来的网络协议</span>
+            <span class="post-date" title="2020-02-01 21:58:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%8D%81-RPC-SOAP-RESTful/"
+           data-tag="RESTFul,RPC,SOAP"
+           data-author="" >
+            <span class="post-title" title="网络协议(十) - RPC, SOAP, RESTful">网络协议(十) - RPC, SOAP, RESTful</span>
+            <span class="post-date" title="2020-02-01 21:53:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B9%9D-%E4%BA%91/"
+           data-tag="Cloud"
+           data-author="" >
+            <span class="post-title" title="网络协议(九)-云">网络协议(九)-云</span>
+            <span class="post-date" title="2020-02-01 19:52:09">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AB-%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83-VPN-%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/"
+           data-tag="Data Center,VPN"
+           data-author="" >
+            <span class="post-title" title="网络协议(八)-数据中心, VPN, 移动网络">网络协议(八)-数据中心, VPN, 移动网络</span>
+            <span class="post-date" title="2020-02-01 19:44:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%83-%E6%B5%81%E5%AA%92%E4%BD%93%E5%8D%8F%E8%AE%AE-%E7%BD%91%E7%BB%9C%E7%9B%B4%E6%92%AD%E5%BD%93%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E4%B8%8E%E4%BC%A0%E6%92%AD%E9%97%AE%E9%A2%98/"
+           data-tag="Network,CDN,流媒体协议,P2P,DNS"
+           data-author="" >
+            <span class="post-title" title="网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)">网络协议(七)-流媒体协议(网络直播当中的视频压缩与传播问题)</span>
+            <span class="post-date" title="2020-02-01 19:38:44">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%85%AD-%E5%BA%94%E7%94%A8%E5%B1%82/"
+           data-tag="HTTP,Network,HTTP 2.0,QUIC,HTTPS"
+           data-author="" >
+            <span class="post-title" title="网络协议(六)-应用层">网络协议(六)-应用层</span>
+            <span class="post-date" title="2020-02-01 17:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%94-%E4%BC%A0%E8%BE%93%E5%B1%82/"
+           data-tag="Network,UDP,TCP,Socket"
+           data-author="" >
+            <span class="post-title" title="网络协议(五)-传输层">网络协议(五)-传输层</span>
+            <span class="post-date" title="2020-02-01 16:50:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E5%9B%9B-%E7%BD%91%E7%BB%9C%E5%B1%82/"
+           data-tag="Network,IP Protocol,CIDR,DHCP,ICMP,Router"
+           data-author="" >
+            <span class="post-title" title="网络协议(四)-网络层">网络协议(四)-网络层</span>
+            <span class="post-date" title="2020-02-01 16:45:42">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%89-%E9%93%BE%E8%B7%AF%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(三)-链路层">网络协议(三)-链路层</span>
+            <span class="post-date" title="2020-02-01 16:43:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%BA%8C-%E7%89%A9%E7%90%86%E5%B1%82/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(二)-物理层">网络协议(二)-物理层</span>
+            <span class="post-date" title="2020-02-01 16:42:56">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE-%E4%B8%80-%E6%A1%86%E6%9E%B6/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络协议(一) -- 框架">网络协议(一) -- 框架</span>
+            <span class="post-date" title="2020-02-01 16:42:04">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%9E%E6%8E%A5%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 连接器">Tomcat - 连接器</span>
+            <span class="post-date" title="2020-02-01 14:24:18">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - Servlet规范和Servlet容器">Tomcat - Servlet规范和Servlet容器</span>
+            <span class="post-date" title="2020-02-01 14:22:47">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%AE%B9%E5%99%A8-cookie-session/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 什么是Web容器, cookie &amp; session">Tomcat - 什么是Web容器, cookie &amp; session</span>
+            <span class="post-date" title="2020-02-01 14:22:02">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E4%BC%98%E5%8C%96Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 优化Tomcat启动速度">Tomcat - 优化Tomcat启动速度</span>
+            <span class="post-date" title="2020-02-01 14:20:22">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E8%BF%90%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA-Servlet/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 运行第一个 Servlet">Tomcat - 运行第一个 Servlet</span>
+            <span class="post-date" title="2020-02-01 14:19:17">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Tomcat-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"
+           data-tag="Tomcat"
+           data-author="" >
+            <span class="post-title" title="Tomcat - 整体架构">Tomcat - 整体架构</span>
+            <span class="post-date" title="2020-02-01 14:15:34">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E5%9B%9B/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(四)">Web 浏览器是如何构成的(四)</span>
+            <span class="post-date" title="2020-02-01 14:14:28">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%89/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(三)">Web 浏览器是如何构成的(三)</span>
+            <span class="post-date" title="2020-02-01 14:13:39">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%BA%8C/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(二)">Web 浏览器是如何构成的(二)</span>
+            <span class="post-date" title="2020-02-01 14:12:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%9E%84%E6%88%90%E7%9A%84-%E4%B8%80/"
+           data-tag="Web,Browser"
+           data-author="" >
+            <span class="post-title" title="Web 浏览器是如何构成的(一)">Web 浏览器是如何构成的(一)</span>
+            <span class="post-date" title="2020-02-01 11:39:48">2020/02/01</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E5G/"
+           data-tag="Network,5G"
+           data-author="" >
+            <span class="post-title" title="关于5G">关于5G</span>
+            <span class="post-date" title="2020-02-01 11:15:52">2020/02/01</span>
+        </a>
+        
+        <a  class="Web "
+           href="/API-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86RESTFUL/"
+           data-tag="RESTFul,Web"
+           data-author="" >
+            <span class="post-title" title="API-重新认识RESTFUL">API-重新认识RESTFUL</span>
+            <span class="post-date" title="2020-01-31 21:02:19">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Thoughts-on-web-accessibility-%E4%BF%A1%E6%81%AF%E6%97%A0%E9%9A%9C%E7%A2%8D/"
+           data-tag="FrontEnd,Web Accessibility"
+           data-author="" >
+            <span class="post-title" title="Thoughts on web accessibility(信息无障碍)">Thoughts on web accessibility(信息无障碍)</span>
+            <span class="post-date" title="2020-01-31 21:00:52">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RPC%E5%8D%8F%E8%AE%AE/"
+           data-tag="Web,RPC"
+           data-author="" >
+            <span class="post-title" title="RPC协议">RPC协议</span>
+            <span class="post-date" title="2020-01-31 20:59:08">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/RESTful-vs-RPC/"
+           data-tag="RESTFul,RPC"
+           data-author="" >
+            <span class="post-title" title="RESTful vs RPC">RESTful vs RPC</span>
+            <span class="post-date" title="2020-01-31 20:58:01">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/LDAP-Intro/"
+           data-tag="Web,LDAP"
+           data-author="" >
+            <span class="post-title" title="LDAP Intro">LDAP Intro</span>
+            <span class="post-date" title="2020-01-31 20:25:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%83-OAuth-2-0/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(七) - OAuth 2.0">HTTP API认证与授权(七) - OAuth 2.0</span>
+            <span class="post-date" title="2020-01-31 20:24:28">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%85%AD-OAuth-1-0/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(六) - OAuth 1.0">HTTP API认证与授权(六) - OAuth 1.0</span>
+            <span class="post-date" title="2020-01-31 20:23:15">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%94-JWT/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(五) - JWT">HTTP API认证与授权(五) - JWT</span>
+            <span class="post-date" title="2020-01-31 18:58:09">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E5%9B%9B-App-Secret-Key-HMAC/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(四) - App Secret Key, HMAC">HTTP API认证与授权(四) - App Secret Key, HMAC</span>
+            <span class="post-date" title="2020-01-31 18:56:59">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%89-Digest-Access/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(三) - Digest Access">HTTP API认证与授权(三) - Digest Access</span>
+            <span class="post-date" title="2020-01-31 18:55:56">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%BA%8C-HTTP-Basic/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(二) - HTTP Basic">HTTP API认证与授权(二) - HTTP Basic</span>
+            <span class="post-date" title="2020-01-31 18:54:18">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/HTTP-API%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83-%E4%B8%80-general/"
+           data-tag="HTTP,Network,认证授权"
+           data-author="" >
+            <span class="post-title" title="HTTP API认证与授权(一) - general">HTTP API认证与授权(一) - general</span>
+            <span class="post-date" title="2020-01-31 18:52:42">2020/01/31</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"
+           data-tag="Network"
+           data-author="" >
+            <span class="post-title" title="网络知识必知必会">网络知识必知必会</span>
+            <span class="post-date" title="2020-01-31 09:32:22">2020/01/31</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
+           data-tag="FrontEnd,Regex"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2020-01-30 23:25:28">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Scaling-webapps/"
+           data-tag="Web,Scalibility"
+           data-author="" >
+            <span class="post-title" title="Scaling webapps">Scaling webapps</span>
+            <span class="post-date" title="2020-01-30 23:20:10">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-capture-click-outside-component/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React - capture click outside component">React - capture click outside component</span>
+            <span class="post-date" title="2020-01-30 23:19:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Run-your-first-Puppeteer-with-recorder/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Run your first Puppeteer with recorder">Run your first Puppeteer with recorder</span>
+            <span class="post-date" title="2020-01-30 23:16:31">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-4/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(4)">React Advanced(4)</span>
+            <span class="post-date" title="2020-01-30 23:15:33">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-3/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(3)">React Advanced(3)</span>
+            <span class="post-date" title="2020-01-30 23:14:44">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(2)">React Advanced(2)</span>
+            <span class="post-date" title="2020-01-30 23:13:49">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React-Advanced-1/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React Advanced(1)">React Advanced(1)</span>
+            <span class="post-date" title="2020-01-30 23:12:13">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Pupperteer-Tutorial/"
+           data-tag="FrontEnd,UI Test,Puppeteer"
+           data-author="" >
+            <span class="post-title" title="Pupperteer Tutorial">Pupperteer Tutorial</span>
+            <span class="post-date" title="2020-01-30 23:11:07">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/NightWatch-JavaScript-Tutorial/"
+           data-tag="FrontEnd,JavaScript,NightWatch,UI Test"
+           data-author="" >
+            <span class="post-title" title="NightWatch JavaScript Tutorial">NightWatch JavaScript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:32:53">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/Typescript-Tutorial/"
+           data-tag="FrontEnd,TypeScript"
+           data-author="" >
+            <span class="post-title" title="Typescript Tutorial">Typescript Tutorial</span>
+            <span class="post-date" title="2020-01-30 22:31:34">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-3/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 3">JavaScript 教程 - part 3</span>
+            <span class="post-date" title="2020-01-30 22:30:15">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-%E6%95%99%E7%A8%8B-part-2/"
+           data-tag="FrontEnd,JavaScript,Object Oriented"
+           data-author="" >
+            <span class="post-title" title="JavaScript 教程 - part 2">JavaScript 教程 - part 2</span>
+            <span class="post-date" title="2020-01-30 22:28:48">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript%E6%95%99%E7%A8%8B-Part-1/"
+           data-tag="FrontEnd,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript教程 Part 1">JavaScript教程 Part 1</span>
+            <span class="post-date" title="2020-01-30 21:12:39">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/JavaScript-callback-function/"
+           data-tag="FrontEnd,JavaScript,Callback"
+           data-author="" >
+            <span class="post-title" title="JavaScript - callback function">JavaScript - callback function</span>
+            <span class="post-date" title="2020-01-30 20:57:57">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/i18next-tutorial/"
+           data-tag="FrontEnd,JavaScript,i18next"
+           data-author="" >
+            <span class="post-title" title="i18next tutorial">i18next tutorial</span>
+            <span class="post-date" title="2020-01-30 20:56:25">2020/01/30</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/CSS-pseudo-class-selectors/"
+           data-tag="FrontEnd,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS pseudo class selectors">CSS pseudo class selectors</span>
+            <span class="post-date" title="2020-01-30 20:54:22">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-4-CPU%E4%BD%BF%E7%94%A8%E7%8E%87/"
+           data-tag="Linux,CPU Utilization"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(4)-CPU使用率">Linux性能优化(4)-CPU使用率</span>
+            <span class="post-date" title="2020-01-30 20:52:23">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-3-CPU-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"
+           data-tag="Linux,Context Switch"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(3)-CPU 上下文切换">Linux性能优化(3)-CPU 上下文切换</span>
+            <span class="post-date" title="2020-01-30 20:50:10">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/"
+           data-tag="Linux,平均负载"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(2)-平均负载">Linux性能优化(2)-平均负载</span>
+            <span class="post-date" title="2020-01-30 20:48:55">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1-%E6%A6%82%E8%BF%B0/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux性能优化(1)-概述">Linux性能优化(1)-概述</span>
+            <span class="post-date" title="2020-01-30 20:47:03">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-3-Inspired-by-THE-ART-OF-COMMAND-LINE/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE">Linux 常用指令(3) - Inspired by THE ART OF COMMAND LINE</span>
+            <span class="post-date" title="2020-01-30 20:45:49">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-2/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux常用指令(2)">Linux常用指令(2)</span>
+            <span class="post-date" title="2020-01-30 20:44:54">2020/01/30</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4-1/"
+           data-tag="Linux,Cli"
+           data-author="" >
+            <span class="post-title" title="Linux 常用指令(1)">Linux 常用指令(1)</span>
+            <span class="post-date" title="2020-01-30 20:43:36">2020/01/30</span>
+        </a>
+        
+        <a  class="Web "
+           href="/Curl-tutorial/"
+           data-tag="Curl"
+           data-author="" >
+            <span class="post-title" title="Curl tutorial">Curl tutorial</span>
+            <span class="post-date" title="2020-01-30 20:41:41">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98GPS%E7%B2%BE%E5%BA%A6/"
+           data-tag="GPS,Uber"
+           data-author="" >
+            <span class="post-title" title="如何提高GPS精度">如何提高GPS精度</span>
+            <span class="post-date" title="2020-01-30 20:40:11">2020/01/30</span>
+        </a>
+        
+        <a  class="Tools "
+           href="/Google%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"
+           data-tag="Tips"
+           data-author="" >
+            <span class="post-title" title="Google搜索技巧">Google搜索技巧</span>
+            <span class="post-date" title="2020-01-30 20:38:47">2020/01/30</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A1%85%E8%B0%B7%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/"
+           data-tag="Thought,Reading"
+           data-author="" >
+            <span class="post-title" title="硅谷增长黑客实战笔记">硅谷增长黑客实战笔记</span>
+            <span class="post-date" title="2020-01-29 22:44:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/"
+           data-tag="Thought,Reading"
+           data-author="" >
+            <span class="post-title" title="程序员修炼之道">程序员修炼之道</span>
+            <span class="post-date" title="2020-01-29 22:43:53">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%B4%E8%AF%B4%E6%97%A5%E6%9C%AC/"
+           data-tag="Thought,Reading,Japan"
+           data-author="" >
+            <span class="post-title" title="说说日本">说说日本</span>
+            <span class="post-date" title="2020-01-29 22:42:41">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E9%87%8D%E6%9E%84%E7%AC%94%E8%AE%B0/"
+           data-tag="reading,rafactor"
+           data-author="" >
+            <span class="post-title" title="重构笔记">重构笔记</span>
+            <span class="post-date" title="2020-01-29 22:41:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E6%98%8E%E6%9C%9D%E6%88%B7%E7%B1%8D%E5%88%B6%E5%BA%A6/"
+           data-tag="reading"
+           data-author="" >
+            <span class="post-title" title="明朝户籍制度">明朝户籍制度</span>
+            <span class="post-date" title="2020-01-29 22:38:55">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E5%81%9A%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"
+           data-tag="thought,time management"
+           data-author="" >
+            <span class="post-title" title="如何做时间管理">如何做时间管理</span>
+            <span class="post-date" title="2020-01-29 22:37:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%AD%A6%E4%B9%A0%E8%A7%82-from-Yjango/"
+           data-tag="reading,thought"
+           data-author="" >
+            <span class="post-title" title="学习观 from Yjango">学习观 from Yjango</span>
+            <span class="post-date" title="2020-01-29 22:36:47">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F-From-Sam-Altman/"
+           data-tag="reading,Sam Altman"
+           data-author="" >
+            <span class="post-title" title="如何成功(From Sam Altman)">如何成功(From Sam Altman)</span>
+            <span class="post-date" title="2020-01-29 22:35:20">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%88%9B%E9%80%A0%E4%BC%B0%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%9A%84%E5%85%AC%E5%8F%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%AC-share/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="创造估值上亿的公司的方式们(share)">创造估值上亿的公司的方式们(share)</span>
+            <span class="post-date" title="2020-01-29 22:34:25">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E5%85%B3%E4%BA%8E2019/"
+           data-tag="thought"
+           data-author="" >
+            <span class="post-title" title="关于2019">关于2019</span>
+            <span class="post-date" title="2020-01-29 22:31:48">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BB%8A%E6%97%A5%E7%AE%80%E5%8F%B2-%E8%87%B4%E6%95%AC%E5%85%85%E6%BB%A1%E6%9C%AA%E7%9F%A5%E7%9A%84%E4%B8%96%E7%95%8C/"
+           data-tag="reading,society"
+           data-author="" >
+            <span class="post-title" title="今日简史-致敬充满未知的世界">今日简史-致敬充满未知的世界</span>
+            <span class="post-date" title="2020-01-29 22:20:35">2020/01/29</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/Food-Rules/"
+           data-tag="food,diet,reading"
+           data-author="" >
+            <span class="post-title" title="Food Rules">Food Rules</span>
+            <span class="post-date" title="2020-01-29 21:41:19">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-5-Architecting/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essential(5) - Architecting">AWS essential(5) - Architecting</span>
+            <span class="post-date" title="2020-01-29 21:06:50">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essential-4-Security/"
+           data-tag="AWS,Security"
+           data-author="" >
+            <span class="post-title" title="AWS essential(4)-Security">AWS essential(4)-Security</span>
+            <span class="post-date" title="2020-01-29 21:05:42">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-3-Core-Services/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(3) - Core Services">AWS essentials(3) - Core Services</span>
+            <span class="post-date" title="2020-01-29 20:48:08">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-2-Cloud-Concepts/"
+           data-tag="AWS,Security,Agility,Elasticity,Reliability"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(2) - Cloud Concepts">AWS essentials(2) - Cloud Concepts</span>
+            <span class="post-date" title="2020-01-29 20:46:46">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-essentials-1-introduction/"
+           data-tag="AWS"
+           data-author="" >
+            <span class="post-title" title="AWS essentials(1) - introduction">AWS essentials(1) - introduction</span>
+            <span class="post-date" title="2020-01-29 20:45:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/ECS-Elastic-Container-Service/"
+           data-tag="AWS,ECS"
+           data-author="" >
+            <span class="post-title" title="ECS - Elastic Container Service">ECS - Elastic Container Service</span>
+            <span class="post-date" title="2020-01-29 20:36:54">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Elasticsearch-Overview/"
+           data-tag="Elastic Search"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch Overview">Elasticsearch Overview</span>
+            <span class="post-date" title="2020-01-29 20:35:39">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-X-Ray-Intro-Java/"
+           data-tag="AWS,Distributed Tracing"
+           data-author="" >
+            <span class="post-title" title="AWS X-Ray Intro(Java)">AWS X-Ray Intro(Java)</span>
+            <span class="post-date" title="2020-01-29 20:34:38">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-VPC/"
+           data-tag="AWS,VPC"
+           data-author="" >
+            <span class="post-title" title="AWS-VPC">AWS-VPC</span>
+            <span class="post-date" title="2020-01-29 20:32:16">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-Lambda/"
+           data-tag="AWS,Lambda"
+           data-author="" >
+            <span class="post-title" title="AWS Lambda">AWS Lambda</span>
+            <span class="post-date" title="2020-01-29 20:18:52">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/AWS-DynamoDBClient-vs-DynamoDBMapper/"
+           data-tag="AWS,DynamoDB,Mapper"
+           data-author="" >
+            <span class="post-title" title="AWS DynamoDBClient vs DynamoDBMapper">AWS DynamoDBClient vs DynamoDBMapper</span>
+            <span class="post-date" title="2020-01-29 20:09:13">2020/01/29</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Distributed-Tracing/"
+           data-tag="Distributed Tracing,System Design"
+           data-author="" >
+            <span class="post-title" title="Distributed Tracing">Distributed Tracing</span>
+            <span class="post-date" title="2020-01-28 23:39:40">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/DynamoDB-Advanced/"
+           data-tag="AWS,DynamoDB"
+           data-author="" >
+            <span class="post-title" title="DynamoDB-Advanced">DynamoDB-Advanced</span>
+            <span class="post-date" title="2020-01-28 23:23:57">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-11-Deploying-Applications/"
+           data-tag="AWS,CI/ CD"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.11 Deploying Applications">Developing on AWS Note.11 Deploying Applications</span>
+            <span class="post-date" title="2020-01-28 23:22:38">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-10-Docker-ECS-Security/"
+           data-tag="AWS,Security,Docker,ECS"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.10 Docker, ECS, Security">Developing on AWS Note.10 Docker, ECS, Security</span>
+            <span class="post-date" title="2020-01-28 23:20:55">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-9-Step-Functions-ElasticCache/"
+           data-tag="AWS,Step Functions,ElasticCache"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.9 Step Functions, ElasticCache">Developing on AWS Note.9 Step Functions, ElasticCache</span>
+            <span class="post-date" title="2020-01-28 23:18:45">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-8-SQS-SNS/"
+           data-tag="AWS,SQS,SNS,Notification Service,Queue"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.8 SQS, SNS">Developing on AWS Note.8 SQS, SNS</span>
+            <span class="post-date" title="2020-01-28 23:17:05">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-7-API-Gateway/"
+           data-tag="RESTFul,AWS,Gateway"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.7 API Gateway">Developing on AWS Note.7 API Gateway</span>
+            <span class="post-date" title="2020-01-28 23:14:08">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-6-AWS-Serverless-platform-Lambda/"
+           data-tag="AWS,Lambda,Serverless"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.6 AWS Serverless platform, Lambda">Developing on AWS Note.6 AWS Serverless platform, Lambda</span>
+            <span class="post-date" title="2020-01-28 23:06:41">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-5-DynamoDB/"
+           data-tag="AWS,DynamoDB,NoSQL"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.5 DynamoDB">Developing on AWS Note.5 DynamoDB</span>
+            <span class="post-date" title="2020-01-28 23:05:29">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-4-Storage-Options-S3-in-detail/"
+           data-tag="AWS,S3"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.4 Storage Options, S3 in detail">Developing on AWS Note.4 Storage Options, S3 in detail</span>
+            <span class="post-date" title="2020-01-28 23:03:35">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-3-CloudWatch-CloudTrail-server-design-for-fail/"
+           data-tag="AWS,CloudWatch,CloudTrail"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail">Developing on AWS Note.3  - CloudWatch, CloudTrail, server-design for fail</span>
+            <span class="post-date" title="2020-01-28 23:02:31">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-2-IAM/"
+           data-tag="AWS,Identity and Access Management"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.2  - IAM">Developing on AWS Note.2  - IAM</span>
+            <span class="post-date" title="2020-01-28 23:00:14">2020/01/28</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Developing-on-AWS-Note-1-AWS-Models-EC2-ELB-autoScaling/"
+           data-tag="AWS,EC2,ELB,AutoScaling"
+           data-author="" >
+            <span class="post-title" title="Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling">Developing on AWS Note.1  - AWS Models, EC2, ELB, autoScaling</span>
+            <span class="post-date" title="2020-01-28 22:58:39">2020/01/28</span>
+        </a>
+        
+        <a  class="Web "
+           href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%90%88%E5%B9%B6HTTP%E8%AF%B7%E6%B1%82/"
+           data-tag="FrontEnd,HTTP,Network,Batch Processing,Web Development"
+           data-author="" >
+            <span class="post-title" title="为什么要合并HTTP请求?">为什么要合并HTTP请求?</span>
+            <span class="post-date" title="2020-01-28 20:37:15">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java-Synchronized%E6%96%B9%E6%B3%95/"
+           data-tag="Java,Concurrency,Synchronized,Lock"
+           data-author="" >
+            <span class="post-title" title="Java-Synchronized方法">Java-Synchronized方法</span>
+            <span class="post-date" title="2020-01-28 20:34:26">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
+           data-tag="Java,Concurrency,BackEnd"
+           data-author="" >
+            <span class="post-title" title="Volatile关键字">Volatile关键字</span>
+            <span class="post-date" title="2020-01-28 20:22:48">2020/01/28</span>
+        </a>
+        
+        <a  class="BackEnd "
+           href="/Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1/"
+           data-tag="Java,Concurrency,BackEnd"
+           data-author="" >
+            <span class="post-title" title="Java并发图谱">Java并发图谱</span>
+            <span class="post-date" title="2020-01-28 09:11:45">2020/01/28</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E4%BB%A5%E5%90%8E%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"
+           data-tag="FrontEnd,Browser,CDN,network,TCP/ IP"
+           data-author="" >
+            <span class="post-title" title="浏览器输入url以后都发生了什么">浏览器输入url以后都发生了什么</span>
+            <span class="post-date" title="2020-01-27 22:06:56">2020/01/27</span>
+        </a>
+        
+        <a  class="FrontEnd "
+           href="/React%E5%88%9D%E6%8E%A2/"
+           data-tag="FrontEnd,React"
+           data-author="" >
+            <span class="post-title" title="React初探">React初探</span>
+            <span class="post-date" title="2020-01-27 21:58:30">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E4%BA%8C%E6%88%98%E6%97%B6%E9%97%B4%E7%BA%BF/"
+           data-tag="history,world war"
+           data-author="" >
+            <span class="post-title" title="二战时间线">二战时间线</span>
+            <span class="post-date" title="2020-01-27 21:08:37">2020/01/27</span>
+        </a>
+        
+        <a  class="Notes "
+           href="/%E8%AF%BB%E6%87%82%E8%B4%A2%E6%8A%A5/"
+           data-tag="reading,finance,stock"
+           data-author="" >
+            <span class="post-title" title="读懂财报">读懂财报</span>
+            <span class="post-date" title="2020-01-27 20:28:53">2020/01/27</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Java-Annotations-注解详解" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Java Annotations 注解详解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="BackEnd">BackEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">Java</a>
+            
+            <a class="color2">Annotations</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-05 18:57:33'>2020-02-05 18:57</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Annotation架构"><span class="toc-text">1. Annotation架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-0-Annotation的介绍"><span class="toc-text">1.0 Annotation的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Annotation-组成部分"><span class="toc-text">1.1 Annotation 组成部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Annotation-java"><span class="toc-text">1.1.1 Annotation.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-ElementType-java"><span class="toc-text">1.1.2 ElementType.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-RetentionPolicy-java"><span class="toc-text">1.1.3 RetentionPolicy.java</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-通用定义"><span class="toc-text">1.2 通用定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-interface"><span class="toc-text">1.2.1 @interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-Documented"><span class="toc-text">1.2.2 @Documented</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-Target-ElementType-TYPE"><span class="toc-text">1.2.3 @Target(ElementType.TYPE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-Retention-RetentionPolicy-RUNTIME"><span class="toc-text">1.2.4 @Retention(RetentionPolicy.RUNTIME)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-常用Annotation"><span class="toc-text">1.3 常用Annotation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-Deprecated"><span class="toc-text">1.3.1 @Deprecated</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-Override"><span class="toc-text">1.3.2 @Override</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-Documented"><span class="toc-text">1.3.3 @Documented</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-Inherited"><span class="toc-text">1.3.4 @Inherited</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-5-Retention"><span class="toc-text">1.3.5 @Retention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-6-Target"><span class="toc-text">1.3.6 @Target</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-7-SuppressWarnings"><span class="toc-text">1.3.7 @SuppressWarnings</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-创建自己的Annotation"><span class="toc-text">2. 创建自己的Annotation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Reference"><span class="toc-text">3. Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java annotation很有用，这篇博客会带着大家去理解Annotation的语法以及用法，希望能有所裨益。</p>
+<h1 id="1-Annotation架构"><a href="#1-Annotation架构" class="headerlink" title="1. Annotation架构"></a>1. Annotation架构</h1><h2 id="1-0-Annotation的介绍"><a href="#1-0-Annotation的介绍" class="headerlink" title="1.0 Annotation的介绍"></a>1.0 Annotation的介绍</h2><p>用一句话来解释Annotation的话，我想可以称其为Metadata(元数据) - 即数据的数据。</p>
+<p>举个例子，比如这里我使用了@Override：</p>
+<pre><code>@Override
+public String toString() {
+return &quot;This is String Representation of current object.&quot;;
+}</code></pre><p>通过注解的方式，我告诉编译器我重写了这个toString()的方法。但其实就算我没有加这个注解，代码仍然是可以有效运行的，那么用注解的好处有哪些呢？为什么我们需要使用注解呢？？？ </p>
+<p>上述的注解告诉编译器我重写了父类里面的一个方法，然后编译器会去父类检查看这个方法是否存在，如果不存在的话，那就会扔出一个编译错误。通过这种方式我们可以减少错误的发生，并且提高整个代码的可读性，给我们带来一些便利。</p>
+<p>其实就像上面说的那样，注解是一种携带元数据的方式，我们实际上在注解之前是用XML来做元数据的存储的。二者各有自己的适用场景。对于XML来说，如果你写的应用有大量的常数，参量，用XML会更好，因为我们可以将这些常量和代码完全解耦，这样在改变常量值的时候会方便很多。如果你想对外暴露一些方法来做服务，那注解会是更好的选择。因为这种情形下元数据最好和方法紧密相连，让开发者意识到这个方法的一些特征。</p>
+<p>另外注解提供了一个标准的在代码中定义元数据的方式，在注解之前工程师常会自己定义，比如注释，接口，等等。注解将这个过程做了标准化。</p>
+<h2 id="1-1-Annotation-组成部分"><a href="#1-1-Annotation-组成部分" class="headerlink" title="1.1 Annotation 组成部分"></a>1.1 Annotation 组成部分</h2><p><img src="fig1.jpg" alt="fig1.jpg"></p>
+<ul>
+<li>Annotation<ul>
+<li>1 RetentionPolicy 每一个注解对象都会有唯一的RetentionPolicy属性</li>
+<li>1 - n ElementType  每个注解对象都可以有若干个ElementType属性</li>
+<li>Annotation有多个实现类，包括<ul>
+<li>Deprecated </li>
+<li>Documented</li>
+<li>Inherited </li>
+<li>Override </li>
+<li>Retention </li>
+<li>Target </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>第一个很重要的观念，就是<strong><em>注解只是元数据，它不包括任何真正的代码逻辑</em></strong>。</p>
+<p>第二个很重要的观念，建立在第一个的基础之上，即如果注解不包括代码逻辑，那么就一定有针对注解的消费者，来读取注解提供的信息，并且执行对应的代码逻辑。</p>
+<p>比如以@override为例，这里JVM就是这个注解的消费者，并且在字节码的水平利用注解信息。</p>
+<h3 id="1-1-1-Annotation-java"><a href="#1-1-1-Annotation-java" class="headerlink" title="1.1.1 Annotation.java"></a>1.1.1 Annotation.java</h3><pre><code>package java.lang.annotation;
+public interface Annotation {
+
+    boolean equals(Object obj);
+
+    int hashCode();
+
+    String toString();
+
+    Class&lt;? extends Annotation&gt; annotationType();
+}</code></pre><p>一个接口</p>
+<h3 id="1-1-2-ElementType-java"><a href="#1-1-2-ElementType-java" class="headerlink" title="1.1.2 ElementType.java"></a>1.1.2 ElementType.java</h3><pre><code>package java.lang.annotation;
+
+public enum ElementType {
+    TYPE,               /* 类、接口（包括注释类型）或枚举声明  */
+
+    FIELD,              /* 字段声明（包括枚举常量）  */
+
+    METHOD,             /* 方法声明  */
+
+    PARAMETER,          /* 参数声明  */
+
+    CONSTRUCTOR,        /* 构造方法声明  */
+
+    LOCAL_VARIABLE,     /* 局部变量声明  */
+
+    ANNOTATION_TYPE,    /* 注释类型声明  */
+
+    PACKAGE             /* 包声明  */
+}</code></pre><p>枚举类型，用来指定Annotation的类型。就是这个注解对象是用来修饰什么的，是方法，是变量，还是其他的各种…</p>
+<h3 id="1-1-3-RetentionPolicy-java"><a href="#1-1-3-RetentionPolicy-java" class="headerlink" title="1.1.3 RetentionPolicy.java"></a>1.1.3 RetentionPolicy.java</h3><pre><code>package java.lang.annotation;
+public enum RetentionPolicy {
+    SOURCE,            /* Annotation信息仅存在于编译器处理期间，编译器处理完之后就没有该Annotation信息了  */
+
+    CLASS,             /* 编译器将Annotation存储于类对应的.class文件中。默认行为  */
+
+    RUNTIME            /* 编译器将Annotation存储于class文件中，并且可由JVM读入 */
+}</code></pre><p>RetentionPolicy是Enum枚举类型，每个都有其对应的行为。</p>
+<p><strong>RetentionPolicy.SOURCE</strong> – Discard during the compile. These annotations don’t make any sense after the compile has completed, so they aren’t written to the bytecode. Examples @Override, @SuppressWarnings</p>
+<p><strong>RetentionPolicy.CLASS</strong> – Discard during class load. Useful when doing bytecode-level post-processing. Somewhat surprisingly, this is the default.</p>
+<p><strong>RetentionPolicy.RUNTIME</strong> – Do not discard. The annotation should be available for reflection at runtime. This is what we generally use for our custom annotations.</p>
+<h2 id="1-2-通用定义"><a href="#1-2-通用定义" class="headerlink" title="1.2 通用定义"></a>1.2 通用定义</h2><pre><code>@Documented
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyAnnotation1 {
+}</code></pre><h3 id="1-2-1-interface"><a href="#1-2-1-interface" class="headerlink" title="1.2.1 @interface"></a>1.2.1 @interface</h3><p>意味着实现了java.lang.annotation.Annotation接口，即该注解就是一个Annotation。Annotation接口的实现细节都由编译器来完成的，通过@interface定义注解吼，该注解不能继承其他的注解或接口。</p>
+<h3 id="1-2-2-Documented"><a href="#1-2-2-Documented" class="headerlink" title="1.2.2 @Documented"></a>1.2.2 @Documented</h3><p>类和方法的Annotation在缺省情况下是不出现在javadoc中的。如果使用@Documented修饰该Annotation，则表示它可以出现在javadoc中。</p>
+<h3 id="1-2-3-Target-ElementType-TYPE"><a href="#1-2-3-Target-ElementType-TYPE" class="headerlink" title="1.2.3 @Target(ElementType.TYPE)"></a>1.2.3 @Target(ElementType.TYPE)</h3><p>ElementType是Annotation的类型属性，而@Target的作用，就是来指定类型属性的</p>
+<p>有@Target，则该Annotation只能用于其所指定的地方；若没有，则该Annotation可以用于任何地方</p>
+<h3 id="1-2-4-Retention-RetentionPolicy-RUNTIME"><a href="#1-2-4-Retention-RetentionPolicy-RUNTIME" class="headerlink" title="1.2.4 @Retention(RetentionPolicy.RUNTIME)"></a>1.2.4 @Retention(RetentionPolicy.RUNTIME)</h3><p>RetentionPolicy是Annotation的策略属性，</p>
+<h2 id="1-3-常用Annotation"><a href="#1-3-常用Annotation" class="headerlink" title="1.3 常用Annotation"></a>1.3 常用Annotation</h2><h3 id="1-3-1-Deprecated"><a href="#1-3-1-Deprecated" class="headerlink" title="1.3.1 @Deprecated"></a>1.3.1 @Deprecated</h3><pre><code>@Documented
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Deprecated {
+}</code></pre><ol>
+<li>@interface – 它的用来修饰Deprecated，意味着Deprecated实现了java.lang.annotation.Annotation接口；即Deprecated就是一个注解。</li>
+<li>@Documented – 它的作用是说明该注解能出现在javadoc中。</li>
+<li>@Retention(RetentionPolicy.RUNTIME) – 它的作用是指定Deprecated的策略是RetentionPolicy.RUNTIME。这就意味着，编译器会将Deprecated的信息保留在.class文件中，并且能被虚拟机读取。</li>
+<li>@Deprecated 所标注内容，不再被建议使用。<h3 id="1-3-2-Override"><a href="#1-3-2-Override" class="headerlink" title="1.3.2 @Override"></a>1.3.2 @Override</h3></li>
+</ol>
+<h3 id="1-3-3-Documented"><a href="#1-3-3-Documented" class="headerlink" title="1.3.3 @Documented"></a>1.3.3 @Documented</h3><h3 id="1-3-4-Inherited"><a href="#1-3-4-Inherited" class="headerlink" title="1.3.4 @Inherited"></a>1.3.4 @Inherited</h3><p>用来标注Annotation类型，所标注的Annotation具有继承性</p>
+<pre><code>@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Inherited {
+}</code></pre><ol>
+<li>@interface – 它的用来修饰Inherited，意味着Inherited实现了java.lang.annotation.Annotation接口；即Inherited就是一个注解。</li>
+<li>@Documented – 它的作用是说明该注解能出现在javadoc中。</li>
+<li>@Retention(RetentionPolicy.RUNTIME) – 它的作用是指定Inherited的策略是RetentionPolicy.RUNTIME。这就意味着，编译器会将Inherited的信息保留在.class文件中，并且能被虚拟机读取。</li>
+<li>@Target(ElementType.ANNOTATION_TYPE) – 它的作用是指定Inherited的类型是ANNOTATION_TYPE。这就意味着，@Inherited只能被用来标注“Annotation类型”。</li>
+</ol>
+<h3 id="1-3-5-Retention"><a href="#1-3-5-Retention" class="headerlink" title="1.3.5 @Retention"></a>1.3.5 @Retention</h3><p>用来标注Annotation类型，用来指定RetentionPolicy属性</p>
+<h3 id="1-3-6-Target"><a href="#1-3-6-Target" class="headerlink" title="1.3.6 @Target"></a>1.3.6 @Target</h3><p>@Target只能被用来标注“Annotation类型”，而且它被用来指定Annotation的ElementType属性。</p>
+<h3 id="1-3-7-SuppressWarnings"><a href="#1-3-7-SuppressWarnings" class="headerlink" title="1.3.7 @SuppressWarnings"></a>1.3.7 @SuppressWarnings</h3><p>@SuppressWarnings 所标注内容产生的警告，编译器会对这些警告保持静默。</p>
+<pre><code>@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+@Retention(RetentionPolicy.SOURCE)
+public @interface SuppressWarnings {
+    String[] value();
+}</code></pre><ol>
+<li>@interface – 它的用来修饰SuppressWarnings，意味着SuppressWarnings实现了java.lang.annotation.Annotation接口；即SuppressWarnings就是一个注解。</li>
+<li>@Retention(RetentionPolicy.SOURCE) – 它的作用是指定SuppressWarnings的策略是RetentionPolicy.SOURCE。这就意味着，SuppressWarnings信息仅存在于编译器处理期间，编译器处理完之后SuppressWarnings就没有作用了。</li>
+<li>@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE}) – 它的作用是指定SuppressWarnings的类型同时包括TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE。</li>
+</ol>
+<ul>
+<li>TYPE意味着，它能标注“类、接口（包括注释类型）或枚举声明”。</li>
+<li>FIELD意味着，它能标注“字段声明”。</li>
+<li>METHOD意味着，它能标注“方法”。</li>
+<li>PARAMETER意味着，它能标注“参数”。</li>
+<li>CONSTRUCTOR意味着，它能标注“构造方法”。</li>
+<li>LOCAL_VARIABLE意味着，它能标注“局部变量”。</li>
+</ul>
+<ol start="4">
+<li>String[] value(); 意味着，SuppressWarnings能指定参数</li>
+<li>SuppressWarnings 的作用是，让编译器对“它所标注的内容”的某些警告保持静默。例如，”@SuppressWarnings(value={“deprecation”, “unchecked”})” 表示对“它所标注的内容”中的 “SuppressWarnings不再建议使用警告”和“未检查的转换时的警告”保持沉默。<h1 id="2-创建自己的Annotation"><a href="#2-创建自己的Annotation" class="headerlink" title="2. 创建自己的Annotation"></a>2. 创建自己的Annotation</h1></li>
+</ol>
+<p>注解只支持基本类型，String，还有Enum。所有的注解的属性都被定义为方法，default的值也会在方法里提供。</p>
+<pre><code>@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@interface Todo {
+public enum Priority {LOW, MEDIUM, HIGH}
+public enum Status {STARTED, NOT_STARTED}
+String author() default &quot;Yash&quot;;
+Priority priority() default Priority.LOW;
+Status status() default Status.NOT_STARTED;
+}</code></pre><p>这里我们创建了一个新的注解，@Todo</p>
+<pre><code>@Todo(priority = Todo.Priority.MEDIUM, author = &quot;Yashwant&quot;, status = Todo.Status.STARTED)
+public void incompleteMethod1() {
+    //一些业务逻辑
+}</code></pre><p>值得注意的一点，如果注解只有一个属性，那么它应该被命名为value,在使用它的时候不用使用具体的变量名了。</p>
+<pre><code>@interface Author{
+String value();
+}
+@Author(&quot;Yashwant&quot;)
+public void someMethod() {
+}</code></pre><p>定义好注解以后，我们需要写注解的消费者，使用反射。</p>
+<pre><code>Class businessLogicClass = BusinessLogic.class;
+for(Method method : businessLogicClass.getMethods()) {
+    Todo todoAnnotation = (Todo)method.getAnnotation(Todo.class);
+    if(todoAnnotation != null) {
+    System.out.println(&quot; Method Name : &quot; + method.getName());
+    System.out.println(&quot; Author : &quot; + todoAnnotation.author());
+    System.out.println(&quot; Priority : &quot; + todoAnnotation.priority());
+    System.out.println(&quot; Status : &quot; + todoAnnotation.status());
+    }
+}</code></pre><h1 id="3-Reference"><a href="#3-Reference" class="headerlink" title="3. Reference"></a>3. Reference</h1><ol>
+<li><a href="https://www.cnblogs.com/skywang12345/p/3344137.html" target="_blank" rel="noopener">https://www.cnblogs.com/skywang12345/p/3344137.html</a> </li>
+<li><a href="https://dzone.com/articles/how-annotations-work-java" target="_blank" rel="noopener">https://dzone.com/articles/how-annotations-work-java</a></li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Java Annotations 注解详解</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-05, 18:57:11</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-05, 18:57:33</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/" title="Java Annotations 注解详解">https://www.llchen60.com/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <section id="comments" class="disqus">
+    <style> aside.comment-bar { margin: auto 30px; }</style>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function(){
+            this.page.url = 'https://www.llchen60.com/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/';
+            this.page.identifier = 'Java-Annotations-注解详解/';
+        };
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '//leilei-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+
+</section>
+
+<!-- Add comment count-->
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Java-Annotations-注解详解/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Java-Annotations-%E6%B3%A8%E8%A7%A3%E8%AF%A6%E8%A7%A3/"></span>
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2020 Leilei&#39;s Blog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-127393934-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀','#Design Pattern','#架构','#CAP','#编程范式','#Apache','#Cache','#Load Balancers','#Dagger','#DI','#HashMap','#Jackson','#Serialization','#Annotations',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
