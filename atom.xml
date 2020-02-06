@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-06T03:01:43.795Z</updated>
+  <updated>2020-02-06T03:02:58.113Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java 反射机制</title>
+    <link href="https://www.llchen60.com/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>https://www.llchen60.com/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</id>
+    <published>2020-02-06T03:02:35.000Z</published>
+    <updated>2020-02-06T03:02:58.113Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>Java反射机制是在运行时用来判定或者修改方法，类，接口的行为的API。</p><ul><li><p>反射可以告诉我们类和对象之间的信息，以及我们可以用类的哪些方法来使用这个对象</p></li><li><p>通过反射，我们就可以在运行的时候赋予类一个新的对象</p></li></ul><h1 id="2-使用范例"><a href="#2-使用范例" class="headerlink" title="2. 使用范例"></a>2. 使用范例</h1><p>反射可以用来获取关于类，构造器和方法的信息：</p><ul><li><p>class: getClass()方法可以用来获取对象属于的类的名字</p></li><li><p>Constructors: getConstructor()可以用来获取对象属于的类的public的构造器</p></li><li><p>getMethods() 可以用来获取对象属于的类的public的方法</p><p>  // A simple Java program to demonstrate the use of reflection<br>  import java.lang.reflect.Method;<br>  import java.lang.reflect.Field;<br>  import java.lang.reflect.Constructor; </p><p>  // class whose object is to be created<br>  class Test<br>  { </p><pre><code>  // creating a private field   private String s;   // creating a public constructor   public Test() { s = &quot;GeeksforGeeks&quot;; }   // Creating a public method with no arguments   public void method1() {       System.out.println(&quot;The string is &quot; + s);   }   // Creating a public method with int as argument   public void method2(int n) {       System.out.println(&quot;The number is &quot; + n);   }   // creating a private method   private void method3() {       System.out.println(&quot;Private method invoked&quot;);   } </code></pre><p>  } </p><p>  class Demo<br>  { </p><pre><code>  public static void main(String args[]) throws Exception   {       // Creating object whose property is to be checked       Test obj = new Test();           // 构建类的对象      // getclass method       Class cls = obj.getClass();       System.out.println(&quot;The name of class is &quot; +                           cls.getName());       // Getting the constructor of the class through the       // object of the class       Constructor constructor = cls.getConstructor();       System.out.println(&quot;The name of constructor is &quot; +                           constructor.getName());       System.out.println(&quot;The public methods of class are : &quot;);       // Getting methods of the class through the object       // of the class by using getMethods       Method[] methods = cls.getMethods();       // Printing method names       for (Method method:methods)           System.out.println(method.getName());       // creates object of desired method by providing the       // method name and parameter class as arguments to       // the getDeclaredMethod        // 这里是通过方法的名字和输入变量来获取对应的方法      Method methodcall1 = cls.getDeclaredMethod(&quot;method2&quot;,                                               int.class);       // invokes the method at runtime       // 这里是在运行时执行这个方法       methodcall1.invoke(obj, 19);       // creates object of the desired field by providing       // the name of field as argument to the       // getDeclaredField method       // 运行时获取对应的private的变量      Field field = cls.getDeclaredField(&quot;s&quot;);       // allows the object to access the field irrespective       // of the access specifier used with the field       // 将这个变量设成可以获取的      field.setAccessible(true);       // takes object and the new value to be assigned       // to the field as arguments       field.set(obj, &quot;JAVA&quot;);       // Creates object of desired method by providing the       // method name as argument to the getDeclaredMethod       Method methodcall2 = cls.getDeclaredMethod(&quot;method1&quot;);       // invokes the method at runtime       methodcall2.invoke(obj);       // Creates object of the desired method by providing       // the name of method as argument to the       // getDeclaredMethod method       Method methodcall3 = cls.getDeclaredMethod(&quot;method3&quot;);       // allows the object to access the method irrespective       // of the access specifier used with the method       methodcall3.setAccessible(true);       // invokes the method at runtime       methodcall3.invoke(obj);   } </code></pre><p>  } </p></li></ul><h1 id="3-详细分析"><a href="#3-详细分析" class="headerlink" title="3. 详细分析"></a>3. 详细分析</h1><p>反射一言以蔽之，即在运行时拿到class，并创建类对应的对象的方式。这种好处是更具灵活性，劣势是会慢很多，代码会相对难理解些。</p><p>从代码本身的角度来讲，是指一部分代码有能力去观察/检查另一部分代码。用已知的部分合理推断出未知的部分，这未知的部分其实是指还不知道的信息。</p><p>一般来说在Java里我们都是和注解一起来使用反射的，</p><h1 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h1><ul><li>好处<ul><li>反射是什么呢？当我们的程序在运行时，需要动态的加载一些类这些类可能之前用不到所以不用加载到jvm，而是在运行时根据需要才加载，这样的好处对于服务器来说不言而喻，举个例子我们的项目底层有时是用mysql，有时用oracle，<strong>需要动态地根据实际情况加载驱动类，这个时候反射就有用了</strong>，假设 <code>com.java.dbtest.myqlConnection</code>，<code>com.java.dbtest.oracleConnection</code>这两个类我们要用，这时候我们的程序就写得比较动态化，通过<code>Class tc = Class.forName(&quot;com.java.dbtest.TestConnection&quot;);</code>通过类的全类名让jvm在服务器中找到并加载这个类，而如果是oracle则传入的参数就变成另一个了。这时候就可以看到反射的好处了，这个动态性就体现出java的特性了！</li><li>更具拓展性，可以在运行时获取信息</li><li>获取一些private的域的值方便debug</li></ul></li><li>劣势<ul><li>更慢，有延时</li><li>会暴露一些接口</li><li>反射会要求运行的许可，当在secure manager下来运行可能不被允许</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful" target="_blank" rel="noopener">https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/index.html</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/class/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/class/index.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-介绍&quot;&gt;&lt;a href=&quot;#1-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. 介绍&quot;&gt;&lt;/a&gt;1. 介绍&lt;/h1&gt;&lt;p&gt;Java反射机制是在运行时用来判定或者修改方法，类，接口的行为的API。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;反射可以告诉我
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Reflection" scheme="https://www.llchen60.com/tags/Reflection/"/>
+    
+  </entry>
   
   <entry>
     <title>java - serialization</title>
@@ -531,32 +561,6 @@
       
         &lt;p&gt;基于原型的编程，是指没有class化，直接使用对象的编程方式。又叫做基于实例的编程，主流语言是JavaScript。 &lt;/p&gt;
 &lt;h1 id=&quot;1-与传统面向对象编程的比较&quot;&gt;&lt;a href=&quot;#1-与传统面向对象编程的比较&quot; class=&quot;headerlink&quot; titl
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="编程范式" scheme="https://www.llchen60.com/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编程范式系列-函数式编程</title>
-    <link href="https://www.llchen60.com/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
-    <id>https://www.llchen60.com/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%B3%BB%E5%88%97-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</id>
-    <published>2020-02-04T04:29:45.000Z</published>
-    <updated>2020-02-04T04:30:21.107Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-从c-到函数式编程"><a href="#1-从c-到函数式编程" class="headerlink" title="1. 从c++到函数式编程"></a>1. 从c++到函数式编程</h1><p>C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类、模板、虚函数和运行时识别，解决了C语言的泛型编程问题。函数式编程 -&gt; 更为抽象的泛型。</p><h1 id="2-函数式编程"><a href="#2-函数式编程" class="headerlink" title="2. 函数式编程"></a>2. 函数式编程</h1><h2 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h2><p>函数式编程只关心**定义的输入数据和输出数据相关的关系，数学表达式里面其实是在做一种映射(mapping)，输入的数据和输出的数据关系是什么样子的，是用函数来定义的。</p><h2 id="2-2-特征"><a href="#2-2-特征" class="headerlink" title="2.2 特征"></a>2.2 特征</h2><h3 id="2-2-1-优势"><a href="#2-2-1-优势" class="headerlink" title="2.2.1 优势"></a>2.2.1 优势</h3><ul><li>stateless </li></ul><p>不维护任何状态，给数据，我做处理，然后给你处理完的数据，中间的过程量用完就没了</p><p>无状态的话并行执行无害了，重构代码无伤害</p><ul><li>immutable</li></ul><p>输入数据动了，输出数据也会变，意味着新的数据集会被返回</p><ul><li>惰性求值</li></ul><p>表达式不在它被绑定到变量之后立即求值，而是在该值被取用的时候求值。</p><ul><li><p>确定性</p><p>f(x)=y, 这个函数无论在什么场景下，都会得到同样的结果，这个我们称之为函数的确定性。而不是像程序中的很多函数那样，同一个参数，却会在不同的场景下计算出不同的结果。所谓不同的场景，就是我们的函数会根据运行中的状态信息的不同而发生变化。</p><h3 id="2-2-2-劣势"><a href="#2-2-2-劣势" class="headerlink" title="2.2.2 劣势"></a>2.2.2 劣势</h3><ul><li>数据复制很严重</li><li>函数式编程抽象度更高，实现方式上，函数套函数，函数返回函数，函数里定义函数… </li></ul></li></ul><h2 id="2-3-函数式编程用到的技术"><a href="#2-3-函数式编程用到的技术" class="headerlink" title="2.3 函数式编程用到的技术"></a>2.3 函数式编程用到的技术</h2><ul><li>first class function 头等函数</li></ul><p>把函数当成变量来使用。可以像变量一样被创建、修改，并当成变量一样传递、返回，或者是在函数中嵌套函数 </p><ul><li>tail recursion optimization 尾递归优化</li></ul><p>如果递归很深的话，stack受不了，会导致性能大幅度下降。因此我们使用尾递归优化技术，每次递归的时候都会重用stack</p><ul><li><p>map &amp; reduce</p></li><li><p>pipeline </p></li></ul><p>将函数实例成一个个action，然后将一组action放到一个数组或列表中，再把数据传给这个action list，数据就被各个函数所操作，最终得到我们想要的结果。</p><ul><li>recursing</li></ul><p>将复杂问题用简单的代码描述出来。</p><ul><li>currying 颗粒化</li></ul><p>将一个函数的多个参数分解成多个函数，然后将函数多层封装起来，每层函数都返回一个函数去接收下一个参数，这可以简化函数的多个参数。</p><ul><li>higher order function 高阶函数</li></ul><p>函数当参数，把传入的函数做一个封装，然后返回这个封装函数</p><h2 id="2-4-函数式编程的理念"><a href="#2-4-函数式编程的理念" class="headerlink" title="2.4 函数式编程的理念"></a>2.4 函数式编程的理念</h2><pre><code>// 非函数式，有状态的int cnt;void increment() {    cnt ++;}// 函数式， 无状态的int increment(int cnt) {    return cnt + 1;}</code></pre><ul><li>把函数当成变量来用，关注描述问题而不是怎么实现的，可以让代码更易读</li><li>因为函数返回里面的这个函数，所以函数关注的是表达式，关注的是描述这个问题，而不是如何实现的</li></ul><h3 id="2-4-1-函数式编程例子"><a href="#2-4-1-函数式编程例子" class="headerlink" title="2.4.1  函数式编程例子"></a>2.4.1  函数式编程例子</h3><p>下面我们看一下相关的示例。比如，我们有 3 辆车比赛，简单起见，我们分别给这 3 辆车有 70% 的概率可以往前走一步，一共有 5 次机会，然后打出每一次这 3 辆车的前行状态。</p><pre><code>// Imperative Programming from random import randomtime = 5car_positions = [1, 1, 1]while time:    # decrease time    time -= 1    print &#39;&#39;    for i in range(len(car_positions)):        # move car        if random() &gt; 0.3:            car_positions[i] += 1        # draw car        print &#39;-&#39; * car_positions[i]</code></pre><p>下面这个例子是将循环分成了几个小函数，但是相互之间的参数是共享的，函数是有状态的。</p><pre><code>// make it to some function model from random import randomdef move_cars():    for i, _ in enumerate(car_positions):        if random() &gt; 0.3:            car_positions[i] += 1def draw_car(car_position):    print &#39;-&#39; * car_positiondef run_step_of_race():    global time    time -= 1    move_cars()def draw():    print &#39;&#39;    for car_position in car_positions:        draw_car(car_position)time = 5car_positions = [1, 1, 1]while time:    run_step_of_race()    draw()</code></pre><p>函数式写法</p><pre><code>from random import randomdef move_cars(car_positions):    return map(lambda x: x + 1 if random() &gt; 0.3 else x, car_positions)def output_car(car_position):    return &#39;-&#39; * car_positiondef run_step_of_race(state):    return {&#39;time&#39;: state[&#39;time&#39;] - 1, &#39;car_positions&#39;: move_cars(state[&#39;car_positions&#39;])}def draw(state):    print &#39;&#39;    print &#39;\n&#39;.join(map(output_car, state[&#39;car_positions&#39;]))def race(state):    draw(state)    if state[&#39;time&#39;]:        race(run_step_of_race(state))race({&#39;time&#39;: 5,      &#39;car_positions&#39;: [1, 1, 1]})</code></pre><p>上面的代码依然把程序的逻辑分成了函数。不过这些函数都是函数式的，它们有三个特点：它们之间没有共享的变量；函数间通过参数和返回值来传递数据；在函数里没有临时变量。</p><h2 id="2-5-函数式语言常用函数"><a href="#2-5-函数式语言常用函数" class="headerlink" title="2.5 函数式语言常用函数"></a>2.5 函数式语言常用函数</h2><ol><li>map()</li><li>reduce()</li><li>filter()</li></ol><p>好处： </p><ol><li>数据集、对数据的操作和返回值都放在了一起。</li><li>没有了循环体，就可以少了些临时用来控制程序执行逻辑的变量，也少了把数据倒来倒去的控制逻辑。</li><li>代码变成了在描述你要干什么，而不是怎么干</li></ol><h3 id="2-5-1-E-G"><a href="#2-5-1-E-G" class="headerlink" title="2.5.1 E.G"></a>2.5.1 E.G</h3><p>process: </p><ol><li>找出偶数</li><li>乘3</li><li>转成字符串</li></ol><pre><code>def process(num):# filter out non-evensif num % 2 != 0:    returnnum = num * 3num = &#39;The Number: %s&#39; % numreturn numnums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]for num in nums:    print process(num)# 输出：# None# The Number: 6# None# The Number: 12# None# The Number: 18# None# The Number: 24# None# The Number: 30</code></pre><p>pipeline way</p><p>使用了yield关键字，返回generator，一个可迭代对象 ，并没有真正的执行函数。意味着只有其返回的迭代对象被迭代时，yield函数才会真正运行</p><pre><code>def even_filter(nums):for num in nums:    if num % 2 == 0:        yield numdef multiply_by_three(nums):    for num in nums:        yield num * 3def convert_to_string(nums):    for num in nums:        yield &#39;The Number: %s&#39; % numnums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]pipeline = convert_to_string(multiply_by_three(even_filter(nums)))for num in pipeline:    print num# 输出：# The Number: 6# The Number: 12# The Number: 18# The Number: 24# The Number: 30</code></pre><p>使用map &amp; reduce</p><pre><code>def even_filter(nums):return filter(lambda x: x%2==0, nums)def multiply_by_three(nums):    return map(lambda x: x*3, nums)def convert_to_string(nums):    return map(lambda x: &#39;The Number: %s&#39; % x,  nums)nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]pipeline = convert_to_string(               multiply_by_three(                   even_filter(nums)               )            )for num in pipeline:    print num</code></pre><p>pipeline model </p><pre><code>class Pipe(object):def __init__(self, func):    self.func = funcdef __ror__(self, other):    def generator():        for obj in other:            if obj is not None:                yield self.func(obj)    return generator()@Pipedef even_filter(num):    return num if num % 2 == 0 else None@Pipedef multiply_by_three(num):    return num*3@Pipedef convert_to_string(num):    return &#39;The Number: %s&#39; % num@Pipedef echo(item):    print item    return itemdef force(sqs):    for item in sqs: passnums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]force(nums | even_filter | multiply_by_three | convert_to_string | echo)</code></pre><h2 id="3-修饰器模式-decorator"><a href="#3-修饰器模式-decorator" class="headerlink" title="3. 修饰器模式 decorator"></a>3. 修饰器模式 decorator</h2><p>Python 用一个函数来构造另一个函数</p><pre><code>def hello(fn):    def wrapper():        print &quot;hello, %s&quot; % fn.__name__        fn()        print &quot;goodbye, %s&quot; % fn.__name__    return wrapper@hellodef Hao():    print &quot;i am Hao Chen&quot;Hao()// code result:$ python hello.pyhello, Haoi am Hao Chengoodbye, Hao</code></pre><p>Hello 注解就是我们前面定义的hello函数，hello函数中需要一个参数fn，用来做回调，hello函数中返回了一个inner函数wrapper，回调了传进来的fn</p><h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>函数式编程，将运算过程尽量写成一系列嵌套的函数调用，关注的是做什么而不是怎么做，被称为声明式编程。以stateless和immutable为主要特点。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-从c-到函数式编程&quot;&gt;&lt;a href=&quot;#1-从c-到函数式编程&quot; class=&quot;headerlink&quot; title=&quot;1. 从c++到函数式编程&quot;&gt;&lt;/a&gt;1. 从c++到函数式编程&lt;/h1&gt;&lt;p&gt;C++很大程度上解决了C语言中的各种问题和不便，尤其是通过类
       
     
     </summary>

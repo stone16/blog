@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Java 反射机制</title>
+      <link href="/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+      <url>/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>Java反射机制是在运行时用来判定或者修改方法，类，接口的行为的API。</p><ul><li><p>反射可以告诉我们类和对象之间的信息，以及我们可以用类的哪些方法来使用这个对象</p></li><li><p>通过反射，我们就可以在运行的时候赋予类一个新的对象</p></li></ul><h1 id="2-使用范例"><a href="#2-使用范例" class="headerlink" title="2. 使用范例"></a>2. 使用范例</h1><p>反射可以用来获取关于类，构造器和方法的信息：</p><ul><li><p>class: getClass()方法可以用来获取对象属于的类的名字</p></li><li><p>Constructors: getConstructor()可以用来获取对象属于的类的public的构造器</p></li><li><p>getMethods() 可以用来获取对象属于的类的public的方法</p><p>  // A simple Java program to demonstrate the use of reflection<br>  import java.lang.reflect.Method;<br>  import java.lang.reflect.Field;<br>  import java.lang.reflect.Constructor; </p><p>  // class whose object is to be created<br>  class Test<br>  { </p><pre><code>  // creating a private field   private String s;   // creating a public constructor   public Test() { s = &quot;GeeksforGeeks&quot;; }   // Creating a public method with no arguments   public void method1() {       System.out.println(&quot;The string is &quot; + s);   }   // Creating a public method with int as argument   public void method2(int n) {       System.out.println(&quot;The number is &quot; + n);   }   // creating a private method   private void method3() {       System.out.println(&quot;Private method invoked&quot;);   } </code></pre><p>  } </p><p>  class Demo<br>  { </p><pre><code>  public static void main(String args[]) throws Exception   {       // Creating object whose property is to be checked       Test obj = new Test();           // 构建类的对象      // getclass method       Class cls = obj.getClass();       System.out.println(&quot;The name of class is &quot; +                           cls.getName());       // Getting the constructor of the class through the       // object of the class       Constructor constructor = cls.getConstructor();       System.out.println(&quot;The name of constructor is &quot; +                           constructor.getName());       System.out.println(&quot;The public methods of class are : &quot;);       // Getting methods of the class through the object       // of the class by using getMethods       Method[] methods = cls.getMethods();       // Printing method names       for (Method method:methods)           System.out.println(method.getName());       // creates object of desired method by providing the       // method name and parameter class as arguments to       // the getDeclaredMethod        // 这里是通过方法的名字和输入变量来获取对应的方法      Method methodcall1 = cls.getDeclaredMethod(&quot;method2&quot;,                                               int.class);       // invokes the method at runtime       // 这里是在运行时执行这个方法       methodcall1.invoke(obj, 19);       // creates object of the desired field by providing       // the name of field as argument to the       // getDeclaredField method       // 运行时获取对应的private的变量      Field field = cls.getDeclaredField(&quot;s&quot;);       // allows the object to access the field irrespective       // of the access specifier used with the field       // 将这个变量设成可以获取的      field.setAccessible(true);       // takes object and the new value to be assigned       // to the field as arguments       field.set(obj, &quot;JAVA&quot;);       // Creates object of desired method by providing the       // method name as argument to the getDeclaredMethod       Method methodcall2 = cls.getDeclaredMethod(&quot;method1&quot;);       // invokes the method at runtime       methodcall2.invoke(obj);       // Creates object of the desired method by providing       // the name of method as argument to the       // getDeclaredMethod method       Method methodcall3 = cls.getDeclaredMethod(&quot;method3&quot;);       // allows the object to access the method irrespective       // of the access specifier used with the method       methodcall3.setAccessible(true);       // invokes the method at runtime       methodcall3.invoke(obj);   } </code></pre><p>  } </p></li></ul><h1 id="3-详细分析"><a href="#3-详细分析" class="headerlink" title="3. 详细分析"></a>3. 详细分析</h1><p>反射一言以蔽之，即在运行时拿到class，并创建类对应的对象的方式。这种好处是更具灵活性，劣势是会慢很多，代码会相对难理解些。</p><p>从代码本身的角度来讲，是指一部分代码有能力去观察/检查另一部分代码。用已知的部分合理推断出未知的部分，这未知的部分其实是指还不知道的信息。</p><p>一般来说在Java里我们都是和注解一起来使用反射的，</p><h1 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h1><ul><li>好处<ul><li>反射是什么呢？当我们的程序在运行时，需要动态的加载一些类这些类可能之前用不到所以不用加载到jvm，而是在运行时根据需要才加载，这样的好处对于服务器来说不言而喻，举个例子我们的项目底层有时是用mysql，有时用oracle，<strong>需要动态地根据实际情况加载驱动类，这个时候反射就有用了</strong>，假设 <code>com.java.dbtest.myqlConnection</code>，<code>com.java.dbtest.oracleConnection</code>这两个类我们要用，这时候我们的程序就写得比较动态化，通过<code>Class tc = Class.forName(&quot;com.java.dbtest.TestConnection&quot;);</code>通过类的全类名让jvm在服务器中找到并加载这个类，而如果是oracle则传入的参数就变成另一个了。这时候就可以看到反射的好处了，这个动态性就体现出java的特性了！</li><li>更具拓展性，可以在运行时获取信息</li><li>获取一些private的域的值方便debug</li></ul></li><li>劣势<ul><li>更慢，有延时</li><li>会暴露一些接口</li><li>反射会要求运行的许可，当在secure manager下来运行可能不被允许</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful" target="_blank" rel="noopener">https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/index.html</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/class/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/class/index.html</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Reflection </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java - serialization</title>
       <link href="/java-serialization/"/>
       <url>/java-serialization/</url>
