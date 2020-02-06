@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>java - serialization</title>
+      <link href="/java-serialization/"/>
+      <url>/java-serialization/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>An object is eligible for serialization if and only if its class implements the <strong>java.io.Serializable</strong> interface. Serializable is a marker interface (contains no methods) that tell the Java Virtual Machine (JVM) that the objects of this class is ready for being written to and read from a persistent storage or over the network.</p><h1 id="2-Why-we-need-serialization"><a href="#2-Why-we-need-serialization" class="headerlink" title="2. Why we need serialization?"></a>2. Why we need serialization?</h1><p>It’s used when the need arises to send data/ object over network or stored in files.</p><p>The thing is network and hard disk are hardware component that understand bits and bytes but not Java Objects. </p><p>Serialization is the translation of your Java object’s values/states to bytes to send it over network or save it.</p><p>Also used to store into database. </p><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p>Ways for serialize/ deserialize  – xml JSON </p><p>Serialization process is instance independent. </p><ul><li>ObjectInputStream <ul><li>extends java.io.InputStream </li></ul></li></ul><pre><code>public final Object readObject() throws IOException, ClassNotFoundException;</code></pre><ul><li>ObjectOutputStream <ul><li>extends java.io.OutputStream</li></ul></li></ul><pre><code>public final void writeObject(Object o) throws IOException;</code></pre><h2 id="3-1-Example"><a href="#3-1-Example" class="headerlink" title="3.1 Example"></a>3.1 Example</h2><pre><code>public class Person implements Serializable {    private static final long serialVersionUID = 1L;    static String country = &quot;ITALY&quot;;    private int age;    private String name;    transient int height;    // getters and setters}@Testpublic void whenSerializingAndDeserializing_ThenObjectIsTheSame() ()   throws IOException, ClassNotFoundException {     Person person = new Person();    person.setAge(20);    person.setName(&quot;Joe&quot;);    FileOutputStream fileOutputStream      = new FileOutputStream(&quot;yourfile.txt&quot;);    ObjectOutputStream objectOutputStream       = new ObjectOutputStream(fileOutputStream);    objectOutputStream.writeObject(person);    objectOutputStream.flush();    objectOutputStream.close();    FileInputStream fileInputStream      = new FileInputStream(&quot;yourfile.txt&quot;);    ObjectInputStream objectInputStream      = new ObjectInputStream(fileInputStream);    Person p2 = (Person) objectInputStream.readObject();    objectInputStream.close();     assertTrue(p2.getAge() == p.getAge());    assertTrue(p2.getName().equals(p.getName()));}</code></pre><h1 id="4-Caveats"><a href="#4-Caveats" class="headerlink" title="4. Caveats"></a>4. Caveats</h1><ol><li>When a class implements the java.io.Serializable interface, all <strong>its sub-classes are serializable as well</strong>.</li><li>when an object has a reference to another object, these objects must implement the Serializable interface separately, or else a NotSerializableException will be thrown</li><li>JVM associates a version number with each serializable class. </li></ol><p>Reference</p><ol><li><a href="https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java" target="_blank" rel="noopener">https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java</a></li><li><a href="https://www.baeldung.com/java-serialization" target="_blank" rel="noopener">https://www.baeldung.com/java-serialization</a></li><li><a href="https://www.geeksforgeeks.org/serialization-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/serialization-in-java/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java Pattern Regex表达式</title>
       <link href="/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
       <url>/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>

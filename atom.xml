@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-06T03:00:54.343Z</updated>
+  <updated>2020-02-06T03:01:43.795Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java - serialization</title>
+    <link href="https://www.llchen60.com/java-serialization/"/>
+    <id>https://www.llchen60.com/java-serialization/</id>
+    <published>2020-02-06T03:01:26.000Z</published>
+    <updated>2020-02-06T03:01:43.795Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>An object is eligible for serialization if and only if its class implements the <strong>java.io.Serializable</strong> interface. Serializable is a marker interface (contains no methods) that tell the Java Virtual Machine (JVM) that the objects of this class is ready for being written to and read from a persistent storage or over the network.</p><h1 id="2-Why-we-need-serialization"><a href="#2-Why-we-need-serialization" class="headerlink" title="2. Why we need serialization?"></a>2. Why we need serialization?</h1><p>It’s used when the need arises to send data/ object over network or stored in files.</p><p>The thing is network and hard disk are hardware component that understand bits and bytes but not Java Objects. </p><p>Serialization is the translation of your Java object’s values/states to bytes to send it over network or save it.</p><p>Also used to store into database. </p><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p>Ways for serialize/ deserialize  – xml JSON </p><p>Serialization process is instance independent. </p><ul><li>ObjectInputStream <ul><li>extends java.io.InputStream </li></ul></li></ul><pre><code>public final Object readObject() throws IOException, ClassNotFoundException;</code></pre><ul><li>ObjectOutputStream <ul><li>extends java.io.OutputStream</li></ul></li></ul><pre><code>public final void writeObject(Object o) throws IOException;</code></pre><h2 id="3-1-Example"><a href="#3-1-Example" class="headerlink" title="3.1 Example"></a>3.1 Example</h2><pre><code>public class Person implements Serializable {    private static final long serialVersionUID = 1L;    static String country = &quot;ITALY&quot;;    private int age;    private String name;    transient int height;    // getters and setters}@Testpublic void whenSerializingAndDeserializing_ThenObjectIsTheSame() ()   throws IOException, ClassNotFoundException {     Person person = new Person();    person.setAge(20);    person.setName(&quot;Joe&quot;);    FileOutputStream fileOutputStream      = new FileOutputStream(&quot;yourfile.txt&quot;);    ObjectOutputStream objectOutputStream       = new ObjectOutputStream(fileOutputStream);    objectOutputStream.writeObject(person);    objectOutputStream.flush();    objectOutputStream.close();    FileInputStream fileInputStream      = new FileInputStream(&quot;yourfile.txt&quot;);    ObjectInputStream objectInputStream      = new ObjectInputStream(fileInputStream);    Person p2 = (Person) objectInputStream.readObject();    objectInputStream.close();     assertTrue(p2.getAge() == p.getAge());    assertTrue(p2.getName().equals(p.getName()));}</code></pre><h1 id="4-Caveats"><a href="#4-Caveats" class="headerlink" title="4. Caveats"></a>4. Caveats</h1><ol><li>When a class implements the java.io.Serializable interface, all <strong>its sub-classes are serializable as well</strong>.</li><li>when an object has a reference to another object, these objects must implement the Serializable interface separately, or else a NotSerializableException will be thrown</li><li>JVM associates a version number with each serializable class. </li></ol><p>Reference</p><ol><li><a href="https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java" target="_blank" rel="noopener">https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java</a></li><li><a href="https://www.baeldung.com/java-serialization" target="_blank" rel="noopener">https://www.baeldung.com/java-serialization</a></li><li><a href="https://www.geeksforgeeks.org/serialization-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/serialization-in-java/</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Overview&quot;&gt;&lt;a href=&quot;#1-Overview&quot; class=&quot;headerlink&quot; title=&quot;1. Overview&quot;&gt;&lt;/a&gt;1. Overview&lt;/h1&gt;&lt;p&gt;An object is eligible for serializat
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java Pattern Regex表达式</title>
@@ -540,37 +566,6 @@
     
     
       <category term="编程范式" scheme="https://www.llchen60.com/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>笔记 - 领域驱动设计 by Eric Evans</title>
-    <link href="https://www.llchen60.com/%E7%AC%94%E8%AE%B0-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-by-Eric-Evans/"/>
-    <id>https://www.llchen60.com/%E7%AC%94%E8%AE%B0-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-by-Eric-Evans/</id>
-    <published>2020-02-04T04:28:36.000Z</published>
-    <updated>2020-02-04T04:29:00.240Z</updated>
-    
-    <content type="html"><![CDATA[<p>在看博文的时候看到了关于DDD的内容，确实发现在工程上碰到了一些些问题，关于核心领域，关于领域驱动，毕竟技术是为了解决实际问题的，只有在对某个领域有着较深的理解的前提下，才能做出更有利于维护，更容易扩展的软件。</p><p>本书想说的就是在大规模工程上，如何来控制整体的复杂性，我们需要有一个良好的领域模型，不仅仅停留在领域的表面，而是要透过表象抓住领域的实质结构，从而为软件开发人员提供他们所需要的支持。</p><p>软件的负责性并不仅仅在技术上，而是来自领域本身，用户的活动或业务。这种复杂性我们需要在设计上考虑到的。</p><p>领域涉及的前提： </p><ol><li>在大多数软件项目当中，主要的焦点应该是领域和领域逻辑</li><li>复杂的领域设计应该基于模型</li></ol><p>领域驱动设计的实质是<strong>消化吸收大量知识，最后产生一个反映深层次领域知识并聚焦于关键概念的模型</strong></p><h1 id="1-让领域模型发挥作用-领域驱动开发的基本目标"><a href="#1-让领域模型发挥作用-领域驱动开发的基本目标" class="headerlink" title="1. 让领域模型发挥作用 - 领域驱动开发的基本目标"></a>1. 让领域模型发挥作用 - 领域驱动开发的基本目标</h1><h2 id="1-1-几个基本问题"><a href="#1-1-几个基本问题" class="headerlink" title="1.1 几个基本问题"></a>1.1 几个基本问题</h2><ul><li>什么是模型？ <ul><li>模型是一种简化，是对现实的解释，并把与解决问题密切相关的方面抽象出来，而忽略无关的细节。  </li><li>模型是为了解决信息超载问题的工具</li><li>模型是一种知识形式，它对知识进行有选择的简化和有目的的结构化 </li></ul></li><li>如何界定领域？<ul><li>每个软件程序的目的都是为了执行某项活动，或者满足用户的某种需求。用户会将软件程序应用在某个主题区域当中，这个区域就叫做软件的领域。</li></ul></li><li>软件的核心是什么？ <ul><li>用户解决领域相关的问题的能力 </li></ul></li></ul><h2 id="1-2-如何有效消化知识？"><a href="#1-2-如何有效消化知识？" class="headerlink" title="1.2 如何有效消化知识？"></a>1.2 如何有效消化知识？</h2><h3 id="1-2-1-有效建模的要素"><a href="#1-2-1-有效建模的要素" class="headerlink" title="1.2.1 有效建模的要素"></a>1.2.1 有效建模的要素</h3><ul><li>模型与实现的绑定  <ul><li>在模型与实现之间建立早期连接，在后续的所有迭代当中维护该原型</li></ul></li><li>获得一种基于模型的语言<ul><li>业务和技术上的对应的模型的熟悉，对于名词的意思达成一致</li></ul></li><li>开发一个蕴含丰富知识的模型</li><li>提炼模型 - 保证模型整体结构的精炼</li></ul><h3 id="1-2-2-知识消化"><a href="#1-2-2-知识消化" class="headerlink" title="1.2.2 知识消化"></a>1.2.2 知识消化</h3><p>在大量信息当中探寻有用的部分，由开发人员和领域专家组成的团队共同协作，收集信息并寻找对信息有意义的简化视图。</p><p>在你的架构当中应当本身就有领域的特征，即某部分需要能够清晰的反应商业上的可能需求和可能的拓展。这种东西如果在刚刚开始的时候就能被研究到，那以后就会很方便了。</p><p>开发出来的软件是需要能够反应出领域专家的思考方式的，我们用自己的技术来解决他们的问题，用代码构建他们的思维体系。</p><h2 id="1-3-语言的交流和使用"><a href="#1-3-语言的交流和使用" class="headerlink" title="1.3 语言的交流和使用"></a>1.3 语言的交流和使用</h2><ul><li>模型 <ul><li>头脑中形成的与项目有关的概念集合，用术语和关系反映了领域的深层含义。这些术语和关系提供了模型语言的语义</li><li>不仅仅限于UML图，需要充分利用各种交流手段，以提高代码本身和测试的沟通能力</li></ul></li></ul><h3 id="1-3-1-模式：-Ubiquitous-Language"><a href="#1-3-1-模式：-Ubiquitous-Language" class="headerlink" title="1.3.1 模式： Ubiquitous Language"></a>1.3.1 模式： Ubiquitous Language</h3><p>需要一种通用的，共享的团队语言，这种语言应该是时刻进行检验的。语言上的鸿沟，即我们对同样的词语是没有同样的认识的，这就导致了当我们对某个领域不够熟悉的时候，对于各种概念的理解是有很大量的欠缺的。而各类人在工作的时候也很容易为了方便创建小范围达成共识的语言，但是在这个小范围之外是没有人知道和了解这究竟是什么意思的。</p><ul><li>为什么需要这种公共语言？<ul><li>将团队的沟通和软件实现紧密联系起来</li><li>避免因为对于概念不同理解带来的交流沟通成本陡增的问题</li></ul></li><li>词汇表<ul><li>类名称</li><li>主要操作</li><li>术语 <ul><li>讨论模型当中已经明确的规则</li><li>或者是模型上的高级组织原则</li></ul></li></ul></li><li>tips<ul><li>模型作为语言的中心，确保团队在所有交流活动和代码中坚持使用这种语言</li><li>通过尝试不同的表示方法来消除难点，然后重构代码，并对类、方法和模块重新命名，以便与新模型一致。</li><li>需要对各种词语，无论是在工程上的，还是在商业上的，都有更好的理解</li><li>要认识到Uniquitous Language当中的更改就是对模型的更改。</li></ul></li></ul><h3 id="1-3-2-文档和图"><a href="#1-3-2-文档和图" class="headerlink" title="1.3.2 文档和图"></a>1.3.2 文档和图</h3><ul><li>UML图有用，但是会容易是你陷入细节当中</li><li>图应该是一种直观的给你综合概念和视角的工具，而不是落于细节当中。</li><li>设计的重要细节应该在代码当中体现出来</li></ul><ul><li>书面设计文档<ul><li>提供稳定和共享的交流</li><li>文档应该作为代码和口头交流的补充</li></ul></li><li>解释性模型<ul><li>没有UML 没有类</li><li>就是单纯的用图来描述商业上的使用案例</li></ul></li></ul><h1 id="2-模型驱动设计的构造块-阐述核心最佳实践"><a href="#2-模型驱动设计的构造块-阐述核心最佳实践" class="headerlink" title="2. 模型驱动设计的构造块 - 阐述核心最佳实践"></a>2. 模型驱动设计的构造块 - 阐述核心最佳实践</h1><h1 id="3-通过重构加深理解-如何将构造块装配为实用的模型"><a href="#3-通过重构加深理解-如何将构造块装配为实用的模型" class="headerlink" title="3. 通过重构加深理解 - 如何将构造块装配为实用的模型"></a>3. 通过重构加深理解 - 如何将构造块装配为实用的模型</h1><h1 id="4-战略设计-讨论在复杂系统交互中的情况"><a href="#4-战略设计-讨论在复杂系统交互中的情况" class="headerlink" title="4. 战略设计 - 讨论在复杂系统交互中的情况"></a>4. 战略设计 - 讨论在复杂系统交互中的情况</h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在看博文的时候看到了关于DDD的内容，确实发现在工程上碰到了一些些问题，关于核心领域，关于领域驱动，毕竟技术是为了解决实际问题的，只有在对某个领域有着较深的理解的前提下，才能做出更有利于维护，更容易扩展的软件。&lt;/p&gt;
-&lt;p&gt;本书想说的就是在大规模工程上，如何来控制整体的复
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
-    
-      <category term="System Design" scheme="https://www.llchen60.com/tags/System-Design/"/>
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/tags/BackEnd/"/>
-    
-      <category term="DDD" scheme="https://www.llchen60.com/tags/DDD/"/>
     
   </entry>
   

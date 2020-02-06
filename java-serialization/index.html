@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>java - serialization | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="java - serialization | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -2004,12 +2004,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-java-serialization" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol></li></ol>
+        <h1 class="article-title">java - serialization</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="BackEnd">BackEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color5">Java</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-02-05 19:01:43'>2020-02-05 19:01</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:343</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Overview"><span class="toc-text">1. Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Why-we-need-serialization"><span class="toc-text">2. Why we need serialization?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Implementation"><span class="toc-text">3. Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Example"><span class="toc-text">3.1 Example</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Caveats"><span class="toc-text">4. Caveats</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2022,26 +2078,107 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h3 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h3><p>从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵/ 问题，欢迎留言，共勉！</p>
-<p>感谢！</p>
-<h3 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h3><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h3 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h3><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>An object is eligible for serialization if and only if its class implements the <strong>java.io.Serializable</strong> interface. Serializable is a marker interface (contains no methods) that tell the Java Virtual Machine (JVM) that the objects of this class is ready for being written to and read from a persistent storage or over the network.</p>
+<h1 id="2-Why-we-need-serialization"><a href="#2-Why-we-need-serialization" class="headerlink" title="2. Why we need serialization?"></a>2. Why we need serialization?</h1><p>It’s used when the need arises to send data/ object over network or stored in files.</p>
+<p>The thing is network and hard disk are hardware component that understand bits and bytes but not Java Objects. </p>
+<p>Serialization is the translation of your Java object’s values/states to bytes to send it over network or save it.</p>
+<p>Also used to store into database. </p>
+<h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p>Ways for serialize/ deserialize  – xml JSON </p>
+<p>Serialization process is instance independent. </p>
+<ul>
+<li>ObjectInputStream <ul>
+<li>extends java.io.InputStream </li>
+</ul>
+</li>
+</ul>
+<pre><code>public final Object readObject() throws IOException, ClassNotFoundException;</code></pre><ul>
+<li>ObjectOutputStream <ul>
+<li>extends java.io.OutputStream</li>
+</ul>
+</li>
+</ul>
+<pre><code>public final void writeObject(Object o) throws IOException;</code></pre><h2 id="3-1-Example"><a href="#3-1-Example" class="headerlink" title="3.1 Example"></a>3.1 Example</h2><pre><code>public class Person implements Serializable {
+    private static final long serialVersionUID = 1L;
+    static String country = &quot;ITALY&quot;;
+    private int age;
+    private String name;
+    transient int height;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+    // getters and setters
+}
+
+
+@Test
+public void whenSerializingAndDeserializing_ThenObjectIsTheSame() () 
+  throws IOException, ClassNotFoundException { 
+    Person person = new Person();
+    person.setAge(20);
+    person.setName(&quot;Joe&quot;);
+
+    FileOutputStream fileOutputStream
+      = new FileOutputStream(&quot;yourfile.txt&quot;);
+    ObjectOutputStream objectOutputStream 
+      = new ObjectOutputStream(fileOutputStream);
+    objectOutputStream.writeObject(person);
+    objectOutputStream.flush();
+    objectOutputStream.close();
+
+    FileInputStream fileInputStream
+      = new FileInputStream(&quot;yourfile.txt&quot;);
+    ObjectInputStream objectInputStream
+      = new ObjectInputStream(fileInputStream);
+    Person p2 = (Person) objectInputStream.readObject();
+    objectInputStream.close(); 
+
+    assertTrue(p2.getAge() == p.getAge());
+    assertTrue(p2.getName().equals(p.getName()));
+}</code></pre><h1 id="4-Caveats"><a href="#4-Caveats" class="headerlink" title="4. Caveats"></a>4. Caveats</h1><ol>
+<li>When a class implements the java.io.Serializable interface, all <strong>its sub-classes are serializable as well</strong>.</li>
+<li>when an object has a reference to another object, these objects must implement the Serializable interface separately, or else a NotSerializableException will be thrown</li>
+<li>JVM associates a version number with each serializable class. </li>
+</ol>
+<p>Reference</p>
+<ol>
+<li><a href="https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java" target="_blank" rel="noopener">https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java</a></li>
+<li><a href="https://www.baeldung.com/java-serialization" target="_blank" rel="noopener">https://www.baeldung.com/java-serialization</a></li>
+<li><a href="https://www.geeksforgeeks.org/serialization-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/serialization-in-java/</a></li>
+</ol>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>java - serialization</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">343</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-02-05, 19:01:26</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-05, 19:01:43</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/java-serialization/" title="java - serialization">https://www.llchen60.com/java-serialization/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'page/9/index.html';
+            this.page.url = 'https://www.llchen60.com/java-serialization/';
+            this.page.identifier = 'java-serialization/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -2057,8 +2194,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="page/9/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="java-serialization/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/java-serialization/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">
