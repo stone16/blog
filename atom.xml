@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-06T02:58:23.254Z</updated>
+  <updated>2020-02-06T02:59:23.181Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java - ExecutorService</title>
+    <link href="https://www.llchen60.com/Java-ExecutorService/"/>
+    <id>https://www.llchen60.com/Java-ExecutorService/</id>
+    <published>2020-02-06T02:58:50.000Z</published>
+    <updated>2020-02-06T02:59:23.181Z</updated>
+    
+    <content type="html"><![CDATA[<p>ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in <strong><em>asynchronous</em></strong> mode. ExecutorService automatically provides a pool of threads and API for assigning tasks to it. </p><h1 id="1-Instantiation"><a href="#1-Instantiation" class="headerlink" title="1. Instantiation"></a>1. Instantiation</h1><h2 id="1-1-Factory-methods-of-Executors-class"><a href="#1-1-Factory-methods-of-Executors-class" class="headerlink" title="1.1 Factory methods of Executors class"></a>1.1 Factory methods of Executors class</h2><p>Use its factory methods of the Executors class to create ExecutorService. </p><pre><code>ExecutorService executor = Executors.newFixedThreadPool(10);</code></pre><h2 id="1-2-Directly-create"><a href="#1-2-Directly-create" class="headerlink" title="1.2 Directly create"></a>1.2 Directly create</h2><pre><code>ExecutorService executorService =   new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,     new LinkedBlockingQueue&lt;Runnable&gt;());</code></pre><h1 id="2-Assigning-Tasks"><a href="#2-Assigning-Tasks" class="headerlink" title="2. Assigning Tasks"></a>2. Assigning Tasks</h1><p>ExecutorService can execute Runnable and Callable tasks. </p><pre><code>Runnable runnableTask = () -&gt; {    try {        TimeUnit.MILLISECONDS.sleep(300);    } catch (InterruptedException e) {        e.printStackTrace();    }};Callable&lt;String&gt; callableTask = () -&gt; {    TimeUnit.MILLISECONDS.sleep(300);    return &quot;Task&#39;s execution&quot;;};List&lt;Callable&lt;String&gt;&gt; callableTasks = new ArrayList&lt;&gt;();callableTasks.add(callableTask);callableTasks.add(callableTask);callableTasks.add(callableTask);</code></pre><h2 id="2-1-execute"><a href="#2-1-execute" class="headerlink" title="2.1 execute()"></a>2.1 execute()</h2><p>The execute() method is void, and it doesn’t give any possibility to get the result of task’s execution or to check the task’s status (is it running or executed).</p><pre><code>executerService.execute(runnableTask);</code></pre><h2 id="2-2-submit"><a href="#2-2-submit" class="headerlink" title="2.2 submit()"></a>2.2 submit()</h2><p>submit() submits a Callable or a Runnable task to an ExecutorService and returns a result of type Future.</p><pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);</code></pre><h2 id="2-3-invokeAny"><a href="#2-3-invokeAny" class="headerlink" title="2.3 invokeAny()"></a>2.3 invokeAny()</h2><p>invokeAny() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of a successful execution of one task (if there was a successful execution).</p><pre><code>String result = executorService.invokeAny(callableTasks);</code></pre><h2 id="2-4-invokeAll"><a href="#2-4-invokeAll" class="headerlink" title="2.4 invokeAll()"></a>2.4 invokeAll()</h2><p>invokeAll() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of all task executions in the form of a list of objects of type Future.</p><pre><code>List&lt;Future&lt;String&gt;&gt; futures = executorService.invokeAll(callableTasks);</code></pre><h1 id="3-Shutdown"><a href="#3-Shutdown" class="headerlink" title="3. Shutdown"></a>3. Shutdown</h1><p>In general, the ExecutorService will not be automatically destroyed when there is not task to process. It will stay alive and wait for new work to do.</p><p>In some cases this is very helpful; for example, if an app needs to process tasks which appear on an irregular basis or the quantity of these tasks is not known at compile time.</p><p>On the other hand, an app could reach its end, but it will not be stopped because a waiting ExecutorService will cause the JVM to keep running.</p><h2 id="3-1-shutdown"><a href="#3-1-shutdown" class="headerlink" title="3.1 shutdown()"></a>3.1 shutdown()</h2><p>The shutdown() method doesn’t cause an immediate destruction of the ExecutorService. It will make the ExecutorService stop accepting new tasks and shut down after all running threads finish their current work.</p><pre><code>executorService.shutdown();</code></pre><h2 id="3-2-shutdownNow"><a href="#3-2-shutdownNow" class="headerlink" title="3.2 shutdownNow()"></a>3.2 shutdownNow()</h2><p>The shutdownNow() method tries to destroy the ExecutorService immediately, but it doesn’t guarantee that all the running threads will be stopped at the same time. This method returns a list of tasks which are waiting to be processed. It is up to the developer to decide what to do with these tasks.</p><pre><code>List&lt;Runnable&gt; notExecutedTasks = executorService.shutDownNow();</code></pre><h2 id="3-3-best-behavior"><a href="#3-3-best-behavior" class="headerlink" title="3.3 best behavior"></a>3.3 best behavior</h2><pre><code>executorService.shutdown();try {    if (!executorService.awaitTermination(800, TimeUnit.MILLISECONDS)) {        executorService.shutdownNow();    } } catch (InterruptedException e) {    executorService.shutdownNow();}</code></pre><h1 id="4-Future-interface"><a href="#4-Future-interface" class="headerlink" title="4. Future interface"></a>4. Future interface</h1><p>Future interface provides a <code>get()</code> which returns an actual result of the Callable task’s execution or null in the case of Runnable task. Calling the get() method while the task is still running will cause execution to block until the task is properly executed and the result is available.</p><pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);String result = null;try {    result = future.get();} catch (InterruptedException | ExecutionException e) {    e.printStackTrace();}</code></pre><p>With very long blocking caused by the get() method, an application’s performance can degrade. If the resulting data is not crucial, it is possible to avoid such a problem by using timeouts:</p><pre><code>String result = future.get(200, TimeUnit.MILLISECONDS);</code></pre><p>some other methods provided:</p><pre><code>cancel()isCancelled()isDone() </code></pre><h1 id="5-How-to-sync-the-value-across-different-threads"><a href="#5-How-to-sync-the-value-across-different-threads" class="headerlink" title="5. How to sync the value across different threads?"></a>5. How to sync the value across different threads?</h1><p>Suppose we have i++ in several threads, and they all perform such operations. To make the i computed properly, we need to make it atomic. </p><p>Use <code>AtomicInteger</code> or <code>synchronized</code> to get the final correct result. </p><p>Notice, <code>volatile</code> cannot make sure the final result is correct. It mainly makes sure the visibility of newest value, but there is possibility that we mound and switch to other thread before the new value being recorded. </p><p>AtomicInteger class uses CAS(Compare and swap) low level CPU operations. They allow you to modify a particular variable only if the present value is equal to something else (and is returned successfully).</p><h1 id="6-Executor-execute-and-ExecutorService-submit-differences"><a href="#6-Executor-execute-and-ExecutorService-submit-differences" class="headerlink" title="6. Executor.execute() and ExecutorService.submit() differences"></a>6. Executor.execute() and ExecutorService.submit() differences</h1><ol><li>execute(Runnable) does not return anything; while submit(Callable<T>) returns a Future object which allows a way to programatically cancel the running thread and get the return result. </li><li>submit() can accept both Runnable and Callable task but execute() can only accept the Runnable task</li><li>submit() return a Future object while execute() has no return</li><li>get() is a blocking call, which will take some time</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in &lt;strong&gt;&lt;em&gt;asynchronous&lt;/em&gt;&lt;/strong&gt; mode
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Executor Service" scheme="https://www.llchen60.com/tags/Executor-Service/"/>
+    
+  </entry>
   
   <entry>
     <title>Java - callback</title>
@@ -541,32 +569,6 @@
       <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
       <category term="CAP" scheme="https://www.llchen60.com/tags/CAP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构学习-架构设计流程</title>
-    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B/"/>
-    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B/</id>
-    <published>2020-02-04T04:14:02.000Z</published>
-    <updated>2020-02-04T04:14:25.557Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-识别复杂度"><a href="#1-识别复杂度" class="headerlink" title="1. 识别复杂度"></a>1. 识别复杂度</h1><p>具体情况需要具体分析，即这个系统的复杂度体现在哪一个方面。一个系统的复杂度主要来源于高性能，高可用，可扩展这几个方面。</p><p>正确的做法是将主要的复杂度问题列出来，然后根据业务、技术、团队等综合情况进行排序，优先解决当前面临的最主要的复杂问题。</p><p>多个系统之间的强耦合，可以通过信息队列来解耦。要注意从高可用，高性能，可扩展几个维度对其进行分析，看整个架构调整的复杂度在哪里，然后做针对性的提升。</p><p>平均TPS， QPS，峰值TPS (average x 3)，</p><h1 id="2-设计备选方案"><a href="#2-设计备选方案" class="headerlink" title="2. 设计备选方案"></a>2. 设计备选方案</h1><p>架构师需要对已经存在的技术非常熟悉，对已经经过验证的架构模式烂熟于心，然后根据自己对于业务的理解，挑选合适的架构模式进行组合，再对组合之后的方案进行修改和调整。</p><p>目前，只要明确了应用场景，复杂度上的限制因素，我们往往能找到相对成熟的技术来直接使用。例如</p><ul><li>高可用主备方案</li><li>集群方案</li><li>高性能负载均衡</li><li>多路复用</li><li>可拓展的分层</li><li>插件化技术</li></ul><p>设计备选方案的tips</p><ul><li>多设计几个备选方法，3-5个为宜</li><li>方案之间的差异要比较明显</li><li>备选方案的技术不要只局限于已经熟悉的技术</li><li>备选方案不需要太过于详细的，关注的是技术选型，而不是技术细节</li></ul><p>对于高性能写入</p><ul><li>集群</li><li>直接写入一台正常的服务器即可<br>高可用存储</li><li>已经写入的信息在单台服务器宕机的情况下不丢失</li><li>使用MySQL的主备复制功能<br>高可用读取</li><li>要求已经写入的消息在单台服务器宕机的情况下可以继续读取</li><li>服务器的主备方案</li></ul><h1 id="3-评估和选择备选方案"><a href="#3-评估和选择备选方案" class="headerlink" title="3. 评估和选择备选方案"></a>3. 评估和选择备选方案</h1><ul><li>多角度环评<ul><li>列出需要关注的质量属性点</li><li>分别从这些质量属性的维度去评估每个方案，再综合挑选适合当时情况的最优方案</li></ul></li><li>方案质量属性点<ul><li>性能</li><li>可用性</li><li>硬件成本</li><li>项目投入</li><li>复杂度</li><li>安全性</li><li>可拓展性</li></ul></li><li>对于需要评估未来业务发展的规模时，一般可以将当前的业务规模乘以2-4 即可。</li><li>将质量属性按照优先级排序</li></ul><h1 id="4-详细方案设计"><a href="#4-详细方案设计" class="headerlink" title="4. 详细方案设计"></a>4. 详细方案设计</h1><p>将方案涉及的关键技术细节给确定下来。</p><ul><li>假如我们确定使用 Elasticsearch 来做全文搜索，那么就需要确定 Elasticsearch 的索引是按照业务划分，还是一个大索引就可以了；副本数量是 2 个、3 个还是 4 个，集群节点数量是 3 个还是 6 个等。</li><li>假如我们确定使用 MySQL 分库分表，那么就需要确定哪些表要分库分表，按照什么维度来分库分表，分库分表后联合查询怎么处理等。</li><li>假如我们确定引入 Nginx 来做负载均衡，那么 Nginx 的主备怎么做，Nginx 的负载均衡策略用哪个（权重分配？轮询？ip_hash？）等。<ul><li>轮询</li><li>加权轮询 - 后端服务器性能不均</li><li>ip_hash - 每个方可固定访问同一个后端服务器，解决session的问题</li><li>fair - 按照响应时间来分配请求，响应时间短的优先分配，能够最大化平衡各后端服务器的压力，可以适用于后端服务器性能不均衡的情况</li><li>url_hash - 每个url定向到同一个后端服务器，适用于后端服务器能够将url的响应结果缓存的情况</li></ul></li></ul><ul><li>通过分步骤，分阶段，分系统等方式，尽量降低方案的复杂度。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-识别复杂度&quot;&gt;&lt;a href=&quot;#1-识别复杂度&quot; class=&quot;headerlink&quot; title=&quot;1. 识别复杂度&quot;&gt;&lt;/a&gt;1. 识别复杂度&lt;/h1&gt;&lt;p&gt;具体情况需要具体分析，即这个系统的复杂度体现在哪一个方面。一个系统的复杂度主要来源于高性能，高可
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   
