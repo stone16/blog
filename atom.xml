@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-04T17:15:47.639Z</updated>
+  <updated>2020-02-06T02:56:25.555Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jackson  java-json parser</title>
+    <link href="https://www.llchen60.com/Jackson-java-json-parser/"/>
+    <id>https://www.llchen60.com/Jackson-java-json-parser/</id>
+    <published>2020-02-06T02:55:49.000Z</published>
+    <updated>2020-02-06T02:56:25.555Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><ul><li>JSON <ul><li>JavaScript Object Notation </li><li>Data exchange format between browsers and web servers </li></ul></li><li>Jackson <ul><li>2 main parsers <ul><li>ObjectMapper <ul><li>parse JSON into custom Java objects, or into a jackson specific tree structure </li></ul></li><li>JsonParser <ul><li>JSON pull parser, parsing JSON one token at a time </li></ul></li></ul></li><li>2 main JSON generator<ul><li>ObjectMapper </li><li>JsonGenerator<ul><li>generate JSON one token at a time </li></ul></li></ul></li><li>3 main packages <ul><li>Jackson Core</li><li>Jackson Annotations</li><li>Jackson Databind </li></ul></li></ul></li></ul><h1 id="2-Parsers-JSON-to-Java-Object"><a href="#2-Parsers-JSON-to-Java-Object" class="headerlink" title="2. Parsers - JSON to Java Object"></a>2. Parsers - JSON to Java Object</h1><pre><code>ObjectMapper objectMapper = new ObjectMapper();String lakers = &quot;{ \&quot;SuperStar\&quot;:\&quot;Kobe Bryant\&quot;}&quot;;try {    Lakers lakers = objectMapper.readValue(lakers, Lakers.class);} catch (IOException e) {    log.error(e);}@Datapublic class Lakers {    private String superStar;}</code></pre><h2 id="2-1-How-Jackson-ObjectMapper-matches-JSON-fields-to-Java-Fields"><a href="#2-1-How-Jackson-ObjectMapper-matches-JSON-fields-to-Java-Fields" class="headerlink" title="2.1 How Jackson ObjectMapper matches JSON fields to Java Fields?"></a>2.1 How Jackson ObjectMapper matches JSON fields to Java Fields?</h2><p>By default, Jackson maps the fields of a JSON object to fields in a Java object by matching the names of the JSON field to the getter and setter methods in the Java object.<br>Jackson removes the “get” and “set” part of the names of the getter and setter methods, and converts the first character of the remaining name to lowercase.</p><p>If you want to customize the parsing process, you may want to use a custom serializer and deserializer, or use Jackson Annotations </p><h2 id="2-2-Fail-on-Null-for-primitive-types"><a href="#2-2-Fail-on-Null-for-primitive-types" class="headerlink" title="2.2 Fail on Null for primitive types"></a>2.2 Fail on Null for primitive types</h2><p>We could configure the Jackson ObjectMapper to fail if a JSON string contains a field with its value set to null. </p><pre><code>ObjectMapper objectMapper = new ObjectMapper();objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);</code></pre><h2 id="2-3-Jackson-JsonParser"><a href="#2-3-Jackson-JsonParser" class="headerlink" title="2.3 Jackson JsonParser"></a>2.3 Jackson JsonParser</h2><ul><li><p>lower level than the ObjectMapper </p><ul><li>faster than the ObjectMapper</li></ul></li><li><p>Create a JsonParser </p><ul><li><code>JsonFactory factory = new JsonFactory();</code></li><li><code>JsonParser parser = factory.createParser(carJson);</code></li></ul></li><li><p>Parsing Json with JsonParser</p><ul><li>break the JSON up into a sequence of tokens which you can iterate one by one </li></ul></li></ul><pre><code>String carJson =        &quot;{ \&quot;brand\&quot; : \&quot;Mercedes\&quot;, \&quot;doors\&quot; : 5 }&quot;;JsonFactory factory = new JsonFactory();JsonParser  parser  = factory.createParser(carJson);while(!parser.isClosed()){    JsonToken jsonToken = parser.nextToken();    System.out.println(&quot;jsonToken = &quot; + jsonToken);}</code></pre><h1 id="3-Generators-Java-Object-to-JSON"><a href="#3-Generators-Java-Object-to-JSON" class="headerlink" title="3. Generators - Java Object to JSON"></a>3. Generators - Java Object to JSON</h1><ul><li>ObjectMapper<ul><li>writeValue()</li><li>writeValueAsString()</li><li>writeValueAsBytes()</li></ul></li></ul><h2 id="3-1-Jackson-JsonGenerator"><a href="#3-1-Jackson-JsonGenerator" class="headerlink" title="3.1 Jackson JsonGenerator"></a>3.1 Jackson JsonGenerator</h2><ul><li>used to generate JSON from java objects </li></ul><pre><code>JsonFactory factory = new JsonFactory();JsonGenerator generator = factory.createGenerator(    new File(&quot;blabla&quot;), JsonEncoding.UTF8);</code></pre><h1 id="4-Jackson-JSON-Tree-Model"><a href="#4-Jackson-JSON-Tree-Model" class="headerlink" title="4. Jackson JSON Tree Model"></a>4. Jackson JSON Tree Model</h1><ul><li>A built-in tree model: used to represent a JSON object </li><li>Represented by the JsonNode class <ul><li>use the ObjectMapper to parse JSON into a JsonNode tree model</li></ul></li><li>JsonNode class lets you navigate the JSOn as a Java object in a quite flexible and dynamic way </li></ul><pre><code>String carJson =        &quot;{ \&quot;brand\&quot; : \&quot;Mercedes\&quot;, \&quot;doors\&quot; : 5 }&quot;;ObjectMapper objectMapper = new ObjectMapper();try {    JsonNode jsonNode = objectMapper.readValue(carJson, JsonNode.class);} catch (IOException e) {    e.printStackTrace();}// ways on how to access JSON fields, arrays and nested objects String carJson =    &quot;{ \&quot;brand\&quot; : \&quot;Mercedes\&quot;, \&quot;doors\&quot; : 5,&quot; +    &quot;  \&quot;owners\&quot; : [\&quot;John\&quot;, \&quot;Jack\&quot;, \&quot;Jill\&quot;],&quot; +    &quot;  \&quot;nestedObject\&quot; : { \&quot;field\&quot; : \&quot;value\&quot; } }&quot;;ObjectMapper objectMapper = new ObjectMapper();try {    JsonNode jsonNode = objectMapper.readValue(carJson, JsonNode.class);    // we could always use get() to get the node     JsonNode brandNode = jsonNode.get(&quot;brand&quot;);    String brand = brandNode.asText();    System.out.println(&quot;brand = &quot; + brand);    JsonNode doorsNode = jsonNode.get(&quot;doors&quot;);    int doors = doorsNode.asInt();    System.out.println(&quot;doors = &quot; + doors);    JsonNode array = jsonNode.get(&quot;owners&quot;);    JsonNode jsonNode = array.get(0);    String john = jsonNode.asText();    System.out.println(&quot;john  = &quot; + john);    JsonNode child = jsonNode.get(&quot;nestedObject&quot;);    JsonNode childField = child.get(&quot;field&quot;);    String field = childField.asText();    System.out.println(&quot;field = &quot; + field);} catch (IOException e) {    e.printStackTrace();}</code></pre><h2 id="4-1-Read-JsonNode-from-JSON"><a href="#4-1-Read-JsonNode-from-JSON" class="headerlink" title="4.1 Read JsonNode from JSON"></a>4.1 Read JsonNode from JSON</h2><pre><code>String jsonStr = blablabla;ObjectMapper objectMapper = new ObjectMapper();JsonNode jsonNode = objectMapper.readTree(json);</code></pre><h2 id="4-2-Write-JsonNode-to-JSON"><a href="#4-2-Write-JsonNode-to-JSON" class="headerlink" title="4.2 Write JsonNode to JSON"></a>4.2 Write JsonNode to JSON</h2><pre><code>ObjectMapper objectMapper = new ObjectMapper();JsonNode jsonNode = readJsonIntoJsonNode();String json = objectMapper.writeValueAsString(jsonNode);</code></pre><h1 id="5-JsonAnnotation"><a href="#5-JsonAnnotation" class="headerlink" title="5. JsonAnnotation"></a>5. JsonAnnotation</h1><ul><li>@JsonIgnore</li><li>@JsonIgnoreProperties<ul><li>specify a list of properties of a class to ignore </li></ul></li><li>@JsonIgnoreType</li><li>@JsonAutoDetect </li><li>@JsonSetter </li><li>@JsonCreator</li><li>@JsonProperty </li><li>@JsonInclude<ul><li>tells Jackson only to include properties under certain circumstances</li></ul></li><li>@JsonGetter <ul><li>tell Jackson that a certain field value should be obtained from calling a getter method instead of via direct field access </li></ul></li><li>@JsonPropertyOrder<ul><li>specify in what order the fields of your java object should be serialized into JSON</li></ul></li><li>@JsonValue<ul><li>tells jackson that it should not attempt to serialize the obejct itself, but rather call a method on the object which serialize the object to a JSON string </li></ul></li><li>@JsonSerialize <ul><li>specify a custom serializer for a field in a Java object  </li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://tutorials.jenkov.com/java-json/jackson-objectmapper.html" target="_blank" rel="noopener">http://tutorials.jenkov.com/java-json/jackson-objectmapper.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; title=&quot;1. Intro&quot;&gt;&lt;/a&gt;1. Intro&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;JSON &lt;ul&gt;
+&lt;li&gt;JavaScript Object Notation &lt;
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Jackson" scheme="https://www.llchen60.com/tags/Jackson/"/>
+    
+      <category term="Serialization" scheme="https://www.llchen60.com/tags/Serialization/"/>
+    
+  </entry>
   
   <entry>
     <title>HashMap在Java中是如何工作的</title>
@@ -522,33 +554,6 @@
       
       
         &lt;h1 id=&quot;1-技术演进的动力-企业发展&quot;&gt;&lt;a href=&quot;#1-技术演进的动力-企业发展&quot; class=&quot;headerlink&quot; title=&quot;1. 技术演进的动力 - 企业发展&quot;&gt;&lt;/a&gt;1. 技术演进的动力 - 企业发展&lt;/h1&gt;&lt;h2 id=&quot;1-1-业务和技术之间
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="架构" scheme="https://www.llchen60.com/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构学习-复杂度来源</title>
-    <link href="https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/"/>
-    <id>https://www.llchen60.com/%E6%9E%B6%E6%9E%84%E5%AD%A6%E4%B9%A0-%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9D%A5%E6%BA%90/</id>
-    <published>2020-02-04T04:09:13.000Z</published>
-    <updated>2020-02-04T04:09:32.574Z</updated>
-    
-    <content type="html"><![CDATA[<p>架构设计的主要目的是为了解决软件系统复杂度带来的问题，那么复杂度的来源到底在哪里呢？ </p><h1 id="1-高性能"><a href="#1-高性能" class="headerlink" title="1. 高性能"></a>1. 高性能</h1><h2 id="1-1-单机复杂度"><a href="#1-1-单机复杂度" class="headerlink" title="1.1 单机复杂度"></a>1.1 单机复杂度</h2><p>操作系统 - 是将硬件性能充分发挥出来的关键。</p><ul><li>最初是只有输入计算以及输出功能</li><li>批处理 - 将要执行的指令预先写下来，形成一个指令清单，然后将任务交给计算机执行，读取任务中的指令清单并进行处理</li><li>进程 - 进程对应任务，都有自己的内存空间，进程间互不相关</li><li>进程间的通信<ul><li>管道</li><li>消息队列</li><li>信号量</li><li>共享存储</li></ul></li><li>线程<ul><li>进程内部的子任务，都共享同一份进程数据。为保证数据的正确性，有了互斥锁机制。有了多线程以后，操作系统调度的最小单位就变成了线程，而进程变成了操作系统分配资源的最小单位。</li></ul></li><li>多个CPU真正同时执行计算任务<ul><li>SMP symmetric multi processor </li><li>NUMA  Non uniform memory access </li><li>MPP  Massive Parallel Processing </li></ul></li></ul><h2 id="1-2-集群复杂度"><a href="#1-2-集群复杂度" class="headerlink" title="1.2 集群复杂度"></a>1.2 集群复杂度</h2><p>突然发现双十一峰值，支付宝能到每秒12万笔；红包能达到76万。通过大量机器来提升性能，并不仅仅是增加机器这么简单，让多台机器来配合达到高性能的目的，是一个复杂的任务，复杂在于：</p><ul><li>任务分配<ul><li>任务分配器<ul><li>硬件网络设备 交换机</li><li>软件网络设备  LVS</li><li>负载均衡软件  Nginix  HAProxy</li><li>分配算法<ul><li>轮询</li><li>按权重分配</li><li>按负载分配</li></ul></li></ul></li><li>任务分配器和业务服务器的连接<ul><li>选择合适的连接方式</li><li>管理连接<ul><li>连接建立，检测，中断后的处理 </li></ul></li></ul></li><li>继续拓展 -&gt; 任务分配器也要变成多台了<ul><li>此时需要将不同的用户分配到不同的任务分配器上<ul><li>DNS轮询，CDN， GSLB(Global Server Load Balance)</li></ul></li><li>任务分配器和业务服务器，多对多的网状结构</li></ul></li></ul></li><li>任务分解<ul><li>任务分配到不同的机器上带来的帮助会递减的，因为当业务越来越复杂，单台机器的性能不够用了，所以就需要进行任务分解来做优化</li><li>可以从逻辑上将各个子业务进行拆分，将一整个业务系统拆分成小而简单，但是需要多个系统配合的业务系统</li><li>为什么能提升性能？ 代码还是那些代码哇？<ul><li>简单的系统更容易分析出瓶颈，更容易做到高性能</li><li>可以针对单个任务进行拓展</li><li>当然不能划分的太细，因为网络的调用性能远比系统内的函数调用要低</li></ul></li></ul></li></ul><h1 id="2-高可用"><a href="#2-高可用" class="headerlink" title="2. 高可用"></a>2. 高可用</h1><blockquote><p>系统无中断地执行其功能的能力，代表系统的可用性程度</p></blockquote><blockquote><p>通过冗余来实现高可用，与高性能的区别在于，高性能增加机器的目的在于扩展处理性能；高可用增加机器的目的在于冗余处理单元</p></blockquote><h2 id="2-1-计算高可用"><a href="#2-1-计算高可用" class="headerlink" title="2.1 计算高可用"></a>2.1 计算高可用</h2><p>多台服务器时主备的选择，具体采用什么方式，主备分别的个数，结合实际业务需求来分析和判断。</p><h2 id="2-2-存储高可用"><a href="#2-2-存储高可用" class="headerlink" title="2.2 存储高可用"></a>2.2 存储高可用</h2><p>高可用设计的关键点就在于存储高可用了，区别在于将数据从一台机器搬到另一台机器，需要经过线路进行传输</p><p>无论是正常情况下的传输延迟，还是异常情况下的传输中断，都会导致系统的数据在某个时间点或者时间段是不一致的，而数据的不一致又会导致业务问题；存储高可用的难点不在于如何备份数据，而在于如何减少或者规避数据不一致对业务造成的影响。</p><p>分布式领域的CAP定理，存储高可用性不可能同时满足一致性，可用性，分区容错性，最多满足其中两个，这就要求我们在做架构设计的时候结合业务进行取舍。</p><h2 id="2-3-高可用状态决策"><a href="#2-3-高可用状态决策" class="headerlink" title="2.3 高可用状态决策"></a>2.3 高可用状态决策</h2><p>无论是计算高可用还是存储高可用，其基础都是状态决策，即系统需要能够判断当前的状态是正常还是异常的，如果出现异常就要采取行动来保证高可用。但一个矛盾点在于： </p><p><strong>通过冗余实现的高可用，状态决策本质上就不可能做到完全正确</strong></p><p>常见的决策方式：</p><ul><li>独裁式<ul><li>只有一个决策者</li><li>n个上报者</li><li>不会出现决策混乱，但是决策者本身故障的时候，系统就崩了</li></ul></li><li>协商式<ul><li>两个独立的个体通过交流信息，根据规则进行决策</li><li>主备决策</li><li>2台服务器启动时都是备机</li><li>建立连接</li><li>交换状态信息</li><li>某1台服务器做出决策，成为主机；另一台继续保持备机身份</li><li>协商式 当连接出问题的时候，采用哪个？ 两主？ 多连接？ 仍然存在问题的</li></ul></li><li>民主式<ul><li>多个独立个体通过投票的方式进行状态决策</li><li>ZooKeeper集群在选举leader时就采用这种方式</li><li>对于连接断开，可能出现多个leader的问题的解决<ul><li>投票节点数必须超过系统总结点数的一半的规则 </li></ul></li></ul></li></ul><h1 id="3-可拓展性"><a href="#3-可拓展性" class="headerlink" title="3. 可拓展性"></a>3. 可拓展性</h1><ul><li>可拓展性指系统为了应对将来的需求变化而提供的一种扩展能力，当有新的需求出现的时候，系统不需要或者仅仅需要少量修改就可以支持，无须整个系统的重构或者重建。</li><li>面向对象的思想以及设计模式的诞生与演化，都是在努力提升代码的可拓展性</li><li>设计具备良好可拓展性的系统的基本条件<ul><li>正确预测变化<ul><li>不能每个点都考虑可拓展性</li><li>不能完全不考虑可拓展性</li><li>所有的预测都存在出错的可能性</li></ul></li><li>完美封装变化<ul><li>一般来说会将变化封装在一个变化层，将不变的部分封装在一个独立的稳定层</li><li>或者提炼出一个抽象层和一个实现层</li></ul></li></ul></li></ul><h1 id="4-低成本，安全，规模"><a href="#4-低成本，安全，规模" class="headerlink" title="4. 低成本，安全，规模"></a>4. 低成本，安全，规模</h1><ul><li>低成本<ul><li>通过减少服务器的数量来达成低成本的目标</li><li>首先指定一个成本目标，当我们根据高性能、高可用的要求设计出方案时，评估一下方案能否满足成本目标，如果不行，就要重新设计架构</li><li>通过引入新技术来达到目标<ul><li>NoSQL 解决关系型数据库无法应对高并发情况下的访问压力的问题</li><li>全文搜索引擎是为了解决关系型数据库like搜索的低效的问题</li><li>Hadoop的出现是为了解决传统文件体统无法应对海量数据存储和计算的问题</li></ul></li></ul></li><li>安全<ul><li>功能安全<ul><li>XSS攻击</li><li>CSRF攻击</li><li>SQL注入</li><li>Windows漏洞</li><li>密码破解</li></ul></li><li>架构安全<ul><li>防火墙<ul><li>隔离网络</li><li>通过将网络划分成不同的区域，制定出不同区域之间的访问控制策略来控制不同信任程度区域间传送的数据流</li><li>太贵，很难实现</li></ul></li><li>一般还是靠运营商或者云服务商强大的带宽和流量清洗能力</li></ul></li></ul></li><li>规模<ul><li>规模带来的复杂度 - 量变带来的质变</li><li>功能越来越多，复杂度指数级增加</li><li>数据越来越多</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;架构设计的主要目的是为了解决软件系统复杂度带来的问题，那么复杂度的来源到底在哪里呢？ &lt;/p&gt;
-&lt;h1 id=&quot;1-高性能&quot;&gt;&lt;a href=&quot;#1-高性能&quot; class=&quot;headerlink&quot; title=&quot;1. 高性能&quot;&gt;&lt;/a&gt;1. 高性能&lt;/h1&gt;&lt;h2 id=&quot;
       
     
     </summary>
