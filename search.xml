@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Java map() 与 flatMap()的比较</title>
+      <link href="/Java-map-%E4%B8%8E-flatMap-%E7%9A%84%E6%AF%94%E8%BE%83/"/>
+      <url>/Java-map-%E4%B8%8E-flatMap-%E7%9A%84%E6%AF%94%E8%BE%83/</url>
+      
+        <content type="html"><![CDATA[<p><code>map()</code>和<code>flatMap()</code>方法都来自于functional languages. 在Java8当中，我们可以在Optional, Stream还有CompletableFuture当中找到他们。</p><p>Stream代表一些列的对象，而Optional代表一个存在或者空的值。<code>map()</code>和<code>flatmap()</code>都是聚合方法，尽管其有着相同的返回类型，但是实际上他们有很多的不同。下面我们通过例子来逐一展现。</p><h1 id="1-在Optionals当中"><a href="#1-在Optionals当中" class="headerlink" title="1. 在Optionals当中"></a>1. 在Optionals当中</h1><pre><code>// map()Optional&lt;String&gt; s = Optional.of(&quot;Test&quot;);assertEquals(Optional.of(&quot;TEST&quot;), s.map(String::toUpperCase));// 如果情况更为复杂，变成Optional&lt;Optional&lt;String&gt;&gt;assertEquals(Optional.of(Optional.of(&quot;STRING&quot;)),     Optional.of(&quot;string&quot;).map(s -&gt; Optional.of(&quot;STRING&quot;)));// 同样的代码用flatmap来表示assertEquals(Optional.of(&quot;STRING&quot;), Optional.of(&quot;string&quot;).flatMap(s -&gt; Optional.of(&quot;STRING&quot;)));</code></pre><h1 id="2-在Streams当中"><a href="#2-在Streams当中" class="headerlink" title="2. 在Streams当中"></a>2. 在Streams当中</h1><p>map方法只能做一层的序列化，但是flatmap可以做多层的，来解决Stream&lt;Stream<R>&gt;的这种结构的问题。</p><pre><code>// 对于这种多层架构的, map()方法就显得力有未逮了List&lt;List&lt;String&gt;&gt; list = Arrays.asList(  Arrays.asList(&quot;a&quot;),  Arrays.asList(&quot;b&quot;));System.out.println(list);// flatmap可以很好的解决System.out.println(list.stream().flatMap(Collection::stream).collect(Collectors.toList()));</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.baeldung.com/java-difference-map-and-flatmap" target="_blank" rel="noopener">https://www.baeldung.com/java-difference-map-and-flatmap</a></li><li><a href="https://www.mkyong.com/java8/java-8-flatmap-example/" target="_blank" rel="noopener">https://www.mkyong.com/java8/java-8-flatmap-example/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Map </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java - ExecutorService</title>
       <link href="/Java-ExecutorService/"/>
       <url>/Java-ExecutorService/</url>
