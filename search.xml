@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>Javadoc tutorial</title>
+      <link href="/Javadoc-tutorial/"/>
+      <url>/Javadoc-tutorial/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-What-is-javadoc"><a href="#1-What-is-javadoc" class="headerlink" title="1. What is javadoc"></a>1. What is javadoc</h1><p>A tool comes with JDK and used for generating Java code documentation in <strong>HTML format from Java source code</strong>, which requires documentation in a predefined format </p><h1 id="2-Javadoc-tags"><a href="#2-Javadoc-tags" class="headerlink" title="2. Javadoc tags"></a>2. Javadoc tags</h1><ul><li>@author</li><li>{@code}<ul><li>Displays text in code font without interpreting the text as HTML markup or nested javadoc tags.</li></ul></li><li>{@docRoot}<ul><li>Represents the relative path to the generated document’s root directory from any generated page.</li></ul></li><li>@deprecated</li><li>@exception<ul><li>Adds a Throws subheading to the generated documentation, with the classname and description text.</li></ul></li><li>{@inheritDoc}<ul><li>Inherits a comment from the nearest inheritable class or implementable interface.</li></ul></li><li>{@link}<ul><li>Inserts an in-line link with the visible text label that points to the documentation for the specified package, class, or member name of a referenced class. </li></ul></li><li>@param</li><li>@return</li><li>@see</li><li>@serial</li><li>@serialData <ul><li>Documents the data written by the writeObject( ) or writeExternal( ) methods.</li></ul></li><li>@serialField<ul><li>Documents an ObjectStreamField component.</li></ul></li><li>@since <ul><li>Adds a since heading with the specified since text to the generated documentation</li></ul></li><li>@throws </li><li>{@value}<ul><li>When {@value} is used in the doc comment of a static field, it displays the value of that constant. </li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java 继承与组合</title>
+      <link href="/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/"/>
+      <url>/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-什么是组合？"><a href="#1-什么是组合？" class="headerlink" title="1. 什么是组合？"></a>1. 什么是组合？</h1><p>组合将类定义为各个部分的集合</p><pre><code>public class MerchantListHelper {    // TODO     void addToDDB (ListEntry entry) {    }    void removeFromDDB(DDBRecord record) {    }    List&lt;ListEntry&gt; getFromDDB() {    }}public class MerchantBlacklistBizLogic {    private MerchantListHelper merchantListHelper;    merchantListHelper.addToDDB(blabla..);    merchantListHelper.removeFromDDB(blabla..)}</code></pre><h1 id="2-什么是继承？"><a href="#2-什么是继承？" class="headerlink" title="2. 什么是继承？"></a>2. 什么是继承？</h1><p>将父类和子类通过集成关系紧密联系在一起 （紧耦合）。但与之相对的是继承会允许再利用类的方法以及其他的属性，会很便捷。</p><p>使用super()方法来直接访问父类的方法，构造器，属性等。</p><pre><code>public Abstract class MerchantListHelper {    // TODO     abstract void addToDDB (ListEntry entry);    abstract void removeFromDDB(DDBRecord record);    abstract List&lt;ListEntry&gt; getFromDDB();}public class MerchantBlacklistBizLogic {    private MerchantListHelper merchantListHelper;    @Override    void addToDDB(ListEntry entry) {        // TODO    }    @Override    void removeFromDDB(DDBRecord record) {        // TODO    }    ...}</code></pre><h1 id="3-Use-cases"><a href="#3-Use-cases" class="headerlink" title="3. Use cases"></a>3. Use cases</h1><p>组合和继承都可以将子对象放到新的类当中，组合一般是当你想要在这个新类当中使用一个已经存在的类的特征的时候。这意味着，通过这种方式你可以嵌入一个对象，并将其放在新的类当中。 继承表示的是一种is-a的关系，组合表达的含有某种功能。</p><p>如何判断是否需要继承或者组合 -&gt; 看是否需要从你的新类到基本类进行向上转型。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="http://thedeanbear.com/2012/09/24/composition_vs_inheritance/" target="_blank" rel="noopener">http://thedeanbear.com/2012/09/24/composition_vs_inheritance/</a></li><li>Java Challengers #7: Debugging Java inheritance </li><li>javaworld.com/article/3409071/java-challenger-7-debugging-java-inheritance.html</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Composition </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java 反射机制</title>
       <link href="/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
       <url>/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</url>
