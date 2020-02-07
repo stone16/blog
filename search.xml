@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题</title>
+      <link href="/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-常用日志系统介绍"><a href="#1-常用日志系统介绍" class="headerlink" title="1. 常用日志系统介绍"></a>1. 常用日志系统介绍</h1><ul><li>日志门面<ul><li>jcl - jakarta common logging  <ul><li>日志接口，支持运行时动态加载日志组件的实现 </li></ul></li><li>slf4j<ul><li>日志接口</li><li>在log层和代码层之间起到门面作用，对于用户来说只要使用SLF4J的接口，就可以隐藏日志的具体实现，其提供的核心API是一些接口和一个LoggerFactory的工厂类，用户只需要按照其提供的日志接口进行使用，最终日志的格式，记录级别，输出方式等都可以通过具体日志系统的配置来实现</li></ul></li></ul></li><li>日志框架<ul><li>jul - java.util.logging </li><li>log4j</li><li>log4j2</li><li>logback<ul><li>slf4j的实现 </li><li>是log4j的升级版</li></ul></li></ul></li></ul><h1 id="2-日志级别"><a href="#2-日志级别" class="headerlink" title="2. 日志级别"></a>2. 日志级别</h1><ul><li>severe</li><li>warning </li><li>info</li><li>config</li><li>fine </li><li>finer </li></ul><h1 id="3-常见使用方式"><a href="#3-常见使用方式" class="headerlink" title="3. 常见使用方式"></a>3. 常见使用方式</h1><p>一般工程上会选择一个日志门面，加日志框架，常用的门面基本上还是SLF4J比较多，框架的选择很多，主要是需要注意工程上分布式系统的多线程方面的支持。</p><h1 id="4-Log4j2-ThreadContext复用的问题"><a href="#4-Log4j2-ThreadContext复用的问题" class="headerlink" title="4. Log4j2 ThreadContext复用的问题"></a>4. Log4j2 ThreadContext复用的问题</h1><p>ThreadContext出现的背景主要是因为现代系统基本上都需要都是和多个client打交道，在一个典型的多线程的应用系统当中，不同的线程就需要和不同的client打交道.为了能够分辨出同一个client发出的不同log请求，我们就需要给每个请求一个id，来做标记。</p><p>Log4j2使用Thread Context Map和Thread Context Stack来进行标记。常用Map，因为键值对更容易进行添加和处理</p><p>使用Stack: </p><pre><code>ThreadContext.push(UUID.randomUUID().toString()); // Add the fishtag;logger.debug(&quot;Message 1&quot;);...logger.debug(&quot;Message 2&quot;);..ThreadContext.pop();</code></pre><p>使用Map: </p><pre><code>ThreadContext.put(&quot;id&quot;, UUID.randomUUID().toString()); // Add the fishtag;ThreadContext.put(&quot;ipAddress&quot;, request.getRemoteAddr());ThreadContext.put(&quot;loginId&quot;, session.getAttribute(&quot;loginId&quot;));ThreadContext.put(&quot;hostName&quot;, request.getServerName());.logger.debug(&quot;Message 1&quot;);..logger.debug(&quot;Message 2&quot;);..ThreadContext.clear();</code></pre><p>问题来了，如果我们使用Executor.execute(new CachedThreadPool())的话，因为线程的复用，（所有使用完的线程会归还到线程池当中），那么ThreadContext里面的东西必须要进行手动清除，才能防止原先记录的这个线程的东西被复用掉。比如一般会记录的[Client][API]此类信息。</p><p>这个时候需要使用getContext()和cloneStack()来使得子线程获得父线程的信息。</p><pre><code>ThreadContext.clearAll();ThreadContext.putAll(preSavedThreadContextMap);ThreadContext.setStack(preSavedThreadContextStack);</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Log </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java基础知识</title>
       <link href="/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
       <url>/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>

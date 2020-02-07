@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-06T03:05:28.755Z</updated>
+  <updated>2020-02-07T03:48:21.842Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java日志管理 - slf4j + log4j - 探究Distribute system 的threadContext复用的问题</title>
+    <link href="https://www.llchen60.com/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://www.llchen60.com/Java%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86-slf4j-log4j-%E6%8E%A2%E7%A9%B6Distribute-system-%E7%9A%84threadContext%E5%A4%8D%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-02-07T03:48:00.000Z</published>
+    <updated>2020-02-07T03:48:21.842Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-常用日志系统介绍"><a href="#1-常用日志系统介绍" class="headerlink" title="1. 常用日志系统介绍"></a>1. 常用日志系统介绍</h1><ul><li>日志门面<ul><li>jcl - jakarta common logging  <ul><li>日志接口，支持运行时动态加载日志组件的实现 </li></ul></li><li>slf4j<ul><li>日志接口</li><li>在log层和代码层之间起到门面作用，对于用户来说只要使用SLF4J的接口，就可以隐藏日志的具体实现，其提供的核心API是一些接口和一个LoggerFactory的工厂类，用户只需要按照其提供的日志接口进行使用，最终日志的格式，记录级别，输出方式等都可以通过具体日志系统的配置来实现</li></ul></li></ul></li><li>日志框架<ul><li>jul - java.util.logging </li><li>log4j</li><li>log4j2</li><li>logback<ul><li>slf4j的实现 </li><li>是log4j的升级版</li></ul></li></ul></li></ul><h1 id="2-日志级别"><a href="#2-日志级别" class="headerlink" title="2. 日志级别"></a>2. 日志级别</h1><ul><li>severe</li><li>warning </li><li>info</li><li>config</li><li>fine </li><li>finer </li></ul><h1 id="3-常见使用方式"><a href="#3-常见使用方式" class="headerlink" title="3. 常见使用方式"></a>3. 常见使用方式</h1><p>一般工程上会选择一个日志门面，加日志框架，常用的门面基本上还是SLF4J比较多，框架的选择很多，主要是需要注意工程上分布式系统的多线程方面的支持。</p><h1 id="4-Log4j2-ThreadContext复用的问题"><a href="#4-Log4j2-ThreadContext复用的问题" class="headerlink" title="4. Log4j2 ThreadContext复用的问题"></a>4. Log4j2 ThreadContext复用的问题</h1><p>ThreadContext出现的背景主要是因为现代系统基本上都需要都是和多个client打交道，在一个典型的多线程的应用系统当中，不同的线程就需要和不同的client打交道.为了能够分辨出同一个client发出的不同log请求，我们就需要给每个请求一个id，来做标记。</p><p>Log4j2使用Thread Context Map和Thread Context Stack来进行标记。常用Map，因为键值对更容易进行添加和处理</p><p>使用Stack: </p><pre><code>ThreadContext.push(UUID.randomUUID().toString()); // Add the fishtag;logger.debug(&quot;Message 1&quot;);...logger.debug(&quot;Message 2&quot;);..ThreadContext.pop();</code></pre><p>使用Map: </p><pre><code>ThreadContext.put(&quot;id&quot;, UUID.randomUUID().toString()); // Add the fishtag;ThreadContext.put(&quot;ipAddress&quot;, request.getRemoteAddr());ThreadContext.put(&quot;loginId&quot;, session.getAttribute(&quot;loginId&quot;));ThreadContext.put(&quot;hostName&quot;, request.getServerName());.logger.debug(&quot;Message 1&quot;);..logger.debug(&quot;Message 2&quot;);..ThreadContext.clear();</code></pre><p>问题来了，如果我们使用Executor.execute(new CachedThreadPool())的话，因为线程的复用，（所有使用完的线程会归还到线程池当中），那么ThreadContext里面的东西必须要进行手动清除，才能防止原先记录的这个线程的东西被复用掉。比如一般会记录的[Client][API]此类信息。</p><p>这个时候需要使用getContext()和cloneStack()来使得子线程获得父线程的信息。</p><pre><code>ThreadContext.clearAll();ThreadContext.putAll(preSavedThreadContextMap);ThreadContext.setStack(preSavedThreadContextStack);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-常用日志系统介绍&quot;&gt;&lt;a href=&quot;#1-常用日志系统介绍&quot; class=&quot;headerlink&quot; title=&quot;1. 常用日志系统介绍&quot;&gt;&lt;/a&gt;1. 常用日志系统介绍&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;日志门面&lt;ul&gt;
+&lt;li&gt;jcl - jakarta com
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Log" scheme="https://www.llchen60.com/tags/Log/"/>
+    
+  </entry>
   
   <entry>
     <title>Java基础知识</title>
@@ -544,34 +574,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="Cache" scheme="https://www.llchen60.com/tags/Cache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache-Ant</title>
-    <link href="https://www.llchen60.com/Apache-Ant/"/>
-    <id>https://www.llchen60.com/Apache-Ant/</id>
-    <published>2020-02-04T16:32:50.000Z</published>
-    <updated>2020-02-04T16:33:18.973Z</updated>
-    
-    <content type="html"><![CDATA[<p>Apache Ant is a Java-based build tool. A java library and command line tool, which aims to drive processes described in build files as targets and extension points dependent upon each other. </p><p>Main usage: build java applications. It can pilot any type of processes which can be described <strong>in terms of targets and tasks.</strong></p><h1 id="1-Writing-a-Simple-BuildFile"><a href="#1-Writing-a-Simple-BuildFile" class="headerlink" title="1. Writing a Simple BuildFile"></a>1. Writing a Simple BuildFile</h1><h2 id="1-1-Intro"><a href="#1-1-Intro" class="headerlink" title="1.1 Intro"></a>1.1 Intro</h2><p>Ant’s buildfile are written in XML. Each buildfile contains one project and as least one target. Targets contain task elements. Each task element of the build file can have an id attribute and can later be referred to by the value supplied to this. </p><p>The structure comes to be: </p><ul><li>project </li><li>target<ul><li>task elements<ul><li>id attribute </li></ul></li></ul></li></ul><h2 id="1-2-Projects"><a href="#1-2-Projects" class="headerlink" title="1.2 Projects"></a>1.2 Projects</h2><p>A project has three attributes: </p><ul><li>name <ul><li>the name of project</li></ul></li><li>default<ul><li>the default target to use when no target is supplied </li></ul></li><li>basedir<ul><li>the base directory from which all path calculations are done. A relative path is resolved relative to the directory containing the buildfile. </li><li>defaults to the parent directory of the buildfile </li></ul></li></ul><h2 id="1-3-Targets"><a href="#1-3-Targets" class="headerlink" title="1.3 Targets"></a>1.3 <a href="https://ant.apache.org/manual/targets.html" target="_blank" rel="noopener">Targets</a></h2><p>It’s a container of tasks that cooperate to reach a desired state during the build process. </p><p>A target can depend on other targets. **You might have a target for compiling, for example, and a target for creating a distributable. You can only build a distributable when you have compiled first, so the “distribute” target depends on the “compile” target. Ant resolves these dependencies</p><pre><code>&lt;target name=&quot;A&quot;/&gt;&lt;target name=&quot;B&quot; depends=&quot;A&quot;/&gt;&lt;target name=&quot;C&quot; depends=&quot;B&quot;/&gt;&lt;target name=&quot;D&quot; depends=&quot;C,B,A&quot;/&gt;</code></pre><p>Suppose we want to execute target D. From its depends attribute, you might think that first target C, then B and then A is executed. Wrong! C depends on B, and B depends on A, so first A is executed, then B, then C, and finally D.</p><p>A target also has the ability to perform its execution if(or unless) a property has been set. </p><pre><code>&lt;target name=&quot;myTarget&quot; depends=&quot;myTarget.check&quot; if=&quot;myTarget.run&quot;&gt;    &lt;echo&gt;Files foo.txt and bar.txt are present.&lt;/echo&gt;&lt;/target&gt;&lt;target name=&quot;myTarget.check&quot;&gt;    &lt;condition property=&quot;myTarget.run&quot;&gt;        &lt;and&gt;            &lt;available file=&quot;foo.txt&quot;/&gt;            &lt;available file=&quot;bar.txt&quot;/&gt;        &lt;/and&gt;    &lt;/condition&gt;&lt;/target&gt;</code></pre><h2 id="1-4-Tasks"><a href="#1-4-Tasks" class="headerlink" title="1.4 Tasks"></a>1.4 Tasks</h2><h3 id="1-4-1-Intro"><a href="#1-4-1-Intro" class="headerlink" title="1.4.1 Intro"></a>1.4.1 Intro</h3><p>Task is a piece of code that can be executed. </p><p>A task can have multiple attributes. The value of an attribute might contain reference to a property. These references will be resolved before the task is executed. </p><p>Task has a common structure: </p><pre><code>&lt;name attribute1=&quot;value1&quot; attribute2=&quot;value2&quot; ... /&gt;</code></pre><p>where name is the name of the task, attributeN is the attribute name, and valueN is the value for this attribute.</p><p>All tasks can have a name attribute, which will be used in the logging messages generated by Ant. </p><h3 id="1-4-2-Built-in-tasks"><a href="#1-4-2-Built-in-tasks" class="headerlink" title="1.4.2 Built-in tasks"></a>1.4.2 Built-in tasks</h3><p><a href="https://ant.apache.org/manual/tasklist.html" target="_blank" rel="noopener">https://ant.apache.org/manual/tasklist.html</a> </p><h3 id="1-4-3-Write-your-own-tasks"><a href="#1-4-3-Write-your-own-tasks" class="headerlink" title="1.4.3 Write your own tasks"></a>1.4.3 Write your own tasks</h3><p><a href="https://ant.apache.org/manual/develop.html#writingowntask" target="_blank" rel="noopener">https://ant.apache.org/manual/develop.html#writingowntask</a></p><h2 id="1-5-Properties"><a href="#1-5-Properties" class="headerlink" title="1.5 Properties"></a>1.5 <a href="https://ant.apache.org/manual/properties.html#if+unless" target="_blank" rel="noopener">Properties</a></h2><p>Properties are an important way to customize a build process or to just provide shortcuts for strings that are used repeatedly inside a buildfile.</p><p>In its most simple form properties are defined in the buildfile (for example by the property task) or might be set outside Ant. <strong>A property has a name and a value</strong>; the name is case-sensitive. Properties may be used in the value of task attributes or in the nested text of tasks that support them. This is done by <strong>placing the property name between “${“ and “}” in the attribute value</strong>. For example, if there is a builddir property with the value “build”, then this could be used in an attribute like this: ${builddir}/classes. This is resolved at run-time as build/classes.</p><pre><code>&lt;project name=&quot;MyProject&quot; default=&quot;dist&quot; basedir=&quot;.&quot;&gt;  &lt;description&gt;    simple example build file  &lt;/description&gt;  &lt;!-- set global properties for this build --&gt;  &lt;property name=&quot;src&quot; location=&quot;src&quot;/&gt;  &lt;property name=&quot;build&quot; location=&quot;build&quot;/&gt;  &lt;property name=&quot;dist&quot; location=&quot;dist&quot;/&gt;  &lt;target name=&quot;init&quot;&gt;    &lt;!-- Create the time stamp --&gt;    &lt;tstamp/&gt;    &lt;!-- Create the build directory structure used by compile --&gt;    &lt;mkdir dir=&quot;${build}&quot;/&gt;  &lt;/target&gt;  &lt;target name=&quot;compile&quot; depends=&quot;init&quot;        description=&quot;compile the source&quot;&gt;    &lt;!-- Compile the Java code from ${src} into ${build} --&gt;    &lt;javac srcdir=&quot;${src}&quot; destdir=&quot;${build}&quot;/&gt;  &lt;/target&gt;  &lt;target name=&quot;dist&quot; depends=&quot;compile&quot;        description=&quot;generate the distribution&quot;&gt;    &lt;!-- Create the distribution directory --&gt;    &lt;mkdir dir=&quot;${dist}/lib&quot;/&gt;    &lt;!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file --&gt;    &lt;jar jarfile=&quot;${dist}/lib/MyProject-${DSTAMP}.jar&quot; basedir=&quot;${build}&quot;/&gt;  &lt;/target&gt;  &lt;target name=&quot;clean&quot;        description=&quot;clean up&quot;&gt;    &lt;!-- Delete the ${build} and ${dist} directory trees --&gt;    &lt;delete dir=&quot;${build}&quot;/&gt;    &lt;delete dir=&quot;${dist}&quot;/&gt;  &lt;/target&gt;&lt;/project&gt;</code></pre><p>Properties are key-value pair where Apache Ant tries to expand ${key} to value at run time.  In general properties are of global scope, i.e., once they have been defined they are available for any task or target invoked subsequently—it is not possible to set a property in a child build process created via the ant, antcall or subant tasks and make it available to the calling build process, though. </p><h3 id="1-5-2-Built-in-Properties"><a href="#1-5-2-Built-in-Properties" class="headerlink" title="1.5.2 Built-in Properties"></a>1.5.2 Built-in Properties</h3><p>Ant provides access to all system properties as if they had been defined using a <property> task. </p><ul><li>javadoc of <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#getProperties--" target="_blank" rel="noopener">System.getProperties</a></li><li>basedir: the absolute path of the project’s basedir </li><li>ant.file: the absolute path of the buildfile</li><li>ant.version</li><li>ant.project.name </li></ul><h1 id="2-Concepts-and-Types"><a href="#2-Concepts-and-Types" class="headerlink" title="2. Concepts and Types"></a>2. Concepts and Types</h1><h2 id="2-1-Concepts"><a href="#2-1-Concepts" class="headerlink" title="2.1 Concepts"></a>2.1 Concepts</h2><ul><li>targets and Extension-points </li><li>Properties and PropertyHelpers</li></ul><h2 id="2-2-List-of-Types"><a href="#2-2-List-of-Types" class="headerlink" title="2.2 List of Types"></a>2.2 List of Types</h2><p><a href="https://ant.apache.org/manual/index.html" target="_blank" rel="noopener">https://ant.apache.org/manual/index.html</a> </p><ul><li>Class Fileset </li><li>Description Type </li><li>Directory based Tasks</li><li>Dirset</li><li>Extension Package </li><li>Set of Extension Packages</li><li>FileList</li><li>FileSet </li><li>File Mappers </li><li>FilterChains and FilterReaders</li><li>FilterSet </li><li>MultiRootFileSet </li><li>PatternSet </li><li>Path-like Structures</li><li>Permissions</li><li>PropertySet </li><li>I/O redirectors </li><li>Regexp</li><li>Resources </li><li>Resource Collections </li><li>Selectors </li><li>TarFileSet </li><li>XMLCatalog </li><li>ZipFileSet </li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Apache Ant is a Java-based build tool. A java library and command line tool, which aims to drive processes described in build files as ta
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Apache" scheme="https://www.llchen60.com/tags/Apache/"/>
     
   </entry>
   
