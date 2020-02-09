@@ -1,1 +1,1 @@
-https://www.llchen60.com/Ruby-Totorial/
+https://www.llchen60.com/System-gc-and-Runtime-gc/
