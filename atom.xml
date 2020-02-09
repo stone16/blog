@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T06:49:54.512Z</updated>
+  <updated>2020-02-09T17:45:06.181Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(5)-栈</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-5-%E6%A0%88/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-5-%E6%A0%88/</id>
+    <published>2020-02-09T17:44:43.000Z</published>
+    <updated>2020-02-09T17:45:06.181Z</updated>
+    
+    <content type="html"><![CDATA[<p>大家都常用Chrome浏览器，你会发现在你做后退或者前进按钮时，浏览器的加载速度非常快，这里实际上是用的栈这个数据结构来进行处理的。</p><h1 id="1-对栈的理解"><a href="#1-对栈的理解" class="headerlink" title="1. 对栈的理解"></a>1. 对栈的理解</h1><ul><li>先进后出</li><li>操作受限的线性表，只允许在一端插入和删除数据</li><li>实质上栈的功能一定是可以被数组（顺序栈）或者链表（链式栈）来替代的，因为有拿第一个和最后一个的接口，或者说方式</li><li>用栈的好处是操作上的简单，更不容易出错一些</li><li>功能操作受限的线性表，栈可以通过数组或者链表来进行实现</li></ul><h1 id="2-支持动态扩容的顺序栈"><a href="#2-支持动态扩容的顺序栈" class="headerlink" title="2. 支持动态扩容的顺序栈"></a>2. 支持动态扩容的顺序栈</h1><ul><li>动态扩容 - load factor</li><li>顺序栈 - 数组</li></ul><p><img src="fig1.jpg" alt="fig1.jpg"></p><ul><li>注意动态扩容的顺序栈，出栈过程依然可以实现O(1)的时间复杂度，但是在入栈过程当中，如果空间不够了的话，那就需要实现整体的迁移，时间复杂度就变成了O(n)</li></ul><pre><code>// 基于数组实现的顺序栈public class ArrayStack {  private String[] items;  // 数组  private int count;       // 栈中元素个数  private int n;           //栈的大小  // 初始化数组，申请一个大小为n的数组空间  public ArrayStack(int n) {    this.items = new String[n];    this.n = n;    this.count = 0;  }  // 入栈操作  public boolean push(String item) {    // 数组空间不够了，直接返回false，入栈失败。    if (count == n) return false;    // 将item放到下标为count的位置，并且count加一    items[count] = item;    ++count;    return true;  }  // 出栈操作  public String pop() {    // 栈为空，则直接返回null    if (count == 0) return null;    // 返回下标为count-1的数组元素，并且栈中元素个数count减一    String tmp = items[count-1];    --count;    return tmp;  }}</code></pre><h1 id="3-栈的应用"><a href="#3-栈的应用" class="headerlink" title="3. 栈的应用"></a>3. 栈的应用</h1><ul><li>函数调用栈<ul><li>操作系统给每个线程分配一块独立的内存空间，这块内存被组织成栈这种结构，用来存储函数调用时的临时变量</li></ul></li><li>表达式求值<ul><li>计算机会用两个栈来实现</li><li>一个用来保存操作数</li><li>一个用来保存运算符<br>实际上，编译器就是通过两个栈来实现的。其中一个保存操作数的栈，另一个是保存运算符的栈。我们从左向右遍历表达式，当遇到数字，我们就直接压入操作数栈；当遇到运算符，就与运算符栈的栈顶元素进行比较。如果比运算符栈顶元素的优先级高，就将当前运算符压入栈；如果比运算符栈顶元素的优先级低或者相同，从运算符栈中取栈顶运算符，从操作数栈的栈顶取 2 个操作数，然后进行计算，再把计算完的结果压入操作数栈，继续比较。<br><img src="fig2.jpg" alt="fig2.jpg"></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;大家都常用Chrome浏览器，你会发现在你做后退或者前进按钮时，浏览器的加载速度非常快，这里实际上是用的栈这个数据结构来进行处理的。&lt;/p&gt;
+&lt;h1 id=&quot;1-对栈的理解&quot;&gt;&lt;a href=&quot;#1-对栈的理解&quot; class=&quot;headerlink&quot; title=&quot;1. 对
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="栈" scheme="https://www.llchen60.com/tags/%E6%A0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(4)-链表</title>
@@ -534,32 +561,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="Reflection" scheme="https://www.llchen60.com/tags/Reflection/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java - serialization</title>
-    <link href="https://www.llchen60.com/java-serialization/"/>
-    <id>https://www.llchen60.com/java-serialization/</id>
-    <published>2020-02-06T03:01:26.000Z</published>
-    <updated>2020-02-06T03:01:43.795Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>An object is eligible for serialization if and only if its class implements the <strong>java.io.Serializable</strong> interface. Serializable is a marker interface (contains no methods) that tell the Java Virtual Machine (JVM) that the objects of this class is ready for being written to and read from a persistent storage or over the network.</p><h1 id="2-Why-we-need-serialization"><a href="#2-Why-we-need-serialization" class="headerlink" title="2. Why we need serialization?"></a>2. Why we need serialization?</h1><p>It’s used when the need arises to send data/ object over network or stored in files.</p><p>The thing is network and hard disk are hardware component that understand bits and bytes but not Java Objects. </p><p>Serialization is the translation of your Java object’s values/states to bytes to send it over network or save it.</p><p>Also used to store into database. </p><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p>Ways for serialize/ deserialize  – xml JSON </p><p>Serialization process is instance independent. </p><ul><li>ObjectInputStream <ul><li>extends java.io.InputStream </li></ul></li></ul><pre><code>public final Object readObject() throws IOException, ClassNotFoundException;</code></pre><ul><li>ObjectOutputStream <ul><li>extends java.io.OutputStream</li></ul></li></ul><pre><code>public final void writeObject(Object o) throws IOException;</code></pre><h2 id="3-1-Example"><a href="#3-1-Example" class="headerlink" title="3.1 Example"></a>3.1 Example</h2><pre><code>public class Person implements Serializable {    private static final long serialVersionUID = 1L;    static String country = &quot;ITALY&quot;;    private int age;    private String name;    transient int height;    // getters and setters}@Testpublic void whenSerializingAndDeserializing_ThenObjectIsTheSame() ()   throws IOException, ClassNotFoundException {     Person person = new Person();    person.setAge(20);    person.setName(&quot;Joe&quot;);    FileOutputStream fileOutputStream      = new FileOutputStream(&quot;yourfile.txt&quot;);    ObjectOutputStream objectOutputStream       = new ObjectOutputStream(fileOutputStream);    objectOutputStream.writeObject(person);    objectOutputStream.flush();    objectOutputStream.close();    FileInputStream fileInputStream      = new FileInputStream(&quot;yourfile.txt&quot;);    ObjectInputStream objectInputStream      = new ObjectInputStream(fileInputStream);    Person p2 = (Person) objectInputStream.readObject();    objectInputStream.close();     assertTrue(p2.getAge() == p.getAge());    assertTrue(p2.getName().equals(p.getName()));}</code></pre><h1 id="4-Caveats"><a href="#4-Caveats" class="headerlink" title="4. Caveats"></a>4. Caveats</h1><ol><li>When a class implements the java.io.Serializable interface, all <strong>its sub-classes are serializable as well</strong>.</li><li>when an object has a reference to another object, these objects must implement the Serializable interface separately, or else a NotSerializableException will be thrown</li><li>JVM associates a version number with each serializable class. </li></ol><p>Reference</p><ol><li><a href="https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java" target="_blank" rel="noopener">https://www.codejava.net/java-se/file-io/why-do-we-need-serialization-in-java</a></li><li><a href="https://www.baeldung.com/java-serialization" target="_blank" rel="noopener">https://www.baeldung.com/java-serialization</a></li><li><a href="https://www.geeksforgeeks.org/serialization-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/serialization-in-java/</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Overview&quot;&gt;&lt;a href=&quot;#1-Overview&quot; class=&quot;headerlink&quot; title=&quot;1. Overview&quot;&gt;&lt;/a&gt;1. Overview&lt;/h1&gt;&lt;p&gt;An object is eligible for serializat
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
   </entry>
   
