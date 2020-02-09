@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据结构与算法(14)-散列表</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-14-%E6%95%A3%E5%88%97%E8%A1%A8/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-14-%E6%95%A3%E5%88%97%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>散列表 - Hash Table, 又被称为哈希表或者Hash表。散列表用的是数组支持按照下标来随机访问数据的特性，因此散列表实际上是数组的一种扩展，由数组演化而来。</p><p>散列的思想就是对于key值，通过hash function，对应到table上来进行存储</p><p><img src="https://i.loli.net/2020/02/10/pnWdbkoVjUE7aTw.jpg" alt="fig1.jpg"></p><h1 id="2-散列函数"><a href="#2-散列函数" class="headerlink" title="2. 散列函数"></a>2. 散列函数</h1><p>散列函数就是实现输入到存储的对应的函数，因为最终是要存储到数组当中，故而其基本要求有：</p><ol><li>散列函数计算得到的散列值是一个非负整数</li><li>如果Key1 = Key2,那么hash(key1) == hash(key2)</li><li>如果key1 != key2, 那么hash(key1) != hash(key2)</li></ol><p>条件3 即如何应对散列冲突的问题，首先本身是必须的，而且客观是存在散列冲突的情况的，针对于散列冲突，我们一般会使用开放寻址法和链表法。</p><h1 id="3-如何解决散列冲突"><a href="#3-如何解决散列冲突" class="headerlink" title="3. 如何解决散列冲突"></a>3. 如何解决散列冲突</h1><h2 id="3-1-开放寻址法"><a href="#3-1-开放寻址法" class="headerlink" title="3.1 开放寻址法"></a>3.1 开放寻址法</h2><ul><li>核心思想<ul><li>出现了散列冲突，就重新探测一个空闲位置，将其插入</li></ul></li><li>探测方法<ul><li>线性探测</li><li>二次探测<ul><li>探测步长为二次方的增长 </li></ul></li><li>双重散列<ul><li>使用第一个散列函数进行尝试</li><li>如果计算得到的存储位置已经被占用，再用第二个散列函数，依次类推直到找到空闲的存储位置</li></ul></li></ul></li><li>装载因子<ul><li>引入装在引资的概念来表示空位的多少</li><li><code>装载因子 = 填入表中的元素个数/散列表的长度</code></li></ul></li></ul><h2 id="3-2-链表法"><a href="#3-2-链表法" class="headerlink" title="3.2 链表法"></a>3.2 链表法</h2><p><img src="https://i.loli.net/2020/02/10/VAUezcR2phPlYjT.jpg" alt="fig2.jpg"></p><p>链表法是一种更加常用的散列冲突解决办法，相比开放寻址法，它要简单很多。我们来看这个图，在散列表中，每个“桶（bucket）”或者“槽（slot）”会对应一条链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。</p><h1 id="4-工程上使用的散列表"><a href="#4-工程上使用的散列表" class="headerlink" title="4. 工程上使用的散列表"></a>4. 工程上使用的散列表</h1><p>首先我们需要思考下实际应用场景当中的散列表，虽然我们说散列表的查询效率是O(1), 实质上他的真实数据时和散列函数，装载因子，散列冲突都有关系的。如果散列函数设计的不好，或者装载因子过高，都可能导致散列冲突发生的概率升高，从而导致查询的效率下降。</p><p>因此对于在工程上使用的散列表，首先要考虑的就是需要能够应对各种异常情况，来避免散列冲突的情况下散列表性能的急剧下降，并且需要能够抵抗散列碰撞攻击。</p><h2 id="4-1-如何设计散列函数"><a href="#4-1-如何设计散列函数" class="headerlink" title="4.1 如何设计散列函数"></a>4.1 如何设计散列函数</h2><ul><li>需求<ul><li>散列函数的设计不能太复杂 <ul><li>会消耗很多计算时间</li><li>即会影响到散列表的性能</li></ul></li><li>散列函数生成的值需要尽可能随机并且均匀分布</li></ul></li><li>如何解决装载因子过大的问题<ul><li>针对散列表，当装载因子过大的时候，我们也可以进行动态扩容，重新申请一个更大的散列表，将数据搬移到这个新的散列表当中。</li><li>同时也有装载因子太小的情况下，我们可以做动态缩容的工作</li></ul></li><li>如何避免低效扩容<ul><li>所谓低效的扩容指的是如果我们在装载因子超过阈值的时候一下子进行扩容，即数据的搬运和最终的新数据的插入，那针对这一个数据，其时间复杂度变成了O(n).</li><li>为了解决这个问题，我们在需要进行扩容的时候，将扩容的操作穿插在插入操作的过程当中，分批次来完成。当装载因子触达阈值的时候，只申请新空间，但是没有将老的数据搬移到新的散列表当中。</li><li>当有新数据插入的时候，就将新数据放到新的散列表当中，并且从老的散列表当中拿一个数据放到新的散列表当中</li><li>而查询操作，为了兼顾，我们会先从新的散列表当中查找，如果没有找到，再去老的散列表当中查找</li></ul></li></ul><h2 id="4-2-如何解决冲突？"><a href="#4-2-如何解决冲突？" class="headerlink" title="4.2 如何解决冲突？"></a>4.2 如何解决冲突？</h2><h3 id="4-2-1-开放寻址法"><a href="#4-2-1-开放寻址法" class="headerlink" title="4.2.1 开放寻址法"></a>4.2.1 开放寻址法</h3><ul><li>优势<ul><li>数据都存储在数组当中，可以有效利用CPU缓存加快查询速度</li><li>序列化比较简单</li></ul></li><li>缺陷<ul><li>删除数据比较麻烦，需要特殊标记已经删除的数据</li><li>冲突代价高，导致装载因子的上限不能太大</li></ul></li></ul><blockquote><p>当数据量比较小，装载因子小的时候，适合使用开放寻址法。</p></blockquote><h3 id="4-2-2-链表法"><a href="#4-2-2-链表法" class="headerlink" title="4.2.2 链表法"></a>4.2.2 链表法</h3><ul><li>优势<ul><li>对内存的利用率相对比较高，因为链表结点可以在需要的时候再创建，不需要提前申请好</li><li>可以允许很高的装载因子</li></ul></li><li>劣势<ul><li>因为要存储指针，对于小的对象的存储，是更加耗内存的</li><li>因为结点零散分布在内存当中，不是连续的，所以对CPU缓存不友好，对执行效率会造成一定的影响</li></ul></li></ul><h2 id="4-3-Java-HashMap举例"><a href="#4-3-Java-HashMap举例" class="headerlink" title="4.3 Java HashMap举例"></a>4.3 Java HashMap举例</h2><ul><li>初始大小 - 16<ul><li>如果大概知道数据量的大小，可以修改默认，来减少动态扩容的次数</li></ul></li><li>装载因子和动态扩容<ul><li>默认 load factor 0.75 </li><li>每次扩容大小变为两倍</li></ul></li><li>散列冲突解决方法<ul><li>采用链表法</li><li>1.8以后当链表长度超过8以后，链表就会自动转化为红黑树</li></ul></li><li>散列函数</li></ul><pre><code>int hash(Object key) {    int h = key.hashCode()；    return (h ^ (h &gt;&gt;&gt; 16)) &amp; (capicity -1); //capicity表示散列表的大小} </code></pre><p><code>&amp;(capacity - 1)</code> means <code>% capacity</code></p><p>因为hashcode本身是个32位的整型值，获得其hash值以后，将高16位移到低16位，就相当于拿到了高16位和低16位的feature。用自己的高半区和低半区做异或，为的是加大低位的随机性。这样子哪怕是高位的变化也可以反映到低位当中，保证了最终进bin的随机性</p><h1 id="5-散列表实际应用"><a href="#5-散列表实际应用" class="headerlink" title="5. 散列表实际应用"></a>5. 散列表实际应用</h1><p>散列表和链表经常是共同使用的,这一部分会walk through一些常用的场景，看看是如何来共同使用的。</p><h2 id="5-1-LRU缓存淘汰算法"><a href="#5-1-LRU缓存淘汰算法" class="headerlink" title="5.1 LRU缓存淘汰算法"></a>5.1 LRU缓存淘汰算法</h2><p>最基础的LRU实现，我们可以通过链表来做.维护一个按照访问时间从大到小有序排列的链表结构，因为缓存大小有限，当缓存空间不够，需要淘汰一个数据的时候，我们就直接将链表头部的结点删除。</p><p>我们可以选择使用散列表和双向链表一起来实现LRU cache。要实现的操作有：</p><ul><li>往缓存中加入数据</li><li>从缓存中删除数据</li><li>在缓存中查找数据</li></ul><p><img src="https://i.loli.net/2020/02/10/LIB2nkbZYudrq37.jpg" alt="fig3.jpg"></p><p>如图所示，我们相当于在维护两条链表，一条是在哈希表的每个entry上的链，在这上面的链是为了解决哈希冲突的；另外一个点，我们在使用的是维护LRU cache的链表。</p><p>链表当中的每个结点保存了：</p><ul><li>prev</li><li>next</li><li>data</li><li>hnext<ul><li>散列表上碰撞问题的解决的 </li></ul></li></ul><h2 id="5-2-Java-LinkedHashMap"><a href="#5-2-Java-LinkedHashMap" class="headerlink" title="5.2 Java LinkedHashMap"></a>5.2 Java LinkedHashMap</h2><p>LinkedHashMap能够实现按照数据的插入顺序来进行打印，是因为他也是通过散列表和链表组合在一起的方式实现的。它支持按照插入顺序遍历数据，还支持按照访问顺序来遍历数据</p><pre><code>// 10是初始大小，0.75是装载因子，true是表示按照访问时间排序HashMap&lt;Integer, Integer&gt; m = new LinkedHashMap&lt;&gt;(10, 0.75f, true);m.put(3, 11);m.put(1, 12);m.put(5, 23);m.put(2, 22);m.put(3, 26);m.get(5);for (Map.Entry e : m.entrySet()) {  System.out.println(e.getKey());}// print out: 1, 2, 3, 5</code></pre><p><img src="https://i.loli.net/2020/02/10/wxy1tumrZO3DXQz.jpg" alt="fig4.jpg"></p><p><img src="https://i.loli.net/2020/02/10/9phoBuRSI5gsJC4.jpg" alt="fig5.jpg"></p><p><img src="https://i.loli.net/2020/02/10/3KGVI15LDp4PSAZ.jpg" alt="fig6.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 散列表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构与算法(13)-跳表</title>
       <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"/>
       <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/</url>
