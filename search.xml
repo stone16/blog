@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>JMX - Tutorials</title>
+      <link href="/JMX-Tutorials/"/>
+      <url>/JMX-Tutorials/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ul><li>JMX - Java Management extensions<ul><li>export standard metrics and custom metrics using MBeans to a monitoring system </li><li>understand how your application is performing <ul><li>memory </li><li>cpu</li><li>threads </li><li>API calls in a REST endpoint</li></ul></li></ul></li></ul><h1 id="2-Why-need-this"><a href="#2-Why-need-this" class="headerlink" title="2. Why need this?"></a>2. Why need this?</h1><ul><li>Large scale java applications <ul><li>gather performance information <ul><li>number of users connected </li></ul></li></ul></li><li>could provide a monitoring interface </li><li>any class that exports data to JMX is called a Managed Bean(MBean). These MBeans publish their metrics to a MBean Server provided by the Java platform. </li></ul><h1 id="3-Components"><a href="#3-Components" class="headerlink" title="3. Components"></a>3. Components</h1><h2 id="3-1-MBean"><a href="#3-1-MBean" class="headerlink" title="3.1 MBean"></a>3.1 MBean</h2><ul><li>Objects with methods that return information and export the information via the MBeanServer</li><li>Mainly have 4 types <ul><li>Standard MBean <ul><li>create an interface with getter  </li></ul></li><li>Dynamic MBean <ul><li>implements getters and setters to retrieve or modify the metric that can be auto discovered by implementing the javax.management.DynamicMBean interface </li></ul></li><li>Model MBean<ul><li>Generic, dynamic in runtime to instrument the resources  </li></ul></li><li>Open MBean<ul><li>Using a predefined set of java classes</li></ul></li></ul></li></ul><h1 id="4-Example"><a href="#4-Example" class="headerlink" title="4. Example"></a>4. Example</h1><pre><code>// Create an interface that the MBeanServer will retrieve information public interface SystemStatusMBean {   Integer getNumberOfSecondsRunning();   String getProgramName();   Long getNumberOfUnixSecondsRunning();   Boolean getSwitchStatus();}</code></pre><p>Actual Implementation </p><pre><code>    public class SystemStatus implements SystemStatusMBean {   private Integer numberOfSecondsRunning;   private String programName;   private Long numberOfUnixSecondsRunning;   private Boolean switchStatus;   private Thread backgroundThread;   public SystemStatus(String programName) {       // First we initialize all the metrics       this.backgroundThread = new Thread();       this.programName = programName;       this.numberOfSecondsRunning = 0;       this.numberOfUnixSecondsRunning = System.currentTimeMillis() / 1000L;       this.switchStatus = false;       // We will use a background thread to update the metrics       this.backgroundThread = new Thread(() -&gt; {           try {               while (true) {                   // Every second we update the metrics                   numberOfSecondsRunning += 1;                   numberOfUnixSecondsRunning += 1;                   switchStatus = !switchStatus;                   Thread.sleep(1000L);               }           } catch (Exception e) {               e.printStackTrace();           }       });       this.backgroundThread.setName(&quot;backgroundThread&quot;);       this.backgroundThread.start();   }</code></pre><h1 id="5-Operations-and-attributes"><a href="#5-Operations-and-attributes" class="headerlink" title="5. Operations and attributes"></a>5. Operations and attributes</h1><p>Class properties exported through MBeans are called attributes, and methods exported through MBeans are called operations.</p><ul><li>TotalCompilationTime <ul><li>Total time spent doing in JIT compilation  </li></ul></li><li>Garbage Collector - CollectionCount <ul><li>Number of garbage collection events fired since the JVM launch</li></ul></li><li>Garbage Collector - CollectionTime </li><li>FreePyhsicalMemorySize </li><li>CommitedVirtualMemorySize<ul><li>The amount of memory that is guaranteed to be available for use by JVM  </li></ul></li><li>ProcessCpuTime <ul><li>Time CPU has spent running the process  </li></ul></li><li>PeakThreadCount <ul><li>maximum number of threads being executed at the same time since the JVM was started or the peak was reset  </li></ul></li><li>ThreadCount <ul><li>the number of threads running at the current moment </li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://sysdig.com/blog/jmx-monitoring-custom-metrics/" target="_blank" rel="noopener">https://sysdig.com/blog/jmx-monitoring-custom-metrics/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> JMX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java是如何工作的</title>
       <link href="/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
       <url>/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</url>
