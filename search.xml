@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>数据结构与算法(10)-排序(桶排序 计数排序 基数排序)</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<p>上述三种排序方法的时间复杂度均为线性，因此将其称为线性排序(Linear sort).之所以能做先线性的时间复杂度，是因为他们都不是基于比较的排序算法，并不涉及到元素之间的比较操作。</p><h1 id="1-桶排序-Bucket-Sort"><a href="#1-桶排序-Bucket-Sort" class="headerlink" title="1. 桶排序 Bucket Sort"></a>1. 桶排序 Bucket Sort</h1><ul><li>核心思想<ul><li>将排序的数据分到几个有序的桶当中，每个桶的数据再单独进行排序。桶内排完序之后，再将每个桶里的数据按照顺序依次取出，组成的序列就是有序的了。</li></ul></li><li>分析<ul><li>如果要排序的数据为 n个，将其均匀分到m个桶当中，每个桶就有 k=n/m个元素。每个桶内部使用快排，时间复杂度为O(k*logk)</li><li>m个桶的时间复杂度就为O(n*log(n/m)) </li><li>当m的数量非常接近n的时候，那么log(n/m)就是一个非常小的常量，这时候桶排序的时间复杂度就接近O(n)了</li></ul></li><li>优劣势<ul><li>对数据本身要求比较苛刻</li><li>需要足够均匀，否则桶内排序就不是常量级的复杂度了</li></ul></li><li>桶排序  适合在外部排序当中<ul><li>指数据存储在外部磁盘当中，数据量比较大，内存有限，无法将数据全部加载到内存当中 </li><li>顺序进行划分，挨个顺次放到内存当中</li></ul></li></ul><h1 id="2-计数排序-Counting-Sort"><a href="#2-计数排序-Counting-Sort" class="headerlink" title="2. 计数排序 Counting Sort"></a>2. 计数排序 Counting Sort</h1><p>类似于桶排序，但是每个桶里面存储的只是个数</p><pre><code>// 计数排序，a是数组，n是数组大小。假设数组中存储的都是非负整数。public void countingSort(int[] a, int n) {  if (n &lt;= 1) return;  // 查找数组中数据的范围  int max = a[0];  for (int i = 1; i &lt; n; ++i) {    if (max &lt; a[i]) {      max = a[i];    }  }  int[] c = new int[max + 1]; // 申请一个计数数组c，下标大小[0,max]  for (int i = 0; i &lt;= max; ++i) {    c[i] = 0;  }  // 计算每个元素的个数，放入c中  for (int i = 0; i &lt; n; ++i) {    c[a[i]]++;  }  // 依次累加  for (int i = 1; i &lt;= max; ++i) {    c[i] = c[i-1] + c[i];  }  // 临时数组r，存储排序之后的结果  int[] r = new int[n];  // 计算排序的关键步骤，有点难理解  for (int i = n - 1; i &gt;= 0; --i) {    int index = c[a[i]]-1;    r[index] = a[i];    c[a[i]]--;  }  // 将结果拷贝给a数组  for (int i = 0; i &lt; n; ++i) {    a[i] = r[i];  }}</code></pre><h1 id="3-基数排序-Radix-Sort"><a href="#3-基数排序-Radix-Sort" class="headerlink" title="3. 基数排序 Radix Sort"></a>3. 基数排序 Radix Sort</h1><p>排10万个手机号码，从小到大来排序？ </p><p>按照位来排，需要选用稳定性的算法来做。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构与算法(9)-排序(归并 快排)</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-9-%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6-%E5%BF%AB%E6%8E%92/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-9-%E6%8E%92%E5%BA%8F-%E5%BD%92%E5%B9%B6-%E5%BF%AB%E6%8E%92/</url>
+      
+        <content type="html"><![CDATA[<p>这节主要讲归并排序和快速排序，二者其实都用了分治的思想，可以借鉴这个思想，来解决诸如“如何在O(n)的时间复杂度内查找一个无序数组中的第k大元素”这样的问题。</p><h1 id="1-归并排序"><a href="#1-归并排序" class="headerlink" title="1. 归并排序"></a>1. 归并排序</h1><p><img src="https://i.loli.net/2020/02/10/fVpOLyXAhjn2cKW.jpg" alt="fig1.jpg"></p><ul><li><p>归并排序</p><ul><li>分治思想</li><li>分治是一种解决问题的处理思想，递归是一种编程技巧</li><li>和递归的三要素很类似，先分析得出递推公式，然后找到终止条件，再将递推公式翻译成递归代码。</li></ul></li><li><p>注意是分成了分开和合并两个过程的，在合并的过程当中，需要遍历两个有序子集，相互比较大小，然后放置在另外一个空间当中</p></li></ul><pre><code>递推公式：merge_sort(p…r) = merge(merge_sort(p…q), merge_sort(q+1…r))终止条件：p &gt;= r 不用再继续分解// 归并排序算法, A 是数组，n 表示数组大小merge_sort(A, n) {  merge_sort_c(A, 0, n-1)}// 递归调用函数merge_sort_c(A, p, r) {  // 递归终止条件  if p &gt;= r  then return  // 取 p 到 r 之间的中间位置 q  q = (p+r) / 2  // 分治递归  merge_sort_c(A, p, q)  merge_sort_c(A, q+1, r)  // 将 A[p...q] 和 A[q+1...r] 合并为 A[p...r]  merge(A[p...r], A[p...q], A[q+1...r])}</code></pre><ul><li>稳定排序</li><li>时间复杂度为O(nlog(n))</li><li>需要借助额外空间，不是原地排序算法  空间复杂度 O(n) 每次搞完就会直接释放掉了</li></ul><h1 id="2-快速排序"><a href="#2-快速排序" class="headerlink" title="2. 快速排序"></a>2. 快速排序</h1><p><img src="https://i.loli.net/2020/02/10/J6wH1nKPtv9qIAm.jpg" alt="fig2.jpg"></p><ul><li>快排的思想<ul><li>如果要排序数组中下标从p到r之间的一组数据，我们选择p到r之间的任意一个数据作为pivot(分区点) </li><li>我们遍历 p 到 r 之间的数据，将小于 pivot 的放到左边，将大于 pivot 的放到右边，将 pivot 放到中间。经过这一步骤之后，数组 p 到 r 之间的数据就被分成了三个部分，前面 p 到 q-1 之间都是小于 pivot 的，中间是 pivot，后面的 q+1 到 r 之间是大于 pivot 的。</li><li>快速排序是一种不稳定的排序方法，因为要实现swap</li></ul></li></ul><pre><code>递推公式：quick_sort(p…r) = quick_sort(p…q-1) + quick_sort(q+1, r)终止条件：p &gt;= r// 快速排序，A 是数组，n 表示数组的大小quick_sort(A, n) {  quick_sort_c(A, 0, n-1)}// 快速排序递归函数，p,r 为下标quick_sort_c(A, p, r) {  if p &gt;= r then return  q = partition(A, p, r) // 获取分区点  quick_sort_c(A, p, q-1)  quick_sort_c(A, q+1, r)}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构与算法(8)-排序(冒泡 插入 选择)</title>
       <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/"/>
       <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/</url>
