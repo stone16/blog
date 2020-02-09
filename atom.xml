@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T17:45:58.480Z</updated>
+  <updated>2020-02-09T17:47:45.905Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(7)-递归</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/</id>
+    <published>2020-02-09T17:47:26.000Z</published>
+    <updated>2020-02-09T17:47:45.905Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-如何理解递归"><a href="#1-如何理解递归" class="headerlink" title="1.如何理解递归"></a>1.如何理解递归</h1><ul><li>递<ul><li>去的过程 </li></ul></li><li>归<ul><li>回来的过程</li></ul></li></ul><p>给我的感觉是先努力去溯源，拿到源数据以后就相当于多了一个信息，然后再依托多了一个的信息，来解决问题。</p><pre><code>f(n) = f(n-1) + 1 </code></pre><h1 id="2-递归的条件"><a href="#2-递归的条件" class="headerlink" title="2. 递归的条件"></a>2. 递归的条件</h1><ul><li>一个问题的解可以分解为几个子问题的解<ul><li>子问题指数据规模更小的解</li></ul></li><li>这个问题与分解之后的子问题，除了数据规模的不同，求解思路完全一样</li><li>存在递归终止条件</li></ul><h1 id="3-如何写递归代码"><a href="#3-如何写递归代码" class="headerlink" title="3. 如何写递归代码"></a>3. 如何写递归代码</h1><ul><li>写出递归公式</li><li>找到终止条件</li></ul><p>E.G </p><p>n个台阶，每次可以跨过1个或者2个，问一共多少种走法？ </p><ul><li>可以划分为子问题，即一共的走法等于我先走一步，剩下的n-1共同的走法和先走两步，剩下的n-1共同的走法的和。就有了一个递归公式：</li></ul><pre><code>f(n) = f(n-1) + f(n-2)</code></pre><p>终止条件，看最后几个corner case，只有一个台阶，只有两个台阶，然后用3，4来验证一下。</p><blockquote><p>写递归代码的关键就是找到如何将大问题分解为小问题的规律，并且基于此写出递推公式，然后再推敲出终止条件，最终将递推公式和终止条件翻译成代码</p></blockquote><p>不要人为加大难度，遇到递归，抽象成一个递推公式，不再一层层的想其调用关系，不要试图用人脑去分解递归的步骤</p><p>分解子问题的时候，当我们将其分解成几个子问题B C D以后，我们要做的是在假设子问题 BCD都已经解决的前提下，思考如何解决问题A。这样子我们就可以思考问题A和子问题B,C,D两层之间的关系就可以了，不需要再一层一层往下思考更深的子问题之间的关系了。屏蔽掉递归的实现细节，我们理解起来就会容易很多了</p><h1 id="4-警惕堆栈溢出"><a href="#4-警惕堆栈溢出" class="headerlink" title="4. 警惕堆栈溢出"></a>4. 警惕堆栈溢出</h1><ul><li>递归容易堆栈溢出</li><li>函数调用会使用栈来保存临时变量，每调用一个函数，都会将临时变量封装为栈帧压入内存栈当中。等函数执行完成返回时，才出栈。</li><li>系统栈或者虚拟机栈空间都不大，如果递归层很多的话，那么就会有堆栈溢出的风险。</li><li>可以在代码中限制递归调用的最大深度来解决这个问题</li></ul><p>递归好处是表达能力强，很容易去理顺其想要表达的内容；坏处是空间复杂度会比较高，因为每次递归的时候都需要在内存栈中保存一次现场数据，所以在分析递归代码空间复杂度的时候，是需要额外考虑这部分的开销的。</p><h1 id="5-重复计算问题"><a href="#5-重复计算问题" class="headerlink" title="5. 重复计算问题"></a>5. 重复计算问题</h1><p>子步骤会被计算了很多很多遍，为了避免这种重复计算，可以使用一些数据结构来保存已经求解过得f(k)。当递归调用到f(k)的时候，先看下是否已经求解过了</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-如何理解递归&quot;&gt;&lt;a href=&quot;#1-如何理解递归&quot; class=&quot;headerlink&quot; title=&quot;1.如何理解递归&quot;&gt;&lt;/a&gt;1.如何理解递归&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;递&lt;ul&gt;
+&lt;li&gt;去的过程 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;归&lt;u
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="递归" scheme="https://www.llchen60.com/tags/%E9%80%92%E5%BD%92/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(6)-队列</title>
@@ -529,35 +560,6 @@
     
     
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 继承与组合</title>
-    <link href="https://www.llchen60.com/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/"/>
-    <id>https://www.llchen60.com/Java-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88/</id>
-    <published>2020-02-06T03:03:28.000Z</published>
-    <updated>2020-02-06T03:03:53.281Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-什么是组合？"><a href="#1-什么是组合？" class="headerlink" title="1. 什么是组合？"></a>1. 什么是组合？</h1><p>组合将类定义为各个部分的集合</p><pre><code>public class MerchantListHelper {    // TODO     void addToDDB (ListEntry entry) {    }    void removeFromDDB(DDBRecord record) {    }    List&lt;ListEntry&gt; getFromDDB() {    }}public class MerchantBlacklistBizLogic {    private MerchantListHelper merchantListHelper;    merchantListHelper.addToDDB(blabla..);    merchantListHelper.removeFromDDB(blabla..)}</code></pre><h1 id="2-什么是继承？"><a href="#2-什么是继承？" class="headerlink" title="2. 什么是继承？"></a>2. 什么是继承？</h1><p>将父类和子类通过集成关系紧密联系在一起 （紧耦合）。但与之相对的是继承会允许再利用类的方法以及其他的属性，会很便捷。</p><p>使用super()方法来直接访问父类的方法，构造器，属性等。</p><pre><code>public Abstract class MerchantListHelper {    // TODO     abstract void addToDDB (ListEntry entry);    abstract void removeFromDDB(DDBRecord record);    abstract List&lt;ListEntry&gt; getFromDDB();}public class MerchantBlacklistBizLogic {    private MerchantListHelper merchantListHelper;    @Override    void addToDDB(ListEntry entry) {        // TODO    }    @Override    void removeFromDDB(DDBRecord record) {        // TODO    }    ...}</code></pre><h1 id="3-Use-cases"><a href="#3-Use-cases" class="headerlink" title="3. Use cases"></a>3. Use cases</h1><p>组合和继承都可以将子对象放到新的类当中，组合一般是当你想要在这个新类当中使用一个已经存在的类的特征的时候。这意味着，通过这种方式你可以嵌入一个对象，并将其放在新的类当中。 继承表示的是一种is-a的关系，组合表达的含有某种功能。</p><p>如何判断是否需要继承或者组合 -&gt; 看是否需要从你的新类到基本类进行向上转型。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="http://thedeanbear.com/2012/09/24/composition_vs_inheritance/" target="_blank" rel="noopener">http://thedeanbear.com/2012/09/24/composition_vs_inheritance/</a></li><li>Java Challengers #7: Debugging Java inheritance </li><li>javaworld.com/article/3409071/java-challenger-7-debugging-java-inheritance.html</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-什么是组合？&quot;&gt;&lt;a href=&quot;#1-什么是组合？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是组合？&quot;&gt;&lt;/a&gt;1. 什么是组合？&lt;/h1&gt;&lt;p&gt;组合将类定义为各个部分的集合&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;public class M
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Composition" scheme="https://www.llchen60.com/tags/Composition/"/>
     
   </entry>
   
