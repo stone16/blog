@@ -260,7 +260,7 @@ The class itself is also made final by default, becuase immutability is not some
 Actually, @Value equals to `final @ToString @EqualsAndHashCode @AllArgsConstructor @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE) @Getter`
 
 
-     import lombok.AccessLevel;
+    import lombok.AccessLevel;
     import lombok.experimental.NonFinal;
     import lombok.experimental.Value;
     import lombok.experimental.Wither;
