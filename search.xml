@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据结构与算法(2)-复杂度分析</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-为什么需要复杂度分析？"><a href="#1-为什么需要复杂度分析？" class="headerlink" title="1. 为什么需要复杂度分析？"></a>1. 为什么需要复杂度分析？</h1><p>通过统计和监控得到的算法执行时间的占用的内存的大小的方法称为事后统计法，这种方法有其局限性：</p><ul><li>测试结果非常依赖于测试环境</li><li>测试结果受数据规模的影响很大, 而且会和数据集本身的数据质量有关</li><li>—-&gt; 因此我们需要一个不用具体的测试数据来测试，就可以粗略估计算法的执行效率的方法</li></ul><h1 id="2-大O复杂度表示法"><a href="#2-大O复杂度表示法" class="headerlink" title="2. 大O复杂度表示法"></a>2. 大O复杂度表示法</h1><ul><li>假定每行代码执行时间都一样</li><li>并不表示具体的代码执行时间，而是表示执行时间随着数据规模增大的变化趋势，因此也叫做渐进时间复杂度。</li></ul><h1 id="3-如何分析代码的时间复杂度"><a href="#3-如何分析代码的时间复杂度" class="headerlink" title="3. 如何分析代码的时间复杂度"></a>3. 如何分析代码的时间复杂度</h1><ul><li>只关注循环执行次数最多的一段代码</li><li>加法原则：总复杂度等于量级最大的那段代码的复杂度</li><li>乘法法则： 嵌套代码的复杂度等于签到内外层代码复杂度的乘积</li></ul><h1 id="4-复杂度量级"><a href="#4-复杂度量级" class="headerlink" title="4. 复杂度量级"></a>4. 复杂度量级</h1><ul><li>常量阶 O(1)</li><li>对数阶 O(logn)</li><li>线性阶 O(n)<ul><li>O (m+n) 当我们不知道几个变量的大小的时候 </li></ul></li><li>线性对数阶 O(nlogn)</li><li>平方阶 O(n^2)<ul><li>O (m*n) 乘法关系，不知道参量之间的相对大小 </li></ul></li><li>k次方阶 O(n^k)</li><li>指数阶 O(2^n)</li><li>阶乘阶 O(n!)</li></ul><h1 id="5-空间复杂度分析"><a href="#5-空间复杂度分析" class="headerlink" title="5. 空间复杂度分析"></a>5. 空间复杂度分析</h1><p>空间复杂度的全程是渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。</p><p>大O时间复杂度，并不具体表示代码真正的执行时间，而是表示代码执行时间随着数据规模的增大的变化趋势。因此也叫做渐进时间复杂度，(asymptotic time complexity)</p><pre><code>T(n) = O(f(n))</code></pre><p>T(n) - 代码的执行时间<br>n - 数据规模的大小<br>f(n) - 每行代码执行的次数总和<br>O - 表示左右成正比</p><h2 id="5-1-Tips"><a href="#5-1-Tips" class="headerlink" title="5.1 Tips"></a>5.1 Tips</h2><ul><li>只关注循环执行次数最多的一段代码</li><li>总复杂度等于量级最大的那段代码的复杂度</li><li>嵌套代码的复杂度为嵌套内外代码复杂度的乘积</li></ul><h1 id="6-复杂度的分析"><a href="#6-复杂度的分析" class="headerlink" title="6. 复杂度的分析"></a>6. 复杂度的分析</h1><h2 id="6-1-时间复杂度分析"><a href="#6-1-时间复杂度分析" class="headerlink" title="6.1 时间复杂度分析"></a>6.1 时间复杂度分析</h2><h3 id="6-1-1-多项式量级"><a href="#6-1-1-多项式量级" class="headerlink" title="6.1.1 多项式量级"></a>6.1.1 多项式量级</h3><ul><li>O(1) <ul><li>常量级的代码，我们将其时间复杂度都记作O(1)</li></ul></li><li>O(logn)</li></ul><pre><code> i=1; while (i &lt;= n)  {   i = i * 2; }</code></pre><ul><li>O(nlogn)</li><li>O(m+n)</li><li>O(m*n)</li></ul><h3 id="6-1-2-非多项式量级"><a href="#6-1-2-非多项式量级" class="headerlink" title="6.1.2 非多项式量级"></a>6.1.2 非多项式量级</h3><p>非常低效，会随着n的增长急剧增长，因此我们应当尽量不选择有如下时间复杂度的算法</p><ul><li>O(2^n) </li><li>O(n!)</li></ul><h2 id="6-2-空间复杂度分析"><a href="#6-2-空间复杂度分析" class="headerlink" title="6.2 空间复杂度分析"></a>6.2 空间复杂度分析</h2><p>渐进空间复杂度，表示算法的存储空间和数据规模之间的增长关系。</p><p>一般来说在O(1), O(n), O(n^2)这几个可能性上面</p><h1 id="7-浅析最好、最坏、平均、均摊时间复杂度"><a href="#7-浅析最好、最坏、平均、均摊时间复杂度" class="headerlink" title="7. 浅析最好、最坏、平均、均摊时间复杂度"></a>7. 浅析最好、最坏、平均、均摊时间复杂度</h1><pre><code>// n 表示数组 array 的长度int find(int[] array, int n, int x) {  int i = 0;  int pos = -1;  for (; i &lt; n; ++i) {    if (array[i] == x) {       pos = i;       break;    }  }  return pos;}</code></pre><h2 id="7-1-最好情况时间复杂度-best-case-time-complexity"><a href="#7-1-最好情况时间复杂度-best-case-time-complexity" class="headerlink" title="7.1 最好情况时间复杂度(best case time complexity)"></a>7.1 最好情况时间复杂度(best case time complexity)</h2><p>上面这段代码，最好情况是O(1)</p><h2 id="7-2-最坏情况时间复杂度-worst-case-time-complexity"><a href="#7-2-最坏情况时间复杂度-worst-case-time-complexity" class="headerlink" title="7.2 最坏情况时间复杂度(worst case time complexity)"></a>7.2 最坏情况时间复杂度(worst case time complexity)</h2><p>上面这段代码，最坏情况是O(n)</p><h2 id="7-3-平均情况时间复杂度-average-case-time-complexity"><a href="#7-3-平均情况时间复杂度-average-case-time-complexity" class="headerlink" title="7.3 平均情况时间复杂度(average case time complexity)"></a>7.3 平均情况时间复杂度(average case time complexity)</h2><p>需要算上发生的概率</p><p>上述例子当中，因为要查找变量x在数组当中的位置，一共有n+1种情况，在数组的0 - n-1位置中和不在数组当中。将每种情况下，需要遍历的元素个数累加起来，再除以n+1,就可以得到需要遍历的元素个数的平均值了 </p><p>即</p><pre><code>(1+2+3+ ... + n + n) / (n+1) = n(n+3)/(2(n+1))</code></pre><p>故平均复杂度还是O(n)</p><p>然而还要考虑每种情况下 发生的概率实质上是不同的，需要将这个算上</p><h2 id="7-4-均摊时间复杂度-amortized-time-complexity"><a href="#7-4-均摊时间复杂度-amortized-time-complexity" class="headerlink" title="7.4 均摊时间复杂度(amortized time complexity)"></a>7.4 均摊时间复杂度(amortized time complexity)</h2><p>不是遍历case，而是有轮回的，因此算一个轮回里的时间就可以得出平均复杂度了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 复杂度分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构与算法(1)-概述</title>
       <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-%E6%A6%82%E8%BF%B0/"/>
       <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-1-%E6%A6%82%E8%BF%B0/</url>

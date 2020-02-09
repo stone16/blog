@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T06:40:41.488Z</updated>
+  <updated>2020-02-09T06:42:03.983Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(2)-复杂度分析</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</id>
+    <published>2020-02-09T06:41:40.000Z</published>
+    <updated>2020-02-09T06:42:03.983Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-为什么需要复杂度分析？"><a href="#1-为什么需要复杂度分析？" class="headerlink" title="1. 为什么需要复杂度分析？"></a>1. 为什么需要复杂度分析？</h1><p>通过统计和监控得到的算法执行时间的占用的内存的大小的方法称为事后统计法，这种方法有其局限性：</p><ul><li>测试结果非常依赖于测试环境</li><li>测试结果受数据规模的影响很大, 而且会和数据集本身的数据质量有关</li><li>—-&gt; 因此我们需要一个不用具体的测试数据来测试，就可以粗略估计算法的执行效率的方法</li></ul><h1 id="2-大O复杂度表示法"><a href="#2-大O复杂度表示法" class="headerlink" title="2. 大O复杂度表示法"></a>2. 大O复杂度表示法</h1><ul><li>假定每行代码执行时间都一样</li><li>并不表示具体的代码执行时间，而是表示执行时间随着数据规模增大的变化趋势，因此也叫做渐进时间复杂度。</li></ul><h1 id="3-如何分析代码的时间复杂度"><a href="#3-如何分析代码的时间复杂度" class="headerlink" title="3. 如何分析代码的时间复杂度"></a>3. 如何分析代码的时间复杂度</h1><ul><li>只关注循环执行次数最多的一段代码</li><li>加法原则：总复杂度等于量级最大的那段代码的复杂度</li><li>乘法法则： 嵌套代码的复杂度等于签到内外层代码复杂度的乘积</li></ul><h1 id="4-复杂度量级"><a href="#4-复杂度量级" class="headerlink" title="4. 复杂度量级"></a>4. 复杂度量级</h1><ul><li>常量阶 O(1)</li><li>对数阶 O(logn)</li><li>线性阶 O(n)<ul><li>O (m+n) 当我们不知道几个变量的大小的时候 </li></ul></li><li>线性对数阶 O(nlogn)</li><li>平方阶 O(n^2)<ul><li>O (m*n) 乘法关系，不知道参量之间的相对大小 </li></ul></li><li>k次方阶 O(n^k)</li><li>指数阶 O(2^n)</li><li>阶乘阶 O(n!)</li></ul><h1 id="5-空间复杂度分析"><a href="#5-空间复杂度分析" class="headerlink" title="5. 空间复杂度分析"></a>5. 空间复杂度分析</h1><p>空间复杂度的全程是渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。</p><p>大O时间复杂度，并不具体表示代码真正的执行时间，而是表示代码执行时间随着数据规模的增大的变化趋势。因此也叫做渐进时间复杂度，(asymptotic time complexity)</p><pre><code>T(n) = O(f(n))</code></pre><p>T(n) - 代码的执行时间<br>n - 数据规模的大小<br>f(n) - 每行代码执行的次数总和<br>O - 表示左右成正比</p><h2 id="5-1-Tips"><a href="#5-1-Tips" class="headerlink" title="5.1 Tips"></a>5.1 Tips</h2><ul><li>只关注循环执行次数最多的一段代码</li><li>总复杂度等于量级最大的那段代码的复杂度</li><li>嵌套代码的复杂度为嵌套内外代码复杂度的乘积</li></ul><h1 id="6-复杂度的分析"><a href="#6-复杂度的分析" class="headerlink" title="6. 复杂度的分析"></a>6. 复杂度的分析</h1><h2 id="6-1-时间复杂度分析"><a href="#6-1-时间复杂度分析" class="headerlink" title="6.1 时间复杂度分析"></a>6.1 时间复杂度分析</h2><h3 id="6-1-1-多项式量级"><a href="#6-1-1-多项式量级" class="headerlink" title="6.1.1 多项式量级"></a>6.1.1 多项式量级</h3><ul><li>O(1) <ul><li>常量级的代码，我们将其时间复杂度都记作O(1)</li></ul></li><li>O(logn)</li></ul><pre><code> i=1; while (i &lt;= n)  {   i = i * 2; }</code></pre><ul><li>O(nlogn)</li><li>O(m+n)</li><li>O(m*n)</li></ul><h3 id="6-1-2-非多项式量级"><a href="#6-1-2-非多项式量级" class="headerlink" title="6.1.2 非多项式量级"></a>6.1.2 非多项式量级</h3><p>非常低效，会随着n的增长急剧增长，因此我们应当尽量不选择有如下时间复杂度的算法</p><ul><li>O(2^n) </li><li>O(n!)</li></ul><h2 id="6-2-空间复杂度分析"><a href="#6-2-空间复杂度分析" class="headerlink" title="6.2 空间复杂度分析"></a>6.2 空间复杂度分析</h2><p>渐进空间复杂度，表示算法的存储空间和数据规模之间的增长关系。</p><p>一般来说在O(1), O(n), O(n^2)这几个可能性上面</p><h1 id="7-浅析最好、最坏、平均、均摊时间复杂度"><a href="#7-浅析最好、最坏、平均、均摊时间复杂度" class="headerlink" title="7. 浅析最好、最坏、平均、均摊时间复杂度"></a>7. 浅析最好、最坏、平均、均摊时间复杂度</h1><pre><code>// n 表示数组 array 的长度int find(int[] array, int n, int x) {  int i = 0;  int pos = -1;  for (; i &lt; n; ++i) {    if (array[i] == x) {       pos = i;       break;    }  }  return pos;}</code></pre><h2 id="7-1-最好情况时间复杂度-best-case-time-complexity"><a href="#7-1-最好情况时间复杂度-best-case-time-complexity" class="headerlink" title="7.1 最好情况时间复杂度(best case time complexity)"></a>7.1 最好情况时间复杂度(best case time complexity)</h2><p>上面这段代码，最好情况是O(1)</p><h2 id="7-2-最坏情况时间复杂度-worst-case-time-complexity"><a href="#7-2-最坏情况时间复杂度-worst-case-time-complexity" class="headerlink" title="7.2 最坏情况时间复杂度(worst case time complexity)"></a>7.2 最坏情况时间复杂度(worst case time complexity)</h2><p>上面这段代码，最坏情况是O(n)</p><h2 id="7-3-平均情况时间复杂度-average-case-time-complexity"><a href="#7-3-平均情况时间复杂度-average-case-time-complexity" class="headerlink" title="7.3 平均情况时间复杂度(average case time complexity)"></a>7.3 平均情况时间复杂度(average case time complexity)</h2><p>需要算上发生的概率</p><p>上述例子当中，因为要查找变量x在数组当中的位置，一共有n+1种情况，在数组的0 - n-1位置中和不在数组当中。将每种情况下，需要遍历的元素个数累加起来，再除以n+1,就可以得到需要遍历的元素个数的平均值了 </p><p>即</p><pre><code>(1+2+3+ ... + n + n) / (n+1) = n(n+3)/(2(n+1))</code></pre><p>故平均复杂度还是O(n)</p><p>然而还要考虑每种情况下 发生的概率实质上是不同的，需要将这个算上</p><h2 id="7-4-均摊时间复杂度-amortized-time-complexity"><a href="#7-4-均摊时间复杂度-amortized-time-complexity" class="headerlink" title="7.4 均摊时间复杂度(amortized time complexity)"></a>7.4 均摊时间复杂度(amortized time complexity)</h2><p>不是遍历case，而是有轮回的，因此算一个轮回里的时间就可以得出平均复杂度了</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-为什么需要复杂度分析？&quot;&gt;&lt;a href=&quot;#1-为什么需要复杂度分析？&quot; class=&quot;headerlink&quot; title=&quot;1. 为什么需要复杂度分析？&quot;&gt;&lt;/a&gt;1. 为什么需要复杂度分析？&lt;/h1&gt;&lt;p&gt;通过统计和监控得到的算法执行时间的占用的内存的大
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="复杂度分析" scheme="https://www.llchen60.com/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(1)-概述</title>
@@ -535,34 +561,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="Map" scheme="https://www.llchen60.com/tags/Map/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java - ExecutorService</title>
-    <link href="https://www.llchen60.com/Java-ExecutorService/"/>
-    <id>https://www.llchen60.com/Java-ExecutorService/</id>
-    <published>2020-02-06T02:58:50.000Z</published>
-    <updated>2020-02-06T02:59:23.181Z</updated>
-    
-    <content type="html"><![CDATA[<p>ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in <strong><em>asynchronous</em></strong> mode. ExecutorService automatically provides a pool of threads and API for assigning tasks to it. </p><h1 id="1-Instantiation"><a href="#1-Instantiation" class="headerlink" title="1. Instantiation"></a>1. Instantiation</h1><h2 id="1-1-Factory-methods-of-Executors-class"><a href="#1-1-Factory-methods-of-Executors-class" class="headerlink" title="1.1 Factory methods of Executors class"></a>1.1 Factory methods of Executors class</h2><p>Use its factory methods of the Executors class to create ExecutorService. </p><pre><code>ExecutorService executor = Executors.newFixedThreadPool(10);</code></pre><h2 id="1-2-Directly-create"><a href="#1-2-Directly-create" class="headerlink" title="1.2 Directly create"></a>1.2 Directly create</h2><pre><code>ExecutorService executorService =   new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,     new LinkedBlockingQueue&lt;Runnable&gt;());</code></pre><h1 id="2-Assigning-Tasks"><a href="#2-Assigning-Tasks" class="headerlink" title="2. Assigning Tasks"></a>2. Assigning Tasks</h1><p>ExecutorService can execute Runnable and Callable tasks. </p><pre><code>Runnable runnableTask = () -&gt; {    try {        TimeUnit.MILLISECONDS.sleep(300);    } catch (InterruptedException e) {        e.printStackTrace();    }};Callable&lt;String&gt; callableTask = () -&gt; {    TimeUnit.MILLISECONDS.sleep(300);    return &quot;Task&#39;s execution&quot;;};List&lt;Callable&lt;String&gt;&gt; callableTasks = new ArrayList&lt;&gt;();callableTasks.add(callableTask);callableTasks.add(callableTask);callableTasks.add(callableTask);</code></pre><h2 id="2-1-execute"><a href="#2-1-execute" class="headerlink" title="2.1 execute()"></a>2.1 execute()</h2><p>The execute() method is void, and it doesn’t give any possibility to get the result of task’s execution or to check the task’s status (is it running or executed).</p><pre><code>executerService.execute(runnableTask);</code></pre><h2 id="2-2-submit"><a href="#2-2-submit" class="headerlink" title="2.2 submit()"></a>2.2 submit()</h2><p>submit() submits a Callable or a Runnable task to an ExecutorService and returns a result of type Future.</p><pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);</code></pre><h2 id="2-3-invokeAny"><a href="#2-3-invokeAny" class="headerlink" title="2.3 invokeAny()"></a>2.3 invokeAny()</h2><p>invokeAny() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of a successful execution of one task (if there was a successful execution).</p><pre><code>String result = executorService.invokeAny(callableTasks);</code></pre><h2 id="2-4-invokeAll"><a href="#2-4-invokeAll" class="headerlink" title="2.4 invokeAll()"></a>2.4 invokeAll()</h2><p>invokeAll() assigns a collection of tasks to an ExecutorService, causing each to be executed, and returns the result of all task executions in the form of a list of objects of type Future.</p><pre><code>List&lt;Future&lt;String&gt;&gt; futures = executorService.invokeAll(callableTasks);</code></pre><h1 id="3-Shutdown"><a href="#3-Shutdown" class="headerlink" title="3. Shutdown"></a>3. Shutdown</h1><p>In general, the ExecutorService will not be automatically destroyed when there is not task to process. It will stay alive and wait for new work to do.</p><p>In some cases this is very helpful; for example, if an app needs to process tasks which appear on an irregular basis or the quantity of these tasks is not known at compile time.</p><p>On the other hand, an app could reach its end, but it will not be stopped because a waiting ExecutorService will cause the JVM to keep running.</p><h2 id="3-1-shutdown"><a href="#3-1-shutdown" class="headerlink" title="3.1 shutdown()"></a>3.1 shutdown()</h2><p>The shutdown() method doesn’t cause an immediate destruction of the ExecutorService. It will make the ExecutorService stop accepting new tasks and shut down after all running threads finish their current work.</p><pre><code>executorService.shutdown();</code></pre><h2 id="3-2-shutdownNow"><a href="#3-2-shutdownNow" class="headerlink" title="3.2 shutdownNow()"></a>3.2 shutdownNow()</h2><p>The shutdownNow() method tries to destroy the ExecutorService immediately, but it doesn’t guarantee that all the running threads will be stopped at the same time. This method returns a list of tasks which are waiting to be processed. It is up to the developer to decide what to do with these tasks.</p><pre><code>List&lt;Runnable&gt; notExecutedTasks = executorService.shutDownNow();</code></pre><h2 id="3-3-best-behavior"><a href="#3-3-best-behavior" class="headerlink" title="3.3 best behavior"></a>3.3 best behavior</h2><pre><code>executorService.shutdown();try {    if (!executorService.awaitTermination(800, TimeUnit.MILLISECONDS)) {        executorService.shutdownNow();    } } catch (InterruptedException e) {    executorService.shutdownNow();}</code></pre><h1 id="4-Future-interface"><a href="#4-Future-interface" class="headerlink" title="4. Future interface"></a>4. Future interface</h1><p>Future interface provides a <code>get()</code> which returns an actual result of the Callable task’s execution or null in the case of Runnable task. Calling the get() method while the task is still running will cause execution to block until the task is properly executed and the result is available.</p><pre><code>Future&lt;String&gt; future = executorService.submit(callableTask);String result = null;try {    result = future.get();} catch (InterruptedException | ExecutionException e) {    e.printStackTrace();}</code></pre><p>With very long blocking caused by the get() method, an application’s performance can degrade. If the resulting data is not crucial, it is possible to avoid such a problem by using timeouts:</p><pre><code>String result = future.get(200, TimeUnit.MILLISECONDS);</code></pre><p>some other methods provided:</p><pre><code>cancel()isCancelled()isDone() </code></pre><h1 id="5-How-to-sync-the-value-across-different-threads"><a href="#5-How-to-sync-the-value-across-different-threads" class="headerlink" title="5. How to sync the value across different threads?"></a>5. How to sync the value across different threads?</h1><p>Suppose we have i++ in several threads, and they all perform such operations. To make the i computed properly, we need to make it atomic. </p><p>Use <code>AtomicInteger</code> or <code>synchronized</code> to get the final correct result. </p><p>Notice, <code>volatile</code> cannot make sure the final result is correct. It mainly makes sure the visibility of newest value, but there is possibility that we mound and switch to other thread before the new value being recorded. </p><p>AtomicInteger class uses CAS(Compare and swap) low level CPU operations. They allow you to modify a particular variable only if the present value is equal to something else (and is returned successfully).</p><h1 id="6-Executor-execute-and-ExecutorService-submit-differences"><a href="#6-Executor-execute-and-ExecutorService-submit-differences" class="headerlink" title="6. Executor.execute() and ExecutorService.submit() differences"></a>6. Executor.execute() and ExecutorService.submit() differences</h1><ol><li>execute(Runnable) does not return anything; while submit(Callable<T>) returns a Future object which allows a way to programatically cancel the running thread and get the return result. </li><li>submit() can accept both Runnable and Callable task but execute() can only accept the Runnable task</li><li>submit() return a Future object while execute() has no return</li><li>get() is a blocking call, which will take some time</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;ExecutorService is a framework provided by the JDK which simplifies the execution of tasks in &lt;strong&gt;&lt;em&gt;asynchronous&lt;/em&gt;&lt;/strong&gt; mode
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Executor Service" scheme="https://www.llchen60.com/tags/Executor-Service/"/>
     
   </entry>
   
