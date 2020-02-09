@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T17:45:06.181Z</updated>
+  <updated>2020-02-09T17:45:58.480Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(6)-队列</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/</id>
+    <published>2020-02-09T17:45:37.000Z</published>
+    <updated>2020-02-09T17:45:58.480Z</updated>
+    
+    <content type="html"><![CDATA[<p>CPU资源有限，任务的处理速度和线程个数并不是线性正相关的。相反的，过多的线程会导致CPU频繁切换，处理性能下降。因此，线程池的大小一般都是综合考虑要处理任务的特点和硬件环境，来事先设置的。</p><p>当我们向固定大小的线程池中请求一个线程的时候，如果线程池中没有空闲资源，如何处理这个请求呢？ —–&gt; 队列</p><p>操作受限的线性表。</p><h1 id="1-理解队列"><a href="#1-理解队列" class="headerlink" title="1. 理解队列"></a>1. 理解队列</h1><ul><li>基本操作<ul><li>入队 enqueue()   入栈 push()</li><li>出队 dequeue()   出栈 pop()</li></ul></li><li>操作受限的线性表数据结构</li><li>带有一些特性的队列<ul><li>循环队列</li><li>阻塞队列</li><li>并发队列</li><li>顺序队列 - 数组实现</li><li>链式队列 - 链式队列</li></ul></li></ul><p>在很多偏底层系统，框架，中间件的开发当中，起到关键性作用。比如高性能disruptor,Linux环形缓存，都用到了循环并发队列; Java Concurrent并发包利用ArrayBlockingQueue来实现公平锁。</p><pre><code>// 用数组实现的队列public class ArrayQueue {  // 数组：items，数组大小：n  private String[] items;  private int n = 0;  // head 表示队头下标，tail 表示队尾下标  private int head = 0;  private int tail = 0;  // 申请一个大小为 capacity 的数组  public ArrayQueue(int capacity) {    items = new String[capacity];    n = capacity;  }  // 入队  public boolean enqueue(String item) {    // 如果 tail == n 表示队列已经满了    if (tail == n) return false;    items[tail] = item;    ++tail;    return true;  }  // 出队  public String dequeue() {    // 如果 head == tail 表示队列为空    if (head == tail) return null;    // 为了让其他语言的同学看的更加明确，把 -- 操作放到单独一行来写了    String ret = items[head];    ++head;    return ret;  }}</code></pre><h1 id="2-基于链表的队列实现方法"><a href="#2-基于链表的队列实现方法" class="headerlink" title="2. 基于链表的队列实现方法"></a>2. 基于链表的队列实现方法</h1><ul><li>两个指针<ul><li>head指针 - 指向第一个结点</li><li>tail指针 - 指向最后一个结点</li></ul></li></ul><h1 id="3-循环队列"><a href="#3-循环队列" class="headerlink" title="3. 循环队列"></a>3. 循环队列</h1><p>用数组实现的队列，在tail = n的时候，会有数据搬移操作。这样入队性能就会受到影响。循环队列的可以解决这个问题。</p><ul><li>如何确认队空和队满<ul><li>队空 head == tail</li><li>队满 (tail+1)%n = head</li></ul></li></ul><pre><code>public class CircularQueue {  // 数组：items，数组大小：n  private String[] items;  private int n = 0;  // head 表示队头下标，tail 表示队尾下标  private int head = 0;  private int tail = 0;  // 申请一个大小为 capacity 的数组  public CircularQueue(int capacity) {    items = new String[capacity];    n = capacity;  }  // 入队  public boolean enqueue(String item) {    // 队列满了    if ((tail + 1) % n == head) return false;    items[tail] = item;    tail = (tail + 1) % n;    return true;  }  // 出队  public String dequeue() {    // 如果 head == tail 表示队列为空    if (head == tail) return null;    String ret = items[head];    head = (head + 1) % n;    return ret;  }}</code></pre><h1 id="4-阻塞队列和并发队列"><a href="#4-阻塞队列和并发队列" class="headerlink" title="4. 阻塞队列和并发队列"></a>4. 阻塞队列和并发队列</h1><ul><li>阻塞队列<ul><li>在队列基础上增加了阻塞操作</li><li>队列为空的时候，从队头取数据会被阻塞</li><li>如果队列已经满了，那么插入数据的操作会被阻塞，直到队列中有空闲位置后再插入数据，然后再返回</li><li>生产者 消费者模型  相当于</li><li>基于阻塞队列，我们可以通过协调生产者和消费者的个数来提高数据的处理效率</li><li>我们可以通过配置多几个的消费者，来应对一个生产者</li></ul></li><li>并发队列<ul><li>实现方法<ul><li>在enquue()和dequeue()方法上加锁</li><li>基于CAS原子操作</li></ul></li></ul></li></ul><h1 id="5-对比基于数组和基于链表实现的队列"><a href="#5-对比基于数组和基于链表实现的队列" class="headerlink" title="5. 对比基于数组和基于链表实现的队列"></a>5. 对比基于数组和基于链表实现的队列</h1><ul><li>基于链表的实现方式<ul><li>可以实现一个支持无限排队的无界队列</li><li>可能会导致过多的请求排队等待</li><li>请求处理的响应时间会长很多</li><li>因此对于响应时间比较敏感的系统来说，基于链表实现的无限排队的线程池就不是很合适了</li></ul></li><li>基于数组实现的有界队列<ul><li>队列大小是有限的</li><li>超过一定数量以后，请求就会被拒绝</li><li>队列的大小设置就会是个trade off了</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CPU资源有限，任务的处理速度和线程个数并不是线性正相关的。相反的，过多的线程会导致CPU频繁切换，处理性能下降。因此，线程池的大小一般都是综合考虑要处理任务的特点和硬件环境，来事先设置的。&lt;/p&gt;
+&lt;p&gt;当我们向固定大小的线程池中请求一个线程的时候，如果线程池中没有空闲资
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="队列" scheme="https://www.llchen60.com/tags/%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(5)-栈</title>
@@ -531,36 +558,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="Composition" scheme="https://www.llchen60.com/tags/Composition/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 反射机制</title>
-    <link href="https://www.llchen60.com/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
-    <id>https://www.llchen60.com/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</id>
-    <published>2020-02-06T03:02:35.000Z</published>
-    <updated>2020-02-06T03:02:58.113Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>Java反射机制是在运行时用来判定或者修改方法，类，接口的行为的API。</p><ul><li><p>反射可以告诉我们类和对象之间的信息，以及我们可以用类的哪些方法来使用这个对象</p></li><li><p>通过反射，我们就可以在运行的时候赋予类一个新的对象</p></li></ul><h1 id="2-使用范例"><a href="#2-使用范例" class="headerlink" title="2. 使用范例"></a>2. 使用范例</h1><p>反射可以用来获取关于类，构造器和方法的信息：</p><ul><li><p>class: getClass()方法可以用来获取对象属于的类的名字</p></li><li><p>Constructors: getConstructor()可以用来获取对象属于的类的public的构造器</p></li><li><p>getMethods() 可以用来获取对象属于的类的public的方法</p><p>  // A simple Java program to demonstrate the use of reflection<br>  import java.lang.reflect.Method;<br>  import java.lang.reflect.Field;<br>  import java.lang.reflect.Constructor; </p><p>  // class whose object is to be created<br>  class Test<br>  { </p><pre><code>  // creating a private field   private String s;   // creating a public constructor   public Test() { s = &quot;GeeksforGeeks&quot;; }   // Creating a public method with no arguments   public void method1() {       System.out.println(&quot;The string is &quot; + s);   }   // Creating a public method with int as argument   public void method2(int n) {       System.out.println(&quot;The number is &quot; + n);   }   // creating a private method   private void method3() {       System.out.println(&quot;Private method invoked&quot;);   } </code></pre><p>  } </p><p>  class Demo<br>  { </p><pre><code>  public static void main(String args[]) throws Exception   {       // Creating object whose property is to be checked       Test obj = new Test();           // 构建类的对象      // getclass method       Class cls = obj.getClass();       System.out.println(&quot;The name of class is &quot; +                           cls.getName());       // Getting the constructor of the class through the       // object of the class       Constructor constructor = cls.getConstructor();       System.out.println(&quot;The name of constructor is &quot; +                           constructor.getName());       System.out.println(&quot;The public methods of class are : &quot;);       // Getting methods of the class through the object       // of the class by using getMethods       Method[] methods = cls.getMethods();       // Printing method names       for (Method method:methods)           System.out.println(method.getName());       // creates object of desired method by providing the       // method name and parameter class as arguments to       // the getDeclaredMethod        // 这里是通过方法的名字和输入变量来获取对应的方法      Method methodcall1 = cls.getDeclaredMethod(&quot;method2&quot;,                                               int.class);       // invokes the method at runtime       // 这里是在运行时执行这个方法       methodcall1.invoke(obj, 19);       // creates object of the desired field by providing       // the name of field as argument to the       // getDeclaredField method       // 运行时获取对应的private的变量      Field field = cls.getDeclaredField(&quot;s&quot;);       // allows the object to access the field irrespective       // of the access specifier used with the field       // 将这个变量设成可以获取的      field.setAccessible(true);       // takes object and the new value to be assigned       // to the field as arguments       field.set(obj, &quot;JAVA&quot;);       // Creates object of desired method by providing the       // method name as argument to the getDeclaredMethod       Method methodcall2 = cls.getDeclaredMethod(&quot;method1&quot;);       // invokes the method at runtime       methodcall2.invoke(obj);       // Creates object of the desired method by providing       // the name of method as argument to the       // getDeclaredMethod method       Method methodcall3 = cls.getDeclaredMethod(&quot;method3&quot;);       // allows the object to access the method irrespective       // of the access specifier used with the method       methodcall3.setAccessible(true);       // invokes the method at runtime       methodcall3.invoke(obj);   } </code></pre><p>  } </p></li></ul><h1 id="3-详细分析"><a href="#3-详细分析" class="headerlink" title="3. 详细分析"></a>3. 详细分析</h1><p>反射一言以蔽之，即在运行时拿到class，并创建类对应的对象的方式。这种好处是更具灵活性，劣势是会慢很多，代码会相对难理解些。</p><p>从代码本身的角度来讲，是指一部分代码有能力去观察/检查另一部分代码。用已知的部分合理推断出未知的部分，这未知的部分其实是指还不知道的信息。</p><p>一般来说在Java里我们都是和注解一起来使用反射的，</p><h1 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h1><ul><li>好处<ul><li>反射是什么呢？当我们的程序在运行时，需要动态的加载一些类这些类可能之前用不到所以不用加载到jvm，而是在运行时根据需要才加载，这样的好处对于服务器来说不言而喻，举个例子我们的项目底层有时是用mysql，有时用oracle，<strong>需要动态地根据实际情况加载驱动类，这个时候反射就有用了</strong>，假设 <code>com.java.dbtest.myqlConnection</code>，<code>com.java.dbtest.oracleConnection</code>这两个类我们要用，这时候我们的程序就写得比较动态化，通过<code>Class tc = Class.forName(&quot;com.java.dbtest.TestConnection&quot;);</code>通过类的全类名让jvm在服务器中找到并加载这个类，而如果是oracle则传入的参数就变成另一个了。这时候就可以看到反射的好处了，这个动态性就体现出java的特性了！</li><li>更具拓展性，可以在运行时获取信息</li><li>获取一些private的域的值方便debug</li></ul></li><li>劣势<ul><li>更慢，有延时</li><li>会暴露一些接口</li><li>反射会要求运行的许可，当在secure manager下来运行可能不被允许</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful" target="_blank" rel="noopener">https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/index.html</a></li><li><a href="https://docs.oracle.com/javase/tutorial/reflect/class/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/reflect/class/index.html</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-介绍&quot;&gt;&lt;a href=&quot;#1-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. 介绍&quot;&gt;&lt;/a&gt;1. 介绍&lt;/h1&gt;&lt;p&gt;Java反射机制是在运行时用来判定或者修改方法，类，接口的行为的API。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;反射可以告诉我
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Reflection" scheme="https://www.llchen60.com/tags/Reflection/"/>
     
   </entry>
   
