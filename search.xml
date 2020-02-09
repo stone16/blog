@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>PATH and LD_LIBRARY_PATH</title>
+      <link href="/PATH-and-LD-LIBRARY-PATH/"/>
+      <url>/PATH-and-LD-LIBRARY-PATH/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-What-is-LD-LIBRARY-PATH"><a href="#1-What-is-LD-LIBRARY-PATH" class="headerlink" title="1. What is LD_LIBRARY_PATH?"></a>1. What is LD_LIBRARY_PATH?</h1><p>LD_LIBRARY_PATH is a variable in linux to provide a list of additional directories in which to search for dynamically linkable libraries. </p><p>Consulted at time of execution , not consulted at link time </p><h1 id="2-PATH"><a href="#2-PATH" class="headerlink" title="2. PATH"></a>2. PATH</h1><p>PATH environment variable specifies the search paths for commands</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Lombok</title>
       <link href="/Lombok/"/>
       <url>/Lombok/</url>

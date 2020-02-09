@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T05:17:47.769Z</updated>
+  <updated>2020-02-09T05:20:52.375Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PATH and LD_LIBRARY_PATH</title>
+    <link href="https://www.llchen60.com/PATH-and-LD-LIBRARY-PATH/"/>
+    <id>https://www.llchen60.com/PATH-and-LD-LIBRARY-PATH/</id>
+    <published>2020-02-09T05:19:09.000Z</published>
+    <updated>2020-02-09T05:20:52.375Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-What-is-LD-LIBRARY-PATH"><a href="#1-What-is-LD-LIBRARY-PATH" class="headerlink" title="1. What is LD_LIBRARY_PATH?"></a>1. What is LD_LIBRARY_PATH?</h1><p>LD_LIBRARY_PATH is a variable in linux to provide a list of additional directories in which to search for dynamically linkable libraries. </p><p>Consulted at time of execution , not consulted at link time </p><h1 id="2-PATH"><a href="#2-PATH" class="headerlink" title="2. PATH"></a>2. PATH</h1><p>PATH environment variable specifies the search paths for commands</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-What-is-LD-LIBRARY-PATH&quot;&gt;&lt;a href=&quot;#1-What-is-LD-LIBRARY-PATH&quot; class=&quot;headerlink&quot; title=&quot;1. What is LD_LIBRARY_PATH?&quot;&gt;&lt;/a&gt;1. What i
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://www.llchen60.com/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://www.llchen60.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Lombok</title>
@@ -552,36 +578,6 @@
     
     
       <category term="Load Balancers" scheme="https://www.llchen60.com/tags/Load-Balancers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Google Dagger Tutorial</title>
-    <link href="https://www.llchen60.com/Google-Dagger-Tutorial/"/>
-    <id>https://www.llchen60.com/Google-Dagger-Tutorial/</id>
-    <published>2020-02-04T17:12:52.000Z</published>
-    <updated>2020-02-04T17:14:18.480Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Comparisons"><a href="#1-Comparisons" class="headerlink" title="1. Comparisons"></a>1. Comparisons</h1><p>Spring is a giant collection of libraries and utilities. with a lot of integration, an XML configuration, runtime/ reflective bindings. Application already using Spring can use its dependency injection smoothly. </p><p>Dependency is only a small part of it. Guice and Dagger is lightweight and only a dependency injection framework</p><p>Dagger is very lightweight framework with very few integrations, java interface/ annotation configuration, and compile-time code generated bindings. </p><p>For dependency injection and IOC container, there is <a href="https://llchen60.com/IOC%E5%AE%B9%E5%99%A8%E5%92%8CDependency-Injection%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">a post in Chinese</a> wrote last year.</p><p>Also a big difference between those DI framework is when does the injection happen, compile time or runtime? </p><p>Run-time DI is <strong>based on reflection</strong> which is simpler to use but slower at run-time —- Spring, Guice </p><p>Compile-time DI is <strong>based on code generation</strong>. This means that all the heavy-weight operations are performed during compilation. It adds complexity but generally performs faster</p><h1 id="2-Implementation"><a href="#2-Implementation" class="headerlink" title="2. Implementation"></a>2. Implementation</h1><ul><li>POJO</li><li>Module<ul><li>a class provides or builds the objects’ dependencies </li></ul></li><li>Component<ul><li>an interface used to generate the injector </li></ul></li></ul><h2 id="2-1-POJO"><a href="#2-1-POJO" class="headerlink" title="2.1 POJO"></a>2.1 POJO</h2><pre><code>public class Car {    private Engine engine;    private Brand brand;    @Inject    public Car(Engine engine, Brand brand) {        this.engine = engine;        this.brand = brand;    }    // getters and setters}</code></pre><h2 id="2-2-Module"><a href="#2-2-Module" class="headerlink" title="2.2 Module"></a>2.2 Module</h2><pre><code>@Module // similar to @Controller  @Service public class VehiclesModule {    @Provides // similar to @Bean     public Engine provideEngine() {        return new Engine();    }    @Provides    @Singleton    public Brand provideBrand() {         return new Brand(&quot;lol&quot;);     }}</code></pre><h2 id="2-3-Component"><a href="#2-3-Component" class="headerlink" title="2.3 Component"></a>2.3 Component</h2><p>here we could return the real object we want to be the starting point of the whole mechanism:</p><p>Dagger will start from here, go through all the @Inject and satisfy those dependencies. In our example, will create engine and brand object. </p><pre><code>@Singleton@Component(modules = VehiclesModule.class)public interface VehiclesComponent {    Car buildCar();}</code></pre><h2 id="2-4-client-side"><a href="#2-4-client-side" class="headerlink" title="2.4 client side"></a>2.4 client side</h2><p>Notice: <code>DaggerVehiclesComponent</code> is created by dagger automatically. </p><pre><code>VehiclesComponent component = DaggerVehiclesComponent.create();Car eg = component.buildCar();</code></pre><h1 id="3-Dagger-User-Guide"><a href="#3-Dagger-User-Guide" class="headerlink" title="3. Dagger User Guide"></a>3. Dagger User Guide</h1><h2 id="3-1-Declaring-Dependencies"><a href="#3-1-Declaring-Dependencies" class="headerlink" title="3.1 Declaring Dependencies"></a>3.1 Declaring Dependencies</h2><p>Dagger constructs instances of application classes and satisfies their dependencies. It uses @Inject annotation to identify which constructors and fields it is interested in. </p><h2 id="3-2-Satisfying-Dependencies"><a href="#3-2-Satisfying-Dependencies" class="headerlink" title="3.2 Satisfying Dependencies"></a>3.2 Satisfying Dependencies</h2><p>By default, Dagger satisfies each dependency by constructing an instance of the requested type. It call <code>new SomeObject()</code> and setting its injectable fields. </p><ul><li>@Inject <ul><li>interfaces cannot be constructed </li><li>third party classes cannot be annotated </li><li>configurable objects must be configured </li></ul></li><li>Instead, use @provides <ul><li>all @provides methods should be named with a provide prefix and module classes are named with a Module suffix </li></ul></li></ul><h2 id="3-3-Building-the-Graph"><a href="#3-3-Building-the-Graph" class="headerlink" title="3.3 Building the Graph"></a>3.3 Building the Graph</h2><p>The @Inject and @Provides annotated classes form a graph of objects, linked by their dependencies. Build the application by <strong>an interface with methods that have no arguments and return the desired type</strong>. </p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://stackoverflow.com/questions/39688830/why-use-develop-guice-when-you-have-spring-and-dagger" target="_blank" rel="noopener">https://stackoverflow.com/questions/39688830/why-use-develop-guice-when-you-have-spring-and-dagger</a></li><li><a href="https://www.baeldung.com/dagger-2" target="_blank" rel="noopener">https://www.baeldung.com/dagger-2</a></li><li><a href="https://rskupnik.github.io/dependency-injection-in-pet-project-dagger2" target="_blank" rel="noopener">https://rskupnik.github.io/dependency-injection-in-pet-project-dagger2</a></li><li><a href="https://dagger.dev/" target="_blank" rel="noopener">https://dagger.dev/</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Comparisons&quot;&gt;&lt;a href=&quot;#1-Comparisons&quot; class=&quot;headerlink&quot; title=&quot;1. Comparisons&quot;&gt;&lt;/a&gt;1. Comparisons&lt;/h1&gt;&lt;p&gt;Spring is a giant collec
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Dagger" scheme="https://www.llchen60.com/tags/Dagger/"/>
-    
-      <category term="DI" scheme="https://www.llchen60.com/tags/DI/"/>
     
   </entry>
   
