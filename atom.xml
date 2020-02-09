@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T06:46:53.794Z</updated>
+  <updated>2020-02-09T06:49:54.512Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(4)-链表</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-4-%E9%93%BE%E8%A1%A8/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-4-%E9%93%BE%E8%A1%A8/</id>
+    <published>2020-02-09T06:48:48.000Z</published>
+    <updated>2020-02-09T06:49:54.512Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-链表结构"><a href="#1-链表结构" class="headerlink" title="1. 链表结构"></a>1. 链表结构</h1><ul><li><p>数组需要一块连续的内存空间来存储，对内存的要求比较高</p></li><li><p>链表，通过指针将一组<strong>零散的内存块</strong>串联起来使用</p></li><li><p>链表经典应用场景 - LRU缓存淘汰算法</p><ul><li>缓存是一种提高数据读取性能的技术<ul><li>CPU缓存</li><li>数据库缓存</li><li>浏览器缓存</li></ul></li></ul></li></ul><h2 id="1-1-单链表"><a href="#1-1-单链表" class="headerlink" title="1.1 单链表"></a>1.1 单链表</h2><p><img src="https://i.loli.net/2020/02/09/Q9fFlx6ap5B47Mj.jpg" alt="fig1.jpg"></p><ul><li><p>每个链表的节点 </p><ul><li>存储的数据</li><li>记录链的下一个结点的地址(后继指针next)</li></ul></li><li><p>头结点用来记录链表的<strong>基地址</strong></p></li><li><p>尾结点的指针指向一个<strong>空地址NULL</strong></p></li><li><p>插入和删除结点都非常快 O(1)</p></li><li><p>随机访问其中一个元素，比如按照顺序选第n个就是O(n)的复杂度</p></li></ul><p><img src="https://i.loli.net/2020/02/09/h6maNKWveQnfgGP.jpg" alt="fig2.jpg"></p><h2 id="1-2-双向链表"><a href="#1-2-双向链表" class="headerlink" title="1.2 双向链表"></a>1.2 双向链表</h2><p><img src="https://i.loli.net/2020/02/09/rYhNQ1Zwp5klgVn.jpg" alt="fig4.jpg"></p><ul><li>双向链表支持两个方向，每个节点不止有一个后继指针next指向后面的结点，还有一个前驱指针prev指向前面的结点。</li><li>双向链表可以支持O(1) 的时间复杂度的情况下找到前驱结点，这样就使得双向链表在某些情况下的插入、删除等操作都要比单链表简单高效。</li><li>其实就是无论单链表还是双向链表，在删除的时候都需要找到前驱结点，而单链表在这里想要找到前驱结点的话就得从头开始去找，时间复杂度还是O(n)，而双向链表就可以实现很快的找到对应的前驱节点了。</li><li>因为有prev next两个指针，它黄海军更占用内存的空间</li><li>Java的LinkedHashMap就是用双向链表来实现的</li><li>用空间换时间的设计思想<ul><li>当内存空间充足的时候，如果我们更追求代码的执行速度，那么我们就可以选择空间复杂度相对较高，但时间复杂度相对很低的算法或者数据结构。 </li></ul></li><li>对于有序链表来说，双向链表的按值查询效率也要比单链表高。因为我们可以通过记录上次查找的位置p，每次查询的时候，根据要查找的值和p的大小关系决定是往前还是往后来查找。</li></ul><h2 id="1-3-循环链表"><a href="#1-3-循环链表" class="headerlink" title="1.3 循环链表"></a>1.3 循环链表</h2><p><img src="https://i.loli.net/2020/02/09/BLOXWHUgpeJoQGh.jpg" alt="fig3.jpg"></p><ul><li>循环链表的尾结点指针是指向链表的头结点，像一个环一样首尾相连</li><li>当要处理的数据具有<strong>环形结构特点</strong>时，就特别适合采用循环链表。</li></ul><h1 id="2-链表数组性能对比"><a href="#2-链表数组性能对比" class="headerlink" title="2.链表数组性能对比"></a>2.链表数组性能对比</h1><table><thead><tr><th>时间复杂度</th><th>数组</th><th>链表</th></tr></thead><tbody><tr><td>插入删除</td><td>O(n)</td><td>O(1)</td></tr><tr><td>随机访问</td><td>O(1)</td><td>O(n)</td></tr></tbody></table><p>但是在实际应用开发当中，不能仅仅利用复杂度分析就决定使用哪个数据结构来存储数据。</p><p>数组简单易用，在实现上使用的是连续的内存空间，可以借助CPU的缓存机制，预读数组中的数据，所以访问效率更高。而链表因为不是连续内存存储，所以没办法有效预读。</p><p>数组大小固定，增大如果要做扩容拷贝是非常费时间的。链表本身没有大小的限制，天然支持动态扩容。</p><p>而且，如果代码对于内存的使用很苛刻，那数组会更加合适。因为链表中的每个结点都要消耗额外的存储空间去存储指针，所以内存的消耗会翻倍。而且，对链表进行频繁的插入，删除操作还会导致频繁的内存申请和释放，容易造成内存碎片。Java中就会导致频繁的garbage collection. </p><h1 id="3-写链表代码的技巧"><a href="#3-写链表代码的技巧" class="headerlink" title="3. 写链表代码的技巧"></a>3. 写链表代码的技巧</h1><h2 id="3-1-理解指针或者引用的含义"><a href="#3-1-理解指针或者引用的含义" class="headerlink" title="3.1 理解指针或者引用的含义"></a>3.1 理解指针或者引用的含义</h2><p>指针，是在像C语言这样的语言当中来使用的；对于Java这种面向对象的语言，是用引用来达成存储所指对象的内存地址的目的。</p><p>将某个变量赋值给指针，实际上就是将这个变量的地址赋值给指针，或者反过来说，指针中存储了这个变量的内存地址，指向了这个变量，通过指针就可以找到这个变量了。</p><pre><code>// p结点的next指针里面存储了q结点的内存地址p-&gt;next = q// p 结点的next指针存储了p结点的下下个结点的内存地址p-&gt;next = p-&gt;next-&gt;next</code></pre><h2 id="3-2-警惕指针丢失和内存泄露"><a href="#3-2-警惕指针丢失和内存泄露" class="headerlink" title="3.2 警惕指针丢失和内存泄露"></a>3.2 警惕指针丢失和内存泄露</h2><p><img src="https://i.loli.net/2020/02/09/ASXEJ4ZYzf6lmrH.jpg" alt="fig5.jpg"></p><pre><code>x-&gt;next = p-&gt;next;  // 将 x 的结点的 next 指针指向 b 结点；p-&gt;next = x;  // 将 p 的 next 指针指向 x 结点；</code></pre><p>两行代码的顺序很重要，你需要先将p的next的地址赋给x的next的地址，然后再来改p的next，改变p的next指针</p><h2 id="3-3-利用哨兵"><a href="#3-3-利用哨兵" class="headerlink" title="3.3 利用哨兵"></a>3.3 利用哨兵</h2><p>对于链表当中的第一个结点和最后一个结点，其实现插入删除的逻辑和其他结点是不一样的。</p><p>利用哨兵结点可以简化整个实现，让针对于第一个结点和最后一个结点的处理和其他结点的处理方式一致。</p><p><img src="https://i.loli.net/2020/02/09/A43BtwNSuvhMy7n.jpg" alt="fig6.jpg"></p><h2 id="3-4-边界条件的思考与判定"><a href="#3-4-边界条件的思考与判定" class="headerlink" title="3.4 边界条件的思考与判定"></a>3.4 边界条件的思考与判定</h2><ul><li>链表为空</li><li>链表只包含一个结点</li><li>链表只包含两个结点</li><li>代码逻辑在处理头结点和尾结点的时候</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-链表结构&quot;&gt;&lt;a href=&quot;#1-链表结构&quot; class=&quot;headerlink&quot; title=&quot;1. 链表结构&quot;&gt;&lt;/a&gt;1. 链表结构&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;数组需要一块连续的内存空间来存储，对内存的要求比较高&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="LinkedList" scheme="https://www.llchen60.com/tags/LinkedList/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(3)-数组</title>
@@ -531,34 +560,6 @@
     
     
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java Pattern Regex表达式</title>
-    <link href="https://www.llchen60.com/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/Java-Pattern-Regex%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
-    <published>2020-02-06T03:00:32.000Z</published>
-    <updated>2020-02-06T03:00:54.343Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-为什么要使用Pattern？"><a href="#1-为什么要使用Pattern？" class="headerlink" title="1. 为什么要使用Pattern？"></a>1. 为什么要使用Pattern？</h1><p>一般来说如果我们要对String做某个范式下的替换时，我们需要使用</p><pre><code>stringEG.replaceAll(&quot;(?i)@gmail\\.com$&quot;, &quot;&quot;);</code></pre><p>上面这行代码是将stringEG最后的@gmail.com给替换掉，通过这种方式来获得用户名。</p><p>这种Replace操作我们会经常使用，但是上述有一个问题，即每次运行都要执行一遍Regex操作，这样很费时间，每次都要进行编译，Pattern可以帮助我们解决这个问题。</p><p>通过设置static的变量，我们可以将Compile完的结果存起来，然后在需要的时候直接使用这个结果即可。</p><p>使用方法如下所示:</p><pre><code>private static final Pattern USER_NAME_PATTERN = Pattern.compile(&quot;(?i)@gmail\\.com$);final String username =  USER_NAME_PATTERN.matcher(stringEG.replace(&quot;&quot;));</code></pre><h1 id="2-如何使用Pattern？"><a href="#2-如何使用Pattern？" class="headerlink" title="2. 如何使用Pattern？"></a>2. 如何使用Pattern？</h1><p>使用Java Pattern，重点在于对于正则表达式的使用，可以看一下文章 - <a href="https://llchen60.com/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank" rel="noopener">正则表达式</a>, 里面有对正则的详细介绍。</p><p>Pattern对象是一个已经编译过的正则表达式的表达，Pattern类没有public的构造器，想要创建一个Pattern，我们需要首先调用其静态的compile()方法，通过这个方法会得到一个Pattern对象。</p><p>Matcher 对象用来解释正则表达式然后根据表达式来找符合规则的相关表达，同样没有public的构造器，通过调用matcher() 方法来作比较</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-为什么要使用Pattern？&quot;&gt;&lt;a href=&quot;#1-为什么要使用Pattern？&quot; class=&quot;headerlink&quot; title=&quot;1. 为什么要使用Pattern？&quot;&gt;&lt;/a&gt;1. 为什么要使用Pattern？&lt;/h1&gt;&lt;p&gt;一般来说如果我们要对St
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Regex" scheme="https://www.llchen60.com/tags/Regex/"/>
     
   </entry>
   
