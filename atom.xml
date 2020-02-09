@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-09T18:07:27.910Z</updated>
+  <updated>2020-02-09T18:12:09.716Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法(13)-跳表</title>
+    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"/>
+    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/</id>
+    <published>2020-02-09T18:11:25.000Z</published>
+    <updated>2020-02-09T18:12:09.716Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul><li>跳表<ul><li>动态数据结构</li><li>可以支持快速的插入，删除，查找操作</li><li>写起来也不会很复杂</li></ul></li></ul><p>Redis当中的有序集合就是用跳表来实现的。</p><h1 id="2-如何理解跳表"><a href="#2-如何理解跳表" class="headerlink" title="2. 如何理解跳表"></a>2. 如何理解跳表</h1><p>对于一个单链表来说，即便链表当中存储的数据是有序的，如果我们想要从中查找某个数据，也只能从头到尾遍历链表，这样查找效率就会非常低，时间复杂度比较高，O(n)</p><p>为了解决这个问题，我们可以对链表建立一级索引，每几个结点就提取一个结点到上一级当中，抽出来的那一级我们就可以将其叫做索引或者索引层了。</p><p>通过增加索引的层级，来加快寻找节点的速度，这就是跳表 – 链表加上多级索引的结构</p><ul><li>时间复杂度非常理想 O(logn)</li><li>但是相对来说会更需要内存一些  空间复杂度为O(n)</li></ul><h1 id="3-高效的动态插入和删除操作"><a href="#3-高效的动态插入和删除操作" class="headerlink" title="3. 高效的动态插入和删除操作"></a>3. 高效的动态插入和删除操作</h1><p>其动态的插入和删除操作的时间复杂度为O(logn)</p><p><img src="https://i.loli.net/2020/02/10/f4vdSyzCEs2KWFY.jpg" alt="fig1.jpg"></p><p>删除操作，还是需要拿到删除节点的前驱节点，然后通过指针操作完成删除。</p><h2 id="4-跳表索引动态更新"><a href="#4-跳表索引动态更新" class="headerlink" title="4. 跳表索引动态更新"></a>4. 跳表索引动态更新</h2><p><img src="https://i.loli.net/2020/02/10/J5QxpXFgAeTCa2j.jpg" alt="fig2.jpg"></p><p>跳表是需要不断更新的，因为当我们不断向跳表里面插入数据的时候，如果我们不更新索引，就有可能出现两个索引节点之间数据非常多的情况。极端情况下，跳表就会退化成单链表。</p><ul><li>我们需要某种方式来维护索引与原始链表大小之间的平衡<ul><li>跳表是通过随机函数来维护平衡性的</li><li>当我们往跳表里面插入数据的时候，可以选择同时将这个数据插入到部分索引层当中。</li><li>根据随机函数来决定这个结点插入到哪几级索引当中。</li></ul></li></ul><p><img src="https://i.loli.net/2020/02/10/64FQnKPZ8uWlTCb.jpg" alt="fig3.jpg"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-概念&quot;&gt;&lt;a href=&quot;#1-概念&quot; class=&quot;headerlink&quot; title=&quot;1. 概念&quot;&gt;&lt;/a&gt;1. 概念&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;跳表&lt;ul&gt;
+&lt;li&gt;动态数据结构&lt;/li&gt;
+&lt;li&gt;可以支持快速的插入，删除，查找操作&lt;/li&gt;
+&lt;li&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="跳表" scheme="https://www.llchen60.com/tags/%E8%B7%B3%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构与算法(12)-二分查找</title>
@@ -537,35 +567,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="JSP" scheme="https://www.llchen60.com/tags/JSP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JMX - Tutorials</title>
-    <link href="https://www.llchen60.com/JMX-Tutorials/"/>
-    <id>https://www.llchen60.com/JMX-Tutorials/</id>
-    <published>2020-02-09T05:15:44.000Z</published>
-    <updated>2020-02-09T05:16:07.815Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><ul><li>JMX - Java Management extensions<ul><li>export standard metrics and custom metrics using MBeans to a monitoring system </li><li>understand how your application is performing <ul><li>memory </li><li>cpu</li><li>threads </li><li>API calls in a REST endpoint</li></ul></li></ul></li></ul><h1 id="2-Why-need-this"><a href="#2-Why-need-this" class="headerlink" title="2. Why need this?"></a>2. Why need this?</h1><ul><li>Large scale java applications <ul><li>gather performance information <ul><li>number of users connected </li></ul></li></ul></li><li>could provide a monitoring interface </li><li>any class that exports data to JMX is called a Managed Bean(MBean). These MBeans publish their metrics to a MBean Server provided by the Java platform. </li></ul><h1 id="3-Components"><a href="#3-Components" class="headerlink" title="3. Components"></a>3. Components</h1><h2 id="3-1-MBean"><a href="#3-1-MBean" class="headerlink" title="3.1 MBean"></a>3.1 MBean</h2><ul><li>Objects with methods that return information and export the information via the MBeanServer</li><li>Mainly have 4 types <ul><li>Standard MBean <ul><li>create an interface with getter  </li></ul></li><li>Dynamic MBean <ul><li>implements getters and setters to retrieve or modify the metric that can be auto discovered by implementing the javax.management.DynamicMBean interface </li></ul></li><li>Model MBean<ul><li>Generic, dynamic in runtime to instrument the resources  </li></ul></li><li>Open MBean<ul><li>Using a predefined set of java classes</li></ul></li></ul></li></ul><h1 id="4-Example"><a href="#4-Example" class="headerlink" title="4. Example"></a>4. Example</h1><pre><code>// Create an interface that the MBeanServer will retrieve information public interface SystemStatusMBean {   Integer getNumberOfSecondsRunning();   String getProgramName();   Long getNumberOfUnixSecondsRunning();   Boolean getSwitchStatus();}</code></pre><p>Actual Implementation </p><pre><code>    public class SystemStatus implements SystemStatusMBean {   private Integer numberOfSecondsRunning;   private String programName;   private Long numberOfUnixSecondsRunning;   private Boolean switchStatus;   private Thread backgroundThread;   public SystemStatus(String programName) {       // First we initialize all the metrics       this.backgroundThread = new Thread();       this.programName = programName;       this.numberOfSecondsRunning = 0;       this.numberOfUnixSecondsRunning = System.currentTimeMillis() / 1000L;       this.switchStatus = false;       // We will use a background thread to update the metrics       this.backgroundThread = new Thread(() -&gt; {           try {               while (true) {                   // Every second we update the metrics                   numberOfSecondsRunning += 1;                   numberOfUnixSecondsRunning += 1;                   switchStatus = !switchStatus;                   Thread.sleep(1000L);               }           } catch (Exception e) {               e.printStackTrace();           }       });       this.backgroundThread.setName(&quot;backgroundThread&quot;);       this.backgroundThread.start();   }</code></pre><h1 id="5-Operations-and-attributes"><a href="#5-Operations-and-attributes" class="headerlink" title="5. Operations and attributes"></a>5. Operations and attributes</h1><p>Class properties exported through MBeans are called attributes, and methods exported through MBeans are called operations.</p><ul><li>TotalCompilationTime <ul><li>Total time spent doing in JIT compilation  </li></ul></li><li>Garbage Collector - CollectionCount <ul><li>Number of garbage collection events fired since the JVM launch</li></ul></li><li>Garbage Collector - CollectionTime </li><li>FreePyhsicalMemorySize </li><li>CommitedVirtualMemorySize<ul><li>The amount of memory that is guaranteed to be available for use by JVM  </li></ul></li><li>ProcessCpuTime <ul><li>Time CPU has spent running the process  </li></ul></li><li>PeakThreadCount <ul><li>maximum number of threads being executed at the same time since the JVM was started or the peak was reset  </li></ul></li><li>ThreadCount <ul><li>the number of threads running at the current moment </li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://sysdig.com/blog/jmx-monitoring-custom-metrics/" target="_blank" rel="noopener">https://sysdig.com/blog/jmx-monitoring-custom-metrics/</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Introduction&quot;&gt;&lt;a href=&quot;#1-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Introduction&quot;&gt;&lt;/a&gt;1. Introduction&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;JMX - Java Man
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="JMX" scheme="https://www.llchen60.com/tags/JMX/"/>
     
   </entry>
   

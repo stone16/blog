@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据结构与算法(13)-跳表</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul><li>跳表<ul><li>动态数据结构</li><li>可以支持快速的插入，删除，查找操作</li><li>写起来也不会很复杂</li></ul></li></ul><p>Redis当中的有序集合就是用跳表来实现的。</p><h1 id="2-如何理解跳表"><a href="#2-如何理解跳表" class="headerlink" title="2. 如何理解跳表"></a>2. 如何理解跳表</h1><p>对于一个单链表来说，即便链表当中存储的数据是有序的，如果我们想要从中查找某个数据，也只能从头到尾遍历链表，这样查找效率就会非常低，时间复杂度比较高，O(n)</p><p>为了解决这个问题，我们可以对链表建立一级索引，每几个结点就提取一个结点到上一级当中，抽出来的那一级我们就可以将其叫做索引或者索引层了。</p><p>通过增加索引的层级，来加快寻找节点的速度，这就是跳表 – 链表加上多级索引的结构</p><ul><li>时间复杂度非常理想 O(logn)</li><li>但是相对来说会更需要内存一些  空间复杂度为O(n)</li></ul><h1 id="3-高效的动态插入和删除操作"><a href="#3-高效的动态插入和删除操作" class="headerlink" title="3. 高效的动态插入和删除操作"></a>3. 高效的动态插入和删除操作</h1><p>其动态的插入和删除操作的时间复杂度为O(logn)</p><p><img src="https://i.loli.net/2020/02/10/f4vdSyzCEs2KWFY.jpg" alt="fig1.jpg"></p><p>删除操作，还是需要拿到删除节点的前驱节点，然后通过指针操作完成删除。</p><h2 id="4-跳表索引动态更新"><a href="#4-跳表索引动态更新" class="headerlink" title="4. 跳表索引动态更新"></a>4. 跳表索引动态更新</h2><p><img src="https://i.loli.net/2020/02/10/J5QxpXFgAeTCa2j.jpg" alt="fig2.jpg"></p><p>跳表是需要不断更新的，因为当我们不断向跳表里面插入数据的时候，如果我们不更新索引，就有可能出现两个索引节点之间数据非常多的情况。极端情况下，跳表就会退化成单链表。</p><ul><li>我们需要某种方式来维护索引与原始链表大小之间的平衡<ul><li>跳表是通过随机函数来维护平衡性的</li><li>当我们往跳表里面插入数据的时候，可以选择同时将这个数据插入到部分索引层当中。</li><li>根据随机函数来决定这个结点插入到哪几级索引当中。</li></ul></li></ul><p><img src="https://i.loli.net/2020/02/10/64FQnKPZ8uWlTCb.jpg" alt="fig3.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 跳表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构与算法(12)-二分查找</title>
       <link href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-12-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
       <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-12-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
