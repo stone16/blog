@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java是如何工作的</title>
+      <link href="/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
+      <url>/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-编程语言是如何工作的"><a href="#1-编程语言是如何工作的" class="headerlink" title="1. 编程语言是如何工作的"></a>1. 编程语言是如何工作的</h1><p>我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。</p><p>对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为<code>Object</code> 文件。一系列的<code>Object</code>文件可以被链接起来，并创建一个可执行文件。操作系统可以加载这个可执行文件到内存中，并运行程序。</p><p>还有一部分语言是解释性的，比如Lisp, Schema。他会针对每一个高层次的语句来做低层次的翻译，然后顺序执行他们。这个过程相当于我遇到一个语句，翻译成计算机能看懂的语言以后，再看下一句…</p><h1 id="2-Java是如何工作的"><a href="#2-Java是如何工作的" class="headerlink" title="2. Java是如何工作的"></a>2. Java是如何工作的</h1><p>Java是个平台独立的语言，那他是怎么做到的呢？</p><p>首先我们要理解一下什么叫做平台独立？</p><blockquote><p>对于很多编程语言来说，编译器会生成可以在特定计算机上执行的代码。比如你在windows机器上编译一段c++代码，那么生成的可执行文件可以在任何其他的windows电脑上运行，但无法在Mac或者Linux机器上运行。</p></blockquote><p>对于早期的语言来说，设计者需要针对每一个平台专门设计一个编译器。而作为一个程序员，如果你想自己的代码在多个平台上都可以工作，你也需要针对性的做很多修改。</p><p>Java重新组织了编译-链接-执行这个循环，它将和平台相关的代码给抽象出来，和其他代码分开。这样子，编译的时候不会生成一个Object文件，反之，会生成字节码文件，这个字节码文件是平台独立的，即它可以在任何平台运行。那么刚才说的和平台相关的代码放到哪里了呢？为了执行字节码，我们需要唤醒java解释器。每个平台都会有自己的解释器，来解决和平台相关的问题。</p><p>对于其他语言来说，执行的过程是 编译，链接然后执行。对于Java来说，更应该说是编译然后链接，执行。</p><h1 id="3-Compile-vs-Runtime"><a href="#3-Compile-vs-Runtime" class="headerlink" title="3. Compile vs Runtime"></a>3. Compile vs Runtime</h1><p>整个代码的lifecycle,程序员先写源码，通过源码定义了程序是比如和工作的。这些源码必须要编译成机器码(java里面等效为字节码)，然后变成可执行文件。这个编译的过程称之为compile time.</p><p>一个编译过的文件是可以打开并且运行的，当一个应用正在运行的时候，我们就叫他处在runtime当中。</p><p>compile error一般是在编译的过程中由编译器报的错，告诉我们哪一行出了什么问题。运行时候的错误就叫做runtime error，这往往是一些逻辑错误，系统崩溃，流量过大等原因造成的。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cs.cmu.edu/~jcarroll/15-100-s05/supps/basics/history.html" target="_blank" rel="noopener">CMU Class Notes</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java Unit Test - Junit5</title>
       <link href="/Java-Unit-Test-Junit5/"/>
       <url>/Java-Unit-Test-Junit5/</url>

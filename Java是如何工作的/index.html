@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Volatile关键字 | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content=" Java , Concurrency , BackEnd ">
-  <meta name="description" content="Volatile关键字 | Leilei&#39;s Blog | 磊磊的博客">
+  <title>Java是如何工作的 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" Java ">
+  <meta name="description" content="Java是如何工作的 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
 <meta property="og:type" content="website">
@@ -2078,9 +2078,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Volatile关键字" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java是如何工作的" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Volatile关键字</h1>
+        <h1 class="article-title">Java是如何工作的</h1>
     
     <div class="article-meta">
         
@@ -2097,21 +2097,17 @@
             
             <a class="color5">Java</a>
             
-            <a class="color2">Concurrency</a>
-            
-            <a class="color3">BackEnd</a>
-            
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-01 22:06:58'>2020-01-28 20:22</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-08 21:14:29'>2020-02-08 21:14</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:915</span>
+        <span>字数:854</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2141,7 +2137,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Synchronized-vs-volatile"><span class="toc-text">1. Synchronized vs volatile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-实现原理"><span class="toc-text">2. 实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-volatile的happen-before关系"><span class="toc-text">3. volatile的happen before关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-volatile的内存语义实现"><span class="toc-text">4. volatile的内存语义实现</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-编程语言是如何工作的"><span class="toc-text">1. 编程语言是如何工作的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Java是如何工作的"><span class="toc-text">2. Java是如何工作的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Compile-vs-Runtime"><span class="toc-text">3. Compile vs Runtime</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2157,28 +2153,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-Synchronized-vs-volatile"><a href="#1-Synchronized-vs-volatile" class="headerlink" title="1. Synchronized vs volatile"></a>1. Synchronized vs volatile</h1><p>synchronized是阻塞式同步，在线程竞争激烈的情况下会升级为重量级锁。而volatile是java虚拟机提供的最轻量级的同步机制。而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。</p>
-<p><strong>被volatile修饰的变量能够保证每个线程能够获取该变量的最新值，从而避免出现数据脏读的现象。</strong></p>
-<h1 id="2-实现原理"><a href="#2-实现原理" class="headerlink" title="2. 实现原理"></a>2. 实现原理</h1><p>生成汇编代码时会在Volatile修饰的共享变量进行写操作的时候多出lock前缀的指令：<strong>该指令会将当前处理器缓存行的数据写会系统内存；这个写回内存的操作会使得其他CPU里缓存了该内存地址的数据无效</strong></p>
-<p>为了提高处理速度，处理器不直接和内存进行通信，而是先将系统内存的数据读到<strong>内部缓存（L1，L2或其他</strong>）后再进行操作，但操作完不知道何时会写到内存。如果对声明了volatile的变量进行写操作，JVM就会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写回到系统内存。但是，就算写回到内存，如果其他处理器缓存的值还是旧的，再执行计算操作就会有问题。所以，在多处理器下，为了保证各个处理器的缓存是一致的，就会实现<strong>缓存一致性协</strong>议，<strong>每个处理器通过嗅探在总线上传播的数据来检查自己缓存的值是不是过期了，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。</strong>因此，经过分析我们可以得出如下结论：</p>
-<ol>
-<li>lock前缀的指令会引起处理器缓存写回内存</li>
-<li>一个处理器的缓存回写到内存会导致其他处理器的缓存失效</li>
-<li>当处理器发现本地缓存失效后，就会从内存中重读该变量数据，即可以获得当前最新值</li>
-</ol>
-<h1 id="3-volatile的happen-before关系"><a href="#3-volatile的happen-before关系" class="headerlink" title="3. volatile的happen before关系"></a>3. volatile的happen before关系</h1><p>写后读，线程A改本地内存的变量，同步到主内存，线程B的本地内存废弃，到主内存中拿到更新的数据。</p>
-<h1 id="4-volatile的内存语义实现"><a href="#4-volatile的内存语义实现" class="headerlink" title="4. volatile的内存语义实现"></a>4. volatile的内存语义实现</h1><p>为了性能优化，JMM在不改变正确语义的前提下，会允许编译器和处理器对指令序列进行重排序，那如果想阻止重排序要怎么办了？答案是可以添加内存屏障。</p>
-<p>内存屏障类型： </p>
-<p><img src="https://i.loli.net/2020/01/29/kIQaATpeCf56nxs.png" alt="内存屏障.png"></p>
-<p><img src="https://i.loli.net/2020/01/29/RKDH1XxFAJeQVjY.png" alt="重排序.png"></p>
-<p>“NO”表示禁止重排序。为了实现volatile内存语义时，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎是不可能的，为此，JMM采取了保守策略：</p>
-<ol>
-<li>在每个volatile写操作的前面插入一个StoreStore屏障；</li>
-<li>在每个volatile写操作的后面插入一个StoreLoad屏障；</li>
-<li>在每个volatile读操作的后面插入一个LoadLoad屏障；</li>
-<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
-</ol>
-<p><img src="https://i.loli.net/2020/01/29/8JCkKYZg2NfMzP5.png" alt="volatile内存屏障.png"><br><img src="https://i.loli.net/2020/01/29/uY9qUvorMLK5a1V.png" alt="volatile读插入内存屏障示意图.png"></p>
+        <h1 id="1-编程语言是如何工作的"><a href="#1-编程语言是如何工作的" class="headerlink" title="1. 编程语言是如何工作的"></a>1. 编程语言是如何工作的</h1><p>我们可以把编程语言按照与底层实现的接近程度来划分层次，更加高层次的编程语言会让我们写起来更像自然语言一些，比如Java, C++。而低层次的语言，更贴近机器语言，即在描述底层是如何实现的。</p>
+<p>对于大部分编程语言来说，工作的整个过程是从编译 - 链接 - 执行。就是从源代码开始，编译器会运行源代码，将其转化为贴近机器语言的状态，我们将其称为<code>Object</code> 文件。一系列的<code>Object</code>文件可以被链接起来，并创建一个可执行文件。操作系统可以加载这个可执行文件到内存中，并运行程序。</p>
+<p>还有一部分语言是解释性的，比如Lisp, Schema。他会针对每一个高层次的语句来做低层次的翻译，然后顺序执行他们。这个过程相当于我遇到一个语句，翻译成计算机能看懂的语言以后，再看下一句…</p>
+<h1 id="2-Java是如何工作的"><a href="#2-Java是如何工作的" class="headerlink" title="2. Java是如何工作的"></a>2. Java是如何工作的</h1><p>Java是个平台独立的语言，那他是怎么做到的呢？</p>
+<p>首先我们要理解一下什么叫做平台独立？</p>
+<blockquote>
+<p>对于很多编程语言来说，编译器会生成可以在特定计算机上执行的代码。比如你在windows机器上编译一段c++代码，那么生成的可执行文件可以在任何其他的windows电脑上运行，但无法在Mac或者Linux机器上运行。</p>
+</blockquote>
+<p>对于早期的语言来说，设计者需要针对每一个平台专门设计一个编译器。而作为一个程序员，如果你想自己的代码在多个平台上都可以工作，你也需要针对性的做很多修改。</p>
+<p>Java重新组织了编译-链接-执行这个循环，它将和平台相关的代码给抽象出来，和其他代码分开。这样子，编译的时候不会生成一个Object文件，反之，会生成字节码文件，这个字节码文件是平台独立的，即它可以在任何平台运行。那么刚才说的和平台相关的代码放到哪里了呢？为了执行字节码，我们需要唤醒java解释器。每个平台都会有自己的解释器，来解决和平台相关的问题。</p>
+<p>对于其他语言来说，执行的过程是 编译，链接然后执行。对于Java来说，更应该说是编译然后链接，执行。</p>
+<h1 id="3-Compile-vs-Runtime"><a href="#3-Compile-vs-Runtime" class="headerlink" title="3. Compile vs Runtime"></a>3. Compile vs Runtime</h1><p>整个代码的lifecycle,程序员先写源码，通过源码定义了程序是比如和工作的。这些源码必须要编译成机器码(java里面等效为字节码)，然后变成可执行文件。这个编译的过程称之为compile time.</p>
+<p>一个编译过的文件是可以打开并且运行的，当一个应用正在运行的时候，我们就叫他处在runtime当中。</p>
+<p>compile error一般是在编译的过程中由编译器报的错，告诉我们哪一行出了什么问题。运行时候的错误就叫做runtime error，这往往是一些逻辑错误，系统崩溃，流量过大等原因造成的。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://www.cs.cmu.edu/~jcarroll/15-100-s05/supps/basics/history.html" target="_blank" rel="noopener">CMU Class Notes</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -2192,12 +2181,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Volatile关键字</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">915</span></p>
+    <p><span class="copy-title">文章标题:</span>Java是如何工作的</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">854</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-01-28, 20:22:48</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-01, 22:06:58</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/" title="Volatile关键字">https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/</a>
+    <p><span class="copy-title">发布时间:</span>2020-02-08, 21:14:12</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-08, 21:14:29</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" title="Java是如何工作的">https://www.llchen60.com/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -2210,8 +2199,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/';
-            this.page.identifier = 'Volatile关键字/';
+            this.page.url = 'https://www.llchen60.com/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/';
+            this.page.identifier = 'Java是如何工作的/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -2227,8 +2216,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Volatile关键字/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Volatile%E5%85%B3%E9%94%AE%E5%AD%97/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Java是如何工作的/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"></span>
 
 
 
