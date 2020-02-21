@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>PowerMock with EasyMock toturial</title>
+      <link href="/Powermock-with-EasyMock-toturial/"/>
+      <url>/Powermock-with-EasyMock-toturial/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro-with-an-example"><a href="#1-Intro-with-an-example" class="headerlink" title="1. Intro with an example"></a>1. Intro with an example</h1><p>We often find we need to do unit tests for final class, static method, which are not supported by Easymock, Mockito currently. Under such situation, we could use Powermock to help us mock the corresponding classes. </p><p>For detail introduction about powermock, refer to <a href="https://github.com/powermock/powermock" target="_blank" rel="noopener">PowerMock Github</a></p><p>Use example as followed to show how to integrate PowerMock with EasyMock: </p><pre><code>public final class FinalClassExample {    public String static doNothingStatic() {        return &quot;test&quot;;    }}@PowerMockIgnore(&quot;javax.management.*&quot;) // only need when see warning related with jmx or mbeans@RunWith(PowerMockRunner.class)  // necessary for powermock @PrepareForTest(FinalClassExample.class)  // necessary for powermock public class FinalClassExampleTest {    private IMocksControl control;    @Before    public void init() {        // do some initialization here         control = EasyMock.createControl();    }    @Test    public void test_example() {        PowerMock.mockStatic(FinalClassExample.class);        expect(FinalClassExample.doNothingStatic()).andReturn(&quot;test&quot;);        PowerMock.replay(FinalClassExample.class);        runYourTest();        PowerMock.verify(FinalClassExample.class);        // do some assertions here    }}</code></pre><h1 id="2-Other-APIs"><a href="#2-Other-APIs" class="headerlink" title="2. Other APIs"></a>2. Other APIs</h1><ul><li>mock final classes or methods <ul><li><code>@RunWith(PowerMockRunner.class)</code></li><li><code>@PrepareForTest(ClassWithFinal.class)</code></li><li><code>PowerMock.createMock(ClassWithFinal.class);</code></li><li><code>PowerMock.replay(mockObject)</code></li><li><code>PowerMock.verify(mockObject)</code></li></ul></li><li>mock private methods <ul><li><code>@RunWith(PowerMockRunner.class)</code></li><li><code>@PrepareForTest(ClassWithPrivateMethod.class)</code></li><li><code>PowerMock.createPartialMock(ClassWithPrivateMethod.class, &quot;nameOfTheMethodToMock&quot;)</code></li><li>Use <code>PowerMock.expectPrivate(mockObject, &quot;nameOfTheMethodToMock&quot;, argument1, argument2)</code> to expect the method call to <code>nameOfTheMethodToMock</code> with arguments <code>argument1</code> and <code>argument2</code></li><li><code>PowerMock.replay(mockObject)</code></li><li><code>PowerMock.verify(mockObject)</code></li></ul></li><li>mock construction of new objects <ul><li><code>@RunWith(PowerMockRunner.class)</code></li><li><code>@PrepareForTest(ClassThatCreatesTheNewInstance.class)</code> </li><li><code>PowerMock.createMock(NewInstanceClass.class)</code></li><li><code>PowerMock.expectNew(NewInstanceClass.class).andReturn(mockObject)</code></li><li><code>PowerMock.replay(mockObject, NewInstanceClass.class)</code></li><li><code>PowerMock.verify(mockObject, NewInstanceClass.class)</code></li></ul></li><li>mock partial <ul><li><code>@RunWith(PowerMockRunner.class)</code></li><li><code>@PrepareForTest(ClassToPartiallyMock.class)</code></li><li><code>PowerMock.createPartialMock(ClassToPartiallyMock.class, &quot;nameOfTheFirstMethodToMock&quot;, &quot;nameOfTheSecondMethodToMock&quot;)</code></li><li><code>PowerMock.replay(mockObject)</code></li><li><code>PowerMock.verify(mockObject)</code></li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://github.com/powermock/powermock" target="_blank" rel="noopener">https://github.com/powermock/powermock</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Unit Test </tag>
+            
+            <tag> PowerMock </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>工程师需要知道的latency 数字 </title>
       <link href="/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/"/>
       <url>/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/</url>
