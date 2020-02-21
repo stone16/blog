@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>工程师需要知道的latency 数字 </title>
+      <link href="/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/"/>
+      <url>/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/</url>
+      
+        <content type="html"><![CDATA[<p>看到一篇博客，叙述了当前内存对于数据的处理速度对于开发的影响，推而广之，找到了一些我们在做系统设计的时候需要熟知的一些数据。</p><p>首先处理器的处理速度和内存的处理速度是差距很大的，处理器的处理速度的增长速度要比内存的快很多。</p><p><img src="https://i.loli.net/2020/02/21/s8h6GTfi1PSYwpe.png" alt="处理器与内存的性能表现.png"></p><p>我们需要探究的是CPU从内存中随机提取数据以及获取连续数据的速度，这是很粗略的估计，只是希望能够有一个数量级上的感知。</p><pre><code>Latency Comparison Numbers (~2012)----------------------------------L1 cache reference                           0.5 nsBranch mispredict                            5   nsL2 cache reference                           7   ns                      14x L1 cacheMutex lock/unlock                           25   nsMain memory reference                      100   ns                      20x L2 cache, 200x L1 cacheCompress 1K bytes with Zippy             3,000   ns        3 usSend 1K bytes over 1 Gbps network       10,000   ns       10 usRead 4K randomly from SSD*             150,000   ns      150 us          ~1GB/sec SSDRead 1 MB sequentially from memory     250,000   ns      250 usRound trip within same datacenter      500,000   ns      500 usRead 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/sec SSD, 4X memoryDisk seek                           10,000,000   ns   10,000 us   10 ms  20x datacenter roundtripRead 1 MB sequentially from disk    20,000,000   ns   20,000 us   20 ms  80x memory, 20X SSDSend packet CA-&gt;Netherlands-&gt;CA    150,000,000   ns  150,000 us  150 ms</code></pre><p>根据2020年StackOverflow上的回答，我们可以看到Core i7 Xeon 5500 的benchmark数据如下</p><pre><code>Core i7 Xeon 5500 Series Data Source Latency (approximate)               [Pg. 22]local  L1 CACHE hit,                              ~4 cycles (   2.1 -  1.2 ns )local  L2 CACHE hit,                             ~10 cycles (   5.3 -  3.0 ns )local  L3 CACHE hit, line unshared               ~40 cycles (  21.4 - 12.0 ns )local  L3 CACHE hit, shared line in another core ~65 cycles (  34.8 - 19.5 ns )local  L3 CACHE hit, modified in another core    ~75 cycles (  40.2 - 22.5 ns )remote L3 CACHE (Ref: Fig.1 [Pg. 5])        ~100-300 cycles ( 160.7 - 30.0 ns )local  DRAM                                                   ~60 nsremote DRAM                                                  ~100 ns</code></pre><p>而现在的cache的大小，根据wikiChip上的数据，对于Core i7-8700K</p><pre><code>Memory Bandwidth: 39.74 gigabytes per secondL1 cache: 192 kilobytes (32 KB per core)L2 cache: 1.5 megabytes (256 KB per core)L3 cache: 12 megabytes  (shared; 2 MB per core)</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.forrestthewoods.com/blog/memory-bandwidth-napkin-math/" target="_blank" rel="noopener">https://www.forrestthewoods.com/blog/memory-bandwidth-napkin-math/</a>?</li><li><a href="https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory" target="_blank" rel="noopener">https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory</a></li><li><a href="https://en.wikichip.org/wiki/intel/core_i7/i7-8700k" target="_blank" rel="noopener">https://en.wikichip.org/wiki/intel/core_i7/i7-8700k</a></li><li><a href="https://gist.github.com/jboner/2841832" target="_blank" rel="noopener">https://gist.github.com/jboner/2841832</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> latency </tag>
+            
+            <tag> system design </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java8 Date Time API </title>
       <link href="/Java8-Date-Time-API/"/>
       <url>/Java8-Date-Time-API/</url>
