@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>设计模式概述</title>
+      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"/>
+      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-起源"><a href="#1-起源" class="headerlink" title="1. 起源"></a>1. 起源</h1><p>每个模式都描述了一个在我们的环境中不断出现的问题，然后描述了该问题的解决方案的核心，通过这种方式，我们可以无数次重用那些已有的成功的解决方案，无须再重复相同的工作。</p><p>软件模式(Software Patterns)是将模式的一般概念应用于软件开发领域，即软件开发的总体指导思路或参照样板。软件模式并非仅限于设计模式，还包括架构模式、分析模式和过程模式等，<strong><em>实际上，在软件开发生命周期的每一个阶段都存在着一些被认同的模式</em></strong>。</p><p>想要学习设计模式的原因，是因为感到自己的代码能力还是有点捉急，可以写出能用的代码，但很难写出好看的代码，如果每次写代码的时候都要一行一行的来构建，而没有一个组件一个组件的意识的话，那写好代码恐怕只能是天方夜谭了。我想设计模式对我来说，就是抽象，构建框架的过程，是真真切切能够在日常工作当中帮助到自己的。不仅仅在于代码质量，也在于组件化以后的开发速度，以及对于更加复杂的商业上的实际场景得以提供出更加匹配的解决方式的能力。</p><p>另外一个点是当前我的能力范畴还是仅仅在于根据需求写出代码，即停留在写业务代码的阶段，在这个阶段当中，自己并不需要具有很强的代码设计能力，理解业务就可以写出代码了。但是如果想要成长，还是需要具备写出<strong>和业务并不直接相关的更加通用的功能模块</strong>的能力的。</p><h1 id="2-软件模式的基础结构"><a href="#2-软件模式的基础结构" class="headerlink" title="2. 软件模式的基础结构"></a>2. 软件模式的基础结构</h1><ul><li>问题描述</li><li>前提条件</li><li>解法</li><li>效果</li></ul><h2 id="2-1-评价代码的一些维度"><a href="#2-1-评价代码的一些维度" class="headerlink" title="2.1 评价代码的一些维度"></a>2.1 评价代码的一些维度</h2><p>关于如何判断一段代码写的好坏，众说纷纭，每个人其实都有自己主观上的某些看法。但是在更高维度上来说，会有一些相对能达成共识的标准，是我们可以在平常写代码的时候更多的注意一下的。</p><h3 id="2-1-1-可维护性-maintainability"><a href="#2-1-1-可维护性-maintainability" class="headerlink" title="2.1.1 可维护性 maintainability"></a>2.1.1 可维护性 maintainability</h3><ul><li>在不破坏原有代码的设计，不引入新的bug的情况下，能够快速地修改或者添加代码</li><li>细拆分其实就有很多因素的协同作用了<ul><li>代码的可读性，简洁</li><li>代码分层清晰程度，模块化，高内聚低耦合</li><li>基于接口而非实现编程</li></ul></li></ul><h3 id="2-1-2-可读性-readability"><a href="#2-1-2-可读性-readability" class="headerlink" title="2.1.2 可读性 readability"></a>2.1.2 可读性 readability</h3><ul><li>命名</li><li>注释</li><li>函数的长短</li><li>模块的划分</li></ul><h3 id="2-1-3-可扩展性-extensibility"><a href="#2-1-3-可扩展性-extensibility" class="headerlink" title="2.1.3 可扩展性  extensibility"></a>2.1.3 可扩展性  extensibility</h3><p>表征的是我们的代码对未来需求变化进行应对的能力。</p><p>即代码预留了一些功能的扩展点，我们可以将新功能代码直接插入到扩展点上，而不需要因为添加一个功能而大动干戈，改动大量的原始代码。</p><h3 id="2-1-4-灵活性-flexibility"><a href="#2-1-4-灵活性-flexibility" class="headerlink" title="2.1.4 灵活性  flexibility"></a>2.1.4 灵活性  flexibility</h3><ul><li>比如预留好了扩展点给新的功能代码来使用</li><li>代码已经抽象出了很多底层可以复用的模块，类</li></ul><h3 id="2-1-5-简洁性-simplicity"><a href="#2-1-5-简洁性-simplicity" class="headerlink" title="2.1.5 简洁性   simplicity"></a>2.1.5 简洁性   simplicity</h3><p>Keep it simple, stupid. </p><h3 id="2-1-6-可复用性-reusability"><a href="#2-1-6-可复用性-reusability" class="headerlink" title="2.1.6 可复用性  reusability"></a>2.1.6 可复用性  reusability</h3><p>尽量减少重复代码的编写，复用已有的代码</p><h3 id="2-1-7-可测试性-testability"><a href="#2-1-7-可测试性-testability" class="headerlink" title="2.1.7 可测试性  testability"></a>2.1.7 可测试性  testability</h3><p>比较难写的单元测试往往意味着代码的设计是有问题的。</p><p>如果说上面的细节实在是太多，并不能一下子很快的掌握，个人感觉，去看别人的设计，别人的代码，和自己的比较，会是非常快的成长方式。除此以外，肯定还是要经过看山是山，不是山，还是山的阶段的。希望自己的代码最终能像一个故事一样，将一段逻辑讲述完整。</p><h1 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3. 设计模式"></a>3. 设计模式</h1><blockquote><p>设计模式(Design Pattern)是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。</p></blockquote><p>整个设计模式系列将会分以下几个部分：</p><ol><li><p>概述</p></li><li><p>面向对象设计原则</p><ul><li>单一职责</li><li>开闭原则</li><li>里氏代换</li><li>依赖倒转</li><li>接口隔离</li><li>合成复用</li><li>迪米特</li></ul></li><li><p>创建型模式（描述如何创建对象）</p><ul><li>简单工厂模式</li><li>工厂方法模式</li><li>抽象工厂模式</li><li>单例模式</li><li>原型模式</li><li>建造者模式</li></ul></li><li><p>结构型模式（如何实现类或对象的组合）</p><ul><li>适配器模式</li><li>桥接模式</li><li>组合模式</li><li>装饰模式</li><li>外观模式</li><li>享元模式</li><li>代理模式</li></ul></li><li><p>行为型模式（类或者对象怎样交互以及怎样分配职责）（类是对一类事物的描述，抽象出来的；而对象是具体的描述。类是一群具有相同属性的对象的集合体）</p><ul><li>职责链模式</li><li>命令模式</li><li>解释器模式</li><li>迭代器模式</li><li>中介者模式</li><li>备忘录模式</li><li>观察者模式</li><li>状态模式</li><li>策略模式</li><li>模板方法模式</li><li>访问者模式</li></ul></li></ol><h1 id="4-面向对象，设计原则，设计模式，编程规范，代码重构"><a href="#4-面向对象，设计原则，设计模式，编程规范，代码重构" class="headerlink" title="4. 面向对象，设计原则，设计模式，编程规范，代码重构"></a>4. 面向对象，设计原则，设计模式，编程规范，代码重构</h1><h2 id="4-1-面向对象"><a href="#4-1-面向对象" class="headerlink" title="4.1 面向对象"></a>4.1 面向对象</h2><p>主流的编程范式有：</p><ul><li>面向过程</li><li>面向对象</li><li>函数式编程</li></ul><p>面向对象因为其具有的丰富的特性 - 封装，继承，抽象，多态。可以实现很多复杂的设计思路，是很多设计原则，设计模式的实现基础。</p><ul><li>知识点<ul><li>封装 继承 抽象 多态</li><li>面向对象与面向过程编程的区别与联系</li><li>面向对象的分析设计和编程</li><li>接口和抽象类的区别以及各自的应用场景</li><li>基于接口而非实现的编程设计思想</li><li>多用组合少用继承的设计思想</li><li>面向过程的贫血模型和面向对象的充血模型<h2 id="4-2-设计原则"><a href="#4-2-设计原则" class="headerlink" title="4.2 设计原则"></a>4.2 设计原则</h2></li></ul></li><li>设计原则<ul><li>单一职责原则</li><li>开闭原则</li><li>里氏替换原则</li><li>接口隔离原则</li><li>依赖导致原则</li><li>DRY</li><li>KISS</li><li>YAGNI</li><li>LOD</li></ul></li></ul><h2 id="4-3-设计模式"><a href="#4-3-设计模式" class="headerlink" title="4.3 设计模式"></a>4.3 设计模式</h2><ul><li>设计模式<ul><li>为了解决代码的可扩展性问题</li><li>需要掌握他们都解决了哪些问题，典型的应用场景，并且不能也不应该过度使用</li><li>创建型<ul><li>单例模式</li><li>工厂模式</li><li>建造者模式</li></ul></li><li>结构型<ul><li>代理模式</li><li>桥接模式</li><li>装饰者模式</li><li>适配器模式</li></ul></li><li>行为型<ul><li>观察者模式</li><li>模板模式</li><li>策略模式</li><li>职责链模式</li><li>迭代器模式</li><li>状态模式</li></ul></li></ul></li></ul><h2 id="4-4-编程规范"><a href="#4-4-编程规范" class="headerlink" title="4.4 编程规范"></a>4.4 编程规范</h2><p>主要为了解决代码的可读性问题，这些规范主要是记忆，熟悉，然后尽量多的去使用。书籍的话可以去看重构，代码大全，代码整洁之道这几本书。</p><h2 id="4-5-代码重构"><a href="#4-5-代码重构" class="headerlink" title="4.5 代码重构"></a>4.5 代码重构</h2><p>业务发展，规模扩大，原先的设计很可能无法支持现在的体量的应用场景，这种情况下就需要持续重构了。而是用的工具就是我们前面说的设计模式，编程规范等等。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Design Pattern </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PowerMock with EasyMock toturial</title>
       <link href="/Powermock-with-EasyMock-toturial/"/>
       <url>/Powermock-with-EasyMock-toturial/</url>
@@ -77,31 +102,6 @@
         <tags>
             
             <tag> Java </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>设计模式概述</title>
-      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/"/>
-      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0/</url>
-      
-        <content type="html"><![CDATA[<h1 id="1-起源"><a href="#1-起源" class="headerlink" title="1. 起源"></a>1. 起源</h1><p>每个模式都描述了一个在我们的环境中不断出现的问题，然后描述了该问题的解决方案的核心，通过这种方式，我们可以无数次重用那些已有的成功的解决方案，无须再重复相同的工作。</p><p>软件模式(Software Patterns)是将模式的一般概念应用于软件开发领域，即软件开发的总体指导思路或参照样板。软件模式并非仅限于设计模式，还包括架构模式、分析模式和过程模式等，<strong><em>实际上，在软件开发生命周期的每一个阶段都存在着一些被认同的模式</em></strong>。</p><p>想要学习设计模式的原因，是因为感到自己的代码能力还是有点捉急，可以写出能用的代码，但很难写出好看的代码，如果每次写代码的时候都要一行一行的来构建，而没有一个组件一个组件的意识的话，那写好代码恐怕只能是天方夜谭了。我想设计模式对我来说，就是抽象，构建框架的过程，是真真切切能够在日常工作当中帮助到自己的。不仅仅在于代码质量，也在于组件化以后的开发速度，以及对于更加复杂的商业上的实际场景得以提供出更加匹配的解决方式的能力。</p><p>另外一个点是当前我的能力范畴还是仅仅在于根据需求写出代码，即停留在写业务代码的阶段，在这个阶段当中，自己并不需要具有很强的代码设计能力，理解业务就可以写出代码了。但是如果想要成长，还是需要具备写出<strong>和业务并不直接相关的更加通用的功能模块</strong>的能力的。</p><h1 id="2-软件模式的基础结构"><a href="#2-软件模式的基础结构" class="headerlink" title="2. 软件模式的基础结构"></a>2. 软件模式的基础结构</h1><ul><li>问题描述</li><li>前提条件</li><li>解法</li><li>效果</li></ul><h2 id="2-1-评价代码的一些维度"><a href="#2-1-评价代码的一些维度" class="headerlink" title="2.1 评价代码的一些维度"></a>2.1 评价代码的一些维度</h2><p>关于如何判断一段代码写的好坏，众说纷纭，每个人其实都有自己主观上的某些看法。但是在更高维度上来说，会有一些相对能达成共识的标准，是我们可以在平常写代码的时候更多的注意一下的。</p><h3 id="2-1-1-可维护性-maintainability"><a href="#2-1-1-可维护性-maintainability" class="headerlink" title="2.1.1 可维护性 maintainability"></a>2.1.1 可维护性 maintainability</h3><ul><li>在不破坏原有代码的设计，不引入新的bug的情况下，能够快速地修改或者添加代码</li><li>细拆分其实就有很多因素的协同作用了<ul><li>代码的可读性，简洁</li><li>代码分层清晰程度，模块化，高内聚低耦合</li><li>基于接口而非实现编程</li></ul></li></ul><h3 id="2-1-2-可读性-readability"><a href="#2-1-2-可读性-readability" class="headerlink" title="2.1.2 可读性 readability"></a>2.1.2 可读性 readability</h3><ul><li>命名</li><li>注释</li><li>函数的长短</li><li>模块的划分</li></ul><h3 id="2-1-3-可扩展性-extensibility"><a href="#2-1-3-可扩展性-extensibility" class="headerlink" title="2.1.3 可扩展性  extensibility"></a>2.1.3 可扩展性  extensibility</h3><p>表征的是我们的代码对未来需求变化进行应对的能力。</p><p>即代码预留了一些功能的扩展点，我们可以将新功能代码直接插入到扩展点上，而不需要因为添加一个功能而大动干戈，改动大量的原始代码。</p><h3 id="2-1-4-灵活性-flexibility"><a href="#2-1-4-灵活性-flexibility" class="headerlink" title="2.1.4 灵活性  flexibility"></a>2.1.4 灵活性  flexibility</h3><ul><li>比如预留好了扩展点给新的功能代码来使用</li><li>代码已经抽象出了很多底层可以复用的模块，类</li></ul><h3 id="2-1-5-简洁性-simplicity"><a href="#2-1-5-简洁性-simplicity" class="headerlink" title="2.1.5 简洁性   simplicity"></a>2.1.5 简洁性   simplicity</h3><p>Keep it simple, stupid. </p><h3 id="2-1-6-可复用性-reusability"><a href="#2-1-6-可复用性-reusability" class="headerlink" title="2.1.6 可复用性  reusability"></a>2.1.6 可复用性  reusability</h3><p>尽量减少重复代码的编写，复用已有的代码</p><h3 id="2-1-7-可测试性-testability"><a href="#2-1-7-可测试性-testability" class="headerlink" title="2.1.7 可测试性  testability"></a>2.1.7 可测试性  testability</h3><p>比较难写的单元测试往往意味着代码的设计是有问题的。</p><p>如果说上面的细节实在是太多，并不能一下子很快的掌握，个人感觉，去看别人的设计，别人的代码，和自己的比较，会是非常快的成长方式。除此以外，肯定还是要经过看山是山，不是山，还是山的阶段的。希望自己的代码最终能像一个故事一样，将一段逻辑讲述完整。</p><h1 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3. 设计模式"></a>3. 设计模式</h1><blockquote><p>设计模式(Design Pattern)是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结，使用设计模式是为了可重用代码、让代码更容易被他人理解并且保证代码可靠性。</p></blockquote><p>整个设计模式系列将会分以下几个部分：</p><ol><li><p>概述</p></li><li><p>面向对象设计原则</p><ul><li>单一职责</li><li>开闭原则</li><li>里氏代换</li><li>依赖倒转</li><li>接口隔离</li><li>合成复用</li><li>迪米特</li></ul></li><li><p>创建型模式（描述如何创建对象）</p><ul><li>简单工厂模式</li><li>工厂方法模式</li><li>抽象工厂模式</li><li>单例模式</li><li>原型模式</li><li>建造者模式</li></ul></li><li><p>结构型模式（如何实现类或对象的组合）</p><ul><li>适配器模式</li><li>桥接模式</li><li>组合模式</li><li>装饰模式</li><li>外观模式</li><li>享元模式</li><li>代理模式</li></ul></li><li><p>行为型模式（类或者对象怎样交互以及怎样分配职责）（类是对一类事物的描述，抽象出来的；而对象是具体的描述。类是一群具有相同属性的对象的集合体）</p><ul><li>职责链模式</li><li>命令模式</li><li>解释器模式</li><li>迭代器模式</li><li>中介者模式</li><li>备忘录模式</li><li>观察者模式</li><li>状态模式</li><li>策略模式</li><li>模板方法模式</li><li>访问者模式</li></ul></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> SystemDesign </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Design Pattern </tag>
             
         </tags>
       
