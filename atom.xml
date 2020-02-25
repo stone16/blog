@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-02-23T17:10:22.625Z</updated>
+  <updated>2020-02-25T05:21:32.108Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解面向对象</title>
+    <link href="https://www.llchen60.com/%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://www.llchen60.com/%E7%90%86%E8%A7%A3%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</id>
+    <published>2020-02-25T05:20:52.000Z</published>
+    <updated>2020-02-25T05:21:32.108Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇博文主要想说面向对象的几大特性：封装，抽象，继承，多态，以及我们究竟如何去使用。</p><h1 id="1-面向对象概述"><a href="#1-面向对象概述" class="headerlink" title="1. 面向对象概述"></a>1. 面向对象概述</h1><h2 id="1-1-面向对象编程"><a href="#1-1-面向对象编程" class="headerlink" title="1.1 面向对象编程"></a>1.1 面向对象编程</h2><p>一种编程范式/风格，以类或对象作为组织代码的基本单元，并将封装，抽象，继承，多态四个特性作为代码设计和实现的基石。</p><p>整个编程的过程：</p><ul><li>Object Oriented Analysis</li><li>Object Oriented Design</li><li>Object Oriented Programming </li></ul><h2 id="1-2-面向对象编程的四大特征"><a href="#1-2-面向对象编程的四大特征" class="headerlink" title="1.2 面向对象编程的四大特征"></a>1.2 面向对象编程的四大特征</h2><h3 id="1-2-1-封装-Encapsulation"><a href="#1-2-1-封装-Encapsulation" class="headerlink" title="1.2.1 封装 Encapsulation"></a>1.2.1 封装 Encapsulation</h3><pre><code>public class Wallet {  private String id;  private long createTime;  private BigDecimal balance;  private long balanceLastModifiedTime;  // ...省略其他属性...  public Wallet() {     this.id = IdGenerator.getInstance().generate();     this.createTime = System.currentTimeMillis();     this.balance = BigDecimal.ZERO;     this.balanceLastModifiedTime = System.currentTimeMillis();  }  // 注意：下面对get方法做了代码折叠，是为了减少代码所占文章的篇幅  public String getId() { return this.id; }  public long getCreateTime() { return this.createTime; }  public BigDecimal getBalance() { return this.balance; }  public long getBalanceLastModifiedTime() { return this.balanceLastModifiedTime;  }  public void increaseBalance(BigDecimal increasedAmount) {    if (increasedAmount.compareTo(BigDecimal.ZERO) &lt; 0) {      throw new InvalidAmountException(&quot;...&quot;);    }    this.balance.add(increasedAmount);    this.balanceLastModifiedTime = System.currentTimeMillis();  }  public void decreaseBalance(BigDecimal decreasedAmount) {    if (decreasedAmount.compareTo(BigDecimal.ZERO) &lt; 0) {      throw new InvalidAmountException(&quot;...&quot;);    }    if (decreasedAmount.compareTo(this.balance) &gt; 0) {      throw new InsufficientAmountException(&quot;...&quot;);    }    this.balance.subtract(decreasedAmount);    this.balanceLastModifiedTime = System.currentTimeMillis();  }}</code></pre><p>虚拟钱包，对于自身变量，用private来标注，然后通过对应的getter，setter方法允许外界来访问一部分变量，允许进行一定的修改。</p><p>没有封装则意味着不可控，即任何代码都可以被任何人访问，修改的代码可以遍布在包的任何角落，会影响代码的可读性，以及可维护性。只暴露出有限多的接口，供外界来使用。</p><p>总结： 封装是为了隐藏信息，保护数据</p><h3 id="1-2-2-继承-Inheritance"><a href="#1-2-2-继承-Inheritance" class="headerlink" title="1.2.2 继承 Inheritance"></a>1.2.2 继承 Inheritance</h3><p>用来表述is a的关系，java支持单继承。</p><p>继承最大的好处就是代码复用，比如两个子类的共同代码抽取到父类当中，然后父类来共同使用。</p><p>但是过度使用的话会容易导致层级数量太多，反而降低代码的可读性。</p><h3 id="1-2-3-多态-Polymorphism"><a href="#1-2-3-多态-Polymorphism" class="headerlink" title="1.2.3 多态 Polymorphism"></a>1.2.3 多态 Polymorphism</h3><ul><li>继承加方法重写实现</li></ul><pre><code>public class DynamicArray {  private static final int DEFAULT_CAPACITY = 10;  protected int size = 0;  protected int capacity = DEFAULT_CAPACITY;  protected Integer[] elements = new Integer[DEFAULT_CAPACITY];  public int size() { return this.size; }  public Integer get(int index) { return elements[index];}  //...省略n多方法...  public void add(Integer e) {    ensureCapacity();    elements[size++] = e;  }  protected void ensureCapacity() {    //...如果数组满了就扩容...代码省略...  }}public class SortedDynamicArray extends DynamicArray {  @Override  public void add(Integer e) {    ensureCapacity();    int i;    for (i = size-1; i&gt;=0; --i) { //保证数组中的数据有序      if (elements[i] &gt; e) {        elements[i+1] = elements[i];      } else {        break;      }    }    elements[i+1] = e;    ++size;  }}public class Example {  public static void test(DynamicArray dynamicArray) {    dynamicArray.add(5);    dynamicArray.add(1);    dynamicArray.add(3);    for (int i = 0; i &lt; dynamicArray.size(); ++i) {      System.out.println(dynamicArray.get(i));    }  }  public static void main(String args[]) {    DynamicArray dynamicArray = new SortedDynamicArray();    test(dynamicArray); // 打印结果：1、3、5  }}</code></pre><ul><li>利用接口类实现多态特性</li></ul><pre><code>public interface Iterator {  String hasNext();  String next();  String remove();}public class Array implements Iterator {  private String[] data;  public String hasNext() { ... }  public String next() { ... }  public String remove() { ... }  //...省略其他方法...}public class LinkedList implements Iterator {  private LinkedListNode head;  public String hasNext() { ... }  public String next() { ... }  public String remove() { ... }  //...省略其他方法... }public class Demo {  private static void print(Iterator iterator) {    while (iterator.hasNext()) {      System.out.println(iterator.next());    }  }  public static void main(String[] args) {    Iterator arrayIterator = new Array();    print(arrayIterator);    Iterator linkedListIterator = new LinkedList();    print(linkedListIterator);  }}</code></pre><p>多态可以很大程度上提高代码的可扩展性和复用性</p><h3 id="1-2-4-抽象-Abstraction"><a href="#1-2-4-抽象-Abstraction" class="headerlink" title="1.2.4 抽象 Abstraction"></a>1.2.4 抽象 Abstraction</h3><p>抽象，主要是为了隐藏方法的具体实现，让调用者只需要关心方法提供了哪些功能，并不需要知道这些方法具体是如何实现的。</p><pre><code>public interface IPictureStorage {  void savePicture(Picture picture);  Image getPicture(String pictureId);  void deletePicture(String pictureId);  void modifyMetaInfo(String pictureId, PictureMetaInfo metaInfo);}public class PictureStorage implements IPictureStorage {  // ...省略其他属性...  @Override  public void savePicture(Picture picture) { ... }  @Override  public Image getPicture(String pictureId) { ... }  @Override  public void deletePicture(String pictureId) { ... }  @Override  public void modifyMetaInfo(String pictureId, PictureMetaInfo metaInfo) { ... }}</code></pre><p>使用接口或者abstract class，然后调用者就只需要知道需要传入什么参数，传出什么参数，就可以试用了。</p><h1 id="2-接口-vs-抽象类"><a href="#2-接口-vs-抽象类" class="headerlink" title="2. 接口 vs 抽象类"></a>2. 接口 vs 抽象类</h1><h1 id="3-组合-vs-继承"><a href="#3-组合-vs-继承" class="headerlink" title="3. 组合 vs 继承"></a>3. 组合 vs 继承</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://github.com/gdhucoder/Algorithms4/blob/master/designpattern/pic/umlcheatsheet.jpg" target="_blank" rel="noopener">https://github.com/gdhucoder/Algorithms4/blob/master/designpattern/pic/umlcheatsheet.jpg</a> </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这篇博文主要想说面向对象的几大特性：封装，抽象，继承，多态，以及我们究竟如何去使用。&lt;/p&gt;
+&lt;h1 id=&quot;1-面向对象概述&quot;&gt;&lt;a href=&quot;#1-面向对象概述&quot; class=&quot;headerlink&quot; title=&quot;1. 面向对象概述&quot;&gt;&lt;/a&gt;1. 面向对象概述&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="OOP" scheme="https://www.llchen60.com/tags/OOP/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式概述</title>
@@ -551,32 +578,6 @@
     
     
       <category term="Array" scheme="https://www.llchen60.com/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(2)-复杂度分析</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</id>
-    <published>2020-02-09T06:41:40.000Z</published>
-    <updated>2020-02-09T06:42:03.983Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-为什么需要复杂度分析？"><a href="#1-为什么需要复杂度分析？" class="headerlink" title="1. 为什么需要复杂度分析？"></a>1. 为什么需要复杂度分析？</h1><p>通过统计和监控得到的算法执行时间的占用的内存的大小的方法称为事后统计法，这种方法有其局限性：</p><ul><li>测试结果非常依赖于测试环境</li><li>测试结果受数据规模的影响很大, 而且会和数据集本身的数据质量有关</li><li>—-&gt; 因此我们需要一个不用具体的测试数据来测试，就可以粗略估计算法的执行效率的方法</li></ul><h1 id="2-大O复杂度表示法"><a href="#2-大O复杂度表示法" class="headerlink" title="2. 大O复杂度表示法"></a>2. 大O复杂度表示法</h1><ul><li>假定每行代码执行时间都一样</li><li>并不表示具体的代码执行时间，而是表示执行时间随着数据规模增大的变化趋势，因此也叫做渐进时间复杂度。</li></ul><h1 id="3-如何分析代码的时间复杂度"><a href="#3-如何分析代码的时间复杂度" class="headerlink" title="3. 如何分析代码的时间复杂度"></a>3. 如何分析代码的时间复杂度</h1><ul><li>只关注循环执行次数最多的一段代码</li><li>加法原则：总复杂度等于量级最大的那段代码的复杂度</li><li>乘法法则： 嵌套代码的复杂度等于签到内外层代码复杂度的乘积</li></ul><h1 id="4-复杂度量级"><a href="#4-复杂度量级" class="headerlink" title="4. 复杂度量级"></a>4. 复杂度量级</h1><ul><li>常量阶 O(1)</li><li>对数阶 O(logn)</li><li>线性阶 O(n)<ul><li>O (m+n) 当我们不知道几个变量的大小的时候 </li></ul></li><li>线性对数阶 O(nlogn)</li><li>平方阶 O(n^2)<ul><li>O (m*n) 乘法关系，不知道参量之间的相对大小 </li></ul></li><li>k次方阶 O(n^k)</li><li>指数阶 O(2^n)</li><li>阶乘阶 O(n!)</li></ul><h1 id="5-空间复杂度分析"><a href="#5-空间复杂度分析" class="headerlink" title="5. 空间复杂度分析"></a>5. 空间复杂度分析</h1><p>空间复杂度的全程是渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。</p><p>大O时间复杂度，并不具体表示代码真正的执行时间，而是表示代码执行时间随着数据规模的增大的变化趋势。因此也叫做渐进时间复杂度，(asymptotic time complexity)</p><pre><code>T(n) = O(f(n))</code></pre><p>T(n) - 代码的执行时间<br>n - 数据规模的大小<br>f(n) - 每行代码执行的次数总和<br>O - 表示左右成正比</p><h2 id="5-1-Tips"><a href="#5-1-Tips" class="headerlink" title="5.1 Tips"></a>5.1 Tips</h2><ul><li>只关注循环执行次数最多的一段代码</li><li>总复杂度等于量级最大的那段代码的复杂度</li><li>嵌套代码的复杂度为嵌套内外代码复杂度的乘积</li></ul><h1 id="6-复杂度的分析"><a href="#6-复杂度的分析" class="headerlink" title="6. 复杂度的分析"></a>6. 复杂度的分析</h1><h2 id="6-1-时间复杂度分析"><a href="#6-1-时间复杂度分析" class="headerlink" title="6.1 时间复杂度分析"></a>6.1 时间复杂度分析</h2><h3 id="6-1-1-多项式量级"><a href="#6-1-1-多项式量级" class="headerlink" title="6.1.1 多项式量级"></a>6.1.1 多项式量级</h3><ul><li>O(1) <ul><li>常量级的代码，我们将其时间复杂度都记作O(1)</li></ul></li><li>O(logn)</li></ul><pre><code> i=1; while (i &lt;= n)  {   i = i * 2; }</code></pre><ul><li>O(nlogn)</li><li>O(m+n)</li><li>O(m*n)</li></ul><h3 id="6-1-2-非多项式量级"><a href="#6-1-2-非多项式量级" class="headerlink" title="6.1.2 非多项式量级"></a>6.1.2 非多项式量级</h3><p>非常低效，会随着n的增长急剧增长，因此我们应当尽量不选择有如下时间复杂度的算法</p><ul><li>O(2^n) </li><li>O(n!)</li></ul><h2 id="6-2-空间复杂度分析"><a href="#6-2-空间复杂度分析" class="headerlink" title="6.2 空间复杂度分析"></a>6.2 空间复杂度分析</h2><p>渐进空间复杂度，表示算法的存储空间和数据规模之间的增长关系。</p><p>一般来说在O(1), O(n), O(n^2)这几个可能性上面</p><h1 id="7-浅析最好、最坏、平均、均摊时间复杂度"><a href="#7-浅析最好、最坏、平均、均摊时间复杂度" class="headerlink" title="7. 浅析最好、最坏、平均、均摊时间复杂度"></a>7. 浅析最好、最坏、平均、均摊时间复杂度</h1><pre><code>// n 表示数组 array 的长度int find(int[] array, int n, int x) {  int i = 0;  int pos = -1;  for (; i &lt; n; ++i) {    if (array[i] == x) {       pos = i;       break;    }  }  return pos;}</code></pre><h2 id="7-1-最好情况时间复杂度-best-case-time-complexity"><a href="#7-1-最好情况时间复杂度-best-case-time-complexity" class="headerlink" title="7.1 最好情况时间复杂度(best case time complexity)"></a>7.1 最好情况时间复杂度(best case time complexity)</h2><p>上面这段代码，最好情况是O(1)</p><h2 id="7-2-最坏情况时间复杂度-worst-case-time-complexity"><a href="#7-2-最坏情况时间复杂度-worst-case-time-complexity" class="headerlink" title="7.2 最坏情况时间复杂度(worst case time complexity)"></a>7.2 最坏情况时间复杂度(worst case time complexity)</h2><p>上面这段代码，最坏情况是O(n)</p><h2 id="7-3-平均情况时间复杂度-average-case-time-complexity"><a href="#7-3-平均情况时间复杂度-average-case-time-complexity" class="headerlink" title="7.3 平均情况时间复杂度(average case time complexity)"></a>7.3 平均情况时间复杂度(average case time complexity)</h2><p>需要算上发生的概率</p><p>上述例子当中，因为要查找变量x在数组当中的位置，一共有n+1种情况，在数组的0 - n-1位置中和不在数组当中。将每种情况下，需要遍历的元素个数累加起来，再除以n+1,就可以得到需要遍历的元素个数的平均值了 </p><p>即</p><pre><code>(1+2+3+ ... + n + n) / (n+1) = n(n+3)/(2(n+1))</code></pre><p>故平均复杂度还是O(n)</p><p>然而还要考虑每种情况下 发生的概率实质上是不同的，需要将这个算上</p><h2 id="7-4-均摊时间复杂度-amortized-time-complexity"><a href="#7-4-均摊时间复杂度-amortized-time-complexity" class="headerlink" title="7.4 均摊时间复杂度(amortized time complexity)"></a>7.4 均摊时间复杂度(amortized time complexity)</h2><p>不是遍历case，而是有轮回的，因此算一个轮回里的时间就可以得出平均复杂度了</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-为什么需要复杂度分析？&quot;&gt;&lt;a href=&quot;#1-为什么需要复杂度分析？&quot; class=&quot;headerlink&quot; title=&quot;1. 为什么需要复杂度分析？&quot;&gt;&lt;/a&gt;1. 为什么需要复杂度分析？&lt;/h1&gt;&lt;p&gt;通过统计和监控得到的算法执行时间的占用的内存的大
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="复杂度分析" scheme="https://www.llchen60.com/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
