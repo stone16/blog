@@ -13,7 +13,7 @@ LDAP stands for ***Lightweight Directory Access Protocol***. It is a lightweight
 
 # 2. What's directory? 
 
-Similar to database, but contain more **descriptive, attibute-based information**. It has some features:
+Similar to database, but contain more **descriptive, attribute-based information**. It has some features:
 
 1. Read much more often than it is written. 
 2. Directories are tuned to give quick response to high volume look up or search operations.
