@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="192">
-<input type="hidden" id="yelog_site_word_count" value="336.4k">
+<input type="hidden" id="yelog_site_word_count" value="337.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2466,12 +2466,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-05 16:50:17'>2020-03-05 16:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-06 08:37:15'>2020-03-05 16:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.8k</span>
+        <span>字数:2.6k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2501,7 +2501,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-传统基于MVC的开发模式"><span class="toc-text">1. 传统基于MVC的开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基于充血模型的DDD开发模式"><span class="toc-text">2. 基于充血模型的DDD开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-实战-DDD-开发虚拟钱包系统"><span class="toc-text">3. 实战  DDD 开发虚拟钱包系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-钱包业务背景介绍"><span class="toc-text">3.1 钱包业务背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-设计思路"><span class="toc-text">3.2 设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-基于贫血模式的传统开发模式"><span class="toc-text">3.3 基于贫血模式的传统开发模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-基于充血模式的DDD开发模式"><span class="toc-text">3.4 基于充血模式的DDD开发模式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-传统基于MVC的开发模式"><span class="toc-text">1. 传统基于MVC的开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基于充血模型的DDD开发模式"><span class="toc-text">2. 基于充血模型的DDD开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-实战-DDD-开发虚拟钱包系统"><span class="toc-text">3. 实战  DDD 开发虚拟钱包系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-钱包业务背景介绍"><span class="toc-text">3.1 钱包业务背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-设计思路"><span class="toc-text">3.2 设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-基于贫血模式的传统开发模式"><span class="toc-text">3.3 基于贫血模式的传统开发模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-基于充血模式的DDD开发模式"><span class="toc-text">3.4 基于充血模式的DDD开发模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-实战-接口鉴权"><span class="toc-text">4. 实战 - 接口鉴权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-需求"><span class="toc-text">4.1 需求</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2725,6 +2725,61 @@ public class VirtualWalletService {
 </ul>
 </li>
 </ul>
+<h1 id="4-实战-接口鉴权"><a href="#4-实战-接口鉴权" class="headerlink" title="4. 实战 - 接口鉴权"></a>4. 实战 - 接口鉴权</h1><p>目的是熟悉在拿到相对笼统的开发需求的时候，需要如何做需求分析，如何做职责划分，看需要定义哪些类，每个类应该具有哪些属性，方法；定义类和类的交互</p>
+<h2 id="4-1-需求"><a href="#4-1-需求" class="headerlink" title="4.1 需求"></a>4.1 需求</h2><p>微服务系统，通过HTTP协议暴露接口给其他系统调用。需要实现一个接口鉴权系统，只有经过认证的系统才能调用我们的接口</p>
+<ul>
+<li>需求分析<ul>
+<li>基础分析<ul>
+<li>通过用户名加密码来做认证</li>
+<li>每个允许访问的调用发都有应用ID还有秘钥，在做接口请求的时候，需要传进来应用ID和秘钥，然后我们在自己的服务器来进行验证比对。如果一致，说明认证成功，允许接口调用了否则，就拒绝</li>
+</ul>
+</li>
+<li>二轮分析<ul>
+<li>这种方式，明文传输，容易被拦截，并不安全</li>
+<li>借助加密算法，对密码进行加密再传递到微服务端验证，同样不安全。因为还是可以被拦截，被拦截以后黑客可以直接拿着这个加密的密码加ID来假装是调用者向服务端发出请求</li>
+<li>OAuth方式<ul>
+<li>调用方生成token (id + appId + pwd)</li>
+<li>调用方生成新的URL (id + appId + token)</li>
+<li>Server解析出URL, appId, token</li>
+<li>Server从数据库根据appId拿出pwd</li>
+<li>Server利用Url，appId， pwd生成server端token</li>
+<li>比较是否一致</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三轮分析<ul>
+<li>上述方式还是可能存在重放攻击，被拦截，然后来伪装成认证系统，调用这个URL对应的接口。</li>
+<li>token生成过程加入时间戳，然后传递到微服务器端</li>
+<li>微服务器收到这些数据之后，会验证当前时间戳跟传递过来的时间戳，是否在一定的时间窗口内。超过时间窗口，也会决绝请求</li>
+</ul>
+</li>
+<li>四轮分析<ul>
+<li>基本就是到这个程度，因为我们还要考虑性能方面的东西。这种方式对于性能的影响比较小，也考量到了安全性。</li>
+<li>如何在微服务端存储每个授权调用方的appId和密码<ul>
+<li>开发鉴权这种非业务功能，最好不要与具体的第三方系统有过度的耦合</li>
+<li>最好能够支持多种不同的存储方式<ul>
+<li>ZooKeeper</li>
+<li>本地配置文件</li>
+<li>自研配置中心</li>
+<li>MySQL</li>
+<li>Redis等</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最终需求的确定<ul>
+<li>调用方进行接口请求的时候，将 URL、AppID、密码、时间戳拼接在一起，通过加密算法生成 token，并且将 token、AppID、时间戳拼接在 URL 中，一并发送到微服务端。</li>
+<li>微服务端在接收到调用方的接口请求之后，从请求中拆解出 token、AppID、时间戳。</li>
+<li>微服务端首先检查传递过来的时间戳跟当前时间，是否在 token 失效时间窗口内。如果已经超过失效时间，那就算接口调用鉴权失败，拒绝接口调用请求。</li>
+<li>如果 token 验证没有过期失效，微服务端再从自己的存储中，取出 AppID 对应的密码，通过同样的 token 生成算法，生成另外一个 token，与调用方传递过来的 token 进行匹配；如果一致，则鉴权成功，允许接口调用，否则就拒绝接口调用。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -2739,10 +2794,10 @@ public class VirtualWalletService {
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>基于充血模型的DDD开发模型</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.6k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-03-05, 16:49:16</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-05, 16:50:17</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-06, 08:37:15</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%9F%BA%E4%BA%8E%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E7%9A%84DDD%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B/" title="基于充血模型的DDD开发模型">https://www.llchen60.com/%E5%9F%BA%E4%BA%8E%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E7%9A%84DDD%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
