@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="192">
-<input type="hidden" id="yelog_site_word_count" value="337.3k">
+<input type="hidden" id="yelog_site_word_count" value="337.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2466,12 +2466,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-06 08:37:15'>2020-03-05 16:49</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-08 10:05:14'>2020-03-05 16:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.6k</span>
+        <span>字数:3.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2501,7 +2501,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-传统基于MVC的开发模式"><span class="toc-text">1. 传统基于MVC的开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基于充血模型的DDD开发模式"><span class="toc-text">2. 基于充血模型的DDD开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-实战-DDD-开发虚拟钱包系统"><span class="toc-text">3. 实战  DDD 开发虚拟钱包系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-钱包业务背景介绍"><span class="toc-text">3.1 钱包业务背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-设计思路"><span class="toc-text">3.2 设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-基于贫血模式的传统开发模式"><span class="toc-text">3.3 基于贫血模式的传统开发模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-基于充血模式的DDD开发模式"><span class="toc-text">3.4 基于充血模式的DDD开发模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-实战-接口鉴权"><span class="toc-text">4. 实战 - 接口鉴权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-需求"><span class="toc-text">4.1 需求</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-传统基于MVC的开发模式"><span class="toc-text">1. 传统基于MVC的开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基于充血模型的DDD开发模式"><span class="toc-text">2. 基于充血模型的DDD开发模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-实战-DDD-开发虚拟钱包系统"><span class="toc-text">3. 实战  DDD 开发虚拟钱包系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-钱包业务背景介绍"><span class="toc-text">3.1 钱包业务背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-设计思路"><span class="toc-text">3.2 设计思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-基于贫血模式的传统开发模式"><span class="toc-text">3.3 基于贫血模式的传统开发模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-基于充血模式的DDD开发模式"><span class="toc-text">3.4 基于充血模式的DDD开发模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-实战-接口鉴权"><span class="toc-text">4. 实战 - 接口鉴权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-需求"><span class="toc-text">4.1 需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-面向对象设计"><span class="toc-text">4.2 面向对象设计</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2780,7 +2780,92 @@ public class VirtualWalletService {
 </ul>
 </li>
 </ul>
+<h2 id="4-2-面向对象设计"><a href="#4-2-面向对象设计" class="headerlink" title="4.2 面向对象设计"></a>4.2 面向对象设计</h2><ul>
+<li>进行职责划分，进而识别出都有哪些类<ul>
+<li>将需求描述中的名词罗列出来，作为可能的候选类，然后进行筛选</li>
+<li>或者根据需求描述，将其中涉及的功能点，一个一个罗列出来，然后再看哪些功能点职责相近，操作同样的属性，能否归到同一个类当中</li>
+</ul>
+</li>
+<li>定义类，及其属性和方法</li>
+<li>定义类和类之间的交互关系</li>
+<li>将类组装起来并提供执行入口 </li>
+</ul>
+<ul>
+<li>功能点列表<ul>
+<li>把 URL、AppID、密码、时间戳拼接为一个字符串；</li>
+<li>对字符串通过加密算法加密生成 token；</li>
+<li>将 token、AppID、时间戳拼接到 URL 中，形成新的 URL；</li>
+<li>解析 URL，得到 token、AppID、时间戳等信息；</li>
+<li>从存储中取出 AppID 和对应的密码；</li>
+<li>根据时间戳判断 token 是否过期失效；</li>
+<li>验证两个 token 是否匹配； </li>
+</ul>
+</li>
+</ul>
+<p>从上面的功能列表中，我们发现，1、2、6、7 都是跟 token 有关，负责 token 的生成、验证；3、4 都是在处理 URL，负责 URL 的拼接、解析；5 是操作 AppID 和密码，负责从存储中读取 AppID 和密码。所以，我们可以粗略地得到三个核心的类：AuthToken、Url、CredentialStorage。AuthToken 负责实现 1、2、6、7 这四个操作；Url 负责 3、4 两个操作；CredentialStorage 负责 5 这个操作。</p>
+<pre><code>// AuthToken类的实现
+private static final long DEFAULT_EXPIRED_TIME_INTERVAL = 1 * 60 * 1000;
+private String token;
+private long createTime;
+private long expiredTimeInterval = DEFAULT_EXPIRED_TIME_INTERVAL;
 
+public AuthToken(String token, long createTime);
+public AuthToken(String token, long createTime, long expredTImeInterval);
+
+public static AuthToken create(String baseUrl, long createTime, Map&lt;String, String&gt; params);
+
+public String getToken();
+
+public boolean isExpired();
+
+public boolean match(AuthToken authToken)</code></pre><ul>
+<li>Tips<ul>
+<li>并不是所有的需要的名词类的属性都会作为类的属性，有可能会作为方法的参数。选择的基准还是这个属性到底属不属于这个类，从这个角度来看的</li>
+<li>我们有可能需要去挖掘一下在功能需求里面并没有体现的一些属性  还是需要从业务模型的角度上来看究竟需要怎么做才比较好</li>
+</ul>
+</li>
+</ul>
+<pre><code>public interface ApiAuthenticator {
+  void auth(String url);
+  void auth(ApiRequest apiRequest);
+}
+
+public class DefaultApiAuthenticatorImpl implements ApiAuthenticator {
+  private CredentialStorage credentialStorage;
+
+  public DefaultApiAuthenticator() {
+    this.credentialStorage = new MysqlCredentialStorage();
+  }
+
+  public DefaultApiAuthenticator(CredentialStorage credentialStorage) {
+    this.credentialStorage = credentialStorage;
+  }
+
+  @Override
+  public void auth(String url) {
+    ApiRequest apiRequest = ApiRequest.buildFromUrl(url);
+    auth(apiRequest);
+  }
+
+  @Override
+  public void auth(ApiRequest apiRequest) {
+    String appId = apiRequest.getAppId();
+    String token = apiRequest.getToken();
+    long timestamp = apiRequest.getTimestamp();
+    String originalUrl = apiRequest.getOriginalUrl();
+
+    AuthToken clientAuthToken = new AuthToken(token, timestamp);
+    if (clientAuthToken.isExpired()) {
+      throw new RuntimeException(&quot;Token is expired.&quot;);
+    }
+
+    String password = credentialStorage.getPasswordByAppId(appId);
+    AuthToken serverAuthToken = AuthToken.generate(originalUrl, appId, password, timestamp);
+    if (!serverAuthToken.match(clientAuthToken)) {
+      throw new RuntimeException(&quot;Token verfication failed.&quot;);
+    }
+  }
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -2794,10 +2879,10 @@ public class VirtualWalletService {
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>基于充血模型的DDD开发模型</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.6k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-03-05, 16:49:16</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-06, 08:37:15</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-08, 10:05:14</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%9F%BA%E4%BA%8E%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E7%9A%84DDD%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B/" title="基于充血模型的DDD开发模型">https://www.llchen60.com/%E5%9F%BA%E4%BA%8E%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E7%9A%84DDD%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
