@@ -267,3 +267,90 @@ MVC三层结构中的M表示Model，V表示View，C表示Controller。通过这�
         + 微服务端在接收到调用方的接口请求之后，从请求中拆解出 token、AppID、时间戳。
         + 微服务端首先检查传递过来的时间戳跟当前时间，是否在 token 失效时间窗口内。如果已经超过失效时间，那就算接口调用鉴权失败，拒绝接口调用请求。
         + 如果 token 验证没有过期失效，微服务端再从自己的存储中，取出 AppID 对应的密码，通过同样的 token 生成算法，生成另外一个 token，与调用方传递过来的 token 进行匹配；如果一致，则鉴权成功，允许接口调用，否则就拒绝接口调用。 
+
+## 4.2 面向对象设计
+
++ 进行职责划分，进而识别出都有哪些类
+    + 将需求描述中的名词罗列出来，作为可能的候选类，然后进行筛选
+    + 或者根据需求描述，将其中涉及的功能点，一个一个罗列出来，然后再看哪些功能点职责相近，操作同样的属性，能否归到同一个类当中
++ 定义类，及其属性和方法
++ 定义类和类之间的交互关系
++ 将类组装起来并提供执行入口 
+
+
++ 功能点列表
+    + 把 URL、AppID、密码、时间戳拼接为一个字符串；
+    + 对字符串通过加密算法加密生成 token；
+    + 将 token、AppID、时间戳拼接到 URL 中，形成新的 URL；
+    + 解析 URL，得到 token、AppID、时间戳等信息；
+    + 从存储中取出 AppID 和对应的密码；
+    + 根据时间戳判断 token 是否过期失效；
+    + 验证两个 token 是否匹配； 
+
+从上面的功能列表中，我们发现，1、2、6、7 都是跟 token 有关，负责 token 的生成、验证；3、4 都是在处理 URL，负责 URL 的拼接、解析；5 是操作 AppID 和密码，负责从存储中读取 AppID 和密码。所以，我们可以粗略地得到三个核心的类：AuthToken、Url、CredentialStorage。AuthToken 负责实现 1、2、6、7 这四个操作；Url 负责 3、4 两个操作；CredentialStorage 负责 5 这个操作。
+
+
+    // AuthToken类的实现
+    private static final long DEFAULT_EXPIRED_TIME_INTERVAL = 1 * 60 * 1000;
+    private String token;
+    private long createTime;
+    private long expiredTimeInterval = DEFAULT_EXPIRED_TIME_INTERVAL;
+    
+    public AuthToken(String token, long createTime);
+    public AuthToken(String token, long createTime, long expredTImeInterval);
+    
+    public static AuthToken create(String baseUrl, long createTime, Map<String, String> params);
+    
+    public String getToken();
+    
+    public boolean isExpired();
+    
+    public boolean match(AuthToken authToken)
+
++ Tips
+    + 并不是所有的需要的名词类的属性都会作为类的属性，有可能会作为方法的参数。选择的基准还是这个属性到底属不属于这个类，从这个角度来看的
+    + 我们有可能需要去挖掘一下在功能需求里面并没有体现的一些属性  还是需要从业务模型的角度上来看究竟需要怎么做才比较好
+
+
+
+    public interface ApiAuthenticator {
+      void auth(String url);
+      void auth(ApiRequest apiRequest);
+    }
+    
+    public class DefaultApiAuthenticatorImpl implements ApiAuthenticator {
+      private CredentialStorage credentialStorage;
+      
+      public DefaultApiAuthenticator() {
+        this.credentialStorage = new MysqlCredentialStorage();
+      }
+      
+      public DefaultApiAuthenticator(CredentialStorage credentialStorage) {
+        this.credentialStorage = credentialStorage;
+      }
+    
+      @Override
+      public void auth(String url) {
+        ApiRequest apiRequest = ApiRequest.buildFromUrl(url);
+        auth(apiRequest);
+      }
+    
+      @Override
+      public void auth(ApiRequest apiRequest) {
+        String appId = apiRequest.getAppId();
+        String token = apiRequest.getToken();
+        long timestamp = apiRequest.getTimestamp();
+        String originalUrl = apiRequest.getOriginalUrl();
+    
+        AuthToken clientAuthToken = new AuthToken(token, timestamp);
+        if (clientAuthToken.isExpired()) {
+          throw new RuntimeException("Token is expired.");
+        }
+    
+        String password = credentialStorage.getPasswordByAppId(appId);
+        AuthToken serverAuthToken = AuthToken.generate(originalUrl, appId, password, timestamp);
+        if (!serverAuthToken.match(clientAuthToken)) {
+          throw new RuntimeException("Token verfication failed.");
+        }
+      }
+    }
