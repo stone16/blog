@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-08T17:05:14.373Z</updated>
+  <updated>2020-03-10T03:50:07.853Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SOLID - 单一职责原则</title>
+    <link href="https://www.llchen60.com/SOLID-%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"/>
+    <id>https://www.llchen60.com/SOLID-%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</id>
+    <published>2020-03-10T03:49:07.000Z</published>
+    <updated>2020-03-10T03:50:07.853Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><ul><li>Single Responsibility Principle - 单一职责原则<ul><li>我们希望对于一个类或者模块来说，他们都是只有一个职责的，即只完成一个功能</li><li>这个职责说的其实就是，不要设计大而全的类，应当设计粒度小，功能单一的类。</li><li>在同一个类当中的方法功能，应该是在同一个业务方向当中的</li></ul></li></ul><h1 id="2-如何判断类的职责是否单一"><a href="#2-如何判断类的职责是否单一" class="headerlink" title="2. 如何判断类的职责是否单一"></a>2. 如何判断类的职责是否单一</h1><ul><li><p>E.G</p><ul><li>如果一个类，既要处理和其他微服务的交互，又要到数据库query，那么这就是两个职责，我们就应该将这个类分割开，划分到两个不同的类当中去 </li></ul></li><li><p>E.G2</p></li></ul><pre><code>public class UserInfo {  private long userId;  private String username;  private String email;  private String telephone;  private long createTime;  private long lastLoginTime;  private String avatarUrl;  private String provinceOfAddress; // 省  private String cityOfAddress; // 市  private String regionOfAddress; // 区   private String detailedAddress; // 详细地址  // ...省略其他属性和方法...}</code></pre><p>对于上述UserInfo类来说，里面全是User的一些属性，但是其中有将近半数是关于地址的，我们有理由将其细分为UserAddress类以及UserInfo类，但是在实际应用场景当中，我们需要考虑我们到底是准备如何使用这些数据的。</p><p>如果应用场景就是拿出用户相关的信息，那放在一起无伤大雅，但是如果是要做物流，电商的场景，那么我们单独想拿出地址相关信息的场景就会比较多了，这种情况最好就分成两个不同的类了。</p><p>实际开发当中，实际上一般情况下都是先写一个粗粒度的类，以满足业务的需求，随着业务的发展，如果粗粒度的类越来越庞大，我们就可以将这个粗粒度的类拆分成几个更细粒度的类，即–持续重构。</p><h1 id="3-判断是否满足单一职责原则的判断准则"><a href="#3-判断是否满足单一职责原则的判断准则" class="headerlink" title="3. 判断是否满足单一职责原则的判断准则"></a>3. 判断是否满足单一职责原则的判断准则</h1><ul><li>类中代码的行数，函数或者属性过多，会影响代码的可读性和可维护性，需要考虑对类进行拆分了</li><li>类依赖的其他类过多，或者依赖类的其他类过多，不符合高内聚，低耦合的设计思想，我们需要对其考虑进行拆分</li><li>私有方法过多，我们需要考虑是否应该将私有方法独立到新的类当中，设置为public方法，供更多的类使用，从而提高代码的复用性</li><li>如果对于一个类，比较难取名字，只能用相对泛泛的名字，那很可能意味着这个类的职责有点过多了</li><li>类中的大量方法都是集中操作类中的某几个属性，那么就可以考虑将这几个属性和对应的方法拆分出来</li></ul><p>需要注意的一点是： 我们使用这些准则，亦或者是设计模式，最终的目的还是提高代码的可读性，可扩展性，复用性，可维护性等。这才应当是我们判断是否要采用SOLID准则，以及其他的原则的最终标准。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; title=&quot;1. Intro&quot;&gt;&lt;/a&gt;1. Intro&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Single Responsibility Principle - 单一职责原则&lt;u
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
+    
+  </entry>
   
   <entry>
     <title>基于充血模型的DDD开发模型</title>
@@ -553,33 +580,6 @@
     
     
       <category term="递归" scheme="https://www.llchen60.com/tags/%E9%80%92%E5%BD%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(6)-队列</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-6-%E9%98%9F%E5%88%97/</id>
-    <published>2020-02-09T17:45:37.000Z</published>
-    <updated>2020-02-09T17:45:58.480Z</updated>
-    
-    <content type="html"><![CDATA[<p>CPU资源有限，任务的处理速度和线程个数并不是线性正相关的。相反的，过多的线程会导致CPU频繁切换，处理性能下降。因此，线程池的大小一般都是综合考虑要处理任务的特点和硬件环境，来事先设置的。</p><p>当我们向固定大小的线程池中请求一个线程的时候，如果线程池中没有空闲资源，如何处理这个请求呢？ —–&gt; 队列</p><p>操作受限的线性表。</p><h1 id="1-理解队列"><a href="#1-理解队列" class="headerlink" title="1. 理解队列"></a>1. 理解队列</h1><ul><li>基本操作<ul><li>入队 enqueue()   入栈 push()</li><li>出队 dequeue()   出栈 pop()</li></ul></li><li>操作受限的线性表数据结构</li><li>带有一些特性的队列<ul><li>循环队列</li><li>阻塞队列</li><li>并发队列</li><li>顺序队列 - 数组实现</li><li>链式队列 - 链式队列</li></ul></li></ul><p>在很多偏底层系统，框架，中间件的开发当中，起到关键性作用。比如高性能disruptor,Linux环形缓存，都用到了循环并发队列; Java Concurrent并发包利用ArrayBlockingQueue来实现公平锁。</p><pre><code>// 用数组实现的队列public class ArrayQueue {  // 数组：items，数组大小：n  private String[] items;  private int n = 0;  // head 表示队头下标，tail 表示队尾下标  private int head = 0;  private int tail = 0;  // 申请一个大小为 capacity 的数组  public ArrayQueue(int capacity) {    items = new String[capacity];    n = capacity;  }  // 入队  public boolean enqueue(String item) {    // 如果 tail == n 表示队列已经满了    if (tail == n) return false;    items[tail] = item;    ++tail;    return true;  }  // 出队  public String dequeue() {    // 如果 head == tail 表示队列为空    if (head == tail) return null;    // 为了让其他语言的同学看的更加明确，把 -- 操作放到单独一行来写了    String ret = items[head];    ++head;    return ret;  }}</code></pre><h1 id="2-基于链表的队列实现方法"><a href="#2-基于链表的队列实现方法" class="headerlink" title="2. 基于链表的队列实现方法"></a>2. 基于链表的队列实现方法</h1><ul><li>两个指针<ul><li>head指针 - 指向第一个结点</li><li>tail指针 - 指向最后一个结点</li></ul></li></ul><h1 id="3-循环队列"><a href="#3-循环队列" class="headerlink" title="3. 循环队列"></a>3. 循环队列</h1><p>用数组实现的队列，在tail = n的时候，会有数据搬移操作。这样入队性能就会受到影响。循环队列的可以解决这个问题。</p><ul><li>如何确认队空和队满<ul><li>队空 head == tail</li><li>队满 (tail+1)%n = head</li></ul></li></ul><pre><code>public class CircularQueue {  // 数组：items，数组大小：n  private String[] items;  private int n = 0;  // head 表示队头下标，tail 表示队尾下标  private int head = 0;  private int tail = 0;  // 申请一个大小为 capacity 的数组  public CircularQueue(int capacity) {    items = new String[capacity];    n = capacity;  }  // 入队  public boolean enqueue(String item) {    // 队列满了    if ((tail + 1) % n == head) return false;    items[tail] = item;    tail = (tail + 1) % n;    return true;  }  // 出队  public String dequeue() {    // 如果 head == tail 表示队列为空    if (head == tail) return null;    String ret = items[head];    head = (head + 1) % n;    return ret;  }}</code></pre><h1 id="4-阻塞队列和并发队列"><a href="#4-阻塞队列和并发队列" class="headerlink" title="4. 阻塞队列和并发队列"></a>4. 阻塞队列和并发队列</h1><ul><li>阻塞队列<ul><li>在队列基础上增加了阻塞操作</li><li>队列为空的时候，从队头取数据会被阻塞</li><li>如果队列已经满了，那么插入数据的操作会被阻塞，直到队列中有空闲位置后再插入数据，然后再返回</li><li>生产者 消费者模型  相当于</li><li>基于阻塞队列，我们可以通过协调生产者和消费者的个数来提高数据的处理效率</li><li>我们可以通过配置多几个的消费者，来应对一个生产者</li></ul></li><li>并发队列<ul><li>实现方法<ul><li>在enquue()和dequeue()方法上加锁</li><li>基于CAS原子操作</li></ul></li></ul></li></ul><h1 id="5-对比基于数组和基于链表实现的队列"><a href="#5-对比基于数组和基于链表实现的队列" class="headerlink" title="5. 对比基于数组和基于链表实现的队列"></a>5. 对比基于数组和基于链表实现的队列</h1><ul><li>基于链表的实现方式<ul><li>可以实现一个支持无限排队的无界队列</li><li>可能会导致过多的请求排队等待</li><li>请求处理的响应时间会长很多</li><li>因此对于响应时间比较敏感的系统来说，基于链表实现的无限排队的线程池就不是很合适了</li></ul></li><li>基于数组实现的有界队列<ul><li>队列大小是有限的</li><li>超过一定数量以后，请求就会被拒绝</li><li>队列的大小设置就会是个trade off了</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;CPU资源有限，任务的处理速度和线程个数并不是线性正相关的。相反的，过多的线程会导致CPU频繁切换，处理性能下降。因此，线程池的大小一般都是综合考虑要处理任务的特点和硬件环境，来事先设置的。&lt;/p&gt;
-&lt;p&gt;当我们向固定大小的线程池中请求一个线程的时候，如果线程池中没有空闲资
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="队列" scheme="https://www.llchen60.com/tags/%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
