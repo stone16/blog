@@ -2,7 +2,8 @@
 title: SOLID - 开闭原则
 date: 2020-03-10 20:52:23
 categories: SystemDesign
-tags: SOLID
+tags: 
+    - SOLID
 top:
 ---
 开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。
