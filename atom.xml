@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-10T03:50:07.853Z</updated>
+  <updated>2020-03-14T04:33:36.110Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SOLID - 里氏替换原则</title>
+    <link href="https://www.llchen60.com/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"/>
+    <id>https://www.llchen60.com/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/</id>
+    <published>2020-03-14T04:33:36.000Z</published>
+    <updated>2020-03-14T04:33:36.110Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SOLID - 开闭原则</title>
+    <link href="https://www.llchen60.com/SOLID-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"/>
+    <id>https://www.llchen60.com/SOLID-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/</id>
+    <published>2020-03-11T03:52:23.000Z</published>
+    <updated>2020-03-14T04:34:11.692Z</updated>
+    
+    <content type="html"><![CDATA[<p>开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。</p><h1 id="1-如何理解-对扩展开放，对修改关闭？"><a href="#1-如何理解-对扩展开放，对修改关闭？" class="headerlink" title="1. 如何理解 对扩展开放，对修改关闭？"></a>1. 如何理解 对扩展开放，对修改关闭？</h1><p>Open closed principle, Software entities (modules, classes, functions, etc) should be open for extension, but closed for modification. </p><p>添加一个新的功能应该是在已有代码基础上扩展代码，而非修改已有的代码。</p><h1 id="2-实例解释"><a href="#2-实例解释" class="headerlink" title="2. 实例解释"></a>2. 实例解释</h1><p>代码实现的功能就是当TPS超过某个预设的最大值的时候，或者是错误的数量超过允许的最大值，那么就会触发警报<br>    public class Alert {<br>      private AlertRule rule;<br>      private Notification notification;</p><pre><code>  public Alert(AlertRule rule, Notification notification) {    this.rule = rule;    this.notification = notification;  }  public void check(String api, long requestCount, long errorCount, long durationOfSeconds) {    long tps = requestCount / durationOfSeconds;    if (tps &gt; rule.getMatchedRule(api).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }    if (errorCount &gt; rule.getMatchedRule(api).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }  }}</code></pre><p>现在我们需要添加一个功能，当每秒钟请求数量超过某个阈值的时候，我们也要触发警告，发送通知。</p><p>如果直接在上述代码中进行修改的话，我们主要是需要在check函数当中，添加一个新的输入参数，timeoutCount，表示超时的请求数量，然后再check函数里面加上对应的逻辑</p><pre><code>public class Alert {  // ...省略AlertRule/Notification属性和构造函数...  // 改动一：添加参数timeoutCount  public void check(String api, long requestCount, long errorCount, long timeoutCount, long durationOfSeconds) {    long tps = requestCount / durationOfSeconds;    if (tps &gt; rule.getMatchedRule(api).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }    if (errorCount &gt; rule.getMatchedRule(api).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }    // 改动二：添加接口超时处理逻辑    long timeoutTps = timeoutCount / durationOfSeconds;    if (timeoutTps &gt; rule.getMatchedRule(api).getMaxTimeoutTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }  }}</code></pre><p>这样的改动是有不少问题的，比如我们对于传入参数做了改动，那所有调用这个函数的地方都需要进行修改，这就是个不小的问题了；而且在修改了check函数以后，所有的单元测试都需要进行修改，会很麻烦的。</p><p>为了提高这整个类的拓展性，我们可以做以下的重构操作：</p><ul><li>将check函数的多个入参封装成ApiStatInfo类</li><li>引入handler的概念，将if判断逻辑分散到各个handler当中</li></ul><pre><code>public class Alert {  private List&lt;AlertHandler&gt; alertHandlers = new ArrayList&lt;&gt;();  public void addAlertHandler(AlertHandler alertHandler) {    this.alertHandlers.add(alertHandler);  }  public void check(ApiStatInfo apiStatInfo) {    for (AlertHandler handler : alertHandlers) {      handler.check(apiStatInfo);    }  }}public class ApiStatInfo {//省略constructor/getter/setter方法  private String api;  private long requestCount;  private long errorCount;  private long durationOfSeconds;}public abstract class AlertHandler {  protected AlertRule rule;  protected Notification notification;  public AlertHandler(AlertRule rule, Notification notification) {    this.rule = rule;    this.notification = notification;  }  public abstract void check(ApiStatInfo apiStatInfo);}public class TpsAlertHandler extends AlertHandler {  public TpsAlertHandler(AlertRule rule, Notification notification) {    super(rule, notification);  }  @Override  public void check(ApiStatInfo apiStatInfo) {    long tps = apiStatInfo.getRequestCount()/ apiStatInfo.getDurationOfSeconds();    if (tps &gt; rule.getMatchedRule(apiStatInfo.getApi()).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }  }}public class ErrorAlertHandler extends AlertHandler {  public ErrorAlertHandler(AlertRule rule, Notification notification){    super(rule, notification);  }  @Override  public void check(ApiStatInfo apiStatInfo) {    if (apiStatInfo.getErrorCount() &gt; rule.getMatchedRule(apiStatInfo.getApi()).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }  }}</code></pre><p>在使用的时候，如下：</p><pre><code>public class ApplicationContext {  private AlertRule alertRule;  private Notification notification;  private Alert alert;  public void initializeBeans() {    alertRule = new AlertRule(/*.省略参数.*/); //省略一些初始化代码    notification = new Notification(/*.省略参数.*/); //省略一些初始化代码    alert = new Alert();    alert.addAlertHandler(new TpsAlertHandler(alertRule, notification));    alert.addAlertHandler(new ErrorAlertHandler(alertRule, notification));  }  public Alert getAlert() { return alert; }  // 饿汉式单例  private static final ApplicationContext instance = new ApplicationContext();  private ApplicationContext() {    instance.initializeBeans();  }  public static ApplicationContext getInstance() {    return instance;  }}public class Demo {  public static void main(String[] args) {    ApiStatInfo apiStatInfo = new ApiStatInfo();    // ...省略设置apiStatInfo数据值的代码    ApplicationContext.getInstance().getAlert().check(apiStatInfo);  }}</code></pre><p>需要修改的地方：</p><pre><code>public class Alert { // 代码未改动... }public class ApiStatInfo {//省略constructor/getter/setter方法  private String api;  private long requestCount;  private long errorCount;  private long durationOfSeconds;  private long timeoutCount; // 改动一：添加新字段}public abstract class AlertHandler { //代码未改动... }public class TpsAlertHandler extends AlertHandler {//代码未改动...}public class ErrorAlertHandler extends AlertHandler {//代码未改动...}// 改动二：添加新的handlerpublic class TimeoutAlertHandler extends AlertHandler {//省略代码...}public class ApplicationContext {  private AlertRule alertRule;  private Notification notification;  private Alert alert;  public void initializeBeans() {    alertRule = new AlertRule(/*.省略参数.*/); //省略一些初始化代码    notification = new Notification(/*.省略参数.*/); //省略一些初始化代码    alert = new Alert();    alert.addAlertHandler(new TpsAlertHandler(alertRule, notification));    alert.addAlertHandler(new ErrorAlertHandler(alertRule, notification));    // 改动三：注册handler    alert.addAlertHandler(new TimeoutAlertHandler(alertRule, notification));  }  //...省略其他未改动代码...}public class Demo {  public static void main(String[] args) {    ApiStatInfo apiStatInfo = new ApiStatInfo();    // ...省略apiStatInfo的set字段代码    apiStatInfo.setTimeoutCount(289); // 改动四：设置tiemoutCount值    ApplicationContext.getInstance().getAlert().check(apiStatInfo);}</code></pre><h1 id="3-一些思考"><a href="#3-一些思考" class="headerlink" title="3. 一些思考"></a>3. 一些思考</h1><ul><li><p>写代码的时候就需要想想有可能会有哪些需求上的变更，如何设计代码的结构，留好扩展点。</p></li><li><p>在识别出可变部分之后，要将可变部分封装起来，隔离变化，提供抽象化的不可变接口，给上层系统来使用。当具体的实现发生变化的时候，我们只需要基于相同的抽象接口，扩展一个新的实现，这样子上游的代码就几乎不需要修改了</p></li><li><p>基于接口而非实现的编程， 对扩展开放，对修改关闭</p><p>  // 这一部分体现了抽象意识<br>  public interface MessageQueue { //… }<br>  public class KafkaMessageQueue implements MessageQueue { //… }<br>  public class RocketMQMessageQueue implements MessageQueue {//…}</p><p>  public interface MessageFormatter { //… }<br>  public class JsonMessageFormatter implements MessageFormatter {//…}<br>  public class MessageFormatter implements MessageFormatter {//…}</p><p>  public class Demo {</p><pre><code>private MessageQueue msgQueue; // 基于接口而非实现编程public Demo(MessageQueue msgQueue) { // 依赖注入  this.msgQueue = msgQueue;}// msgFormatter：多态、依赖注入public void sendNotification(Notification notification, MessageFormatter msgFormatter) {  //...    }</code></pre><p>  }</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。&lt;/p&gt;
+&lt;h1 id=&quot;1-如何理解-对扩展开放，对修改关闭？&quot;&gt;&lt;a href=&quot;#1-如何理解-对扩展开放，对修改关闭？&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
+    
+  </entry>
   
   <entry>
     <title>SOLID - 单一职责原则</title>
@@ -515,71 +557,6 @@
     
     
       <category term="排序" scheme="https://www.llchen60.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(8)-排序(冒泡 插入 选择)</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-8-%E6%8E%92%E5%BA%8F-%E5%86%92%E6%B3%A1-%E6%8F%92%E5%85%A5-%E9%80%89%E6%8B%A9/</id>
-    <published>2020-02-09T17:49:00.000Z</published>
-    <updated>2020-02-09T17:50:06.364Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>这里介绍三大类型的排序<ul><li>冒泡，插入，选择  O(n^2)</li><li>快排，归并 O(nlogn)</li><li>桶，计数，基数</li></ul></li></ul><h1 id="1-如何分析一个排序算法？"><a href="#1-如何分析一个排序算法？" class="headerlink" title="1. 如何分析一个排序算法？"></a>1. 如何分析一个排序算法？</h1><h2 id="1-1-执行效率"><a href="#1-1-执行效率" class="headerlink" title="1.1 执行效率"></a>1.1 执行效率</h2><ul><li>最好情况，最坏情况，平均情况时间复杂度<ul><li>要知道针对于数据集的特征，需要采取哪一种排序算法 </li></ul></li><li>时间复杂度的系数，常数，低阶<ul><li>实际开发过程中，面对规模比较小的数据，我们可能需要将系数，常数，低阶都考虑进去才可以的 </li></ul></li><li>比较次数和交换次数<ul><li>对于基于比较的排序算法，会涉及到元素大小的比较以及元素的交换或者移动，因此当我们在分析排序算法的执行效率的时候，应该把比较次数和交换次数也考虑进去 </li></ul></li></ul><h2 id="1-2-排序算法的内存消耗"><a href="#1-2-排序算法的内存消耗" class="headerlink" title="1.2 排序算法的内存消耗"></a>1.2 排序算法的内存消耗</h2><p>内存消耗可以用空间复杂度来衡量，来看算法究竟消耗了多少内存空间</p><h2 id="1-3-排序算法的稳定性"><a href="#1-3-排序算法的稳定性" class="headerlink" title="1.3 排序算法的稳定性"></a>1.3 排序算法的稳定性</h2><p>如果待排序的序列中存在值相等的元素，经过排序以后，相等元素之间原有的先后顺序不变</p><p>稳定性很重要，表现在要对几个影响因素来按照步骤进行排序的情况。</p><h1 id="2-算法分析"><a href="#2-算法分析" class="headerlink" title="2. 算法分析"></a>2. 算法分析</h1><h2 id="2-1-冒泡排序"><a href="#2-1-冒泡排序" class="headerlink" title="2.1 冒泡排序"></a>2.1 冒泡排序</h2><ul><li>操作相邻的两个数据<ul><li>每次冒泡都会对相邻的两个元素进行比较，</li><li>看是否满足大小关系要求</li><li>如果不满足就让它倆互换，一次冒泡至少会让一个元素移动到它应该在的位置，重复n次，就完成了n个数据的排序工作</li></ul></li></ul><p><img src="https://i.loli.net/2020/02/10/zUxOmSFQJLiyGMD.jpg" alt="fig1.jpg"></p><p><img src="https://i.loli.net/2020/02/10/o8L1DHgENfb2su7.jpg" alt="fig2.jpg"></p><pre><code>// 冒泡排序，a 表示数组，n 表示数组大小public void bubbleSort(int[] a, int n) {  if (n &lt;= 1) return; for (int i = 0; i &lt; n; ++i) {    // 提前退出冒泡循环的标志位，如果没有冒泡，说明已经有序了，不用再进行下去了    boolean flag = false;    // -i是因为在进行第i轮次的时候，最末尾的是已经排好了的i个数    for (int j = 0; j &lt; n - i - 1; ++j) {      if (a[j] &gt; a[j+1]) { // 交换        int tmp = a[j];        a[j] = a[j+1];        a[j+1] = tmp;        flag = true;  // 表示有数据交换            }    }    if (!flag) break;  // 没有数据交换，提前退出  }}</code></pre><ul><li>冒泡排序是原地排序算法，空间复杂度为O(1)</li><li>冒泡排序是稳定的排序算法</li><li>时间复杂度<ul><li>最好情况 O(n)</li><li>最坏情况 O(n^2)</li></ul></li></ul><h2 id="2-2-插入排序"><a href="#2-2-插入排序" class="headerlink" title="2.2 插入排序"></a>2.2 插入排序</h2><p>对于一个有序的数组来说，我们往里面添加一个新的数据，就是要遍历数组，找到数据应该插入的位置并将其插入即可。</p><p><img src="https://i.loli.net/2020/02/10/GIRQpFxgunetcr7.jpg" alt="fig3.jpg"></p><ul><li>将数组中的数据分为两个区间，已排序空间和未排序空间</li><li>初始已排序空间有一个元素，即数组的第一个元素</li><li>插入算法的核心思想是取未排序区间当中的元素，在已排序空间中找到合适的插入位置将其插入，并保证已排序空间的数据一致都是有序的</li><li>重复这个过程直到未排序空间中的元素为空</li></ul><p><img src="https://i.loli.net/2020/02/10/r9yq3FfdKginlQI.jpg" alt="fig4.jpg"></p><pre><code>// 插入排序，a 表示数组，n 表示数组大小public void insertionSort(int[] a, int n) {  if (n &lt;= 1) return;  for (int i = 1; i &lt; n; ++i) {    int value = a[i];    int j = i - 1;    // 查找插入的位置    for (; j &gt;= 0; --j) {      if (a[j] &gt; value) {        a[j+1] = a[j];  // 数据移动      } else {        break;      }    }    // 这里注意循环当中j--了，所以这里是a[j+1]    a[j+1] = value; // 插入数据  }}</code></pre><ul><li>原地排序算法，空间复杂度为O(1)</li><li>稳定的排序算法</li><li>时间复杂度<ul><li>最好情况O(n)</li><li>最坏情况O(n^2)</li></ul></li></ul><h2 id="2-3-选择排序"><a href="#2-3-选择排序" class="headerlink" title="2.3 选择排序"></a>2.3 选择排序</h2><p>同样是分成已排序空间和未排序空间，但是选择排序每次都会从未排序空间当中找到最小的元素，将其放到已排序区间的末尾</p><p><img src="https://i.loli.net/2020/02/10/uZH8xBFPs247nCr.jpg" alt="fig5.jpg"></p><ul><li><p>原地排序算法</p></li><li><p>不稳定的，因为每次都要找剩余的未排序的元素当中的最小值，并和前面的元素交换位置</p><p>  public int[] selectSort(int arr[], int n) {</p><pre><code>for (int i = 0; i &lt; n; i++) {  int index = min(i+1, n);   swap(arr[index], arr[i]);}</code></pre></li></ul><pre><code>  return arr;}</code></pre><h1 id="3-冒泡-插入-选择排序的比较"><a href="#3-冒泡-插入-选择排序的比较" class="headerlink" title="3. 冒泡 插入 选择排序的比较"></a>3. 冒泡 插入 选择排序的比较</h1><p>三者的平均时间复杂度均为O(n^2)。但是实际上还是有不同的，冒泡不如插入优秀，因为在循环当中，冒泡有三个操作，而插入只有一个。在实际情况当中，插入会比冒泡快不少。而选择排序的问题是因为它的逻辑是在未选择的数列里面选择最小的，放到已排序的末端，这里是一定会有一个swap发生的，这导致排序不稳定，即对于有相同值的，排列顺序可能会发生变化。这会在实际应用中造成问题。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;这里介绍三大类型的排序&lt;ul&gt;
-&lt;li&gt;冒泡，插入，选择  O(n^2)&lt;/li&gt;
-&lt;li&gt;快排，归并 O(nlogn)&lt;/li&gt;
-&lt;li&gt;桶，计数，基数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;1-如何分析一个排序算法？&quot;&gt;&lt;a href
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="排序" scheme="https://www.llchen60.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(7)-递归</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-7-%E9%80%92%E5%BD%92/</id>
-    <published>2020-02-09T17:47:26.000Z</published>
-    <updated>2020-02-09T17:47:45.905Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-如何理解递归"><a href="#1-如何理解递归" class="headerlink" title="1.如何理解递归"></a>1.如何理解递归</h1><ul><li>递<ul><li>去的过程 </li></ul></li><li>归<ul><li>回来的过程</li></ul></li></ul><p>给我的感觉是先努力去溯源，拿到源数据以后就相当于多了一个信息，然后再依托多了一个的信息，来解决问题。</p><pre><code>f(n) = f(n-1) + 1 </code></pre><h1 id="2-递归的条件"><a href="#2-递归的条件" class="headerlink" title="2. 递归的条件"></a>2. 递归的条件</h1><ul><li>一个问题的解可以分解为几个子问题的解<ul><li>子问题指数据规模更小的解</li></ul></li><li>这个问题与分解之后的子问题，除了数据规模的不同，求解思路完全一样</li><li>存在递归终止条件</li></ul><h1 id="3-如何写递归代码"><a href="#3-如何写递归代码" class="headerlink" title="3. 如何写递归代码"></a>3. 如何写递归代码</h1><ul><li>写出递归公式</li><li>找到终止条件</li></ul><p>E.G </p><p>n个台阶，每次可以跨过1个或者2个，问一共多少种走法？ </p><ul><li>可以划分为子问题，即一共的走法等于我先走一步，剩下的n-1共同的走法和先走两步，剩下的n-1共同的走法的和。就有了一个递归公式：</li></ul><pre><code>f(n) = f(n-1) + f(n-2)</code></pre><p>终止条件，看最后几个corner case，只有一个台阶，只有两个台阶，然后用3，4来验证一下。</p><blockquote><p>写递归代码的关键就是找到如何将大问题分解为小问题的规律，并且基于此写出递推公式，然后再推敲出终止条件，最终将递推公式和终止条件翻译成代码</p></blockquote><p>不要人为加大难度，遇到递归，抽象成一个递推公式，不再一层层的想其调用关系，不要试图用人脑去分解递归的步骤</p><p>分解子问题的时候，当我们将其分解成几个子问题B C D以后，我们要做的是在假设子问题 BCD都已经解决的前提下，思考如何解决问题A。这样子我们就可以思考问题A和子问题B,C,D两层之间的关系就可以了，不需要再一层一层往下思考更深的子问题之间的关系了。屏蔽掉递归的实现细节，我们理解起来就会容易很多了</p><h1 id="4-警惕堆栈溢出"><a href="#4-警惕堆栈溢出" class="headerlink" title="4. 警惕堆栈溢出"></a>4. 警惕堆栈溢出</h1><ul><li>递归容易堆栈溢出</li><li>函数调用会使用栈来保存临时变量，每调用一个函数，都会将临时变量封装为栈帧压入内存栈当中。等函数执行完成返回时，才出栈。</li><li>系统栈或者虚拟机栈空间都不大，如果递归层很多的话，那么就会有堆栈溢出的风险。</li><li>可以在代码中限制递归调用的最大深度来解决这个问题</li></ul><p>递归好处是表达能力强，很容易去理顺其想要表达的内容；坏处是空间复杂度会比较高，因为每次递归的时候都需要在内存栈中保存一次现场数据，所以在分析递归代码空间复杂度的时候，是需要额外考虑这部分的开销的。</p><h1 id="5-重复计算问题"><a href="#5-重复计算问题" class="headerlink" title="5. 重复计算问题"></a>5. 重复计算问题</h1><p>子步骤会被计算了很多很多遍，为了避免这种重复计算，可以使用一些数据结构来保存已经求解过得f(k)。当递归调用到f(k)的时候，先看下是否已经求解过了</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-如何理解递归&quot;&gt;&lt;a href=&quot;#1-如何理解递归&quot; class=&quot;headerlink&quot; title=&quot;1.如何理解递归&quot;&gt;&lt;/a&gt;1.如何理解递归&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;递&lt;ul&gt;
-&lt;li&gt;去的过程 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;归&lt;u
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="递归" scheme="https://www.llchen60.com/tags/%E9%80%92%E5%BD%92/"/>
     
   </entry>
   
