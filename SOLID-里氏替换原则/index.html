@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   <title>SOLID - 里氏替换原则 | Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
+  <meta name="keywords" content=" SOLID ">
   <meta name="description" content="SOLID - 里氏替换原则 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta name="description" content="1. Intro里氏替代原则 - Liskov Substitution Principle  讲述的是子类对象需要能够替换程序当中父类对象出现的任何地方，并且保证原来程序的逻辑性为不变以及正确性不被破坏。 public class Transporter {   private HttpClient httpClient;    public Transporter(HttpClient htt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOLID - 里氏替换原则">
+<meta property="og:url" content="https://www.llchen60.com/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
-<meta property="og:description" content="My thoughts从18年入职开始写起，一直到现在。最深的感受是 – 输出真的能促进输入，希望自己的一些想法能对正在看这个博客的你有所帮助。如果觉得哪篇文章有瑕疵&#x2F; 问题，欢迎留言，共勉！ 感谢！ 内推Offer STRONG referral to Amazon, send email to amazonreferll@gmail.com with your resume, your sel">
-<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
-<meta property="article:modified_time" content="2020-02-02T06:06:58.021Z">
+<meta property="og:description" content="1. Intro里氏替代原则 - Liskov Substitution Principle  讲述的是子类对象需要能够替换程序当中父类对象出现的任何地方，并且保证原来程序的逻辑性为不变以及正确性不被破坏。 public class Transporter {   private HttpClient httpClient;    public Transporter(HttpClient htt">
+<meta property="article:published_time" content="2020-03-14T04:33:36.000Z">
+<meta property="article:modified_time" content="2020-03-14T04:34:42.521Z">
 <meta property="article:author" content="Leilei Chen">
+<meta property="article:tag" content="SOLID">
 <meta name="twitter:card" content="summary">
 
 
@@ -195,7 +196,7 @@
     
         
             
-            <li><div data-rel="SystemDesign">SystemDesign<small>(33)</small></div>
+            <li><div data-rel="SystemDesign">SystemDesign<small>(34)</small></div>
                 
             </li>
             
@@ -219,7 +220,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="195">
-<input type="hidden" id="yelog_site_word_count" value="340k">
+<input type="hidden" id="yelog_site_word_count" value="340.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -914,9 +915,9 @@
             <span class="post-date" title="2020-02-02 14:44:35">2020/02/02</span>
         </a>
         
-        <a  class=""
+        <a  class="SystemDesign "
            href="/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"
-           data-tag=""
+           data-tag="SOLID"
            data-author="" >
             <span class="post-title" title="SOLID - 里氏替换原则">SOLID - 里氏替换原则</span>
             <span class="post-date" title="2020-03-13 21:33:36">2020/03/13</span>
@@ -2478,16 +2479,28 @@
         
         
         
+        <span class="book">
+            
+                <a  data-rel="SystemDesign">SystemDesign</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">SOLID</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-13 21:33:36'>2020-03-13 21:33</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-13 21:34:42'>2020-03-13 21:33</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:344</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2517,7 +2530,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Intro"><span class="toc-text">1. Intro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-里氏替代原则-–-按照协议进行设计"><span class="toc-text">2. 里氏替代原则 – 按照协议进行设计</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2533,7 +2546,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>里氏替代原则 - Liskov Substitution Principle </p>
+<p>讲述的是子类对象需要能够替换程序当中父类对象出现的任何地方，并且保证原来程序的逻辑性为不变以及正确性不被破坏。</p>
+<pre><code>public class Transporter {
+  private HttpClient httpClient;
+
+  public Transporter(HttpClient httpClient) {
+    this.httpClient = httpClient;
+  }
+
+  public Response sendRequest(Request request) {
+    // ...use httpClient to send request
+  }
+}
+
+public class SecurityTransporter extends Transporter {
+  private String appId;
+  private String appToken;
+
+  public SecurityTransporter(HttpClient httpClient, String appId, String appToken) {
+    super(httpClient);
+    this.appId = appId;
+    this.appToken = appToken;
+  }
+
+  @Override
+  public Response sendRequest(Request request) {
+    if (StringUtils.isNotBlank(appId) &amp;&amp; StringUtils.isNotBlank(appToken)) {
+      request.addPayload(&quot;app-id&quot;, appId);
+      request.addPayload(&quot;app-token&quot;, appToken);
+    }
+    return super.sendRequest(request);
+  }
+}
+
+public class Demo {    
+  public void demoFunction(Transporter transporter) {    
+    Reuqest request = new Request();
+    //...省略设置request中数据值的代码...
+    Response response = transporter.sendRequest(request);
+    //...省略其他逻辑...
+  }
+}
+
+// 里式替换原则
+Demo demo = new Demo();
+demo.demofunction(new SecurityTransporter(/*省略参数*/););</code></pre><h1 id="2-里氏替代原则-–-按照协议进行设计"><a href="#2-里氏替代原则-–-按照协议进行设计" class="headerlink" title="2. 里氏替代原则 – 按照协议进行设计"></a>2. 里氏替代原则 – 按照协议进行设计</h1><p>子类在设计的时候，应当遵守父类的行为约定。父类定义了函数的行为约定，那么子类可以改变函数的内部实现逻辑，但不能改变函数原有的行为约定。  </p>
+<p>这里的行为约定指的是函数声明的要实现的功能；对于输入输出以及异常的约定</p>
+<p>定义当中父类和子类之间的关系，也是可以替换成接口和实现类之间的关系的。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -2547,10 +2608,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>SOLID - 里氏替换原则</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">0</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">344</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-03-13, 21:33:36</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-13, 21:33:36</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-13, 21:34:42</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/" title="SOLID - 里氏替换原则">https://www.llchen60.com/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。

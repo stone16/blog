@@ -8,9 +8,21 @@
       <link href="/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"/>
       <url>/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>里氏替代原则 - Liskov Substitution Principle </p><p>讲述的是子类对象需要能够替换程序当中父类对象出现的任何地方，并且保证原来程序的逻辑性为不变以及正确性不被破坏。</p><pre><code>public class Transporter {  private HttpClient httpClient;  public Transporter(HttpClient httpClient) {    this.httpClient = httpClient;  }  public Response sendRequest(Request request) {    // ...use httpClient to send request  }}public class SecurityTransporter extends Transporter {  private String appId;  private String appToken;  public SecurityTransporter(HttpClient httpClient, String appId, String appToken) {    super(httpClient);    this.appId = appId;    this.appToken = appToken;  }  @Override  public Response sendRequest(Request request) {    if (StringUtils.isNotBlank(appId) &amp;&amp; StringUtils.isNotBlank(appToken)) {      request.addPayload(&quot;app-id&quot;, appId);      request.addPayload(&quot;app-token&quot;, appToken);    }    return super.sendRequest(request);  }}public class Demo {      public void demoFunction(Transporter transporter) {        Reuqest request = new Request();    //...省略设置request中数据值的代码...    Response response = transporter.sendRequest(request);    //...省略其他逻辑...  }}// 里式替换原则Demo demo = new Demo();demo.demofunction(new SecurityTransporter(/*省略参数*/););</code></pre><h1 id="2-里氏替代原则-–-按照协议进行设计"><a href="#2-里氏替代原则-–-按照协议进行设计" class="headerlink" title="2. 里氏替代原则 – 按照协议进行设计"></a>2. 里氏替代原则 – 按照协议进行设计</h1><p>子类在设计的时候，应当遵守父类的行为约定。父类定义了函数的行为约定，那么子类可以改变函数的内部实现逻辑，但不能改变函数原有的行为约定。  </p><p>这里的行为约定指的是函数声明的要实现的功能；对于输入输出以及异常的约定</p><p>定义当中父类和子类之间的关系，也是可以替换成接口和实现类之间的关系的。</p>]]></content>
       
       
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SOLID </tag>
+            
+        </tags>
       
     </entry>
     
