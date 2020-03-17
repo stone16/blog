@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>SOLID - 接口隔离原则 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" SOLID ">
+  <meta name="description" content="SOLID - 接口隔离原则 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -2476,12 +2476,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-SOLID-接口隔离原则" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#信息-vs-观点"><span class="toc-text">信息 vs 观点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息源"><span class="toc-text">信息源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">SOLID - 接口隔离原则</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="SystemDesign">SystemDesign</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">SOLID</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-03-16 18:26:41'>2020-03-16 18:26</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:451</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-将接口视为一组API接口的集合"><span class="toc-text">1. 将接口视为一组API接口的集合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-将接口理解为单个API接口或者函数"><span class="toc-text">2. 将接口理解为单个API接口或者函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-将接口理解为OOP中的接口的概念"><span class="toc-text">3. 将接口理解为OOP中的接口的概念</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2494,32 +2550,88 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h2><h4 id="信息-vs-观点"><a href="#信息-vs-观点" class="headerlink" title="信息 vs 观点"></a>信息 vs 观点</h4><p>身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。</p>
-<p>很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。</p>
-<p>在努力学习，分清信息和观点。</p>
-<h4 id="信息源"><a href="#信息源" class="headerlink" title="信息源"></a>信息源</h4><p>因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。</p>
-<p>兜兜转转，开始使用reeder，inoreader 订阅一些rss信息源；发现了哪怕现在，还是有很多人在写自己的博客，没有KPI，没有10万+，嗯，有一小撮人能看到就好，自己开心就好，能随心所欲的发自己的东西就好。</p>
-<p>在努力探索，想体验他们的体验。</p>
-<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>输出的是输入的一部分的压缩和总结，大部分还是信息，尤其是关于技术的内容。有翻译的，有看着好玩的，有多少夹带点私货的，总归敞开了门，可劲的撒欢儿。也有看的书，自己的一些想法，希望看官大人能觉得在这里停的5分钟不算浪费时间吧。 </p>
-<p>在努力输入，为了开心点~ </p>
-<h2 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h2><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接口隔离原则 – interface segregation principle </p>
+<p>客户端不应该强迫依赖它不需要的接口。</p>
+<h1 id="1-将接口视为一组API接口的集合"><a href="#1-将接口视为一组API接口的集合" class="headerlink" title="1. 将接口视为一组API接口的集合"></a>1. 将接口视为一组API接口的集合</h1><pre><code>public interface UserService {
+  boolean register(String cellphone, String password);
+  boolean login(String cellphone, String password);
+  UserInfo getUserInfoById(long id);
+  UserInfo getUserInfoByCellphone(String cellphone);
+}
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+public class UserServiceImpl implements UserService {
+  //...
+}</code></pre><p>当我们要实现删除操作的时候，最好不要直接在UserService里面加上这个方法，因为用户服务实质上不应该被默认直接具有删除的权限，相对应的，我们应该去创建一个新的接口，里面实现有删除相关的方法，实现接口的隔离。</p>
+<pre><code>public interface UserService {
+  boolean register(String cellphone, String password);
+  boolean login(String cellphone, String password);
+  UserInfo getUserInfoById(long id);
+  UserInfo getUserInfoByCellphone(String cellphone);
+}
+
+public interface RestrictedUserService {
+  boolean deleteUserByCellphone(String cellphone);
+  boolean deleteUserById(long id);
+}
+
+public class UserServiceImpl implements UserService, RestrictedUserService {
+  // ...省略实现代码...
+}</code></pre><h1 id="2-将接口理解为单个API接口或者函数"><a href="#2-将接口理解为单个API接口或者函数" class="headerlink" title="2. 将接口理解为单个API接口或者函数"></a>2. 将接口理解为单个API接口或者函数</h1><p>函数的设计需要功能单一，不要将多个不同的功能逻辑放在一个函数当中实现。</p>
+<pre><code>public class Statistics {
+  private Long max;
+  private Long min;
+  private Long average;
+  private Long sum;
+  private Long percentile99;
+  private Long percentile999;
+  //...省略constructor/getter/setter等方法...
+}
+
+public Statistics count(Collection&lt;Long&gt; dataSet) {
+  Statistics statistics = new Statistics();
+  //...省略计算逻辑...
+  return statistics;
+}</code></pre><p>count方法算了太多不同的指标，应该将其分割开的。</p>
+<pre><code>public Long max(Collection&lt;Long&gt; dataSet) { //... }
+public Long min(Collection&lt;Long&gt; dataSet) { //... } 
+public Long average(Colletion&lt;Long&gt; dataSet) { //... }
+// ...省略其他统计函数...</code></pre><h1 id="3-将接口理解为OOP中的接口的概念"><a href="#3-将接口理解为OOP中的接口的概念" class="headerlink" title="3. 将接口理解为OOP中的接口的概念"></a>3. 将接口理解为OOP中的接口的概念</h1><p>即在设计接口的时候尽量减少大而全的接口的设计，每个接口都只做一件事情，这样子类在implement interface的时候，我们通过接口名也可以很清晰的知道在做什么，会有什么功能，也很大程度上提升了代码的复用性。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>SOLID - 接口隔离原则</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">451</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-16, 18:26:08</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-16, 18:26:41</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/" title="SOLID - 接口隔离原则">https://www.llchen60.com/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'tags/CPU-Utilization/index.html';
+            this.page.url = 'https://www.llchen60.com/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/';
+            this.page.identifier = 'SOLID-接口隔离原则/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -2535,8 +2647,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="tags/CPU-Utilization/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="SOLID-接口隔离原则/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">

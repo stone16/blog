@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>SOLID - 接口隔离原则</title>
+      <link href="/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"/>
+      <url>/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/</url>
+      
+        <content type="html"><![CDATA[<p>接口隔离原则 – interface segregation principle </p><p>客户端不应该强迫依赖它不需要的接口。</p><h1 id="1-将接口视为一组API接口的集合"><a href="#1-将接口视为一组API接口的集合" class="headerlink" title="1. 将接口视为一组API接口的集合"></a>1. 将接口视为一组API接口的集合</h1><pre><code>public interface UserService {  boolean register(String cellphone, String password);  boolean login(String cellphone, String password);  UserInfo getUserInfoById(long id);  UserInfo getUserInfoByCellphone(String cellphone);}public class UserServiceImpl implements UserService {  //...}</code></pre><p>当我们要实现删除操作的时候，最好不要直接在UserService里面加上这个方法，因为用户服务实质上不应该被默认直接具有删除的权限，相对应的，我们应该去创建一个新的接口，里面实现有删除相关的方法，实现接口的隔离。</p><pre><code>public interface UserService {  boolean register(String cellphone, String password);  boolean login(String cellphone, String password);  UserInfo getUserInfoById(long id);  UserInfo getUserInfoByCellphone(String cellphone);}public interface RestrictedUserService {  boolean deleteUserByCellphone(String cellphone);  boolean deleteUserById(long id);}public class UserServiceImpl implements UserService, RestrictedUserService {  // ...省略实现代码...}</code></pre><h1 id="2-将接口理解为单个API接口或者函数"><a href="#2-将接口理解为单个API接口或者函数" class="headerlink" title="2. 将接口理解为单个API接口或者函数"></a>2. 将接口理解为单个API接口或者函数</h1><p>函数的设计需要功能单一，不要将多个不同的功能逻辑放在一个函数当中实现。</p><pre><code>public class Statistics {  private Long max;  private Long min;  private Long average;  private Long sum;  private Long percentile99;  private Long percentile999;  //...省略constructor/getter/setter等方法...}public Statistics count(Collection&lt;Long&gt; dataSet) {  Statistics statistics = new Statistics();  //...省略计算逻辑...  return statistics;}</code></pre><p>count方法算了太多不同的指标，应该将其分割开的。</p><pre><code>public Long max(Collection&lt;Long&gt; dataSet) { //... }public Long min(Collection&lt;Long&gt; dataSet) { //... } public Long average(Colletion&lt;Long&gt; dataSet) { //... }// ...省略其他统计函数...</code></pre><h1 id="3-将接口理解为OOP中的接口的概念"><a href="#3-将接口理解为OOP中的接口的概念" class="headerlink" title="3. 将接口理解为OOP中的接口的概念"></a>3. 将接口理解为OOP中的接口的概念</h1><p>即在设计接口的时候尽量减少大而全的接口的设计，每个接口都只做一件事情，这样子类在implement interface的时候，我们通过接口名也可以很清晰的知道在做什么，会有什么功能，也很大程度上提升了代码的复用性。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SOLID </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SOLID - 里氏替换原则</title>
       <link href="/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/"/>
       <url>/SOLID-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/</url>
