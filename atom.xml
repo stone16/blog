@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-17T01:26:41.608Z</updated>
+  <updated>2020-03-19T03:53:34.823Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SOLID - 依赖反转原则</title>
+    <link href="https://www.llchen60.com/SOLID-%E4%BE%9D%E8%B5%96%E5%8F%8D%E8%BD%AC%E5%8E%9F%E5%88%99/"/>
+    <id>https://www.llchen60.com/SOLID-%E4%BE%9D%E8%B5%96%E5%8F%8D%E8%BD%AC%E5%8E%9F%E5%88%99/</id>
+    <published>2020-03-19T03:53:05.000Z</published>
+    <updated>2020-03-19T03:53:34.823Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-控制反转-IOC-Inversion-of-Control"><a href="#1-控制反转-IOC-Inversion-of-Control" class="headerlink" title="1. 控制反转 IOC Inversion of Control"></a>1. 控制反转 IOC Inversion of Control</h1><pre><code>public class UserServiceTest {  public static boolean doTest() {    // ...   }  public static void main(String[] args) {//这部分逻辑可以放到框架中    if (doTest()) {      System.out.println(&quot;Test succeed.&quot;);    } else {      System.out.println(&quot;Test failed.&quot;);    }  }}</code></pre><p>上述代码程序员在自己控制整个代码的运行顺序和执行,可以看到如果我想增加test的话，就要在main函数里面添加，同时在UserServiceTest当中添加实例。而使用框架的话，代码就可以变成如下：</p><pre><code>public abstract class TestCase {  public void run() {    if (doTest()) {      System.out.println(&quot;Test succeed.&quot;);    } else {      System.out.println(&quot;Test failed.&quot;);    }  }  public abstract boolean doTest();}public class JunitApplication {  private static final List&lt;TestCase&gt; testCases = new ArrayList&lt;&gt;();  public static void register(TestCase testCase) {    testCases.add(testCase);  }  public static final void main(String[] args) {    for (TestCase case: testCases) {      case.run();    }  }</code></pre><p>上面的代码我们将测试的注册和运行都交给了JunitApplication了，然后我们要写新test，就让我们的concrete class extends TestCase类，来填充我们需要做的各种测试。</p><p>通过这种方式，我们实现了使用框架来控制整个代码的运转，我们使用框架来<strong>组装对象，管理整个执行流程</strong>。程序员利用框架进行开发的时候，只需要往预留的扩展点上，添加跟自己业务相关的代码，然后利用框架来驱动整个程序流程的执行。</p><p>控制反转是一种思想，有很多的具体的实现方式</p><h1 id="2-控制反转-–-依赖注入"><a href="#2-控制反转-–-依赖注入" class="headerlink" title="2. 控制反转 – 依赖注入"></a>2. 控制反转 – 依赖注入</h1><p>是控制反转的一种具体实现的方式，他的实际操作的指南是 – 不通过new（）的方式在类内部创建依赖类的对象，而是将依赖的类对象在外部创建好以后，通过构造函数，函数参数的方式传递进来给类使用。</p><pre><code>// 非依赖注入实现方式public class Notification {  private MessageSender messageSender;  public Notification() {    this.messageSender = new MessageSender(); //此处有点像hardcode  }  public void sendMessage(String cellphone, String message) {    //...省略校验逻辑等...    this.messageSender.send(cellphone, message);  }}public class MessageSender {  public void send(String cellphone, String message) {    //....  }}// 使用NotificationNotification notification = new Notification();// 依赖注入的实现方式public class Notification {  private MessageSender messageSender;  // 通过构造函数将messageSender传递进来  public Notification(MessageSender messageSender) {    this.messageSender = messageSender;  }  public void sendMessage(String cellphone, String message) {    //...省略校验逻辑等...    this.messageSender.send(cellphone, message);  }}//使用NotificationMessageSender messageSender = new MessageSender();Notification notification = new Notification(messageSender);</code></pre><p>使用依赖注入的最大好处就是，我们不需要在具体的类当中实例化其他的类，这样就实现了解耦，即他的具体实现我们可以在外部做其他方式的实例，这个时候多态也可以派上用场。可以想成我在类的内部占了个座，至于这个座具体要给谁坐，怎么坐，得等到节目要开始之前再来安排，这样我就可以举办不同的活动了。</p><pre><code>public class Notification {  private MessageSender messageSender;  public Notification(MessageSender messageSender) {    this.messageSender = messageSender;  }  public void sendMessage(String cellphone, String message) {    this.messageSender.send(cellphone, message);  }}public interface MessageSender {  void send(String cellphone, String message);}// 短信发送类public class SmsSender implements MessageSender {  @Override  public void send(String cellphone, String message) {    //....  }}// 站内信发送类public class InboxSender implements MessageSender {  @Override  public void send(String cellphone, String message) {    //....  }}//使用NotificationMessageSender messageSender = new SmsSender();Notification notification = new Notification(messageSender);</code></pre><h1 id="3-依赖反转原则"><a href="#3-依赖反转原则" class="headerlink" title="3. 依赖反转原则"></a>3. 依赖反转原则</h1><p>依赖反转 – Dependency Inversion Principle </p><blockquote><p>High-level modules shouldn’t depend on low-level modules. Both modules should depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.</p></blockquote><p>高层模块（high-level modules）不要依赖低层模块（low-level）。高层模块和低层模块应该通过抽象（abstractions）来互相依赖。除此之外，抽象（abstractions）不要依赖具体实现细节（details），具体实现细节（details）依赖抽象（abstractions）。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-控制反转-IOC-Inversion-of-Control&quot;&gt;&lt;a href=&quot;#1-控制反转-IOC-Inversion-of-Control&quot; class=&quot;headerlink&quot; title=&quot;1. 控制反转 IOC Inversion of Contr
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
+    
+  </entry>
   
   <entry>
     <title>SOLID - 接口隔离原则</title>
@@ -534,33 +560,6 @@
         &lt;p&gt;在日常开发当中，无论我们使用的语言是什么，他们几乎都会提供排序算法，本篇博文将尝试着对其进行分析，看看如何实现一个通用的，高性能的排序算法。&lt;/p&gt;
 &lt;p&gt;首先看看我们的现有排序算法库，看看我们的选择空间在哪里： &lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://i.lo
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="排序" scheme="https://www.llchen60.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(10)-排序(桶排序 计数排序 基数排序)</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-10-%E6%8E%92%E5%BA%8F-%E6%A1%B6%E6%8E%92%E5%BA%8F-%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</id>
-    <published>2020-02-09T17:55:16.000Z</published>
-    <updated>2020-02-09T17:55:34.808Z</updated>
-    
-    <content type="html"><![CDATA[<p>上述三种排序方法的时间复杂度均为线性，因此将其称为线性排序(Linear sort).之所以能做先线性的时间复杂度，是因为他们都不是基于比较的排序算法，并不涉及到元素之间的比较操作。</p><h1 id="1-桶排序-Bucket-Sort"><a href="#1-桶排序-Bucket-Sort" class="headerlink" title="1. 桶排序 Bucket Sort"></a>1. 桶排序 Bucket Sort</h1><ul><li>核心思想<ul><li>将排序的数据分到几个有序的桶当中，每个桶的数据再单独进行排序。桶内排完序之后，再将每个桶里的数据按照顺序依次取出，组成的序列就是有序的了。</li></ul></li><li>分析<ul><li>如果要排序的数据为 n个，将其均匀分到m个桶当中，每个桶就有 k=n/m个元素。每个桶内部使用快排，时间复杂度为O(k*logk)</li><li>m个桶的时间复杂度就为O(n*log(n/m)) </li><li>当m的数量非常接近n的时候，那么log(n/m)就是一个非常小的常量，这时候桶排序的时间复杂度就接近O(n)了</li></ul></li><li>优劣势<ul><li>对数据本身要求比较苛刻</li><li>需要足够均匀，否则桶内排序就不是常量级的复杂度了</li></ul></li><li>桶排序  适合在外部排序当中<ul><li>指数据存储在外部磁盘当中，数据量比较大，内存有限，无法将数据全部加载到内存当中 </li><li>顺序进行划分，挨个顺次放到内存当中</li></ul></li></ul><h1 id="2-计数排序-Counting-Sort"><a href="#2-计数排序-Counting-Sort" class="headerlink" title="2. 计数排序 Counting Sort"></a>2. 计数排序 Counting Sort</h1><p>类似于桶排序，但是每个桶里面存储的只是个数</p><pre><code>// 计数排序，a是数组，n是数组大小。假设数组中存储的都是非负整数。public void countingSort(int[] a, int n) {  if (n &lt;= 1) return;  // 查找数组中数据的范围  int max = a[0];  for (int i = 1; i &lt; n; ++i) {    if (max &lt; a[i]) {      max = a[i];    }  }  int[] c = new int[max + 1]; // 申请一个计数数组c，下标大小[0,max]  for (int i = 0; i &lt;= max; ++i) {    c[i] = 0;  }  // 计算每个元素的个数，放入c中  for (int i = 0; i &lt; n; ++i) {    c[a[i]]++;  }  // 依次累加  for (int i = 1; i &lt;= max; ++i) {    c[i] = c[i-1] + c[i];  }  // 临时数组r，存储排序之后的结果  int[] r = new int[n];  // 计算排序的关键步骤，有点难理解  for (int i = n - 1; i &gt;= 0; --i) {    int index = c[a[i]]-1;    r[index] = a[i];    c[a[i]]--;  }  // 将结果拷贝给a数组  for (int i = 0; i &lt; n; ++i) {    a[i] = r[i];  }}</code></pre><h1 id="3-基数排序-Radix-Sort"><a href="#3-基数排序-Radix-Sort" class="headerlink" title="3. 基数排序 Radix Sort"></a>3. 基数排序 Radix Sort</h1><p>排10万个手机号码，从小到大来排序？ </p><p>按照位来排，需要选用稳定性的算法来做。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;上述三种排序方法的时间复杂度均为线性，因此将其称为线性排序(Linear sort).之所以能做先线性的时间复杂度，是因为他们都不是基于比较的排序算法，并不涉及到元素之间的比较操作。&lt;/p&gt;
-&lt;h1 id=&quot;1-桶排序-Bucket-Sort&quot;&gt;&lt;a href=&quot;#1-桶排
       
     
     </summary>
