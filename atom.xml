@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-19T03:53:34.823Z</updated>
+  <updated>2020-03-21T03:25:05.413Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KISS and YAGNI原则</title>
+    <link href="https://www.llchen60.com/KISS-and-YAGNI%E5%8E%9F%E5%88%99/"/>
+    <id>https://www.llchen60.com/KISS-and-YAGNI%E5%8E%9F%E5%88%99/</id>
+    <published>2020-03-21T03:24:37.000Z</published>
+    <updated>2020-03-21T03:25:05.413Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-KISS"><a href="#1-KISS" class="headerlink" title="1. KISS"></a>1. KISS</h1><p>Keep it simple and stupid. </p><p>这个原则相对比较范范，其实着重在说的还是从代码的可读性和可维护性两个角度来衡量代码的质量。</p><pre><code>// 第一种实现方式: 使用正则表达式public boolean isValidIpAddressV1(String ipAddress) {  if (StringUtils.isBlank(ipAddress)) return false;  String regex = &quot;^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\.&quot;          + &quot;(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.&quot;          + &quot;(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.&quot;          + &quot;(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$&quot;;  return ipAddress.matches(regex);}// 第二种实现方式: 使用现成的工具类public boolean isValidIpAddressV2(String ipAddress) {  if (StringUtils.isBlank(ipAddress)) return false;  String[] ipUnits = StringUtils.split(ipAddress, &#39;.&#39;);  if (ipUnits.length != 4) {    return false;  }  for (int i = 0; i &lt; 4; ++i) {    int ipUnitIntValue;    try {      ipUnitIntValue = Integer.parseInt(ipUnits[i]);    } catch (NumberFormatException e) {      return false;    }    if (ipUnitIntValue &lt; 0 || ipUnitIntValue &gt; 255) {      return false;    }    if (i == 0 &amp;&amp; ipUnitIntValue == 0) {      return false;    }  }  return true;}// 第三种实现方式: 不使用任何工具类public boolean isValidIpAddressV3(String ipAddress) {  char[] ipChars = ipAddress.toCharArray();  int length = ipChars.length;  int ipUnitIntValue = -1;  boolean isFirstUnit = true;  int unitsCount = 0;  for (int i = 0; i &lt; length; ++i) {    char c = ipChars[i];    if (c == &#39;.&#39;) {      if (ipUnitIntValue &lt; 0 || ipUnitIntValue &gt; 255) return false;      if (isFirstUnit &amp;&amp; ipUnitIntValue == 0) return false;      if (isFirstUnit) isFirstUnit = false;      ipUnitIntValue = -1;      unitsCount++;      continue;    }    if (c &lt; &#39;0&#39; || c &gt; &#39;9&#39;) {      return false;    }    if (ipUnitIntValue == -1) ipUnitIntValue = 0;    ipUnitIntValue = ipUnitIntValue * 10 + (c - &#39;0&#39;);  }  if (ipUnitIntValue &lt; 0 || ipUnitIntValue &gt; 255) return false;  if (unitsCount != 3) return false;  return true;}</code></pre><p>相对来说，第二种实现方式会更好一些，因为细节被封装在工具类当中，可读性相对强很多；方法一直接使用正则表达式，可读性会差很多；第三种自己来处理底层的逻辑，虽然执行起来相对会快一些，但是很容易出错。</p><h1 id="2-YAGNI"><a href="#2-YAGNI" class="headerlink" title="2. YAGNI"></a>2. YAGNI</h1><p>You ain’t gonna need it. </p><p>你不会需要它。深有感触，很多时候我们想写很优雅的代码，会疯狂向后考虑，比如对于不常用的功能，有的时候哪怕就一个方法，也想搞个接口供后面的扩展来使用。过度设计，反而增加了代码的阅读成本和维护成本。</p><p>我们不应当去设计当前用不到的功能，也不应该编写现在用不到的代码。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-KISS&quot;&gt;&lt;a href=&quot;#1-KISS&quot; class=&quot;headerlink&quot; title=&quot;1. KISS&quot;&gt;&lt;/a&gt;1. KISS&lt;/h1&gt;&lt;p&gt;Keep it simple and stupid. &lt;/p&gt;
+&lt;p&gt;这个原则相对比较范范，其实着重在说
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>SOLID - 依赖反转原则</title>
@@ -541,34 +566,6 @@
     
     
       <category term="二分查找" scheme="https://www.llchen60.com/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(11)-应用场景下的排序函数</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-11-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-11-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/</id>
-    <published>2020-02-09T18:00:04.000Z</published>
-    <updated>2020-02-09T18:00:58.516Z</updated>
-    
-    <content type="html"><![CDATA[<p>在日常开发当中，无论我们使用的语言是什么，他们几乎都会提供排序算法，本篇博文将尝试着对其进行分析，看看如何实现一个通用的，高性能的排序算法。</p><p>首先看看我们的现有排序算法库，看看我们的选择空间在哪里： </p><p><img src="https://i.loli.net/2020/02/10/2ga9UPTNkOcb8wr.jpg" alt="fig1.jpg"></p><p>如果对于小规模数据排序，可以选择O(n^2); 但是对于大规模的数据，时间复杂度为O(nlogn)的算法会高效很多。因此为了兼顾任意规模数据的排序，一般都会首选时间复杂度为O(nlogn)的排序算法来实现排序函数。</p><p>一般来说会选用堆排序或者快速排序来做。</p><p>因为在实际情况下内存的占用情况是非常关键的参数了，所以我们需要看待选算法的空间复杂度，最好是原地的，即不占用更多的空间。像归并排序，时间复杂度很合适但是空间复杂度为O(n)，那就完全不是一个好选择了</p><p>快速排序想要优化的话，主要的点在于要选准分区点，好的分区点是希望其两个分区数据的数量是差不多的才可以。我们可以随机取值，也可以多取几个随机点，然后求平均。</p><p>还有一点需要注意的是在实际情况当中, O(n^2)有可能会比O(nlogn)要快的，因为小规模数据集的时候首先常量就不能忽略掉了。在这种情况下，可能插入排序反而会更快。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在日常开发当中，无论我们使用的语言是什么，他们几乎都会提供排序算法，本篇博文将尝试着对其进行分析，看看如何实现一个通用的，高性能的排序算法。&lt;/p&gt;
-&lt;p&gt;首先看看我们的现有排序算法库，看看我们的选择空间在哪里： &lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.lo
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="排序" scheme="https://www.llchen60.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
