@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-22T03:02:11.787Z</updated>
+  <updated>2020-03-23T03:30:50.426Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迪米特法则 (LOD) — 高内聚，低耦合</title>
+    <link href="https://www.llchen60.com/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/"/>
+    <id>https://www.llchen60.com/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/</id>
+    <published>2020-03-23T03:30:09.000Z</published>
+    <updated>2020-03-23T03:30:50.426Z</updated>
+    
+    <content type="html"><![CDATA[<p>高内聚 低耦合是比较通用的设计思想，可以用来指导不同的粒度的代码的设计和开发的工作，比如系统，模块，类，甚至是函数。也可以去使用到不同的开发场景当中，比如微服务，框架，组件，类库等等。</p><p>在这个原则当中，高内聚指的是类本身的设计，低耦合指的是类和类之间的依赖关系的设计。</p><p>迪米特法则，可以称之为The least knowledge principle.<br>Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.</p><h1 id="1-什么是高内聚？"><a href="#1-什么是高内聚？" class="headerlink" title="1. 什么是高内聚？"></a>1. 什么是高内聚？</h1><p>指的是相近的功能应该放到同一个类当中，不相近的功能不要放在同一类。代码集中相对来说就会更加容易维护了。</p><h1 id="2-什么是低耦合？"><a href="#2-什么是低耦合？" class="headerlink" title="2. 什么是低耦合？"></a>2. 什么是低耦合？</h1><p>类和类之间的依赖关系简单清晰，即尽管两个类之间有依赖关系。一个类的代码的改动不会或者很少导致依赖类的代码的改动。</p><h1 id="3-内聚和耦合的关系"><a href="#3-内聚和耦合的关系" class="headerlink" title="3. 内聚和耦合的关系"></a>3. 内聚和耦合的关系</h1><p><img src="https://i.loli.net/2020/03/23/yZVTqaQSgvbtE4l.png" alt="内聚耦合关系.png"></p><p>如图所示，左侧就是很好的高内聚低耦合的范例，我们将类最小化，即每个类只做一件事情，这样子其他依赖就会少很多。在修改或增加功能的时候，就不会对其他的类造成很大的影响。</p><h1 id="4-实战"><a href="#4-实战" class="headerlink" title="4. 实战"></a>4. 实战</h1><pre><code>public class NetworkTransporter {    // 存在问题，NetworkTransporter作为一个底层类，不应该依赖于HtmlRequest类；与之相反的，因为其实他需要的是string address，以及byte的数组，那我们应该直接提供这些primitive type的数据    public Byte[] send(HtmlRequest htmlRequest) {      //...    }}public class HtmlDownloader {  private NetworkTransporter transporter;//通过构造函数或IOC注入  public Html downloadHtml(String url) {  // 根据上面NetworkTransporter我们希望做的改动，这里传入的不应该是HtmlRequest类的实例了    Byte[] rawHtml = transporter.send(new HtmlRequest(url));    return new Html(rawHtml);  }}public class Document {  private Html html;  private String url;  public Document(String url) {    this.url = url;    // downloader.downloadHtml逻辑复杂，不应该放在构造函数当中，也会很不好测试    // 构造函数中使用new来做实例，违反了基于接口而非实现编程的原则    HtmlDownloader downloader = new HtmlDownloader();    this.html = downloader.downloadHtml(url);  }  //...}</code></pre><p>修改以后的代码： </p><pre><code>public class NetworkTransporter {    // 省略属性和其他方法...    public Byte[] send(String address, Byte[] data) {      //...    }}public class HtmlDownloader {  private NetworkTransporter transporter;//通过构造函数或IOC注入  // HtmlDownloader这里也要有相应的修改  public Html downloadHtml(String url) {    HtmlRequest htmlRequest = new HtmlRequest(url);    Byte[] rawHtml = transporter.send(      htmlRequest.getAddress(), htmlRequest.getContent().getBytes());    return new Html(rawHtml);  }}public class Document {  private Html html;  private String url;  public Document(String url, Html html) {    this.html = html;    this.url = url;  }  //...}// 通过一个工厂方法来创建Documentpublic class DocumentFactory {  private HtmlDownloader downloader;  public DocumentFactory(HtmlDownloader downloader) {    this.downloader = downloader;  }  public Document createDocument(String url) {    Html html = downloader.downloadHtml(url);    return new Document(url, html);  }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;高内聚 低耦合是比较通用的设计思想，可以用来指导不同的粒度的代码的设计和开发的工作，比如系统，模块，类，甚至是函数。也可以去使用到不同的开发场景当中，比如微服务，框架，组件，类库等等。&lt;/p&gt;
+&lt;p&gt;在这个原则当中，高内聚指的是类本身的设计，低耦合指的是类和类之间的依赖关系
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="高内聚" scheme="https://www.llchen60.com/tags/%E9%AB%98%E5%86%85%E8%81%9A/"/>
+    
+      <category term="低耦合" scheme="https://www.llchen60.com/tags/%E4%BD%8E%E8%80%A6%E5%90%88/"/>
+    
+      <category term="迪米特" scheme="https://www.llchen60.com/tags/%E8%BF%AA%E7%B1%B3%E7%89%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>DRY 原则</title>
@@ -534,36 +565,6 @@
     
     
       <category term="散列表" scheme="https://www.llchen60.com/tags/%E6%95%A3%E5%88%97%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(13)-跳表</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-13-%E8%B7%B3%E8%A1%A8/</id>
-    <published>2020-02-09T18:11:25.000Z</published>
-    <updated>2020-02-09T18:12:09.716Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><ul><li>跳表<ul><li>动态数据结构</li><li>可以支持快速的插入，删除，查找操作</li><li>写起来也不会很复杂</li></ul></li></ul><p>Redis当中的有序集合就是用跳表来实现的。</p><h1 id="2-如何理解跳表"><a href="#2-如何理解跳表" class="headerlink" title="2. 如何理解跳表"></a>2. 如何理解跳表</h1><p>对于一个单链表来说，即便链表当中存储的数据是有序的，如果我们想要从中查找某个数据，也只能从头到尾遍历链表，这样查找效率就会非常低，时间复杂度比较高，O(n)</p><p>为了解决这个问题，我们可以对链表建立一级索引，每几个结点就提取一个结点到上一级当中，抽出来的那一级我们就可以将其叫做索引或者索引层了。</p><p>通过增加索引的层级，来加快寻找节点的速度，这就是跳表 – 链表加上多级索引的结构</p><ul><li>时间复杂度非常理想 O(logn)</li><li>但是相对来说会更需要内存一些  空间复杂度为O(n)</li></ul><h1 id="3-高效的动态插入和删除操作"><a href="#3-高效的动态插入和删除操作" class="headerlink" title="3. 高效的动态插入和删除操作"></a>3. 高效的动态插入和删除操作</h1><p>其动态的插入和删除操作的时间复杂度为O(logn)</p><p><img src="https://i.loli.net/2020/02/10/f4vdSyzCEs2KWFY.jpg" alt="fig1.jpg"></p><p>删除操作，还是需要拿到删除节点的前驱节点，然后通过指针操作完成删除。</p><h2 id="4-跳表索引动态更新"><a href="#4-跳表索引动态更新" class="headerlink" title="4. 跳表索引动态更新"></a>4. 跳表索引动态更新</h2><p><img src="https://i.loli.net/2020/02/10/J5QxpXFgAeTCa2j.jpg" alt="fig2.jpg"></p><p>跳表是需要不断更新的，因为当我们不断向跳表里面插入数据的时候，如果我们不更新索引，就有可能出现两个索引节点之间数据非常多的情况。极端情况下，跳表就会退化成单链表。</p><ul><li>我们需要某种方式来维护索引与原始链表大小之间的平衡<ul><li>跳表是通过随机函数来维护平衡性的</li><li>当我们往跳表里面插入数据的时候，可以选择同时将这个数据插入到部分索引层当中。</li><li>根据随机函数来决定这个结点插入到哪几级索引当中。</li></ul></li></ul><p><img src="https://i.loli.net/2020/02/10/64FQnKPZ8uWlTCb.jpg" alt="fig3.jpg"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-概念&quot;&gt;&lt;a href=&quot;#1-概念&quot; class=&quot;headerlink&quot; title=&quot;1. 概念&quot;&gt;&lt;/a&gt;1. 概念&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;跳表&lt;ul&gt;
-&lt;li&gt;动态数据结构&lt;/li&gt;
-&lt;li&gt;可以支持快速的插入，删除，查找操作&lt;/li&gt;
-&lt;li&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="跳表" scheme="https://www.llchen60.com/tags/%E8%B7%B3%E8%A1%A8/"/>
     
   </entry>
   
