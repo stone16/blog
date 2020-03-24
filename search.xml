@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>团队能力构建手册-新人Ramp Up</title>
+      <link href="/%E5%9B%A2%E9%98%9F%E8%83%BD%E5%8A%9B%E6%9E%84%E5%BB%BA%E6%89%8B%E5%86%8C-%E6%96%B0%E4%BA%BARamp-Up/"/>
+      <url>/%E5%9B%A2%E9%98%9F%E8%83%BD%E5%8A%9B%E6%9E%84%E5%BB%BA%E6%89%8B%E5%86%8C-%E6%96%B0%E4%BA%BARamp-Up/</url>
+      
+        <content type="html"><![CDATA[<p>这篇博客引述了ThoughtWorks的<a href="https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/" target="_blank" rel="noopener">capacity-building-and-quality-assurance</a>，里面讲得如何构建团队，如何让新人快速适应的方法指南非常实用。分享/ 思考/ 归纳如下。</p><p>自己所在的团队最近也经历了快速的增长，在带新人的过程当中，确实感觉到想一茬抓一茬是客观存在且经常性发生的事情，lol。需要一个更加清晰细致的上手指南，并把一些需要的前提条件先给到，然后给新人留下在正确的方向上足够的探索空间，这样大概才能加速他们的成长把。</p><p>我们当然需要每个个体的无上才能，但更需要一个好的平台，让他们能够专注的将自己的才能用在那个地方。而平台，意味着脚手架，意味着规则，意味着指南。</p><h1 id="1-常规新人成长方式-Mentor-Onboarding-Buddy"><a href="#1-常规新人成长方式-Mentor-Onboarding-Buddy" class="headerlink" title="1. 常规新人成长方式 Mentor/ Onboarding Buddy"></a>1. 常规新人成长方式 Mentor/ Onboarding Buddy</h1><p>为新人指派一名有经验的师傅，作为他的onboarding伙伴，平时可以做结对编程，在日常工作当中交换知识，学习并成长。新人onboarding的速度，取决于师傅的技能。</p><p>这么做当然有好处，一定比新人自己探索onboard要快的多，但是正如上面所说的那样，这种方式很依赖于师傅的能力，还有新人的沟通交流，搜集知识的能力。效果会因为每个成员的性格习惯能力等，有很大的不同。</p><h1 id="2-制定规则化的成长流程"><a href="#2-制定规则化的成长流程" class="headerlink" title="2. 制定规则化的成长流程"></a>2. 制定规则化的成长流程</h1><h2 id="2-1-CraftSkill-Map"><a href="#2-1-CraftSkill-Map" class="headerlink" title="2.1 CraftSkill Map"></a>2.1 CraftSkill Map</h2><p>能力地图是希望能够梳理完整的技术图谱，对技术人员需要掌握的能力进行可视化</p><p>新成员在加入项目的时候一般会有很多问题：</p><ul><li>这个项目是做什么的？ </li><li>这个项目是在解决什么样的问题？</li><li>这个项目使用了什么技术栈？</li><li>新成员应该从哪里开始？</li></ul><p>新人onboard，rampup需要的知识是可以分成可以自己学习的知识(通过各种文档，wiki, stackoverflow, etc.)以及需要老人的帮助的知识(需要上手实操的内容，比如设计原则，DRY,SOLID, LOD等等具体如何使用的问题)。</p><p>我们需要新人自己去探索，获取一些必要的前提性知识，也需要有人帮助，帮他迅速适应新的环境。</p><p>能力地图就是希望能够对所需要的知识，做一个清晰的梳理，形成一个脉络，能够使新人onboard的过程更有的放矢一些。</p><p><img src="https://i.loli.net/2020/03/24/JayeLmisObEpdTS.png" alt="craftskill map E.G.png"></p><h2 id="2-2-指定Onboarding流程"><a href="#2-2-指定Onboarding流程" class="headerlink" title="2.2 指定Onboarding流程"></a>2.2 指定Onboarding流程</h2><p>这里主要是要给一个比较详细的计划，告知新人每周要做的事情，更多的是时间上，任务上的安排。</p><p>根据任务，可以侧重学习前端，后端，或者QA方面的领域知识和技能，然后<strong>做一个meeting，将自己学到的完整的和组里的同事分享下，然后可以一起查漏补缺，完善新人的知识体系</strong>。</p><p>值得注意的是Onboarding的流程当中需要有里程碑和执行时间，由资深员工协助制定，然后就可以领取任务，保质保量的独立完成。</p><p>Onboard流程当中，关于自己看的知识，有很多方式可以来做，比如wiki，视频，甚至是音频，起到的作用就是更高速度的学习。这种相对来说比较被动，主动性的学习可以通过Unit test，将知识点转化成Unit test，然后通过单元测试迅速熟悉知识点。</p><h2 id="2-3-新成员状态看板"><a href="#2-3-新成员状态看板" class="headerlink" title="2.3 新成员状态看板"></a>2.3 新成员状态看板</h2><p>每周由mentor负责跟踪观察新人状态，会议追踪，确定新人是否能在一个月的ramp up以后自己独立负责一部分的任务。</p><h2 id="2-4-Case-by-case-针对性培训"><a href="#2-4-Case-by-case-针对性培训" class="headerlink" title="2.4 Case by case 针对性培训"></a>2.4 Case by case 针对性培训</h2><p>根据个人情况来探究如何做提高，是否可以提前交付项目，诸如此类。</p><p><a href="https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/" target="_blank" rel="noopener">https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mentor </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>迪米特法则 (LOD) — 高内聚，低耦合</title>
       <link href="/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/"/>
       <url>/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/</url>
