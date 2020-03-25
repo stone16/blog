@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-24T03:39:22.183Z</updated>
+  <updated>2020-03-25T02:40:00.334Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring @Transactional</title>
+    <link href="https://www.llchen60.com/Spring-Transactional/"/>
+    <id>https://www.llchen60.com/Spring-Transactional/</id>
+    <published>2020-03-25T02:37:03.000Z</published>
+    <updated>2020-03-25T02:40:00.334Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spring的Transactional注解用来做事务管理</p><h1 id="1-使用方法"><a href="#1-使用方法" class="headerlink" title="1. 使用方法"></a>1. 使用方法</h1><p>首先我们需要在xml当中配置事务信息，定义transactionManager的bean，当然也可以使用注解来实现对于bean的定义，具体如下：</p><pre><code>&lt;tx:annotation-driven /&gt;&lt;bean id=&quot;transactionManager&quot;class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;&lt;/bean&gt;@EnableTransactionManagement</code></pre><p>而后，在具体的使用的时候，我们只需要将@Transactional注解添加到合适的方法当中，并且设置合适的属性信息</p><ul><li>name<ul><li>指定事务管理器</li></ul></li><li>propagation<ul><li>事务的传播行为，默认为REQUIRED</li></ul></li><li>isolation <ul><li>事务的隔离度，默认为DEFAULT</li></ul></li><li>timeout<ul><li>事务的超时时间，默认为-1，如果超过该时间限制但事务没有完成，就自动回滚</li></ul></li><li>read-only<ul><li>指定事务是否为只读事务，默认值为false</li><li>当要忽略那些不需要事务的方法的时候，可以设置read-only为true</li></ul></li><li>rollback-for<ul><li>指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，可以通过逗号来做分隔</li></ul></li><li>no-rollback-for<ul><li>对于在这里定义的exception，不回滚 </li></ul></li></ul><h1 id="2-Spring-注解方式的事务实现机制"><a href="#2-Spring-注解方式的事务实现机制" class="headerlink" title="2. Spring 注解方式的事务实现机制"></a>2. Spring 注解方式的事务实现机制</h1><p>在调用@Transactional的目标方法之后，Spring Framework会通过AOP代理，在代码运行时生成一个代理对象，根据注解的属性配置信息，决定该声明@Transactional的目标方法是否由拦截器 - TransactionInterceptor来拦截.</p><p>如果确定要被拦截，那么就会在目标方法开始执行之前创建并加入事务，并执行目标方法的逻辑，最后根据执行情况是否出现异常，利用抽象事务管理器提交或者回滚事务。</p><p><img src="https://i.loli.net/2020/03/25/cM5yEjbPAIogk1X.jpg" alt="Spring事务实现机制.jpg"></p><h1 id="3-Isolation-Level"><a href="#3-Isolation-Level" class="headerlink" title="3. Isolation Level"></a>3. Isolation Level</h1><p>Isolation是有不同的配置的，它主要是为了避免事务的一些副作用：</p><ul><li>脏读：读到同时进行的事务还没有提交上去的数据</li><li>不可重复的读：重复读的时候会读到不同的数据，因为有同时进行的事务对同一条数据进行了更新</li><li>幽灵读取：在做query的时候，再度执行拿到不同的行，因为有同时进行的事务在做更新</li></ul><p>针对不同级别的事务，Spring有如下的设置</p><ul><li>DEFAULT</li><li>READ_UNCOMMITTED<ul><li>最低的隔离水平 </li><li>允许大部分的同时的访问</li><li>有上述所有的弊端</li></ul></li><li>READ_COMMMITED<ul><li>阻止脏读 </li></ul></li><li>REPEATABLE_READ<ul><li>阻止脏读</li><li>阻止不可重复读取</li></ul></li><li>SERAILIZABLE<ul><li>最高程度的隔离</li><li>基本是单序列的执行</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html" target="_blank" rel="noopener">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html</a></li><li><a href="https://dzone.com/articles/how-does-spring-transactional" target="_blank" rel="noopener">https://dzone.com/articles/how-does-spring-transactional</a></li><li><a href="https://www.ibm.com/developerworks/cn/java/j-master-spring-transactional-use/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-master-spring-transactional-use/index.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Spring的Transactional注解用来做事务管理&lt;/p&gt;
+&lt;h1 id=&quot;1-使用方法&quot;&gt;&lt;a href=&quot;#1-使用方法&quot; class=&quot;headerlink&quot; title=&quot;1. 使用方法&quot;&gt;&lt;/a&gt;1. 使用方法&lt;/h1&gt;&lt;p&gt;首先我们需要在xml当中配置事
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Spring" scheme="https://www.llchen60.com/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>团队能力构建手册-新人Ramp Up</title>
@@ -538,33 +567,6 @@
     
     
       <category term="数据结构与算法" scheme="https://www.llchen60.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(15)-哈希算法</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-15-%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-15-%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</id>
-    <published>2020-02-09T18:30:23.000Z</published>
-    <updated>2020-02-09T18:30:43.320Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-什么是哈希算法"><a href="#1-什么是哈希算法" class="headerlink" title="1. 什么是哈希算法"></a>1. 什么是哈希算法</h1><blockquote><p>将任意长度的二进制串映射为固定长度的二进制串，这个映射的规则就是哈希算法，而通过原始数据映射之后得到的二进制串就是哈希值</p></blockquote><ul><li>哈希算法的要求<ul><li>从哈希值无法反向推导出原始数据</li><li>对输入数据非常敏感，哪怕原始数据只修改一个bit，最后得到的哈希值也会大不相同</li><li>散列冲突的概率很小，对于不同的原始数据，哈希值相同的概率非常小</li><li>哈希算法的效率要足够高，针对较长文本，也能快速计算出哈希值</li></ul></li></ul><h1 id="2-哈希算法的应用"><a href="#2-哈希算法的应用" class="headerlink" title="2. 哈希算法的应用"></a>2. 哈希算法的应用</h1><h2 id="2-1-安全加密"><a href="#2-1-安全加密" class="headerlink" title="2.1 安全加密"></a>2.1 安全加密</h2><ul><li>常用de加密算法<ul><li>MD5<ul><li>MD5 Message-Digest Algorithm </li><li>MD5信息摘要算法</li></ul></li><li>SHA <ul><li>Secure Hash Algorithm 安全散列算法</li></ul></li><li>DES <ul><li>Data Encryption Standard 数据加密标准</li></ul></li><li>AES <ul><li>Advanced Encryption Standard 高级加密标准</li></ul></li></ul></li></ul><h2 id="2-2-唯一标识"><a href="#2-2-唯一标识" class="headerlink" title="2.2 唯一标识"></a>2.2 唯一标识</h2><p>图片的标识，从图片的二进制串码的前中后各取出100字节，通过哈希算法得到一个哈希字符串，用它作为图片的唯一标识。然后通过这个唯一标识来判定图片是否在图库当中，通过这种方式来减少工作量。</p><h2 id="2-3-数据校验"><a href="#2-3-数据校验" class="headerlink" title="2.3 数据校验"></a>2.3 数据校验</h2><p>BT协议的数据校验，对每个文件块取哈希值，保存在种子文件当中。当文件块下载完成之后，我们通过相同的哈希算法，对下载好的文件块逐一求哈希值，然后跟种子文件中保存的哈希值进行比对。如果不同，就说明这个文件块不完整或者被篡改了，需要再重新从其他宿主机器上下载这个文件块。</p><h2 id="2-4-散列函数"><a href="#2-4-散列函数" class="headerlink" title="2.4 散列函数"></a>2.4 散列函数</h2><p>哈希表的散列函数，关注的是在做完哈希以后，是否能够平均的分布。一组数据能否均匀散列在各个槽中。 </p><p>另外一个点是其执行速度，散列函数对执行速度的要求会比较高一些。</p><h2 id="2-5-负载均衡"><a href="#2-5-负载均衡" class="headerlink" title="2.5 负载均衡"></a>2.5 负载均衡</h2><p>分布式系统当中需要解决的问题</p><ul><li>负载均衡的算法<ul><li>轮询</li><li>随机</li><li>加权轮询</li></ul></li></ul><p>但是我们需要实现一个会话粘滞的负载均衡算法(session sticky)。即我们需要在一个客户端上，在一次会话上的所有请求都路由到同一个服务器上。</p><p>通过哈希算法，对客户端IP地址或者会话的ID计算哈希值，将取得的哈希值与服务器列表的大小进行取模运算，最终得到的值就是应该被路由到的服务器的编号。</p><h2 id="2-6-数据分片"><a href="#2-6-数据分片" class="headerlink" title="2.6 数据分片"></a>2.6 数据分片</h2><h3 id="2-6-1-如何统计关键词搜索的次数"><a href="#2-6-1-如何统计关键词搜索的次数" class="headerlink" title="2.6.1 如何统计关键词搜索的次数"></a>2.6.1 如何统计关键词搜索的次数</h3><p>假设我们有1T的日志文件，里面记录了用户的关键词，我们想快速统计出来每个关键词被搜索的次数，该怎么做呢？ </p><ol><li>数据量太大的问题</li><li>处理时间太长的问题</li></ol><p>对数据进行分片，然后多台机器进行处理。用哈希算法，将哈希值相同的搜索关键词放到同一台机器上。然后最后做汇总</p><h3 id="2-6-2-如何快速判断图片是否在图库当中"><a href="#2-6-2-如何快速判断图片是否在图库当中" class="headerlink" title="2.6.2 如何快速判断图片是否在图库当中"></a>2.6.2 如何快速判断图片是否在图库当中</h3><p>为每个图片取唯一标识，然后构建散列表，但是当图片量很大的时候，在单台机器上构建散列表是行不通的。</p><p>因为在存储的时候，我们还是需要根据哈希算法取模来进行存储，然后在进行判断的时候，也是用同样的哈希算法，然后与机器个数n求余取模。然后根据得到的值到对应的机器上去进行查找。</p><h2 id="2-7-分布式存储"><a href="#2-7-分布式存储" class="headerlink" title="2.7 分布式存储"></a>2.7 分布式存储</h2><p>分布式存储需要解决的问题是，当我们已经在各个host上按照哈希算法保存了数据以后，再增减host的时候，我们不希望还需要对原先的host里面的数据做迁移。如果说缓存当中的数据会一下子全都失效的话，那么所有数据请求都要从数据库走，直接就压垮数据库了。</p><p>因此在分布式存储当中，我们需要采用<strong><em>一致性哈希算法</em></strong></p><p>假设我们有 k 个机器，数据的哈希值的范围是[0, MAX]。我们将整个范围划分成 m 个小区间（m 远大于 k），每个机器负责 m/k 个小区间。当有新机器加入的时候，我们就将某几个小区间的数据，从原来的机器中搬移到新的机器中。这样，既不用全部重新哈希、搬移数据，也保持了各个机器上数据数量的均衡。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-什么是哈希算法&quot;&gt;&lt;a href=&quot;#1-什么是哈希算法&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是哈希算法&quot;&gt;&lt;/a&gt;1. 什么是哈希算法&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;将任意长度的二进制串映射为固定长度的二进制串，这个映射
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="哈希算法" scheme="https://www.llchen60.com/tags/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
