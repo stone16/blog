@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.llchen60.com/tags/MySQL/</loc>
+        <lastmod>2020-03-27T03:40:42.123Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/RDS/</loc>
+        <lastmod>2020-03-27T03:40:42.123Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.llchen60.com/tags/AWS/</loc>
+        <lastmod>2020-03-27T03:40:42.123Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.llchen60.com/tags/Spring/</loc>
         <lastmod>2020-03-25T02:40:00.334Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -942,13 +963,6 @@
 
     <url>
         <loc>https://www.llchen60.com/tags/DynamoDB/</loc>
-        <lastmod>2020-02-02T06:06:57.981Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.llchen60.com/tags/AWS/</loc>
         <lastmod>2020-02-02T06:06:57.981Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

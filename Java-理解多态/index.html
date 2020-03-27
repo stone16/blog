@@ -6,16 +6,20 @@
   <meta name="keywords" content=" Java , Polymorphism ">
   <meta name="description" content="Java 理解多态 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta name="description" content="Spring的Transactional注解用来做事务管理 1. 使用方法首先我们需要在xml当中配置事务信息，定义transactionManager的bean，当然也可以使用注解来实现对于bean的定义，具体如下： &lt;tx:annotation-driven &#x2F;&gt; &lt;bean id&#x3D;&quot;transactionManager&quot; class&#x3D;&quot;org.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring @Transactional">
+<meta property="og:url" content="https://www.llchen60.com/Spring-Transactional/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
-<meta property="og:description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
-<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
-<meta property="article:modified_time" content="2020-03-14T04:59:34.015Z">
+<meta property="og:description" content="Spring的Transactional注解用来做事务管理 1. 使用方法首先我们需要在xml当中配置事务信息，定义transactionManager的bean，当然也可以使用注解来实现对于bean的定义，具体如下： &lt;tx:annotation-driven &#x2F;&gt; &lt;bean id&#x3D;&quot;transactionManager&quot; class&#x3D;&quot;org.">
+<meta property="og:image" content="https://i.loli.net/2020/03/25/cM5yEjbPAIogk1X.jpg">
+<meta property="article:published_time" content="2020-03-25T02:37:03.000Z">
+<meta property="article:modified_time" content="2020-03-25T02:40:00.334Z">
 <meta property="article:author" content="Leilei Chen">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/03/25/cM5yEjbPAIogk1X.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -135,7 +139,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(202)</small></div></li>
+    <li><div class="all active">全部文章<small>(203)</small></div></li>
     
         
             
@@ -147,7 +151,7 @@
     
         
             
-            <li><div data-rel="Cloud">Cloud<small>(24)</small></div>
+            <li><div data-rel="Cloud">Cloud<small>(25)</small></div>
                 
             </li>
             
@@ -218,8 +222,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="202">
-<input type="hidden" id="yelog_site_word_count" value="345.2k">
+<input type="hidden" id="yelog_site_posts_number" value="203">
+<input type="hidden" id="yelog_site_word_count" value="345.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -908,6 +912,14 @@
         <a class="color2">Spring</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a class="color4">RDS</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">MySQL</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -932,6 +944,14 @@
            data-author="" >
             <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
             <span class="post-date" title="2020-02-02 14:44:35">2020/02/02</span>
+        </a>
+        
+        <a  class="Cloud "
+           href="/Amazon-RDS-Onboard-MySQL/"
+           data-tag="AWS,RDS,MySQL"
+           data-author="" >
+            <span class="post-title" title="Amazon RDS Onboard - MySQL ">Amazon RDS Onboard - MySQL </span>
+            <span class="post-date" title="2020-03-26 20:39:50">2020/03/26</span>
         </a>
         
         <a  class="BackEnd "
@@ -2812,7 +2832,7 @@ ROundGraph,RoundGraph(), radius = 5</code></pre><p>有这样的输出的原因�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀','#Design Pattern','#架构','#CAP','#编程范式','#Apache','#Cache','#Load Balancers','#Dagger','#DI','#HashMap','#Jackson','#Serialization','#Annotations','#Executor Service','#Map','#Reflection','#Composition','#Log','#Unit Test','#JMX','#JSP','#Annotation','#Lombok','#Ruby','#项目模板','#复杂度分析','#Array','#LinkedList','#栈','#队列','#递归','#排序','#二分查找','#跳表','#散列表','#哈希算法','#数据结构与算法','#红黑树','#latency','#system design','#PowerMock','#OOP','#Polymorphism','#Inheritance','#SOLID','#高内聚','#低耦合','#迪米特','#Mentor','#Spring',],
+            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀','#Design Pattern','#架构','#CAP','#编程范式','#Apache','#Cache','#Load Balancers','#Dagger','#DI','#HashMap','#Jackson','#Serialization','#Annotations','#Executor Service','#Map','#Reflection','#Composition','#Log','#Unit Test','#JMX','#JSP','#Annotation','#Lombok','#Ruby','#项目模板','#复杂度分析','#Array','#LinkedList','#栈','#队列','#递归','#排序','#二分查找','#跳表','#散列表','#哈希算法','#数据结构与算法','#红黑树','#latency','#system design','#PowerMock','#OOP','#Polymorphism','#Inheritance','#SOLID','#高内聚','#低耦合','#迪米特','#Mentor','#Spring','#RDS','#MySQL',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

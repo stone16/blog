@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-03-25T02:40:00.334Z</updated>
+  <updated>2020-03-27T03:40:42.123Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Amazon RDS Onboard - MySQL </title>
+    <link href="https://www.llchen60.com/Amazon-RDS-Onboard-MySQL/"/>
+    <id>https://www.llchen60.com/Amazon-RDS-Onboard-MySQL/</id>
+    <published>2020-03-27T03:39:50.000Z</published>
+    <updated>2020-03-27T03:40:42.123Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>Amazon Relational Databazse Service </p><ul><li>provide cost efficient, resizable capacity for relational database and manage common database administration tasks </li><li>CPU, memory, storage, IOPS can be scaled independently </li><li>help you manage backups, software patching, automatic failure detection, and recovery </li><li>Automated backups </li><li>Can get high availability with a primary instance and synchronous secondary instance that you can fail over to when problems occur.</li><li>Integrate with IAM and VPC settings</li></ul><h2 id="1-1-How-does-amazon-help-you-do-the-setup"><a href="#1-1-How-does-amazon-help-you-do-the-setup" class="headerlink" title="1.1 How does amazon help you do the setup?"></a>1.1 How does amazon help you do the setup?</h2><p>Overall, you control your database by using DB instance, you could select different kind of host with different configuration, AWS will help you to deploy it in your selected region, and it will be automatically deployed to different AZ, to increase availability. Let’s go through it in detail. </p><h3 id="1-1-1-DB-Instances"><a href="#1-1-1-DB-Instances" class="headerlink" title="1.1.1 DB Instances"></a>1.1.1 DB Instances</h3><ul><li><p>An isolated database env in the AWS Cloud </p></li><li><p>One instance can contain multiple user-created databases </p></li><li><p>Each DB instance runs one DB engine, for DB engine, we mean MySQL, MariaDB, PostgreSQL, etc. </p></li><li><p>You could change your selected computation and memory capacity by using <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html" target="_blank" rel="noopener">DB instance class</a>.</p></li><li><p>You could choose to use multiple availability zones, AZ is engineered to be isolated from failures in other AZs, by launching instances in separate AZs, you can protect your applications from the failure of a single location</p><h3 id="1-1-2-Basic-setup"><a href="#1-1-2-Basic-setup" class="headerlink" title="1.1.2 Basic setup"></a>1.1.2 Basic setup</h3></li><li><p>AWS account </p></li><li><p>IAM user </p></li></ul><h1 id="2-MySQL-on-RDS"><a href="#2-MySQL-on-RDS" class="headerlink" title="2. MySQL on RDS"></a>2. MySQL on RDS</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://docs.aws.amazon.com/AmazonRDS" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS</a> </li><li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Overview&quot;&gt;&lt;a href=&quot;#1-Overview&quot; class=&quot;headerlink&quot; title=&quot;1. Overview&quot;&gt;&lt;/a&gt;1. Overview&lt;/h1&gt;&lt;p&gt;Amazon Relational Databazse Service 
+      
+    
+    </summary>
+    
+    
+      <category term="Cloud" scheme="https://www.llchen60.com/categories/Cloud/"/>
+    
+    
+      <category term="AWS" scheme="https://www.llchen60.com/tags/AWS/"/>
+    
+      <category term="RDS" scheme="https://www.llchen60.com/tags/RDS/"/>
+    
+      <category term="MySQL" scheme="https://www.llchen60.com/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring @Transactional</title>
@@ -535,38 +565,6 @@
     
     
       <category term="红黑树" scheme="https://www.llchen60.com/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(16)-二叉树</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-16-%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-16-%E4%BA%8C%E5%8F%89%E6%A0%91/</id>
-    <published>2020-02-09T18:31:37.000Z</published>
-    <updated>2020-02-09T18:32:28.203Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-树"><a href="#1-树" class="headerlink" title="1. 树"></a>1. 树</h1><ul><li>父节点<ul><li>上层的节点 </li></ul></li><li>兄弟节点<ul><li>父节点是同一个节点 </li></ul></li><li>叶节点<ul><li>没有子节点的节点</li></ul></li><li>高度<ul><li>节点到叶子节点的最长路径 </li></ul></li><li>深度<ul><li>根节点到这个节点所经历的边的个数 </li></ul></li><li>层<ul><li>节点的深度 + 1 </li></ul></li></ul><h1 id="2-二叉树"><a href="#2-二叉树" class="headerlink" title="2. 二叉树"></a>2. 二叉树</h1><p>每个节点最多有两个分叉的树，即最多有两个子节点</p><p><img src="https://i.loli.net/2020/02/10/r72vjaPlpfsHmuE.jpg" alt="fig1.jpg"><br>2 显示的是满二叉树，特点是叶子节点都在最底层，出了叶子节点之外，每个节点都有左右两个子节点</p><p>3 叶子节点都在最底下两层，并且出了最后一层，其他的层的节点数量都要达到最大，并且最后一层的节点都是靠左排列的，这种二叉树叫做完全二叉树。</p><h2 id="2-1-如何表示-存储一棵二叉树？"><a href="#2-1-如何表示-存储一棵二叉树？" class="headerlink" title="2.1 如何表示/ 存储一棵二叉树？"></a>2.1 如何表示/ 存储一棵二叉树？</h2><h3 id="2-1-1-基于指针或者引用的二叉链式存储法"><a href="#2-1-1-基于指针或者引用的二叉链式存储法" class="headerlink" title="2.1.1 基于指针或者引用的二叉链式存储法"></a>2.1.1 基于指针或者引用的二叉链式存储法</h3><p><img src="https://i.loli.net/2020/02/10/M1I6FkWJodTq3fX.jpg" alt="fig2.jpg"></p><p>每个节点都有三个字段，其中一个存储数据，另外两个指向左右子节点的指针。因此通过根节点，我们就可以通过左右子节点的指针将整棵树都串起来了。</p><h3 id="2-1-2-基于数组的顺序存储法"><a href="#2-1-2-基于数组的顺序存储法" class="headerlink" title="2.1.2 基于数组的顺序存储法"></a>2.1.2 基于数组的顺序存储法</h3><p><img src="https://i.loli.net/2020/02/10/P62NlH8EbY3LBXv.jpg" alt="fig3.jpg"><br>如果节点X存储在数组中下标为i的位置，下标为2<em>i的位置存储的是左子节点，下标为2</em>i + 1的位置存储的就是右子节点。下标为i/2的位置存储的就是它的父节点了。通过这种方式，我们只要知道根节点存储的位置，就可以通过下标计算，把整棵树都串起来。 不过对于一棵非完全二叉树而言，会浪费比较多的数组存储空间的。</p><h2 id="2-2-二叉树的遍历"><a href="#2-2-二叉树的遍历" class="headerlink" title="2.2 二叉树的遍历"></a>2.2 二叉树的遍历</h2><h3 id="2-2-0-递归公式"><a href="#2-2-0-递归公式" class="headerlink" title="2.2.0 递归公式"></a>2.2.0 递归公式</h3><p><img src="https://i.loli.net/2020/02/10/o1TLXDnalmgBzAQ.jpg" alt="fig4.jpg"></p><p>二叉树的遍历整体就是一个递归的过程</p><p>写递归代码的关键，就是看能不能写出一个递推公式。而递推公式的关键，就是如果要解决问题A，就假设子问题B,C都已经解决，然后再来看如何利用B，C来解决A</p><pre><code>前序遍历的递推公式：preOrder(r) = print r-&gt;preOrder(r-&gt;left)-&gt;preOrder(r-&gt;right)中序遍历的递推公式：inOrder(r) = inOrder(r-&gt;left)-&gt;print r-&gt;inOrder(r-&gt;right)后序遍历的递推公式：postOrder(r) = postOrder(r-&gt;left)-&gt;postOrder(r-&gt;right)-&gt;print r// 前序遍历void preOrder(Node* root) {  if (root == null) return;  print root // 此处为伪代码，表示打印root节点  preOrder(root-&gt;left);  preOrder(root-&gt;right);}// 中序遍历void inOrder(Node* root) {  if (root == null) return;  inOrder(root-&gt;left);  print root // 此处为伪代码，表示打印root节点  inOrder(root-&gt;right);}// 后序遍历void postOrder(Node* root) {  if (root == null) return;  postOrder(root-&gt;left);  postOrder(root-&gt;right);  print root // 此处为伪代码，表示打印root节点}</code></pre><h3 id="2-2-1-前序遍历"><a href="#2-2-1-前序遍历" class="headerlink" title="2.2.1 前序遍历"></a>2.2.1 前序遍历</h3><p>对于树中的任意节点来说，先打印这个节点，然后再打印它的左子树，最后打印它的右子树。</p><h3 id="2-2-2-中序遍历"><a href="#2-2-2-中序遍历" class="headerlink" title="2.2.2 中序遍历"></a>2.2.2 中序遍历</h3><p>对于树中的任意节点来说，先打印它的左子树，然后再打印它本身，最后打印它的右子树</p><h3 id="2-2-3-后序遍历"><a href="#2-2-3-后序遍历" class="headerlink" title="2.2.3 后序遍历"></a>2.2.3 后序遍历</h3><p>对于树中的任意节点来说，先打印它的左子树，然后再打印它的右子树，最后打印这个节点本身</p><h1 id="3-二叉查找树"><a href="#3-二叉查找树" class="headerlink" title="3. 二叉查找树"></a>3. 二叉查找树</h1><p>支持动态数据集合的快速插入、删除、查找操作。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-树&quot;&gt;&lt;a href=&quot;#1-树&quot; class=&quot;headerlink&quot; title=&quot;1. 树&quot;&gt;&lt;/a&gt;1. 树&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;父节点&lt;ul&gt;
-&lt;li&gt;上层的节点 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;兄弟节点&lt;ul&gt;
-&lt;li&gt;父节点是同
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

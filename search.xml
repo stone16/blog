@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Amazon RDS Onboard - MySQL </title>
+      <link href="/Amazon-RDS-Onboard-MySQL/"/>
+      <url>/Amazon-RDS-Onboard-MySQL/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>Amazon Relational Databazse Service </p><ul><li>provide cost efficient, resizable capacity for relational database and manage common database administration tasks </li><li>CPU, memory, storage, IOPS can be scaled independently </li><li>help you manage backups, software patching, automatic failure detection, and recovery </li><li>Automated backups </li><li>Can get high availability with a primary instance and synchronous secondary instance that you can fail over to when problems occur.</li><li>Integrate with IAM and VPC settings</li></ul><h2 id="1-1-How-does-amazon-help-you-do-the-setup"><a href="#1-1-How-does-amazon-help-you-do-the-setup" class="headerlink" title="1.1 How does amazon help you do the setup?"></a>1.1 How does amazon help you do the setup?</h2><p>Overall, you control your database by using DB instance, you could select different kind of host with different configuration, AWS will help you to deploy it in your selected region, and it will be automatically deployed to different AZ, to increase availability. Let’s go through it in detail. </p><h3 id="1-1-1-DB-Instances"><a href="#1-1-1-DB-Instances" class="headerlink" title="1.1.1 DB Instances"></a>1.1.1 DB Instances</h3><ul><li><p>An isolated database env in the AWS Cloud </p></li><li><p>One instance can contain multiple user-created databases </p></li><li><p>Each DB instance runs one DB engine, for DB engine, we mean MySQL, MariaDB, PostgreSQL, etc. </p></li><li><p>You could change your selected computation and memory capacity by using <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html" target="_blank" rel="noopener">DB instance class</a>.</p></li><li><p>You could choose to use multiple availability zones, AZ is engineered to be isolated from failures in other AZs, by launching instances in separate AZs, you can protect your applications from the failure of a single location</p><h3 id="1-1-2-Basic-setup"><a href="#1-1-2-Basic-setup" class="headerlink" title="1.1.2 Basic setup"></a>1.1.2 Basic setup</h3></li><li><p>AWS account </p></li><li><p>IAM user </p></li></ul><h1 id="2-MySQL-on-RDS"><a href="#2-MySQL-on-RDS" class="headerlink" title="2. MySQL on RDS"></a>2. MySQL on RDS</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://docs.aws.amazon.com/AmazonRDS" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS</a> </li><li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AWS </tag>
+            
+            <tag> RDS </tag>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring @Transactional</title>
       <link href="/Spring-Transactional/"/>
       <url>/Spring-Transactional/</url>
