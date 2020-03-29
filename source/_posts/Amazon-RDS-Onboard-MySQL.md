@@ -1,6 +1,6 @@
 ---
 title: 'Amazon RDS Onboard - MySQL '
-date: 2020-03-26 20:39:50
+date: 2020-03-28 20:39:50
 categories: Cloud
 tags:
     - RDS
@@ -8,7 +8,6 @@ tags:
     - AWS
 top:
 ---
-
 # 1. Overview 
 
 Amazon Relational Databazse Service 
@@ -37,9 +36,57 @@ Overall, you control your database by using DB instance, you could select differ
 
 # 2. MySQL on RDS 
 
+## 2.1 Manage security for DB instance 
+
+### 2.1.1 Security Overview 
+
++ Run DB instance in a vertual private cloud based on the Amazon VPC service 
++ Use AWS Identity and Access Management policies to assign permissions that determine who is allowed to manage Amazon RDS resrouces 
++ Use security groups to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB instance
++ Use SSL or TLS connections with DB instances [Instructions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
++ Use Amazon RDS encryption to secure DB instances and snapshots at rest. It used AES-256 encryption algorithm to encrypt data on the server that hosts DB instance
+
+### 2.1.2 Manage access with Policies - resource level 
++ A poloicy is an object that associated with an identity or resource, defines their permissions. 
++ An IAM administrator could use policies to specify who has access to AWS resources, and what actions they can perform on the resources 
+
+### 2.1.3 Access control in DB instance level - security group 
+
++ Security groups control the access that traffic has in and out of a DB instance 
+    + VPC security groups 
+    + DB security groups
+    + EC2-classic security groups 
++ VPC security group
+    + enable a specific source to access a DB instance in a VPC in the security group 
+    + source could be: 
+        + a range of addresses 
+        + another VPC security group 
++ DB security group 
+    + Used with DB instances that are not in a VPC and on the EC2 classic platform  
+    + DB security group rules apply to inbound traffic only 
+    + You don't need to specify port number or protocol when adding rules 
+
+## 2.2 Connect to DB instance 
+
+## 2.3 Configure high availability for a production DB instance 
+
+## 2.4 Configure a DB instance in VPC 
+
+## 2.5 Configure MySQL database parameters and features 
+
+## 2.6 Modify a DB instance running the MySQL database engine 
+
+## 2.7 Configure database backup and restore 
+
+## 2.8 Import and export data 
+
+## 2.9 Monitor a MySQL DB instance 
+
+## 2.10 Replicate data 
 
 # Reference 
 1. https://docs.aws.amazon.com/AmazonRDS 
 2. https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html
+
 
 
