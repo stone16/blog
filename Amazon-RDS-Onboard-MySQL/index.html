@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="203">
-<input type="hidden" id="yelog_site_word_count" value="345.8k">
+<input type="hidden" id="yelog_site_word_count" value="346.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2590,12 +2590,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-03-29 14:37:42'>2020-03-28 20:39</time>
+        创建时间:<time class="date" title='更新时间: 2020-03-31 20:56:59'>2020-03-28 20:39</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:558</span>
+        <span>字数:943</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2701,7 +2701,30 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-2-Connect-to-DB-instance"><a href="#2-2-Connect-to-DB-instance" class="headerlink" title="2.2 Connect to DB instance"></a>2.2 Connect to DB instance</h2><h2 id="2-3-Configure-high-availability-for-a-production-DB-instance"><a href="#2-3-Configure-high-availability-for-a-production-DB-instance" class="headerlink" title="2.3 Configure high availability for a production DB instance"></a>2.3 Configure high availability for a production DB instance</h2><h2 id="2-4-Configure-a-DB-instance-in-VPC"><a href="#2-4-Configure-a-DB-instance-in-VPC" class="headerlink" title="2.4 Configure a DB instance in VPC"></a>2.4 Configure a DB instance in VPC</h2><h2 id="2-5-Configure-MySQL-database-parameters-and-features"><a href="#2-5-Configure-MySQL-database-parameters-and-features" class="headerlink" title="2.5 Configure MySQL database parameters and features"></a>2.5 Configure MySQL database parameters and features</h2><h2 id="2-6-Modify-a-DB-instance-running-the-MySQL-database-engine"><a href="#2-6-Modify-a-DB-instance-running-the-MySQL-database-engine" class="headerlink" title="2.6 Modify a DB instance running the MySQL database engine"></a>2.6 Modify a DB instance running the MySQL database engine</h2><h2 id="2-7-Configure-database-backup-and-restore"><a href="#2-7-Configure-database-backup-and-restore" class="headerlink" title="2.7 Configure database backup and restore"></a>2.7 Configure database backup and restore</h2><h2 id="2-8-Import-and-export-data"><a href="#2-8-Import-and-export-data" class="headerlink" title="2.8 Import and export data"></a>2.8 Import and export data</h2><h2 id="2-9-Monitor-a-MySQL-DB-instance"><a href="#2-9-Monitor-a-MySQL-DB-instance" class="headerlink" title="2.9 Monitor a MySQL DB instance"></a>2.9 Monitor a MySQL DB instance</h2><h2 id="2-10-Replicate-data"><a href="#2-10-Replicate-data" class="headerlink" title="2.10 Replicate data"></a>2.10 Replicate data</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<h2 id="2-2-Connect-to-DB-instance"><a href="#2-2-Connect-to-DB-instance" class="headerlink" title="2.2 Connect to DB instance"></a>2.2 Connect to DB instance</h2><ul>
+<li>Create DB instance as prerequisite </li>
+<li>Use MySQL client application or utility to connect to the instance</li>
+<li>Specify DNS address from the DB instance endpoint as the host parameter, specify the port number from DB instance endpoint as the port parameter </li>
+<li>For endpoint, we could find in AWS console, on the “connectivity &amp; security” tab </li>
+<li>To  connect from MySQL client, using command shown as below<ul>
+<li><code>mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p</code></li>
+</ul>
+</li>
+<li>Amazon RDS creates an SSL certificate for your DB instance when the instance is created     + you could do it with native password or with IAM authentication <ul>
+<li><code>mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p</code> </li>
+</ul>
+</li>
+<li>we could also connect from MySQL workbench <ul>
+<li>See instructions on <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html" target="_blank" rel="noopener">Connnecting from MySQL Workbench</a> </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-Configure-high-availability-for-a-production-DB-instance"><a href="#2-3-Configure-high-availability-for-a-production-DB-instance" class="headerlink" title="2.3 Configure high availability for a production DB instance"></a>2.3 Configure high availability for a production DB instance</h2><p>Amazon help you do this with Multi-AZ deployments. SQL server DB instances use SQL server Database Mirroring or Always On Availability Groups. </p>
+<p>In a Multi-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption.</p>
+<p>The high availability feature is not scaling solution for read-only scenarios, you cannot use a standby replica to serve read traffic. </p>
+<p>NOTICE – DB instances using Multi-AZ deployments can have increased write and commit latency compared to a Single-AZ depolyment, due to the synchrounous data replication that occurs. </p>
+<p>In the event of a planned or unplanned outage of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone if you have enabled Multi-AZ. The time it takes for the failover to complete depends on the database activity and other conditions at the time the primary DB instance became unavailable. Failover times are typically 60–120 seconds. However, large transactions or a lengthy recovery process can increase failover time. When the failover is complete, it can take additional time for the RDS console to reflect the new Availability Zone.</p>
+<h2 id="2-4-Configure-a-DB-instance-in-VPC"><a href="#2-4-Configure-a-DB-instance-in-VPC" class="headerlink" title="2.4 Configure a DB instance in VPC"></a>2.4 Configure a DB instance in VPC</h2><h2 id="2-5-Configure-MySQL-database-parameters-and-features"><a href="#2-5-Configure-MySQL-database-parameters-and-features" class="headerlink" title="2.5 Configure MySQL database parameters and features"></a>2.5 Configure MySQL database parameters and features</h2><h2 id="2-6-Modify-a-DB-instance-running-the-MySQL-database-engine"><a href="#2-6-Modify-a-DB-instance-running-the-MySQL-database-engine" class="headerlink" title="2.6 Modify a DB instance running the MySQL database engine"></a>2.6 Modify a DB instance running the MySQL database engine</h2><h2 id="2-7-Configure-database-backup-and-restore"><a href="#2-7-Configure-database-backup-and-restore" class="headerlink" title="2.7 Configure database backup and restore"></a>2.7 Configure database backup and restore</h2><h2 id="2-8-Import-and-export-data"><a href="#2-8-Import-and-export-data" class="headerlink" title="2.8 Import and export data"></a>2.8 Import and export data</h2><h2 id="2-9-Monitor-a-MySQL-DB-instance"><a href="#2-9-Monitor-a-MySQL-DB-instance" class="headerlink" title="2.9 Monitor a MySQL DB instance"></a>2.9 Monitor a MySQL DB instance</h2><h2 id="2-10-Replicate-data"><a href="#2-10-Replicate-data" class="headerlink" title="2.10 Replicate data"></a>2.10 Replicate data</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li><a href="https://docs.aws.amazon.com/AmazonRDS" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS</a> </li>
 <li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html</a></li>
 </ol>
@@ -2719,10 +2742,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Amazon RDS Onboard - MySQL </p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">558</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">943</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-03-28, 20:39:50</p>
-    <p><span class="copy-title">最后更新:</span>2020-03-29, 14:37:42</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-31, 20:56:59</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Amazon-RDS-Onboard-MySQL/" title="Amazon RDS Onboard - MySQL ">https://www.llchen60.com/Amazon-RDS-Onboard-MySQL/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
