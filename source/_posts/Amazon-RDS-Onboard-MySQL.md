@@ -68,7 +68,28 @@ Overall, you control your database by using DB instance, you could select differ
 
 ## 2.2 Connect to DB instance 
 
++ Create DB instance as prerequisite 
++ Use MySQL client application or utility to connect to the instance
++ Specify DNS address from the DB instance endpoint as the host parameter, specify the port number from DB instance endpoint as the port parameter 
++ For endpoint, we could find in AWS console, on the "connectivity & security" tab 
++ To  connect from MySQL client, using command shown as below
+    + `mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p`
++ Amazon RDS creates an SSL certificate for your DB instance when the instance is created     + you could do it with native password or with IAM authentication 
+    + `mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p` 
++ we could also connect from MySQL workbench 
+    + See instructions on [Connnecting from MySQL Workbench](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html) 
+
 ## 2.3 Configure high availability for a production DB instance 
+
+Amazon help you do this with Multi-AZ deployments. SQL server DB instances use SQL server Database Mirroring or Always On Availability Groups. 
+
+In a Multi-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption.
+
+The high availability feature is not scaling solution for read-only scenarios, you cannot use a standby replica to serve read traffic. 
+
+NOTICE -- DB instances using Multi-AZ deployments can have increased write and commit latency compared to a Single-AZ depolyment, due to the synchrounous data replication that occurs. 
+
+In the event of a planned or unplanned outage of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone if you have enabled Multi-AZ. The time it takes for the failover to complete depends on the database activity and other conditions at the time the primary DB instance became unavailable. Failover times are typically 60–120 seconds. However, large transactions or a lengthy recovery process can increase failover time. When the failover is complete, it can take additional time for the RDS console to reflect the new Availability Zone.
 
 ## 2.4 Configure a DB instance in VPC 
 
