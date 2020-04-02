@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-01T03:56:59.516Z</updated>
+  <updated>2020-04-02T05:29:09.987Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Log4j2 Tutorial </title>
+    <link href="https://www.llchen60.com/Log4j2-Tutorial/"/>
+    <id>https://www.llchen60.com/Log4j2-Tutorial/</id>
+    <published>2020-04-02T05:27:56.000Z</published>
+    <updated>2020-04-02T05:29:09.987Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Log4j2-overview"><a href="#1-Log4j2-overview" class="headerlink" title="1. Log4j2 overview"></a>1. Log4j2 overview</h1><h2 id="1-1-Why-log"><a href="#1-1-Why-log" class="headerlink" title="1.1 Why log?"></a>1.1 Why log?</h2><p>Logging is an important component of the development cycle. </p><ul><li>provides precise context about a run of the application </li><li>once inserted into code, the generation of logging output requires no human intervention </li><li>moreover, log output can be saved in persistent medium to be studied at a later time </li></ul><h2 id="1-2-Why-Log4j2"><a href="#1-2-Why-Log4j2" class="headerlink" title="1.2 Why Log4j2?"></a>1.2 Why Log4j2?</h2><ul><li>Designed to be usable as an audit logging framework , will not lose events while reconfiguring </li><li>Contains asynchrounous loggers, which is 10 times faster than log4j 1.x and logback </li><li>Garbage free for stand alone applications </li><li>Use a plugin system that makes it easy to extend the framework by adding new appenders, filters, layouts, lookups, and pattern converters</li><li>Support for custom log levels </li></ul><h2 id="1-3-Log4j-Architecture"><a href="#1-3-Log4j-Architecture" class="headerlink" title="1.3 Log4j Architecture"></a>1.3 Log4j Architecture</h2><p><img src="https://i.loli.net/2020/04/02/AsXomqJciUyPVKh.jpg" alt="Log4jClasses.jpg"> </p><p>Applications using the Log4j 2 API will request <strong>a Logger with a specific name from the LogManager</strong>. The LogManager will <strong>locate the appropriate LoggerContext</strong> and then obtain the Logger from it. If the Logger must be created it will <strong>be associated with the LoggerConfig</strong> that contains either a) the same name as the Logger, b) the name of a parent package, or c) the root LoggerConfig. LoggerConfig objects are created from Logger declarations in the configuration. The LoggerConfig is associated with the Appenders that actually deliver the LogEvents.</p><ul><li>Filter <ul><li>apply in different time point <ul><li>before control is passed to any loggerConfig</li><li>after control is passed to a LoggerConfig but before calling any Appenders</li><li>after control is passed to a LoggerConfig but before calling a specific Appender</li><li>on each Appender</li></ul></li></ul></li><li>Appender <ul><li>selectively enable or disable logging requests</li><li>allow logging requests to print to multiple destinations </li></ul></li><li>Layout <ul><li>Used to customize the output format </li><li>Associate a layout with an appender </li></ul></li></ul><h1 id="2-Migration-from-Log4j-to-Log4j2"><a href="#2-Migration-from-Log4j-to-Log4j2" class="headerlink" title="2. Migration from Log4j to Log4j2"></a>2. Migration from Log4j to Log4j2</h1><p><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </p><p>Look at sample 1 in above link for how to set up basic configuration </p><p>For some tips: </p><ul><li>The main package in version 1 is org.apache.log4j, in version 2 it is org.apache.logging.log4j</li><li>Calls to org.apache.log4j.Logger.getLogger() must be modified to org.apache.logging.log4j.LogManager.getLogger().</li><li>Calls to org.apache.log4j.Logger.getRootLogger() or org.apache.log4j.LogManager.getRootLogger() must be replaced with org.apache.logging.log4j.LogManager.getRootLogger().</li><li>Calls to org.apache.log4j.Logger.getLogger that accept a LoggerFactory must remove the org.apache.log4j.spi.LoggerFactory and use one of Log4j 2’s other extension mechanisms.</li><li>Replace calls to org.apache.log4j.Logger.getEffectiveLevel() with org.apache.logging.log4j.Logger.getLevel().</li><li>Remove calls to org.apache.log4j.LogManager.shutdown(), they are not needed in version 2 because the Log4j Core now automatically adds a JVM shutdown hook on start up to perform any Core clean ups.<ul><li>Starting in Log4j 2.1, you can specify a custom ShutdownCallbackRegistry to override the default JVM shutdown hook strategy.</li><li>Starting in Log4j 2.6, you can now use org.apache.logging.log4j.LogManager.shutdown() to initiate shutdown manually.</li></ul></li><li>Calls to org.apache.log4j.Logger.setLevel() or similar methods are not supported in the API. Applications should remove these. Equivalent functionality is provided in the Log4j 2 implementation classes, see org.apache.logging.log4j.core.config.Configurator.setLevel(), but may leave the application susceptible to changes in Log4j 2 internals.</li><li>Where appropriate, applications should convert to use parameterized messages instead of String concatenation.</li><li>org.apache.log4j.MDC and org.apache.log4j.NDC have been replaced by the Thread Context.</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Log4j2-overview&quot;&gt;&lt;a href=&quot;#1-Log4j2-overview&quot; class=&quot;headerlink&quot; title=&quot;1. Log4j2 overview&quot;&gt;&lt;/a&gt;1. Log4j2 overview&lt;/h1&gt;&lt;h2 id=&quot;1-1
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="log" scheme="https://www.llchen60.com/tags/log/"/>
+    
+  </entry>
   
   <entry>
     <title>Amazon RDS Onboard - MySQL </title>
@@ -538,33 +564,6 @@
     
     
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构与算法(17)-红黑树</title>
-    <link href="https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-17-%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
-    <id>https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-17-%E7%BA%A2%E9%BB%91%E6%A0%91/</id>
-    <published>2020-02-11T04:16:00.000Z</published>
-    <updated>2020-02-11T04:16:29.377Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先对于我们前面看到的二叉查找树，在相对理想的情况下，它的时间负责度为O(logn).但是在频繁的动态更新的过程中，可能会出现树的高度远远大于log2(n)的情况，导致各项操作的效率下降.</p><p>在极端情况下，二叉查找树会退化为一个链表，时间复杂度会退化到O(n).为了解决这个复杂度退化的问题，我们需要设计一种平衡二叉查找树</p><h1 id="1-什么是平衡二叉查找树？"><a href="#1-什么是平衡二叉查找树？" class="headerlink" title="1. 什么是平衡二叉查找树？"></a>1. 什么是平衡二叉查找树？</h1><blockquote><p>平衡二叉查找树定义  二叉树中任意一个节点的左右子树的高度相差不能大于1.</p></blockquote><p>平衡二叉查找树的初衷是解决普通二叉查找树在频繁的插入\删除等动态更新的情况下，出现时间复杂度退化的问题</p><p>平衡二叉查找树中平衡的意思就是让整棵树看起来比较对称，不要出现左子树很高，右子树很矮的情况。这样就能让整棵树的高度相对来说低一些。</p><h1 id="2-如何定义一棵红黑树-Red-Black-Tree"><a href="#2-如何定义一棵红黑树-Red-Black-Tree" class="headerlink" title="2. 如何定义一棵红黑树 Red Black Tree"></a>2. 如何定义一棵红黑树 Red Black Tree</h1><p>是一种不严格的平衡二叉查找树。红黑树当中的节点，一类被标记为黑色，一类被标记为红色。</p><ul><li>根节点是黑色的</li><li>每个叶子节点都是黑色的空节点(NIL)，即叶子节点不存储数据</li><li>任何相邻的节点都不能同时为红色，即红色节点是被黑色节点分割开的</li><li>每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点</li></ul><p>二叉查找树的很多操作的性能都跟树的高度成正比，因此为了证明红黑树近似平衡，我们需要分析的问题可以转化为其高度是否能比较稳定的趋近log2(n)</p><p>AVL是高度平衡的二叉树，查找效率非常高，但是每次插入删除都要对应做调整，所以会比较复杂耗时。红黑树只是做到近似平衡，在维护平衡的成本上，要比AVL要低。</p><h1 id="3-如何实现一个红黑树"><a href="#3-如何实现一个红黑树" class="headerlink" title="3. 如何实现一个红黑树"></a>3. 如何实现一个红黑树</h1><p>红黑树的平衡过程就是<strong>根据节点排布的特征来，遇到什么样的节点排布，我们就对应的去进行调整</strong>。 </p><ul><li>重要操作<ul><li>左旋 rotate left<ul><li>将基准点的右子树绕x做逆时针旋转，是的x的右子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的特性仍然能够得到满足 </li></ul></li><li>右旋 rotate right <ul><li>将x的左子树绕x顺时针旋转，使得x的左子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的属性仍然能够满足 </li></ul></li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/carpenterlee/p/5503882.html" target="_blank" rel="noopener">https://www.cnblogs.com/carpenterlee/p/5503882.html</a> </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;首先对于我们前面看到的二叉查找树，在相对理想的情况下，它的时间负责度为O(logn).但是在频繁的动态更新的过程中，可能会出现树的高度远远大于log2(n)的情况，导致各项操作的效率下降.&lt;/p&gt;
-&lt;p&gt;在极端情况下，二叉查找树会退化为一个链表，时间复杂度会退化到O(n).
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="红黑树" scheme="https://www.llchen60.com/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
     
   </entry>
   

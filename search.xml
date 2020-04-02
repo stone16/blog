@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Log4j2 Tutorial </title>
+      <link href="/Log4j2-Tutorial/"/>
+      <url>/Log4j2-Tutorial/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Log4j2-overview"><a href="#1-Log4j2-overview" class="headerlink" title="1. Log4j2 overview"></a>1. Log4j2 overview</h1><h2 id="1-1-Why-log"><a href="#1-1-Why-log" class="headerlink" title="1.1 Why log?"></a>1.1 Why log?</h2><p>Logging is an important component of the development cycle. </p><ul><li>provides precise context about a run of the application </li><li>once inserted into code, the generation of logging output requires no human intervention </li><li>moreover, log output can be saved in persistent medium to be studied at a later time </li></ul><h2 id="1-2-Why-Log4j2"><a href="#1-2-Why-Log4j2" class="headerlink" title="1.2 Why Log4j2?"></a>1.2 Why Log4j2?</h2><ul><li>Designed to be usable as an audit logging framework , will not lose events while reconfiguring </li><li>Contains asynchrounous loggers, which is 10 times faster than log4j 1.x and logback </li><li>Garbage free for stand alone applications </li><li>Use a plugin system that makes it easy to extend the framework by adding new appenders, filters, layouts, lookups, and pattern converters</li><li>Support for custom log levels </li></ul><h2 id="1-3-Log4j-Architecture"><a href="#1-3-Log4j-Architecture" class="headerlink" title="1.3 Log4j Architecture"></a>1.3 Log4j Architecture</h2><p><img src="https://i.loli.net/2020/04/02/AsXomqJciUyPVKh.jpg" alt="Log4jClasses.jpg"> </p><p>Applications using the Log4j 2 API will request <strong>a Logger with a specific name from the LogManager</strong>. The LogManager will <strong>locate the appropriate LoggerContext</strong> and then obtain the Logger from it. If the Logger must be created it will <strong>be associated with the LoggerConfig</strong> that contains either a) the same name as the Logger, b) the name of a parent package, or c) the root LoggerConfig. LoggerConfig objects are created from Logger declarations in the configuration. The LoggerConfig is associated with the Appenders that actually deliver the LogEvents.</p><ul><li>Filter <ul><li>apply in different time point <ul><li>before control is passed to any loggerConfig</li><li>after control is passed to a LoggerConfig but before calling any Appenders</li><li>after control is passed to a LoggerConfig but before calling a specific Appender</li><li>on each Appender</li></ul></li></ul></li><li>Appender <ul><li>selectively enable or disable logging requests</li><li>allow logging requests to print to multiple destinations </li></ul></li><li>Layout <ul><li>Used to customize the output format </li><li>Associate a layout with an appender </li></ul></li></ul><h1 id="2-Migration-from-Log4j-to-Log4j2"><a href="#2-Migration-from-Log4j-to-Log4j2" class="headerlink" title="2. Migration from Log4j to Log4j2"></a>2. Migration from Log4j to Log4j2</h1><p><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </p><p>Look at sample 1 in above link for how to set up basic configuration </p><p>For some tips: </p><ul><li>The main package in version 1 is org.apache.log4j, in version 2 it is org.apache.logging.log4j</li><li>Calls to org.apache.log4j.Logger.getLogger() must be modified to org.apache.logging.log4j.LogManager.getLogger().</li><li>Calls to org.apache.log4j.Logger.getRootLogger() or org.apache.log4j.LogManager.getRootLogger() must be replaced with org.apache.logging.log4j.LogManager.getRootLogger().</li><li>Calls to org.apache.log4j.Logger.getLogger that accept a LoggerFactory must remove the org.apache.log4j.spi.LoggerFactory and use one of Log4j 2’s other extension mechanisms.</li><li>Replace calls to org.apache.log4j.Logger.getEffectiveLevel() with org.apache.logging.log4j.Logger.getLevel().</li><li>Remove calls to org.apache.log4j.LogManager.shutdown(), they are not needed in version 2 because the Log4j Core now automatically adds a JVM shutdown hook on start up to perform any Core clean ups.<ul><li>Starting in Log4j 2.1, you can specify a custom ShutdownCallbackRegistry to override the default JVM shutdown hook strategy.</li><li>Starting in Log4j 2.6, you can now use org.apache.logging.log4j.LogManager.shutdown() to initiate shutdown manually.</li></ul></li><li>Calls to org.apache.log4j.Logger.setLevel() or similar methods are not supported in the API. Applications should remove these. Equivalent functionality is provided in the Log4j 2 implementation classes, see org.apache.logging.log4j.core.config.Configurator.setLevel(), but may leave the application susceptible to changes in Log4j 2 internals.</li><li>Where appropriate, applications should convert to use parameterized messages instead of String concatenation.</li><li>org.apache.log4j.MDC and org.apache.log4j.NDC have been replaced by the Thread Context.</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> log </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Amazon RDS Onboard - MySQL </title>
       <link href="/Amazon-RDS-Onboard-MySQL/"/>
       <url>/Amazon-RDS-Onboard-MySQL/</url>
