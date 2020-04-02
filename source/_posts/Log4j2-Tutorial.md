@@ -43,6 +43,8 @@ Applications using the Log4j 2 API will request **a Logger with a specific name 
     + Associate a layout with an appender 
 
 # 2. Migration from Log4j to Log4j2 
+We usually use log4j/ log4j2 with Slf4j, Slf4j is kind of like a connecter, you could use slf4j as logging system, and slf4j could help you connect to logging framework you want to use: like logback, log4j2, commons-logging, etc. 
+
 https://logging.apache.org/log4j/2.x/manual/migration.html 
 
 Look at sample 1 in above link for how to set up basic configuration 
