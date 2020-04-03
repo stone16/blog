@@ -93,17 +93,59 @@ In the event of a planned or unplanned outage of your DB instance, Amazon RDS au
 
 ## 2.4 Configure a DB instance in VPC 
 
++ VPC is a virtual network that is logically isolated from other virtual networks in the AWS cloud. Amazon VPC lets you launch AWS resources into a VPC. 
++ VPC must have at least 2 subnets. And those subnets must be in two different AZs 
++ If you want DB instance in the VPC to be publicly accessible, you must enable the VPC attributes DNS hostnames and DNS resolution 
+
 ## 2.5 Configure MySQL database parameters and features 
+
++ Manage DB engine configuration by associating DB instances with parameter groups. A DB parameter group act as a container for engine configuration values that are applied to one or more DB instances 
++ For MySQL, AWS has memcached support 
 
 ## 2.6 Modify a DB instance running the MySQL database engine 
 
++ We could change the settings of a DB instance to add additional storage or changing the DB instance class 
++ Notice: some cahnges will result in an outage because Amazon RDS must reboot DB instance for the change to take effect 
+    + We could either modify through AWS console
+    + Or through AWS CLI
+    + Or through RDS API 
++ we could do settings as follow:
+    + Allocate storage 
+    + Auto minor version upgrade 
+    + Backup retention period 
+        + number of days that automatic backups are retained 
+    + Backup window 
+    + Certificate Authority 
+    + Database port 
+    + DB engine version 
+    + DB instance class 
+    + DB parameter group 
+    + Delete protection 
+        + prevent your DB from being deleted  
+    + Enhanced Monitoring 
+    + IAM DB authentication 
+    + Kerberos authentication 
+    + License Model 
+    + Log Exports 
+        + We could publish Database logs to Amazon Cloudwatch logs 
+    + Maintenance window 
+    + Multi-AZ deployment 
+    + Performance Insight 
+    + Processor features 
+    + Provisioned IOPS 
+    + Storage auto scaling 
+    + Subnet group 
+
 ## 2.7 Configure database backup and restore 
 
-## 2.8 Import and export data 
++ Amazon RDS creates and saves automated backups of your DB instance
++ RDS creates a storage volume snapshot of DB instance, backing up entire DB instance 
++ The first snapshot of a DB instance contains the data for the full DB instance. Subsequent snapshots of the same DB instance are incremental, which means that only the data that has changed after your most recent snapshot is saved.
++ [Guide for backup and restore an Amazon RDS DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.BackupRestore.html)
 
-## 2.9 Monitor a MySQL DB instance 
+## 2.8 Monitor a MySQL DB instance 
 
-## 2.10 Replicate data 
+### 2.8.1 Overview 
 
 # Reference 
 1. https://docs.aws.amazon.com/AmazonRDS 
