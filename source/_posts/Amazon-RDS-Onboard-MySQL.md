@@ -147,9 +147,51 @@ In the event of a planned or unplanned outage of your DB instance, Amazon RDS au
 
 ### 2.8.1 Overview 
 
++ We should store historical monitoring data, the stored data will gove a baseline to compare against with current performance data
++ With Amazon RDS, you could monitor network throughput, I/O for read and write, metadata operations, client connections
++ Some adviced metrics 
+    + High CPU or RAM consumption 
+    + Disk space consumption 
+    + Network traffic 
+    + Database connections 
+    + IOPS metrics 
+
++ Monitoring Tools 
+    + Amazon RDS Events 
+        + subscribe to events thus could be notified when changes occur with a DB instance 
+    + Database log files
+    + Amazon RDS Enhanced Monitoring
+        + Look at the metrics in real time for the operating system
+    + Amazon CloudWatch Metrics 
+    + Amazon CloudWatch Alarms
+    + Amazon CloudWatch Logs 
+    + In RDS console, you could see: 
+        + the number of connections to a DB instance 
+        + the amount of read and write operations to a DB instance 
+        + the amount of storage that a DB instance is currently utilizing 
+        + the amount of memory and CPU being utilized for a DB instance 
+        + the amount of network traffic to and from a DB instance 
++ Amazon RDS Metrics 
+    + CPUCreditUsage 
+        + The number of CPU credits spent by the instance for CPU utilization. One CPU credit equals one vCPU running at 100 percent utilization for one minute or an equivalent combination of vCPUs, utilization, and time.
+    + DatabaseConnections
+    + DiskQueueDepth 
+        + the number of outstanding IOs waiting to access the disk
+    + FailedSQLServerAgentJobsCount 
+        + the numebr of failed SQL server agent jobs during the last minute 
+    + ReadIOPS 
+        + the average number of disk read I/O operations per second
+    + ReadLatency 
+        + the average amount to time taken per disk I/O operation  
+
+### 2.8.2 Enhanced Monitoring 
+
+Real time metrics for the operating system
+
+CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB instance, and Enhanced Monitoring gathers its metrics from an agent on the instance. As a result, you might find differences between the measurements, because the hypervisor layer performs a small amount of work. The differences can be greater if your DB instances use smaller instance classes, because then there are likely more virtual machines (VMs) that are managed by the hypervisor layer on a single physical instance. Enhanced Monitoring metrics are useful when you want to see how different processes or threads on a DB instance use the CPU
+
+
 # Reference 
 1. https://docs.aws.amazon.com/AmazonRDS 
 2. https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html
-
-
 
