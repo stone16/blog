@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Leilei&#39;s Blog | 磊磊的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Leilei&#39;s Blog | 磊磊的博客">
+  <title>构建React的想法 - from sebmarkbage | Leilei&#39;s Blog | 磊磊的博客</title>
+  <meta name="keywords" content=" React ">
+  <meta name="description" content="构建React的想法 - from sebmarkbage | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -2592,12 +2592,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-构建React的想法-from-sebmarkbage" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#My-thoughts"><span class="toc-text">My thoughts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#信息-vs-观点"><span class="toc-text">信息 vs 观点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息源"><span class="toc-text">信息源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于磊磊的博客"><span class="toc-text">关于磊磊的博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">构建React的想法 - from sebmarkbage</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="FrontEnd">FrontEnd</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color1">React</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-04-08 20:31:08'>2020-04-08 20:25</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-转换-Transformation"><span class="toc-text">1. 转换 - Transformation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-抽象-Abstraction"><span class="toc-text">2. 抽象 - Abstraction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-组合-Composition"><span class="toc-text">3. 组合 - Composition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-状态-State"><span class="toc-text">4. 状态 - State</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-记忆方法"><span class="toc-text">5. 记忆方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-列表"><span class="toc-text">6. 列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-持续性"><span class="toc-text">7. 持续性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-状态Map"><span class="toc-text">8. 状态Map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2610,32 +2666,214 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="My-thoughts"><a href="#My-thoughts" class="headerlink" title="My thoughts"></a>My thoughts</h2><h4 id="信息-vs-观点"><a href="#信息-vs-观点" class="headerlink" title="信息 vs 观点"></a>信息 vs 观点</h4><p>身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。</p>
-<p>很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。</p>
-<p>在努力学习，分清信息和观点。</p>
-<h4 id="信息源"><a href="#信息源" class="headerlink" title="信息源"></a>信息源</h4><p>因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。</p>
-<p>兜兜转转，开始使用reeder，inoreader 订阅一些rss信息源；发现了哪怕现在，还是有很多人在写自己的博客，没有KPI，没有10万+，嗯，有一小撮人能看到就好，自己开心就好，能随心所欲的发自己的东西就好。</p>
-<p>在努力探索，想体验他们的体验。</p>
-<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>输出的是输入的一部分的压缩和总结，大部分还是信息，尤其是关于技术的内容。有翻译的，有看着好玩的，有多少夹带点私货的，总归敞开了门，可劲的撒欢儿。也有看的书，自己的一些想法，希望看官大人能觉得在这里停的5分钟不算浪费时间吧。 </p>
-<p>在努力输入，为了开心点~ </p>
-<h2 id="关于磊磊的博客"><a href="#关于磊磊的博客" class="headerlink" title="关于磊磊的博客"></a>关于磊磊的博客</h2><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题fork自 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从github翻到的论述，是React设计者试图说明其构建React的整个逻辑。</p>
+<h1 id="1-转换-Transformation"><a href="#1-转换-Transformation" class="headerlink" title="1. 转换 - Transformation"></a>1. 转换 - Transformation</h1><p>React的核心假定是UI层实际上是对数据的展现形式的一种转换。同样的输入会给出同样的输出结果，只是表现形式可能会有所区别。</p>
+<pre><code>function NameBox(name) {
+  return { fontWeight: &#39;bold&#39;, labelContent: name };
+}
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+&#39;Sebastian Markbåge&#39; -&gt;
+{ fontWeight: &#39;bold&#39;, labelContent: &#39;Sebastian Markbåge&#39; };</code></pre><h1 id="2-抽象-Abstraction"><a href="#2-抽象-Abstraction" class="headerlink" title="2. 抽象 - Abstraction"></a>2. 抽象 - Abstraction</h1><p>我们无法将一个复杂的UI放到一个方法当中的。将UI抽象到各个可以复用的组件当中就变得尤为重要。抽象成可复用的组件，并且隐藏实现的细节，是我们想要做的。</p>
+<pre><code>function FancyUserBox(user) {
+  return {
+    borderStyle: &#39;1px solid blue&#39;,
+    childContent: [
+      &#39;Name: &#39;,
+      NameBox(user.firstName + &#39; &#39; + user.lastName)
+    ]
+  };
+}
+
+{ firstName: &#39;Sebastian&#39;, lastName: &#39;Markbåge&#39; } -&gt;
+{
+  borderStyle: &#39;1px solid blue&#39;,
+  childContent: [
+    &#39;Name: &#39;,
+    { fontWeight: &#39;bold&#39;, labelContent: &#39;Sebastian Markbåge&#39; }
+  ]
+};</code></pre><h1 id="3-组合-Composition"><a href="#3-组合-Composition" class="headerlink" title="3. 组合 - Composition"></a>3. 组合 - Composition</h1><p>为了实现真正可以复用的特性，仅仅使用细分的子功能，并且每次给他们构建容器是不太够的。我们需要能够建立中间层的抽象，即将几个子功能组件组合起来，形成另一层次的组件。这里的组合就是指将多个抽象融合成一个抽象的能力。</p>
+<pre><code>function FancyBox(children) {
+  return {
+    borderStyle: &#39;1px solid blue&#39;,
+    children: children
+  };
+}
+
+function UserBox(user) {
+  return FancyBox([
+    &#39;Name: &#39;,
+    NameBox(user.firstName + &#39; &#39; + user.lastName)
+  ]);
+}</code></pre><h1 id="4-状态-State"><a href="#4-状态-State" class="headerlink" title="4. 状态 - State"></a>4. 状态 - State</h1><p>UI不仅仅是服务器以及商业逻辑的复制，实际上是有很多状态，是服务于特定的运行过程的。比如你在一个文本框输入内容，那么我们需要一些方式能够记录下这个文本框当前的状态，并且用这个状态去和后端进或者其他的方法进行交互。</p>
+<p>我们希望我们的数据是immutable的</p>
+<pre><code>function FancyNameBox(user, likes, onClick) {
+  return FancyBox([
+    &#39;Name: &#39;, NameBox(user.firstName + &#39; &#39; + user.lastName),
+    &#39;Likes: &#39;, LikeBox(likes),
+    LikeButton(onClick)
+  ]);
+}
+
+// Implementation Details
+
+var likes = 0;
+function addOneMoreLike() {
+  likes++;
+  rerender();
+}
+
+// Init
+
+FancyNameBox(
+  { firstName: &#39;Sebastian&#39;, lastName: &#39;Markbåge&#39; },
+  likes,
+  addOneMoreLike
+);</code></pre><h1 id="5-记忆方法"><a href="#5-记忆方法" class="headerlink" title="5. 记忆方法"></a>5. 记忆方法</h1><p>如果我们知道这是个纯方法，并且还会重复的call它，那么我们可以设计一个记忆版本的方法，这样我们就不用在有相同的数据(输入)的时候还要重复执行了</p>
+<pre><code>function memoize(fn) {
+  var cachedArg;
+  var cachedResult;
+  return function(arg) {
+    if (cachedArg === arg) {
+      return cachedResult;
+    }
+    cachedArg = arg;
+    cachedResult = fn(arg);
+    return cachedResult;
+  };
+}
+
+var MemoizedNameBox = memoize(NameBox);
+
+function NameAndAgeBox(user, currentTime) {
+  return FancyBox([
+    &#39;Name: &#39;,
+    MemoizedNameBox(user.firstName + &#39; &#39; + user.lastName),
+    &#39;Age in milliseconds: &#39;,
+    currentTime - user.dateOfBirth
+  ]);
+}
+
+// 我们同样可以不仅仅记一个值，也可以记一个map
+function memoize(fn) {
+  return function(arg, memoizationCache) {
+    if (memoizationCache.arg === arg) {
+      return memoizationCache.result;
+    }
+    const result = fn(arg);
+    memoizationCache.arg = arg;
+    memoizationCache.result = result;
+    return result;
+  };
+}
+
+function FancyBoxWithState(
+  children,
+  stateMap,
+  updateState,
+  memoizationCache
+) {
+  return FancyBox(
+    children.map(child =&gt; child.continuation(
+      stateMap.get(child.key),
+      updateState,
+      memoizationCache.get(child.key)
+    ))
+  );
+}
+
+const MemoizedFancyNameBox = memoize(FancyNameBox);</code></pre><h1 id="6-列表"><a href="#6-列表" class="headerlink" title="6. 列表"></a>6. 列表</h1><p>大部分的UI都是一些形式的列表，然后为在列表中的每个元素产出不同的一系列的值。这就自然的产生了一个有层级的结构。</p>
+<p>我们可以通过使用Map方法来管理每个列表当中的元素的状态。</p>
+<pre><code>function UserList(users, likesPerUser, updateUserLikes) {
+  return users.map(user =&gt; FancyNameBox(
+    user,
+    likesPerUser.get(user.id),
+    () =&gt; updateUserLikes(user.id, likesPerUser.get(user.id) + 1)
+  ));
+}
+
+var likesPerUser = new Map();
+function updateUserLikes(id, likeCount) {
+  likesPerUser.set(id, likeCount);
+  rerender();
+}
+
+UserList(data.users, likesPerUser, updateUserLikes);</code></pre><h1 id="7-持续性"><a href="#7-持续性" class="headerlink" title="7. 持续性"></a>7. 持续性</h1><p>一些时候，我们在运行我们的核心商业逻辑的时候会大量的操作数据，这部分关于数据的操作会显得有些冗余，我们可以将其移出核心逻辑的代码块，比如使用bind，来绑定方法，在其他地方写具体的代码逻辑。</p>
+<pre><code>function FancyUserList(users) {
+  return FancyBox(
+    UserList.bind(null, users)
+  );
+}
+
+const box = FancyUserList(data.users);
+const resolvedChildren = box.children(likesPerUser, updateUserLikes);
+const resolvedBox = {
+  ...box,
+  children: resolvedChildren
+};</code></pre><h1 id="8-状态Map"><a href="#8-状态Map" class="headerlink" title="8. 状态Map"></a>8. 状态Map</h1><p>我们可以用组合来将几个子组件放在一起来使用，同样的，对于他们需要的一些输入数据，我们可以通过state，来传到下层的方法处，供他们使用。</p>
+<pre><code>function FancyBoxWithState(
+  children,
+  stateMap,
+  updateState
+) {
+  return FancyBox(
+    children.map(child =&gt; child.continuation(
+      stateMap.get(child.key),
+      updateState
+    ))
+  );
+}
+
+function UserList(users) {
+  return users.map(user =&gt; {
+    continuation: FancyNameBox.bind(null, user),
+    key: user.id
+  });
+}
+
+function FancyUserList(users) {
+  return FancyBoxWithState.bind(null,
+    UserList(users)
+  );
+}
+
+const continuation = FancyUserList(data.users);
+continuation(likesPerUser, updateUserLikes);</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/reactjs/react-basic" target="_blank" rel="noopener">https://github.com/reactjs/react-basic</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>构建React的想法 - from sebmarkbage</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-04-08, 20:25:08</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-08, 20:31:08</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/" title="构建React的想法 - from sebmarkbage">https://www.llchen60.com/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <section id="comments" class="disqus">
     <style> aside.comment-bar { margin: auto 30px; }</style>
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/';
-            this.page.identifier = 'categories/Web/page/4/index.html';
+            this.page.url = 'https://www.llchen60.com/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/';
+            this.page.identifier = '构建React的想法-from-sebmarkbage/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -2651,8 +2889,15 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="categories/Web/page/4/index.html"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url=""></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="构建React的想法-from-sebmarkbage/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/"></span>
+
+
+
+    
+
+
+
 
     </div>
     <div class="copyright">

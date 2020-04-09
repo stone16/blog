@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-07T19:00:33.044Z</updated>
+  <updated>2020-04-09T03:31:08.065Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>构建React的想法 - from sebmarkbage</title>
+    <link href="https://www.llchen60.com/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/"/>
+    <id>https://www.llchen60.com/%E6%9E%84%E5%BB%BAReact%E7%9A%84%E6%83%B3%E6%B3%95-from-sebmarkbage/</id>
+    <published>2020-04-09T03:25:08.000Z</published>
+    <updated>2020-04-09T03:31:08.065Z</updated>
+    
+    <content type="html"><![CDATA[<p>从github翻到的论述，是React设计者试图说明其构建React的整个逻辑。</p><h1 id="1-转换-Transformation"><a href="#1-转换-Transformation" class="headerlink" title="1. 转换 - Transformation"></a>1. 转换 - Transformation</h1><p>React的核心假定是UI层实际上是对数据的展现形式的一种转换。同样的输入会给出同样的输出结果，只是表现形式可能会有所区别。</p><pre><code>function NameBox(name) {  return { fontWeight: &#39;bold&#39;, labelContent: name };}&#39;Sebastian Markbåge&#39; -&gt;{ fontWeight: &#39;bold&#39;, labelContent: &#39;Sebastian Markbåge&#39; };</code></pre><h1 id="2-抽象-Abstraction"><a href="#2-抽象-Abstraction" class="headerlink" title="2. 抽象 - Abstraction"></a>2. 抽象 - Abstraction</h1><p>我们无法将一个复杂的UI放到一个方法当中的。将UI抽象到各个可以复用的组件当中就变得尤为重要。抽象成可复用的组件，并且隐藏实现的细节，是我们想要做的。</p><pre><code>function FancyUserBox(user) {  return {    borderStyle: &#39;1px solid blue&#39;,    childContent: [      &#39;Name: &#39;,      NameBox(user.firstName + &#39; &#39; + user.lastName)    ]  };}{ firstName: &#39;Sebastian&#39;, lastName: &#39;Markbåge&#39; } -&gt;{  borderStyle: &#39;1px solid blue&#39;,  childContent: [    &#39;Name: &#39;,    { fontWeight: &#39;bold&#39;, labelContent: &#39;Sebastian Markbåge&#39; }  ]};</code></pre><h1 id="3-组合-Composition"><a href="#3-组合-Composition" class="headerlink" title="3. 组合 - Composition"></a>3. 组合 - Composition</h1><p>为了实现真正可以复用的特性，仅仅使用细分的子功能，并且每次给他们构建容器是不太够的。我们需要能够建立中间层的抽象，即将几个子功能组件组合起来，形成另一层次的组件。这里的组合就是指将多个抽象融合成一个抽象的能力。</p><pre><code>function FancyBox(children) {  return {    borderStyle: &#39;1px solid blue&#39;,    children: children  };}function UserBox(user) {  return FancyBox([    &#39;Name: &#39;,    NameBox(user.firstName + &#39; &#39; + user.lastName)  ]);}</code></pre><h1 id="4-状态-State"><a href="#4-状态-State" class="headerlink" title="4. 状态 - State"></a>4. 状态 - State</h1><p>UI不仅仅是服务器以及商业逻辑的复制，实际上是有很多状态，是服务于特定的运行过程的。比如你在一个文本框输入内容，那么我们需要一些方式能够记录下这个文本框当前的状态，并且用这个状态去和后端进或者其他的方法进行交互。</p><p>我们希望我们的数据是immutable的</p><pre><code>function FancyNameBox(user, likes, onClick) {  return FancyBox([    &#39;Name: &#39;, NameBox(user.firstName + &#39; &#39; + user.lastName),    &#39;Likes: &#39;, LikeBox(likes),    LikeButton(onClick)  ]);}// Implementation Detailsvar likes = 0;function addOneMoreLike() {  likes++;  rerender();}// InitFancyNameBox(  { firstName: &#39;Sebastian&#39;, lastName: &#39;Markbåge&#39; },  likes,  addOneMoreLike);</code></pre><h1 id="5-记忆方法"><a href="#5-记忆方法" class="headerlink" title="5. 记忆方法"></a>5. 记忆方法</h1><p>如果我们知道这是个纯方法，并且还会重复的call它，那么我们可以设计一个记忆版本的方法，这样我们就不用在有相同的数据(输入)的时候还要重复执行了</p><pre><code>function memoize(fn) {  var cachedArg;  var cachedResult;  return function(arg) {    if (cachedArg === arg) {      return cachedResult;    }    cachedArg = arg;    cachedResult = fn(arg);    return cachedResult;  };}var MemoizedNameBox = memoize(NameBox);function NameAndAgeBox(user, currentTime) {  return FancyBox([    &#39;Name: &#39;,    MemoizedNameBox(user.firstName + &#39; &#39; + user.lastName),    &#39;Age in milliseconds: &#39;,    currentTime - user.dateOfBirth  ]);}// 我们同样可以不仅仅记一个值，也可以记一个mapfunction memoize(fn) {  return function(arg, memoizationCache) {    if (memoizationCache.arg === arg) {      return memoizationCache.result;    }    const result = fn(arg);    memoizationCache.arg = arg;    memoizationCache.result = result;    return result;  };}function FancyBoxWithState(  children,  stateMap,  updateState,  memoizationCache) {  return FancyBox(    children.map(child =&gt; child.continuation(      stateMap.get(child.key),      updateState,      memoizationCache.get(child.key)    ))  );}const MemoizedFancyNameBox = memoize(FancyNameBox);</code></pre><h1 id="6-列表"><a href="#6-列表" class="headerlink" title="6. 列表"></a>6. 列表</h1><p>大部分的UI都是一些形式的列表，然后为在列表中的每个元素产出不同的一系列的值。这就自然的产生了一个有层级的结构。</p><p>我们可以通过使用Map方法来管理每个列表当中的元素的状态。</p><pre><code>function UserList(users, likesPerUser, updateUserLikes) {  return users.map(user =&gt; FancyNameBox(    user,    likesPerUser.get(user.id),    () =&gt; updateUserLikes(user.id, likesPerUser.get(user.id) + 1)  ));}var likesPerUser = new Map();function updateUserLikes(id, likeCount) {  likesPerUser.set(id, likeCount);  rerender();}UserList(data.users, likesPerUser, updateUserLikes);</code></pre><h1 id="7-持续性"><a href="#7-持续性" class="headerlink" title="7. 持续性"></a>7. 持续性</h1><p>一些时候，我们在运行我们的核心商业逻辑的时候会大量的操作数据，这部分关于数据的操作会显得有些冗余，我们可以将其移出核心逻辑的代码块，比如使用bind，来绑定方法，在其他地方写具体的代码逻辑。</p><pre><code>function FancyUserList(users) {  return FancyBox(    UserList.bind(null, users)  );}const box = FancyUserList(data.users);const resolvedChildren = box.children(likesPerUser, updateUserLikes);const resolvedBox = {  ...box,  children: resolvedChildren};</code></pre><h1 id="8-状态Map"><a href="#8-状态Map" class="headerlink" title="8. 状态Map"></a>8. 状态Map</h1><p>我们可以用组合来将几个子组件放在一起来使用，同样的，对于他们需要的一些输入数据，我们可以通过state，来传到下层的方法处，供他们使用。</p><pre><code>function FancyBoxWithState(  children,  stateMap,  updateState) {  return FancyBox(    children.map(child =&gt; child.continuation(      stateMap.get(child.key),      updateState    ))  );}function UserList(users) {  return users.map(user =&gt; {    continuation: FancyNameBox.bind(null, user),    key: user.id  });}function FancyUserList(users) {  return FancyBoxWithState.bind(null,    UserList(users)  );}const continuation = FancyUserList(data.users);continuation(likesPerUser, updateUserLikes);</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/reactjs/react-basic" target="_blank" rel="noopener">https://github.com/reactjs/react-basic</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;从github翻到的论述，是React设计者试图说明其构建React的整个逻辑。&lt;/p&gt;
+&lt;h1 id=&quot;1-转换-Transformation&quot;&gt;&lt;a href=&quot;#1-转换-Transformation&quot; class=&quot;headerlink&quot; title=&quot;1. 转换 
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
+    
+    
+      <category term="React" scheme="https://www.llchen60.com/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>如何知道用户是否在使用Adblocker</title>
@@ -535,36 +562,6 @@
       <category term="Unit Test" scheme="https://www.llchen60.com/tags/Unit-Test/"/>
     
       <category term="PowerMock" scheme="https://www.llchen60.com/tags/PowerMock/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工程师需要知道的latency 数字 </title>
-    <link href="https://www.llchen60.com/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/"/>
-    <id>https://www.llchen60.com/%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84latency-%E6%95%B0%E5%AD%97/</id>
-    <published>2020-02-21T05:08:38.000Z</published>
-    <updated>2020-02-21T05:10:12.077Z</updated>
-    
-    <content type="html"><![CDATA[<p>看到一篇博客，叙述了当前内存对于数据的处理速度对于开发的影响，推而广之，找到了一些我们在做系统设计的时候需要熟知的一些数据。</p><p>首先处理器的处理速度和内存的处理速度是差距很大的，处理器的处理速度的增长速度要比内存的快很多。</p><p><img src="https://i.loli.net/2020/02/21/s8h6GTfi1PSYwpe.png" alt="处理器与内存的性能表现.png"></p><p>我们需要探究的是CPU从内存中随机提取数据以及获取连续数据的速度，这是很粗略的估计，只是希望能够有一个数量级上的感知。</p><pre><code>Latency Comparison Numbers (~2012)----------------------------------L1 cache reference                           0.5 nsBranch mispredict                            5   nsL2 cache reference                           7   ns                      14x L1 cacheMutex lock/unlock                           25   nsMain memory reference                      100   ns                      20x L2 cache, 200x L1 cacheCompress 1K bytes with Zippy             3,000   ns        3 usSend 1K bytes over 1 Gbps network       10,000   ns       10 usRead 4K randomly from SSD*             150,000   ns      150 us          ~1GB/sec SSDRead 1 MB sequentially from memory     250,000   ns      250 usRound trip within same datacenter      500,000   ns      500 usRead 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/sec SSD, 4X memoryDisk seek                           10,000,000   ns   10,000 us   10 ms  20x datacenter roundtripRead 1 MB sequentially from disk    20,000,000   ns   20,000 us   20 ms  80x memory, 20X SSDSend packet CA-&gt;Netherlands-&gt;CA    150,000,000   ns  150,000 us  150 ms</code></pre><p>根据2020年StackOverflow上的回答，我们可以看到Core i7 Xeon 5500 的benchmark数据如下</p><pre><code>Core i7 Xeon 5500 Series Data Source Latency (approximate)               [Pg. 22]local  L1 CACHE hit,                              ~4 cycles (   2.1 -  1.2 ns )local  L2 CACHE hit,                             ~10 cycles (   5.3 -  3.0 ns )local  L3 CACHE hit, line unshared               ~40 cycles (  21.4 - 12.0 ns )local  L3 CACHE hit, shared line in another core ~65 cycles (  34.8 - 19.5 ns )local  L3 CACHE hit, modified in another core    ~75 cycles (  40.2 - 22.5 ns )remote L3 CACHE (Ref: Fig.1 [Pg. 5])        ~100-300 cycles ( 160.7 - 30.0 ns )local  DRAM                                                   ~60 nsremote DRAM                                                  ~100 ns</code></pre><p>而现在的cache的大小，根据wikiChip上的数据，对于Core i7-8700K</p><pre><code>Memory Bandwidth: 39.74 gigabytes per secondL1 cache: 192 kilobytes (32 KB per core)L2 cache: 1.5 megabytes (256 KB per core)L3 cache: 12 megabytes  (shared; 2 MB per core)</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.forrestthewoods.com/blog/memory-bandwidth-napkin-math/" target="_blank" rel="noopener">https://www.forrestthewoods.com/blog/memory-bandwidth-napkin-math/</a>?</li><li><a href="https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory" target="_blank" rel="noopener">https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory</a></li><li><a href="https://en.wikichip.org/wiki/intel/core_i7/i7-8700k" target="_blank" rel="noopener">https://en.wikichip.org/wiki/intel/core_i7/i7-8700k</a></li><li><a href="https://gist.github.com/jboner/2841832" target="_blank" rel="noopener">https://gist.github.com/jboner/2841832</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;看到一篇博客，叙述了当前内存对于数据的处理速度对于开发的影响，推而广之，找到了一些我们在做系统设计的时候需要熟知的一些数据。&lt;/p&gt;
-&lt;p&gt;首先处理器的处理速度和内存的处理速度是差距很大的，处理器的处理速度的增长速度要比内存的快很多。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;ht
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="latency" scheme="https://www.llchen60.com/tags/latency/"/>
-    
-      <category term="system design" scheme="https://www.llchen60.com/tags/system-design/"/>
     
   </entry>
   
