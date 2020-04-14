@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>用户画像构建思路</title>
+      <link href="/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF/"/>
+      <url>/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><p>用户画像指的是系统通过用户自己上传的信息以及自己的分析，记录了用户的大量的信息，而后为了便于去给各个系统来使用，将这些信息进行沉淀加工，形成一个标签树的整个过程。</p><p>画像是由标签树及末级标签的标签值构成的，全面定量刻画用户的结构化信息产品。画像是标签的总成，用户标签是具体刻画用户的结构化信息，以下简称标签。</p><p>用户画像对于公司的运营，盈利都有很大的好处：</p><ol><li>可以用于统计，使得对产品，对用户有基本认知</li><li>用于定向营销和精细化运营</li><li>还可以用于算法当中，在搜索推荐，风控广告等策略防线，标签被作为用户特征得以提取和使用</li></ol><h1 id="2-构建标签树"><a href="#2-构建标签树" class="headerlink" title="2. 构建标签树"></a>2. 构建标签树</h1><p>一个好的标签树需要具有高概括性和强延展性，高概括性意味着结构体系能够很好的包含一个用户的<strong>基本属性</strong>和<strong>产品交互的相关行为</strong>，同时对于业务重点单独强调，没有遗漏；“强延展性”意味着结构全面的同时也有一定的抽象概括能力，保证新增的标签可以很好的找到对应的分类，整个体系不会过于收敛局限。</p><p>按照这个原则，画像可以从以下维度进行组织： </p><ul><li><p>基本属性</p><ul><li>指一个用户的基本社会属性和变更频率比较低的特征<ul><li>真实社会年龄</li><li>性别</li><li>婚姻状况</li><li>昵称</li><li>号码</li><li>账号</li><li>lbs </li></ul></li></ul></li><li><p>平台属性</p><ul><li>平台属性是用户在平台上表现出的基本属性特征，是利用用户行为进行算法挖掘，标识用户真实属性的标签</li><li>譬如平台年龄标签  面向例如年龄为20岁，但是心理年龄50岁，穿衣风格50岁的人；反之亦然</li><li>平台属性和基本属性的区别如下：<ul><li>数据源与计算逻辑<ul><li>基础属性是利用用户自行上传的存储在用户基础信息表里的数据，平台属性则利用客户端或者服务端埋点上报采集的用户行为数据进行挖掘计算生成的。</li><li>基本属性是典型的直采型标签，平台属性是典型的算法挖掘型标签</li></ul></li><li>末级标签和输出标签值<ul><li>平台属性代表用户在性别维度上的偏好概率，可以生成类似<code>性别_女_0.80</code>这样的标签，0.8代表了用户的倾向程度</li></ul></li><li>应用场景<ul><li>平台属性通过用户行为进行挖掘，更能代表用户的真实倾向，输出结果比基本属性准确率更高</li></ul></li></ul></li></ul></li><li><p>行为属性</p><ul><li>行为属性记录用户的所有单个点的行为</li><li>包括<ul><li>启动</li><li>登录</li><li>浏览</li><li>点击</li><li>加车</li><li>下单</li></ul></li><li>是可以和不同的产品，不同的模块进行交互的，而且可以在不同的时间窗口进行选取，行为会相对复杂</li><li>按照 产品 x 功能模块 x 用户单点行为 x 时间  这四个要素来进行组织  </li></ul></li><li><p>产品偏好</p><ul><li>对用户使用某些产品，产品核心功能或者其他渠道的偏好程度的刻画，属于挖掘性的标签</li><li>产品可以包括自己公司的，竞品的</li><li>功能渠道包括站内产品功能，包括push、短信、开屏、弹窗等几大运营和产品方式 </li></ul></li><li><p>兴趣偏好</p><ul><li>品牌偏好  nike</li><li>类目偏好  运动</li><li>标签偏好  跑步_0.7</li></ul></li><li><p>敏感度</p><ul><li>营销活动中，会注意到有些用户不需要优惠也会下单，而有些用户一定要通过优惠券刺激才能实现转化，优惠券的额度也会影响用户下单的金额</li><li>需要识别对优惠敏感的用户，发放合理的券额，保证优惠券不浪费，使得整个促销活动的ROI最大</li><li>构建用户的敏感度标签<ul><li>优惠促销敏感度</li><li>活动敏感度</li><li>新品敏感度</li><li>爆款敏感度 </li></ul></li></ul></li><li><p>消费属性</p><ul><li>消费频次</li><li>消费金额</li><li>最近消费时间</li><li>消费能力</li><li>消费意愿 </li></ul></li><li><p>用户生命周期</p><ul><li>新手</li><li>成长</li><li>成熟</li><li>衰退</li><li>流失 </li></ul></li><li><p>用户价值</p><ul><li>活跃度</li><li>裂变拉新等 </li></ul></li></ul><h1 id="3-用户画像的范例"><a href="#3-用户画像的范例" class="headerlink" title="3. 用户画像的范例"></a>3. 用户画像的范例</h1><p><img src="https://i.loli.net/2020/04/14/XnJYc3ejRrMwdul.png" alt="用户画像导图.png"></p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.infoq.cn/article/oUqJDlfstrYAmTBYzier?utm_source=rss&amp;utm_medium=article" target="_blank" rel="noopener">https://www.infoq.cn/article/oUqJDlfstrYAmTBYzier?utm_source=rss&amp;utm_medium=article</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 用户画像 </tag>
+            
+            <tag> 运营 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>中台</title>
       <link href="/%E4%B8%AD%E5%8F%B0/"/>
       <url>/%E4%B8%AD%E5%8F%B0/</url>
