@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-14T04:19:47.832Z</updated>
+  <updated>2020-04-16T00:39:21.588Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中台(二) - 略深入些的探究</title>
+    <link href="https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/"/>
+    <id>https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/</id>
+    <published>2020-04-16T00:38:41.000Z</published>
+    <updated>2020-04-16T00:39:21.588Z</updated>
+    
+    <content type="html"><![CDATA[<p>中台是企业级能力复用平台，整个中台的构建，实际上是将业务数据化，将数据业务化。是需要建立业务中台和数据中台的。业务中台通过抽象，封装可复用的逻辑，提升企业的响应力；数据中台通过打通企业的数据，构建自学习服务的数据能力，让企业更加智慧。</p><h1 id="1-通用化通用能力"><a href="#1-通用化通用能力" class="headerlink" title="1. 通用化通用能力"></a>1. 通用化通用能力</h1><p>目前大部分企业实现的中台，主要是将遗留下的后台系统，比如ERP MES CRM的公共部分进行拆解复用，形成类似交易中心，用户中心，订单中心这样的微服务集合供前台调用，从而保证<strong>逻辑的一致性</strong>同时更快响应前台的变化</p><p>Reference <a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&utm_medium=article" target="_blank" rel="noopener">1</a> 当中举了订单服务的演进过程的例子，很值得一看。当平台需要开放多渠道来完成订单的时候，保证用户有着类似的体验是很重要的一项，包括整个系统的的scalability。</p><p>在这种情况下，一个数据中台能够使得用户可以看到在各个平台各个渠道自己下的订单。从平台角度来说，有了数据中台，维护成本，发生错误以后的修改成本都会减轻很多。</p><p>略微解释下，如果是分开的系统，那么每个系统都会有自己的数据库，我们需要做数据的join操作，然后返回给前端用户需要的正确的信息。当发生了逻辑上的错误以后，我们很有可能需要在分开的几个子系统当中来做修改，很容易出错，修改的整个时间消耗也会很长。而且数据仓库在多个系统的情况下，抽取数据，再进行分析是有比较大的时延的，一般都是加一天的样子，无法看到实时的数据。</p><h1 id="2-使用中台去ERP化"><a href="#2-使用中台去ERP化" class="headerlink" title="2. 使用中台去ERP化"></a>2. 使用中台去ERP化</h1><p>ERP， 即企业资源管理系统。最最开始的时候，企业的需求是将企业的流程梳理清晰，做到资源的集约化管理，本质上来讲是为了解决流程复用，业务能力化的问题。</p><p>但是当前ERP软件存在着如下的一些问题：</p><ol><li>商业软件，响应慢<br>企业只有使用权，这就导致企业的业务发生变化的时候，需要找到原厂重新配置或者重新开发，响应比较慢</li><li>封闭架构，不开放<br>套装ERP软件是封闭架构，技术不开放，导致企业无法对其进行大的功能上的扩展，只能像打补丁一样，构建一些外挂，而且效果往往不会很好</li><li>单体架构，弹性不够<br>单体架构，很难支持持续增长的各种需求</li><li>升级 维护成本<br>套装软件升级和维护成本非常高</li></ol><p>过去人们需要ERP更多的是因为我们需要流程，需要知道具体应该如何去组织。但是在互联网化的今天，原来静态化，标准化的业务流程已经不足以支撑企业的快速响应了。因此，诉求<strong>从原来的流程化变成了需要能够快速响应前台市场的变化</strong>。</p><p>企业组织结构从流程式协作走向了平台式协作。</p><p>ERP更像是一种计划式的经济，希望每个角色都按照分配的任务来走，共同完成一个任务，但是这种共同完成会导致不同角色之间的利益相互冲突。局部利益大于整体利益。</p><p>需要的转变是 —- 要开始学习以客户为中心去动态组织资源来提供服务，将原本<strong><em>以流程为独立单元的模块拆解为以客户价值为独立单元的模块</em></strong>。</p><p>以客户价值为独立单元，如何评定绩效就是个很关键也很困难的问题，尤其是对于那些为后端赋能的业务单元，如何将其关联到直接的客户价值当中。这需要数据中台提供这方面的能力，来利用全域的数据分析，建模，通过敏感性分析等算法技术来实时计算。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article" target="_blank" rel="noopener">https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;中台是企业级能力复用平台，整个中台的构建，实际上是将业务数据化，将数据业务化。是需要建立业务中台和数据中台的。业务中台通过抽象，封装可复用的逻辑，提升企业的响应力；数据中台通过打通企业的数据，构建自学习服务的数据能力，让企业更加智慧。&lt;/p&gt;
+&lt;h1 id=&quot;1-通用化通用
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="中台" scheme="https://www.llchen60.com/tags/%E4%B8%AD%E5%8F%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>用户画像构建思路</title>
@@ -533,34 +560,6 @@
       <category term="Composition" scheme="https://www.llchen60.com/tags/Composition/"/>
     
       <category term="Inheritance" scheme="https://www.llchen60.com/tags/Inheritance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 理解多态</title>
-    <link href="https://www.llchen60.com/Java-%E7%90%86%E8%A7%A3%E5%A4%9A%E6%80%81/"/>
-    <id>https://www.llchen60.com/Java-%E7%90%86%E8%A7%A3%E5%A4%9A%E6%80%81/</id>
-    <published>2020-02-29T16:34:38.000Z</published>
-    <updated>2020-02-29T16:35:36.929Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-什么是多态？"><a href="#1-什么是多态？" class="headerlink" title="1. 什么是多态？"></a>1. 什么是多态？</h1><p>多态目的是为了分离做什么和怎么做，从而实现接口和实现的分离。通过多态，可以改善代码的组织结构和可读性，最重要的是能够创建可扩展的程序。</p><p>有继承关系的类，子类重写父类的方法，然后父类的引用指向子类。通过这种方式，就可以对于父类的声明指向子类的实际对象，</p><h1 id="2-为什么需要多态？"><a href="#2-为什么需要多态？" class="headerlink" title="2. 为什么需要多态？"></a>2. 为什么需要多态？</h1><p>多态的好处很多，令代码可扩展，解耦接口与实现，让代码对于改动封闭，对于扩展开放, etc. 如果直接从代码的角度来看，我们可以比较直观的看到他的优势</p><pre><code>public class Animal {    public void move() {        System.out.println(&quot;Animal move&quot;);    }}public class Cat extends Animal {    @Override    public void move() {        System.out.println(&quot;cat climb&quot;);    }}public calss Dog entends Animal {    @Override    public void move() {        System.out.println(&quot;dog run&quot;);    }}public static void main(String [] args) {    Animal animal = new Cat();    animal.move();    // output: cat climb}</code></pre><p>通过这种方式可以实现接口与实现的解耦。</p><h1 id="3-多态和继承的关系"><a href="#3-多态和继承的关系" class="headerlink" title="3. 多态和继承的关系"></a>3. 多态和继承的关系</h1><p>继承指在子类当中使用父类的数据和方法</p><p>多态指在子类当中改变父类的行为。</p><h1 id="4-构造器内部的多态方法的行为"><a href="#4-构造器内部的多态方法的行为" class="headerlink" title="4. 构造器内部的多态方法的行为"></a>4. 构造器内部的多态方法的行为</h1><p>如果在一个构造器的内部调用正在构造的对象的某个动态绑定的方法，会出现一些不可知的错误。</p><p>因为构造器内部的动态绑定意味着要用到方法被覆盖以后的定义，而这意味着被覆盖的方法在对象被完全构造之前就会被调用了，</p><pre><code>class Graph {    void draw() {        print(&quot;Graph draw()&quot;);    }    Graph() {        print(&quot;Graph() before draw()&quot;);        draw();        print(&quot;Graph() after draw()&quot;);    }}class RoundGraph extends Graph {    private int radius = 1;    RoundGraph(int r) {        radius = r;        print(&quot;RoundGraph.RoundGraph(), radius = &quot; + radius);    }    void draw() {        print(&quot;RoundGraph.draw(), radius = &quot; + radius);    }}public class PolyConstructors {    public static void main(String[] args) {        new RoundGraph(5);    }}// All output Graph() before draw()RoundGraph.draw(), radius = 0Graph() after draw()ROundGraph,RoundGraph(), radius = 5</code></pre><p>有这样的输出的原因是当我们实例化R欧尼的Graph的时候，会调用基类的构造器，在Graph类的构造器当中调用了draw()方法，这个时候动态绑定，是要去调用RoundGraph类的draw方法的，但是这个时候还在构建Graph 的实例，RoundGraph还没有构建好，所以就出现了返回的Radius刚开始值为0的问题了</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li>Thinking in Java Ch.8 </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-什么是多态？&quot;&gt;&lt;a href=&quot;#1-什么是多态？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是多态？&quot;&gt;&lt;/a&gt;1. 什么是多态？&lt;/h1&gt;&lt;p&gt;多态目的是为了分离做什么和怎么做，从而实现接口和实现的分离。通过多态，可以改善代码的组织
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Polymorphism" scheme="https://www.llchen60.com/tags/Polymorphism/"/>
     
   </entry>
   
