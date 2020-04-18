@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-16T00:39:21.588Z</updated>
+  <updated>2020-04-18T01:11:57.173Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于package-lock.json</title>
+    <link href="https://www.llchen60.com/%E5%85%B3%E4%BA%8Epackage-lock-json/"/>
+    <id>https://www.llchen60.com/%E5%85%B3%E4%BA%8Epackage-lock-json/</id>
+    <published>2020-04-18T01:10:23.000Z</published>
+    <updated>2020-04-18T01:11:57.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>当我们将node package manager (npm) 升级到5.0以上的版本的时候，你会发现npm运行的时候会自动创建一个新文件 – package-lock.json。</p><p>里面包含的是我们的依赖关系，各种依赖的包和版本号。package-lock.json会在npm修改了node_modules 树或者修改了package.json之后自动生成。它精确的描述了整个生成的树，使得接下来任何一次的装配都可以生成完全一致的依赖树.这个生成的文件是需要commit 到remote branch上的，其目的在于：</p><ul><li>描述单个依赖树，使得其他人在做deploy的时候使用的是完全一致的依赖</li><li>使得使用人员有能力直接跳转回原先的依赖状态，而不需要将代码也回退到之前的版本</li><li>加强了依赖改变的阅读性，我们可以相对直观的看到每次的commit都有什么依赖被改变了</li><li>也可以通过是的npm跳过对于原先安装过的包的重复的元数据分析来优化整个安装的进程</li></ul><p>针对其特征，我们是应该将package-lock.json也提交上去的，这会给开发，同步带来不小的帮助。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://medium.com/coinmonks/everything-you-wanted-to-know-about-package-lock-json-b81911aa8ab8" target="_blank" rel="noopener">https://medium.com/coinmonks/everything-you-wanted-to-know-about-package-lock-json-b81911aa8ab8</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;当我们将node package manager (npm) 升级到5.0以上的版本的时候，你会发现npm运行的时候会自动创建一个新文件 – package-lock.json。&lt;/p&gt;
+&lt;p&gt;里面包含的是我们的依赖关系，各种依赖的包和版本号。package-lock.js
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
+    
+    
+      <category term="npm" scheme="https://www.llchen60.com/tags/npm/"/>
+    
+  </entry>
   
   <entry>
     <title>中台(二) - 略深入些的探究</title>
@@ -529,37 +556,6 @@
     
     
       <category term="DDD" scheme="https://www.llchen60.com/tags/DDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>组合 vs 继承</title>
-    <link href="https://www.llchen60.com/%E7%BB%84%E5%90%88-vs-%E7%BB%A7%E6%89%BF/"/>
-    <id>https://www.llchen60.com/%E7%BB%84%E5%90%88-vs-%E7%BB%A7%E6%89%BF/</id>
-    <published>2020-03-04T04:21:56.000Z</published>
-    <updated>2020-03-04T04:22:54.643Z</updated>
-    
-    <content type="html"><![CDATA[<p>组合还有继承都是面向对象的很重要的特性，但是有一条非常重要的设计原则说 – 组合优于继承，想在这篇博文当中分析一下为什么认为组合优于继承，以及什么情况下我们仍然应该使用继承。</p><p>继承可以表示类之间的is-a的关系，可以一定程度上解决代码复用性的问题，但是继承层次过深，也会影响到代码的可维护性。</p><h1 id="1-继承的劣势"><a href="#1-继承的劣势" class="headerlink" title="1. 继承的劣势"></a>1. 继承的劣势</h1><p>譬如 我们现在要实现一个关于哺乳动物的类，我们首先需要将哺乳动物定义为一个抽象的类</p><pre><code>public class Mammal {    public void breathWithLung() {    }}</code></pre><p>此时我们就可以实例化Monkey，Whale等一系列哺乳动物了。但是对于哺乳动物来说，他的属，科，目门类很多，海陆空都有，假设我们按照他们的行为来进行分类的话。可以分成会飞的，会游的，还有会跑的。所以就可以写如下的代码：</p><pre><code>public class flyableMammal extends Mammal {    public void fly() {    }}public class underwaterMammal extends Mammal {    public void swim() {    }}public class onLandMammal extends Mammal {    public void run() {    }}</code></pre><p>这个时候我们已经有两层的继承了，而后我们可以实例化一些哺乳动物，譬如鲸鱼，海豚，狮子等等来创建真的对象。然后问题来了，我们现在想探究会飞的动物当中，夜行的类目，那就意味着我们需要再创建一个新的层级来进行研究了。</p><p>长此以往，整个层级就会变得很深。而深度的层级意味着每当我们想真真切切去研究到底这个类做了什么的时候，我们需要去他的父类，去他的父类的父类，追本溯源，一个一个看其中定义的属性和方法，才能完全理解他做了什么。</p><p>这样子来做，首先造成了代码的可读性变得非常差，而对于类本身而言，破坏了其封装特性，将父类的实现细节暴露给了子类。在这种情况下，一旦父类代码修改，就会影响所有子类的逻辑。</p><h1 id="2-组合的优势"><a href="#2-组合的优势" class="headerlink" title="2. 组合的优势"></a>2. 组合的优势</h1><p>对于上述的场景，我们完全可以用组合的方式来实现。通过设立多个功能接口，来表示当前类的属性，譬如flyable, runnable, swimmable, etc. 通过这种方式，我们让concrete class直接implements对应的接口，并override写出自己的实现。这样子就能够解决这个问题了。</p><p>除了使用接口之外，我们也可以使用委托的方式，即仍然定于对应的接口，但是还定义了实现了接口方法的实现类，在实际使用的时候，调用实现类的方法直接使用，例子如下</p><pre><code>public interface Flyable {  void fly()；}public class FlyAbility implements Flyable {  @Override  public void fly() { //... }}//省略Tweetable/TweetAbility/EggLayable/EggLayAbilitypublic class Ostrich implements Tweetable, EggLayable {//鸵鸟  private TweetAbility tweetAbility = new TweetAbility(); //组合  private EggLayAbility eggLayAbility = new EggLayAbility(); //组合  //... 省略其他属性和方法...  @Override  public void tweet() {    tweetAbility.tweet(); // 委托  }  @Override  public void layEgg() {    eggLayAbility.layEgg(); // 委托  }}</code></pre><h1 id="3-如何判断该使用继承还是组合？"><a href="#3-如何判断该使用继承还是组合？" class="headerlink" title="3. 如何判断该使用继承还是组合？"></a>3. 如何判断该使用继承还是组合？</h1><p>组合也并不完美，组合需要对类做更细度的拆分，要定义更多的类和接口，因此在实际开发的过程当中，我们还是要根据具体的情况，来具体选择该使用继承还是组合。</p><p>如果类之间的继承结构稳定 – 不会轻易改变，继承关系比较浅 – 譬如两层到三层的继承关系，那么我们可以直接使用继承。反之，对于系统不够稳定，继承层次会很深，且关系复杂的，我们就应该尽量使用组合来替代继承了。</p><p>或者当我们想要使用多态的特性的时候，我们就需要使用继承了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;组合还有继承都是面向对象的很重要的特性，但是有一条非常重要的设计原则说 – 组合优于继承，想在这篇博文当中分析一下为什么认为组合优于继承，以及什么情况下我们仍然应该使用继承。&lt;/p&gt;
-&lt;p&gt;继承可以表示类之间的is-a的关系，可以一定程度上解决代码复用性的问题，但是继承层次
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-      <category term="Composition" scheme="https://www.llchen60.com/tags/Composition/"/>
-    
-      <category term="Inheritance" scheme="https://www.llchen60.com/tags/Inheritance/"/>
     
   </entry>
   
