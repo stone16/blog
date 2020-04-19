@@ -51,9 +51,10 @@ top:
     
    
 + 数值 - number
-```
+
     let decLiteral: number = 6;
-```
+
+
 + 字符串 - string
 
 ```
