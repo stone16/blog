@@ -6,6 +6,7 @@ tags:
     - TypeScript
 top:
 ---
+Tl;dr 
 
 这会是一篇很长的博文，大部分内容都直接来自Reference当中的TypeScript教程和ES6教程，只是为了总结一些自己认为重要的知识点，以及一些认为需要深入理解的地方及其延伸的链接，希望有帮助。
 
@@ -243,6 +244,45 @@ top:
 
     let a: any[] = [];
     push(a, 1, 2, 3);
+
+
+## 2.8 声明文件 
+当使用第三方库的时候，我们需要引用它的声明文件，以获得对应的代码补全，接口提示的功能
+
+### 2.8.1 声明语句
+
+比如我们想使用jquery，一般来说是加script标签，但是ts当中，我们需要使用declare var来定义其类型
+
+    declare var jQuery: (selector: string) => any;
+
+    jQuery('#foo');
+
+我们会将声明语句放到一个单独的文件当中，譬如对于上述的例子，就是放到jQuery.d.ts 当中
+声明文件必须以`.d.ts`来结尾
+
+ts会解析项目当中所有的*.ts文件，也包含了.d.ts结尾的文件，所以当我们定义.d.ts文件以后，里面的内容是会被整个项目共享的。
+
+另外，我们可以通过@types 来统一管理第三方库的声明文件
+
+### 2.8.2 书写声明文件
+
+当第三方库没有提供声明文件的时候，我们就需要自己书写声明文件了。
+
+库的使用场景主要有：
++ 全局变量 
++ npm包
++ UMD库
++ 直接扩展全局变量
+
+详情看 [link](https://ts.xcatliu.com/basics/declaration-files#xin-yu-fa-suo-yin)
+
+# 2.9 内置对象
+
+[ECMAScript 内置对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
+
+[DOM DOM 内置对象](https://github.com/Microsoft/TypeScript/tree/master/src/lib)
+
+
 # Reference
 1. https://ts.xcatliu.com/
 2. https://es6.ruanyifeng.com/
