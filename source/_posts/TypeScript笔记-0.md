@@ -51,9 +51,9 @@ top:
     
    
 + 数值 - number
-
+```
     let decLiteral: number = 6;
-
+```
 
 + 字符串 - string
 
@@ -100,8 +100,149 @@ top:
     myFavoriteNumber = 'seven';
     myFavoriteNumber = 7;
 
+## 2.4 联合类型 - Union Types
+
+    let myFavoriteNumber: string | number;
+    myFavoriteNumber = 'seven';
+    myFavoriteNumber = 7;
+
+联合类型当中使用 `|`来分割每个类型
+
+## 2.5 接口
+
++ 在TypeScript当中，使用接口定义对象的类型，除了可以对类的一部分行为进行抽象以外，也chang'yo个与对 对象的形状进行描述。
+
+    interface Person {
+        name: string;
+        age: number;
+    }
+
+    let tom: Person = {
+        name: 'Tom',
+        age: 25
+    };
+
+在做赋值的时候，定义的变量需要和接口有一样的属性。
+
++ 对于我们想要可选择的匹配的属性，我们可以用可选属性的方式：
+
+    interface Person {
+        name: string;
+        age?: number;
+    }
+
+    let tom: Person = {
+        name: 'Tom'
+    };
+
++ 也可以配置，是的接口能够接任意的属性： -- `[propName: string] : any`
+    + 需要注意的是一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集 
+
+    interface Person {
+        name: string;
+        age?: number;
+        [propName: string]: any;
+    }
+
+    let tom: Person = {
+        name: 'Tom',
+        gender: 'male'
+    };
+
++ 只读属性
+    + 有use case我们希望对象当中的一些字段只能在创建的时候被赋值，那么就可以通过使用readonly定义只读属性
 
 
+## 2.6 数组类型
+
++ 使用类型+方括号来定义
+
+
+    let fibonacci: number[] = [1, 1, 2, 3, 5];
+
++ 使用数组泛型来表示数组 -- `Array<elemType>`
+
+
+    let fibonacci: Array<number> = [1, 1, 2, 3, 5];
+
++ 使用接口表示数组
+
+
+    interface NumberArray {
+        [index: number]: number;
+    }
+    let fibonacci: NumberArray = [1, 1, 2, 3, 5];
+
+
+## 2.7 函数类型
+
+### 2.7.1 函数声明
+
+    // 函数声明（Function Declaration）
+    function sum(x, y) {
+        return x + y;
+    }
+
+    // 函数表达式（Function Expression）
+    let mySum = function (x, y) {
+        return x + y;
+    };
+    
+    // TypeScript下的函数声明
+    function sum(x: number, y:number):number {
+        return x + y;
+    }
+
+### 2.7.2 函数表达式
+
+    let mySum: (x: number, y: number) => number = function (x: number, y: number): number {
+        return x + y;
+    };
+    
+注意在上述代码当中，跟在mySum后面的是对于输入参数和输出参数的规定，中间用箭头来进行连接，这是TypeScript的规范。
+
+另外我们也可以通过使用接口来定义函数的形状：
+
+    interface SearchFunc {
+        (source: string, subString: string): boolean;
+    }
+
+    let mySearch: SearchFunc;
+    mySearch = function(source: string, subString: string) {
+        return source.search(subString) !== -1;
+    }
+
+
+### 2.7.3 可选参数
++ 使用问号跟在参数名字之后表示是可选的，注意可选参数需要在参数列表的末尾，其之后不能有必需参数了
+
+
+    function buildName(firstName: string, lastName?: string) {
+        if (lastName) {
+            return firstName + ' ' + lastName;
+        } else {
+            return firstName;
+        }
+    }
+
+### 2.7.4 参数默认与剩余参数
+
+    // 默认参数
+    function buildName(firstName: string, lastName: string = 'Cat') {
+        return firstName + ' ' + lastName;
+    }
+    let tomcat = buildName('Tom', 'Cat');
+    let tom = buildName('Tom');
+
+    // 使用 ...来获取函数当中的剩余参数
+    function push(array, ...items) {
+        items.forEach(function(item) {
+            array.push(item);
+        });
+    }
+
+    let a: any[] = [];
+    push(a, 1, 2, 3);
 # Reference
 1. https://ts.xcatliu.com/
 2. https://es6.ruanyifeng.com/
