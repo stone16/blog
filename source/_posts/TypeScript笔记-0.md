@@ -1,5 +1,5 @@
 ---
-title: TypeScript笔记
+title: TypeScript笔记(一)
 date: 2020-04-19 10:44:45
 categories: FrontEnd
 tags:
