@@ -4,7 +4,32 @@
   
     
     <entry>
-      <title>TypeScript笔记</title>
+      <title>Typescript学习笔记(二)</title>
+      <link href="/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/"/>
+      <url>/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</url>
+      
+        <content type="html"><![CDATA[<ul><li><p>类型别名</p><ul><li>用来为一个类型起一个新名字</li></ul></li></ul><pre><code>type Name = string; </code></pre><ul><li>字符串字面量类型</li></ul><pre><code>type EventNames = &#39;click&#39; | &#39;scroll&#39; | &#39;mousemove&#39;;function handleEvent(ele: Element, event: EventNames) {    // do something}handleEvent(document.getElementById(&#39;hello&#39;), &#39;scroll&#39;);  // 没问题handleEvent(document.getElementById(&#39;world&#39;), &#39;dbclick&#39;); // 报错，event 不能为 &#39;dbclick&#39;// index.ts(7,47): error TS2345: Argument of type &#39;&quot;dbclick&quot;&#39; is not assignable to parameter of type &#39;EventNames&#39;.</code></pre><ul><li>元组  - Tuple<ul><li>Tuple可以用于合并不同类型的对象</li></ul></li></ul><pre><code>let tom: [string, number] = [&#39;Tom&#39;, 25];</code></pre><ul><li>枚举<ul><li>用于取值被限定在一定范围内的场景</li><li>使用enum进行定义的</li><li>枚举成员会被赋值为从0开始递增的数字，同时也会对枚举值到枚举名进行反向映射</li></ul></li></ul><pre><code>enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};console.log(Days[&quot;Sun&quot;] === 0); // trueconsole.log(Days[&quot;Mon&quot;] === 1); // trueconsole.log(Days[&quot;Tue&quot;] === 2); // trueconsole.log(Days[&quot;Sat&quot;] === 6); // trueconsole.log(Days[0] === &quot;Sun&quot;); // trueconsole.log(Days[1] === &quot;Mon&quot;); // trueconsole.log(Days[2] === &quot;Tue&quot;); // trueconsole.log(Days[6] === &quot;Sat&quot;); // true</code></pre><ul><li>类，类与接口<ul><li>使用class定义类，使用constructor定义构造函数，通过new生成新实例的时候，是会自动调用构造函数的</li></ul></li></ul><pre><code>class Animal {    constructor(name) {        this.name = name;    }    sayHi() {        return `My name is ${this.name}`;    }}let a = new Animal(&#39;Jack&#39;);console.log(a.sayHi()); // My name is Jack</code></pre><ul><li><p>类通过extends继承</p><ul><li><p>然后通过super关键词来调用父类的构造函数和方法</p><p>class Cat extends Animal {<br>  constructor(name) {</p><pre><code>  super(name); // 调用父类的 constructor(name)  console.log(this.name);</code></pre><p>  }<br>  sayHi() {</p><pre><code>  return &#39;Meow, &#39; + super.sayHi(); // 调用父类的 sayHi()</code></pre><p>  }<br>}</p><p>let c = new Cat(‘Tom’); // Tom<br>console.log(c.sayHi()); // Meow, My name is Tom</p></li></ul></li><li><p>泛型</p><p>  function createArray<T>(length: number, value: T): Array<T> {</p><pre><code>  let result: T[] = [];  for (let i = 0; i &lt; length; i++) {      result[i] = value;  }  return result;</code></pre><p>  }</p><p>  createArray(3, ‘x’); // [‘x’, ‘x’, ‘x’]</p></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://ts.xcatliu.com/advanced/type-aliases" target="_blank" rel="noopener">https://ts.xcatliu.com/advanced/type-aliases</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TypeScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>TypeScript笔记(一)</title>
       <link href="/TypeScript%E7%AC%94%E8%AE%B0-0/"/>
       <url>/TypeScript%E7%AC%94%E8%AE%B0-0/</url>
       

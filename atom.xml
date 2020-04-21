@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-19T21:24:22.828Z</updated>
+  <updated>2020-04-21T03:26:33.088Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -17,11 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>TypeScript笔记</title>
+    <title>Typescript学习笔记(二)</title>
+    <link href="https://www.llchen60.com/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/"/>
+    <id>https://www.llchen60.com/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</id>
+    <published>2020-04-21T03:25:57.000Z</published>
+    <updated>2020-04-21T03:26:33.088Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>类型别名</p><ul><li>用来为一个类型起一个新名字</li></ul></li></ul><pre><code>type Name = string; </code></pre><ul><li>字符串字面量类型</li></ul><pre><code>type EventNames = &#39;click&#39; | &#39;scroll&#39; | &#39;mousemove&#39;;function handleEvent(ele: Element, event: EventNames) {    // do something}handleEvent(document.getElementById(&#39;hello&#39;), &#39;scroll&#39;);  // 没问题handleEvent(document.getElementById(&#39;world&#39;), &#39;dbclick&#39;); // 报错，event 不能为 &#39;dbclick&#39;// index.ts(7,47): error TS2345: Argument of type &#39;&quot;dbclick&quot;&#39; is not assignable to parameter of type &#39;EventNames&#39;.</code></pre><ul><li>元组  - Tuple<ul><li>Tuple可以用于合并不同类型的对象</li></ul></li></ul><pre><code>let tom: [string, number] = [&#39;Tom&#39;, 25];</code></pre><ul><li>枚举<ul><li>用于取值被限定在一定范围内的场景</li><li>使用enum进行定义的</li><li>枚举成员会被赋值为从0开始递增的数字，同时也会对枚举值到枚举名进行反向映射</li></ul></li></ul><pre><code>enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};console.log(Days[&quot;Sun&quot;] === 0); // trueconsole.log(Days[&quot;Mon&quot;] === 1); // trueconsole.log(Days[&quot;Tue&quot;] === 2); // trueconsole.log(Days[&quot;Sat&quot;] === 6); // trueconsole.log(Days[0] === &quot;Sun&quot;); // trueconsole.log(Days[1] === &quot;Mon&quot;); // trueconsole.log(Days[2] === &quot;Tue&quot;); // trueconsole.log(Days[6] === &quot;Sat&quot;); // true</code></pre><ul><li>类，类与接口<ul><li>使用class定义类，使用constructor定义构造函数，通过new生成新实例的时候，是会自动调用构造函数的</li></ul></li></ul><pre><code>class Animal {    constructor(name) {        this.name = name;    }    sayHi() {        return `My name is ${this.name}`;    }}let a = new Animal(&#39;Jack&#39;);console.log(a.sayHi()); // My name is Jack</code></pre><ul><li><p>类通过extends继承</p><ul><li><p>然后通过super关键词来调用父类的构造函数和方法</p><p>class Cat extends Animal {<br>  constructor(name) {</p><pre><code>  super(name); // 调用父类的 constructor(name)  console.log(this.name);</code></pre><p>  }<br>  sayHi() {</p><pre><code>  return &#39;Meow, &#39; + super.sayHi(); // 调用父类的 sayHi()</code></pre><p>  }<br>}</p><p>let c = new Cat(‘Tom’); // Tom<br>console.log(c.sayHi()); // Meow, My name is Tom</p></li></ul></li><li><p>泛型</p><p>  function createArray<T>(length: number, value: T): Array<T> {</p><pre><code>  let result: T[] = [];  for (let i = 0; i &lt; length; i++) {      result[i] = value;  }  return result;</code></pre><p>  }</p><p>  createArray(3, ‘x’); // [‘x’, ‘x’, ‘x’]</p></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://ts.xcatliu.com/advanced/type-aliases" target="_blank" rel="noopener">https://ts.xcatliu.com/advanced/type-aliases</a> </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;类型别名&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用来为一个类型起一个新名字&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;type Name = string; &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;字符串字面量类型&lt;/li&gt;
+&lt;/ul&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
+    
+    
+      <category term="TypeScript" scheme="https://www.llchen60.com/tags/TypeScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript笔记(一)</title>
     <link href="https://www.llchen60.com/TypeScript%E7%AC%94%E8%AE%B0-0/"/>
     <id>https://www.llchen60.com/TypeScript%E7%AC%94%E8%AE%B0-0/</id>
     <published>2020-04-19T17:44:45.000Z</published>
-    <updated>2020-04-19T21:24:22.828Z</updated>
+    <updated>2020-04-21T03:26:13.703Z</updated>
     
     <content type="html"><![CDATA[<p>Tl;dr </p><p>这会是一篇很长的博文，大部分内容都直接来自Reference当中的TypeScript教程和ES6教程，只是为了总结一些自己认为重要的知识点，以及一些认为需要深入理解的地方及其延伸的链接，希望有帮助。</p><h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><ul><li>JavaScript超集，提供了类型系统和对ES6的支持，由Microsoft开发</li></ul><h2 id="1-2-优势"><a href="#1-2-优势" class="headerlink" title="1.2 优势"></a>1.2 优势</h2><ul><li>增加代码的可读性和可维护性<ul><li>类型系统是很好的文档，看类型的定义我们就能够知道如何使用了</li><li>可以在编译阶段发现大部分错误，比运行时出错好很多</li><li>增强编辑器的功能，包括代码补全，接口提示，跳转到定义，重构等</li></ul></li><li>兼容性好<ul><li>js文件实际上是可以直接重命名为ts文件的</li><li>及时不显式定义类型，也能够自动做出类型推论  </li></ul></li></ul><h2 id="1-3-相对劣势"><a href="#1-3-相对劣势" class="headerlink" title="1.3 相对劣势"></a>1.3 相对劣势</h2><ul><li>学习成本 <ul><li>接口 </li><li>泛型</li><li>类</li></ul></li><li>短期增加开发成本，要多写一些类型的定义，但是对于需要长期维护的项目，TypeScript能够减少其维护成本</li><li>集成到构建流程当中需要一些工作量的 </li></ul><h1 id="2-基础知识"><a href="#2-基础知识" class="headerlink" title="2. 基础知识"></a>2. 基础知识</h1><h2 id="2-1-原始数据类型"><a href="#2-1-原始数据类型" class="headerlink" title="2.1 原始数据类型"></a>2.1 原始数据类型</h2><ul><li><p>布尔值 - boolean</p><pre><code>  let isSuccessful: boolean = true;  let createdByNewBoolean: boolean = new Boolean(1);  // Type &#39;Boolean&#39; is not assignable to type &#39;boolean&#39;.  // &#39;boolean&#39; is a primitive, but &#39;Boolean&#39; is a wrapper object. Prefer using &#39;boolean&#39; when possible.  let createdByNewBoolean: Boolean = new Boolean(1);  // when you new Boolean, it will create a Boolean - a wrapper object  let createdByBoolean: boolean = Boolean(1);   // create a boolean </code></pre></li></ul><ul><li><p>数值 - number</p><pre><code>  let decLiteral: number = 6;</code></pre></li><li><p>字符串 - string</p></li></ul><pre><code>    let myName: string = &#39;Tom&#39;;    let myAge: number = 25;    // 模板字符串  `用来定义模板字符串，${}用来在模板字符串中嵌入表达式    let sentence: string = `Hello, my name is ${myName}.    I&#39;ll be ${myAge + 1} years old next month.`;</code></pre><ul><li>null &amp; undefined<ul><li>null 和 undefined是所有类型的子类型</li><li>void类型的变量不能赋值给number类型的变量</li></ul></li><li>symbol</li></ul><h2 id="2-2-任意值-Any"><a href="#2-2-任意值-Any" class="headerlink" title="2.2 任意值 - Any"></a>2.2 任意值 - Any</h2><p>任意值用来表示允许赋值为任意类型。在Typescript当中，普通类型在复制过程中改变类型是不被允许的，但是如果是any类型，则允许被赋值为任意类型。</p><pre><code>    let myFavoriteNumber: any = &#39;seven&#39;;    myFavoriteNumber = 7;</code></pre><ul><li>任意值上访问任何属性都是允许的，也允许调用任何方法</li><li>返回的类型都是任意值</li><li>对于未声明类型的变量<ul><li>未指定类型，那么会被识别为任意值类型</li></ul></li></ul><h2 id="2-3-类型推论"><a href="#2-3-类型推论" class="headerlink" title="2.3 类型推论"></a>2.3 类型推论</h2><p>如果没有明确的指定类型，那么TypeScript会按照类型推论 - Type Inference的规则推断出一个类型。</p><pre><code>let myFavoriteNumber = &#39;seven&#39;;myFavoriteNumber = 7;// index.ts(2,1): error TS2322: Type &#39;number&#39; is not assignable to type &#39;string&#39;.  编译的时候出错，因为TS自动做了类型推论，并且认定其为一个string类型</code></pre><p>但是如果定义的时候没有赋值，那么不管接下来是否会赋值，都会被推断成any类型而完全不被类型检查</p><pre><code>let myFavoriteNumber;myFavoriteNumber = &#39;seven&#39;;myFavoriteNumber = 7;</code></pre><h2 id="2-4-联合类型-Union-Types"><a href="#2-4-联合类型-Union-Types" class="headerlink" title="2.4 联合类型 - Union Types"></a>2.4 联合类型 - Union Types</h2><pre><code>let myFavoriteNumber: string | number;myFavoriteNumber = &#39;seven&#39;;myFavoriteNumber = 7;</code></pre><p>联合类型当中使用 <code>|</code>来分割每个类型</p><h2 id="2-5-接口"><a href="#2-5-接口" class="headerlink" title="2.5 接口"></a>2.5 接口</h2><ul><li><p>在TypeScript当中，使用接口定义对象的类型，除了可以对类的一部分行为进行抽象以外，也chang’yo个与对 对象的形状进行描述。</p><p>  interface Person {</p><pre><code>  name: string;  age: number;</code></pre><p>  }</p><p>  let tom: Person = {</p><pre><code>  name: &#39;Tom&#39;,  age: 25</code></pre><p>  };</p></li></ul><p>在做赋值的时候，定义的变量需要和接口有一样的属性。</p><ul><li><p>对于我们想要可选择的匹配的属性，我们可以用可选属性的方式：</p><p>  interface Person {</p><pre><code>  name: string;  age?: number;</code></pre><p>  }</p><p>  let tom: Person = {</p><pre><code>  name: &#39;Tom&#39;</code></pre><p>  };</p></li><li><p>也可以配置，是的接口能够接任意的属性： – <code>[propName: string] : any</code></p><ul><li><p>需要注意的是一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集 </p><p>interface Person {<br>  name: string;<br>  age?: number;<br>  [propName: string]: any;<br>}</p><p>let tom: Person = {<br>  name: ‘Tom’,<br>  gender: ‘male’<br>};</p></li></ul></li><li><p>只读属性</p><ul><li>有use case我们希望对象当中的一些字段只能在创建的时候被赋值，那么就可以通过使用readonly定义只读属性</li></ul></li></ul><h2 id="2-6-数组类型"><a href="#2-6-数组类型" class="headerlink" title="2.6 数组类型"></a>2.6 数组类型</h2><ul><li>使用类型+方括号来定义</li></ul><pre><code>let fibonacci: number[] = [1, 1, 2, 3, 5];</code></pre><ul><li>使用数组泛型来表示数组 – <code>Array&lt;elemType&gt;</code></li></ul><pre><code>let fibonacci: Array&lt;number&gt; = [1, 1, 2, 3, 5];</code></pre><ul><li>使用接口表示数组</li></ul><pre><code>interface NumberArray {    [index: number]: number;}let fibonacci: NumberArray = [1, 1, 2, 3, 5];</code></pre><h2 id="2-7-函数类型"><a href="#2-7-函数类型" class="headerlink" title="2.7 函数类型"></a>2.7 函数类型</h2><h3 id="2-7-1-函数声明"><a href="#2-7-1-函数声明" class="headerlink" title="2.7.1 函数声明"></a>2.7.1 函数声明</h3><pre><code>// 函数声明（Function Declaration）function sum(x, y) {    return x + y;}// 函数表达式（Function Expression）let mySum = function (x, y) {    return x + y;};// TypeScript下的函数声明function sum(x: number, y:number):number {    return x + y;}</code></pre><h3 id="2-7-2-函数表达式"><a href="#2-7-2-函数表达式" class="headerlink" title="2.7.2 函数表达式"></a>2.7.2 函数表达式</h3><pre><code>let mySum: (x: number, y: number) =&gt; number = function (x: number, y: number): number {    return x + y;};</code></pre><p>注意在上述代码当中，跟在mySum后面的是对于输入参数和输出参数的规定，中间用箭头来进行连接，这是TypeScript的规范。</p><p>另外我们也可以通过使用接口来定义函数的形状：</p><pre><code>interface SearchFunc {    (source: string, subString: string): boolean;}let mySearch: SearchFunc;mySearch = function(source: string, subString: string) {    return source.search(subString) !== -1;}</code></pre><h3 id="2-7-3-可选参数"><a href="#2-7-3-可选参数" class="headerlink" title="2.7.3 可选参数"></a>2.7.3 可选参数</h3><ul><li>使用问号跟在参数名字之后表示是可选的，注意可选参数需要在参数列表的末尾，其之后不能有必需参数了</li></ul><pre><code>function buildName(firstName: string, lastName?: string) {    if (lastName) {        return firstName + &#39; &#39; + lastName;    } else {        return firstName;    }}</code></pre><h3 id="2-7-4-参数默认与剩余参数"><a href="#2-7-4-参数默认与剩余参数" class="headerlink" title="2.7.4 参数默认与剩余参数"></a>2.7.4 参数默认与剩余参数</h3><pre><code>// 默认参数function buildName(firstName: string, lastName: string = &#39;Cat&#39;) {    return firstName + &#39; &#39; + lastName;}let tomcat = buildName(&#39;Tom&#39;, &#39;Cat&#39;);let tom = buildName(&#39;Tom&#39;);// 使用 ...来获取函数当中的剩余参数function push(array, ...items) {    items.forEach(function(item) {        array.push(item);    });}let a: any[] = [];push(a, 1, 2, 3);</code></pre><h2 id="2-8-声明文件"><a href="#2-8-声明文件" class="headerlink" title="2.8 声明文件"></a>2.8 声明文件</h2><p>当使用第三方库的时候，我们需要引用它的声明文件，以获得对应的代码补全，接口提示的功能</p><h3 id="2-8-1-声明语句"><a href="#2-8-1-声明语句" class="headerlink" title="2.8.1 声明语句"></a>2.8.1 声明语句</h3><p>比如我们想使用jquery，一般来说是加script标签，但是ts当中，我们需要使用declare var来定义其类型</p><pre><code>declare var jQuery: (selector: string) =&gt; any;jQuery(&#39;#foo&#39;);</code></pre><p>我们会将声明语句放到一个单独的文件当中，譬如对于上述的例子，就是放到jQuery.d.ts 当中<br>声明文件必须以<code>.d.ts</code>来结尾</p><p>ts会解析项目当中所有的*.ts文件，也包含了.d.ts结尾的文件，所以当我们定义.d.ts文件以后，里面的内容是会被整个项目共享的。</p><p>另外，我们可以通过@types 来统一管理第三方库的声明文件</p><h3 id="2-8-2-书写声明文件"><a href="#2-8-2-书写声明文件" class="headerlink" title="2.8.2 书写声明文件"></a>2.8.2 书写声明文件</h3><p>当第三方库没有提供声明文件的时候，我们就需要自己书写声明文件了。</p><p>库的使用场景主要有：</p><ul><li>全局变量 </li><li>npm包</li><li>UMD库</li><li>直接扩展全局变量</li></ul><p>详情看 <a href="https://ts.xcatliu.com/basics/declaration-files#xin-yu-fa-suo-yin" target="_blank" rel="noopener">link</a></p><h1 id="2-9-内置对象"><a href="#2-9-内置对象" class="headerlink" title="2.9 内置对象"></a>2.9 内置对象</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">ECMAScript 内置对象</a></p><p><a href="https://github.com/Microsoft/TypeScript/tree/master/src/lib" target="_blank" rel="noopener">DOM DOM 内置对象</a></p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://ts.xcatliu.com/" target="_blank" rel="noopener">https://ts.xcatliu.com/</a></li><li><a href="https://es6.ruanyifeng.com/" target="_blank" rel="noopener">https://es6.ruanyifeng.com/</a></li></ol>]]></content>
     
@@ -522,33 +558,6 @@
       
         &lt;p&gt;开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。&lt;/p&gt;
 &lt;h1 id=&quot;1-如何理解-对扩展开放，对修改关闭？&quot;&gt;&lt;a href=&quot;#1-如何理解-对扩展开放，对修改关闭？&quot; class=&quot;headerli
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SOLID - 单一职责原则</title>
-    <link href="https://www.llchen60.com/SOLID-%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/"/>
-    <id>https://www.llchen60.com/SOLID-%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/</id>
-    <published>2020-03-10T03:49:07.000Z</published>
-    <updated>2020-03-10T03:50:07.853Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><ul><li>Single Responsibility Principle - 单一职责原则<ul><li>我们希望对于一个类或者模块来说，他们都是只有一个职责的，即只完成一个功能</li><li>这个职责说的其实就是，不要设计大而全的类，应当设计粒度小，功能单一的类。</li><li>在同一个类当中的方法功能，应该是在同一个业务方向当中的</li></ul></li></ul><h1 id="2-如何判断类的职责是否单一"><a href="#2-如何判断类的职责是否单一" class="headerlink" title="2. 如何判断类的职责是否单一"></a>2. 如何判断类的职责是否单一</h1><ul><li><p>E.G</p><ul><li>如果一个类，既要处理和其他微服务的交互，又要到数据库query，那么这就是两个职责，我们就应该将这个类分割开，划分到两个不同的类当中去 </li></ul></li><li><p>E.G2</p></li></ul><pre><code>public class UserInfo {  private long userId;  private String username;  private String email;  private String telephone;  private long createTime;  private long lastLoginTime;  private String avatarUrl;  private String provinceOfAddress; // 省  private String cityOfAddress; // 市  private String regionOfAddress; // 区   private String detailedAddress; // 详细地址  // ...省略其他属性和方法...}</code></pre><p>对于上述UserInfo类来说，里面全是User的一些属性，但是其中有将近半数是关于地址的，我们有理由将其细分为UserAddress类以及UserInfo类，但是在实际应用场景当中，我们需要考虑我们到底是准备如何使用这些数据的。</p><p>如果应用场景就是拿出用户相关的信息，那放在一起无伤大雅，但是如果是要做物流，电商的场景，那么我们单独想拿出地址相关信息的场景就会比较多了，这种情况最好就分成两个不同的类了。</p><p>实际开发当中，实际上一般情况下都是先写一个粗粒度的类，以满足业务的需求，随着业务的发展，如果粗粒度的类越来越庞大，我们就可以将这个粗粒度的类拆分成几个更细粒度的类，即–持续重构。</p><h1 id="3-判断是否满足单一职责原则的判断准则"><a href="#3-判断是否满足单一职责原则的判断准则" class="headerlink" title="3. 判断是否满足单一职责原则的判断准则"></a>3. 判断是否满足单一职责原则的判断准则</h1><ul><li>类中代码的行数，函数或者属性过多，会影响代码的可读性和可维护性，需要考虑对类进行拆分了</li><li>类依赖的其他类过多，或者依赖类的其他类过多，不符合高内聚，低耦合的设计思想，我们需要对其考虑进行拆分</li><li>私有方法过多，我们需要考虑是否应该将私有方法独立到新的类当中，设置为public方法，供更多的类使用，从而提高代码的复用性</li><li>如果对于一个类，比较难取名字，只能用相对泛泛的名字，那很可能意味着这个类的职责有点过多了</li><li>类中的大量方法都是集中操作类中的某几个属性，那么就可以考虑将这几个属性和对应的方法拆分出来</li></ul><p>需要注意的一点是： 我们使用这些准则，亦或者是设计模式，最终的目的还是提高代码的可读性，可扩展性，复用性，可维护性等。这才应当是我们判断是否要采用SOLID准则，以及其他的原则的最终标准。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; title=&quot;1. Intro&quot;&gt;&lt;/a&gt;1. Intro&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;Single Responsibility Principle - 单一职责原则&lt;u
       
     
     </summary>
