@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-21T03:26:33.088Z</updated>
+  <updated>2020-04-23T23:33:13.740Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript Dependency Hell - 对于JS依赖树的分析</title>
+    <link href="https://www.llchen60.com/JavaScript-Dependency-Hell-%E5%AF%B9%E4%BA%8EJS%E4%BE%9D%E8%B5%96%E6%A0%91%E7%9A%84%E5%88%86%E6%9E%90/"/>
+    <id>https://www.llchen60.com/JavaScript-Dependency-Hell-%E5%AF%B9%E4%BA%8EJS%E4%BE%9D%E8%B5%96%E6%A0%91%E7%9A%84%E5%88%86%E6%9E%90/</id>
+    <published>2020-04-23T23:32:31.000Z</published>
+    <updated>2020-04-23T23:33:13.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>做前端开发的同学肯定都对npm很熟悉，node package manager，一个非常受欢迎的包管理器。npm通过<code>package.json</code>来对项目当中的包进行管理，在这个json文件当中的包相当于就被npm注册了。</p><h1 id="1-什么是package-json"><a href="#1-什么是package-json" class="headerlink" title="1. 什么是package.json?"></a>1. 什么是package.json?</h1><ul><li><p>其定义了你的项目所依赖的所有包</p></li><li><p>并指定你的项目所用的包的版本号</p></li><li><p>让你的build是可以复制的，方便其他开发者来使用</p><h1 id="2-Package-json-中的依赖种类"><a href="#2-Package-json-中的依赖种类" class="headerlink" title="2. Package.json 中的依赖种类"></a>2. Package.json 中的依赖种类</h1></li><li><p>dependencies </p><ul><li>这里定义了你的代码所需要的关键依赖</li></ul></li><li><p>devDependencies </p><ul><li>这里定义了你的开发所使用的的依赖，比如给代码样式的perttier 库</li></ul></li><li><p>peerDependencies </p><ul><li>这里是告诉其他开发者，当使用了你的这个包以后，他们需要定义在这里的包的特定版本</li></ul></li><li><p>optionalDependencies </p><ul><li>可选的依赖，不安装他们不会毁坏安装的过程</li></ul></li><li><p>bundledDependencies </p><ul><li>这里包含的是一个列表的包，他们会被打包到一起来引入到你的项目当中。这个在你的依赖包不在npm当中的情况下是很有用的。    <h1 id="3-使用package-lock-json的目的"><a href="#3-使用package-lock-json的目的" class="headerlink" title="3. 使用package-lock.json的目的"></a>3. 使用package-lock.json的目的</h1>package-lock的使用目的，我们在前面的博文当中有详细的描述过 – <a href="https://llchen60.com/%E5%85%B3%E4%BA%8Epackage-lock-json/" target="_blank" rel="noopener">相关博文</a>。总的来说，有packge-lock.json 能够给我们更大的自由度，将commit的回退和依赖的回退分隔开，即我可以使用过去的依赖树运行当前的代码，这在没有lock json的时候是很难实现的。</li></ul></li></ul><h1 id="4-依赖树的例子与简化"><a href="#4-依赖树的例子与简化" class="headerlink" title="4. 依赖树的例子与简化"></a>4. 依赖树的例子与简化</h1><pre><code>// 以gatsby为例, know the size of your node_modules overall du -sh node_modules// list the size decending $ du -sh ./node_modules/* | sort -nr | grep &#39;\dM.*&#39; 17M    ./node_modules/rxjs8.4M    ./node_modules/@types7.4M    ./node_modules/core-js6.8M    ./node_modules/@babel5.4M    ./node_modules/gatsby5.2M    ./node_modules/eslint4.8M    ./node_modules/lodash3.6M    ./node_modules/graphql-compose3.6M    ./node_modules/@typescript-eslint3.5M    ./node_modules/webpack3.4M    ./node_modules/moment3.3M    ./node_modules/webpack-dev-server3.2M    ./node_modules/caniuse-lite3.1M    ./node_modules/graphql</code></pre><p>…</p><pre><code>// !!! moved unused modules and dependenciesnpm dedup </code></pre><p>解耦操作的运行机理，就是寻找不同依赖之间的公有的包，然后复用这些共有的包。</p><p>对于可视化，用一些现成的工具可以被用来观察整个包的依赖状态，譬如：</p><ul><li><a href="https://npm.anvaka.com/#/" target="_blank" rel="noopener">https://npm.anvaka.com/#/</a></li><li><a href="http://npm.broofa.com/" target="_blank" rel="noopener">http://npm.broofa.com/</a></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://blog.appsignal.com/2020/04/09/ride-down-the-javascript-dependency-hell.html" target="_blank" rel="noopener">https://blog.appsignal.com/2020/04/09/ride-down-the-javascript-dependency-hell.html</a> </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;做前端开发的同学肯定都对npm很熟悉，node package manager，一个非常受欢迎的包管理器。npm通过&lt;code&gt;package.json&lt;/code&gt;来对项目当中的包进行管理，在这个json文件当中的包相当于就被npm注册了。&lt;/p&gt;
+&lt;h1 id=&quot;1-什
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
+    
+    
+      <category term="JaveScript" scheme="https://www.llchen60.com/tags/JaveScript/"/>
+    
+      <category term="JS Dependency" scheme="https://www.llchen60.com/tags/JS-Dependency/"/>
+    
+  </entry>
   
   <entry>
     <title>Typescript学习笔记(二)</title>
@@ -531,33 +560,6 @@
       
         &lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; title=&quot;1. Intro&quot;&gt;&lt;/a&gt;1. Intro&lt;/h1&gt;&lt;p&gt;里氏替代原则 - Liskov Substitution Principle &lt;/p&gt;
 &lt;p&gt;讲
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SOLID - 开闭原则</title>
-    <link href="https://www.llchen60.com/SOLID-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"/>
-    <id>https://www.llchen60.com/SOLID-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/</id>
-    <published>2020-03-11T03:52:23.000Z</published>
-    <updated>2020-03-14T04:34:35.038Z</updated>
-    
-    <content type="html"><![CDATA[<p>开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。</p><h1 id="1-如何理解-对扩展开放，对修改关闭？"><a href="#1-如何理解-对扩展开放，对修改关闭？" class="headerlink" title="1. 如何理解 对扩展开放，对修改关闭？"></a>1. 如何理解 对扩展开放，对修改关闭？</h1><p>Open closed principle, Software entities (modules, classes, functions, etc) should be open for extension, but closed for modification. </p><p>添加一个新的功能应该是在已有代码基础上扩展代码，而非修改已有的代码。</p><h1 id="2-实例解释"><a href="#2-实例解释" class="headerlink" title="2. 实例解释"></a>2. 实例解释</h1><p>代码实现的功能就是当TPS超过某个预设的最大值的时候，或者是错误的数量超过允许的最大值，那么就会触发警报<br>    public class Alert {<br>      private AlertRule rule;<br>      private Notification notification;</p><pre><code>  public Alert(AlertRule rule, Notification notification) {    this.rule = rule;    this.notification = notification;  }  public void check(String api, long requestCount, long errorCount, long durationOfSeconds) {    long tps = requestCount / durationOfSeconds;    if (tps &gt; rule.getMatchedRule(api).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }    if (errorCount &gt; rule.getMatchedRule(api).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }  }}</code></pre><p>现在我们需要添加一个功能，当每秒钟请求数量超过某个阈值的时候，我们也要触发警告，发送通知。</p><p>如果直接在上述代码中进行修改的话，我们主要是需要在check函数当中，添加一个新的输入参数，timeoutCount，表示超时的请求数量，然后再check函数里面加上对应的逻辑</p><pre><code>public class Alert {  // ...省略AlertRule/Notification属性和构造函数...  // 改动一：添加参数timeoutCount  public void check(String api, long requestCount, long errorCount, long timeoutCount, long durationOfSeconds) {    long tps = requestCount / durationOfSeconds;    if (tps &gt; rule.getMatchedRule(api).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }    if (errorCount &gt; rule.getMatchedRule(api).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }    // 改动二：添加接口超时处理逻辑    long timeoutTps = timeoutCount / durationOfSeconds;    if (timeoutTps &gt; rule.getMatchedRule(api).getMaxTimeoutTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }  }}</code></pre><p>这样的改动是有不少问题的，比如我们对于传入参数做了改动，那所有调用这个函数的地方都需要进行修改，这就是个不小的问题了；而且在修改了check函数以后，所有的单元测试都需要进行修改，会很麻烦的。</p><p>为了提高这整个类的拓展性，我们可以做以下的重构操作：</p><ul><li>将check函数的多个入参封装成ApiStatInfo类</li><li>引入handler的概念，将if判断逻辑分散到各个handler当中</li></ul><pre><code>public class Alert {  private List&lt;AlertHandler&gt; alertHandlers = new ArrayList&lt;&gt;();  public void addAlertHandler(AlertHandler alertHandler) {    this.alertHandlers.add(alertHandler);  }  public void check(ApiStatInfo apiStatInfo) {    for (AlertHandler handler : alertHandlers) {      handler.check(apiStatInfo);    }  }}public class ApiStatInfo {//省略constructor/getter/setter方法  private String api;  private long requestCount;  private long errorCount;  private long durationOfSeconds;}public abstract class AlertHandler {  protected AlertRule rule;  protected Notification notification;  public AlertHandler(AlertRule rule, Notification notification) {    this.rule = rule;    this.notification = notification;  }  public abstract void check(ApiStatInfo apiStatInfo);}public class TpsAlertHandler extends AlertHandler {  public TpsAlertHandler(AlertRule rule, Notification notification) {    super(rule, notification);  }  @Override  public void check(ApiStatInfo apiStatInfo) {    long tps = apiStatInfo.getRequestCount()/ apiStatInfo.getDurationOfSeconds();    if (tps &gt; rule.getMatchedRule(apiStatInfo.getApi()).getMaxTps()) {      notification.notify(NotificationEmergencyLevel.URGENCY, &quot;...&quot;);    }  }}public class ErrorAlertHandler extends AlertHandler {  public ErrorAlertHandler(AlertRule rule, Notification notification){    super(rule, notification);  }  @Override  public void check(ApiStatInfo apiStatInfo) {    if (apiStatInfo.getErrorCount() &gt; rule.getMatchedRule(apiStatInfo.getApi()).getMaxErrorCount()) {      notification.notify(NotificationEmergencyLevel.SEVERE, &quot;...&quot;);    }  }}</code></pre><p>在使用的时候，如下：</p><pre><code>public class ApplicationContext {  private AlertRule alertRule;  private Notification notification;  private Alert alert;  public void initializeBeans() {    alertRule = new AlertRule(/*.省略参数.*/); //省略一些初始化代码    notification = new Notification(/*.省略参数.*/); //省略一些初始化代码    alert = new Alert();    alert.addAlertHandler(new TpsAlertHandler(alertRule, notification));    alert.addAlertHandler(new ErrorAlertHandler(alertRule, notification));  }  public Alert getAlert() { return alert; }  // 饿汉式单例  private static final ApplicationContext instance = new ApplicationContext();  private ApplicationContext() {    instance.initializeBeans();  }  public static ApplicationContext getInstance() {    return instance;  }}public class Demo {  public static void main(String[] args) {    ApiStatInfo apiStatInfo = new ApiStatInfo();    // ...省略设置apiStatInfo数据值的代码    ApplicationContext.getInstance().getAlert().check(apiStatInfo);  }}</code></pre><p>需要修改的地方：</p><pre><code>public class Alert { // 代码未改动... }public class ApiStatInfo {//省略constructor/getter/setter方法  private String api;  private long requestCount;  private long errorCount;  private long durationOfSeconds;  private long timeoutCount; // 改动一：添加新字段}public abstract class AlertHandler { //代码未改动... }public class TpsAlertHandler extends AlertHandler {//代码未改动...}public class ErrorAlertHandler extends AlertHandler {//代码未改动...}// 改动二：添加新的handlerpublic class TimeoutAlertHandler extends AlertHandler {//省略代码...}public class ApplicationContext {  private AlertRule alertRule;  private Notification notification;  private Alert alert;  public void initializeBeans() {    alertRule = new AlertRule(/*.省略参数.*/); //省略一些初始化代码    notification = new Notification(/*.省略参数.*/); //省略一些初始化代码    alert = new Alert();    alert.addAlertHandler(new TpsAlertHandler(alertRule, notification));    alert.addAlertHandler(new ErrorAlertHandler(alertRule, notification));    // 改动三：注册handler    alert.addAlertHandler(new TimeoutAlertHandler(alertRule, notification));  }  //...省略其他未改动代码...}public class Demo {  public static void main(String[] args) {    ApiStatInfo apiStatInfo = new ApiStatInfo();    // ...省略apiStatInfo的set字段代码    apiStatInfo.setTimeoutCount(289); // 改动四：设置tiemoutCount值    ApplicationContext.getInstance().getAlert().check(apiStatInfo);}</code></pre><h1 id="3-一些思考"><a href="#3-一些思考" class="headerlink" title="3. 一些思考"></a>3. 一些思考</h1><ul><li><p>写代码的时候就需要想想有可能会有哪些需求上的变更，如何设计代码的结构，留好扩展点。</p></li><li><p>在识别出可变部分之后，要将可变部分封装起来，隔离变化，提供抽象化的不可变接口，给上层系统来使用。当具体的实现发生变化的时候，我们只需要基于相同的抽象接口，扩展一个新的实现，这样子上游的代码就几乎不需要修改了</p></li><li><p>基于接口而非实现的编程， 对扩展开放，对修改关闭</p><p>  // 这一部分体现了抽象意识<br>  public interface MessageQueue { //… }<br>  public class KafkaMessageQueue implements MessageQueue { //… }<br>  public class RocketMQMessageQueue implements MessageQueue {//…}</p><p>  public interface MessageFormatter { //… }<br>  public class JsonMessageFormatter implements MessageFormatter {//…}<br>  public class MessageFormatter implements MessageFormatter {//…}</p><p>  public class Demo {</p><pre><code>private MessageQueue msgQueue; // 基于接口而非实现编程public Demo(MessageQueue msgQueue) { // 依赖注入  this.msgQueue = msgQueue;}// msgFormatter：多态、依赖注入public void sendNotification(Notification notification, MessageFormatter msgFormatter) {  //...    }</code></pre><p>  }</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;开闭原则说的是对扩展开放，对修改关闭。我们希望做到的是使得代码有着比较好的扩展性，但是同时也不会影响到他的可读性。&lt;/p&gt;
-&lt;h1 id=&quot;1-如何理解-对扩展开放，对修改关闭？&quot;&gt;&lt;a href=&quot;#1-如何理解-对扩展开放，对修改关闭？&quot; class=&quot;headerli
       
     
     </summary>
