@@ -53,8 +53,21 @@ ACID指的是Atomicity, Consistency, Isolation, Durability。这些都是数据�
 
 
 关于具体的一个数据库，是怎么样对各级别的隔离进行处理的，可以参考 [Github - hermitage](https://github.com/ept/hermitage)
+
+# 4. 当你无法完全锁住的时候，可以选择使用乐观锁
+
+锁是极度昂贵的，这不仅仅是因为在数据库当中造成了强竞争，并且因为他们对于长连接的要求，这种从你的应用服务器到数据库的连接需要一直保持，是非常耗资源的。排它锁收到网络分区的影响更大，并且会导致非常难debug的死锁的问题。在排它锁不易实现的情境下，乐观锁是一个值得考虑的选择。
+
+乐观锁从实现上是指当你去读一行的时候，记录下来版本号，最后一次修改的时间或者是checksum，想要达成的目的就是知道当前的它还是它。然后我们就可以在修改了数据之后去检测这个数据是否有被改变，如果没有，那么就证实其没有什么问题，我们就可以执行我们接下来的写操作了。
+
+    UPDATE products
+    SET name = 'Telegraph receiver', version = 2 
+    WHERE id = 1 AND version = 1
+
+注意乐观锁不是在数据库层面的限制了，而是在应用代码的层面，加以限制。 
 # Reference 
 1. https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78 
 2. https://www.quora.com/Why-doesnt-NoSQL-support-an-ACID-property
 3. https://en.wikipedia.org/wiki/CAP_theorem
 4. https://jepsen.io/consistency 
+5. https://blog.csdn.net/oaa608868/article/details/54866899
