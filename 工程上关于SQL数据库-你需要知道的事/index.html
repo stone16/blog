@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="215">
-<input type="hidden" id="yelog_site_word_count" value="360.4k">
+<input type="hidden" id="yelog_site_word_count" value="360.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2724,12 +2724,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-25 13:50:02'>2020-04-25 13:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-25 20:32:58'>2020-04-25 13:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2759,7 +2759,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-网络连接问题-–-难以达到的5个9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-有多个涵义"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-每个数据库都有不同的一致性和隔离性能力"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-网络连接问题-–-难以达到的5个9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-有多个涵义"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-每个数据库都有不同的一致性和隔离性能力"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-当你无法完全锁住的时候，可以选择使用乐观锁"><span class="toc-text">4. 当你无法完全锁住的时候，可以选择使用乐观锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2810,11 +2810,17 @@
 </li>
 </ul>
 <p>关于具体的一个数据库，是怎么样对各级别的隔离进行处理的，可以参考 <a href="https://github.com/ept/hermitage" target="_blank" rel="noopener">Github - hermitage</a></p>
+<h1 id="4-当你无法完全锁住的时候，可以选择使用乐观锁"><a href="#4-当你无法完全锁住的时候，可以选择使用乐观锁" class="headerlink" title="4. 当你无法完全锁住的时候，可以选择使用乐观锁"></a>4. 当你无法完全锁住的时候，可以选择使用乐观锁</h1><p>锁是极度昂贵的，这不仅仅是因为在数据库当中造成了强竞争，并且因为他们对于长连接的要求，这种从你的应用服务器到数据库的连接需要一直保持，是非常耗资源的。排它锁收到网络分区的影响更大，并且会导致非常难debug的死锁的问题。在排它锁不易实现的情境下，乐观锁是一个值得考虑的选择。</p>
+<p>乐观锁从实现上是指当你去读一行的时候，记录下来版本号，最后一次修改的时间或者是checksum，想要达成的目的就是知道当前的它还是它。然后我们就可以在修改了数据之后去检测这个数据是否有被改变，如果没有，那么就证实其没有什么问题，我们就可以执行我们接下来的写操作了。</p>
+<pre><code>UPDATE products
+SET name = &#39;Telegraph receiver&#39;, version = 2 
+WHERE id = 1 AND version = 1</code></pre><p>注意乐观锁不是在数据库层面的限制了，而是在应用代码的层面，加以限制。 </p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li><a href="https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78" target="_blank" rel="noopener">https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78</a> </li>
 <li><a href="https://www.quora.com/Why-doesnt-NoSQL-support-an-ACID-property" target="_blank" rel="noopener">https://www.quora.com/Why-doesnt-NoSQL-support-an-ACID-property</a></li>
 <li><a href="https://en.wikipedia.org/wiki/CAP_theorem" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/CAP_theorem</a></li>
 <li><a href="https://jepsen.io/consistency" target="_blank" rel="noopener">https://jepsen.io/consistency</a> </li>
+<li><a href="https://blog.csdn.net/oaa608868/article/details/54866899" target="_blank" rel="noopener">https://blog.csdn.net/oaa608868/article/details/54866899</a></li>
 </ol>
 
       
@@ -2830,10 +2836,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>工程上关于SQL数据库 - 你需要知道的事</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-04-25, 13:48:48</p>
-    <p><span class="copy-title">最后更新:</span>2020-04-25, 13:50:02</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-25, 20:32:58</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/" title="工程上关于SQL数据库 - 你需要知道的事">https://www.llchen60.com/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
