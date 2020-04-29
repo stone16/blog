@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="215">
-<input type="hidden" id="yelog_site_word_count" value="361.7k">
+<input type="hidden" id="yelog_site_word_count" value="362.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2724,12 +2724,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-04-27 15:36:20'>2020-04-27 13:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-04-28 20:34:09'>2020-04-27 13:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.4k</span>
+        <span>字数:3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2759,7 +2759,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-网络连接问题-–-难以达到的5个9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-有多个涵义"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-每个数据库都有不同的一致性和隔离性能力"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-当你无法完全锁住的时候，可以选择使用乐观锁"><span class="toc-text">4. 当你无法完全锁住的时候，可以选择使用乐观锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-除了dirty-reads-和data-loss-你可能遇到其他的一些问题"><span class="toc-text">5. 除了dirty reads 和data loss 你可能遇到其他的一些问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-关于事务提交顺序"><span class="toc-text">6. 关于事务提交顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-应用层面的数据库分区可以布局在应用之外"><span class="toc-text">7. 应用层面的数据库分区可以布局在应用之外</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-网络连接问题-–-难以达到的5个9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-有多个涵义"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-每个数据库都有不同的一致性和隔离性能力"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-当你无法完全锁住的时候，可以选择使用乐观锁"><span class="toc-text">4. 当你无法完全锁住的时候，可以选择使用乐观锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-除了dirty-reads-和data-loss-你可能遇到其他的一些问题"><span class="toc-text">5. 除了dirty reads 和data loss 你可能遇到其他的一些问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-关于事务提交顺序"><span class="toc-text">6. 关于事务提交顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-应用层面的数据库分区可以布局在应用之外"><span class="toc-text">7. 应用层面的数据库分区可以布局在应用之外</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-AUTOINCCREMENT-可能有害"><span class="toc-text">8. AUTOINCCREMENT 可能有害</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-任何时间源之间可能会有不同"><span class="toc-text">9. 任何时间源之间可能会有不同</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2831,7 +2831,19 @@ COMMIT tx1;                     COMMIT tx2;</code></pre><p>为了解决write ske
 <p>如果说执行顺序非常关键的话，我们应当将多条命令放到同一个数据库transaction当中。老避开提交时间不确定的问题。</p>
 <h1 id="7-应用层面的数据库分区可以布局在应用之外"><a href="#7-应用层面的数据库分区可以布局在应用之外" class="headerlink" title="7. 应用层面的数据库分区可以布局在应用之外"></a>7. 应用层面的数据库分区可以布局在应用之外</h1><p>有点拗口，想要说明的是当我们的数据库数据量持续增大的时候，横向的分区就变得必不可少了。但是很多数据库可能无法做好横向分区，即traffic会非常不均匀等等。</p>
 <p>标题想要阐述的，这个分区的逻辑不需要必须在你的应用里边，我们可以单独抽取出一个层级，包含分区逻辑。即application server –&gt; shard servers –&gt; database nodes。这样分离的好处是随着数据量的增大以及访问的数据特征的变化，我们需要的分区逻辑也会不断发生变化。分隔开变化，使得分区逻辑的改变不需要重新deploy应用服务器，加速了整个开发的进程。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<h1 id="8-AUTOINCCREMENT-可能有害"><a href="#8-AUTOINCCREMENT-可能有害" class="headerlink" title="8. AUTOINCCREMENT 可能有害"></a>8. AUTOINCCREMENT 可能有害</h1><p>AUTOINCREMENT是个很常见的生成主键的方式，常常看到数据库被用来作为ID生成器，或者有专门的一个数据库用来负责做ID的生成。这样做有可能会无益，以下是一些原因：</p>
+<ul>
+<li>在分布式数据库系统当中，自动增长是一个很困难的事情。是需要一个global lock来生成ID的。如果你可以用UUID来取而代之的话，那么就不需要各个数据库节点之间的合作了。带锁的自增操作可能会引入冲突，极大的降低插入操作在分布式数据库当中的表现。</li>
+<li>一些数据库根据主键来做分区算法，连续的ID很可能会导致不可测的热点，也许会让一些分区炸掉的同时其他分区很空闲。</li>
+<li>最快访问数据库当中一行的方式就是通过其主键。如果我们能够有更好的定义一条数据的方式，那么使用其他富含意义的属性来作为主键会是个更好的选择。</li>
+</ul>
+<h1 id="9-任何时间源之间可能会有不同"><a href="#9-任何时间源之间可能会有不同" class="headerlink" title="9. 任何时间源之间可能会有不同"></a>9. 任何时间源之间可能会有不同</h1><p>所有的时间相关的API是不准确的，我们的机器并不是清楚的知道当前具体是什么时间的。我们的电脑都包含一个石英晶片，可以用来产生信号，让时间开始走。但是这种方式下，不会非常精准，总会比实际的时间稍微快一些或者慢一些。为了精确性，我们的电脑上的时间就需要根据实际时间来进行同步。</p>
+<p>NTP服务器可以被用来对时间进行同步，但是好玩的是同步本身又会因为网络延时不够准确。谷歌是使用TrueTime服务来做的</p>
+<ul>
+<li>其使用两种不同的资源： GPS和原子钟。他们有不同的失败模式，因此二者并用能够增加可信赖度。</li>
+<li>TrueTime用时间间隔来表示返回的时间，即当前时间一定在一个区间之内，所做的事情就是保证在这个区间的可信度足够高了<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1></li>
+</ul>
+<ol>
 <li><a href="https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78" target="_blank" rel="noopener">https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78</a> </li>
 <li><a href="https://www.quora.com/Why-doesnt-NoSQL-support-an-ACID-property" target="_blank" rel="noopener">https://www.quora.com/Why-doesnt-NoSQL-support-an-ACID-property</a></li>
 <li><a href="https://en.wikipedia.org/wiki/CAP_theorem" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/CAP_theorem</a></li>
@@ -2853,10 +2865,10 @@ COMMIT tx1;                     COMMIT tx2;</code></pre><p>为了解决write ske
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>工程上关于SQL数据库 - 你需要知道的事</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.4k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-04-27, 13:48:48</p>
-    <p><span class="copy-title">最后更新:</span>2020-04-27, 15:36:20</p>
+    <p><span class="copy-title">最后更新:</span>2020-04-28, 20:34:09</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/" title="工程上关于SQL数据库 - 你需要知道的事">https://www.llchen60.com/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
