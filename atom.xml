@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-04-29T18:39:57.222Z</updated>
+  <updated>2020-05-01T02:37:17.627Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java 多线程</title>
+    <link href="https://www.llchen60.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>https://www.llchen60.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+    <published>2020-05-01T02:36:12.000Z</published>
+    <updated>2020-05-01T02:37:17.627Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-多线程知识基础"><a href="#1-多线程知识基础" class="headerlink" title="1. 多线程知识基础"></a>1. 多线程知识基础</h1><h2 id="1-1-线程-vs-进程"><a href="#1-1-线程-vs-进程" class="headerlink" title="1.1 线程 vs 进程"></a>1.1 线程 vs 进程</h2><p>进程是程序的一次执行过程，java当中，启动main函数就是启动了一个JVM进程，main函数所在的线程是其中之一，也称为主线程。</p><p>线程是比进程更小的执行单位，一个进程执行过程当中可以产生多个线程。同类的多个线程互相之间共享进程的堆和方法区的资源。每个线程有自己的程序计数器，虚拟机栈，和本地方法栈</p><p>线程与进程之间的关系如下图所示</p><p><img src="https://i.loli.net/2020/04/30/3AwhmaPDLkcXKMb.png" alt="线程进程关系.png"> </p><p>运行时堆和方法区，还有常量是共享的。</p><p><strong>线程私有的</strong></p><ul><li>程序计数器<ul><li>当前线程所执行的字节码的行号指示器</li><li>字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等功能都需要依赖这个计数器来完成</li><li>为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各线程之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存</li><li>程序计数器是唯一不会出现OutOfMemoryError的内存区域，声明周期是完全跟着线程的，线程创建即创建，线程结束即结束</li><li>程序计数器的私有主要是为了线程切换以后能够恢复到正确的执行位置上</li></ul></li><li>虚拟机栈<ul><li>描述java方法执行的内存模型</li><li>Java虚拟机栈由一个个栈帧组成，每个栈帧都拥有<ul><li>局部变量表<ul><li>存放了编译器已知的各种数据类型</li><li>对象引用</li></ul></li><li>操作数栈</li><li>动态链接</li><li>方法出口信息</li></ul></li></ul></li><li>本地方法栈<ul><li>虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务</li><li>本地方法被执行的时候，在本地方法栈也会创建一个栈帧，用于存放该本地方法的局部变量表、操作数栈、动态链接、出口信息。</li></ul></li></ul><p><strong>线程共享资源</strong></p><ul><li><p>堆 </p><ul><li>存放对象实例</li><li>几乎所有对象实例以及数组都在这里分配内存</li><li>堆是Java垃圾收集器的主要区域，因此也被称作GC堆 Garbage Collected Heap </li><li>堆会根据时间的长度分为多种空间，来方便垃圾收集器来更好的回收内存</li><li>还包括运行时常量池</li></ul></li><li><p>方法区</p><ul><li>用于存储已被虚拟机加载的类的信息，常量，静态变量，即时编译器编译后的代码等数据</li></ul></li><li><p>直接内存</p></li></ul><h2 id="1-2-并发-vs-并行"><a href="#1-2-并发-vs-并行" class="headerlink" title="1.2 并发 vs 并行"></a>1.2 并发 vs 并行</h2><p>并发 - 同一时间段的多个任务都在执行<br>并行 - 单位时间内，多个任务同时执行</p><h2 id="1-3-多线程带来的改变"><a href="#1-3-多线程带来的改变" class="headerlink" title="1.3 多线程带来的改变"></a>1.3 多线程带来的改变</h2><h3 id="1-3-1-优势"><a href="#1-3-1-优势" class="headerlink" title="1.3.1 优势"></a>1.3.1 优势</h3><ul><li>线程，是程序执行的最小单位，线程间的切换和调度成本远远小于进程。而且多核CPU时代意味着多个线程同时进行，这减少了线程上下文切换的开销</li><li>多线程并发变成是开发高并发系统的基础</li><li>单核时代多线程做的优化更多是提高CPU和IO的综合利用率。在一个线程做IO的时候，另外一个线程可以到内核当中做利用CPU的大量计算</li><li>多核时代想做的事情就是同时使用多个内核一起来做这件事，提高整个运行的效率</li></ul><h3 id="1-3-2-可能的问题"><a href="#1-3-2-可能的问题" class="headerlink" title="1.3.2 可能的问题"></a>1.3.2 可能的问题</h3><p>需要解决内存泄漏，死锁，线程不安全相关的问题</p><ul><li>死锁<ul><li>多个线程被同时阻塞，在等待某个资源的释放</li><li>产生死锁的条件<ul><li>互斥条件 – 该资源任意时刻只由一个线程占用</li><li>请求与保持条件 – 一个进程因请求资源而阻塞时，对已获得的资源保持不放 </li><li>不剥夺条件 – 线程已获得的资源在末使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源</li><li>循环等待条件 – 若干进程之间形成一种头尾相接的循环等待资源关系</li></ul></li></ul></li></ul><pre><code>public class DeadLockDemo {    private static Object resource1 = new Object();//资源 1    private static Object resource2 = new Object();//资源 2    public static void main(String[] args) {        new Thread(() -&gt; {            synchronized (resource1) {                System.out.println(Thread.currentThread() + &quot;get resource1&quot;);                try {                    Thread.sleep(1000);                } catch (InterruptedException e) {                    e.printStackTrace();                }                System.out.println(Thread.currentThread() + &quot;waiting get resource2&quot;);                synchronized (resource2) {                    System.out.println(Thread.currentThread() + &quot;get resource2&quot;);                }            }        }, &quot;线程 1&quot;).start();        new Thread(() -&gt; {            synchronized (resource2) {                System.out.println(Thread.currentThread() + &quot;get resource2&quot;);                try {                    Thread.sleep(1000);                } catch (InterruptedException e) {                    e.printStackTrace();                }                System.out.println(Thread.currentThread() + &quot;waiting get resource1&quot;);                synchronized (resource1) {                    System.out.println(Thread.currentThread() + &quot;get resource1&quot;);                }            }        }, &quot;线程 2&quot;).start();    }}</code></pre><h2 id="1-4-sleep（）vs-wait（）"><a href="#1-4-sleep（）vs-wait（）" class="headerlink" title="1.4 sleep（）vs wait（）"></a>1.4 sleep（）vs wait（）</h2><ul><li>最主要的区别在于sleep并没有释放锁，而wait方法会释放锁</li><li>二者都暂停了当前线程的执行</li><li>wait用于线程之间的交互和通信，sleep用于暂停执行</li><li>wait()方法被调用以后，线程不会自动苏醒，需要别的线程调用同一个对象上的notify()或者notifyAll()方法</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-多线程知识基础&quot;&gt;&lt;a href=&quot;#1-多线程知识基础&quot; class=&quot;headerlink&quot; title=&quot;1. 多线程知识基础&quot;&gt;&lt;/a&gt;1. 多线程知识基础&lt;/h1&gt;&lt;h2 id=&quot;1-1-线程-vs-进程&quot;&gt;&lt;a href=&quot;#1-1-线程-vs-进
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Multi-threading" scheme="https://www.llchen60.com/tags/Multi-threading/"/>
+    
+  </entry>
   
   <entry>
     <title>工程上关于SQL数据库 - 你需要知道的事</title>
@@ -534,34 +562,6 @@
       
       
         &lt;h1 id=&quot;1-控制反转-IOC-Inversion-of-Control&quot;&gt;&lt;a href=&quot;#1-控制反转-IOC-Inversion-of-Control&quot; class=&quot;headerlink&quot; title=&quot;1. 控制反转 IOC Inversion of Contr
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="SOLID" scheme="https://www.llchen60.com/tags/SOLID/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SOLID - 接口隔离原则</title>
-    <link href="https://www.llchen60.com/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/"/>
-    <id>https://www.llchen60.com/SOLID-%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99/</id>
-    <published>2020-03-17T01:26:08.000Z</published>
-    <updated>2020-03-17T01:26:41.608Z</updated>
-    
-    <content type="html"><![CDATA[<p>接口隔离原则 – interface segregation principle </p><p>客户端不应该强迫依赖它不需要的接口。</p><h1 id="1-将接口视为一组API接口的集合"><a href="#1-将接口视为一组API接口的集合" class="headerlink" title="1. 将接口视为一组API接口的集合"></a>1. 将接口视为一组API接口的集合</h1><pre><code>public interface UserService {  boolean register(String cellphone, String password);  boolean login(String cellphone, String password);  UserInfo getUserInfoById(long id);  UserInfo getUserInfoByCellphone(String cellphone);}public class UserServiceImpl implements UserService {  //...}</code></pre><p>当我们要实现删除操作的时候，最好不要直接在UserService里面加上这个方法，因为用户服务实质上不应该被默认直接具有删除的权限，相对应的，我们应该去创建一个新的接口，里面实现有删除相关的方法，实现接口的隔离。</p><pre><code>public interface UserService {  boolean register(String cellphone, String password);  boolean login(String cellphone, String password);  UserInfo getUserInfoById(long id);  UserInfo getUserInfoByCellphone(String cellphone);}public interface RestrictedUserService {  boolean deleteUserByCellphone(String cellphone);  boolean deleteUserById(long id);}public class UserServiceImpl implements UserService, RestrictedUserService {  // ...省略实现代码...}</code></pre><h1 id="2-将接口理解为单个API接口或者函数"><a href="#2-将接口理解为单个API接口或者函数" class="headerlink" title="2. 将接口理解为单个API接口或者函数"></a>2. 将接口理解为单个API接口或者函数</h1><p>函数的设计需要功能单一，不要将多个不同的功能逻辑放在一个函数当中实现。</p><pre><code>public class Statistics {  private Long max;  private Long min;  private Long average;  private Long sum;  private Long percentile99;  private Long percentile999;  //...省略constructor/getter/setter等方法...}public Statistics count(Collection&lt;Long&gt; dataSet) {  Statistics statistics = new Statistics();  //...省略计算逻辑...  return statistics;}</code></pre><p>count方法算了太多不同的指标，应该将其分割开的。</p><pre><code>public Long max(Collection&lt;Long&gt; dataSet) { //... }public Long min(Collection&lt;Long&gt; dataSet) { //... } public Long average(Colletion&lt;Long&gt; dataSet) { //... }// ...省略其他统计函数...</code></pre><h1 id="3-将接口理解为OOP中的接口的概念"><a href="#3-将接口理解为OOP中的接口的概念" class="headerlink" title="3. 将接口理解为OOP中的接口的概念"></a>3. 将接口理解为OOP中的接口的概念</h1><p>即在设计接口的时候尽量减少大而全的接口的设计，每个接口都只做一件事情，这样子类在implement interface的时候，我们通过接口名也可以很清晰的知道在做什么，会有什么功能，也很大程度上提升了代码的复用性。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;接口隔离原则 – interface segregation principle &lt;/p&gt;
-&lt;p&gt;客户端不应该强迫依赖它不需要的接口。&lt;/p&gt;
-&lt;h1 id=&quot;1-将接口视为一组API接口的集合&quot;&gt;&lt;a href=&quot;#1-将接口视为一组API接口的集合&quot; class=&quot;he
       
     
     </summary>
