@@ -398,9 +398,14 @@ top:
 
 
 ![execute process](https://i.loli.net/2020/05/02/t7yVTDjNZdnEahw.png)
-# 3. AQS
 
-# 4. Atomic原子类
+
+# 3. Atomic原子类
+
+
+
+# 4. AQS
+
 
 # Reference
 1. https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/Multithread/synchronized.md
