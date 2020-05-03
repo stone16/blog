@@ -1,5 +1,5 @@
 ---
-title: Java 多线程基础知识
+title: Java 多线程 基础知识(一)
 date: 2020-04-30 19:36:12
 categories: BackEnd
 tags:
@@ -222,7 +222,7 @@ top:
 + volatile关键字能保证数据的可见性，不能保证数据的原子性。synchronized都可以保证
 + volatile关键字主要用于解决变量在多个线程之间的可见性，而 synchronized关键字解决的是多个线程之间访问资源的同步性
 
-# 2. 线程池 and ThreadLocal
+# 2. ThreadLocal
 ## 2.1 ThreadLocal
 通常情况下，我们创建的变量时可以被任何一个线程访问并修改的，如果想实现每一个线程都有自己的专属的本地变量的话，可以使用JDK提供的ThreadLocal类。ThreadLocal类解决的问题就是想让每个线程都绑定自己的值。
 
@@ -295,118 +295,120 @@ top:
 + 从上面的代码中，可以看出最终的变量是放在了当前线程的ThreadLocalMap当中，并不是直接存在ThreadLocal上，ThreadLocal可以理解为只是ThreadLocalMap的封装，传递了变量值。
 + ThreadLocal类可以通过Thread.currentThread()获取当前线程对象之后，直接通过getMap(Thread t) 访问到该线程的ThreadLocalMap对象
 
+# 3. AQS
 
-## 2.2 线程池
+AQS全称为AbstractQueuedSynchronizer，是一个用来构建锁和同步器的框架。
 
-+ 线程池用来限制和管理资源，每个线程池还可以维护一些基本统计信息
-+ 好处
-    + 降低资源消耗
-        + 重复利用已经创建的线程，来降低线程创建和销毁造成的消耗
-    + 提高响应速度
-        + 当任务到达时，任务可以不需要的等到线程创建就能立即执行
-    + 提高线程的可管理性
-        + 线程是稀缺资源，无限制创建会消耗系统资源，并且降低系统稳定性；使用线程池可以进行统一分配，调优和监控
+## 3.1 原理分析
+
+核心思想为如果被请求的共享资源是空闲的，就将现在请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的资源被占用了，那么就需要一整套线程阻塞等待以及被唤醒时锁分配的机制，AQS使用CLH队列锁实现，将暂时获取不到锁的线程加入到队列当中。
+
+CLH(Craig,Landin,and Hagersten)队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系）。AQS是将每条请求共享资源的线程封装成一个CLH锁队列的一个结点（Node）来实现锁的分配
+
++ AQS使用int变量来表示同步状态
++ 通过内置的FIFO队列来完成获取资源线程的排队工作
++ AQS使用CAS对该同步状态进行原子操作实现对其值的修改
 
 
-### 2.2.1 ThreadPoolExecutor详解
+    private volatile int state;//共享变量，使用volatile修饰保证线程可见性
 
-    /**
-     * 用给定的初始参数创建一个新的ThreadPoolExecutor。
-     */
-    public ThreadPoolExecutor(int corePoolSize,
-                              int maximumPoolSize,
-                              long keepAliveTime,
-                              TimeUnit unit,
-                              BlockingQueue<Runnable> workQueue,
-                              ThreadFactory threadFactory,
-                              RejectedExecutionHandler handler) {
-        if (corePoolSize < 0 ||
-            maximumPoolSize <= 0 ||
-            maximumPoolSize < corePoolSize ||
-            keepAliveTime < 0)
-            throw new IllegalArgumentException();
-        if (workQueue == null || threadFactory == null || handler == null)
-            throw new NullPointerException();
-        this.corePoolSize = corePoolSize;
-        this.maximumPoolSize = maximumPoolSize;
-        this.workQueue = workQueue;
-        this.keepAliveTime = unit.toNanos(keepAliveTime);
-        this.threadFactory = threadFactory;
-        this.handler = handler;
+    //返回同步状态的当前值
+    protected final int getState() {  
+            return state;
     }
+     // 设置同步状态的值
+    protected final void setState(int newState) { 
+            state = newState;
+    }
+    //原子地（CAS操作）将同步状态值设置为给定值update如果当前同步状态的值等于expect（期望值）
+    protected final boolean compareAndSetState(int expect, int update) {
+            return unsafe.compareAndSwapInt(this, stateOffset, expect, update);
+    }
+
+## 3.2 AQS资源共享方式
+
++ 共有两种资源共享方式
+    + Exclusive 独占 
+        + 只有一个线程能执行，又分为公平锁和非公平锁
+        + 公平锁
+            + 按照线程在队列中的排队顺序，先到者先拿到锁 
+        + 非公平锁  
+            + 当线程要获取锁时，无视队列顺序直接去抢锁，谁抢到就是谁的
+    + Share 共享
+        + 多个线程可同时执行
+            + semaphore
+            + coutDownLatch
+           
+## 3.3 常用组件
+
++ Semaphore 信号量 -- 允许多个线程同时访问
+    + synchronized 和 ReentrantLock 都是一次只允许一个线程访问某个资源，Semaphore(信号量)可以指定多个线程同时访问某个资源。
++ CountDownLatch 倒计时器
+    + CountDownLatch是一个同步工具类，用来协调多个线程之间的同步。这个工具通常用来控制线程等待，它可以让某一个线程等待直到倒计时结束，再开始执行
+
++ CyclicBarrier 循环栅栏
+    + CyclicBarrier 和 CountDownLatch 非常类似，它也可以实现线程间的技术等待，但是它的功能比 CountDownLatch 更加复杂和强大。主要应用场景和 CountDownLatch 类似。CyclicBarrier 的字面意思是可循环使用（Cyclic）的屏障（Barrier）
+    + 它要做的事情是，让一组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续干活。CyclicBarrier默认的构造方法是 CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，每个线程调用await()方法告诉 CyclicBarrier 我已经到达了屏障，然后当前线程被阻塞
+# 4. Atomic原子类
+
+在这里指的是不可中断的操作，即便是多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程干扰。原子类体系就是就有原子/原子操作特征的类。
+
+
+## 4.1 General
+
++ 基本类型 - 使用原子的方式更新基本类型
+    +  AtomicInteger 整形原子类
+    +  AtomicLong 长整形原子类
+    +  AtomicBoolean 布尔型原子类
++ 数组类型
+    + AtomicIntegerArray 整形数组原子类
+    + AtomicLongArray 长整形数组原子类
+    + AtomicReferenceArray 引用类型数组原子类
+
++ 引用类型
+    + AtomicReference 引用类型原子类
+    + AtomicStampedReference 原子更新引用类型里的字段原子类
+    + AtomicMarkableReference 原子更新带有标记位的引用类型
+
++ 对象的属性修改类型
+    + AtomicIntegerFieldUpdater 
+    + AtomicLongFielfUpdater
+    + AtomicStampedReference 
+
+## 4.2 使用与原理
++ 以AtomicInteger为例，其方法如下：
+
+
+        public final int get() //获取当前的值
+        public final int getAndSet(int newValue)//获取当前的值，并设置新的值
+        public final int getAndIncrement()//获取当前的值，并自增
+        public final int getAndDecrement() //获取当前的值，并自减
+        public final int getAndAdd(int delta) //获取当前的值，并加上预期的值
+        boolean compareAndSet(int expect, int update) //如果输入的数值等于预期值，则以原子方式将该值设置为输入值（update）
+        public final void lazySet(int newValue)//最终设置为newValue,使用 lazySet 设置之后可能导致其他线程在之后的一小段时间内还是可以读到旧的值。
     
-+ corePoolSize 
-    + 定义了不会timeout的最小的同时工作的线程数量
-+ maxPoolSize
-    + 定义了可以被创建的线程的最大数量
-    + 和CorePoolSize的区别在于当提交一个新的任务，当前线程数量小于corePoolSize的时候，哪怕现在存在的线程是空闲的，还是会创建新线程来运行这个任务；maxPoolSize说的是最多能够创建的线程数量，是上限
-+ workQueue
-    + 当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中
-+ handler 饱和策略 - 当当前同时运行的线程数量达到最大线程数量，并且队列已经被放满了的时候的策略
-    + AbortPolicy
-        + 抛出RejectedExecutionException来拒绝新的任务的处理
-    + CallerRunsPolicy 
-        + 调用执行自己的线程运行任务，会有延迟
-    + DiscardPolicy  
-        + 不处理新任务，直接丢弃掉
-    + DiscardOldestPolicy 
-        + 丢弃最早的未处理的任务请求
++ AtomicInteger实现原理
+    + 使用CAS以及volative来保证原子操作，从而避免synchronized的高开销，执行效率大为提升
+    + CAS的原理是拿期望的值和原本的一个值作比较，如果相同则更新成新的值
+    + UnSafe 类的 objectFieldOffset() 方法是一个本地方法，这个方法是用来拿到“原来的值”的内存地址，返回值是 valueOffset
+    + 另外 value 是一个volatile变量，在内存中可见，因此 JVM 可以保证任何时刻任何线程总能拿到该变量的最新值。
 
 
-+ Executor.execute代码的源码如下： 
 
-        // 存放线程池的运行状态 (runState) 和线程池内有效线程的数量 (workerCount)
-        private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 
-        private static int workerCountOf(int c) {
-            return c & CAPACITY;
+
+        // setup to use Unsafe.compareAndSwapInt for updates（更新操作时提供“比较并替换”的作用）
+        private static final Unsafe unsafe = Unsafe.getUnsafe();
+        private static final long valueOffset;
+
+        static {
+            try {
+                valueOffset = unsafe.objectFieldOffset
+                    (AtomicInteger.class.getDeclaredField("value"));
+            } catch (Exception ex) { throw new Error(ex); }
         }
 
-        private final BlockingQueue<Runnable> workQueue;
-
-        public void execute(Runnable command) {
-            // 如果任务为null，则抛出异常。
-            if (command == null)
-                throw new NullPointerException();
-            // ctl 中保存的线程池当前的一些状态信息
-            int c = ctl.get();
-
-            //  下面会涉及到 3 步 操作
-            // 1.首先判断当前线程池中之行的任务数量是否小于 corePoolSize
-            // 如果小于的话，通过addWorker(command, true)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。
-            if (workerCountOf(c) < corePoolSize) {
-                if (addWorker(command, true))
-                    return;
-                c = ctl.get();
-            }
-            // 2.如果当前之行的任务数量大于等于 corePoolSize 的时候就会走到这里
-            // 通过 isRunning 方法判断线程池状态，线程池处于 RUNNING 状态才会被并且队列可以加入任务，该任务才会被加入进去
-            if (isRunning(c) && workQueue.offer(command)) {
-                int recheck = ctl.get();
-                // 再次获取线程池状态，如果线程池状态不是 RUNNING 状态就需要从任务队列中移除任务，并尝试判断线程是否全部执行完毕。同时执行拒绝策略。
-                if (!isRunning(recheck) && remove(command))
-                    reject(command);
-                    // 如果当前线程池为空就新创建一个线程并执行。
-                else if (workerCountOf(recheck) == 0)
-                    addWorker(null, false);
-            }
-            //3. 通过addWorker(command, false)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。
-            //如果addWorker(command, false)执行失败，则通过reject()执行相应的拒绝策略的内容。
-            else if (!addWorker(command, false))
-                reject(command);
-        }
-
-
-![execute process](https://i.loli.net/2020/05/02/t7yVTDjNZdnEahw.png)
-
-
-# 3. Atomic原子类
-
-
-
-# 4. AQS
-
-
+        private volatile int value;
 # Reference
 1. https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/Multithread/synchronized.md
 2. https://blog.csdn.net/zqz_zqz/article/details/70233767
