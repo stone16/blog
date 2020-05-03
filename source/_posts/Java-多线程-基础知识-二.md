@@ -122,3 +122,171 @@ Java 提供的线程安全的 Queue 可以分为阻塞队列和非阻塞队列�
 ## 2.2 悲观锁
 
 总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程）。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中synchronized和ReentrantLock等独占锁就是悲观锁思想的实现。
+
+
+
+# 3. 线程池
+
++ 线程池用来限制和管理资源，每个线程池还可以维护一些基本统计信息
++ 好处
+    + 降低资源消耗
+        + 重复利用已经创建的线程，来降低线程创建和销毁造成的消耗
+    + 提高响应速度
+        + 当任务到达时，任务可以不需要的等到线程创建就能立即执行
+    + 提高线程的可管理性
+        + 线程是稀缺资源，无限制创建会消耗系统资源，并且降低系统稳定性；使用线程池可以进行统一分配，调优和监控
+
+
+## 3.1 ThreadPoolExecutor详解
+
+    /**
+     * 用给定的初始参数创建一个新的ThreadPoolExecutor。
+     */
+    public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory,
+                              RejectedExecutionHandler handler) {
+        if (corePoolSize < 0 ||
+            maximumPoolSize <= 0 ||
+            maximumPoolSize < corePoolSize ||
+            keepAliveTime < 0)
+            throw new IllegalArgumentException();
+        if (workQueue == null || threadFactory == null || handler == null)
+            throw new NullPointerException();
+        this.corePoolSize = corePoolSize;
+        this.maximumPoolSize = maximumPoolSize;
+        this.workQueue = workQueue;
+        this.keepAliveTime = unit.toNanos(keepAliveTime);
+        this.threadFactory = threadFactory;
+        this.handler = handler;
+    }
+    
++ corePoolSize 
+    + 定义了不会timeout的最小的同时工作的线程数量
++ maxPoolSize
+    + 定义了可以被创建的线程的最大数量
+    + 和CorePoolSize的区别在于当提交一个新的任务，当前线程数量小于corePoolSize的时候，哪怕现在存在的线程是空闲的，还是会创建新线程来运行这个任务；maxPoolSize说的是最多能够创建的线程数量，是上限
++ workQueue
+    + 当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中
++ handler 饱和策略 - 当当前同时运行的线程数量达到最大线程数量，并且队列已经被放满了的时候的策略
+    + AbortPolicy
+        + 抛出RejectedExecutionException来拒绝新的任务的处理
+    + CallerRunsPolicy 
+        + 调用执行自己的线程运行任务，会有延迟
+    + DiscardPolicy  
+        + 不处理新任务，直接丢弃掉
+    + DiscardOldestPolicy 
+        + 丢弃最早的未处理的任务请求
+
+
++ Executor.execute代码的源码如下： 
+
+        // 存放线程池的运行状态 (runState) 和线程池内有效线程的数量 (workerCount)
+        private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+
+        private static int workerCountOf(int c) {
+            return c & CAPACITY;
+        }
+
+        private final BlockingQueue<Runnable> workQueue;
+
+        public void execute(Runnable command) {
+            // 如果任务为null，则抛出异常。
+            if (command == null)
+                throw new NullPointerException();
+            // ctl 中保存的线程池当前的一些状态信息
+            int c = ctl.get();
+
+            //  下面会涉及到 3 步 操作
+            // 1.首先判断当前线程池中之行的任务数量是否小于 corePoolSize
+            // 如果小于的话，通过addWorker(command, true)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。
+            if (workerCountOf(c) < corePoolSize) {
+                if (addWorker(command, true))
+                    return;
+                c = ctl.get();
+            }
+            // 2.如果当前之行的任务数量大于等于 corePoolSize 的时候就会走到这里
+            // 通过 isRunning 方法判断线程池状态，线程池处于 RUNNING 状态才会被并且队列可以加入任务，该任务才会被加入进去
+            if (isRunning(c) && workQueue.offer(command)) {
+                int recheck = ctl.get();
+                // 再次获取线程池状态，如果线程池状态不是 RUNNING 状态就需要从任务队列中移除任务，并尝试判断线程是否全部执行完毕。同时执行拒绝策略。
+                if (!isRunning(recheck) && remove(command))
+                    reject(command);
+                    // 如果当前线程池为空就新创建一个线程并执行。
+                else if (workerCountOf(recheck) == 0)
+                    addWorker(null, false);
+            }
+            //3. 通过addWorker(command, false)新建一个线程，并将任务(command)添加到该线程中；然后，启动该线程从而执行任务。
+            //如果addWorker(command, false)执行失败，则通过reject()执行相应的拒绝策略的内容。
+            else if (!addWorker(command, false))
+                reject(command);
+        }
+
+
+![execute process](https://i.loli.net/2020/05/02/t7yVTDjNZdnEahw.png)
+
+## 3.2 Executor框架
+
+Java5以后引入的Executor，用其启动线程比使用Thread的start方法更好，易管理，效率高，还可以帮助避免this逃逸的问题。Executor框架提供了：
++ 线程池管理
++ 线程工厂
++ 队列
++ 拒绝策略
+
+### 3.2.1 框架结构
+
++ 任务
+    + 执行任务实现Runnable或者Callable接口，然后被ThreadPoolExecutor或者ScheduledThreadPoolExecutor来执行
++ 任务执行
+    + Executor
++ 异步计算的结果
+    + Future接口以及Future接口实现类FutureTask都可以来代表异步计算的结果
+
+![Exectuor 流程图](https://i.loli.net/2020/05/04/pxtNFGULRe3IT6a.png)
+
+整个过程中，主线程首先创建并实现了Runnable或者Callable的任务对象，而后将对象交给ExecutorService来执行，然后拿到返回的Future接口，执行FutureTask.get（）等方法来等待任务执行完成
+
+## 3.3 常用线程池
+### 3.3.1 FixedThreadPool
++ FixedThreadPool
+    + 如果当前运行的线程数小于 corePoolSize， 如果再来新任务的话，就创建新的线程来执行任务；
+    + 当前运行的线程数等于 corePoolSize 后， 如果再来新任务的话，会将任务加入 LinkedBlockingQueue；
+    + 线程池中的线程执行完 手头的任务后，会在循环中反复从 LinkedBlockingQueue 中获取任务来执行；
+
++ 不推荐使用
+    + 线程池中的线程数达到 corePoolSize 后，新任务将在无界队列中等待，因此线程池中的线程数不会超过 corePoolSize
+    + 由于使用无界队列时 maximumPoolSize 将是一个无效参数，因为不可能存在任务队列满的情况。所以，通过创建 FixedThreadPool的源码可以看出创建的 FixedThreadPool 的 corePoolSize 和 maximumPoolSize 被设置为同一个值
+    + 由于上述两点，keepAliveTime就会是一个无效参数了
+    + 因为无法执行shutdown() shutdownNow()，不会拒绝任务，在任务比较多的时候会导致OOM(内存溢出的问题)
+
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                                      0L, TimeUnit.MILLISECONDS,
+                                      new LinkedBlockingQueue<Runnable>());
+    }
+
+
+### 3.3.2 CachedThreadPool 
+
+可以根据需要来创建新线程的线程池
+
+
+        /**
+         * 创建一个线程池，根据需要创建新线程，但会在先前构建的线程可用时重用它。
+         */
+        public static ExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
+            return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                          60L, TimeUnit.SECONDS,
+                                          new SynchronousQueue<Runnable>(),
+                                          threadFactory);
+        }
+  
+注意看源码中，corePoolSize设置为空，maximumPoolSize设置为无界的了，如果主线程提交任务的速度高于maximumPool中线程处理任务的速度，CachedThreadPool会不断创建新的线程，极端情况下，会耗尽CPU和内存资源的。
+
+
+# Reference
+1. https://github.com/Snailclimb/JavaGuide/ 
+2. https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/
