@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Bash 脚本</title>
+      <link href="/Bash-%E8%84%9A%E6%9C%AC/"/>
+      <url>/Bash-%E8%84%9A%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<p>Bash是大多数Linux发行版的默认Shell（命令行环境），值得去研究一波~</p><p>最近也有很多人转而使用zsh，看到一个不错的<a href="https://apple.stackexchange.com/questions/361870/what-are-the-practical-differences-between-bash-and-zsh" target="_blank" rel="noopener">post</a>,讲了二者的主要区别</p><h1 id="1-基本语法"><a href="#1-基本语法" class="headerlink" title="1. 基本语法"></a>1. 基本语法</h1><ul><li><p>echo 在屏幕输出一行文本，可以将该命令的参数原样输出</p><ul><li><code>-n</code> 取消末尾的回车符</li><li><code>-e</code> 解释引号当中的特殊字符，进行转义 </li></ul></li><li><p>命令格式</p><ul><li><code>command [arg1 ... argN]</code></li><li><code>ls -l</code> 等于 <code>ls --list</code><ul><li>其实主要是写script的时候为了让语句自己能够解释自己，会选用长形式，其余时候一般都选用短形式的语句</li></ul></li></ul></li><li><p>分号</p><ul><li>命令的结束符，使得一行可以放置多个命令</li><li>上个命令执行完之后，才会执行下一个命令</li><li>后一个指令总会接着第一个来执行，不管第一个成功或者失败</li></ul></li><li><p>命令组合符</p><ul><li><code>command1 &amp;&amp; command2</code> <ul><li>如果command1成功，才会继续执行command2</li></ul></li><li><code>command1 || command2</code><ul><li>如果command1成功，就不执行command2了</li></ul></li></ul></li><li><p>type命令  – 用于判断命令的来源，是内置的命令或者外部程序</p><ul><li><code>-a</code> 去查看一个命令的所有定义</li><li><code>-t</code> 可以返回一个命令的类型<ul><li>alias</li><li>keyword</li><li>function</li><li>builtin</li><li>file</li></ul></li></ul></li><li><p>快捷键</p><ul><li><code>Ctrl + L</code>：清除屏幕并将当前行移到页面顶部。</li><li><code>Ctrl + C</code>：中止当前正在执行的命令。</li><li><code>Shift + PageUp</code>：向上滚动。</li><li><code>Shift + PageDown</code>：向下滚动。</li><li><code>Ctrl + U</code>：从光标位置删除到行首。</li><li><code>Ctrl + K</code>：从光标位置删除到行尾。</li><li><code>Ctrl + D</code>：关闭 Shell 会话。</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://wangdoc.com/bash/grammar.html" target="_blank" rel="noopener">https://wangdoc.com/bash/grammar.html</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于时间管理</title>
       <link href="/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"/>
       <url>/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</url>

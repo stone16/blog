@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-05-06T05:34:05.299Z</updated>
+  <updated>2020-05-08T05:25:36.811Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Bash 脚本</title>
+    <link href="https://www.llchen60.com/Bash-%E8%84%9A%E6%9C%AC/"/>
+    <id>https://www.llchen60.com/Bash-%E8%84%9A%E6%9C%AC/</id>
+    <published>2020-05-08T05:24:54.000Z</published>
+    <updated>2020-05-08T05:25:36.811Z</updated>
+    
+    <content type="html"><![CDATA[<p>Bash是大多数Linux发行版的默认Shell（命令行环境），值得去研究一波~</p><p>最近也有很多人转而使用zsh，看到一个不错的<a href="https://apple.stackexchange.com/questions/361870/what-are-the-practical-differences-between-bash-and-zsh" target="_blank" rel="noopener">post</a>,讲了二者的主要区别</p><h1 id="1-基本语法"><a href="#1-基本语法" class="headerlink" title="1. 基本语法"></a>1. 基本语法</h1><ul><li><p>echo 在屏幕输出一行文本，可以将该命令的参数原样输出</p><ul><li><code>-n</code> 取消末尾的回车符</li><li><code>-e</code> 解释引号当中的特殊字符，进行转义 </li></ul></li><li><p>命令格式</p><ul><li><code>command [arg1 ... argN]</code></li><li><code>ls -l</code> 等于 <code>ls --list</code><ul><li>其实主要是写script的时候为了让语句自己能够解释自己，会选用长形式，其余时候一般都选用短形式的语句</li></ul></li></ul></li><li><p>分号</p><ul><li>命令的结束符，使得一行可以放置多个命令</li><li>上个命令执行完之后，才会执行下一个命令</li><li>后一个指令总会接着第一个来执行，不管第一个成功或者失败</li></ul></li><li><p>命令组合符</p><ul><li><code>command1 &amp;&amp; command2</code> <ul><li>如果command1成功，才会继续执行command2</li></ul></li><li><code>command1 || command2</code><ul><li>如果command1成功，就不执行command2了</li></ul></li></ul></li><li><p>type命令  – 用于判断命令的来源，是内置的命令或者外部程序</p><ul><li><code>-a</code> 去查看一个命令的所有定义</li><li><code>-t</code> 可以返回一个命令的类型<ul><li>alias</li><li>keyword</li><li>function</li><li>builtin</li><li>file</li></ul></li></ul></li><li><p>快捷键</p><ul><li><code>Ctrl + L</code>：清除屏幕并将当前行移到页面顶部。</li><li><code>Ctrl + C</code>：中止当前正在执行的命令。</li><li><code>Shift + PageUp</code>：向上滚动。</li><li><code>Shift + PageDown</code>：向下滚动。</li><li><code>Ctrl + U</code>：从光标位置删除到行首。</li><li><code>Ctrl + K</code>：从光标位置删除到行尾。</li><li><code>Ctrl + D</code>：关闭 Shell 会话。</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://wangdoc.com/bash/grammar.html" target="_blank" rel="noopener">https://wangdoc.com/bash/grammar.html</a> </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Bash是大多数Linux发行版的默认Shell（命令行环境），值得去研究一波~&lt;/p&gt;
+&lt;p&gt;最近也有很多人转而使用zsh，看到一个不错的&lt;a href=&quot;https://apple.stackexchange.com/questions/361870/what-are-
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://www.llchen60.com/categories/Linux/"/>
+    
+    
+      <category term="bash" scheme="https://www.llchen60.com/tags/bash/"/>
+    
+  </entry>
   
   <entry>
     <title>关于时间管理</title>
@@ -546,37 +573,6 @@
     
     
       <category term="Mentor" scheme="https://www.llchen60.com/tags/Mentor/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>迪米特法则 (LOD) — 高内聚，低耦合</title>
-    <link href="https://www.llchen60.com/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/"/>
-    <id>https://www.llchen60.com/%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99-LOD-%E2%80%94-%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88/</id>
-    <published>2020-03-23T03:30:09.000Z</published>
-    <updated>2020-03-23T03:30:50.426Z</updated>
-    
-    <content type="html"><![CDATA[<p>高内聚 低耦合是比较通用的设计思想，可以用来指导不同的粒度的代码的设计和开发的工作，比如系统，模块，类，甚至是函数。也可以去使用到不同的开发场景当中，比如微服务，框架，组件，类库等等。</p><p>在这个原则当中，高内聚指的是类本身的设计，低耦合指的是类和类之间的依赖关系的设计。</p><p>迪米特法则，可以称之为The least knowledge principle.<br>Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.</p><h1 id="1-什么是高内聚？"><a href="#1-什么是高内聚？" class="headerlink" title="1. 什么是高内聚？"></a>1. 什么是高内聚？</h1><p>指的是相近的功能应该放到同一个类当中，不相近的功能不要放在同一类。代码集中相对来说就会更加容易维护了。</p><h1 id="2-什么是低耦合？"><a href="#2-什么是低耦合？" class="headerlink" title="2. 什么是低耦合？"></a>2. 什么是低耦合？</h1><p>类和类之间的依赖关系简单清晰，即尽管两个类之间有依赖关系。一个类的代码的改动不会或者很少导致依赖类的代码的改动。</p><h1 id="3-内聚和耦合的关系"><a href="#3-内聚和耦合的关系" class="headerlink" title="3. 内聚和耦合的关系"></a>3. 内聚和耦合的关系</h1><p><img src="https://i.loli.net/2020/03/23/yZVTqaQSgvbtE4l.png" alt="内聚耦合关系.png"></p><p>如图所示，左侧就是很好的高内聚低耦合的范例，我们将类最小化，即每个类只做一件事情，这样子其他依赖就会少很多。在修改或增加功能的时候，就不会对其他的类造成很大的影响。</p><h1 id="4-实战"><a href="#4-实战" class="headerlink" title="4. 实战"></a>4. 实战</h1><pre><code>public class NetworkTransporter {    // 存在问题，NetworkTransporter作为一个底层类，不应该依赖于HtmlRequest类；与之相反的，因为其实他需要的是string address，以及byte的数组，那我们应该直接提供这些primitive type的数据    public Byte[] send(HtmlRequest htmlRequest) {      //...    }}public class HtmlDownloader {  private NetworkTransporter transporter;//通过构造函数或IOC注入  public Html downloadHtml(String url) {  // 根据上面NetworkTransporter我们希望做的改动，这里传入的不应该是HtmlRequest类的实例了    Byte[] rawHtml = transporter.send(new HtmlRequest(url));    return new Html(rawHtml);  }}public class Document {  private Html html;  private String url;  public Document(String url) {    this.url = url;    // downloader.downloadHtml逻辑复杂，不应该放在构造函数当中，也会很不好测试    // 构造函数中使用new来做实例，违反了基于接口而非实现编程的原则    HtmlDownloader downloader = new HtmlDownloader();    this.html = downloader.downloadHtml(url);  }  //...}</code></pre><p>修改以后的代码： </p><pre><code>public class NetworkTransporter {    // 省略属性和其他方法...    public Byte[] send(String address, Byte[] data) {      //...    }}public class HtmlDownloader {  private NetworkTransporter transporter;//通过构造函数或IOC注入  // HtmlDownloader这里也要有相应的修改  public Html downloadHtml(String url) {    HtmlRequest htmlRequest = new HtmlRequest(url);    Byte[] rawHtml = transporter.send(      htmlRequest.getAddress(), htmlRequest.getContent().getBytes());    return new Html(rawHtml);  }}public class Document {  private Html html;  private String url;  public Document(String url, Html html) {    this.html = html;    this.url = url;  }  //...}// 通过一个工厂方法来创建Documentpublic class DocumentFactory {  private HtmlDownloader downloader;  public DocumentFactory(HtmlDownloader downloader) {    this.downloader = downloader;  }  public Document createDocument(String url) {    Html html = downloader.downloadHtml(url);    return new Document(url, html);  }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;高内聚 低耦合是比较通用的设计思想，可以用来指导不同的粒度的代码的设计和开发的工作，比如系统，模块，类，甚至是函数。也可以去使用到不同的开发场景当中，比如微服务，框架，组件，类库等等。&lt;/p&gt;
-&lt;p&gt;在这个原则当中，高内聚指的是类本身的设计，低耦合指的是类和类之间的依赖关系
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="高内聚" scheme="https://www.llchen60.com/tags/%E9%AB%98%E5%86%85%E8%81%9A/"/>
-    
-      <category term="低耦合" scheme="https://www.llchen60.com/tags/%E4%BD%8E%E8%80%A6%E5%90%88/"/>
-    
-      <category term="迪米特" scheme="https://www.llchen60.com/tags/%E8%BF%AA%E7%B1%B3%E7%89%B9/"/>
     
   </entry>
   
