@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-05-10T05:59:04.101Z</updated>
+  <updated>2020-05-12T03:40:08.892Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中台(三) - 看白话中台系列的一些总结</title>
+    <link href="https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%B8%89-%E7%9C%8B%E7%99%BD%E8%AF%9D%E4%B8%AD%E5%8F%B0%E7%B3%BB%E5%88%97%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%B8%89-%E7%9C%8B%E7%99%BD%E8%AF%9D%E4%B8%AD%E5%8F%B0%E7%B3%BB%E5%88%97%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</id>
+    <published>2020-05-12T03:36:52.000Z</published>
+    <updated>2020-05-12T03:40:08.892Z</updated>
+    
+    <content type="html"><![CDATA[<p>前面两篇文章讲了一些关于中台的信息, <a href="https://llchen60.com/%E4%B8%AD%E5%8F%B0/" target="_blank" rel="noopener">中台1</a>,<a href="https://llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/" target="_blank" rel="noopener">中台2</a>。</p><ul><li><p>为什么需要平台化</p><ul><li>赋予企业用户响应力</li></ul></li><li><p>什么是中台</p><ul><li><strong>企业级能力复用平台</strong></li><li>基础的理念和架构</li><li>可以联通，支持上端的业务</li><li>需要能够将后台各式各样的资源转化为前台易于使用的能力 –&gt; 以用户为中心的持续规模化创新</li><li>Platform as a product </li><li>亚马逊大量使用微服务，关于微服务与中台，可以想象成中台是多个有平台化能力的微服务的集合，通过隐藏内部的信息和不必要的接口，对外呈现为单独一个具有平台服务能力的微服务。</li></ul></li><li><p>中台分类/ 为什么要建平台</p><ul><li>内部研发效能提升</li><li>资源整合</li><li>新零售</li><li>全周期</li><li>全渠道</li><li>开放银行</li><li>多品牌战略</li><li>全球化战略</li><li>产业互联</li><li>构建商业生态</li></ul></li><li><p>阿里的数据业务双中台</p><ul><li>业务中台将后台资源进行抽象包装整合，转化为前台友好的可重用可共享的核心能力，实现后端业务资源到前台易用能力的转化</li><li>数据中台从后台及业务中台将数据流入，完成海量数据的存储，计算，产品化包装的过程，构成企业的核心数据能力</li></ul></li><li><p>阿里技术中台</p><ul><li>将使用云或者其他基础设施的能力以及应用各种技术中间件的能力进行整合包装，过滤掉技术细节，提供简单一致，易于使用的应用技术基础设施的能力接口，助力前台和业务中台数据中台的快速建设</li></ul></li><li><p>组织中台</p><ul><li>中台建设真正困难的地方在于组织上的重构，技术架构与组织架构的匹配！！</li><li>组织中台很像企业中的内部风投和创新孵化机构，为前台组织和团队构建创新型前台应用提供类似于投资评估（项目甄别）、投资管理、投后管理（孵化与风控），真正从组织和制度上支撑前台组织和应用的快速迭代规模化创新</li></ul></li><li><p>中台建设的难点 – 需要关注组织架构的调整</p><ul><li>组织架构的调整和演进以及利益的重新分配 </li><li>战略的落地是需要靠组织架构的调整来实现的，企业的发展取决于企业正确的战略以及企业的组织结构。前者决定了后者，后者能够保证前者的落地实现</li><li>如果将中台和前台之间的关系定义成服务和被服务的关系，很容易会因为大量需求占据大量时间，短期利益和长期利益的博弈，造成很多问题</li><li>产品化思维，将中台当做一个产品，和其他组是产品之间互通的关系</li></ul></li><li><p>关于中台 - 产品化思考以后的问题</p><ul><li>愿景是什么？<ul><li>中台作为产品需要有自己的愿景定位，不一定需要满足所有前台客户的需求，这同样也意味着前台可以选择不使用中台的某些能力而选择自建。</li></ul></li><li>用户是谁？ 如何划分？<ul><li>中台作为产品需要有自己清晰的用户定位和用户划分，前台作为中台的用户不再是平等的，VIP 前台用户的需求要优于免费前台用户的诉求，通过产品上常见的用户划分来解决需求膨胀、排期、优先级和冲突问题</li></ul></li><li>解决了什么问题？<ul><li>中台作为一个产品，需要想方设法体现自身的价值，真正为前台客户解决实际问题，并关注前台用户体验，通过营销和售前等手段获取前台客户，通过清晰的用户定位和产品力吸引前台客户，让其主动选择采购中台产品</li></ul></li><li>竞争环境？ 团队构成？<ul><li>产品的建设初期，不一定启动资金直接从业务上切分，可能需要类似于天使投资的企业战略投资进行初始孵化，减少中台前期建设的业务交付压力，甚至作为企业的战略级产品，需要一些内部保护和孵化，但仍需要快速验证其价值，获取客户，实现自负盈亏</li></ul></li><li>如何获取用户？营销？售前？</li><li>如何向用户提供服务？<ul><li>产品的建设过程可以借鉴精益创业思路，需要尽快体现其商业价值，如果一定时期内无法获取相应的前台用户（前台不用），或是其他考核指标不达标，则需要进行中台建设止损，类似于创业失败</li><li>甚至在特殊情况下，允许同一类型的中台产品存在合理的内部竞争，同时对两个相似的中台产品进行孵化，使用类似于内部赛马的机制解决内部服务差异性带来的内部产品垄断和定价困难问题</li><li>中台产品为了用户留存，需要对于前台客户提供产品级 SLA，提供客户运营，客户售后服务，保持产品平滑更新，关注用户满意度，实现客户留存与转化</li></ul></li><li>如何验证价值？成本核算？ 定价机制？</li><li>如何保证服务质量？ </li><li>如何升级演进？产品运营？<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1></li></ul></li></ul><ol><li><a href="https://www.infoq.cn/profile/1084916/publish" target="_blank" rel="noopener">https://www.infoq.cn/profile/1084916/publish</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前面两篇文章讲了一些关于中台的信息, &lt;a href=&quot;https://llchen60.com/%E4%B8%AD%E5%8F%B0/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;中台1&lt;/a&gt;,&lt;a href=&quot;https://llchen60.co
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="中台" scheme="https://www.llchen60.com/tags/%E4%B8%AD%E5%8F%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Bash 脚本</title>
@@ -547,32 +573,6 @@
       <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
     
       <category term="Spring" scheme="https://www.llchen60.com/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>团队能力构建手册-新人Ramp Up</title>
-    <link href="https://www.llchen60.com/%E5%9B%A2%E9%98%9F%E8%83%BD%E5%8A%9B%E6%9E%84%E5%BB%BA%E6%89%8B%E5%86%8C-%E6%96%B0%E4%BA%BARamp-Up/"/>
-    <id>https://www.llchen60.com/%E5%9B%A2%E9%98%9F%E8%83%BD%E5%8A%9B%E6%9E%84%E5%BB%BA%E6%89%8B%E5%86%8C-%E6%96%B0%E4%BA%BARamp-Up/</id>
-    <published>2020-03-24T03:37:58.000Z</published>
-    <updated>2020-03-24T03:39:22.183Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇博客引述了ThoughtWorks的<a href="https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/" target="_blank" rel="noopener">capacity-building-and-quality-assurance</a>，里面讲得如何构建团队，如何让新人快速适应的方法指南非常实用。分享/ 思考/ 归纳如下。</p><p>自己所在的团队最近也经历了快速的增长，在带新人的过程当中，确实感觉到想一茬抓一茬是客观存在且经常性发生的事情，lol。需要一个更加清晰细致的上手指南，并把一些需要的前提条件先给到，然后给新人留下在正确的方向上足够的探索空间，这样大概才能加速他们的成长把。</p><p>我们当然需要每个个体的无上才能，但更需要一个好的平台，让他们能够专注的将自己的才能用在那个地方。而平台，意味着脚手架，意味着规则，意味着指南。</p><h1 id="1-常规新人成长方式-Mentor-Onboarding-Buddy"><a href="#1-常规新人成长方式-Mentor-Onboarding-Buddy" class="headerlink" title="1. 常规新人成长方式 Mentor/ Onboarding Buddy"></a>1. 常规新人成长方式 Mentor/ Onboarding Buddy</h1><p>为新人指派一名有经验的师傅，作为他的onboarding伙伴，平时可以做结对编程，在日常工作当中交换知识，学习并成长。新人onboarding的速度，取决于师傅的技能。</p><p>这么做当然有好处，一定比新人自己探索onboard要快的多，但是正如上面所说的那样，这种方式很依赖于师傅的能力，还有新人的沟通交流，搜集知识的能力。效果会因为每个成员的性格习惯能力等，有很大的不同。</p><h1 id="2-制定规则化的成长流程"><a href="#2-制定规则化的成长流程" class="headerlink" title="2. 制定规则化的成长流程"></a>2. 制定规则化的成长流程</h1><h2 id="2-1-CraftSkill-Map"><a href="#2-1-CraftSkill-Map" class="headerlink" title="2.1 CraftSkill Map"></a>2.1 CraftSkill Map</h2><p>能力地图是希望能够梳理完整的技术图谱，对技术人员需要掌握的能力进行可视化</p><p>新成员在加入项目的时候一般会有很多问题：</p><ul><li>这个项目是做什么的？ </li><li>这个项目是在解决什么样的问题？</li><li>这个项目使用了什么技术栈？</li><li>新成员应该从哪里开始？</li></ul><p>新人onboard，rampup需要的知识是可以分成可以自己学习的知识(通过各种文档，wiki, stackoverflow, etc.)以及需要老人的帮助的知识(需要上手实操的内容，比如设计原则，DRY,SOLID, LOD等等具体如何使用的问题)。</p><p>我们需要新人自己去探索，获取一些必要的前提性知识，也需要有人帮助，帮他迅速适应新的环境。</p><p>能力地图就是希望能够对所需要的知识，做一个清晰的梳理，形成一个脉络，能够使新人onboard的过程更有的放矢一些。</p><p><img src="https://i.loli.net/2020/03/24/JayeLmisObEpdTS.png" alt="craftskill map E.G.png"></p><h2 id="2-2-指定Onboarding流程"><a href="#2-2-指定Onboarding流程" class="headerlink" title="2.2 指定Onboarding流程"></a>2.2 指定Onboarding流程</h2><p>这里主要是要给一个比较详细的计划，告知新人每周要做的事情，更多的是时间上，任务上的安排。</p><p>根据任务，可以侧重学习前端，后端，或者QA方面的领域知识和技能，然后<strong>做一个meeting，将自己学到的完整的和组里的同事分享下，然后可以一起查漏补缺，完善新人的知识体系</strong>。</p><p>值得注意的是Onboarding的流程当中需要有里程碑和执行时间，由资深员工协助制定，然后就可以领取任务，保质保量的独立完成。</p><p>Onboard流程当中，关于自己看的知识，有很多方式可以来做，比如wiki，视频，甚至是音频，起到的作用就是更高速度的学习。这种相对来说比较被动，主动性的学习可以通过Unit test，将知识点转化成Unit test，然后通过单元测试迅速熟悉知识点。</p><h2 id="2-3-新成员状态看板"><a href="#2-3-新成员状态看板" class="headerlink" title="2.3 新成员状态看板"></a>2.3 新成员状态看板</h2><p>每周由mentor负责跟踪观察新人状态，会议追踪，确定新人是否能在一个月的ramp up以后自己独立负责一部分的任务。</p><h2 id="2-4-Case-by-case-针对性培训"><a href="#2-4-Case-by-case-针对性培训" class="headerlink" title="2.4 Case by case 针对性培训"></a>2.4 Case by case 针对性培训</h2><p>根据个人情况来探究如何做提高，是否可以提前交付项目，诸如此类。</p><p><a href="https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/" target="_blank" rel="noopener">https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这篇博客引述了ThoughtWorks的&lt;a href=&quot;https://insights.thoughtworks.cn/capacity-building-and-quality-assurance/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ca
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
-    
-      <category term="Mentor" scheme="https://www.llchen60.com/tags/Mentor/"/>
     
   </entry>
   
