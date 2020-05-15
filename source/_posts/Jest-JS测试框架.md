@@ -6,7 +6,7 @@ tags:
     - Jest
 top:
 ---
-Jest是一个简洁的JavaScript测试框架，我们可以将其与Babel, TS, Node, React, Angular, Vue等来共同使用
+JJest是一个简洁的JavaScript测试框架，我们可以将其与Babel, TS, Node, React, Angular, Vue等来共同使用
 
 # 1. Intro
 
@@ -176,6 +176,28 @@ Mock函数允许我们来测试代码之间的连接，和Mockito， EasyMock其
 
     // 第一次函数调用的返回值是 42
     expect(mockCallback.mock.results[0].value).toBe(42);
+
+# 2. 测试方法
+## 2.1 Snapshot 测试
+
+给当前的UI做快照，然后和过去做过的快照进行比较，看是否有不同。
+
+    import React from 'react';
+    import Link from '../Link.react';
+    import renderer from 'react-test-renderer';
+
+    it('renders correctly', () => {
+      const tree = renderer
+        .create(<Link page="http://www.facebook.com">Facebook</Link>)
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+实际上是生成一个DOM树，然后来比较两颗DOM树的节点，看设置是否相同。
+
+在每次提交的时候，会记录下当前的快照，下次提交的时候会和这次的来进行比较。
+
+然后当我们有目的的引入了变化的时候，我们需要告诉jest 需要更新现在保存的snapshot了，这种情况下需要运行指令`jest --updateSnapshot`.
 
 
 # Reference 
