@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-05-15T04:11:30.500Z</updated>
+  <updated>2020-05-17T20:03:57.815Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>应用设计 Practice</title>
+    <link href="https://www.llchen60.com/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/"/>
+    <id>https://www.llchen60.com/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/</id>
+    <published>2020-05-17T20:03:10.000Z</published>
+    <updated>2020-05-17T20:03:57.815Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-thought"><a href="#1-thought" class="headerlink" title="1. thought"></a>1. thought</h1><p>实际应用设计，首先还是需要将工作进行合理分割：</p><ul><li>前期需求沟通分析<ul><li>工程师应该尽量参与到产品设计当中</li><li>寻找类似的产品，进行借鉴</li><li>将借鉴来的东西努力融合到我们自己的产品当中</li></ul></li><li>中期代码设计实现</li><li>后期系统上线维护 <h1 id="2-业务系统设计-–-积分系统"><a href="#2-业务系统设计-–-积分系统" class="headerlink" title="2. 业务系统设计 – 积分系统"></a>2. 业务系统设计 – 积分系统</h1></li></ul><h2 id="2-1-业务需求"><a href="#2-1-业务需求" class="headerlink" title="2.1 业务需求"></a>2.1 业务需求</h2><ul><li><p>功能点</p><ul><li>赚取积分<ul><li>积分赚取渠道<ul><li>订单</li><li>签到</li><li>评论</li></ul></li><li>积分兑换规则<ul><li>订单金额与积分的兑换比例</li><li>签到赠送积分数量等</li></ul></li></ul></li><li>消费积分<ul><li>积分消费渠道<ul><li>抵扣订单金额</li><li>兑换优惠券</li><li>积分换购</li><li>参与活动</li></ul></li></ul></li></ul></li><li><p>方式方法</p><ul><li>借鉴已经相对成熟的产品<ul><li>看其实现的方式方法</li></ul></li><li>通过产品线框图</li><li>user case<ul><li>模拟用户是如何使用我们的产品的</li><li>描述用户在特定的应用场景当中的一个完整的业务操作流程</li></ul></li></ul></li></ul><h2 id="2-2-系统设计"><a href="#2-2-系统设计" class="headerlink" title="2.2 系统设计"></a>2.2 系统设计</h2><h3 id="2-2-1-功能模块划分"><a href="#2-2-1-功能模块划分" class="headerlink" title="2.2.1 功能模块划分"></a>2.2.1 功能模块划分</h3><ul><li>将功能划分到不同的模块当中 <ul><li>做到模块层面的高内聚，低耦合</li></ul></li></ul><ul><li>针对上述的业务需求，我们可以采用<ul><li><ol><li>将关于积分的赚取消费的规则的管理维护放到更上层的营销系统当中，这样积分系统就只负责增删改查的数据库操作了</li></ol></li><li><ol start="2"><li>将规则分散到各个子系统当中，譬如订单系统，评论系统，签到系统，诸如此类</li></ol></li><li><ol start="3"><li>所有功能划分到积分系统当中</li></ol></li></ul></li></ul><p>值得注意的是，为了避免业务知识的耦合，让下层系统更加通用，我们不希望下层系统（被调用系统）包含太多上层系统（调用系统）的业务信息。但上层系统是可以包含下层系统的业务信息的，比如，订单系统、优惠券系统、换购商城等作为调用积分系统的上层系统，可以包含一些积分相关的业务信息。但是，反过来，积分系统中最好不要包含太多跟订单、优惠券、换购等相关的信息。</p><p>因此，1，2都是相对不错的选择，我们希望做的是让积分系统模块只包含积分的增删改查的操作，而不包含太多的业务层面的逻辑。</p><h3 id="2-2-2-模块间交互"><a href="#2-2-2-模块间交互" class="headerlink" title="2.2.2 模块间交互"></a>2.2.2 模块间交互</h3><p>定位需要和积分系统之间进行交互的系统，以及交互方式。</p><p>一般来说，系统之间的交互方式有两大类：</p><ul><li>同步接口调用</li><li>利用信息中间件异步调用</li></ul><h3 id="2-2-3-设计模块的接口、数据库、业务模型"><a href="#2-2-3-设计模块的接口、数据库、业务模型" class="headerlink" title="2.2.3 设计模块的接口、数据库、业务模型"></a>2.2.3 设计模块的接口、数据库、业务模型</h3><p>数据库和接口的设计相对来说都比较重要，一旦设计好，都不能轻易改动。尤其是当有不同的组来调用你的API的时候，让所有的组都快速迁移到新的API上是一件相对比较困难的事情了。  改动数据库表的结构，需要涉及数据的迁移和适配。</p><p>而业务模型，即业务逻辑代码，因为都是内部使用，改动的可能性比较大，对外是不可见的。</p><ul><li><p>数据库设计：</p><ul><li>id - 明细ID</li><li>user_id - 用户ID</li><li>channel_id - 赚取或消费渠道ID</li><li>event_id - 相关事件ID，例如订单ID，评论ID，优惠券换购ID等</li><li>credit - 积分 </li><li>create_time - 积分赚取或消费时间</li><li>expired_time - 积分过期时间</li></ul></li><li><p>接口设计</p><ul><li>单一职责原则 <ul><li>但是粒度太小也不好，比如一个功能的实现需要多个接口，但是每个接口如果都是RPC的一次远程调用的话，那网络上的损耗就很多，多次远程调用会影响性能的</li><li>另外还有数据一致性 - 即操作的原子性方面的考量</li><li>可以借鉴facade外观设计模式，在职责单一的细粒度接口之上，封装一层粗粒度的接口给外部使用</li></ul></li></ul></li><li><p>MVC </p><ul><li>controller负责接口暴露</li><li>service 负责核心业务逻辑</li><li>repository负责数据读写</li><li>为什么要分成MVC三层？<ul><li>代码复用</li><li>隔离变化</li><li>隔离关注点</li><li>提高代码的可测试性</li><li>能够应对系统的复杂性</li></ul></li></ul></li></ul><h1 id="3-非业务通用框架设计"><a href="#3-非业务通用框架设计" class="headerlink" title="3. 非业务通用框架设计"></a>3. 非业务通用框架设计</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-thought&quot;&gt;&lt;a href=&quot;#1-thought&quot; class=&quot;headerlink&quot; title=&quot;1. thought&quot;&gt;&lt;/a&gt;1. thought&lt;/h1&gt;&lt;p&gt;实际应用设计，首先还是需要将工作进行合理分割：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前期需
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="System Design" scheme="https://www.llchen60.com/tags/System-Design/"/>
+    
+  </entry>
   
   <entry>
     <title>Jest - JS测试框架</title>
@@ -543,32 +571,6 @@
     
     
       <category term="Tricks" scheme="https://www.llchen60.com/tags/Tricks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Log4j2 Tutorial </title>
-    <link href="https://www.llchen60.com/Log4j2-Tutorial/"/>
-    <id>https://www.llchen60.com/Log4j2-Tutorial/</id>
-    <published>2020-04-02T05:27:56.000Z</published>
-    <updated>2020-04-02T05:32:48.736Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Log4j2-overview"><a href="#1-Log4j2-overview" class="headerlink" title="1. Log4j2 overview"></a>1. Log4j2 overview</h1><h2 id="1-1-Why-log"><a href="#1-1-Why-log" class="headerlink" title="1.1 Why log?"></a>1.1 Why log?</h2><p>Logging is an important component of the development cycle. </p><ul><li>provides precise context about a run of the application </li><li>once inserted into code, the generation of logging output requires no human intervention </li><li>moreover, log output can be saved in persistent medium to be studied at a later time </li></ul><h2 id="1-2-Why-Log4j2"><a href="#1-2-Why-Log4j2" class="headerlink" title="1.2 Why Log4j2?"></a>1.2 Why Log4j2?</h2><ul><li>Designed to be usable as an audit logging framework , will not lose events while reconfiguring </li><li>Contains asynchrounous loggers, which is 10 times faster than log4j 1.x and logback </li><li>Garbage free for stand alone applications </li><li>Use a plugin system that makes it easy to extend the framework by adding new appenders, filters, layouts, lookups, and pattern converters</li><li>Support for custom log levels </li></ul><h2 id="1-3-Log4j-Architecture"><a href="#1-3-Log4j-Architecture" class="headerlink" title="1.3 Log4j Architecture"></a>1.3 Log4j Architecture</h2><p><img src="https://i.loli.net/2020/04/02/AsXomqJciUyPVKh.jpg" alt="Log4jClasses.jpg"> </p><p>Applications using the Log4j 2 API will request <strong>a Logger with a specific name from the LogManager</strong>. The LogManager will <strong>locate the appropriate LoggerContext</strong> and then obtain the Logger from it. If the Logger must be created it will <strong>be associated with the LoggerConfig</strong> that contains either a) the same name as the Logger, b) the name of a parent package, or c) the root LoggerConfig. LoggerConfig objects are created from Logger declarations in the configuration. The LoggerConfig is associated with the Appenders that actually deliver the LogEvents.</p><ul><li>Filter <ul><li>apply in different time point <ul><li>before control is passed to any loggerConfig</li><li>after control is passed to a LoggerConfig but before calling any Appenders</li><li>after control is passed to a LoggerConfig but before calling a specific Appender</li><li>on each Appender</li></ul></li></ul></li><li>Appender <ul><li>selectively enable or disable logging requests</li><li>allow logging requests to print to multiple destinations </li></ul></li><li>Layout <ul><li>Used to customize the output format </li><li>Associate a layout with an appender </li></ul></li></ul><h1 id="2-Migration-from-Log4j-to-Log4j2"><a href="#2-Migration-from-Log4j-to-Log4j2" class="headerlink" title="2. Migration from Log4j to Log4j2"></a>2. Migration from Log4j to Log4j2</h1><p>We usually use log4j/ log4j2 with Slf4j, Slf4j is kind of like a connecter, you could use slf4j as logging system, and slf4j could help you connect to logging framework you want to use: like logback, log4j2, commons-logging, etc. </p><p><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </p><p>Look at sample 1 in above link for how to set up basic configuration </p><p>For some tips: </p><ul><li>The main package in version 1 is org.apache.log4j, in version 2 it is org.apache.logging.log4j</li><li>Calls to org.apache.log4j.Logger.getLogger() must be modified to org.apache.logging.log4j.LogManager.getLogger().</li><li>Calls to org.apache.log4j.Logger.getRootLogger() or org.apache.log4j.LogManager.getRootLogger() must be replaced with org.apache.logging.log4j.LogManager.getRootLogger().</li><li>Calls to org.apache.log4j.Logger.getLogger that accept a LoggerFactory must remove the org.apache.log4j.spi.LoggerFactory and use one of Log4j 2’s other extension mechanisms.</li><li>Replace calls to org.apache.log4j.Logger.getEffectiveLevel() with org.apache.logging.log4j.Logger.getLevel().</li><li>Remove calls to org.apache.log4j.LogManager.shutdown(), they are not needed in version 2 because the Log4j Core now automatically adds a JVM shutdown hook on start up to perform any Core clean ups.<ul><li>Starting in Log4j 2.1, you can specify a custom ShutdownCallbackRegistry to override the default JVM shutdown hook strategy.</li><li>Starting in Log4j 2.6, you can now use org.apache.logging.log4j.LogManager.shutdown() to initiate shutdown manually.</li></ul></li><li>Calls to org.apache.log4j.Logger.setLevel() or similar methods are not supported in the API. Applications should remove these. Equivalent functionality is provided in the Log4j 2 implementation classes, see org.apache.logging.log4j.core.config.Configurator.setLevel(), but may leave the application susceptible to changes in Log4j 2 internals.</li><li>Where appropriate, applications should convert to use parameterized messages instead of String concatenation.</li><li>org.apache.log4j.MDC and org.apache.log4j.NDC have been replaced by the Thread Context.</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/migration.html</a> </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Log4j2-overview&quot;&gt;&lt;a href=&quot;#1-Log4j2-overview&quot; class=&quot;headerlink&quot; title=&quot;1. Log4j2 overview&quot;&gt;&lt;/a&gt;1. Log4j2 overview&lt;/h1&gt;&lt;h2 id=&quot;1-1
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="log" scheme="https://www.llchen60.com/tags/log/"/>
     
   </entry>
   
