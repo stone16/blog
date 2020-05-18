@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-05-17T20:03:57.815Z</updated>
+  <updated>2020-05-18T23:07:22.568Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Enzyme -- React测试库</title>
+    <link href="https://www.llchen60.com/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/"/>
+    <id>https://www.llchen60.com/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/</id>
+    <published>2020-05-18T23:06:42.000Z</published>
+    <updated>2020-05-18T23:07:22.568Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是前端用于对React的组件进行测试的一个工具类，我们可以使用这个工具来遍历，控制，以及一定程度上的模拟运行时输出。我们主要是将该工具类和Jest一起使用，写我们的react组件的单元测试们。</p><h1 id="1-Shalow-Rendering"><a href="#1-Shalow-Rendering" class="headerlink" title="1. Shalow Rendering"></a>1. Shalow Rendering</h1><p>用于以单个组件为单元来进行测试，然后确保你的测试不会依赖于子组件的状态。从Enzyme v3开始，shallow API会call React生命周期方法了，譬如<code>componentDidUpdate</code>和<code>componentDidMount</code></p><pre><code>import { shallow } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;MyComponent /&gt;&#39;, () =&gt; {  it(&#39;renders three &lt;Foo /&gt; components&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(Foo)).to.have.lengthOf(3);  });  it(&#39;renders an `.icon-star`&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(&#39;.icon-star&#39;)).to.have.lengthOf(1);  });  it(&#39;renders children when passed in&#39;, () =&gt; {    const wrapper = shallow((      &lt;MyComponent&gt;        &lt;div className=&quot;unique&quot; /&gt;      &lt;/MyComponent&gt;    ));    expect(wrapper.contains(&lt;div className=&quot;unique&quot; /&gt;)).to.equal(true);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = shallow(&lt;Foo onButtonClick={onButtonClick} /&gt;);    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="2-Full-Dom-Rendering"><a href="#2-Full-Dom-Rendering" class="headerlink" title="2. Full Dom Rendering"></a>2. Full Dom Rendering</h1><p>这种测试方式在你需要和DOM API进行交互，或者需要测试在更高次位的组件的时候非常有用。</p><p>需要运行在浏览器环境当中，如果无法运行在真实的浏览器当中，那我们就需要依赖于<code>mount</code>指令，在指令之下，是调用了一个叫做jsdom的包，完全使用JavaScript实现了一个浏览器。</p><p>值得注意的是，full dom rendering是真实的将当前组件渲染到DOM树当中，这也意味着如果用的是同一棵DOM树，那么你做的改动很可能会影响其他的测试，这点是值得我们注意的。</p><pre><code>import { mount } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;calls componentDidMount&#39;, () =&gt; {    sinon.spy(Foo.prototype, &#39;componentDidMount&#39;);    const wrapper = mount(&lt;Foo /&gt;);    expect(Foo.prototype.componentDidMount).to.have.property(&#39;callCount&#39;, 1);  });  it(&#39;allows us to set props&#39;, () =&gt; {    const wrapper = mount(&lt;Foo bar=&quot;baz&quot; /&gt;);    expect(wrapper.props().bar).to.equal(&#39;baz&#39;);    wrapper.setProps({ bar: &#39;foo&#39; });    expect(wrapper.props().bar).to.equal(&#39;foo&#39;);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = mount((      &lt;Foo onButtonClick={onButtonClick} /&gt;    ));    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="3-Static-Rendering"><a href="#3-Static-Rendering" class="headerlink" title="3. Static Rendering"></a>3. Static Rendering</h1><p>Render 使用的是Cheerio这个HTML转化库，用于从我们的React树来生成HTML，然后分析HTML的整个架构。</p><pre><code>import React from &#39;react&#39;;import { render } from &#39;enzyme&#39;;import PropTypes from &#39;prop-types&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;renders three `.foo-bar`s&#39;, () =&gt; {    const wrapper = render(&lt;Foo /&gt;);    expect(wrapper.find(&#39;.foo-bar&#39;)).to.have.lengthOf(3);  });  it(&#39;rendered the title&#39;, () =&gt; {    const wrapper = render(&lt;Foo title=&quot;unique&quot; /&gt;);    expect(wrapper.text()).to.contain(&#39;unique&#39;);  });  it(&#39;renders a div&#39;, () =&gt; {    const wrapper = render(&lt;div className=&quot;myClass&quot; /&gt;);    expect(wrapper.html()).to.contain(&#39;div&#39;);  });  it(&#39;can pass in context&#39;, () =&gt; {    function SimpleComponent(props, context) {      const { name } = context;      return &lt;div&gt;{name}&lt;/div&gt;;    }    SimpleComponent.contextTypes = {      name: PropTypes.string,    };    const context = { name: &#39;foo&#39; };    const wrapper = render(&lt;SimpleComponent /&gt;, { context });    expect(wrapper.text()).to.equal(&#39;foo&#39;);  });});</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">https://enzymejs.github.io/enzyme/</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是前端用于对React的组件进行测试的一个工具类，我们可以使用这个工具来遍历，控制，以及一定程度上的模拟运行时输出。我们主要是将该工具类和Jest一起使用，写我们的react组件的单元测试们。&lt;/p&gt;
+&lt;h1 id=&quot;1-Shalow-Rendering&quot;&gt;&lt;a href
+      
+    
+    </summary>
+    
+    
+      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
+    
+    
+      <category term="Enzyme" scheme="https://www.llchen60.com/tags/Enzyme/"/>
+    
+  </entry>
   
   <entry>
     <title>应用设计 Practice</title>
@@ -544,33 +571,6 @@
     
     
       <category term="React" scheme="https://www.llchen60.com/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何知道用户是否在使用Adblocker</title>
-    <link href="https://www.llchen60.com/%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E5%9C%A8%E4%BD%BF%E7%94%A8Adblocker/"/>
-    <id>https://www.llchen60.com/%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E5%9C%A8%E4%BD%BF%E7%94%A8Adblocker/</id>
-    <published>2020-04-07T18:58:04.000Z</published>
-    <updated>2020-04-07T19:00:33.044Z</updated>
-    
-    <content type="html"><![CDATA[<p>广告监测和屏蔽是很好的功能，而Ad-blocker基本是市面上做屏蔽广告插件的翘楚了。根据GlobalWebIndex在2019年五月做的统计，现在有47% 的用户正在使用广告屏蔽的软件。</p><p>作为网站管理者，你可以做一个pop up 的信息框，希望用户能够停止对于广告的屏蔽，或者你可以直接不允许用户来访问页面，知道去除了广告屏蔽之后。</p><p>那么如何知道用户是否在使用AbBlocker呢，这里需要了解下adblocker的运行机制，广告屏蔽的运行依赖于过滤规则(filter rules)， adblock会将你正在访问的URL和过滤列表相比较，如果匹配，那么这个请求就会被屏蔽掉。</p><p>但是还有部分的广告是不会发起一个HTTP请求，相对应的，他们会使用<code>data:image/png</code>这种方式来加载广告，对于这种广告，AdBlock 在每个页面都会插入一个样式表，然后这个样式表包括选择器，来display:none 通过这种方式来隐藏页面上的广告</p><p>而这些屏蔽列表来自于一些过去的积累，譬如：</p><ul><li><a href="https://easylist.to/" target="_blank" rel="noopener">Easylist</a></li><li><a href="https://help.getadblock.com/support/solutions/articles/6000092027-why-am-i-suddenly-seeing-taboola-outbrain-and-google-ads-" target="_blank" rel="noopener">accesptable list</a></li></ul><p>除此以外，adblocker还会检测前端调用的js文件，如果还有ad关键词，也会直接屏蔽，所以我们可以直接使用命名，来做一个简单的判断。</p><pre><code>// 创建名为ads.js的文件isAdBlockActive = false;// 创建script.jsvar AdBlocker = (function () {    function showModal() {        $(&#39;#modal_ad_blocker&#39;).modal(); // show a message to the user when ads are blocked    }    setInterval(function () {        // Get the first AdSense ad unit on the page        var ad = document.querySelector(&quot;ins.adsbygoogle&quot;);        // If the ads.js or the Google ads are not loaded, show modal and track the event        if (typeof isAdBlockActive === &#39;undefined&#39;            || (ad &amp;&amp; ad.innerHTML.replace(/\s/g, &quot;&quot;).length === 0)) {            showModal();            if (typeof ga !== &#39;undefined&#39;) {                // Log an event in Universal Analytics                // but without affecting overall bounce rate                ga(&#39;send&#39;, &#39;event&#39;, &#39;Adblock&#39;, &#39;Yes&#39;, {&#39;nonInteraction&#39;: 1});            } else if (typeof _gaq !== &#39;undefined&#39;) {                // Log a non-interactive event in old Google Analytics                _gaq.push([&#39;_trackEvent&#39;, &#39;Adblock&#39;, &#39;Yes&#39;, undefined, undefined, true]);            }        }    }, 5000); // check every 5 seconds})();</code></pre><p>通过检测我们在ads.js当中定义的isAdBlockActive 是否能够被检测到(undefined or have some value)。我们就可以看出是否有adBlocker正在运行，然后根据检测结果我们可以给用户提醒，或者直接阻止访问。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://blog.rampatra.com/how-to-know-whether-a-user-is-using-an-adblocker" target="_blank" rel="noopener">https://blog.rampatra.com/how-to-know-whether-a-user-is-using-an-adblocker</a> </li><li><a href="https://help.getadblock.com/support/solutions/articles/6000087914-how-does-adblock-work-" target="_blank" rel="noopener">https://help.getadblock.com/support/solutions/articles/6000087914-how-does-adblock-work-</a> </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;广告监测和屏蔽是很好的功能，而Ad-blocker基本是市面上做屏蔽广告插件的翘楚了。根据GlobalWebIndex在2019年五月做的统计，现在有47% 的用户正在使用广告屏蔽的软件。&lt;/p&gt;
-&lt;p&gt;作为网站管理者，你可以做一个pop up 的信息框，希望用户能够停止对
-      
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="https://www.llchen60.com/categories/Web/"/>
-    
-    
-      <category term="Tricks" scheme="https://www.llchen60.com/tags/Tricks/"/>
     
   </entry>
   

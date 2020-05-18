@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Enzyme -- React测试库</title>
+      <link href="/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/"/>
+      <url>/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<p>这是前端用于对React的组件进行测试的一个工具类，我们可以使用这个工具来遍历，控制，以及一定程度上的模拟运行时输出。我们主要是将该工具类和Jest一起使用，写我们的react组件的单元测试们。</p><h1 id="1-Shalow-Rendering"><a href="#1-Shalow-Rendering" class="headerlink" title="1. Shalow Rendering"></a>1. Shalow Rendering</h1><p>用于以单个组件为单元来进行测试，然后确保你的测试不会依赖于子组件的状态。从Enzyme v3开始，shallow API会call React生命周期方法了，譬如<code>componentDidUpdate</code>和<code>componentDidMount</code></p><pre><code>import { shallow } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;MyComponent /&gt;&#39;, () =&gt; {  it(&#39;renders three &lt;Foo /&gt; components&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(Foo)).to.have.lengthOf(3);  });  it(&#39;renders an `.icon-star`&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(&#39;.icon-star&#39;)).to.have.lengthOf(1);  });  it(&#39;renders children when passed in&#39;, () =&gt; {    const wrapper = shallow((      &lt;MyComponent&gt;        &lt;div className=&quot;unique&quot; /&gt;      &lt;/MyComponent&gt;    ));    expect(wrapper.contains(&lt;div className=&quot;unique&quot; /&gt;)).to.equal(true);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = shallow(&lt;Foo onButtonClick={onButtonClick} /&gt;);    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="2-Full-Dom-Rendering"><a href="#2-Full-Dom-Rendering" class="headerlink" title="2. Full Dom Rendering"></a>2. Full Dom Rendering</h1><p>这种测试方式在你需要和DOM API进行交互，或者需要测试在更高次位的组件的时候非常有用。</p><p>需要运行在浏览器环境当中，如果无法运行在真实的浏览器当中，那我们就需要依赖于<code>mount</code>指令，在指令之下，是调用了一个叫做jsdom的包，完全使用JavaScript实现了一个浏览器。</p><p>值得注意的是，full dom rendering是真实的将当前组件渲染到DOM树当中，这也意味着如果用的是同一棵DOM树，那么你做的改动很可能会影响其他的测试，这点是值得我们注意的。</p><pre><code>import { mount } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;calls componentDidMount&#39;, () =&gt; {    sinon.spy(Foo.prototype, &#39;componentDidMount&#39;);    const wrapper = mount(&lt;Foo /&gt;);    expect(Foo.prototype.componentDidMount).to.have.property(&#39;callCount&#39;, 1);  });  it(&#39;allows us to set props&#39;, () =&gt; {    const wrapper = mount(&lt;Foo bar=&quot;baz&quot; /&gt;);    expect(wrapper.props().bar).to.equal(&#39;baz&#39;);    wrapper.setProps({ bar: &#39;foo&#39; });    expect(wrapper.props().bar).to.equal(&#39;foo&#39;);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = mount((      &lt;Foo onButtonClick={onButtonClick} /&gt;    ));    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="3-Static-Rendering"><a href="#3-Static-Rendering" class="headerlink" title="3. Static Rendering"></a>3. Static Rendering</h1><p>Render 使用的是Cheerio这个HTML转化库，用于从我们的React树来生成HTML，然后分析HTML的整个架构。</p><pre><code>import React from &#39;react&#39;;import { render } from &#39;enzyme&#39;;import PropTypes from &#39;prop-types&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;renders three `.foo-bar`s&#39;, () =&gt; {    const wrapper = render(&lt;Foo /&gt;);    expect(wrapper.find(&#39;.foo-bar&#39;)).to.have.lengthOf(3);  });  it(&#39;rendered the title&#39;, () =&gt; {    const wrapper = render(&lt;Foo title=&quot;unique&quot; /&gt;);    expect(wrapper.text()).to.contain(&#39;unique&#39;);  });  it(&#39;renders a div&#39;, () =&gt; {    const wrapper = render(&lt;div className=&quot;myClass&quot; /&gt;);    expect(wrapper.html()).to.contain(&#39;div&#39;);  });  it(&#39;can pass in context&#39;, () =&gt; {    function SimpleComponent(props, context) {      const { name } = context;      return &lt;div&gt;{name}&lt;/div&gt;;    }    SimpleComponent.contextTypes = {      name: PropTypes.string,    };    const context = { name: &#39;foo&#39; };    const wrapper = render(&lt;SimpleComponent /&gt;, { context });    expect(wrapper.text()).to.equal(&#39;foo&#39;);  });});</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">https://enzymejs.github.io/enzyme/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Enzyme </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>应用设计 Practice</title>
       <link href="/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/"/>
       <url>/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/</url>
