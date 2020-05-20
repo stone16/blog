@@ -219,7 +219,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="225">
-<input type="hidden" id="yelog_site_word_count" value="391.9k">
+<input type="hidden" id="yelog_site_word_count" value="392.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2826,12 +2826,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-17 13:03:57'>2020-05-17 13:03</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-19 17:12:33'>2020-05-17 13:03</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:1.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2861,7 +2861,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-thought"><span class="toc-text">1. thought</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-业务系统设计-–-积分系统"><span class="toc-text">2. 业务系统设计 – 积分系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-业务需求"><span class="toc-text">2.1 业务需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-系统设计"><span class="toc-text">2.2 系统设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-功能模块划分"><span class="toc-text">2.2.1 功能模块划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-模块间交互"><span class="toc-text">2.2.2 模块间交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-设计模块的接口、数据库、业务模型"><span class="toc-text">2.2.3 设计模块的接口、数据库、业务模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-非业务通用框架设计"><span class="toc-text">3. 非业务通用框架设计</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-thought"><span class="toc-text">1. thought</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-业务系统设计-–-积分系统"><span class="toc-text">2. 业务系统设计 – 积分系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-业务需求"><span class="toc-text">2.1 业务需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-系统设计"><span class="toc-text">2.2 系统设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-功能模块划分"><span class="toc-text">2.2.1 功能模块划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-模块间交互"><span class="toc-text">2.2.2 模块间交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-设计模块的接口、数据库、业务模型"><span class="toc-text">2.2.3 设计模块的接口、数据库、业务模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-非业务通用框架设计"><span class="toc-text">3. 非业务通用框架设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-需求分析"><span class="toc-text">3.1 需求分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-框架设计"><span class="toc-text">3.2 框架设计</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3003,7 +3003,116 @@
 </ul>
 </li>
 </ul>
-<h1 id="3-非业务通用框架设计"><a href="#3-非业务通用框架设计" class="headerlink" title="3. 非业务通用框架设计"></a>3. 非业务通用框架设计</h1>
+<h1 id="3-非业务通用框架设计"><a href="#3-非业务通用框架设计" class="headerlink" title="3. 非业务通用框架设计"></a>3. 非业务通用框架设计</h1><p>假设我们要设计开发一个小框架，来获取接口调用的各种统计信息。</p>
+<ul>
+<li>响应时间<ul>
+<li>max/ min/ avg/ percentile/ count/ tps </li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1 需求分析"></a>3.1 需求分析</h2><p>是一个和业务无关的独立功能，我们可以将其开发成一个独立的框架或者库，集成到很多的业务系统当中。作为一个需要复用性的框架，除了功能上的需求以外，非功能性的需求也非常重要。</p>
+<ul>
+<li><p>功能性需求分析</p>
+<ul>
+<li><p>接口统计信息</p>
+<ul>
+<li>响应时间</li>
+<li>接口调用次数</li>
+</ul>
+</li>
+<li><p>统计信息的类型</p>
+<ul>
+<li>max min ave percentile tps count </li>
+</ul>
+</li>
+<li><p>统计信息显示格式</p>
+<ul>
+<li>json</li>
+<li>html</li>
+<li>自定义</li>
+</ul>
+</li>
+<li><p>统计信息显示终端</p>
+<ul>
+<li>console</li>
+<li>email</li>
+<li>http 页面</li>
+<li>日志</li>
+<li>自定义</li>
+</ul>
+</li>
+<li><p>统计触发方式</p>
+</li>
+<li><p>统计时间区间</p>
+</li>
+<li><p>统计时间间隔</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>非功能性需求分析</p>
+<ul>
+<li><p>易用性</p>
+<ul>
+<li>框架是否易集成，易拔插</li>
+<li>跟业务代码是否为松耦合</li>
+<li>提供的接口是否足够灵活</li>
+</ul>
+</li>
+<li><p>性能</p>
+<ul>
+<li>不希望框架本身的代码执行效率会对业务系统有太多性能上的影响</li>
+<li>希望框架低延迟，并且对内存的消耗不能太大</li>
+</ul>
+</li>
+<li><p>扩展性</p>
+<ul>
+<li>在不修改或者尽量少修改代码的情况下添加新功能的能力</li>
+</ul>
+</li>
+<li><p>容错性</p>
+</li>
+<li><p>通用性</p>
+<ul>
+<li>除了接口数据统计，能否将其放到其他事件上来做统计呢？ </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-框架设计"><a href="#3-2-框架设计" class="headerlink" title="3.2 框架设计"></a>3.2 框架设计</h2><p>可以借鉴TDD (测试驱动开发)和Prototype(最小原型)的思想，先聚焦于一个简单的应用场景，基于此来设计一个简单的原型，然后不断进行迭代。</p>
+<p>而后是将整个框架分为多个模块，分模块进行思考：</p>
+<ul>
+<li>数据采集<ul>
+<li>打点采集原始数据</li>
+<li>记录每次接口请求的响应时间和请求时间</li>
+<li>数据采集过程要高度容错，不能影响到接口本身的可用性</li>
+</ul>
+</li>
+<li>存储<ul>
+<li>负责将采集的原始数据保存下来，以便后面做聚合统计</li>
+<li>数据可以存储在<ul>
+<li>redis</li>
+<li>mysql</li>
+<li>hbase</li>
+<li>日志</li>
+<li>文件</li>
+<li>内存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>聚合统计<ul>
+<li>将原始数据聚合为统计数据</li>
+</ul>
+</li>
+<li>显示<ul>
+<li>将统计数据以某种格式显示到终端当中</li>
+</ul>
+</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3017,10 +3126,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>应用设计 Practice</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-17, 13:03:10</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-17, 13:03:57</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-19, 17:12:33</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/" title="应用设计 Practice">https://www.llchen60.com/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
