@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-05-23T00:29:58.284Z</updated>
+  <updated>2020-05-25T05:35:25.466Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提高代码质量的Tips</title>
+    <link href="https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/"/>
+    <id>https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/</id>
+    <published>2020-05-25T05:34:48.000Z</published>
+    <updated>2020-05-25T05:35:25.466Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-如何重构"><a href="#1-如何重构" class="headerlink" title="1. 如何重构"></a>1. 如何重构</h1><h2 id="1-1-为什么要重构代码？"><a href="#1-1-为什么要重构代码？" class="headerlink" title="1.1 为什么要重构代码？"></a>1.1 为什么要重构代码？</h2><p>重构是一种对软件内部结构的改善，目的是在不改变软件的可见行为的情况下，使其更易理解，修改成本更低。</p><p>即 重构是指保持功能不变的前提下，利用设计思想、原则、模式和编程规范等理论来优化代码，修改设计上的不足，提高代码的质量。</p><p>如果没有维护，物体势必会往熵增加的方向去演变的。如果不做代码的维护，代码总归会往越来越混乱的方向演进，当混乱到一定程度，量变引起质变，项目的维护成本已经高过了重新开发一套新代码的成本，再去重构就会变得十分困难了。</p><h2 id="1-2-重构的对象"><a href="#1-2-重构的对象" class="headerlink" title="1.2 重构的对象"></a>1.2 重构的对象</h2><ul><li>大型重构<ul><li>对顶层代码设计的重构<ul><li>包括 <ul><li>系统</li><li>模块</li><li>代码结构</li><li>类与类之间的关系</li></ul></li><li>重构的手段<ul><li>分层</li><li>模块化</li><li>解耦</li><li>抽象可复用的组件</li></ul></li></ul></li></ul></li></ul><ul><li>小型重构<ul><li>对于代码细节的重构</li><li>针对类，函数，变量等代码级别的重构</li></ul></li></ul><h2 id="1-3-什么时候重构？"><a href="#1-3-什么时候重构？" class="headerlink" title="1.3 什么时候重构？"></a>1.3 什么时候重构？</h2><p>持续重构的概念，即没事情的时候，看看项目中有哪些写得不够好，可以优化的代码，主动去重构一下。或者在修改添加某个功能代码的时候，也可以顺手把不符合编码规范，不好的设计重构一下。</p><h1 id="2-代码的可测试性"><a href="#2-代码的可测试性" class="headerlink" title="2. 代码的可测试性"></a>2. 代码的可测试性</h1><p>做重构，如何保证你做的改动能够按照既定的想法运行，那么我们需要来写单元测试，来保证新的代码仍然能够通过，即原有的逻辑的正确性没有被破坏。</p><p>另外，单元测试的阅读实际上是快速熟悉代码的一种方式</p><p>一些常见的Anti-patterns:</p><ul><li>未决行为<ul><li>代码的输出是随机的，或者不确定的</li></ul></li><li>全局变量</li><li>静态方法</li><li>复杂继承</li><li>高耦合代码</li></ul><h1 id="3-编程规范"><a href="#3-编程规范" class="headerlink" title="3. 编程规范"></a>3. 编程规范</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-如何重构&quot;&gt;&lt;a href=&quot;#1-如何重构&quot; class=&quot;headerlink&quot; title=&quot;1. 如何重构&quot;&gt;&lt;/a&gt;1. 如何重构&lt;/h1&gt;&lt;h2 id=&quot;1-1-为什么要重构代码？&quot;&gt;&lt;a href=&quot;#1-1-为什么要重构代码？&quot; class=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Enzyme + Jest Practice</title>
@@ -543,32 +567,6 @@
       <category term="用户画像" scheme="https://www.llchen60.com/tags/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F/"/>
     
       <category term="运营" scheme="https://www.llchen60.com/tags/%E8%BF%90%E8%90%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中台</title>
-    <link href="https://www.llchen60.com/%E4%B8%AD%E5%8F%B0/"/>
-    <id>https://www.llchen60.com/%E4%B8%AD%E5%8F%B0/</id>
-    <published>2020-04-13T00:32:59.000Z</published>
-    <updated>2020-04-13T00:34:29.013Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-什么是中台？"><a href="#1-什么是中台？" class="headerlink" title="1. 什么是中台？"></a>1. 什么是中台？</h1><p>看到几篇关于中台的博客，是国内提出的一个新的概念，稍微研究了下，很有意思的概念。</p><p>中台，在我看来，从业务上来讲，可以说是为了解决系统的复用性的问题而出现的。一个简单的例子，阿里刚刚开始的时候只有淘宝，但是后来出现了天猫，二者尽管顶层业务逻辑有不同，但是他们都是需要一套订单，商品，库存，仓储，物流的各种系统的。如果每次我们想做一个新的业务模块的时候，都要来实现这样一套系统，迭代速度会很慢，而且很容易在做改动的时候因为各个类似功能的系统的改动不一致产生错误。</p><p>因此，将这些公用的系统提升，做成–中台，统一来使得各个业务部门重复使用，将需要反复建设的功能和系统进行统一的规划和管理。</p><p>主要解决的问题实质上有两类： </p><ol><li>需要业务需求或者功能需求是高度类似的，通用化程度很高，但是由于没有专门的团队负责规划和开发，大量的系统重复开发、重复建设、导致复用性很低，效率低，研发资源被浪费，用户体验也不够统一</li><li>早起业务发展过程当中，为了解决当下的一些业务问题，垂直的个性化的业务逻辑与基础系统耦合太深，由于没有平台性质的规划，横向系统之间、上下游系统之间的交叉逻辑非常多，导致了在新业务新市场的拓展过程当中，市场没有办法直接复用，甚至没有办法快速迭代。</li></ol><h1 id="2-为什么要中台，为什么要平台化？"><a href="#2-为什么要中台，为什么要平台化？" class="headerlink" title="2. 为什么要中台，为什么要平台化？"></a>2. 为什么要中台，为什么要平台化？</h1><p>引述《白话中台战略》当中的内容，“因为在当今互联网时代，⽤户才是商业战场的中心，为了快速响应用户的需求，借助平台化的力量可以事半功倍”</p><blockquote><p>不断快速响应、探索、挖掘、引领⽤户的需求，才是企业得以⽣存和持续发展的关键因素。</p></blockquote><blockquote><p>那些真正尊重用户，甚⾄不惜调整⾃己颠覆⾃己来响应⽤户的企业将在这场以⽤户为中心的商业战争中得以⽣存和发展；⽽反之，那些在过去的成就上故步⾃封，存在侥幸⼼理希望⽤户会像之前一样继续追随⾃己的企业则会被用户淘汰。很残酷，但这就是这个时代最基本的企业⽣存法则。</p></blockquote><p>平台化能够赋予或加强企业在以用户为中心的现代商业战争当中最为核心的能力 –&gt; 用户响应力。 </p><p>中台，可以说是与前台，后台相对应的。</p><ul><li>前台<ul><li>由各类前台系统组成的前端平台。每个前台系统就是一个用户触点，即企业的最终用户直接使用或者交互的系统，是企业与最终用户的交点。</li></ul></li><li>后台<ul><li>后台系统组成的后端平台，宝具哦企业的核心资源 – 数据 + 计算 <ul><li>财务系统</li><li>产品系统</li><li>客户管理系统</li><li>仓库物流管理系统</li></ul></li></ul></li><li>中台<ul><li>因为企业后台往往不能很好的支撑前台快速创新，响应用户的需求</li><li>前台直接使用后台，会遇到处理复杂，迭代速度缓慢的问题</li><li>前台要处理的是快速响应用户的需求，但是后台拿着整个公司的数据，是需要越稳定越好的，随着公司的发展，按照对速度和稳定的追求的冲突会越来越多</li><li>有了中台以后就可以将前台系统当中的稳定通用业务能力沉降到中台层，恢复前台的响应力</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.infoq.cn/article/3tbJZ8aS5pYdWYX5bBfg?utm_source=rss&amp;utm_medium=article" target="_blank" rel="noopener">https://www.infoq.cn/article/3tbJZ8aS5pYdWYX5bBfg?utm_source=rss&amp;utm_medium=article</a></li><li><a href="https://mp.weixin.qq.com/s/yfhaEkO1DG_ihJMhwtkWjA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/yfhaEkO1DG_ihJMhwtkWjA</a></li><li><a href="https://www.infoq.cn/article/hfONAlDdhK3fD9JjduGR" target="_blank" rel="noopener">https://www.infoq.cn/article/hfONAlDdhK3fD9JjduGR</a></li><li><a href="https://www.zhihu.com/question/57717433" target="_blank" rel="noopener">https://www.zhihu.com/question/57717433</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-什么是中台？&quot;&gt;&lt;a href=&quot;#1-什么是中台？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是中台？&quot;&gt;&lt;/a&gt;1. 什么是中台？&lt;/h1&gt;&lt;p&gt;看到几篇关于中台的博客，是国内提出的一个新的概念，稍微研究了下，很有意思的概念。&lt;/p&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="中台" scheme="https://www.llchen60.com/tags/%E4%B8%AD%E5%8F%B0/"/>
     
   </entry>
   
