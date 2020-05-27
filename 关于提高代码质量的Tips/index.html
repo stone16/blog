@@ -227,7 +227,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="228">
-<input type="hidden" id="yelog_site_word_count" value="394.9k">
+<input type="hidden" id="yelog_site_word_count" value="395.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2860,12 +2860,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-24 22:35:25'>2020-05-24 22:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-27 14:32:26'>2020-05-24 22:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:528</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2895,7 +2895,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-如何重构"><span class="toc-text">1. 如何重构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么要重构代码？"><span class="toc-text">1.1 为什么要重构代码？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-重构的对象"><span class="toc-text">1.2 重构的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-什么时候重构？"><span class="toc-text">1.3 什么时候重构？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-代码的可测试性"><span class="toc-text">2. 代码的可测试性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-编程规范"><span class="toc-text">3. 编程规范</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-如何重构"><span class="toc-text">1. 如何重构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么要重构代码？"><span class="toc-text">1.1 为什么要重构代码？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-重构的对象"><span class="toc-text">1.2 重构的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-什么时候重构？"><span class="toc-text">1.3 什么时候重构？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-如何解耦代码？"><span class="toc-text">1.4 如何解耦代码？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-代码的可测试性"><span class="toc-text">2. 代码的可测试性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-编程规范"><span class="toc-text">3. 编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-命名与注释"><span class="toc-text">3.1 命名与注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-代码风格"><span class="toc-text">3.2 代码风格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-编程技巧"><span class="toc-text">3.3 编程技巧</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -2944,6 +2944,71 @@
 </li>
 </ul>
 <h2 id="1-3-什么时候重构？"><a href="#1-3-什么时候重构？" class="headerlink" title="1.3 什么时候重构？"></a>1.3 什么时候重构？</h2><p>持续重构的概念，即没事情的时候，看看项目中有哪些写得不够好，可以优化的代码，主动去重构一下。或者在修改添加某个功能代码的时候，也可以顺手把不符合编码规范，不好的设计重构一下。</p>
+<h2 id="1-4-如何解耦代码？"><a href="#1-4-如何解耦代码？" class="headerlink" title="1.4 如何解耦代码？"></a>1.4 如何解耦代码？</h2><ul>
+<li><p>解耦的目的</p>
+<ul>
+<li>高内聚</li>
+<li>松耦合</li>
+</ul>
+</li>
+<li><p>为什么需要解耦</p>
+<ul>
+<li>控制代码的复杂性</li>
+<li>使得我们可以聚焦在某一模块或类当中，不需要了解太多其他模块或类的代码</li>
+<li>使得代码改动相对集中，引入bug的风险就减少了很多</li>
+</ul>
+</li>
+<li><p>如何判断是否需要解耦</p>
+<ul>
+<li>在做修改的时候是否需要跨很多个包来进行改动</li>
+<li>需要通过解耦的方式让依赖关系变得清晰，简单一些</li>
+</ul>
+</li>
+<li><p>如何进行解耦</p>
+<ul>
+<li><p>封装与抽象</p>
+<ul>
+<li>有效隐藏实现的复杂</li>
+<li>隔离实现的易变性</li>
+<li>给依赖的模块提供稳定易用的抽象接口</li>
+</ul>
+</li>
+<li><p>引入中间层</p>
+<ul>
+<li>引入中间层能够简化模块或类之间的依赖关系</li>
+<li>即我们可以让开发和重构同步进行</li>
+<li>例如需要进行接口的修改<ul>
+<li>先引入一个中间层，包裹老的接口，提供新的接口定义</li>
+<li>新开发的代码依赖中间层提供的新接口</li>
+<li>将依赖老街口的代码改为调用新接口</li>
+<li>确保所有的代码都调用新接口之后，删掉老接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模块化</p>
+<ul>
+<li>对于一个大型复杂系统来说，没有人能够掌控所有细节</li>
+<li>通过划分成不同的独立模块，让不同的人负责不同的模块</li>
+<li>这样即便在不了解全部细节的情况下，管理者也能够协调各个模块，让整个系统有效运转起来</li>
+<li>将每个模块都当做一个独立的library来进行开发，只提供封装了内部实现细节的接口给其他模块使用，以此来减少不同模块之间的耦合度</li>
+</ul>
+</li>
+<li><p>遵循设计思想和原则</p>
+<ul>
+<li>单一职责原则</li>
+<li>基于接口而非实现编程</li>
+<li>依赖注入</li>
+<li>多用组合少用继承</li>
+<li>迪米特法则<ul>
+<li>不应该有直接依赖关系的类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="2-代码的可测试性"><a href="#2-代码的可测试性" class="headerlink" title="2. 代码的可测试性"></a>2. 代码的可测试性</h1><p>做重构，如何保证你做的改动能够按照既定的想法运行，那么我们需要来写单元测试，来保证新的代码仍然能够通过，即原有的逻辑的正确性没有被破坏。</p>
 <p>另外，单元测试的阅读实际上是快速熟悉代码的一种方式</p>
 <p>一些常见的Anti-patterns:</p>
@@ -2957,7 +3022,61 @@
 <li>复杂继承</li>
 <li>高耦合代码</li>
 </ul>
-<h1 id="3-编程规范"><a href="#3-编程规范" class="headerlink" title="3. 编程规范"></a>3. 编程规范</h1>
+<h1 id="3-编程规范"><a href="#3-编程规范" class="headerlink" title="3. 编程规范"></a>3. 编程规范</h1><h2 id="3-1-命名与注释"><a href="#3-1-命名与注释" class="headerlink" title="3.1 命名与注释"></a>3.1 命名与注释</h2><ol>
+<li>在足够表达含义的情况下，命名尽量短</li>
+</ol>
+<p>命名时候的缩写，只对大家比较熟知的使用，减少阅读时候的障碍的感觉。</p>
+<ol start="2">
+<li>利用上下文简化命名</li>
+</ol>
+<p>比如POJO当中，类名往往对这是个什么类做了定义了，成员变量就不用再添加类前缀了</p>
+<ol start="3">
+<li>命名需要可读，可搜索</li>
+</ol>
+<p>英文上可读，方便发音，哪怕是第一次见到，也需要尽可能简单的能够直接读出来</p>
+<p>另外需要遵从一些大家约定俗成的规范，即比如使用selectXXX 还是queryXXX 来表示选择，从数据库里面拿东西，一旦选定，就需要一起遵从规定了。</p>
+<ol start="4">
+<li>对于接口，抽象类的命名</li>
+</ol>
+<ul>
+<li><p>对于接口的命名</p>
+<ul>
+<li>加前缀I，比如IUserService</li>
+<li>或者加后缀Impl, UserServiceImpl</li>
+</ul>
+</li>
+<li><p>抽象类的命名</p>
+<ul>
+<li>加上前缀Abstract</li>
+<li>或者不带</li>
+</ul>
+</li>
+</ul>
+<p>皆可，但是需要形式上的统一。</p>
+<ol start="5">
+<li>注释</li>
+</ol>
+<ul>
+<li><p>目的</p>
+<ul>
+<li>让代码更容易看懂</li>
+</ul>
+</li>
+<li><p>写什么</p>
+<ul>
+<li>是什么，为什么，怎么办 三大问题</li>
+<li>能够起到总结性和文档的作用</li>
+<li>总结性注释也能够让整个代码更加清晰</li>
+</ul>
+</li>
+<li><p>在哪里写</p>
+<ul>
+<li>一般来说是在类和函数上写注释</li>
+<li>函数内部尽量通过好的命名，提炼函数，解释性的变量来提高代码的可读性</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-代码风格"><a href="#3-2-代码风格" class="headerlink" title="3.2 代码风格"></a>3.2 代码风格</h2><h2 id="3-3-编程技巧"><a href="#3-3-编程技巧" class="headerlink" title="3.3 编程技巧"></a>3.3 编程技巧</h2>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -2971,10 +3090,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>提高代码质量的Tips</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">528</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-24, 22:34:48</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-24, 22:35:25</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-27, 14:32:26</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/" title="提高代码质量的Tips">https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
