@@ -227,7 +227,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="228">
-<input type="hidden" id="yelog_site_word_count" value="395.8k">
+<input type="hidden" id="yelog_site_word_count" value="396.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2860,12 +2860,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-05-27 14:32:26'>2020-05-24 22:34</time>
+        创建时间:<time class="date" title='更新时间: 2020-05-28 17:49:33'>2020-05-24 22:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:1.9k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3076,7 +3076,70 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-2-代码风格"><a href="#3-2-代码风格" class="headerlink" title="3.2 代码风格"></a>3.2 代码风格</h2><h2 id="3-3-编程技巧"><a href="#3-3-编程技巧" class="headerlink" title="3.3 编程技巧"></a>3.3 编程技巧</h2>
+<h2 id="3-2-代码风格"><a href="#3-2-代码风格" class="headerlink" title="3.2 代码风格"></a>3.2 代码风格</h2><ol>
+<li>类和函数的大小</li>
+</ol>
+<p>软标准，只是要尽量注意，对于很大的类，最好将其分割开</p>
+<ol start="2">
+<li>一行代码的长度的限制，譬如100字符或者150字符</li>
+<li>使用空行分割单元块</li>
+</ol>
+<ul>
+<li>对于比较长的函数，如果逻辑上可以分为几个独立的代码块，可以使用空行来分割各个代码块</li>
+<li>在类的成员变量和函数之间</li>
+<li>静态成员变量和普通成员变量之间</li>
+<li>各个函数之间</li>
+<li>各个成员变量之间</li>
+</ul>
+<ol start="4">
+<li>缩进风格的统一</li>
+<li>类当中成员的排列顺序</li>
+</ol>
+<ul>
+<li>首先是类的所属包名</li>
+<li>然后罗列import引入的依赖类</li>
+<li>类当中<ul>
+<li>大原则<ul>
+<li>先静态，后普通</li>
+<li>作用域从大到小来排序</li>
+</ul>
+</li>
+<li>成员变量</li>
+<li>各种方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-编程技巧"><a href="#3-3-编程技巧" class="headerlink" title="3.3 编程技巧"></a>3.3 编程技巧</h2><ol>
+<li>将代码分割为更小的单元块</li>
+</ol>
+<p>大部分人阅读代码的习惯都是先看整体再看细节，因为我们要有模块化和抽象思维，善于将大块的负责逻辑提炼成类或者函数，屏蔽掉细节</p>
+<p>通过提炼函数，通过函数名字，直接读懂这段代码是做什么用的</p>
+<ol start="2">
+<li>避免函数参数过多</li>
+</ol>
+<ul>
+<li>考虑函数是否职责单一，能否通过拆分多个函数的方式来减少参数</li>
+<li>将函数的参数封装成对象</li>
+<li>不要使用函数的参数(true/ false) 来控制逻辑，直接分成几个不同的函数会更好</li>
+</ul>
+<ol start="3">
+<li>函数的设计，职责单一</li>
+<li>移除过深的嵌套层次</li>
+</ol>
+<ul>
+<li>去掉多余的if else语句</li>
+<li>使用continue break return等关键字，来提前退出嵌套</li>
+<li>调整执行顺序来减少嵌套</li>
+<li>将部分嵌套逻辑封装成函数调用，以此来减少嵌套</li>
+</ul>
+<ol start="5">
+<li>使用解释性变量</li>
+</ol>
+<ul>
+<li>常量替代magic number</li>
+<li>使用解释性变量来解释复杂表达式</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3090,10 +3153,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>提高代码质量的Tips</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.9k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-05-24, 22:34:48</p>
-    <p><span class="copy-title">最后更新:</span>2020-05-27, 14:32:26</p>
+    <p><span class="copy-title">最后更新:</span>2020-05-28, 17:49:33</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/" title="提高代码质量的Tips">https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
