@@ -119,6 +119,31 @@
     
     
     <entry>
+      <title>中台(二) - 略深入些的探究</title>
+      <link href="/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/"/>
+      <url>/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/</url>
+      
+        <content type="html"><![CDATA[<p>中台是企业级能力复用平台，整个中台的构建，实际上是将业务数据化，将数据业务化。是需要建立业务中台和数据中台的。业务中台通过抽象，封装可复用的逻辑，提升企业的响应力；数据中台通过打通企业的数据，构建自学习服务的数据能力，让企业更加智慧。</p><h1 id="1-通用化通用能力"><a href="#1-通用化通用能力" class="headerlink" title="1. 通用化通用能力"></a>1. 通用化通用能力</h1><p>目前大部分企业实现的中台，主要是将遗留下的后台系统，比如ERP MES CRM的公共部分进行拆解复用，形成类似交易中心，用户中心，订单中心这样的微服务集合供前台调用，从而保证<strong>逻辑的一致性</strong>同时更快响应前台的变化</p><p>Reference <a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&utm_medium=article" target="_blank" rel="noopener">1</a> 当中举了订单服务的演进过程的例子，很值得一看。当平台需要开放多渠道来完成订单的时候，保证用户有着类似的体验是很重要的一项，包括整个系统的的scalability。</p><p>在这种情况下，一个数据中台能够使得用户可以看到在各个平台各个渠道自己下的订单。从平台角度来说，有了数据中台，维护成本，发生错误以后的修改成本都会减轻很多。</p><p>略微解释下，如果是分开的系统，那么每个系统都会有自己的数据库，我们需要做数据的join操作，然后返回给前端用户需要的正确的信息。当发生了逻辑上的错误以后，我们很有可能需要在分开的几个子系统当中来做修改，很容易出错，修改的整个时间消耗也会很长。而且数据仓库在多个系统的情况下，抽取数据，再进行分析是有比较大的时延的，一般都是加一天的样子，无法看到实时的数据。</p><h1 id="2-使用中台去ERP化"><a href="#2-使用中台去ERP化" class="headerlink" title="2. 使用中台去ERP化"></a>2. 使用中台去ERP化</h1><p>ERP， 即企业资源管理系统。最最开始的时候，企业的需求是将企业的流程梳理清晰，做到资源的集约化管理，本质上来讲是为了解决流程复用，业务能力化的问题。</p><p>但是当前ERP软件存在着如下的一些问题：</p><ol><li>商业软件，响应慢<br>企业只有使用权，这就导致企业的业务发生变化的时候，需要找到原厂重新配置或者重新开发，响应比较慢</li><li>封闭架构，不开放<br>套装ERP软件是封闭架构，技术不开放，导致企业无法对其进行大的功能上的扩展，只能像打补丁一样，构建一些外挂，而且效果往往不会很好</li><li>单体架构，弹性不够<br>单体架构，很难支持持续增长的各种需求</li><li>升级 维护成本<br>套装软件升级和维护成本非常高</li></ol><p>过去人们需要ERP更多的是因为我们需要流程，需要知道具体应该如何去组织。但是在互联网化的今天，原来静态化，标准化的业务流程已经不足以支撑企业的快速响应了。因此，诉求<strong>从原来的流程化变成了需要能够快速响应前台市场的变化</strong>。</p><p>企业组织结构从流程式协作走向了平台式协作。</p><p>ERP更像是一种计划式的经济，希望每个角色都按照分配的任务来走，共同完成一个任务，但是这种共同完成会导致不同角色之间的利益相互冲突。局部利益大于整体利益。</p><p>需要的转变是 —- 要开始学习以客户为中心去动态组织资源来提供服务，将原本<strong><em>以流程为独立单元的模块拆解为以客户价值为独立单元的模块</em></strong>。</p><p>以客户价值为独立单元，如何评定绩效就是个很关键也很困难的问题，尤其是对于那些为后端赋能的业务单元，如何将其关联到直接的客户价值当中。这需要数据中台提供这方面的能力，来利用全域的数据分析，建模，通过敏感性分析等算法技术来实时计算。</p><h1 id="3-数据中台成熟度的评估维度"><a href="#3-数据中台成熟度的评估维度" class="headerlink" title="3. 数据中台成熟度的评估维度"></a>3. 数据中台成熟度的评估维度</h1><ul><li><p>数据战略</p><ul><li><p>理念</p><ul><li>究竟做数据中台是为了什么</li><li>一个组织的愿景和目标，来指导我们接下来的行动</li><li>确定组织，团队对于战略的理解是一致的</li></ul></li><li><p>行动</p><ul><li>一个管理组织<ul><li>确保战略目标能够被有效分解</li><li>能够在部门团队之间落地</li></ul></li><li>制度建设<ul><li>如何保证战略落地</li><li>如何处理冲突，不一致</li><li>如果构建决策流程</li><li>战略/行动的优化和调整机制</li></ul></li></ul></li></ul></li><li><p>数据治理</p><ul><li><p>元数据相关</p><ul><li>如何做元数据分类</li><li>技术和业务元数据的管理</li><li>维护机制</li></ul></li><li><p>数据字典相关</p></li><li><p>数据模型相关</p></li><li><p>数据质量相关</p></li><li><p>数据标准相关</p></li><li><p>数据安全相关</p></li><li><p>数据生命周期相关</p></li></ul></li><li><p>数据资产管理</p><ul><li><p>数据资产审核能力</p><ul><li>注册申请</li></ul></li><li><p>数据资产发布能力</p><ul><li>将数据提供给消费者查询使用的能力</li></ul></li><li><p>数据资产标签</p><ul><li>客户特征标签</li><li>关键业务的指标标签</li></ul></li><li><p>数据资产地图</p><ul><li>通过地图或者目录的形式，提供数据资产的查询功能</li><li>实现数据资产的可视化</li></ul></li><li><p>数据资产开放能力</p><ul><li>通过接口提供给内外部用户使用</li></ul></li><li><p>数据资产盘点能力</p></li><li><p>数据资产定价</p></li><li><p>效益评估</p></li></ul></li><li><p>数据平台和架构</p><ul><li>基准<ul><li>易用</li><li>稳定</li><li>可扩展</li><li>支持多应用的平台架构</li></ul></li><li>架构标准<ul><li>架构选择的流程<ul><li>同业调研</li><li>选型</li><li>POC</li><li>决策部门</li></ul></li><li>架构方法<ul><li>架构规划</li><li>基础架构</li><li>评估机制</li></ul></li></ul></li></ul></li><li><p>数据服务化</p><ul><li><p>数据中心以什么样的方式向外界提供服务呢？</p><ul><li><p>API调用</p></li><li><p>服务标准的确立</p><ul><li>服务目标</li><li>提供方式</li><li>流程</li><li>优先级</li></ul></li><li><p>服务监控和维护</p><ul><li>量化的评估标准</li></ul></li><li><p>数据服务的评估和优化</p></li></ul></li></ul></li><li><p>数据产品化</p><ul><li>产品<ul><li>报表分析等</li></ul></li><li>业务支撑能力<ul><li>所能支撑的业务是否能反映战略的方向或战略的执行情况，功能支撑能力是不是能被周期性评估和优化</li></ul></li><li>业务分析响应能力<ul><li>响应机制</li></ul></li><li>数据可视化能力<ul><li>是否支持业务友好的使用方式</li></ul></li><li>统一服务的能力<ul><li>是否能够将业务需求沉淀成统一的服务的能力，从而服务更多业务团队</li></ul></li></ul></li><li><p>中台运营</p><ul><li>将整个平台作为一个产品来看，是否有运营的指标和控制机制</li><li>中台管理平台<ul><li>文档</li><li>规范</li><li>流程等</li></ul></li><li>成本分析<ul><li>存储</li><li>计算</li><li>研发 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1></li></ul></li></ul></li></ul><ol><li><a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article" target="_blank" rel="noopener">https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article</a></li><li><a href="https://insights.thoughtworks.cn/data-zhongtai-maturity-model/" target="_blank" rel="noopener">https://insights.thoughtworks.cn/data-zhongtai-maturity-model/</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 中台 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Jest - JS测试框架</title>
       <link href="/Jest-JS%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
       <url>/Jest-JS%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</url>
@@ -438,31 +463,6 @@
         <tags>
             
             <tag> npm </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>中台(二) - 略深入些的探究</title>
-      <link href="/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/"/>
-      <url>/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/</url>
-      
-        <content type="html"><![CDATA[<p>中台是企业级能力复用平台，整个中台的构建，实际上是将业务数据化，将数据业务化。是需要建立业务中台和数据中台的。业务中台通过抽象，封装可复用的逻辑，提升企业的响应力；数据中台通过打通企业的数据，构建自学习服务的数据能力，让企业更加智慧。</p><h1 id="1-通用化通用能力"><a href="#1-通用化通用能力" class="headerlink" title="1. 通用化通用能力"></a>1. 通用化通用能力</h1><p>目前大部分企业实现的中台，主要是将遗留下的后台系统，比如ERP MES CRM的公共部分进行拆解复用，形成类似交易中心，用户中心，订单中心这样的微服务集合供前台调用，从而保证<strong>逻辑的一致性</strong>同时更快响应前台的变化</p><p>Reference <a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&utm_medium=article" target="_blank" rel="noopener">1</a> 当中举了订单服务的演进过程的例子，很值得一看。当平台需要开放多渠道来完成订单的时候，保证用户有着类似的体验是很重要的一项，包括整个系统的的scalability。</p><p>在这种情况下，一个数据中台能够使得用户可以看到在各个平台各个渠道自己下的订单。从平台角度来说，有了数据中台，维护成本，发生错误以后的修改成本都会减轻很多。</p><p>略微解释下，如果是分开的系统，那么每个系统都会有自己的数据库，我们需要做数据的join操作，然后返回给前端用户需要的正确的信息。当发生了逻辑上的错误以后，我们很有可能需要在分开的几个子系统当中来做修改，很容易出错，修改的整个时间消耗也会很长。而且数据仓库在多个系统的情况下，抽取数据，再进行分析是有比较大的时延的，一般都是加一天的样子，无法看到实时的数据。</p><h1 id="2-使用中台去ERP化"><a href="#2-使用中台去ERP化" class="headerlink" title="2. 使用中台去ERP化"></a>2. 使用中台去ERP化</h1><p>ERP， 即企业资源管理系统。最最开始的时候，企业的需求是将企业的流程梳理清晰，做到资源的集约化管理，本质上来讲是为了解决流程复用，业务能力化的问题。</p><p>但是当前ERP软件存在着如下的一些问题：</p><ol><li>商业软件，响应慢<br>企业只有使用权，这就导致企业的业务发生变化的时候，需要找到原厂重新配置或者重新开发，响应比较慢</li><li>封闭架构，不开放<br>套装ERP软件是封闭架构，技术不开放，导致企业无法对其进行大的功能上的扩展，只能像打补丁一样，构建一些外挂，而且效果往往不会很好</li><li>单体架构，弹性不够<br>单体架构，很难支持持续增长的各种需求</li><li>升级 维护成本<br>套装软件升级和维护成本非常高</li></ol><p>过去人们需要ERP更多的是因为我们需要流程，需要知道具体应该如何去组织。但是在互联网化的今天，原来静态化，标准化的业务流程已经不足以支撑企业的快速响应了。因此，诉求<strong>从原来的流程化变成了需要能够快速响应前台市场的变化</strong>。</p><p>企业组织结构从流程式协作走向了平台式协作。</p><p>ERP更像是一种计划式的经济，希望每个角色都按照分配的任务来走，共同完成一个任务，但是这种共同完成会导致不同角色之间的利益相互冲突。局部利益大于整体利益。</p><p>需要的转变是 —- 要开始学习以客户为中心去动态组织资源来提供服务，将原本<strong><em>以流程为独立单元的模块拆解为以客户价值为独立单元的模块</em></strong>。</p><p>以客户价值为独立单元，如何评定绩效就是个很关键也很困难的问题，尤其是对于那些为后端赋能的业务单元，如何将其关联到直接的客户价值当中。这需要数据中台提供这方面的能力，来利用全域的数据分析，建模，通过敏感性分析等算法技术来实时计算。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article" target="_blank" rel="noopener">https://www.infoq.cn/article/wCZV6X5uujxDXFP0Eub9?utm_source=rss&amp;utm_medium=article</a></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> SystemDesign </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 中台 </tag>
             
         </tags>
       
