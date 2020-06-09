@@ -6,15 +6,17 @@
   <meta name="keywords" content=" 设计原则 , 编程规范 ">
   <meta name="description" content="设计原则，编程规范的总结 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://www.llchen60.com/about/index.html">
+<meta name="description" content="本文作为一个对于整理过的设计原则和思想的总结，包括：  面向对象 封装、继承、抽象、多态 面向对象编程 vs 面向过程编程 面向对象分析、设计、编程 接口 vs 抽象类 基于接口而非实现编程 多用组合少用继承 贫血模式 vs 充血模式    设计原则 单一职责原则 开闭原则 里氏替换原则 接口隔离原则 依赖倒置原则 DRY KISS YAGNI LOD   规范与重构 目的，对象，时机，方法 单元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计原则，编程规范的总结">
+<meta property="og:url" content="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%EF%BC%8C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E7%9A%84%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
-<meta property="og:description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
-<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
-<meta property="article:modified_time" content="2020-04-30T03:11:58.752Z">
+<meta property="og:description" content="本文作为一个对于整理过的设计原则和思想的总结，包括：  面向对象 封装、继承、抽象、多态 面向对象编程 vs 面向过程编程 面向对象分析、设计、编程 接口 vs 抽象类 基于接口而非实现编程 多用组合少用继承 贫血模式 vs 充血模式    设计原则 单一职责原则 开闭原则 里氏替换原则 接口隔离原则 依赖倒置原则 DRY KISS YAGNI LOD   规范与重构 目的，对象，时机，方法 单元">
+<meta property="article:published_time" content="2020-06-07T18:12:00.000Z">
+<meta property="article:modified_time" content="2020-06-09T05:04:33.891Z">
 <meta property="article:author" content="Leilei Chen">
+<meta property="article:tag" content="设计原则">
+<meta property="article:tag" content="编程规范">
 <meta name="twitter:card" content="summary">
 
 
@@ -227,7 +229,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="230">
-<input type="hidden" id="yelog_site_word_count" value="403.8k">
+<input type="hidden" id="yelog_site_word_count" value="404.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -2896,12 +2898,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-07 11:12:37'>2020-06-07 11:12</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-08 22:04:33'>2020-06-07 11:12</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -2931,7 +2933,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-代码质量的评判标准"><span class="toc-text">1. 代码质量的评判标准</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-面向对象"><span class="toc-text">2. 面向对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-设计原则"><span class="toc-text">3. 设计原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-相关的文章"><span class="toc-text">4. 相关的文章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实战：ID生成器"><span class="toc-text">实战：ID生成器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实战：性能计数器"><span class="toc-text">实战：性能计数器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-代码质量的评判标准"><span class="toc-text">1. 代码质量的评判标准</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-面向对象"><span class="toc-text">2. 面向对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-设计原则"><span class="toc-text">3. 设计原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-相关的文章"><span class="toc-text">4. 相关的文章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-实战：ID生成器"><span class="toc-text">5. 实战：ID生成器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-原始的生成ID的代码"><span class="toc-text">5.1 原始的生成ID的代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-完善后的代码"><span class="toc-text">5.2 完善后的代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-实战：性能计数器"><span class="toc-text">6. 实战：性能计数器</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3149,7 +3151,106 @@
 <li><a href="https://llchen60.com/%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1-Practice/" target="_blank" rel="noopener">应用设计 Practice</a></li>
 <li><a href="https://llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/" target="_blank" rel="noopener">提高代码质量的Tips</a></li>
 </ol>
-<h1 id="实战：ID生成器"><a href="#实战：ID生成器" class="headerlink" title="实战：ID生成器"></a>实战：ID生成器</h1><h1 id="实战：性能计数器"><a href="#实战：性能计数器" class="headerlink" title="实战：性能计数器"></a>实战：性能计数器</h1>
+<h1 id="5-实战：ID生成器"><a href="#5-实战：ID生成器" class="headerlink" title="5. 实战：ID生成器"></a>5. 实战：ID生成器</h1><p>使用ID来做服务内部的请求追踪，因为在日志文件当中，不同请求的日志是会交织到一起的。我们需要使用ID来标识哪些日志属于同一个请求。</p>
+<p>因此我们需要做的事情就是给每个请求分配一个唯一的ID，并且保存在请求的上下文当中。Java当中可以将ID存储在ThreadLocal当中，或者使用Slf4j的MDC(Mapped Diagnostic Contexts)来实现。每次打印日志的时候，我们就可以从请求上下文当中取出请求ID，跟日志一块输出。</p>
+<h2 id="5-1-原始的生成ID的代码"><a href="#5-1-原始的生成ID的代码" class="headerlink" title="5.1 原始的生成ID的代码"></a>5.1 原始的生成ID的代码</h2><pre><code>public class IdGenerator {
+  private static final Logger logger = LoggerFactory.getLogger(IdGenerator.class);
+
+  public static String generate() {
+    String id = &quot;&quot;;
+    try {
+      String hostName = InetAddress.getLocalHost().getHostName();
+      String[] tokens = hostName.split(&quot;\\.&quot;);
+      if (tokens.length &gt; 0) {
+        hostName = tokens[tokens.length - 1];
+      }
+      char[] randomChars = new char[8];
+      int count = 0;
+      Random random = new Random();
+      while (count &lt; 8) {
+        int randomAscii = random.nextInt(122);
+        if (randomAscii &gt;= 48 &amp;&amp; randomAscii &lt;= 57) {
+          randomChars[count] = (char)(&#39;0&#39; + (randomAscii - 48));
+          count++;
+        } else if (randomAscii &gt;= 65 &amp;&amp; randomAscii &lt;= 90) {
+          randomChars[count] = (char)(&#39;A&#39; + (randomAscii - 65));
+          count++;
+        } else if (randomAscii &gt;= 97 &amp;&amp; randomAscii &lt;= 122) {
+          randomChars[count] = (char)(&#39;a&#39; + (randomAscii - 97));
+          count++;
+        }
+      }
+      id = String.format(&quot;%s-%d-%s&quot;, hostName,
+              System.currentTimeMillis(), new String(randomChars));
+    } catch (UnknownHostException e) {
+      logger.warn(&quot;Failed to get the host name.&quot;, e);
+    }
+
+    return id;
+  }
+}</code></pre><ul>
+<li>上述代码存在的问题<ul>
+<li>static 方法可测试性太低</li>
+<li>generate函数的代码实现依赖运行环境，时间函数以及随机函数，本身的可测试性也不强</li>
+<li>随机字符串生成代码难以看懂</li>
+<li>有太多的魔法数，需要告诉读代码的人这些都是什么意思才可以的</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-2-完善后的代码"><a href="#5-2-完善后的代码" class="headerlink" title="5.2 完善后的代码"></a>5.2 完善后的代码</h2><pre><code>public interface IdGenerator {
+  String generate();
+}
+
+public interface LogTraceIdGenerator extends IdGenerator {
+}
+
+public class RandomIdGenerator implements IdGenerator {
+  private static final Logger logger = LoggerFactory.getLogger(RandomIdGenerator.class);
+
+  @Override
+  public String generate() {
+    String substrOfHostName = getLastfieldOfHostName();
+    long currentTimeMillis = System.currentTimeMillis();
+    String randomString = generateRandomAlphameric(8);
+    String id = String.format(&quot;%s-%d-%s&quot;,
+            substrOfHostName, currentTimeMillis, randomString);
+    return id;
+  }
+
+  private String getLastfieldOfHostName() {
+    String substrOfHostName = null;
+    try {
+      String hostName = InetAddress.getLocalHost().getHostName();
+      String[] tokens = hostName.split(&quot;\\.&quot;);
+      substrOfHostName = tokens[tokens.length - 1];
+      return substrOfHostName;
+    } catch (UnknownHostException e) {
+      logger.warn(&quot;Failed to get the host name.&quot;, e);
+    }
+    return substrOfHostName;
+  }
+
+  private String generateRandomAlphameric(int length) {
+    char[] randomChars = new char[length];
+    int count = 0;
+    Random random = new Random();
+    while (count &lt; length) {
+      int maxAscii = &#39;z&#39;;
+      int randomAscii = random.nextInt(maxAscii);
+      boolean isDigit= randomAscii &gt;= &#39;0&#39; &amp;&amp; randomAscii &lt;= &#39;9&#39;;
+      boolean isUppercase= randomAscii &gt;= &#39;A&#39; &amp;&amp; randomAscii &lt;= &#39;Z&#39;;
+      boolean isLowercase= randomAscii &gt;= &#39;a&#39; &amp;&amp; randomAscii &lt;= &#39;z&#39;;
+      if (isDigit|| isUppercase || isLowercase) {
+        randomChars[count] = (char) (randomAscii);
+        ++count;
+      }
+    }
+    return new String(randomChars);
+  }
+}
+
+//代码使用举例
+LogTraceIdGenerator logTraceIdGenerator = new RandomIdGenerator();</code></pre><h1 id="6-实战：性能计数器"><a href="#6-实战：性能计数器" class="headerlink" title="6. 实战：性能计数器"></a>6. 实战：性能计数器</h1>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3163,10 +3264,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>设计原则，编程规范的总结</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-06-07, 11:12:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-06-07, 11:12:37</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-08, 22:04:33</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%EF%BC%8C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E7%9A%84%E6%80%BB%E7%BB%93/" title="设计原则，编程规范的总结">https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%EF%BC%8C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E7%9A%84%E6%80%BB%E7%BB%93/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
