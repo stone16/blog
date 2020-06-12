@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-06-12T04:40:24.485Z</updated>
+  <updated>2020-06-12T05:47:39.827Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>思维模型的搜集/整理</title>
+    <link href="https://www.llchen60.com/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%90%9C%E9%9B%86-%E6%95%B4%E7%90%86/"/>
+    <id>https://www.llchen60.com/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%90%9C%E9%9B%86-%E6%95%B4%E7%90%86/</id>
+    <published>2020-06-12T05:46:32.000Z</published>
+    <updated>2020-06-12T05:47:39.827Z</updated>
+    
+    <content type="html"><![CDATA[<p>看到了Adam Amran的<a href="https://untools.co/，感觉是有一些元知识是衍生的根本，希望能够用这篇blog作为总结分享的集散地，把自己看到的认为在某些方面有实际效用的思维模型分享给大家。" target="_blank" rel="noopener">https://untools.co/，感觉是有一些元知识是衍生的根本，希望能够用这篇blog作为总结分享的集散地，把自己看到的认为在某些方面有实际效用的思维模型分享给大家。</a></p><h1 id="1-问题树-Issue-Tree"><a href="#1-问题树-Issue-Tree" class="headerlink" title="1. 问题树 - Issue Tree"></a>1. 问题树 - <a href="https://untools.co/issue-trees" target="_blank" rel="noopener">Issue Tree</a></h1><h2 id="1-1-是什么"><a href="#1-1-是什么" class="headerlink" title="1.1 是什么"></a>1.1 是什么</h2><ul><li>一个问题地图</li><li>旨在给你需要解决的问题一个清晰而系统的思考方式</li><li>帮助你对问题进行拆分，其实很符合divide and conquer 即分治的思想</li></ul><p>对自己而言，确实有在做，在思考。值得注意且需要加强的一点是MECE原则 – mutually exclusive, collectively exhaustive。 对提高思维的完备性很有作用</p><h2 id="1-2-怎么做"><a href="#1-2-怎么做" class="headerlink" title="1.2 怎么做"></a>1.2 怎么做</h2><ul><li><p>问题树应该能够覆盖所有的问题，需要非常细致</p></li><li><p>一些需要遵循的原则</p><ul><li><p><strong>MECE - mutually exclusive, collectively exhaustive</strong> </p><ul><li><strong>需要做到相互之间没有交集，并集即为全集</strong></li></ul></li><li><p>不要过度纠结于太小的细节，需要先做大类目的划分，来定义问题</p></li><li><p>二八法则，专注于起于数据的有价值的问题</p></li></ul></li></ul><h1 id="2-Second-order-thinking"><a href="#2-Second-order-thinking" class="headerlink" title="2. Second-order thinking"></a>2. <a href="https://untools.co/second-order-thinking" target="_blank" rel="noopener">Second-order thinking</a></h1><h2 id="2-1-Overview"><a href="#2-1-Overview" class="headerlink" title="2.1 Overview"></a>2.1 Overview</h2><p>有的时候我们下的决定看起来直观上会给我们带来好处，但是长远看来是对我们不利的。我们通常的思考链条是 需求 - 设定方案 - 评估方案 - 执行。其实大到公司的项目，小到晚上吃什么，我们的脑海里都会先给出需求，饿了，需要吃饭。到设定方案，在家吃vs出去吃，然后是吃什么，然后做出决定，并且按照决定来执行。</p><p>这种思考方式希望你做的是在要做出决定的时候，在想了决定的直接影响之后。再多问自己一个问题，即 – 然后呢？ 这个决定后续还会带来什么结果呢？ </p><p><strong>从事情发展的阶段来看，思考二度的发展；也可以从时间维度，去思考做出的决定在接下来几天，几个月，甚至相对更长的时间里可能对你带来的影响。</strong></p><h1 id="3-第一性原理"><a href="#3-第一性原理" class="headerlink" title="3. 第一性原理"></a>3. 第一性原理</h1><p>在每一种系统的探索当中，存在第一性原理，这是一个最基本的命题或假设，不能被忽略或删除，也不能被违反。</p><p>首先是归纳法与演绎法的对比，我们生活中最经常使用的是归纳法，即根据经验，现象到结果的链条来总结事情是如何发生的；而演绎法是基于一些元知识，做出自己的推论。</p><p>第一性原理 – First Principle，说的就是不能被省略，不能被删除，不能违反的最基本的命题或假设。是演绎法的一种，即从根本原理上，剔除干扰因素和常识性知识的思考方法。目的是希望能够将人从错综复杂的现实问题中换一个视角，将复杂的事情努力转化为简单的结构，来从源头上理解。</p><p>“我们运用第一性原理，而不是比较思维去思考问题是非常重要的。我们在生活中总是倾向于比较，对别人已经做过或者正在做的事情我们也都去做，这样发展的结果只能产生细小的迭代发展。</p><p>第一性原理的思想方式是用物理学的角度看待世界，也就是说一层层拨开事物表象，看到里面的本质，再从本质一层层往上走。”</p><h2 id="3-1-如何使用第一性原理"><a href="#3-1-如何使用第一性原理" class="headerlink" title="3.1 如何使用第一性原理"></a>3.1 如何使用第一性原理</h2><ul><li><p>苏格拉底式的提问</p><ul><li>问题源头，源起，具体表现形式？</li><li>这个情况总是发生么？什么因素会导致问题出现？</li><li>假设的证据在哪里？是否可靠？</li><li>替代观点和角度</li><li>影响和后果</li><li>对问题本身的质疑</li></ul></li><li><p>实践过程</p><ul><li>溯源</li><li>拆解</li><li>重构</li><li>迭代</li></ul></li><li><p>比较思维 vs 第一性原理</p><ul><li>看资讯</li><li>自己总结分析想法</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://untools.co/issue-trees" target="_blank" rel="noopener">https://untools.co/issue-trees</a></li><li><a href="https://medium.com/@idtimw/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B03-first-principles-%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86-7571fc664faf" target="_blank" rel="noopener">https://medium.com/@idtimw/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B03-first-principles-%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86-7571fc664faf</a></li><li><a href="http://fund.jrj.com.cn/2018/06/04151524634381.shtml" target="_blank" rel="noopener">http://fund.jrj.com.cn/2018/06/04151524634381.shtml</a></li><li><a href="https://36kr.com/p/5068808" target="_blank" rel="noopener">https://36kr.com/p/5068808</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;看到了Adam Amran的&lt;a href=&quot;https://untools.co/，感觉是有一些元知识是衍生的根本，希望能够用这篇blog作为总结分享的集散地，把自己看到的认为在某些方面有实际效用的思维模型分享给大家。&quot; target=&quot;_blank&quot; rel=&quot;noop
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
+    
+    
+      <category term="思维模型" scheme="https://www.llchen60.com/tags/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-创建型-单例模式</title>
@@ -537,42 +563,6 @@
       <category term="JaveScript" scheme="https://www.llchen60.com/tags/JaveScript/"/>
     
       <category term="JS Dependency" scheme="https://www.llchen60.com/tags/JS-Dependency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Typescript学习笔记(二)</title>
-    <link href="https://www.llchen60.com/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/"/>
-    <id>https://www.llchen60.com/Typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</id>
-    <published>2020-04-21T03:25:57.000Z</published>
-    <updated>2020-04-21T03:26:33.088Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><p>类型别名</p><ul><li>用来为一个类型起一个新名字</li></ul></li></ul><pre><code>type Name = string; </code></pre><ul><li>字符串字面量类型</li></ul><pre><code>type EventNames = &#39;click&#39; | &#39;scroll&#39; | &#39;mousemove&#39;;function handleEvent(ele: Element, event: EventNames) {    // do something}handleEvent(document.getElementById(&#39;hello&#39;), &#39;scroll&#39;);  // 没问题handleEvent(document.getElementById(&#39;world&#39;), &#39;dbclick&#39;); // 报错，event 不能为 &#39;dbclick&#39;// index.ts(7,47): error TS2345: Argument of type &#39;&quot;dbclick&quot;&#39; is not assignable to parameter of type &#39;EventNames&#39;.</code></pre><ul><li>元组  - Tuple<ul><li>Tuple可以用于合并不同类型的对象</li></ul></li></ul><pre><code>let tom: [string, number] = [&#39;Tom&#39;, 25];</code></pre><ul><li>枚举<ul><li>用于取值被限定在一定范围内的场景</li><li>使用enum进行定义的</li><li>枚举成员会被赋值为从0开始递增的数字，同时也会对枚举值到枚举名进行反向映射</li></ul></li></ul><pre><code>enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};console.log(Days[&quot;Sun&quot;] === 0); // trueconsole.log(Days[&quot;Mon&quot;] === 1); // trueconsole.log(Days[&quot;Tue&quot;] === 2); // trueconsole.log(Days[&quot;Sat&quot;] === 6); // trueconsole.log(Days[0] === &quot;Sun&quot;); // trueconsole.log(Days[1] === &quot;Mon&quot;); // trueconsole.log(Days[2] === &quot;Tue&quot;); // trueconsole.log(Days[6] === &quot;Sat&quot;); // true</code></pre><ul><li>类，类与接口<ul><li>使用class定义类，使用constructor定义构造函数，通过new生成新实例的时候，是会自动调用构造函数的</li></ul></li></ul><pre><code>class Animal {    constructor(name) {        this.name = name;    }    sayHi() {        return `My name is ${this.name}`;    }}let a = new Animal(&#39;Jack&#39;);console.log(a.sayHi()); // My name is Jack</code></pre><ul><li><p>类通过extends继承</p><ul><li><p>然后通过super关键词来调用父类的构造函数和方法</p><p>class Cat extends Animal {<br>  constructor(name) {</p><pre><code>  super(name); // 调用父类的 constructor(name)  console.log(this.name);</code></pre><p>  }<br>  sayHi() {</p><pre><code>  return &#39;Meow, &#39; + super.sayHi(); // 调用父类的 sayHi()</code></pre><p>  }<br>}</p><p>let c = new Cat(‘Tom’); // Tom<br>console.log(c.sayHi()); // Meow, My name is Tom</p></li></ul></li><li><p>泛型</p><p>  function createArray<T>(length: number, value: T): Array<T> {</p><pre><code>  let result: T[] = [];  for (let i = 0; i &lt; length; i++) {      result[i] = value;  }  return result;</code></pre><p>  }</p><p>  createArray(3, ‘x’); // [‘x’, ‘x’, ‘x’]</p></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://ts.xcatliu.com/advanced/type-aliases" target="_blank" rel="noopener">https://ts.xcatliu.com/advanced/type-aliases</a> </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;类型别名&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用来为一个类型起一个新名字&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;type Name = string; &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;字符串字面量类型&lt;/li&gt;
-&lt;/ul&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
-    
-    
-      <category term="TypeScript" scheme="https://www.llchen60.com/tags/TypeScript/"/>
     
   </entry>
   
