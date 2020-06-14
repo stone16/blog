@@ -6,22 +6,17 @@
   <meta name="keywords" content=" LinkedList ">
   <meta name="description" content="数据结构与算法(4)-链表 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1. 为什么需要单例模式windows系统的任务管理器，只能有一个,唯一性的原因：  如果能弹出多个窗口，且这些窗口的内容完全一致，全都是重复对象，那势必会浪费资源，尤其是任务管理器会需要进入内核态调取各种状态信息，会对性能造成一定的影响。 而且多个窗口之间需要保持一致性，绝对的同步，相互之间的同步也是资源的浪费。  现实中的例子，就是为了节约系统资源，有时需要确保系统中某个类只有唯一一个实例，当">
+<meta name="description" content="看到了Adam Amran的https:&#x2F;&#x2F;untools.co&#x2F;，感觉是有一些元知识是衍生的根本，希望能够用这篇blog作为总结分享的集散地，把自己看到的认为在某些方面有实际效用的思维模型分享给大家。 1. 问题树 - Issue Tree1.1 是什么 一个问题地图 旨在给你需要解决的问题一个清晰而系统的思考方式 帮助你对问题进行拆分，其实很符合divide and conquer 即分治的思">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-创建型-单例模式">
-<meta property="og:url" content="https://www.llchen60.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="思维模型的搜集&#x2F;整理">
+<meta property="og:url" content="https://www.llchen60.com/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%90%9C%E9%9B%86-%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
-<meta property="og:description" content="1. 为什么需要单例模式windows系统的任务管理器，只能有一个,唯一性的原因：  如果能弹出多个窗口，且这些窗口的内容完全一致，全都是重复对象，那势必会浪费资源，尤其是任务管理器会需要进入内核态调取各种状态信息，会对性能造成一定的影响。 而且多个窗口之间需要保持一致性，绝对的同步，相互之间的同步也是资源的浪费。  现实中的例子，就是为了节约系统资源，有时需要确保系统中某个类只有唯一一个实例，当">
-<meta property="og:image" content="https://i.loli.net/2020/02/03/vKPVAeCrImYXq1U.gif">
-<meta property="og:image" content="https://i.loli.net/2020/02/03/4vJzXqlRCITLUge.gif">
-<meta property="og:image" content="https://i.loli.net/2020/02/03/UAk8topvxWQTwfd.gif">
-<meta property="og:image" content="https://i.loli.net/2020/02/03/bDLQtESdzF8Ugmq.gif">
-<meta property="article:published_time" content="2020-06-11T22:00:48.000Z">
-<meta property="article:modified_time" content="2020-06-13T05:00:36.811Z">
+<meta property="og:description" content="看到了Adam Amran的https:&#x2F;&#x2F;untools.co&#x2F;，感觉是有一些元知识是衍生的根本，希望能够用这篇blog作为总结分享的集散地，把自己看到的认为在某些方面有实际效用的思维模型分享给大家。 1. 问题树 - Issue Tree1.1 是什么 一个问题地图 旨在给你需要解决的问题一个清晰而系统的思考方式 帮助你对问题进行拆分，其实很符合divide and conquer 即分治的思">
+<meta property="article:published_time" content="2020-06-12T05:46:32.000Z">
+<meta property="article:modified_time" content="2020-06-12T05:47:39.827Z">
 <meta property="article:author" content="Leilei Chen">
-<meta property="article:tag" content="Design Pattern">
+<meta property="article:tag" content="思维模型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/02/03/vKPVAeCrImYXq1U.gif">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -141,7 +136,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(231)</small></div></li>
+    <li><div class="all active">全部文章<small>(232)</small></div></li>
     
         
             
@@ -201,7 +196,7 @@
     
         
             
-            <li><div data-rel="SystemDesign">SystemDesign<small>(45)</small></div>
+            <li><div data-rel="SystemDesign">SystemDesign<small>(46)</small></div>
                 
             </li>
             
@@ -232,8 +227,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="231">
-<input type="hidden" id="yelog_site_word_count" value="406.2k">
+<input type="hidden" id="yelog_site_posts_number" value="232">
+<input type="hidden" id="yelog_site_word_count" value="407.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -1018,6 +1013,10 @@
         <a class="color5">思维模型</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a class="color5">工厂模式</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
@@ -1058,6 +1057,14 @@
            data-author="" >
             <span class="post-title" title="如何设计一个秒杀系统">如何设计一个秒杀系统</span>
             <span class="post-date" title="2020-02-02 14:44:35">2020/02/02</span>
+        </a>
+        
+        <a  class="SystemDesign "
+           href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E9%80%A0%E5%9E%8B-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"
+           data-tag="工厂模式"
+           data-author="" >
+            <span class="post-title" title="设计模式-创造型-工厂模式">设计模式-创造型-工厂模式</span>
+            <span class="post-date" title="2020-06-14 13:58:25">2020/06/14</span>
         </a>
         
         <a  class="SystemDesign "
@@ -3173,7 +3180,7 @@ p-&gt;next = x;  // 将 p 的 next 指针指向 x 结点；</code></pre><p>两�
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀','#Design Pattern','#架构','#CAP','#编程范式','#Apache','#Cache','#Load Balancers','#Dagger','#DI','#HashMap','#Jackson','#Serialization','#Annotations','#Executor Service','#Map','#Reflection','#Composition','#Log','#Unit Test','#JMX','#JSP','#Annotation','#Lombok','#Ruby','#项目模板','#复杂度分析','#Array','#LinkedList','#栈','#队列','#递归','#排序','#二分查找','#跳表','#散列表','#哈希算法','#数据结构与算法','#红黑树','#latency','#system design','#PowerMock','#OOP','#Polymorphism','#Inheritance','#SOLID','#高内聚','#低耦合','#迪米特','#Mentor','#Spring','#RDS','#MySQL','#log','#Tricks','#抖音','#中台','#用户画像','#运营','#npm','#JaveScript','#JS Dependency','#SQL','#Multi-threading','#Economy','#时间管理','#bash','#Jest','#Enzyme','#meeting','#tips','#心理学','#设计原则','#编程规范','#思维模型',],
+            'data': ['#RESTFul','#Web','#AWS','#DynamoDB','#Mapper','#VPC','#Lambda','#Distributed Tracing','#Security','#Agility','#Elasticity','#Reliability','#FrontEnd','#CSS','#Curl','#EC2','#ELB','#AutoScaling','#Docker','#ECS','#CI/ CD','#Identity and Access Management','#CloudWatch','#CloudTrail','#S3','#Serverless','#NoSQL','#Gateway','#SQS','#SNS','#Notification Service','#Queue','#Step Functions','#ElasticCache','#System Design','#Elastic Search','#food','#diet','#reading','#Tips','#HTTP','#Network','#认证授权','#JavaScript','#Callback','#Java','#Concurrency','#Synchronized','#Lock','#BackEnd','#LDAP','#Object Oriented','#Linux','#Cli','#平均负载','#CPU Utilization','#Context Switch','#NightWatch','#UI Test','#RPC','#Puppeteer','#React','#Scalibility','#Web Accessibility','#Tomcat','#TypeScript','#Browser','#Batch Processing','#Web Development','#i18next','#thought','#society','#history','#world war','#5G','#GPS','#Uber','#time management','#Sam Altman','#Regex','#CDN','#network','#TCP/ IP','#Thought','#Reading','#Cloud','#流媒体协议','#P2P','#DNS','#HTTP 2.0','#QUIC','#HTTPS','#Data Center','#VPN','#UDP','#TCP','#Socket','#SOAP','#Distributed System','#rafactor','#IP Protocol','#CIDR','#DHCP','#ICMP','#Router','#Japan','#finance','#stock','#DDD','#UML','#IOC','#Dependency Injection','#混沌工程','#秒杀','#Design Pattern','#架构','#CAP','#编程范式','#Apache','#Cache','#Load Balancers','#Dagger','#DI','#HashMap','#Jackson','#Serialization','#Annotations','#Executor Service','#Map','#Reflection','#Composition','#Log','#Unit Test','#JMX','#JSP','#Annotation','#Lombok','#Ruby','#项目模板','#复杂度分析','#Array','#LinkedList','#栈','#队列','#递归','#排序','#二分查找','#跳表','#散列表','#哈希算法','#数据结构与算法','#红黑树','#latency','#system design','#PowerMock','#OOP','#Polymorphism','#Inheritance','#SOLID','#高内聚','#低耦合','#迪米特','#Mentor','#Spring','#RDS','#MySQL','#log','#Tricks','#抖音','#中台','#用户画像','#运营','#npm','#JaveScript','#JS Dependency','#SQL','#Multi-threading','#Economy','#时间管理','#bash','#Jest','#Enzyme','#meeting','#tips','#心理学','#设计原则','#编程规范','#思维模型','#工厂模式',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
