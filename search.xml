@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>设计模式-结构型-装饰器模式</title>
+      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><h2 id="1-1-Java-IO类的使用"><a href="#1-1-Java-IO类的使用" class="headerlink" title="1.1 Java IO类的使用"></a>1.1 Java IO类的使用</h2><table><thead><tr><th></th><th>字节流</th><th>字符流</th></tr></thead><tbody><tr><td>输入流</td><td>InputStream</td><td>Reader</td></tr><tr><td>输出流</td><td>OutputStream</td><td>Writer</td></tr></tbody></table><p>JavaIO库非常庞大，几十个类一同来负责IO数据的读取和写入。</p><pre><code>InputStream in = new FileInputStream(&quot;/user/wangzheng/test.txt&quot;);InputStream bin = new BufferedInputStream(in);byte[] data = new byte[128];while (bin.read(data) != -1) {  //...}</code></pre><p>上述代码先使用了FileInputStream来读取文件流，然后又使用了BufferedInputStream，来支持缓存。</p><p>问题来了，为什么不能设置一个继承了FileInputStream并且支持缓存的BufferedFileInputStream类呢？ </p><p>问题在于各种use case太多，如果为了各种功能的组合都设置一个类的话，那么类的继承结构会变得非常负责，代码会变得很难扩展和维护。</p><p>Java IO的设计思路，就是使用组合来替代继承</p><pre><code>public abstract class InputStream {  //...  public int read(byte b[]) throws IOException {    return read(b, 0, b.length);  }  public int read(byte b[], int off, int len) throws IOException {    //...  }  public long skip(long n) throws IOException {    //...  }  public int available() throws IOException {    return 0;  }  public void close() throws IOException {}  public synchronized void mark(int readlimit) {}  public synchronized void reset() throws IOException {    throw new IOException(&quot;mark/reset not supported&quot;);  }  public boolean markSupported() {    return false;  }}public class BufferedInputStream extends InputStream {  protected volatile InputStream in;  protected BufferedInputStream(InputStream in) {    this.in = in;  }  //...实现基于缓存的读数据接口...  }public class DataInputStream extends InputStream {  protected volatile InputStream in;  protected DataInputStream(InputStream in) {    this.in = in;  }  //...实现读取基本类型数据的接口}</code></pre><h2 id="1-2-装饰器模式"><a href="#1-2-装饰器模式" class="headerlink" title="1.2 装饰器模式"></a>1.2 装饰器模式</h2><ul><li>使用组合来替代继承关系</li><li>装饰器类和原始类继承同样的父类，这样我们就可以对原始类嵌套多个装饰器类</li><li>是对功能的增强，是和原始功能相关的</li><li>为了解决继承关系过于复杂的问题</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 装饰器模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-结构型-桥接模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</url>
