@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-06-23T03:56:23.132Z</updated>
+  <updated>2020-06-24T05:40:23.631Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-结构型-门面模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-06-24T05:39:48.000Z</published>
+    <updated>2020-06-24T05:40:23.631Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><p>门面模式应用场景主要在于接口设计方面，是为了处理和解决接口粒度的相关问题。</p><p>为了保证接口的可复用性(通用性)，我们需要将接口设计的粒度细一些，职责单一。但是，如果接口的粒度过小，在接口使用者开发一个业务功能的时候，就需要开发不同的接口来满足，这样会导致系统的接口无限膨胀。</p><ul><li>门面模式  Facade Design Pattern <ul><li>provide a unified interface to a set of interfaces in a subsystem</li><li>facade pattern defines a higher level interface that makes the subsystem easier to use </li></ul></li></ul><ul><li>场景举例<ul><li>比如系统A提供a,b,c,d四个接口，系统B完成某个业务功能，需要调用A系统的a,b,d接口。利用门面模式，提供一个包裹a,b,d接口调用的门面接口x，给系统B直接使用</li><li>如果上述AB一个是后端，一个是APP端的话，那么他们之间网络通信耗时会比较多</li></ul></li></ul><h1 id="2-门面模式的应用场景"><a href="#2-门面模式的应用场景" class="headerlink" title="2. 门面模式的应用场景"></a>2. 门面模式的应用场景</h1><h2 id="2-1-解决易用性问题"><a href="#2-1-解决易用性问题" class="headerlink" title="2.1 解决易用性问题"></a>2.1 解决易用性问题</h2><ul><li>封装系统的底层实现，隐藏系统的复杂性</li><li>提供一组更加简单易用，更高层的接口</li><li>例子<ul><li>Linux系统调用函数<ul><li>封装了底层Linux内核的调用</li></ul></li><li>Shell指令<ul><li>封装系统调用</li><li>提供更加友好的指令</li></ul></li></ul></li></ul><h2 id="2-2-解决性能问题"><a href="#2-2-解决性能问题" class="headerlink" title="2.2 解决性能问题"></a>2.2 解决性能问题</h2><ul><li>当使用一个门面接口替换多个接口的调用的时候，减少了网络通信成本</li><li>如果门面接口比较多<ul><li>可以抽象出一层，专门放置门面接口</li><li>如果跨多个子系统，可以将门面接口放到一个新的子系统当中</li></ul></li></ul><h2 id="2-3-解决分布式事务问题"><a href="#2-3-解决分布式事务问题" class="headerlink" title="2.3 解决分布式事务问题"></a>2.3 解决分布式事务问题</h2><p>在一个金融系统中，有两个业务领域模型，用户和钱包。这两个业务领域模型都对外暴露了一系列接口，比如用户的增删改查接口、钱包的增删改查接口。假设有这样一个业务场景：在用户注册的时候，我们不仅会创建用户（在数据库 User 表中），还会给用户创建一个钱包（在数据库的 Wallet 表中）。</p><p>对于这样一个简单的业务需求，我们可以通过依次调用用户的创建接口和钱包的创建接口来完成。但是，用户注册需要支持事务，也就是说，创建用户和钱包的两个操作，要么都成功，要么都失败，不能一个成功、一个失败。</p><p>要支持两个接口调用在一个事务中执行，是比较难实现的，这涉及分布式事务问题。虽然我们可以通过引入分布式事务框架或者事后补偿的机制来解决，但代码实现都比较复杂。而最简单的解决方案是，利用数据库事务或者 Spring 框架提供的事务（如果是 Java 语言的话），在一个事务中，执行创建用户和创建钱包这两个 SQL 操作。这就要求两个 SQL 操作要在一个接口中完成，所以，我们可以借鉴门面模式的思想，再设计一个包裹这两个操作的新接口，让新接口在一个事务中执行两个 SQL 操作。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;p&gt;门面模式应用场景主要在于接口设计方面，是为了处理和解决接口粒度的相关问题。&lt;/p&gt;
+&lt;p&gt;为了保
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="门面模式" scheme="https://www.llchen60.com/tags/%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-结构型-适配器模式</title>
@@ -533,32 +560,6 @@
     
       <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>中台(三) - 看白话中台系列的一些总结</title>
-    <link href="https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%B8%89-%E7%9C%8B%E7%99%BD%E8%AF%9D%E4%B8%AD%E5%8F%B0%E7%B3%BB%E5%88%97%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
-    <id>https://www.llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%B8%89-%E7%9C%8B%E7%99%BD%E8%AF%9D%E4%B8%AD%E5%8F%B0%E7%B3%BB%E5%88%97%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</id>
-    <published>2020-05-12T03:36:52.000Z</published>
-    <updated>2020-05-12T03:40:08.892Z</updated>
-    
-    <content type="html"><![CDATA[<p>前面两篇文章讲了一些关于中台的信息, <a href="https://llchen60.com/%E4%B8%AD%E5%8F%B0/" target="_blank" rel="noopener">中台1</a>,<a href="https://llchen60.com/%E4%B8%AD%E5%8F%B0-%E4%BA%8C-%E7%95%A5%E6%B7%B1%E5%85%A5%E4%BA%9B%E7%9A%84%E6%8E%A2%E7%A9%B6/" target="_blank" rel="noopener">中台2</a>。</p><ul><li><p>为什么需要平台化</p><ul><li>赋予企业用户响应力</li></ul></li><li><p>什么是中台</p><ul><li><strong>企业级能力复用平台</strong></li><li>基础的理念和架构</li><li>可以联通，支持上端的业务</li><li>需要能够将后台各式各样的资源转化为前台易于使用的能力 –&gt; 以用户为中心的持续规模化创新</li><li>Platform as a product </li><li>亚马逊大量使用微服务，关于微服务与中台，可以想象成中台是多个有平台化能力的微服务的集合，通过隐藏内部的信息和不必要的接口，对外呈现为单独一个具有平台服务能力的微服务。</li></ul></li><li><p>中台分类/ 为什么要建平台</p><ul><li>内部研发效能提升</li><li>资源整合</li><li>新零售</li><li>全周期</li><li>全渠道</li><li>开放银行</li><li>多品牌战略</li><li>全球化战略</li><li>产业互联</li><li>构建商业生态</li></ul></li><li><p>阿里的数据业务双中台</p><ul><li>业务中台将后台资源进行抽象包装整合，转化为前台友好的可重用可共享的核心能力，实现后端业务资源到前台易用能力的转化</li><li>数据中台从后台及业务中台将数据流入，完成海量数据的存储，计算，产品化包装的过程，构成企业的核心数据能力</li></ul></li><li><p>阿里技术中台</p><ul><li>将使用云或者其他基础设施的能力以及应用各种技术中间件的能力进行整合包装，过滤掉技术细节，提供简单一致，易于使用的应用技术基础设施的能力接口，助力前台和业务中台数据中台的快速建设</li></ul></li><li><p>组织中台</p><ul><li>中台建设真正困难的地方在于组织上的重构，技术架构与组织架构的匹配！！</li><li>组织中台很像企业中的内部风投和创新孵化机构，为前台组织和团队构建创新型前台应用提供类似于投资评估（项目甄别）、投资管理、投后管理（孵化与风控），真正从组织和制度上支撑前台组织和应用的快速迭代规模化创新</li></ul></li><li><p>中台建设的难点 – 需要关注组织架构的调整</p><ul><li>组织架构的调整和演进以及利益的重新分配 </li><li>战略的落地是需要靠组织架构的调整来实现的，企业的发展取决于企业正确的战略以及企业的组织结构。前者决定了后者，后者能够保证前者的落地实现</li><li>如果将中台和前台之间的关系定义成服务和被服务的关系，很容易会因为大量需求占据大量时间，短期利益和长期利益的博弈，造成很多问题</li><li>产品化思维，将中台当做一个产品，和其他组是产品之间互通的关系</li></ul></li><li><p>关于中台 - 产品化思考以后的问题</p><ul><li>愿景是什么？<ul><li>中台作为产品需要有自己的愿景定位，不一定需要满足所有前台客户的需求，这同样也意味着前台可以选择不使用中台的某些能力而选择自建。</li></ul></li><li>用户是谁？ 如何划分？<ul><li>中台作为产品需要有自己清晰的用户定位和用户划分，前台作为中台的用户不再是平等的，VIP 前台用户的需求要优于免费前台用户的诉求，通过产品上常见的用户划分来解决需求膨胀、排期、优先级和冲突问题</li></ul></li><li>解决了什么问题？<ul><li>中台作为一个产品，需要想方设法体现自身的价值，真正为前台客户解决实际问题，并关注前台用户体验，通过营销和售前等手段获取前台客户，通过清晰的用户定位和产品力吸引前台客户，让其主动选择采购中台产品</li></ul></li><li>竞争环境？ 团队构成？<ul><li>产品的建设初期，不一定启动资金直接从业务上切分，可能需要类似于天使投资的企业战略投资进行初始孵化，减少中台前期建设的业务交付压力，甚至作为企业的战略级产品，需要一些内部保护和孵化，但仍需要快速验证其价值，获取客户，实现自负盈亏</li></ul></li><li>如何获取用户？营销？售前？</li><li>如何向用户提供服务？<ul><li>产品的建设过程可以借鉴精益创业思路，需要尽快体现其商业价值，如果一定时期内无法获取相应的前台用户（前台不用），或是其他考核指标不达标，则需要进行中台建设止损，类似于创业失败</li><li>甚至在特殊情况下，允许同一类型的中台产品存在合理的内部竞争，同时对两个相似的中台产品进行孵化，使用类似于内部赛马的机制解决内部服务差异性带来的内部产品垄断和定价困难问题</li><li>中台产品为了用户留存，需要对于前台客户提供产品级 SLA，提供客户运营，客户售后服务，保持产品平滑更新，关注用户满意度，实现客户留存与转化</li></ul></li><li>如何验证价值？成本核算？ 定价机制？</li><li>如何保证服务质量？ </li><li>如何升级演进？产品运营？<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1></li></ul></li></ul><ol><li><a href="https://www.infoq.cn/profile/1084916/publish" target="_blank" rel="noopener">https://www.infoq.cn/profile/1084916/publish</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;前面两篇文章讲了一些关于中台的信息, &lt;a href=&quot;https://llchen60.com/%E4%B8%AD%E5%8F%B0/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;中台1&lt;/a&gt;,&lt;a href=&quot;https://llchen60.co
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="中台" scheme="https://www.llchen60.com/tags/%E4%B8%AD%E5%8F%B0/"/>
     
   </entry>
   

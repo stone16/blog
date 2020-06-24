@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>设计模式-结构型-门面模式</title>
+      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><p>门面模式应用场景主要在于接口设计方面，是为了处理和解决接口粒度的相关问题。</p><p>为了保证接口的可复用性(通用性)，我们需要将接口设计的粒度细一些，职责单一。但是，如果接口的粒度过小，在接口使用者开发一个业务功能的时候，就需要开发不同的接口来满足，这样会导致系统的接口无限膨胀。</p><ul><li>门面模式  Facade Design Pattern <ul><li>provide a unified interface to a set of interfaces in a subsystem</li><li>facade pattern defines a higher level interface that makes the subsystem easier to use </li></ul></li></ul><ul><li>场景举例<ul><li>比如系统A提供a,b,c,d四个接口，系统B完成某个业务功能，需要调用A系统的a,b,d接口。利用门面模式，提供一个包裹a,b,d接口调用的门面接口x，给系统B直接使用</li><li>如果上述AB一个是后端，一个是APP端的话，那么他们之间网络通信耗时会比较多</li></ul></li></ul><h1 id="2-门面模式的应用场景"><a href="#2-门面模式的应用场景" class="headerlink" title="2. 门面模式的应用场景"></a>2. 门面模式的应用场景</h1><h2 id="2-1-解决易用性问题"><a href="#2-1-解决易用性问题" class="headerlink" title="2.1 解决易用性问题"></a>2.1 解决易用性问题</h2><ul><li>封装系统的底层实现，隐藏系统的复杂性</li><li>提供一组更加简单易用，更高层的接口</li><li>例子<ul><li>Linux系统调用函数<ul><li>封装了底层Linux内核的调用</li></ul></li><li>Shell指令<ul><li>封装系统调用</li><li>提供更加友好的指令</li></ul></li></ul></li></ul><h2 id="2-2-解决性能问题"><a href="#2-2-解决性能问题" class="headerlink" title="2.2 解决性能问题"></a>2.2 解决性能问题</h2><ul><li>当使用一个门面接口替换多个接口的调用的时候，减少了网络通信成本</li><li>如果门面接口比较多<ul><li>可以抽象出一层，专门放置门面接口</li><li>如果跨多个子系统，可以将门面接口放到一个新的子系统当中</li></ul></li></ul><h2 id="2-3-解决分布式事务问题"><a href="#2-3-解决分布式事务问题" class="headerlink" title="2.3 解决分布式事务问题"></a>2.3 解决分布式事务问题</h2><p>在一个金融系统中，有两个业务领域模型，用户和钱包。这两个业务领域模型都对外暴露了一系列接口，比如用户的增删改查接口、钱包的增删改查接口。假设有这样一个业务场景：在用户注册的时候，我们不仅会创建用户（在数据库 User 表中），还会给用户创建一个钱包（在数据库的 Wallet 表中）。</p><p>对于这样一个简单的业务需求，我们可以通过依次调用用户的创建接口和钱包的创建接口来完成。但是，用户注册需要支持事务，也就是说，创建用户和钱包的两个操作，要么都成功，要么都失败，不能一个成功、一个失败。</p><p>要支持两个接口调用在一个事务中执行，是比较难实现的，这涉及分布式事务问题。虽然我们可以通过引入分布式事务框架或者事后补偿的机制来解决，但代码实现都比较复杂。而最简单的解决方案是，利用数据库事务或者 Spring 框架提供的事务（如果是 Java 语言的话），在一个事务中，执行创建用户和创建钱包这两个 SQL 操作。这就要求两个 SQL 操作要在一个接口中完成，所以，我们可以借鉴门面模式的思想，再设计一个包裹这两个操作的新接口，让新接口在一个事务中执行两个 SQL 操作。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 门面模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-结构型-适配器模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
