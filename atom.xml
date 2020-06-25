@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-06-24T05:40:23.631Z</updated>
+  <updated>2020-06-25T03:32:55.978Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-结构型-组合模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-06-25T03:32:25.000Z</published>
+    <updated>2020-06-25T03:32:55.978Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-原理和实现"><a href="#1-原理和实现" class="headerlink" title="1. 原理和实现"></a>1. 原理和实现</h1><p>组合模式，是用来处理树形结构的数据的。</p><ul><li>Compose objects into tree structure to represent part-whole hierarchies. Composite lets client treat individual objects and compositions of objects uniformly. </li><li>将一组对象组织成树形结构，来表示一种 部分-整体的层次结构，组合让客户端可以统一单个对象和组合对象的处理逻辑。</li></ul><h1 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h1><ul><li>现在设计一个类来表示文件系统中的目录，来方便地实现下面的功能：<ul><li>动态添加、删除某个目录下的子目录或文件</li><li>统计指定目录下的文件个数</li><li>统计指定目录下的文件总大小</li></ul></li></ul><pre><code>public class FileSystemNode {  private String path;  private boolean isFile;  private List&lt;FileSystemNode&gt; subNodes = new ArrayList&lt;&gt;();  public FileSystemNode(String path, boolean isFile) {    this.path = path;    this.isFile = isFile;  }  public int countNumOfFiles() {    if (isFile) { return 1; }     int numOfFiles = 0;     for (FileSystemNode fileOrDir : subNodes) {         numOfFiles += fileOrDir.countNumOfFiles();     }     return numOfFiles;  }  public long countSizeOfFiles() {    if (isFile) {              File file = new File(path);              if (!file.exists()) return 0;              return file.length();        }        long sizeofFiles = 0;        for (FileSystemNode fileOrDir : subNodes) {              sizeofFiles += fileOrDir.countSizeOfFiles();        }        return sizeofFiles;  }  public String getPath() {    return path;  }  public void addSubNode(FileSystemNode fileOrDir) {    subNodes.add(fileOrDir);  }  public void removeSubNode(FileSystemNode fileOrDir) {    int size = subNodes.size();    int i = 0;    for (; i &lt; size; ++i) {      if (subNodes.get(i).getPath().equalsIgnoreCase(fileOrDir.getPath())) {        break;      }    }    if (i &lt; size) {      subNodes.remove(i);    }  }}</code></pre><ul><li>而后对文件和目录进行区分设计</li></ul><pre><code>public abstract class FileSystemNode {  protected String path;  public FileSystemNode(String path) {    this.path = path;  }  public abstract int countNumOfFiles();  public abstract long countSizeOfFiles();  public String getPath() {    return path;  }}public class File extends FileSystemNode {  public File(String path) {    super(path);  }  @Override  public int countNumOfFiles() {    return 1;  }  @Override  public long countSizeOfFiles() {    java.io.File file = new java.io.File(path);    if (!file.exists()) return 0;    return file.length();  }}public class Directory extends FileSystemNode {  private List&lt;FileSystemNode&gt; subNodes = new ArrayList&lt;&gt;();  public Directory(String path) {    super(path);  }  @Override  public int countNumOfFiles() {    int numOfFiles = 0;    for (FileSystemNode fileOrDir : subNodes) {      numOfFiles += fileOrDir.countNumOfFiles();    }    return numOfFiles;  }  @Override  public long countSizeOfFiles() {    long sizeofFiles = 0;    for (FileSystemNode fileOrDir : subNodes) {      sizeofFiles += fileOrDir.countSizeOfFiles();    }    return sizeofFiles;  }  public void addSubNode(FileSystemNode fileOrDir) {    subNodes.add(fileOrDir);  }  public void removeSubNode(FileSystemNode fileOrDir) {    int size = subNodes.size();    int i = 0;    for (; i &lt; size; ++i) {      if (subNodes.get(i).getPath().equalsIgnoreCase(fileOrDir.getPath())) {        break;      }    }    if (i &lt; size) {      subNodes.remove(i);    }  }}public class Demo {  public static void main(String[] args) {    /**     * /     * /wz/     * /wz/a.txt     * /wz/b.txt     * /wz/movies/     * /wz/movies/c.avi     * /xzg/     * /xzg/docs/     * /xzg/docs/d.txt     */    Directory fileSystemTree = new Directory(&quot;/&quot;);    Directory node_wz = new Directory(&quot;/wz/&quot;);    Directory node_xzg = new Directory(&quot;/xzg/&quot;);    fileSystemTree.addSubNode(node_wz);    fileSystemTree.addSubNode(node_xzg);    File node_wz_a = new File(&quot;/wz/a.txt&quot;);    File node_wz_b = new File(&quot;/wz/b.txt&quot;);    Directory node_wz_movies = new Directory(&quot;/wz/movies/&quot;);    node_wz.addSubNode(node_wz_a);    node_wz.addSubNode(node_wz_b);    node_wz.addSubNode(node_wz_movies);    File node_wz_movies_c = new File(&quot;/wz/movies/c.avi&quot;);    node_wz_movies.addSubNode(node_wz_movies_c);    Directory node_xzg_docs = new Directory(&quot;/xzg/docs/&quot;);    node_xzg.addSubNode(node_xzg_docs);    File node_xzg_docs_d = new File(&quot;/xzg/docs/d.txt&quot;);    node_xzg_docs.addSubNode(node_xzg_docs_d);    System.out.println(&quot;/ files num:&quot; + fileSystemTree.countNumOfFiles());    System.out.println(&quot;/wz/ files num:&quot; + node_wz.countNumOfFiles());  }}</code></pre><blockquote><p>将一组对象（文件和目录）组织成树形结构，以表示一种‘部分 - 整体’的层次结构（目录与子目录的嵌套结构）。组合模式让客户端可以统一单个对象（文件）和组合对象（目录）的处理逻辑（递归遍历）</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-原理和实现&quot;&gt;&lt;a href=&quot;#1-原理和实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理和实现&quot;&gt;&lt;/a&gt;1. 原理和实现&lt;/h1&gt;&lt;p&gt;组合模式，是用来处理树形结构的数据的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compose objects
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="组合模式" scheme="https://www.llchen60.com/tags/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-结构型-门面模式</title>
@@ -531,35 +559,6 @@
     
     
       <category term="Jest" scheme="https://www.llchen60.com/tags/Jest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>好玩的网站列表</title>
-    <link href="https://www.llchen60.com/%E5%A5%BD%E7%8E%A9%E7%9A%84%E7%BD%91%E7%AB%99%E5%88%97%E8%A1%A8/"/>
-    <id>https://www.llchen60.com/%E5%A5%BD%E7%8E%A9%E7%9A%84%E7%BD%91%E7%AB%99%E5%88%97%E8%A1%A8/</id>
-    <published>2020-05-13T04:33:52.000Z</published>
-    <updated>2020-06-08T04:02:10.319Z</updated>
-    
-    <content type="html"><![CDATA[<p>好玩的东西，持续更新~ </p><ul><li><p>digital nomad</p><ul><li>以数字技术为生，搬到风景优美，气候温和，物价便宜的地方，做自己想做的事情，这概念有意思的</li><li><a href="https://nomadlist.com/" target="_blank" rel="noopener">https://nomadlist.com/</a> </li></ul></li><li><p>Regex 101 </p><ul><li>神一样的正则网站，可以做在线debug</li><li><a href="https://regex101.com/" target="_blank" rel="noopener">https://regex101.com/</a> </li></ul></li><li><p>中国互联网中讨论的消亡</p><ul><li><a href="https://mp.weixin.qq.com/s/a-32UpINmb_vSj17epysiA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/a-32UpINmb_vSj17epysiA</a></li></ul></li><li><p>经济机器是怎样运行的 by Ray Dalio </p><ul><li>在2020年对着现在的经济形势看，别有一番滋味 lol</li><li>tips<ul><li>不要让债务的增长速度超过收入</li><li>不要让收入的增长速度超过生产率</li><li>尽一切努力提高生产率</li></ul></li><li><a href="https://www.bilibili.com/video/av6496369/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6496369/</a></li></ul></li><li><p>大国周期及储备货币变迁 by Ray Dalio</p><ul><li><a href="https://www.chainnews.com/articles/678538813470.htm" target="_blank" rel="noopener">link</a></li></ul></li><li><p>思考工具的📱</p><ul><li><a href="https://untools.co/" target="_blank" rel="noopener">link</a></li></ul></li><li><p>设计模式的讲解</p><ul><li><a href="https://refactoringguru.cn/design-patterns" target="_blank" rel="noopener">link</a></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;好玩的东西，持续更新~ &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;digital nomad&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;以数字技术为生，搬到风景优美，气候温和，物价便宜的地方，做自己想做的事情，这概念有意思的&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://nomadlist.
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
     
   </entry>
   
