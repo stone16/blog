@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-06-25T03:32:55.978Z</updated>
+  <updated>2020-06-28T03:14:52.407Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-结构型-享元模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-06-28T03:14:26.000Z</published>
+    <updated>2020-06-28T03:14:52.407Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li><p>享元模式 Flyweight Design Pattern </p><ul><li><p>用来复用对象，节省内存，</p></li><li><p>前提条件，享元对象是不可变对象</p><ul><li>不可以暴露任何set（）等修改内部状态的方法</li></ul></li><li><p>当一个系统中存在大量重复对象的时候，如果重复对象都是不可变对象，我们就可以利用享元模式将对象设计成享元，在内存中只保留一份实例，供多处代码来引用。</p></li></ul></li></ul><ul><li>是通过工厂模式，在工厂类当中，通过一个Map来缓存已经创建过的享元对象，来达到复用的目的</li></ul><ul><li>文本文件对于字体格式进行享元操作</li></ul><pre><code>public class CharacterStyle {  private Font font;  private int size;  private int colorRGB;  public CharacterStyle(Font font, int size, int colorRGB) {    this.font = font;    this.size = size;    this.colorRGB = colorRGB;  }  @Override  public boolean equals(Object o) {    CharacterStyle otherStyle = (CharacterStyle) o;    return font.equals(otherStyle.font)            &amp;&amp; size == otherStyle.size            &amp;&amp; colorRGB == otherStyle.colorRGB;  }}public class CharacterStyleFactory {  private static final List&lt;CharacterStyle&gt; styles = new ArrayList&lt;&gt;();  public static CharacterStyle getStyle(Font font, int size, int colorRGB) {    CharacterStyle newStyle = new CharacterStyle(font, size, colorRGB);    for (CharacterStyle style : styles) {      if (style.equals(newStyle)) {        return style;      }    }    styles.add(newStyle);    return newStyle;  }}public class Character {  private char c;  private CharacterStyle style;  public Character(char c, CharacterStyle style) {    this.c = c;    this.style = style;  }}public class Editor {  private List&lt;Character&gt; chars = new ArrayList&lt;&gt;();  public void appendCharacter(char c, Font font, int size, int colorRGB) {    Character character = new Character(c, CharacterStyleFactory.getStyle(font, size, colorRGB));    chars.add(character);  }}</code></pre><h1 id="2-享元模式在Java-Integer以及String当中的应用"><a href="#2-享元模式在Java-Integer以及String当中的应用" class="headerlink" title="2. 享元模式在Java Integer以及String当中的应用"></a>2. 享元模式在Java Integer以及String当中的应用</h1><pre><code>/** * Cache to support the object identity semantics of autoboxing for values between * -128 and 127 (inclusive) as required by JLS. * * The cache is initialized on first usage.  The size of the cache * may be controlled by the {@code -XX:AutoBoxCacheMax=&lt;size&gt;} option. * During VM initialization, java.lang.Integer.IntegerCache.high property * may be set and saved in the private system properties in the * sun.misc.VM class. */private static class IntegerCache {    static final int low = -128;    static final int high;    static final Integer cache[];    static {        // high value may be configured by property        int h = 127;        String integerCacheHighPropValue =            sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);        if (integerCacheHighPropValue != null) {            try {                int i = parseInt(integerCacheHighPropValue);                i = Math.max(i, 127);                // Maximum array size is Integer.MAX_VALUE                h = Math.min(i, Integer.MAX_VALUE - (-low) -1);            } catch( NumberFormatException nfe) {                // If the property cannot be parsed into an int, ignore it.            }        }        high = h;        cache = new Integer[(high - low) + 1];        int j = low;        for(int k = 0; k &lt; cache.length; k++)            cache[k] = new Integer(j++);        // range [-128, 127] must be interned (JLS7 5.1.7)        assert IntegerCache.high &gt;= 127;    }    private IntegerCache() {}}</code></pre><p>IntegerCache 缓存在-128到127之间的内容，即指向的是同样的内存地址的</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;享元模式 Flyweight Design Pattern &lt;/p&gt;
+&lt;ul&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="享元模式" scheme="https://www.llchen60.com/tags/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-结构型-组合模式</title>
@@ -532,33 +560,6 @@
     
     
       <category term="中台" scheme="https://www.llchen60.com/tags/%E4%B8%AD%E5%8F%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jest - JS测试框架</title>
-    <link href="https://www.llchen60.com/Jest-JS%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
-    <id>https://www.llchen60.com/Jest-JS%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</id>
-    <published>2020-05-14T04:31:23.000Z</published>
-    <updated>2020-05-15T04:11:30.500Z</updated>
-    
-    <content type="html"><![CDATA[<p>JJest是一个简洁的JavaScript测试框架，我们可以将其与Babel, TS, Node, React, Angular, Vue等来共同使用</p><h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><p>首先jest是希望能够用很轻量的方式来进行前端测试，自己最近在做一个偏向前端的项目，希望把组里的对外页面从其他平台转移出来，通过router完成路径的转接，然后在自己的平台上，就可以更自由，更快捷的进行迭代了。</p><p>整个架构还是RPC 暴露RESTFul接口，用类似于API Gateway的系统完成Authorization Authentication的工作，前端直接调用后端的信息这样子。想要达到的最终的目标就是易于维护且易于扩展的一个前端小平台，几个基本需求，也是要做转移的原因：</p><ul><li><p>前端的埋点，希望有更多的metrics以知道用户的行为</p><ul><li>各个页面的浏览时长</li><li>跳出率</li><li>哪个步骤过滤走了最多的用户请求，诸如此类</li></ul></li><li><p>CI/ CD</p><ul><li>手动QA太容易犯错了，如果能写一部分unit tests &amp; integration tests,实现整个前端页面的可测试，那么就可以实现持续继承持续部署，会很大程度上提高可交付能力</li></ul></li><li><p>访问速度</p><ul><li>利用S3 host页面，使用CDN完成分布，会提高整体的响应速度</li></ul></li></ul><p>Jest是实现CI/CD的很不错的一个工具，on my way learning it ;) </p><h2 id="1-1-匹配器"><a href="#1-1-匹配器" class="headerlink" title="1.1 匹配器"></a>1.1 匹配器</h2><p>与Junit类似，使用expect做关键词，E.G</p><pre><code>test(&#39;two plus two is four&#39;, () =&gt; {  expect(2 + 2).toBe(4);});</code></pre><ul><li><p>toBe </p><ul><li>匹配器，内部使用的是<code>Object.is</code>来做精确相等</li></ul></li><li><p>toEqual</p><ul><li>来检查对象的值</li></ul></li><li><p>比较真实性</p><ul><li>toBeNull</li><li>toBeUndefined</li><li>toBeTruthy<ul><li>匹配任何if语句为真</li></ul></li><li>toBeFalsy <ul><li>匹配任何if语句为假 </li></ul></li></ul></li><li><p>比较数字</p><ul><li>toBeGreaterThan()</li><li>toBeGreaterThanOrEqual()</li><li>toBeLessThan()</li><li>toBeLessThanOrEqual()</li><li>toBe()</li><li>toEqual()</li></ul></li><li><p>字符串</p><ul><li>toMatch()  match一个正则表达式</li></ul></li><li><p>数组 </p><ul><li>toContain() 检查一个数组或可迭代的对象是否包含某个特定项</li></ul></li></ul><pre><code>const shoppingList = [  &#39;diapers&#39;,  &#39;kleenex&#39;,  &#39;trash bags&#39;,  &#39;paper towels&#39;,  &#39;beer&#39;,];test(&#39;the shopping list has beer on it&#39;, () =&gt; {  expect(shoppingList).toContain(&#39;beer&#39;);  expect(new Set(shoppingList)).toContain(&#39;beer&#39;);});</code></pre><h2 id="1-2-测试异步代码"><a href="#1-2-测试异步代码" class="headerlink" title="1.2 测试异步代码"></a>1.2 测试异步代码</h2><pre><code>// 对于回调函数的测试test(&#39;the data is peanut butter&#39;, done =&gt; {  function callback(data) {    try {      expect(data).toBe(&#39;peanut butter&#39;);      done();    } catch (error) {      done(error);    }  }  fetchData(callback);});// Promisestest(&#39;the data is peanut butter&#39;, () =&gt; {  return fetchData().then(data =&gt; {    expect(data).toBe(&#39;peanut butter&#39;);  });});// Resolve/ rejecttest(&#39;the data is peanut butter&#39;, () =&gt; {  return expect(fetchData()).resolves.toBe(&#39;peanut butter&#39;);});// async/ awaittest(&#39;the data is peanut butter&#39;, async () =&gt; {  const data = await fetchData();  expect(data).toBe(&#39;peanut butter&#39;);});test(&#39;the fetch fails with an error&#39;, async () =&gt; {  expect.assertions(1);  try {    await fetchData();  } catch (e) {    expect(e).toMatch(&#39;error&#39;);  }});</code></pre><h2 id="1-3-测试前后的utility方法"><a href="#1-3-测试前后的utility方法" class="headerlink" title="1.3 测试前后的utility方法"></a>1.3 测试前后的utility方法</h2><ul><li>重复设置值 </li></ul><pre><code>beforeEach(() =&gt; {});afterEach(() =&gt; {});</code></pre><ul><li><p>一次性设置 – 单个测试不会改变其值</p><p>  beforeAll(() =&gt; {</p><p>  });</p><p>  afterAll(() =&gt; {</p><p>  });</p></li><li><p>作用域 </p><ul><li>通过describe来将测试进行分组操作 </li><li>注意describe的执行顺序 <ul><li>在真正的测试开始之前执行测试文件当中的所有的describe处理程序</li><li>当describe块运行完后，Jest会按照test出现的顺序依次运行所有测试，等待每一个测试完成并整理好，然后继续往下走</li></ul></li><li>通用建议<ul><li>当测试失败的时候，首先要检查的是如果仅运行这条测试，是否仍然失败</li><li>通过将test指令改为test.only指令来实现</li></ul></li></ul></li></ul><h2 id="1-4-Mock-方法"><a href="#1-4-Mock-方法" class="headerlink" title="1.4 Mock 方法"></a>1.4 Mock 方法</h2><p>Mock函数允许我们来测试代码之间的连接，和Mockito， EasyMock其实是一个理念的，擦除函数的实际实现，专注于当前的文件的方法本身，捕获对函数的调用，实例等</p><pre><code>function forEach(items, callback) {  for (let index = 0; index &lt; items.length; index++) {    callback(items[index]);  }}const mockCallback = jest.fn(x =&gt; 42 + x);forEach([0, 1], mockCallback);// 此 mock 函数被调用了两次expect(mockCallback.mock.calls.length).toBe(2);// 第一次调用函数时的第一个参数是 0expect(mockCallback.mock.calls[0][0]).toBe(0);// 第二次调用函数时的第一个参数是 1expect(mockCallback.mock.calls[1][0]).toBe(1);// 第一次函数调用的返回值是 42expect(mockCallback.mock.results[0].value).toBe(42);</code></pre><h1 id="2-测试方法"><a href="#2-测试方法" class="headerlink" title="2. 测试方法"></a>2. 测试方法</h1><h2 id="2-1-Snapshot-测试"><a href="#2-1-Snapshot-测试" class="headerlink" title="2.1 Snapshot 测试"></a>2.1 Snapshot 测试</h2><p>给当前的UI做快照，然后和过去做过的快照进行比较，看是否有不同。</p><pre><code>import React from &#39;react&#39;;import Link from &#39;../Link.react&#39;;import renderer from &#39;react-test-renderer&#39;;it(&#39;renders correctly&#39;, () =&gt; {  const tree = renderer    .create(&lt;Link page=&quot;http://www.facebook.com&quot;&gt;Facebook&lt;/Link&gt;)    .toJSON();  expect(tree).toMatchSnapshot();});</code></pre><p>实际上是生成一个DOM树，然后来比较两颗DOM树的节点，看设置是否相同。</p><p>在每次提交的时候，会记录下当前的快照，下次提交的时候会和这次的来进行比较。</p><p>然后当我们有目的的引入了变化的时候，我们需要告诉jest 需要更新现在保存的snapshot了，这种情况下需要运行指令<code>jest --updateSnapshot</code>.</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://jestjs.io/docs/en/getting-started" target="_blank" rel="noopener">https://jestjs.io/docs/en/getting-started</a> </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;JJest是一个简洁的JavaScript测试框架，我们可以将其与Babel, TS, Node, React, Angular, Vue等来共同使用&lt;/p&gt;
-&lt;h1 id=&quot;1-Intro&quot;&gt;&lt;a href=&quot;#1-Intro&quot; class=&quot;headerlink&quot; ti
-      
-    
-    </summary>
-    
-    
-      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
-    
-    
-      <category term="Jest" scheme="https://www.llchen60.com/tags/Jest/"/>
     
   </entry>
   

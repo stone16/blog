@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>设计模式-结构型-享元模式</title>
+      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li><p>享元模式 Flyweight Design Pattern </p><ul><li><p>用来复用对象，节省内存，</p></li><li><p>前提条件，享元对象是不可变对象</p><ul><li>不可以暴露任何set（）等修改内部状态的方法</li></ul></li><li><p>当一个系统中存在大量重复对象的时候，如果重复对象都是不可变对象，我们就可以利用享元模式将对象设计成享元，在内存中只保留一份实例，供多处代码来引用。</p></li></ul></li></ul><ul><li>是通过工厂模式，在工厂类当中，通过一个Map来缓存已经创建过的享元对象，来达到复用的目的</li></ul><ul><li>文本文件对于字体格式进行享元操作</li></ul><pre><code>public class CharacterStyle {  private Font font;  private int size;  private int colorRGB;  public CharacterStyle(Font font, int size, int colorRGB) {    this.font = font;    this.size = size;    this.colorRGB = colorRGB;  }  @Override  public boolean equals(Object o) {    CharacterStyle otherStyle = (CharacterStyle) o;    return font.equals(otherStyle.font)            &amp;&amp; size == otherStyle.size            &amp;&amp; colorRGB == otherStyle.colorRGB;  }}public class CharacterStyleFactory {  private static final List&lt;CharacterStyle&gt; styles = new ArrayList&lt;&gt;();  public static CharacterStyle getStyle(Font font, int size, int colorRGB) {    CharacterStyle newStyle = new CharacterStyle(font, size, colorRGB);    for (CharacterStyle style : styles) {      if (style.equals(newStyle)) {        return style;      }    }    styles.add(newStyle);    return newStyle;  }}public class Character {  private char c;  private CharacterStyle style;  public Character(char c, CharacterStyle style) {    this.c = c;    this.style = style;  }}public class Editor {  private List&lt;Character&gt; chars = new ArrayList&lt;&gt;();  public void appendCharacter(char c, Font font, int size, int colorRGB) {    Character character = new Character(c, CharacterStyleFactory.getStyle(font, size, colorRGB));    chars.add(character);  }}</code></pre><h1 id="2-享元模式在Java-Integer以及String当中的应用"><a href="#2-享元模式在Java-Integer以及String当中的应用" class="headerlink" title="2. 享元模式在Java Integer以及String当中的应用"></a>2. 享元模式在Java Integer以及String当中的应用</h1><pre><code>/** * Cache to support the object identity semantics of autoboxing for values between * -128 and 127 (inclusive) as required by JLS. * * The cache is initialized on first usage.  The size of the cache * may be controlled by the {@code -XX:AutoBoxCacheMax=&lt;size&gt;} option. * During VM initialization, java.lang.Integer.IntegerCache.high property * may be set and saved in the private system properties in the * sun.misc.VM class. */private static class IntegerCache {    static final int low = -128;    static final int high;    static final Integer cache[];    static {        // high value may be configured by property        int h = 127;        String integerCacheHighPropValue =            sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);        if (integerCacheHighPropValue != null) {            try {                int i = parseInt(integerCacheHighPropValue);                i = Math.max(i, 127);                // Maximum array size is Integer.MAX_VALUE                h = Math.min(i, Integer.MAX_VALUE - (-low) -1);            } catch( NumberFormatException nfe) {                // If the property cannot be parsed into an int, ignore it.            }        }        high = h;        cache = new Integer[(high - low) + 1];        int j = low;        for(int k = 0; k &lt; cache.length; k++)            cache[k] = new Integer(j++);        // range [-128, 127] must be interned (JLS7 5.1.7)        assert IntegerCache.high &gt;= 127;    }    private IntegerCache() {}}</code></pre><p>IntegerCache 缓存在-128到127之间的内容，即指向的是同样的内存地址的</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 享元模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-结构型-组合模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</url>
