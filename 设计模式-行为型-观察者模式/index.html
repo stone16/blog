@@ -227,7 +227,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="243">
-<input type="hidden" id="yelog_site_word_count" value="420k">
+<input type="hidden" id="yelog_site_word_count" value="421k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3046,12 +3046,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-06-29 20:49:05'>2020-06-29 20:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-06-30 20:21:33'>2020-06-29 20:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:572</span>
+        <span>字数:1.6k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3081,7 +3081,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-观察者模式原理"><span class="toc-text">1. 观察者模式原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-探究异步非阻塞的EventBus框架"><span class="toc-text">2. 探究异步非阻塞的EventBus框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-基本的异步非阻塞模式"><span class="toc-text">2.1 基本的异步非阻塞模式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-观察者模式原理"><span class="toc-text">1. 观察者模式原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-探究异步非阻塞的EventBus框架"><span class="toc-text">2. 探究异步非阻塞的EventBus框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-基本的异步非阻塞模式"><span class="toc-text">2.1 基本的异步非阻塞模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-EventBus功能需求"><span class="toc-text">2.2 EventBus功能需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-EventBus的实现"><span class="toc-text">2.3 EventBus的实现</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3234,7 +3234,217 @@ public class UserController {
 </ul>
 </li>
 </ul>
+<h2 id="2-2-EventBus功能需求"><a href="#2-2-EventBus功能需求" class="headerlink" title="2.2 EventBus功能需求"></a>2.2 EventBus功能需求</h2><p>以google guava eventBus为例</p>
+<pre><code>public class UserController {
+  private UserService userService; // 依赖注入
 
+  private EventBus eventBus;
+  private static final int DEFAULT_EVENTBUS_THREAD_POOL_SIZE = 20;
+
+  public UserController() {
+    //eventBus = new EventBus(); // 同步阻塞模式
+    eventBus = new AsyncEventBus(Executors.newFixedThreadPool(DEFAULT_EVENTBUS_THREAD_POOL_SIZE)); // 异步非阻塞模式
+  }
+
+  public void setRegObservers(List&lt;Object&gt; observers) {
+    for (Object observer : observers) {
+      eventBus.register(observer);
+    }
+  }
+
+  public Long register(String telephone, String password) {
+    //省略输入参数的校验代码
+    //省略userService.register()异常的try-catch代码
+    long userId = userService.register(telephone, password);
+
+    eventBus.post(userId);
+
+    return userId;
+  }
+}
+
+public class RegPromotionObserver {
+  private PromotionService promotionService; // 依赖注入
+
+  @Subscribe
+  public void handleRegSuccess(long userId) {
+    promotionService.issueNewUserExperienceCash(userId);
+  }
+}
+
+public class RegNotificationObserver {
+  private NotificationService notificationService;
+
+  @Subscribe
+  public void handleRegSuccess(long userId) {
+    notificationService.sendInboxMessage(userId, &quot;...&quot;);
+  }
+}</code></pre><ul>
+<li>使用EventBus框架实现的观察者模式，大流程上相同，但是区别在于<ul>
+<li>不用定义Observer接口了</li>
+<li>任意类型的对象都可以注册到EventBus当中，通过<code>@Subscribe</code>注解来标明类当中哪个函数可以接收被观察者发送的消息</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>EventBus, AsyncEventBus <ul>
+<li>Guava EventBus 的所有可调用接口</li>
+</ul>
+</li>
+</ul>
+<pre><code>EventBus eventBus = new EventBus(); // 同步阻塞模式
+EventBus eventBus = new AsyncEventBus(Executors.newFixedThreadPool(8))；// 异步阻塞模式</code></pre><ul>
+<li><p><code>register()</code>函数</p>
+<ul>
+<li>用来注册观察者</li>
+<li>可以接受任何类型的观察者</li>
+</ul>
+</li>
+<li><p><code>unregister()</code>函数</p>
+<ul>
+<li>删除某个观察者</li>
+</ul>
+</li>
+<li><p><code>post()</code>函数</p>
+<ul>
+<li>用于给观察者发送消息</li>
+</ul>
+</li>
+<li><p><code>@Subscribe</code>注解</p>
+<ul>
+<li>通过注解说明某个函数能够接收哪种类型的消息</li>
+</ul>
+</li>
+</ul>
+<p>最关键的一个数据结构是 Observer 注册表，记录了消息类型和可接收消息函数的对应关系。当调用 register() 函数注册观察者的时候，EventBus 通过解析 @Subscribe 注解，生成 Observer 注册表。当调用 post() 函数发送消息的时候，EventBus 通过注册表找到相应的可接收消息的函数，然后通过 Java 的反射语法来动态地创建对象、执行函数。对于同步阻塞模式，EventBus 在一个线程内依次执行相应的函数。对于异步非阻塞模式，EventBus 通过一个线程池来执行相应的函数。</p>
+<h2 id="2-3-EventBus的实现"><a href="#2-3-EventBus的实现" class="headerlink" title="2.3 EventBus的实现"></a>2.3 EventBus的实现</h2><ol>
+<li>Subscirbe 注解</li>
+</ol>
+<p>用于标明观察者中的哪个函数可以接收信息</p>
+<pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Beta
+public @interface Subscribe {}</code></pre><ol start="2">
+<li>ObserverAction</li>
+</ol>
+<p>ObserverAction类用来表示Subscribe注解的方法，其中target表示观察者类，method表示方法，主要用在ObserverRegistry观察者注册表当中。</p>
+<pre><code>public class ObserverAction {
+  private Object target;
+  private Method method;
+
+  public ObserverAction(Object target, Method method) {
+    this.target = Preconditions.checkNotNull(target);
+    this.method = method;
+    this.method.setAccessible(true);
+  }
+
+  public void execute(Object event) { // event是method方法的参数
+    try {
+      method.invoke(target, event);
+    } catch (InvocationTargetException | IllegalAccessException e) {
+      e.printStackTrace();
+    }
+  }
+}</code></pre><ol start="3">
+<li>ObserverRegistry</li>
+</ol>
+<p>Observer注册表类，大量使用Java的反射语法</p>
+<pre><code>public class ObserverRegistry {
+  private ConcurrentMap&lt;Class&lt;?&gt;, CopyOnWriteArraySet&lt;ObserverAction&gt;&gt; registry = new ConcurrentHashMap&lt;&gt;();
+
+  public void register(Object observer) {
+    Map&lt;Class&lt;?&gt;, Collection&lt;ObserverAction&gt;&gt; observerActions = findAllObserverActions(observer);
+    for (Map.Entry&lt;Class&lt;?&gt;, Collection&lt;ObserverAction&gt;&gt; entry : observerActions.entrySet()) {
+      Class&lt;?&gt; eventType = entry.getKey();
+      Collection&lt;ObserverAction&gt; eventActions = entry.getValue();
+      CopyOnWriteArraySet&lt;ObserverAction&gt; registeredEventActions = registry.get(eventType);
+      if (registeredEventActions == null) {
+        registry.putIfAbsent(eventType, new CopyOnWriteArraySet&lt;&gt;());
+        registeredEventActions = registry.get(eventType);
+      }
+      registeredEventActions.addAll(eventActions);
+    }
+  }
+
+  public List&lt;ObserverAction&gt; getMatchedObserverActions(Object event) {
+    List&lt;ObserverAction&gt; matchedObservers = new ArrayList&lt;&gt;();
+    Class&lt;?&gt; postedEventType = event.getClass();
+    for (Map.Entry&lt;Class&lt;?&gt;, CopyOnWriteArraySet&lt;ObserverAction&gt;&gt; entry : registry.entrySet()) {
+      Class&lt;?&gt; eventType = entry.getKey();
+      Collection&lt;ObserverAction&gt; eventActions = entry.getValue();
+      if (postedEventType.isAssignableFrom(eventType)) {
+        matchedObservers.addAll(eventActions);
+      }
+    }
+    return matchedObservers;
+  }
+
+  private Map&lt;Class&lt;?&gt;, Collection&lt;ObserverAction&gt;&gt; findAllObserverActions(Object observer) {
+    Map&lt;Class&lt;?&gt;, Collection&lt;ObserverAction&gt;&gt; observerActions = new HashMap&lt;&gt;();
+    Class&lt;?&gt; clazz = observer.getClass();
+    for (Method method : getAnnotatedMethods(clazz)) {
+      Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
+      Class&lt;?&gt; eventType = parameterTypes[0];
+      if (!observerActions.containsKey(eventType)) {
+        observerActions.put(eventType, new ArrayList&lt;&gt;());
+      }
+      observerActions.get(eventType).add(new ObserverAction(observer, method));
+    }
+    return observerActions;
+  }
+
+  private List&lt;Method&gt; getAnnotatedMethods(Class&lt;?&gt; clazz) {
+    List&lt;Method&gt; annotatedMethods = new ArrayList&lt;&gt;();
+    for (Method method : clazz.getDeclaredMethods()) {
+      if (method.isAnnotationPresent(Subscribe.class)) {
+        Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
+        Preconditions.checkArgument(parameterTypes.length == 1,
+                &quot;Method %s has @Subscribe annotation but has %s parameters.&quot;
+                        + &quot;Subscriber methods must have exactly 1 parameter.&quot;,
+                method, parameterTypes.length);
+        annotatedMethods.add(method);
+      }
+    }
+    return annotatedMethods;
+  }
+}</code></pre><ol start="4">
+<li>EventBus</li>
+</ol>
+<pre><code>public class EventBus {
+  private Executor executor;
+  private ObserverRegistry registry = new ObserverRegistry();
+
+  public EventBus() {
+    this(MoreExecutors.directExecutor());
+  }
+
+  protected EventBus(Executor executor) {
+    this.executor = executor;
+  }
+
+  public void register(Object object) {
+    registry.register(object);
+  }
+
+  public void post(Object event) {
+    List&lt;ObserverAction&gt; observerActions = registry.getMatchedObserverActions(event);
+    for (ObserverAction observerAction : observerActions) {
+      executor.execute(new Runnable() {
+        @Override
+        public void run() {
+          observerAction.execute(event);
+        }
+      });
+    }
+  }
+}</code></pre><ol start="5">
+<li>AsyncEventBus</li>
+</ol>
+<pre><code>public class AsyncEventBus extends EventBus {
+  public AsyncEventBus(Executor executor) {
+    super(executor);
+  }
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3248,10 +3458,10 @@ public class UserController {
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>设计模式-行为型-观察者模式</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">572</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.6k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-06-29, 20:48:34</p>
-    <p><span class="copy-title">最后更新:</span>2020-06-29, 20:49:05</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-30, 20:21:33</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" title="设计模式-行为型-观察者模式">https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
