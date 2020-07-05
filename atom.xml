@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-07-01T03:21:33.006Z</updated>
+  <updated>2020-07-05T17:54:35.958Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-行为型-模板模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-07-05T17:54:08.000Z</published>
+    <updated>2020-07-05T17:54:35.958Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li>模板方法设计模式<ul><li>Template Method Design Pattern </li><li>Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure </li><li>在一个方法中定义一个算法股价，并将某些步骤推迟到子类当中进行实现，模板方法模式可以让子类在不改变算法整体结构的情况下，重新定义算法中的某些不好走。</li></ul></li></ul><p>实现的基本方式就是设置一个抽象类，对于不想被子类重写的方法可以加上final关键字，其余的可以设置为抽象方法，让子类来实现。</p><pre><code>public abstract class AbstractClass {  public final void templateMethod() {    //...    method1();    //...    method2();    //...  }  protected abstract void method1();  protected abstract void method2();}public class ConcreteClass1 extends AbstractClass {  @Override  protected void method1() {    //...  }  @Override  protected void method2() {    //...  }}public class ConcreteClass2 extends AbstractClass {  @Override  protected void method1() {    //...  }  @Override  protected void method2() {    //...  }}AbstractClass demo = ConcreteClass1();demo.templateMethod();</code></pre><h1 id="2-功能实现的例子"><a href="#2-功能实现的例子" class="headerlink" title="2. 功能实现的例子"></a>2. 功能实现的例子</h1><h2 id="2-1-以复用为目的"><a href="#2-1-以复用为目的" class="headerlink" title="2.1 以复用为目的"></a>2.1 以复用为目的</h2><ol><li><p>InputStream 类的实现</p><p> public abstract class InputStream implements Closeable {<br>   //…省略其他代码…</p><p>   public int read(byte b[], int off, int len) throws IOException {</p><pre><code> if (b == null) {   throw new NullPointerException(); } else if (off &lt; 0 || len &lt; 0 || len &gt; b.length - off) {   throw new IndexOutOfBoundsException(); } else if (len == 0) {   return 0; } int c = read(); if (c == -1) {   return -1; } b[off] = (byte)c; int i = 1; try {   for (; i &lt; len ; i++) {     c = read();     if (c == -1) {       break;     }     b[off + i] = (byte)c;   } } catch (IOException ee) { } return i;</code></pre><p>   }</p><p>   // 在这里定义了一个可以供子类实现的抽象方法<br>   public abstract int read() throws IOException;<br> }</p><p> public class ByteArrayInputStream extends InputStream {<br>   //…省略其他代码…</p><p>   @Override<br>   public synchronized int read() {</p><pre><code> return (pos &lt; count) ? (buf[pos++] &amp; 0xff) : -1;</code></pre><p>   }<br> }</p></li></ol><ol start="2"><li>AbstractList的实现</li></ol><pre><code>public boolean addAll(int index, Collection&lt;? extends E&gt; c) {    rangeCheckForAdd(index);    boolean modified = false;    for (E e : c) {        add(index++, e);        modified = true;    }    return modified;}public void add(int index, E element) {    throw new UnsupportedOperationException();}</code></pre><h2 id="2-2-以扩展为目的"><a href="#2-2-以扩展为目的" class="headerlink" title="2.2 以扩展为目的"></a>2.2 以扩展为目的</h2><ol><li>Java Servlet</li></ol><p>抛开框架直接使用Servlet做开发的话，Servlet在接收到请求之后，会根据URL和Servlet的映射关系，找到对应的Servlet，然后来执行它的service()方法。service方法定义在父类HttpServelet当中，会调用doGet()还有doPost()方法。</p><p>为了实现上述的整个流程，我们需要继承HttpServlet，重新实现我们自己的doGet()以及doPost()方法。</p><pre><code>public class HelloServlet extends HttpServlet {  @Override  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {    this.doPost(req, resp);  }  @Override  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {    resp.getWriter().write(&quot;Hello World.&quot;);  }}// 存储映射关系的xml，也可以使用annotation来实现映射&lt;servlet&gt;    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;    &lt;servlet-class&gt;com.xzg.cd.HelloServlet&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt;    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;    &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;&lt;/servlet-mapping&gt;public void service(ServletRequest req, ServletResponse res)    throws ServletException, IOException{    HttpServletRequest  request;    HttpServletResponse response;    if (!(req instanceof HttpServletRequest &amp;&amp;            res instanceof HttpServletResponse)) {        throw new ServletException(&quot;non-HTTP request or response&quot;);    }    request = (HttpServletRequest) req;    response = (HttpServletResponse) res;    service(request, response);}protected void service(HttpServletRequest req, HttpServletResponse resp)    throws ServletException, IOException{    String method = req.getMethod();    if (method.equals(METHOD_GET)) {        long lastModified = getLastModified(req);        if (lastModified == -1) {            // servlet doesn&#39;t support if-modified-since, no reason            // to go through further expensive logic            doGet(req, resp);        } else {            long ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);            if (ifModifiedSince &lt; lastModified) {                // If the servlet mod time is later, call doGet()                // Round down to the nearest second for a proper compare                // A ifModifiedSince of -1 will always be less                maybeSetLastModified(resp, lastModified);                doGet(req, resp);            } else {                resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);            }        }    } else if (method.equals(METHOD_HEAD)) {        long lastModified = getLastModified(req);        maybeSetLastModified(resp, lastModified);        doHead(req, resp);    } else if (method.equals(METHOD_POST)) {        doPost(req, resp);    } else if (method.equals(METHOD_PUT)) {        doPut(req, resp);    } else if (method.equals(METHOD_DELETE)) {        doDelete(req, resp);    } else if (method.equals(METHOD_OPTIONS)) {        doOptions(req,resp);    } else if (method.equals(METHOD_TRACE)) {        doTrace(req,resp);    } else {        String errMsg = lStrings.getString(&quot;http.method_not_implemented&quot;);        Object[] errArgs = new Object[1];        errArgs[0] = method;        errMsg = MessageFormat.format(errMsg, errArgs);        resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);    }}</code></pre><ol start="2"><li>JUnit TestCase</li></ol><p>Junit定义的功能扩展点为：</p><ul><li>setUp() </li><li>tearDown()</li><li>etc.</li></ul><p>写的测试类都是继承框架提供的testCase类，在这个类当中，runBare()函数是模板方法，定义了执行测试用例的整体流程:先执行setUp()做准备工作，然后执行runTest()运行真正的测试代码，最后执行tearDown()做扫尾工作。</p><pre><code>public abstract class TestCase extends Assert implements Test {  public void runBare() throws Throwable {    Throwable exception = null;    setUp();    try {      runTest();    } catch (Throwable running) {      exception = running;    } finally {      try {        tearDown();      } catch (Throwable tearingDown) {        if (exception == null) exception = tearingDown;      }    }    if (exception != null) throw exception;  }  /**  * Sets up the fixture, for example, open a network connection.  * This method is called before a test is executed.  */  protected void setUp() throws Exception {  }  /**  * Tears down the fixture, for example, close a network connection.  * This method is called after a test is executed.  */  protected void tearDown() throws Exception {  }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;模板方法设计模式&lt;ul&gt;
+&lt;li&gt;Template Method Design Pa
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="模板模式" scheme="https://www.llchen60.com/tags/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-行为型-观察者模式</title>
@@ -540,33 +568,6 @@
       <category term="meeting" scheme="https://www.llchen60.com/tags/meeting/"/>
     
       <category term="tips" scheme="https://www.llchen60.com/tags/tips/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Enzyme -- React测试库</title>
-    <link href="https://www.llchen60.com/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/"/>
-    <id>https://www.llchen60.com/Enzyme-React%E6%B5%8B%E8%AF%95%E5%BA%93/</id>
-    <published>2020-05-18T23:06:42.000Z</published>
-    <updated>2020-05-18T23:07:22.568Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是前端用于对React的组件进行测试的一个工具类，我们可以使用这个工具来遍历，控制，以及一定程度上的模拟运行时输出。我们主要是将该工具类和Jest一起使用，写我们的react组件的单元测试们。</p><h1 id="1-Shalow-Rendering"><a href="#1-Shalow-Rendering" class="headerlink" title="1. Shalow Rendering"></a>1. Shalow Rendering</h1><p>用于以单个组件为单元来进行测试，然后确保你的测试不会依赖于子组件的状态。从Enzyme v3开始，shallow API会call React生命周期方法了，譬如<code>componentDidUpdate</code>和<code>componentDidMount</code></p><pre><code>import { shallow } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;MyComponent /&gt;&#39;, () =&gt; {  it(&#39;renders three &lt;Foo /&gt; components&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(Foo)).to.have.lengthOf(3);  });  it(&#39;renders an `.icon-star`&#39;, () =&gt; {    const wrapper = shallow(&lt;MyComponent /&gt;);    expect(wrapper.find(&#39;.icon-star&#39;)).to.have.lengthOf(1);  });  it(&#39;renders children when passed in&#39;, () =&gt; {    const wrapper = shallow((      &lt;MyComponent&gt;        &lt;div className=&quot;unique&quot; /&gt;      &lt;/MyComponent&gt;    ));    expect(wrapper.contains(&lt;div className=&quot;unique&quot; /&gt;)).to.equal(true);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = shallow(&lt;Foo onButtonClick={onButtonClick} /&gt;);    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="2-Full-Dom-Rendering"><a href="#2-Full-Dom-Rendering" class="headerlink" title="2. Full Dom Rendering"></a>2. Full Dom Rendering</h1><p>这种测试方式在你需要和DOM API进行交互，或者需要测试在更高次位的组件的时候非常有用。</p><p>需要运行在浏览器环境当中，如果无法运行在真实的浏览器当中，那我们就需要依赖于<code>mount</code>指令，在指令之下，是调用了一个叫做jsdom的包，完全使用JavaScript实现了一个浏览器。</p><p>值得注意的是，full dom rendering是真实的将当前组件渲染到DOM树当中，这也意味着如果用的是同一棵DOM树，那么你做的改动很可能会影响其他的测试，这点是值得我们注意的。</p><pre><code>import { mount } from &#39;enzyme&#39;;import sinon from &#39;sinon&#39;;import Foo from &#39;./Foo&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;calls componentDidMount&#39;, () =&gt; {    sinon.spy(Foo.prototype, &#39;componentDidMount&#39;);    const wrapper = mount(&lt;Foo /&gt;);    expect(Foo.prototype.componentDidMount).to.have.property(&#39;callCount&#39;, 1);  });  it(&#39;allows us to set props&#39;, () =&gt; {    const wrapper = mount(&lt;Foo bar=&quot;baz&quot; /&gt;);    expect(wrapper.props().bar).to.equal(&#39;baz&#39;);    wrapper.setProps({ bar: &#39;foo&#39; });    expect(wrapper.props().bar).to.equal(&#39;foo&#39;);  });  it(&#39;simulates click events&#39;, () =&gt; {    const onButtonClick = sinon.spy();    const wrapper = mount((      &lt;Foo onButtonClick={onButtonClick} /&gt;    ));    wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);    expect(onButtonClick).to.have.property(&#39;callCount&#39;, 1);  });});</code></pre><p><a href="https://enzymejs.github.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">API Reference</a></p><h1 id="3-Static-Rendering"><a href="#3-Static-Rendering" class="headerlink" title="3. Static Rendering"></a>3. Static Rendering</h1><p>Render 使用的是Cheerio这个HTML转化库，用于从我们的React树来生成HTML，然后分析HTML的整个架构。</p><pre><code>import React from &#39;react&#39;;import { render } from &#39;enzyme&#39;;import PropTypes from &#39;prop-types&#39;;describe(&#39;&lt;Foo /&gt;&#39;, () =&gt; {  it(&#39;renders three `.foo-bar`s&#39;, () =&gt; {    const wrapper = render(&lt;Foo /&gt;);    expect(wrapper.find(&#39;.foo-bar&#39;)).to.have.lengthOf(3);  });  it(&#39;rendered the title&#39;, () =&gt; {    const wrapper = render(&lt;Foo title=&quot;unique&quot; /&gt;);    expect(wrapper.text()).to.contain(&#39;unique&#39;);  });  it(&#39;renders a div&#39;, () =&gt; {    const wrapper = render(&lt;div className=&quot;myClass&quot; /&gt;);    expect(wrapper.html()).to.contain(&#39;div&#39;);  });  it(&#39;can pass in context&#39;, () =&gt; {    function SimpleComponent(props, context) {      const { name } = context;      return &lt;div&gt;{name}&lt;/div&gt;;    }    SimpleComponent.contextTypes = {      name: PropTypes.string,    };    const context = { name: &#39;foo&#39; };    const wrapper = render(&lt;SimpleComponent /&gt;, { context });    expect(wrapper.text()).to.equal(&#39;foo&#39;);  });});</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">https://enzymejs.github.io/enzyme/</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这是前端用于对React的组件进行测试的一个工具类，我们可以使用这个工具来遍历，控制，以及一定程度上的模拟运行时输出。我们主要是将该工具类和Jest一起使用，写我们的react组件的单元测试们。&lt;/p&gt;
-&lt;h1 id=&quot;1-Shalow-Rendering&quot;&gt;&lt;a href
-      
-    
-    </summary>
-    
-    
-      <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
-    
-    
-      <category term="Enzyme" scheme="https://www.llchen60.com/tags/Enzyme/"/>
     
   </entry>
   
