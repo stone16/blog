@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Intellij IDEA tips and tricks</title>
+      <link href="/Intellij-IDEA-tips-and-tricks/"/>
+      <url>/Intellij-IDEA-tips-and-tricks/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p>Magic shortcut for almost everything<br>Alt + Enter </p></li><li><p>Jump to next error  </p></li></ol><p>F2 </p><ol start="3"><li><p>Project window<br>cmd + 1 </p></li><li><p>focus on editor  </p></li></ol><p>esc </p><ol start="5"><li>The recent file box  </li></ol><p>cmd E </p><ol start="6"><li>Go to declaration </li></ol><p>cmd + B </p><ol start="7"><li>Find usage </li></ol><p>Alt + F7 </p><ol start="8"><li>Run Anything </li></ol><p>double ctrl </p><p>*<em>9. Extend/ shrink selection *</em></p><p>option + up arrow </p><p>option + down arrow </p><ol start="10"><li>Add/ Remove comments</li></ol><p>cmd + / </p><ol start="11"><li>Complete current statement </li></ol><p>shift + cmd + enter </p><ol start="12"><li>Reformat file </li></ol><p>alt + cmd + l</p><ol start="13"><li>Refactor </li></ol><p>ctrl + t </p><p>Show all the refactor option </p><ol start="14"><li>Find action </li></ol><p>shift + cmd + A </p><ol start="15"><li>Search everywhere </li></ol><p>shift + shift </p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.youtube.com/watch?v=QYO5_riePOQ" target="_blank" rel="noopener">https://www.youtube.com/watch?v=QYO5_riePOQ</a> </li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tools </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-行为型-模板模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/</url>
