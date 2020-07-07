@@ -227,7 +227,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="245">
-<input type="hidden" id="yelog_site_word_count" value="422.2k">
+<input type="hidden" id="yelog_site_word_count" value="422.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3066,12 +3066,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-07-05 10:54:35'>2020-07-05 10:54</time>
+        创建时间:<time class="date" title='更新时间: 2020-07-06 22:11:42'>2020-07-05 10:54</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1k</span>
+        <span>字数:1.5k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3101,7 +3101,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-原理与实现"><span class="toc-text">1. 原理与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-功能实现的例子"><span class="toc-text">2. 功能实现的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-以复用为目的"><span class="toc-text">2.1 以复用为目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-以扩展为目的"><span class="toc-text">2.2 以扩展为目的</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-原理与实现"><span class="toc-text">1. 原理与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-功能实现的例子"><span class="toc-text">2. 功能实现的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-以复用为目的"><span class="toc-text">2.1 以复用为目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-以扩展为目的"><span class="toc-text">2.2 以扩展为目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-模板模式对比Callback函数"><span class="toc-text">2.3 模板模式对比Callback函数</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3342,6 +3342,107 @@ protected void service(HttpServletRequest req, HttpServletResponse resp)
   */
   protected void tearDown() throws Exception {
   }
+}</code></pre><h2 id="2-3-模板模式对比Callback函数"><a href="#2-3-模板模式对比Callback函数" class="headerlink" title="2.3 模板模式对比Callback函数"></a>2.3 模板模式对比Callback函数</h2><p>回调函数可以起到和模板模式相同的作用，回调是一种双向调用关系</p>
+<p>A 类事先注册某个函数 F 到 B 类，A 类在调用 B 类的 P 函数的时候，B 类反过来调用 A 类注册给它的 F 函数。这里的 F 函数就是“回调函数”。A 调用 B，B 反过来又调用 A，这种调用机制就叫作“回调”。</p>
+<p>回调分为同步回调和异步回调，同步回调指函数返回之前执行回调函数；异步回调指函数返回之后执行回调函数。</p>
+<pre><code>public interface ICallback {
+  void methodToCallback();
+}
+
+public class BClass {
+  public void process(ICallback callback) {
+    //...
+    callback.methodToCallback();
+    //...
+  }
+}
+
+public class AClass {
+  public static void main(String[] args) {
+    BClass b = new BClass();
+    b.process(new ICallback() { //回调对象
+      @Override
+      public void methodToCallback() {
+        System.out.println(&quot;Call back me.&quot;);
+      }
+    });
+  }
+}</code></pre><ul>
+<li>使用Callback函数实现的JDBCTemplate</li>
+</ul>
+<pre><code>@Override
+public &lt;T&gt; List&lt;T&gt; query(String sql, RowMapper&lt;T&gt; rowMapper) throws DataAccessException {
+ return query(sql, new RowMapperResultSetExtractor&lt;T&gt;(rowMapper));
+}
+
+@Override
+public &lt;T&gt; T query(final String sql, final ResultSetExtractor&lt;T&gt; rse) throws DataAccessException {
+ Assert.notNull(sql, &quot;SQL must not be null&quot;);
+ Assert.notNull(rse, &quot;ResultSetExtractor must not be null&quot;);
+ if (logger.isDebugEnabled()) {
+  logger.debug(&quot;Executing SQL query [&quot; + sql + &quot;]&quot;);
+ }
+
+ class QueryStatementCallback implements StatementCallback&lt;T&gt;, SqlProvider {
+  @Override
+  public T doInStatement(Statement stmt) throws SQLException {
+   ResultSet rs = null;
+   try {
+    rs = stmt.executeQuery(sql);
+    ResultSet rsToUse = rs;
+    if (nativeJdbcExtractor != null) {
+     rsToUse = nativeJdbcExtractor.getNativeResultSet(rs);
+    }
+    return rse.extractData(rsToUse);
+   }
+   finally {
+    JdbcUtils.closeResultSet(rs);
+   }
+  }
+  @Override
+  public String getSql() {
+   return sql;
+  }
+ }
+
+ return execute(new QueryStatementCallback());
+}
+
+@Override
+public &lt;T&gt; T execute(StatementCallback&lt;T&gt; action) throws DataAccessException {
+ Assert.notNull(action, &quot;Callback object must not be null&quot;);
+
+ Connection con = DataSourceUtils.getConnection(getDataSource());
+ Statement stmt = null;
+ try {
+  Connection conToUse = con;
+  if (this.nativeJdbcExtractor != null &amp;&amp;
+    this.nativeJdbcExtractor.isNativeConnectionNecessaryForNativeStatements()) {
+   conToUse = this.nativeJdbcExtractor.getNativeConnection(con);
+  }
+  stmt = conToUse.createStatement();
+  applyStatementSettings(stmt);
+  Statement stmtToUse = stmt;
+  if (this.nativeJdbcExtractor != null) {
+   stmtToUse = this.nativeJdbcExtractor.getNativeStatement(stmt);
+  }
+  T result = action.doInStatement(stmtToUse);
+  handleWarnings(stmt);
+  return result;
+ }
+ catch (SQLException ex) {
+  // Release Connection early, to avoid potential connection pool deadlock
+  // in the case when the exception translator hasn&#39;t been initialized yet.
+  JdbcUtils.closeStatement(stmt);
+  stmt = null;
+  DataSourceUtils.releaseConnection(con, getDataSource());
+  con = null;
+  throw getExceptionTranslator().translate(&quot;StatementCallback&quot;, getSql(action), ex);
+ }
+ finally {
+  JdbcUtils.closeStatement(stmt);
+  DataSourceUtils.releaseConnection(con, getDataSource());
+ }
 }</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -3356,10 +3457,10 @@ protected void service(HttpServletRequest req, HttpServletResponse resp)
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>设计模式-行为型-模板模式</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-07-05, 10:54:08</p>
-    <p><span class="copy-title">最后更新:</span>2020-07-05, 10:54:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-06, 22:11:42</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/" title="设计模式-行为型-模板模式">https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
