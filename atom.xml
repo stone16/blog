@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-07-06T04:40:23.103Z</updated>
+  <updated>2020-07-10T05:19:45.491Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-行为型-策略模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-07-10T05:19:17.000Z</published>
+    <updated>2020-07-10T05:19:45.491Z</updated>
+    
+    <content type="html"><![CDATA[<p>策略模式，用于避免冗长的if else或者switch分支判断，并且可以像模板模式那样提供框架的扩展点。</p><h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li>策略模式<ul><li>Strategy Design Pattern </li><li>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. </li><li>对策略的定义，创建和使用进行解耦</li></ul></li></ul><h2 id="1-1-策略的定义"><a href="#1-1-策略的定义" class="headerlink" title="1.1 策略的定义"></a>1.1 策略的定义</h2><ul><li>策略接口</li><li>一组实现了这个接口的策略类</li></ul><pre><code>public interface Strategy {  void algorithmInterface();}public class ConcreteStrategyA implements Strategy {  @Override  public void  algorithmInterface() {    //具体的算法...  }}public class ConcreteStrategyB implements Strategy {  @Override  public void  algorithmInterface() {    //具体的算法...  }}</code></pre><h2 id="1-2-策略的创建"><a href="#1-2-策略的创建" class="headerlink" title="1.2 策略的创建"></a>1.2 策略的创建</h2><ul><li><p>策略在使用的时候需要根据类型来判断创建哪个策略来使用</p></li><li><p>因此，为了封装创建逻辑，需要对客户端代码屏蔽创建细节</p><p>  public class StrategyFactory {</p><pre><code>private static final Map&lt;String, Strategy&gt; strategies = new HashMap&lt;&gt;();static {  strategies.put(&quot;A&quot;, new ConcreteStrategyA());  strategies.put(&quot;B&quot;, new ConcreteStrategyB());}public static Strategy getStrategy(String type) {  if (type == null || type.isEmpty()) {    throw new IllegalArgumentException(&quot;type should not be empty.&quot;);  }  return strategies.get(type);}</code></pre><p>  }</p></li></ul><p>这里是需要根据策略是否是有状态的，根据业务场景的需要，来看是否需要返回新创建的对象，或者来复用已经创建好的对象。</p><pre><code>// 返回新创建好的对象的范例public class StrategyFactory {  public static Strategy getStrategy(String type) {    if (type == null || type.isEmpty()) {      throw new IllegalArgumentException(&quot;type should not be empty.&quot;);    }    if (type.equals(&quot;A&quot;)) {      return new ConcreteStrategyA();    } else if (type.equals(&quot;B&quot;)) {      return new ConcreteStrategyB();    }    return null;  }}</code></pre><h2 id="1-3-策略的使用"><a href="#1-3-策略的使用" class="headerlink" title="1.3 策略的使用"></a>1.3 策略的使用</h2><p>使用的时候一般是运行时动态来决定使用哪一种策略。即根据配置，用户的输入，计算结果等因素，来决定 </p><pre><code>// 策略接口：EvictionStrategy// 策略类：LruEvictionStrategy、FifoEvictionStrategy、LfuEvictionStrategy...// 策略工厂：EvictionStrategyFactorypublic class UserCache {  private Map&lt;String, User&gt; cacheData = new HashMap&lt;&gt;();  private EvictionStrategy eviction;  public UserCache(EvictionStrategy eviction) {    this.eviction = eviction;  }  //...}// 运行时动态确定，根据配置文件的配置决定使用哪种策略public class Application {  public static void main(String[] args) throws Exception {    EvictionStrategy evictionStrategy = null;    Properties props = new Properties();    props.load(new FileInputStream(&quot;./config.properties&quot;));    String type = props.getProperty(&quot;eviction_type&quot;);    evictionStrategy = EvictionStrategyFactory.getEvictionStrategy(type);    UserCache userCache = new UserCache(evictionStrategy);    //...  }}// 非运行时动态确定，在代码中指定使用哪种策略public class Application {  public static void main(String[] args) {    //...    EvictionStrategy evictionStrategy = new LruEvictionStrategy();    UserCache userCache = new UserCache(evictionStrategy);    //...  }}</code></pre><h1 id="2-实例"><a href="#2-实例" class="headerlink" title="2. 实例"></a>2. 实例</h1><h2 id="2-1-策略模式避免分支判断"><a href="#2-1-策略模式避免分支判断" class="headerlink" title="2.1 策略模式避免分支判断"></a>2.1 策略模式避免分支判断</h2><pre><code>public class OrderService {  public double discount(Order order) {    double discount = 0.0;    OrderType type = order.getType();    if (type.equals(OrderType.NORMAL)) { // 普通订单      //...省略折扣计算算法代码    } else if (type.equals(OrderType.GROUPON)) { // 团购订单      //...省略折扣计算算法代码    } else if (type.equals(OrderType.PROMOTION)) { // 促销订单      //...省略折扣计算算法代码    }    return discount;  }}// 策略的定义public interface DiscountStrategy {  double calDiscount(Order order);}// 省略NormalDiscountStrategy、GrouponDiscountStrategy、PromotionDiscountStrategy类代码...// 策略的创建public class DiscountStrategyFactory {  private static final Map&lt;OrderType, DiscountStrategy&gt; strategies = new HashMap&lt;&gt;();  static {    strategies.put(OrderType.NORMAL, new NormalDiscountStrategy());    strategies.put(OrderType.GROUPON, new GrouponDiscountStrategy());    strategies.put(OrderType.PROMOTION, new PromotionDiscountStrategy());  }  public static DiscountStrategy getDiscountStrategy(OrderType type) {    return strategies.get(type);  }}// 策略的使用public class OrderService {  public double discount(Order order) {    OrderType type = order.getType();    DiscountStrategy discountStrategy = DiscountStrategyFactory.getDiscountStrategy(type);    return discountStrategy.calDiscount(order);  }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;策略模式，用于避免冗长的if else或者switch分支判断，并且可以像模板模式那样提供框架的扩展点。&lt;/p&gt;
+&lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="策略模式" scheme="https://www.llchen60.com/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Intellij IDEA tips and tricks</title>
@@ -545,30 +572,6 @@
     
     
       <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Enzyme + Jest Practice</title>
-    <link href="https://www.llchen60.com/Enzyme-Jest-Practice/"/>
-    <id>https://www.llchen60.com/Enzyme-Jest-Practice/</id>
-    <published>2020-05-23T00:29:18.000Z</published>
-    <updated>2020-05-23T00:29:58.284Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-How-to-use-enzyme-with-jest"><a href="#1-How-to-use-enzyme-with-jest" class="headerlink" title="1. How to use enzyme with jest"></a>1. How to use enzyme with jest</h1><h2 id="1-1-children"><a href="#1-1-children" class="headerlink" title="1.1 children()"></a>1.1 children()</h2><p>This blog mainly describe some practice on how to write tests in jest with enzyme. </p><pre><code>// This test make sure the component only have one h1 element describe(&#39;&lt;Add /&gt; rendering&#39;, () =&gt; {    it(&#39;should render one &lt;h1&gt;&#39;, () =&gt; {        let wrapper = shallow(&lt;Add /&gt;);        expect(wrapper.children(&#39;h1&#39;)).toHaveLength(1);    });});</code></pre><h2 id="1-2-snapshot"><a href="#1-2-snapshot" class="headerlink" title="1.2 snapshot"></a>1.2 snapshot</h2><pre><code>// For snapshot test, jest will help you create a directory named __snapshots__ with the autogenerated file inside with the extension `.snap`. Push snapshot into the repository and store it along with the test // it means same as test it(&#39;render correctly text component&#39;, () =&gt; {      const TextInputComponent = renderer.create(&lt;TextInput /&gt;).toJSON();    expect(TextInputComponent).toMatchSnapshot();});</code></pre><h2 id="1-3-Test-with-props-in-your-component"><a href="#1-3-Test-with-props-in-your-component" class="headerlink" title="1.3 Test with props in your component"></a>1.3 Test with props in your component</h2><pre><code>it(&#39;check month and years dropdowns displayed&#39;, () =&gt; {      const props = {            showMonthYearsDropdowns: true        },        DateInputComponent = mount(&lt;DateInput {...props} /&gt;).find(&#39;.datepicker&#39;);    expect(DateInputComponent.hasClass(&#39;react-datepicker-hide-month&#39;)).toEqual(true);});it(&#39;render date input correctly with null value&#39;, () =&gt; {      const props = {            value: null        },        DateInputComponent = mount(&lt;DateInput {...props} /&gt;);    expect((DateInputComponent).prop(&#39;value&#39;)).toEqual(null);});it(&#39;check the type of value&#39;, () =&gt; {      const props = {            value: &#39;10.03.2018&#39;        },        DateInputComponent = mount(&lt;DateInput {...props} /&gt;);    expect(DateInputComponent.prop(&#39;value&#39;)).toBeString();});</code></pre><h2 id="1-4-Test-events"><a href="#1-4-Test-events" class="headerlink" title="1.4 Test events"></a>1.4 Test events</h2><pre><code>it(&#39;check the onChange callback&#39;, () =&gt; {      const onChange = jest.fn(),        props = {            value: &#39;20.01.2018&#39;,            onChange        },        DateInputComponent = mount(&lt;DateInput {...props} /&gt;).find(&#39;input&#39;);    DateInputComponent.simulate(&#39;change&#39;, { target: {value: moment(&#39;2018-01-22&#39;)} });    expect(onChange).toHaveBeenCalledWith(&#39;22.01.2018&#39;);});it(&#39;check DatePicker popup open&#39;, () =&gt; {      const DateComponent = mount(&lt;DateInput /&gt;),        dateInput = DateComponent.find(&quot;input[type=&#39;text&#39;]&quot;);    dateInput.simulate(&#39;click&#39;);    expect(DateComponent.find(&#39;.react-datepicker&#39;)).toHaveLength(1);});</code></pre><h1 id="2-Some-tips"><a href="#2-Some-tips" class="headerlink" title="2. Some tips"></a>2. Some tips</h1><ol><li><p>One component should have only one snapshot. </p><ol><li>mainly because if one fails, most likely the others will fail too </li></ol></li><li><p>Test props. </p><ol><li>check the render od default prop values </li><li>check the custom value of the prop, set your own value and do tests </li></ol></li><li><p>Testing data types </p><ol><li>you could use <code>jest-extended</code> to test the type of data </li></ol></li><li><p>Event testing </p><ol><li>mock event -&gt; simulate it -&gt; expect event was called </li><li>mock event -&gt; simulate event with params -&gt; expect event was called with passed params </li><li>pass necessary props -&gt; render component -&gt; simulate event -&gt; expect a certain behavior on called event </li></ol></li></ol><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://blog.bitsrc.io/how-to-test-react-components-with-jest-and-enzyme-in-depth-145fcd06b90" target="_blank" rel="noopener">https://blog.bitsrc.io/how-to-test-react-components-with-jest-and-enzyme-in-depth-145fcd06b90</a> </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-How-to-use-enzyme-with-jest&quot;&gt;&lt;a href=&quot;#1-How-to-use-enzyme-with-jest&quot; class=&quot;headerlink&quot; title=&quot;1. How to use enzyme with jest&quot;&gt;&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="FrondEnd" scheme="https://www.llchen60.com/categories/FrondEnd/"/>
     
     
   </entry>
