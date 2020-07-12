@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-07-10T22:10:09.405Z</updated>
+  <updated>2020-07-12T01:22:37.765Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式-行为型-职责链模式</title>
+    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-07-12T01:22:10.000Z</published>
+    <updated>2020-07-12T01:22:37.765Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li>职责链模式<ul><li>Chian of Responsibility Design Pattern </li><li>Avoid coupling the sender of a request to its receiver by giving more than one object a chance to hadle the request. Chain the receiving objects and pass the request along the chain until an object handles it. </li><li>将请求的发送和接收解耦，让多个接收对象都有机会处理这个请求。将这些接收对象串成一条链，并沿着这条链传递这个请求，直到链上的某个接收对象能够处理它为止</li><li>在职责链模式当中，多个处理器依次处理同一个请求，一个请求先经过A处理器处理，再把请求传递给B处理器，B处理器处理完以后再传递给C处理器。各个处理器之间形成了一个链条，链条上的每个处理器各自承担各自的处理职责，所以叫做职责链模式。</li></ul></li></ul><h2 id="1-1-使用链表实现HandlerChain"><a href="#1-1-使用链表实现HandlerChain" class="headerlink" title="1.1 使用链表实现HandlerChain"></a>1.1 使用链表实现HandlerChain</h2><ul><li>Handler是所有处理器的抽象父类</li><li>handle()是抽象方法</li><li>每个具体的处理器类的handle()函数结构会比较类似，如果能处理请求，则进行处理；如果不能，则交由后面的处理器来进行处理</li><li>HandlerChain是处理器链，从数据结构来看，是一个记录了链头、链尾的链表。</li></ul><p>public abstract class Handler {<br>  protected Handler successor = null;</p><p>  public void setSuccessor(Handler successor) {<br>    this.successor = successor;<br>  }</p><p>  public final void handle() {<br>    boolean handled = doHandle();</p><pre><code>if (successor != null &amp;&amp; !handled) {    successor.handle();}</code></pre><p>  }<br>  public abstract boolean doHandle();<br>}</p><p>public class HandlerA extends Handler {<br>  @Override<br>  public void doHandle() {<br>    boolean handled = false;<br>    //…<br>    return handled;<br>  }<br>}</p><p>public class HandlerB extends Handler {<br>  @Override<br>  public void doHandle() {<br>    boolean handled = false;<br>    //…<br>    return handled;<br>  }<br>}</p><p>public class HandlerChain {<br>  private Handler head = null;<br>  private Handler tail = null;</p><p>  public void addHandler(Handler handler) {<br>    handler.setSuccessor(null);</p><pre><code>if (head == null) {  head = handler;  tail = handler;  return;}tail.setSuccessor(handler);tail = handler;</code></pre><p>  }</p><p>  public void handle() {<br>    if (head != null) {<br>      head.handle();<br>    }<br>  }<br>}</p><p>// 使用举例<br>public class Application {<br>  public static void main(String[] args) {<br>    HandlerChain chain = new HandlerChain();<br>    chain.addHandler(new HandlerA());<br>    chain.addHandler(new HandlerB());<br>    chain.handle();<br>  }<br>}</p><h2 id="1-2-使用数组实现HandlerChain"><a href="#1-2-使用数组实现HandlerChain" class="headerlink" title="1.2 使用数组实现HandlerChain"></a>1.2 使用数组实现HandlerChain</h2><pre><code>public interface IHandler {  boolean handle();}public class HandlerA implements IHandler {  @Override  public boolean handle() {    boolean handled = false;    //...    return handled;  }}public class HandlerB implements IHandler {  @Override  public boolean handle() {    boolean handled = false;    //...    return handled;  }}public class HandlerChain {  private List&lt;IHandler&gt; handlers = new ArrayList&lt;&gt;();  public void addHandler(IHandler handler) {    this.handlers.add(handler);  }  public void handle() {    for (IHandler handler : handlers) {      boolean handled = handler.handle();      if (handled) {        break;      }    }  }}// 使用举例public class Application {  public static void main(String[] args) {    HandlerChain chain = new HandlerChain();    chain.addHandler(new HandlerA());    chain.addHandler(new HandlerB());    chain.handle();  }}</code></pre><h1 id="2-过滤器、拦截器的实现"><a href="#2-过滤器、拦截器的实现" class="headerlink" title="2. 过滤器、拦截器的实现"></a>2. 过滤器、拦截器的实现</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;职责链模式&lt;ul&gt;
+&lt;li&gt;Chian of Responsibility Desi
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+      <category term="职责链模式" scheme="https://www.llchen60.com/tags/%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-行为型-策略模式</title>
@@ -549,30 +577,6 @@
     
     
       <category term="心理学" scheme="https://www.llchen60.com/tags/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>提高代码质量的Tips</title>
-    <link href="https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/"/>
-    <id>https://www.llchen60.com/%E5%85%B3%E4%BA%8E%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84Tips/</id>
-    <published>2020-05-25T05:34:48.000Z</published>
-    <updated>2020-05-29T00:49:33.202Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-如何重构"><a href="#1-如何重构" class="headerlink" title="1. 如何重构"></a>1. 如何重构</h1><h2 id="1-1-为什么要重构代码？"><a href="#1-1-为什么要重构代码？" class="headerlink" title="1.1 为什么要重构代码？"></a>1.1 为什么要重构代码？</h2><p>重构是一种对软件内部结构的改善，目的是在不改变软件的可见行为的情况下，使其更易理解，修改成本更低。</p><p>即 重构是指保持功能不变的前提下，利用设计思想、原则、模式和编程规范等理论来优化代码，修改设计上的不足，提高代码的质量。</p><p>如果没有维护，物体势必会往熵增加的方向去演变的。如果不做代码的维护，代码总归会往越来越混乱的方向演进，当混乱到一定程度，量变引起质变，项目的维护成本已经高过了重新开发一套新代码的成本，再去重构就会变得十分困难了。</p><h2 id="1-2-重构的对象"><a href="#1-2-重构的对象" class="headerlink" title="1.2 重构的对象"></a>1.2 重构的对象</h2><ul><li>大型重构<ul><li>对顶层代码设计的重构<ul><li>包括 <ul><li>系统</li><li>模块</li><li>代码结构</li><li>类与类之间的关系</li></ul></li><li>重构的手段<ul><li>分层</li><li>模块化</li><li>解耦</li><li>抽象可复用的组件</li></ul></li></ul></li></ul></li></ul><ul><li>小型重构<ul><li>对于代码细节的重构</li><li>针对类，函数，变量等代码级别的重构</li></ul></li></ul><h2 id="1-3-什么时候重构？"><a href="#1-3-什么时候重构？" class="headerlink" title="1.3 什么时候重构？"></a>1.3 什么时候重构？</h2><p>持续重构的概念，即没事情的时候，看看项目中有哪些写得不够好，可以优化的代码，主动去重构一下。或者在修改添加某个功能代码的时候，也可以顺手把不符合编码规范，不好的设计重构一下。</p><h2 id="1-4-如何解耦代码？"><a href="#1-4-如何解耦代码？" class="headerlink" title="1.4 如何解耦代码？"></a>1.4 如何解耦代码？</h2><ul><li><p>解耦的目的</p><ul><li>高内聚</li><li>松耦合</li></ul></li><li><p>为什么需要解耦</p><ul><li>控制代码的复杂性</li><li>使得我们可以聚焦在某一模块或类当中，不需要了解太多其他模块或类的代码</li><li>使得代码改动相对集中，引入bug的风险就减少了很多</li></ul></li><li><p>如何判断是否需要解耦</p><ul><li>在做修改的时候是否需要跨很多个包来进行改动</li><li>需要通过解耦的方式让依赖关系变得清晰，简单一些</li></ul></li><li><p>如何进行解耦</p><ul><li><p>封装与抽象</p><ul><li>有效隐藏实现的复杂</li><li>隔离实现的易变性</li><li>给依赖的模块提供稳定易用的抽象接口</li></ul></li><li><p>引入中间层</p><ul><li>引入中间层能够简化模块或类之间的依赖关系</li><li>即我们可以让开发和重构同步进行</li><li>例如需要进行接口的修改<ul><li>先引入一个中间层，包裹老的接口，提供新的接口定义</li><li>新开发的代码依赖中间层提供的新接口</li><li>将依赖老街口的代码改为调用新接口</li><li>确保所有的代码都调用新接口之后，删掉老接口</li></ul></li></ul></li><li><p>模块化</p><ul><li>对于一个大型复杂系统来说，没有人能够掌控所有细节</li><li>通过划分成不同的独立模块，让不同的人负责不同的模块</li><li>这样即便在不了解全部细节的情况下，管理者也能够协调各个模块，让整个系统有效运转起来</li><li>将每个模块都当做一个独立的library来进行开发，只提供封装了内部实现细节的接口给其他模块使用，以此来减少不同模块之间的耦合度</li></ul></li><li><p>遵循设计思想和原则</p><ul><li>单一职责原则</li><li>基于接口而非实现编程</li><li>依赖注入</li><li>多用组合少用继承</li><li>迪米特法则<ul><li>不应该有直接依赖关系的类</li></ul></li></ul></li></ul></li></ul><h1 id="2-代码的可测试性"><a href="#2-代码的可测试性" class="headerlink" title="2. 代码的可测试性"></a>2. 代码的可测试性</h1><p>做重构，如何保证你做的改动能够按照既定的想法运行，那么我们需要来写单元测试，来保证新的代码仍然能够通过，即原有的逻辑的正确性没有被破坏。</p><p>另外，单元测试的阅读实际上是快速熟悉代码的一种方式</p><p>一些常见的Anti-patterns:</p><ul><li>未决行为<ul><li>代码的输出是随机的，或者不确定的</li></ul></li><li>全局变量</li><li>静态方法</li><li>复杂继承</li><li>高耦合代码</li></ul><h1 id="3-编程规范"><a href="#3-编程规范" class="headerlink" title="3. 编程规范"></a>3. 编程规范</h1><h2 id="3-1-命名与注释"><a href="#3-1-命名与注释" class="headerlink" title="3.1 命名与注释"></a>3.1 命名与注释</h2><ol><li>在足够表达含义的情况下，命名尽量短</li></ol><p>命名时候的缩写，只对大家比较熟知的使用，减少阅读时候的障碍的感觉。</p><ol start="2"><li>利用上下文简化命名</li></ol><p>比如POJO当中，类名往往对这是个什么类做了定义了，成员变量就不用再添加类前缀了</p><ol start="3"><li>命名需要可读，可搜索</li></ol><p>英文上可读，方便发音，哪怕是第一次见到，也需要尽可能简单的能够直接读出来</p><p>另外需要遵从一些大家约定俗成的规范，即比如使用selectXXX 还是queryXXX 来表示选择，从数据库里面拿东西，一旦选定，就需要一起遵从规定了。</p><ol start="4"><li>对于接口，抽象类的命名</li></ol><ul><li><p>对于接口的命名</p><ul><li>加前缀I，比如IUserService</li><li>或者加后缀Impl, UserServiceImpl</li></ul></li><li><p>抽象类的命名</p><ul><li>加上前缀Abstract</li><li>或者不带</li></ul></li></ul><p>皆可，但是需要形式上的统一。</p><ol start="5"><li>注释</li></ol><ul><li><p>目的</p><ul><li>让代码更容易看懂</li></ul></li><li><p>写什么</p><ul><li>是什么，为什么，怎么办 三大问题</li><li>能够起到总结性和文档的作用</li><li>总结性注释也能够让整个代码更加清晰</li></ul></li><li><p>在哪里写</p><ul><li>一般来说是在类和函数上写注释</li><li>函数内部尽量通过好的命名，提炼函数，解释性的变量来提高代码的可读性</li></ul></li></ul><h2 id="3-2-代码风格"><a href="#3-2-代码风格" class="headerlink" title="3.2 代码风格"></a>3.2 代码风格</h2><ol><li>类和函数的大小</li></ol><p>软标准，只是要尽量注意，对于很大的类，最好将其分割开</p><ol start="2"><li>一行代码的长度的限制，譬如100字符或者150字符</li><li>使用空行分割单元块</li></ol><ul><li>对于比较长的函数，如果逻辑上可以分为几个独立的代码块，可以使用空行来分割各个代码块</li><li>在类的成员变量和函数之间</li><li>静态成员变量和普通成员变量之间</li><li>各个函数之间</li><li>各个成员变量之间</li></ul><ol start="4"><li>缩进风格的统一</li><li>类当中成员的排列顺序</li></ol><ul><li>首先是类的所属包名</li><li>然后罗列import引入的依赖类</li><li>类当中<ul><li>大原则<ul><li>先静态，后普通</li><li>作用域从大到小来排序</li></ul></li><li>成员变量</li><li>各种方法</li></ul></li></ul><h2 id="3-3-编程技巧"><a href="#3-3-编程技巧" class="headerlink" title="3.3 编程技巧"></a>3.3 编程技巧</h2><ol><li>将代码分割为更小的单元块</li></ol><p>大部分人阅读代码的习惯都是先看整体再看细节，因为我们要有模块化和抽象思维，善于将大块的负责逻辑提炼成类或者函数，屏蔽掉细节</p><p>通过提炼函数，通过函数名字，直接读懂这段代码是做什么用的</p><ol start="2"><li>避免函数参数过多</li></ol><ul><li>考虑函数是否职责单一，能否通过拆分多个函数的方式来减少参数</li><li>将函数的参数封装成对象</li><li>不要使用函数的参数(true/ false) 来控制逻辑，直接分成几个不同的函数会更好</li></ul><ol start="3"><li>函数的设计，职责单一</li><li>移除过深的嵌套层次</li></ol><ul><li>去掉多余的if else语句</li><li>使用continue break return等关键字，来提前退出嵌套</li><li>调整执行顺序来减少嵌套</li><li>将部分嵌套逻辑封装成函数调用，以此来减少嵌套</li></ul><ol start="5"><li>使用解释性变量</li></ol><ul><li>常量替代magic number</li><li>使用解释性变量来解释复杂表达式</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-如何重构&quot;&gt;&lt;a href=&quot;#1-如何重构&quot; class=&quot;headerlink&quot; title=&quot;1. 如何重构&quot;&gt;&lt;/a&gt;1. 如何重构&lt;/h1&gt;&lt;h2 id=&quot;1-1-为什么要重构代码？&quot;&gt;&lt;a href=&quot;#1-1-为什么要重构代码？&quot; class=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
     
   </entry>
   

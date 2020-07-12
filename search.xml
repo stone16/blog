@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>设计模式-行为型-职责链模式</title>
+      <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li>职责链模式<ul><li>Chian of Responsibility Design Pattern </li><li>Avoid coupling the sender of a request to its receiver by giving more than one object a chance to hadle the request. Chain the receiving objects and pass the request along the chain until an object handles it. </li><li>将请求的发送和接收解耦，让多个接收对象都有机会处理这个请求。将这些接收对象串成一条链，并沿着这条链传递这个请求，直到链上的某个接收对象能够处理它为止</li><li>在职责链模式当中，多个处理器依次处理同一个请求，一个请求先经过A处理器处理，再把请求传递给B处理器，B处理器处理完以后再传递给C处理器。各个处理器之间形成了一个链条，链条上的每个处理器各自承担各自的处理职责，所以叫做职责链模式。</li></ul></li></ul><h2 id="1-1-使用链表实现HandlerChain"><a href="#1-1-使用链表实现HandlerChain" class="headerlink" title="1.1 使用链表实现HandlerChain"></a>1.1 使用链表实现HandlerChain</h2><ul><li>Handler是所有处理器的抽象父类</li><li>handle()是抽象方法</li><li>每个具体的处理器类的handle()函数结构会比较类似，如果能处理请求，则进行处理；如果不能，则交由后面的处理器来进行处理</li><li>HandlerChain是处理器链，从数据结构来看，是一个记录了链头、链尾的链表。</li></ul><p>public abstract class Handler {<br>  protected Handler successor = null;</p><p>  public void setSuccessor(Handler successor) {<br>    this.successor = successor;<br>  }</p><p>  public final void handle() {<br>    boolean handled = doHandle();</p><pre><code>if (successor != null &amp;&amp; !handled) {    successor.handle();}</code></pre><p>  }<br>  public abstract boolean doHandle();<br>}</p><p>public class HandlerA extends Handler {<br>  @Override<br>  public void doHandle() {<br>    boolean handled = false;<br>    //…<br>    return handled;<br>  }<br>}</p><p>public class HandlerB extends Handler {<br>  @Override<br>  public void doHandle() {<br>    boolean handled = false;<br>    //…<br>    return handled;<br>  }<br>}</p><p>public class HandlerChain {<br>  private Handler head = null;<br>  private Handler tail = null;</p><p>  public void addHandler(Handler handler) {<br>    handler.setSuccessor(null);</p><pre><code>if (head == null) {  head = handler;  tail = handler;  return;}tail.setSuccessor(handler);tail = handler;</code></pre><p>  }</p><p>  public void handle() {<br>    if (head != null) {<br>      head.handle();<br>    }<br>  }<br>}</p><p>// 使用举例<br>public class Application {<br>  public static void main(String[] args) {<br>    HandlerChain chain = new HandlerChain();<br>    chain.addHandler(new HandlerA());<br>    chain.addHandler(new HandlerB());<br>    chain.handle();<br>  }<br>}</p><h2 id="1-2-使用数组实现HandlerChain"><a href="#1-2-使用数组实现HandlerChain" class="headerlink" title="1.2 使用数组实现HandlerChain"></a>1.2 使用数组实现HandlerChain</h2><pre><code>public interface IHandler {  boolean handle();}public class HandlerA implements IHandler {  @Override  public boolean handle() {    boolean handled = false;    //...    return handled;  }}public class HandlerB implements IHandler {  @Override  public boolean handle() {    boolean handled = false;    //...    return handled;  }}public class HandlerChain {  private List&lt;IHandler&gt; handlers = new ArrayList&lt;&gt;();  public void addHandler(IHandler handler) {    this.handlers.add(handler);  }  public void handle() {    for (IHandler handler : handlers) {      boolean handled = handler.handle();      if (handled) {        break;      }    }  }}// 使用举例public class Application {  public static void main(String[] args) {    HandlerChain chain = new HandlerChain();    chain.addHandler(new HandlerA());    chain.addHandler(new HandlerB());    chain.handle();  }}</code></pre><h1 id="2-过滤器、拦截器的实现"><a href="#2-过滤器、拦截器的实现" class="headerlink" title="2. 过滤器、拦截器的实现"></a>2. 过滤器、拦截器的实现</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 职责链模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-行为型-策略模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
