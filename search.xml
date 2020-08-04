@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java Notes</title>
+      <link href="/Java-Notes/"/>
+      <url>/Java-Notes/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-并发"><a href="#1-并发" class="headerlink" title="1. 并发"></a>1. 并发</h1><h2 id="1-1-ThreadLocal复用问题"><a href="#1-1-ThreadLocal复用问题" class="headerlink" title="1.1 ThreadLocal复用问题"></a>1.1 ThreadLocal复用问题</h2><p>ThreadLocal适用于变量在线程间隔离，而在方法或类之间共享的场景。如果用户信息的获取比较昂贵，那么在ThreadLocal中缓存数据时比较合适的做法。</p><pre><code>private static final ThreadLocal&lt;Integer&gt; currentUser = ThreadLocal.withInitial(() -&gt; null);@GetMapping(&quot;wrong&quot;)public Map wrong(@RequestParam(&quot;userId&quot;) Integer userId) {    //设置用户信息之前先查询一次ThreadLocal中的用户信息    String before  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();    //设置用户信息到ThreadLocal    currentUser.set(userId);    //设置用户信息之后再查询一次ThreadLocal中的用户信息    String after  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();    //汇总输出两次查询结果    Map result = new HashMap();    result.put(&quot;before&quot;, before);    result.put(&quot;after&quot;, after);    return result;}</code></pre><p>上述例子当中，我们在设置前设置后都做了记录，来看threadLocal当中都记录了什么信息，。值得注意的是程序是运行在Tomcat当中的，执行程序的线程是Tomcat的工作线程，而Tomcat的工作线程是基于线程池的。</p><p>即会重用几个固定的线程，一旦线程重用，那么很可能首次从ThreadLocal获取的值是之前其他用户的请求遗留的值。这时ThreadLocal中的用户信息就是其他用户的信息了。</p><p>Take Away: </p><ol><li>代码中没用多线程不以为着你的程序没有使用多线程，Tomcat的Web服务器的业务代码，本身就运行在一个多线程环境当中</li><li>使用线程池处理数据就意味着线程是会被重用的，使用类似ThreadLocal工具来存放一些数据的时候，需要注意在代码运行完之后，显式去清空设置的数据。</li></ol><p>修正复用的问题的bug： </p><pre><code>private static final ThreadLocal&lt;Integer&gt; currentUser = ThreadLocal.withInitial(() -&gt; null);@GetMapping(&quot;right&quot;)public Map right(@RequestParam(&quot;userId&quot;) Integer userId) {    String before  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();    currentUser.set(userId);    try {        String after = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();        Map result = new HashMap();        result.put(&quot;before&quot;, before);        result.put(&quot;after&quot;, after);        return result;    } finally {        //在finally代码块中删除ThreadLocal中的数据，确保数据不串        currentUser.remove();    }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式-行为型-备忘录模式</title>
       <link href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/</url>
