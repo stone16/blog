@@ -59,3 +59,142 @@ Take Away:
         }
     }
     
+## 1.2 ConcurrentHashMap 
+
++ ConcurrentHashMap是线程安全的哈希表容器，这里的线程安全是指原子性读写操作是线程安全的。
++ 例子 -- 10个线程一起来补充总共100个元素进去
+
+```
+    //线程个数
+    private static int THREAD_COUNT = 10;
+    //总元素数量
+    private static int ITEM_COUNT = 1000;
+
+    //帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
+    private ConcurrentHashMap<String, Long> getData(int count) {
+        return LongStream.rangeClosed(1, count)
+                .boxed()
+                .collect(Collectors.toConcurrentMap(i -> UUID.randomUUID().toString(), Function.identity(),
+                        (o1, o2) -> o1, ConcurrentHashMap::new));
+    }
+
+    @GetMapping("wrong")
+    public String wrong() throws InterruptedException {
+        ConcurrentHashMap<String, Long> concurrentHashMap = getData(ITEM_COUNT - 100);
+        //初始900个元素
+        log.info("init size:{}", concurrentHashMap.size());
+
+        ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+        //使用线程池并发处理逻辑
+        forkJoinPool.execute(() -> IntStream.rangeClosed(1, 10).parallel().forEach(i -> {
+            //查询还需要补充多少个元素
+            int gap = ITEM_COUNT - concurrentHashMap.size();
+            log.info("gap size:{}", gap);
+            //补充元素
+            concurrentHashMap.putAll(getData(gap));
+        }));
+        //等待所有任务完成
+        forkJoinPool.shutdown();
+        forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+        //最后元素个数会是1000吗？
+        log.info("finish size:{}", concurrentHashMap.size());
+        return "OK";
+    }
+```
+
+这样子执行的结果就是加入远远超过预期的数量，因为ConcurrentHashMap可以保证多个worker工作的时候不会互相干扰，但是无法保证看到的当前ConcurrentHashMap数据数量的同步
+
++ Take Aways
+    + 使用ConcurrentHashMap，不代表对其多个操作之间的状态是一致的，是没有其他线程在操作它的，如果需要确保，需要手动加锁
+    + 诸如size,isEmpty和containsValue等聚合方法，在并发情况下可能会反映ConcurrentHashMap的**中间状态**，因此在并发情况下，***这些方法的返回值只能用作参考，而不能用于流程控制**
+
+解决方案就是通过加锁，使得同时只有一个线程可以操作ConcurrentHashMap
+
+```
+@GetMapping("right")
+public String right() throws InterruptedException {
+    ConcurrentHashMap<String, Long> concurrentHashMap = getData(ITEM_COUNT - 100);
+    log.info("init size:{}", concurrentHashMap.size());
+
+
+    ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+    forkJoinPool.execute(() -> IntStream.rangeClosed(1, 10).parallel().forEach(i -> {
+        //下面的这段复合逻辑需要锁一下这个ConcurrentHashMap
+        synchronized (concurrentHashMap) {
+            int gap = ITEM_COUNT - concurrentHashMap.size();
+            log.info("gap size:{}", gap);
+            concurrentHashMap.putAll(getData(gap));
+        }
+    }));
+    forkJoinPool.shutdown();
+    forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+
+
+    log.info("finish size:{}", concurrentHashMap.size());
+    return "OK";
+}
+```
+
++ 充分使用ConcurrentHashMap的特性
+    + 例如面对一个使用Map来统计Key出现次数的场景
+    + key范围为10， 最多使用10个并发，循环操作1000万次，每次操作累加随机的key
+    + 如果key不存在的话，首次设置值为1 
+
+
+```
+    //循环次数
+    private static int LOOP_COUNT = 10000000;
+    //线程数量
+    private static int THREAD_COUNT = 10;
+    //元素数量
+    private static int ITEM_COUNT = 10;
+    private Map<String, Long> normaluse() throws InterruptedException {
+        ConcurrentHashMap<String, Long> freqs = new ConcurrentHashMap<>(ITEM_COUNT);
+        ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+        forkJoinPool.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -> {
+            //获得一个随机的Key
+            String key = "item" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
+                    synchronized (freqs) {      
+                        if (freqs.containsKey(key)) {
+                            //Key存在则+1
+                            freqs.put(key, freqs.get(key) + 1);
+                        } else {
+                            //Key不存在则初始化为1
+                            freqs.put(key, 1L);
+                        }
+                    }
+                }
+        ));
+        forkJoinPool.shutdown();
+        forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+        return freqs;
+    }
+```
+
+但是实际上ConcurrentHashMap本身是使用的Java自带的CAS操作的，在虚拟机层面确保了写入数据的原子性，比加锁的效率高很多，因此相较于直接加synchronized重量锁，我们可以通过computeIfAbsent()操作，和线程安全累加器LongAdder来更有效率的实现我们的统计目的
+
+```
+private Map<String, Long> gooduse() throws InterruptedException {
+    ConcurrentHashMap<String, LongAdder> freqs = new ConcurrentHashMap<>(ITEM_COUNT);
+    ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+    forkJoinPool.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -> {
+        String key = "item" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
+                //利用computeIfAbsent()方法来实例化LongAdder，然后利用LongAdder来进行线程安全计数
+                freqs.computeIfAbsent(key, k -> new LongAdder()).increment();
+            }
+    ));
+    forkJoinPool.shutdown();
+    forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+    //因为我们的Value是LongAdder而不是Long，所以需要做一次转换才能返回
+    return freqs.entrySet().stream()
+            .collect(Collectors.toMap(
+                    e -> e.getKey(),
+                    e -> e.getValue().longValue())
+            );
+}
+```
+
++ 上述代码中，直接使用了ConcurrentHashMap的原子性方法computeIfAbsent来做符合逻辑操作，判断Key是否存在Value，如果不存在则把Lambda表达式运行后的结果放入Map作为Value
++ LongAdder是线程安全的累加器，因此可以直接调用其increment()方法来做累加。
+
+## 1.3 锁
