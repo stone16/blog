@@ -198,3 +198,61 @@ private Map<String, Long> gooduse() throws InterruptedException {
 + LongAdder是线程安全的累加器，因此可以直接调用其increment()方法来做累加。
 
 ## 1.3 锁
+
++ 加锁前需要知道锁和被保护的对象是不是一个层面上的
+    + 静态字段属于类，需要类级别的锁来进行保护
+    + 非静态字段属于类实例，实例级别的锁就可以保护
+
+```
+// 定义一个静态int字段counter和一个非静态的wrong方法，实现counter字段的累加操作
+class Data {
+    @Getter
+    private static int counter = 0;
+    
+    public static int reset() {
+        counter = 0;
+        return counter;
+    }
+
+    public synchronized void wrong() {
+        counter++;
+    }
+}
+
+
+// 测试代码
+@GetMapping("wrong")
+public int wrong(@RequestParam(value = "count", defaultValue = "1000000") int count) {
+    Data.reset();
+    //多线程循环一定次数调用Data类不同实例的wrong方法
+    IntStream.rangeClosed(1, count).parallel().forEach(i -> new Data().wrong());
+    return Data.getCounter();
+}
+
+```
+
+输出结果，因为默认运行100万次，但是页面输出的并不会是100万。
+
++ 在非静态的wrong方法上加锁，只能够保证多个线程无法执行同一个实例的wrong方法，但无法保证其不会执行不同实例的wrong方法。而静态的counter是被共享的
++ 解决方案时保证在一个实例的方法操作静态变量的时候，其他的实例无法操作这个静态变量
+
+```
+class Data {
+    @Getter
+    private static int counter = 0;
+    private static Object locker = new Object();
+
+    public void right() {
+        synchronized (locker) {
+            counter++;
+        }
+    }
+}
+```
+
+
++ 除此以外，对锁可以做的优化还包括
+    + 精细化锁应用的范围
+    + 区分读写场景以及资源的访问冲突，考虑使用悲观锁还是乐观锁
+        + 对于读写比例差异明显的场景，考虑使用ReentrantReadWriteLock细化区分读写锁，来提高性能
+        + 如果共享资源冲突概率不大，可以考虑使用StampedLock的乐观读的特性，进一步提高性能
