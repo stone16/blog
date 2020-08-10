@@ -235,7 +235,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="252">
-<input type="hidden" id="yelog_site_word_count" value="431k">
+<input type="hidden" id="yelog_site_word_count" value="432.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3150,12 +3150,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-08-06 18:46:10'>2020-08-03 19:19</time>
+        创建时间:<time class="date" title='更新时间: 2020-08-10 15:17:37'>2020-08-03 19:19</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2k</span>
+        <span>字数:3.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3185,7 +3185,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-并发"><span class="toc-text">1. 并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-ThreadLocal复用问题"><span class="toc-text">1.1 ThreadLocal复用问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-ConcurrentHashMap"><span class="toc-text">1.2 ConcurrentHashMap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-锁"><span class="toc-text">1.3 锁</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-并发"><span class="toc-text">1. 并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-ThreadLocal复用问题"><span class="toc-text">1.1 ThreadLocal复用问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-ConcurrentHashMap"><span class="toc-text">1.2 ConcurrentHashMap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-锁"><span class="toc-text">1.3 锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-线程池"><span class="toc-text">1.4 线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-newFixedThreadPool-OOM-问题"><span class="toc-text">1.4.1 newFixedThreadPool OOM 问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-newCachedThreadPool-OOM问题"><span class="toc-text">1.4.2 newCachedThreadPool OOM问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-3-线程池配置Best-Practice"><span class="toc-text">1.4.3 线程池配置Best Practice</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3423,7 +3423,143 @@ public int wrong(@RequestParam(value = &quot;count&quot;, defaultValue = &quot;1
 </ul>
 </li>
 </ul>
+<h2 id="1-4-线程池"><a href="#1-4-线程池" class="headerlink" title="1.4 线程池"></a>1.4 线程池</h2><p>开发当中，我们会使用各种池化技术来缓存创建昂贵的对象，比如线程池，连接池，内存池。一般是预先创建一些对象放入到池当中，使用的时候直接取出使用，用完归还以便复用。通过一定的策略调整池中缓存对象的数量，实现池的动态伸缩。</p>
+<ul>
+<li>应当手动进行线程池的声明<ul>
+<li>Java Executors定义了一些快捷的工具办法，来帮助我们快速创建线程池</li>
+<li>应当禁止使用这些方法来创建线程池，应当手动new ThreadPoolExecutor来创建线程池<ul>
+<li>资源耗尽导致OOM问题<ul>
+<li>newFixedThreadPool</li>
+<li>newCachedThreadPool</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-1-newFixedThreadPool-OOM-问题"><a href="#1-4-1-newFixedThreadPool-OOM-问题" class="headerlink" title="1.4.1 newFixedThreadPool OOM 问题"></a>1.4.1 newFixedThreadPool OOM 问题</h3><pre><code>    @GetMapping(&quot;oom1&quot;)
+    public void oom1() throws InterruptedException {
 
+        ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+        //打印线程池的信息，稍后我会解释这段代码
+        printStats(threadPool); 
+        for (int i = 0; i &lt; 100000000; i++) {
+            threadPool.execute(() -&gt; {
+                String payload = IntStream.rangeClosed(1, 1000000)
+                        .mapToObj(__ -&gt; &quot;a&quot;)
+                        .collect(Collectors.joining(&quot;&quot;)) + UUID.randomUUID().toString();
+                try {
+                    TimeUnit.HOURS.sleep(1);
+                } catch (InterruptedException e) {
+                }
+                log.info(payload);
+            });
+        }
+
+        threadPool.shutdown();
+        threadPool.awaitTermination(1, TimeUnit.HOURS);
+    }</code></pre><ul>
+<li>日志显示出现了OOM</li>
+<li>newFixedThreadPool源码：</li>
+</ul>
+<pre><code>    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                                      0L, TimeUnit.MILLISECONDS,
+                                      new LinkedBlockingQueue&lt;Runnable&gt;());
+    }
+
+    public class LinkedBlockingQueue&lt;E&gt; extends AbstractQueue&lt;E&gt;
+            implements BlockingQueue&lt;E&gt;, java.io.Serializable {
+        ...
+
+
+        /**
+         * Creates a {@code LinkedBlockingQueue} with a capacity of
+         * {@link Integer#MAX_VALUE}.
+         */
+        public LinkedBlockingQueue() {
+            this(Integer.MAX_VALUE);
+        }
+    ...
+    }</code></pre><ul>
+<li>直接使用了一个LinkedBlockingQueue，而默认构造方法是一个Integer.MAX_VALUE长度的队列，是无界的。</li>
+<li>尽管使用newFixedThreadPool可以把工作线程控制在固定的数量上，但任务队列是无界的。如果任务比较多并且执行比较慢的话，队列可能会迅速积压，撑爆内存导致OOM</li>
+</ul>
+<h3 id="1-4-2-newCachedThreadPool-OOM问题"><a href="#1-4-2-newCachedThreadPool-OOM问题" class="headerlink" title="1.4.2 newCachedThreadPool OOM问题"></a>1.4.2 newCachedThreadPool OOM问题</h3><pre><code>public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue&lt;Runnable&gt;());
+</code></pre><ul>
+<li>线程池最大线程数为Integer.MAX_VALUE，是没有上限的，其工作队列SynchronizedQueue是一个没有存储空间的阻塞队列。</li>
+<li>SynchronousQueue是没有存储空间的阻塞队列，有请求到来的时候，必须要找到一条工作线程来处理，如果当前没有空闲的线程就再创建一条新的</li>
+</ul>
+<h3 id="1-4-3-线程池配置Best-Practice"><a href="#1-4-3-线程池配置Best-Practice" class="headerlink" title="1.4.3 线程池配置Best Practice"></a>1.4.3 线程池配置Best Practice</h3><ul>
+<li><p>根据自己的场景，并发情况来评估线程池的几个核心参数，需要设置有界的工作队列和可控的线程数</p>
+<ul>
+<li>核心线程数</li>
+<li>最大线程数</li>
+<li>线程回收策略</li>
+<li>工作队列的类型</li>
+<li>拒绝策略</li>
+</ul>
+</li>
+<li><p>为线程池指定有意义的名称，来方便问题的排查，当出现线程数暴增，线程死锁，线程占用大量CPU这类问题的时候，会抓取线程栈来进行分析，这个时候有意义的线程名称，可以很大程度上方便我们对问题的定位</p>
+</li>
+<li><p>Metrics， alarm来观察线程池的状态</p>
+</li>
+</ul>
+<ul>
+<li>线程池特性<ul>
+<li>不会初始化corePoolSize个线程，有任务来了才创建工作线程</li>
+<li>当核心线程满了之后不会立即扩容线程池，而是把任务堆积到工作队列当中</li>
+<li>当工作队列满了之后扩容线程池，一直到线程个数达到maximumPoolSize为止</li>
+<li>如果队列已满其达到了最大线程后还有任务来，就按照拒绝策略来处理</li>
+<li>当线程数大于核心线程数时，线程等待KeepAliveTime后还没有任务需要处理的话，收缩线程到核心线程数</li>
+</ul>
+</li>
+</ul>
+<pre><code>@GetMapping(&quot;right&quot;)
+public int right() throws InterruptedException {
+    //使用一个计数器跟踪完成的任务数
+    AtomicInteger atomicInteger = new AtomicInteger();
+    //创建一个具有2个核心线程、5个最大线程，使用容量为10的ArrayBlockingQueue阻塞队列作为工作队列的线程池，使用默认的AbortPolicy拒绝策略
+    ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+            2, 5,
+            5, TimeUnit.SECONDS,
+            new ArrayBlockingQueue&lt;&gt;(10),
+            new ThreadFactoryBuilder().setNameFormat(&quot;demo-threadpool-%d&quot;).get(),
+            new ThreadPoolExecutor.AbortPolicy());
+
+    printStats(threadPool);
+    //每隔1秒提交一次，一共提交20次任务
+    IntStream.rangeClosed(1, 20).forEach(i -&gt; {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int id = atomicInteger.incrementAndGet();
+        try {
+            threadPool.submit(() -&gt; {
+                log.info(&quot;{} started&quot;, id);
+                //每个任务耗时10秒
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) {
+                }
+                log.info(&quot;{} finished&quot;, id);
+            });
+        } catch (Exception ex) {
+            //提交出现异常的话，打印出错信息并为计数器减一
+            log.error(&quot;error submitting task {}&quot;, id, ex);
+            atomicInteger.decrementAndGet();
+        }
+    });
+
+    TimeUnit.SECONDS.sleep(60);
+    return atomicInteger.intValue();
+}</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3437,10 +3573,10 @@ public int wrong(@RequestParam(value = &quot;count&quot;, defaultValue = &quot;1
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Java Notes</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-08-03, 19:19:37</p>
-    <p><span class="copy-title">最后更新:</span>2020-08-06, 18:46:10</p>
+    <p><span class="copy-title">最后更新:</span>2020-08-10, 15:17:37</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-Notes/" title="Java Notes">https://www.llchen60.com/Java-Notes/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
