@@ -256,3 +256,151 @@ class Data {
     + 区分读写场景以及资源的访问冲突，考虑使用悲观锁还是乐观锁
         + 对于读写比例差异明显的场景，考虑使用ReentrantReadWriteLock细化区分读写锁，来提高性能
         + 如果共享资源冲突概率不大，可以考虑使用StampedLock的乐观读的特性，进一步提高性能
+
+## 1.4 线程池
+
+开发当中，我们会使用各种池化技术来缓存创建昂贵的对象，比如线程池，连接池，内存池。一般是预先创建一些对象放入到池当中，使用的时候直接取出使用，用完归还以便复用。通过一定的策略调整池中缓存对象的数量，实现池的动态伸缩。
+
++ 应当手动进行线程池的声明
+    + Java Executors定义了一些快捷的工具办法，来帮助我们快速创建线程池
+    + 应当禁止使用这些方法来创建线程池，应当手动new ThreadPoolExecutor来创建线程池
+        + 资源耗尽导致OOM问题
+            + newFixedThreadPool
+            + newCachedThreadPool
+
+
+### 1.4.1 newFixedThreadPool OOM 问题
+
+```
+    @GetMapping("oom1")
+    public void oom1() throws InterruptedException {
+
+        ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+        //打印线程池的信息，稍后我会解释这段代码
+        printStats(threadPool); 
+        for (int i = 0; i < 100000000; i++) {
+            threadPool.execute(() -> {
+                String payload = IntStream.rangeClosed(1, 1000000)
+                        .mapToObj(__ -> "a")
+                        .collect(Collectors.joining("")) + UUID.randomUUID().toString();
+                try {
+                    TimeUnit.HOURS.sleep(1);
+                } catch (InterruptedException e) {
+                }
+                log.info(payload);
+            });
+        }
+
+        threadPool.shutdown();
+        threadPool.awaitTermination(1, TimeUnit.HOURS);
+    }
+```
+
++ 日志显示出现了OOM
++ newFixedThreadPool源码：
+
+```
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                                      0L, TimeUnit.MILLISECONDS,
+                                      new LinkedBlockingQueue<Runnable>());
+    }
+
+    public class LinkedBlockingQueue<E> extends AbstractQueue<E>
+            implements BlockingQueue<E>, java.io.Serializable {
+        ...
+
+
+        /**
+         * Creates a {@code LinkedBlockingQueue} with a capacity of
+         * {@link Integer#MAX_VALUE}.
+         */
+        public LinkedBlockingQueue() {
+            this(Integer.MAX_VALUE);
+        }
+    ...
+    }
+```
+
++ 直接使用了一个LinkedBlockingQueue，而默认构造方法是一个Integer.MAX_VALUE长度的队列，是无界的。
++ 尽管使用newFixedThreadPool可以把工作线程控制在固定的数量上，但任务队列是无界的。如果任务比较多并且执行比较慢的话，队列可能会迅速积压，撑爆内存导致OOM
+
+### 1.4.2 newCachedThreadPool OOM问题
+
+```
+public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue<Runnable>());
+                                  
+```
+
++ 线程池最大线程数为Integer.MAX_VALUE，是没有上限的，其工作队列SynchronizedQueue是一个没有存储空间的阻塞队列。
++ SynchronousQueue是没有存储空间的阻塞队列，有请求到来的时候，必须要找到一条工作线程来处理，如果当前没有空闲的线程就再创建一条新的
+
+
+### 1.4.3 线程池配置Best Practice
+
++ 根据自己的场景，并发情况来评估线程池的几个核心参数，需要设置有界的工作队列和可控的线程数
+    + 核心线程数
+    + 最大线程数
+    + 线程回收策略
+    + 工作队列的类型
+    + 拒绝策略
+
++ 为线程池指定有意义的名称，来方便问题的排查，当出现线程数暴增，线程死锁，线程占用大量CPU这类问题的时候，会抓取线程栈来进行分析，这个时候有意义的线程名称，可以很大程度上方便我们对问题的定位
++ Metrics， alarm来观察线程池的状态
+
+
+
++ 线程池特性
+    + 不会初始化corePoolSize个线程，有任务来了才创建工作线程
+    + 当核心线程满了之后不会立即扩容线程池，而是把任务堆积到工作队列当中
+    + 当工作队列满了之后扩容线程池，一直到线程个数达到maximumPoolSize为止
+    + 如果队列已满其达到了最大线程后还有任务来，就按照拒绝策略来处理
+    + 当线程数大于核心线程数时，线程等待KeepAliveTime后还没有任务需要处理的话，收缩线程到核心线程数
+
+
+```
+@GetMapping("right")
+public int right() throws InterruptedException {
+    //使用一个计数器跟踪完成的任务数
+    AtomicInteger atomicInteger = new AtomicInteger();
+    //创建一个具有2个核心线程、5个最大线程，使用容量为10的ArrayBlockingQueue阻塞队列作为工作队列的线程池，使用默认的AbortPolicy拒绝策略
+    ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+            2, 5,
+            5, TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(10),
+            new ThreadFactoryBuilder().setNameFormat("demo-threadpool-%d").get(),
+            new ThreadPoolExecutor.AbortPolicy());
+
+    printStats(threadPool);
+    //每隔1秒提交一次，一共提交20次任务
+    IntStream.rangeClosed(1, 20).forEach(i -> {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int id = atomicInteger.incrementAndGet();
+        try {
+            threadPool.submit(() -> {
+                log.info("{} started", id);
+                //每个任务耗时10秒
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) {
+                }
+                log.info("{} finished", id);
+            });
+        } catch (Exception ex) {
+            //提交出现异常的话，打印出错信息并为计数器减一
+            log.error("error submitting task {}", id, ex);
+            atomicInteger.decrementAndGet();
+        }
+    });
+
+    TimeUnit.SECONDS.sleep(60);
+    return atomicInteger.intValue();
+}
+```
