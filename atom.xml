@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-08-10T22:17:37.400Z</updated>
+  <updated>2020-08-12T00:41:52.187Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git 流程</title>
+    <link href="https://www.llchen60.com/Git-%E6%B5%81%E7%A8%8B/"/>
+    <id>https://www.llchen60.com/Git-%E6%B5%81%E7%A8%8B/</id>
+    <published>2020-08-12T00:41:26.000Z</published>
+    <updated>2020-08-12T00:41:52.187Z</updated>
+    
+    <content type="html"><![CDATA[<p>解决git conflict永远都是件很让人头疼的事情，为了让生活更简单，还是需要设定正确的git流程的。现在有如下几种git 流程</p><h1 id="1-基本的Git-流程"><a href="#1-基本的Git-流程" class="headerlink" title="1. 基本的Git 流程"></a>1. 基本的Git 流程</h1><p>只有一个branch – master. 开发者直接commit进去，然后会进入到alpha，beta, gamma, prod等不同的生产状态当中。</p><p>一般来说，除非你在自己单独完成某项小任务，是很不推荐这样做的。</p><p>缺陷在于：</p><ul><li>代码上的合作变得很困难，可能会有多次冲突，需要逐次进行解决</li></ul><h1 id="2-Git-feature分支流程"><a href="#2-Git-feature分支流程" class="headerlink" title="2. Git feature分支流程"></a>2. Git feature分支流程</h1><p>当在同一个codebase我们有多个工程师共同工作的时候，使用feature分治就变成了必不可少的事情了。</p><p>如果现在有两个工程师在同一个branch上工作，来提交自己的代码，那最终一定是冲突不断的，很容易出现各种问题。</p><p>为了避免出现这种情况，两个开发者可以创建两个不同的分支，分别在自己的分治上来开发自己的项目。</p><p>这样做的好处是不用担心大量需要解决的冲突了。</p><h1 id="3-Git-feature分支流程与Develop分支"><a href="#3-Git-feature分支流程与Develop分支" class="headerlink" title="3. Git feature分支流程与Develop分支"></a>3. Git feature分支流程与Develop分支</h1><p>和上述的feature分支流程很类似，只是又加了一个Develop分支，在这个流程下，master 分支永远反映一个prod ready的状态。</p><p>无论何时，当小组想要将代码部署到prod的时候，他们从master分支来进行部署</p><p>develop branch反映的是带着最新的为了下次发布准备的所有改动。开发者fork develop 分支的代码，来做独立开发。一旦项目做好，经过了测试，就合并到develop分支当中，在develop分支来做充分的测试，然后再merge到master分支当中去。</p><p>这样做的好处是能够允许小组持续merge新的功能，做持续集成。不过过程相对比较麻烦。个人观点是在小规模的前提下，使用特征分支就足够了，再加上持续集成的工具，譬如Jerkins，很安全，效率也很不错。</p><p><a href="https://zepel.io/blog/5-git-workflows-to-improve-development/" target="_blank" rel="noopener">https://zepel.io/blog/5-git-workflows-to-improve-development/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;解决git conflict永远都是件很让人头疼的事情，为了让生活更简单，还是需要设定正确的git流程的。现在有如下几种git 流程&lt;/p&gt;
+&lt;h1 id=&quot;1-基本的Git-流程&quot;&gt;&lt;a href=&quot;#1-基本的Git-流程&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="git" scheme="https://www.llchen60.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>Java Notes</title>
@@ -546,32 +573,6 @@
     
     
       <category term="原型模式" scheme="https://www.llchen60.com/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-创建型-建造者模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-06-16T04:17:36.000Z</published>
-    <updated>2020-06-16T04:18:58.833Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-为什么需要建造者模式"><a href="#1-为什么需要建造者模式" class="headerlink" title="1. 为什么需要建造者模式"></a>1. 为什么需要建造者模式</h1><p>一个关于如何使用建造者模式的问题是：当我们能够使用构造函数或者使用set方法就能够创建对象的时候，我们为什么会需要建造者模式来创建呢？ </p><p>一个例子，假设我们要定义一个类，其大部分的属性都是可以选择的，那么我们可以使用构造函数来做如下的声明： </p><pre><code>public class ResourcePoolConfig {  private static final int DEFAULT_MAX_TOTAL = 8;  private static final int DEFAULT_MAX_IDLE = 8;  private static final int DEFAULT_MIN_IDLE = 0;  private String name;  private int maxTotal = DEFAULT_MAX_TOTAL;  private int maxIdle = DEFAULT_MAX_IDLE;  private int minIdle = DEFAULT_MIN_IDLE;  public ResourcePoolConfig(String name, Integer maxTotal, Integer maxIdle, Integer minIdle) {    if (StringUtils.isBlank(name)) {      throw new IllegalArgumentException(&quot;name should not be empty.&quot;);    }    this.name = name;    if (maxTotal != null) {      if (maxTotal &lt;= 0) {        throw new IllegalArgumentException(&quot;maxTotal should be positive.&quot;);      }      this.maxTotal = maxTotal;    }    if (maxIdle != null) {      if (maxIdle &lt; 0) {        throw new IllegalArgumentException(&quot;maxIdle should not be negative.&quot;);      }      this.maxIdle = maxIdle;    }    if (minIdle != null) {      if (minIdle &lt; 0) {        throw new IllegalArgumentException(&quot;minIdle should not be negative.&quot;);      }      this.minIdle = minIdle;    }  }  //...省略getter方法...}</code></pre><p>在这个例子当中，除了name以外的所有选项都是可选的，因此会看到在构造函数当中，我们做了很多的null check。这样做当参数很多的时候，是很难看懂的。我们可以将其改良为一系列的set()函数，构造函数只实例化NonNull的参数，对于Nullable的参数，我们可以用set方法来实现声明。如下所示： </p><pre><code>public class ResourcePoolConfig {  private static final int DEFAULT_MAX_TOTAL = 8;  private static final int DEFAULT_MAX_IDLE = 8;  private static final int DEFAULT_MIN_IDLE = 0;  private String name;  private int maxTotal = DEFAULT_MAX_TOTAL;  private int maxIdle = DEFAULT_MAX_IDLE;  private int minIdle = DEFAULT_MIN_IDLE;  public ResourcePoolConfig(String name) {    if (StringUtils.isBlank(name)) {      throw new IllegalArgumentException(&quot;name should not be empty.&quot;);    }    this.name = name;  }  public void setMaxTotal(int maxTotal) {    if (maxTotal &lt;= 0) {      throw new IllegalArgumentException(&quot;maxTotal should be positive.&quot;);    }    this.maxTotal = maxTotal;  }  public void setMaxIdle(int maxIdle) {    if (maxIdle &lt; 0) {      throw new IllegalArgumentException(&quot;maxIdle should not be negative.&quot;);    }    this.maxIdle = maxIdle;  }  public void setMinIdle(int minIdle) {    if (minIdle &lt; 0) {      throw new IllegalArgumentException(&quot;minIdle should not be negative.&quot;);    }    this.minIdle = minIdle;  }  //...省略getter方法...}</code></pre><p>上述的set方法还是有一些缺陷的，即：</p><ul><li>首先如果必填的配置项有很多，且都需要放置到构造函数当中，那构造函数就会出现参数列表很长的问题了。</li><li>假设配置项之间有一定的依赖关系，我们需要将配置项之间的依赖关系和校验逻辑找地方放</li><li>如果我们希望类对象是不可变对象，即对象在创建好之后就不能再修改内部的属性值，那么我们就不能再ResourcePoolConfig类当中暴露set()方法</li></ul><p>Builder模式可以很好的解决上述我们的需求，我们可以将校验逻辑放在调用build()方法之前，也可以将构造函数私有化，这样就只能通过建造者来创建ResourcePoolConfig类对象</p><h1 id="2-如何使用建造者模式构建对象"><a href="#2-如何使用建造者模式构建对象" class="headerlink" title="2. 如何使用建造者模式构建对象"></a>2. 如何使用建造者模式构建对象</h1><pre><code>public class ResourcePoolConfig {  private String name;  private int maxTotal;  private int maxIdle;  private int minIdle;  private ResourcePoolConfig(Builder builder) {    this.name = builder.name;    this.maxTotal = builder.maxTotal;    this.maxIdle = builder.maxIdle;    this.minIdle = builder.minIdle;  }  //...省略getter方法...  //我们将Builder类设计成了ResourcePoolConfig的内部类。  //我们也可以将Builder类设计成独立的非内部类ResourcePoolConfigBuilder。  public static class Builder {    private static final int DEFAULT_MAX_TOTAL = 8;    private static final int DEFAULT_MAX_IDLE = 8;    private static final int DEFAULT_MIN_IDLE = 0;    private String name;    private int maxTotal = DEFAULT_MAX_TOTAL;    private int maxIdle = DEFAULT_MAX_IDLE;    private int minIdle = DEFAULT_MIN_IDLE;    public ResourcePoolConfig build() {      // 校验逻辑放到这里来做，包括必填项校验、依赖关系校验、约束条件校验等      if (StringUtils.isBlank(name)) {        throw new IllegalArgumentException(&quot;...&quot;);      }      if (maxIdle &gt; maxTotal) {        throw new IllegalArgumentException(&quot;...&quot;);      }      if (minIdle &gt; maxTotal || minIdle &gt; maxIdle) {        throw new IllegalArgumentException(&quot;...&quot;);      }      return new ResourcePoolConfig(this);    }    public Builder setName(String name) {      if (StringUtils.isBlank(name)) {        throw new IllegalArgumentException(&quot;...&quot;);      }      this.name = name;      return this;    }    public Builder setMaxTotal(int maxTotal) {      if (maxTotal &lt;= 0) {        throw new IllegalArgumentException(&quot;...&quot;);      }      this.maxTotal = maxTotal;      return this;    }    public Builder setMaxIdle(int maxIdle) {      if (maxIdle &lt; 0) {        throw new IllegalArgumentException(&quot;...&quot;);      }      this.maxIdle = maxIdle;      return this;    }    public Builder setMinIdle(int minIdle) {      if (minIdle &lt; 0) {        throw new IllegalArgumentException(&quot;...&quot;);      }      this.minIdle = minIdle;      return this;    }  }}// 这段代码会抛出IllegalArgumentException，因为minIdle&gt;maxIdleResourcePoolConfig config = new ResourcePoolConfig.Builder()        .setName(&quot;dbconnectionpool&quot;)        .setMaxTotal(16)        .setMaxIdle(10)        .setMinIdle(12)        .build();</code></pre><h1 id="3-何时使用"><a href="#3-何时使用" class="headerlink" title="3. 何时使用"></a>3. 何时使用</h1><p>建造者模式用来创建一种类型的复杂对象，通过设置不同的可选参数，定制化地创建不同的对象。建造者模式和工厂模式的区别可以用一个例子来说明，顾客走进一家餐馆点餐，我们利用工厂模式，根据用户不同的选择，来制作不同的食物，比如披萨、汉堡、沙拉。对于披萨来说，用户又有各种配料可以定制，比如奶酪、西红柿、起司，我们通过建造者模式根据用户选择的不同配料来制作披萨。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-为什么需要建造者模式&quot;&gt;&lt;a href=&quot;#1-为什么需要建造者模式&quot; class=&quot;headerlink&quot; title=&quot;1. 为什么需要建造者模式&quot;&gt;&lt;/a&gt;1. 为什么需要建造者模式&lt;/h1&gt;&lt;p&gt;一个关于如何使用建造者模式的问题是：当我们能够使用构造函
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="建造者模式" scheme="https://www.llchen60.com/tags/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

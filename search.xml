@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Git 流程</title>
+      <link href="/Git-%E6%B5%81%E7%A8%8B/"/>
+      <url>/Git-%E6%B5%81%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p>解决git conflict永远都是件很让人头疼的事情，为了让生活更简单，还是需要设定正确的git流程的。现在有如下几种git 流程</p><h1 id="1-基本的Git-流程"><a href="#1-基本的Git-流程" class="headerlink" title="1. 基本的Git 流程"></a>1. 基本的Git 流程</h1><p>只有一个branch – master. 开发者直接commit进去，然后会进入到alpha，beta, gamma, prod等不同的生产状态当中。</p><p>一般来说，除非你在自己单独完成某项小任务，是很不推荐这样做的。</p><p>缺陷在于：</p><ul><li>代码上的合作变得很困难，可能会有多次冲突，需要逐次进行解决</li></ul><h1 id="2-Git-feature分支流程"><a href="#2-Git-feature分支流程" class="headerlink" title="2. Git feature分支流程"></a>2. Git feature分支流程</h1><p>当在同一个codebase我们有多个工程师共同工作的时候，使用feature分治就变成了必不可少的事情了。</p><p>如果现在有两个工程师在同一个branch上工作，来提交自己的代码，那最终一定是冲突不断的，很容易出现各种问题。</p><p>为了避免出现这种情况，两个开发者可以创建两个不同的分支，分别在自己的分治上来开发自己的项目。</p><p>这样做的好处是不用担心大量需要解决的冲突了。</p><h1 id="3-Git-feature分支流程与Develop分支"><a href="#3-Git-feature分支流程与Develop分支" class="headerlink" title="3. Git feature分支流程与Develop分支"></a>3. Git feature分支流程与Develop分支</h1><p>和上述的feature分支流程很类似，只是又加了一个Develop分支，在这个流程下，master 分支永远反映一个prod ready的状态。</p><p>无论何时，当小组想要将代码部署到prod的时候，他们从master分支来进行部署</p><p>develop branch反映的是带着最新的为了下次发布准备的所有改动。开发者fork develop 分支的代码，来做独立开发。一旦项目做好，经过了测试，就合并到develop分支当中，在develop分支来做充分的测试，然后再merge到master分支当中去。</p><p>这样做的好处是能够允许小组持续merge新的功能，做持续集成。不过过程相对比较麻烦。个人观点是在小规模的前提下，使用特征分支就足够了，再加上持续集成的工具，譬如Jerkins，很安全，效率也很不错。</p><p><a href="https://zepel.io/blog/5-git-workflows-to-improve-development/" target="_blank" rel="noopener">https://zepel.io/blog/5-git-workflows-to-improve-development/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java Notes</title>
       <link href="/Java-Notes/"/>
       <url>/Java-Notes/</url>
