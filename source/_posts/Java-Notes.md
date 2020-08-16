@@ -257,6 +257,7 @@ class Data {
         + 对于读写比例差异明显的场景，考虑使用ReentrantReadWriteLock细化区分读写锁，来提高性能
         + 如果共享资源冲突概率不大，可以考虑使用StampedLock的乐观读的特性，进一步提高性能
 
+
 ## 1.4 线程池
 
 开发当中，我们会使用各种池化技术来缓存创建昂贵的对象，比如线程池，连接池，内存池。一般是预先创建一些对象放入到池当中，使用的时候直接取出使用，用完归还以便复用。通过一定的策略调整池中缓存对象的数量，实现池的动态伸缩。
@@ -404,3 +405,43 @@ public int right() throws InterruptedException {
     return atomicInteger.intValue();
 }
 ```
+
+### 1.4.4 线程池本身不复用
+
+```
+@GetMapping("wrong")
+public String wrong() throws InterruptedException {
+    ThreadPoolExecutor threadPool = ThreadPoolHelper.getThreadPool();
+    IntStream.rangeClosed(1, 10).forEach(i -> {
+        threadPool.execute(() -> {
+            ...
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+            }
+        });
+    });
+    return "OK";
+}
+
+
+class ThreadPoolHelper {
+    public static ThreadPoolExecutor getThreadPool() {
+        //线程池没有复用
+        return (ThreadPoolExecutor) Executors.newCachedThreadPool();
+    }
+}
+```
+
+通过这种方式，会不停产生新的线程，整个业务程序会不停产生新的threadPool，因为newCachedThreadPool的核心线程数是0， keepAliveTime是60秒，过了60s以后线程就会被回收了。
+
+### 1.4.5 线程池的使用策略
+
++ 对于线程池如何使用，放什么样的任务进去，是需要根据任务的轻重缓急来指定线程池的核心参数，包括线程数，回收策略和任务队列
+    + 对于执行比较慢，数量不大的IO任务，可以考虑更多的线程数，而不需要太大的队列
+    + 对于吞吐量比较大的计算型任务，线程数量不应该过多，可以是CPU核心数，或者核心数 x 2。
+        + 因为线程是需要调度到某个CPU当中进行的，如果任务本身是CPU绑定的任务，那么过多的线程只会增加线程切换的开销，并不能提升吞吐量
+        + 需要比较长的队列来做缓冲
+
+
+# 2. 连接池
