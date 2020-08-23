@@ -8,6 +8,10 @@ tags:
     - JavaScript
 top:
 ---
+# 0. Lessons - SkipInterpolation option in i18next-icu 
+
+Overall it works fine for me, one issue I want to highlight is: currently the skipInterpolication option in i18next-icu is not working, insteand, you could leverage on getResource [API](https://www.i18next.com/overview/api#getresource) to get raw data, and define your own substitution logic with regex. [Related github issue](https://github.com/i18next/i18next-icu/issues/11)
+
 # 1. Intro
 
 + highlights
