@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>HTTP调用的超时，并发</title>
+      <link href="/HTTP%E8%B0%83%E7%94%A8%E7%9A%84%E8%B6%85%E6%97%B6%EF%BC%8C%E5%B9%B6%E5%8F%91/"/>
+      <url>/HTTP%E8%B0%83%E7%94%A8%E7%9A%84%E8%B6%85%E6%97%B6%EF%BC%8C%E5%B9%B6%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<p>HTTP调用的时候，是通过HTTP协议进行一次网络请求，网络请求会有超时的可能性，我们需要考虑到：</p><ul><li>使用的框架设置的默认超时的合理性</li><li>超时后的请求重试需要考虑到服务端接口的幂等性 – 即任意多次执行所产生的影响是否与一次执行的影响相同</li><li>需要考虑框架是否会限制并发连接数，以免在服务并发很大的情况下，HTTP调用的并发数限制成为瓶颈 </li></ul><p>常用框架： </p><ul><li>Spring Cloud <ul><li>需要使用Feign进行声明式的服务调用</li></ul></li><li>Spring Boot<ul><li>使用Apache HttpClient进行服务调用</li></ul></li></ul><h1 id="1-如何配置连接超时"><a href="#1-如何配置连接超时" class="headerlink" title="1. 如何配置连接超时"></a>1. 如何配置连接超时</h1><ul><li><p>HTTP调用应用层走的是HTTP协议，但是网络层还是TCP/IP协议的</p><ul><li><p>TCP/ IP协议是面向连接的协议，在传输数据之前需要建立连接</p></li><li><p>网络框架会提供两个超时参数</p><ul><li><p>连接超时参数 ConnectTimeout</p><ul><li>建立连接阶段的最长等待时间</li><li>应该配置在1 - 5s之间，因为TCP的三次握手建立连接需要的时间实际上是非常短的，超出往往是网络或者防火墙配置的问题</li></ul></li><li><p>读取超时参数 ReadTimeout</p><ul><li><p>用来控制从Socket上读取数据的最长等待时间</p></li><li><p>读取超时包括</p><ul><li>网络问题</li><li>服务端处理业务逻辑的时间</li></ul></li><li><p>参数配置不应过大</p><ul><li>HTTP请求一般是同步调用，如果超时很长，在等待服务端返回数据的同时，客户端线程也在等待</li><li>当下游服务出现大量超时的时候，程序可能也会受到拖累创建大量线程，最终崩溃</li></ul></li></ul></li></ul></li></ul></li></ul><ul><li>首先对于超时本身<ul><li>是客户端和服务端需要都有贡献的</li><li>有一致的时间估计</li><li>平衡吞吐量和错误率</li></ul></li></ul><h1 id="2-HTTP调用并发问题"><a href="#2-HTTP调用并发问题" class="headerlink" title="2. HTTP调用并发问题"></a>2. HTTP调用并发问题</h1><p>如果使用Apache 的httpClient，在PoolingHttpClientConnectionManager当中，定义的参数： </p><ul><li>defaultMaxPerRoute = 2<ul><li>同一个主机最大的并发请求书为2</li></ul></li><li>maxTotal = 20<ul><li>主机的最大并发为20</li></ul></li></ul><pre><code>httpClient2 = HttpClients.custom().setMaxConnPerRoute(10).setMaxConnTotal(20).build();</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTTP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>线程池创建: Executors  vs ThreadPoolExecutor</title>
       <link href="/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9B%E5%BB%BA-Executors-vs-ThreadPoolExecutor/"/>
       <url>/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9B%E5%BB%BA-Executors-vs-ThreadPoolExecutor/</url>

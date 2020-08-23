@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-08-16T22:18:46.296Z</updated>
+  <updated>2020-08-23T21:44:10.267Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP调用的超时，并发</title>
+    <link href="https://www.llchen60.com/HTTP%E8%B0%83%E7%94%A8%E7%9A%84%E8%B6%85%E6%97%B6%EF%BC%8C%E5%B9%B6%E5%8F%91/"/>
+    <id>https://www.llchen60.com/HTTP%E8%B0%83%E7%94%A8%E7%9A%84%E8%B6%85%E6%97%B6%EF%BC%8C%E5%B9%B6%E5%8F%91/</id>
+    <published>2020-08-23T21:43:11.000Z</published>
+    <updated>2020-08-23T21:44:10.267Z</updated>
+    
+    <content type="html"><![CDATA[<p>HTTP调用的时候，是通过HTTP协议进行一次网络请求，网络请求会有超时的可能性，我们需要考虑到：</p><ul><li>使用的框架设置的默认超时的合理性</li><li>超时后的请求重试需要考虑到服务端接口的幂等性 – 即任意多次执行所产生的影响是否与一次执行的影响相同</li><li>需要考虑框架是否会限制并发连接数，以免在服务并发很大的情况下，HTTP调用的并发数限制成为瓶颈 </li></ul><p>常用框架： </p><ul><li>Spring Cloud <ul><li>需要使用Feign进行声明式的服务调用</li></ul></li><li>Spring Boot<ul><li>使用Apache HttpClient进行服务调用</li></ul></li></ul><h1 id="1-如何配置连接超时"><a href="#1-如何配置连接超时" class="headerlink" title="1. 如何配置连接超时"></a>1. 如何配置连接超时</h1><ul><li><p>HTTP调用应用层走的是HTTP协议，但是网络层还是TCP/IP协议的</p><ul><li><p>TCP/ IP协议是面向连接的协议，在传输数据之前需要建立连接</p></li><li><p>网络框架会提供两个超时参数</p><ul><li><p>连接超时参数 ConnectTimeout</p><ul><li>建立连接阶段的最长等待时间</li><li>应该配置在1 - 5s之间，因为TCP的三次握手建立连接需要的时间实际上是非常短的，超出往往是网络或者防火墙配置的问题</li></ul></li><li><p>读取超时参数 ReadTimeout</p><ul><li><p>用来控制从Socket上读取数据的最长等待时间</p></li><li><p>读取超时包括</p><ul><li>网络问题</li><li>服务端处理业务逻辑的时间</li></ul></li><li><p>参数配置不应过大</p><ul><li>HTTP请求一般是同步调用，如果超时很长，在等待服务端返回数据的同时，客户端线程也在等待</li><li>当下游服务出现大量超时的时候，程序可能也会受到拖累创建大量线程，最终崩溃</li></ul></li></ul></li></ul></li></ul></li></ul><ul><li>首先对于超时本身<ul><li>是客户端和服务端需要都有贡献的</li><li>有一致的时间估计</li><li>平衡吞吐量和错误率</li></ul></li></ul><h1 id="2-HTTP调用并发问题"><a href="#2-HTTP调用并发问题" class="headerlink" title="2. HTTP调用并发问题"></a>2. HTTP调用并发问题</h1><p>如果使用Apache 的httpClient，在PoolingHttpClientConnectionManager当中，定义的参数： </p><ul><li>defaultMaxPerRoute = 2<ul><li>同一个主机最大的并发请求书为2</li></ul></li><li>maxTotal = 20<ul><li>主机的最大并发为20</li></ul></li></ul><pre><code>httpClient2 = HttpClients.custom().setMaxConnPerRoute(10).setMaxConnTotal(20).build();</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;HTTP调用的时候，是通过HTTP协议进行一次网络请求，网络请求会有超时的可能性，我们需要考虑到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用的框架设置的默认超时的合理性&lt;/li&gt;
+&lt;li&gt;超时后的请求重试需要考虑到服务端接口的幂等性 – 即任意多次执行所产生的影响是否与一次执行的影响
+      
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.llchen60.com/categories/Web/"/>
+    
+    
+      <category term="HTTP" scheme="https://www.llchen60.com/tags/HTTP/"/>
+    
+  </entry>
   
   <entry>
     <title>线程池创建: Executors  vs ThreadPoolExecutor</title>
@@ -542,34 +571,6 @@
     
     
       <category term="装饰器模式" scheme="https://www.llchen60.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-结构型-桥接模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-06-21T21:54:45.000Z</published>
-    <updated>2020-06-21T21:55:09.965Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-原理解析"><a href="#1-原理解析" class="headerlink" title="1. 原理解析"></a>1. 原理解析</h1><ul><li>桥接模式 Bridge Design Pattern<ul><li>将抽象和实现解耦，使之可以独立变化</li><li>一个类存在两个或者多个独立变化的维度，通过组合的方式，让这几个维度都可以独立进行扩展<ul><li>通过组合关系来替代继承关系，避免继承层次的指数级爆炸</li></ul></li></ul></li></ul><h2 id="1-1-JDBC驱动的实现"><a href="#1-1-JDBC驱动的实现" class="headerlink" title="1.1 JDBC驱动的实现"></a>1.1 JDBC驱动的实现</h2><pre><code>    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);//加载及注册JDBC驱动程序    String url = &quot;jdbc:mysql://localhost:3306/sample_db?user=root&amp;password=your_password&quot;;    Connection con = DriverManager.getConnection(url);    Statement stmt = con.createStatement()；    String query = &quot;select * from test&quot;;    ResultSet rs=stmt.executeQuery(query);    while(rs.next()) {      rs.getString(1);      rs.getInt(2);    }</code></pre><ul><li>上述代码中只要改变forName中的路径，就可以改变数据库了</li><li>或者我们可以通过将加载的Driver类写到配置文件当中，来实现数据库的切换，只需要修改配置文件就可以完成数据库的切换了</li></ul><pre><code>package com.mysql.jdbc;import java.sql.SQLException;public class Driver extends NonRegisteringDriver implements java.sql.Driver {  static {    try {      java.sql.DriverManager.registerDriver(new Driver());    } catch (SQLException E) {      throw new RuntimeException(&quot;Can&#39;t register driver!&quot;);    }  }  /**   * Construct a new driver and register it with DriverManager   * @throws SQLException if a database error occurs.   */  public Driver() throws SQLException {    // Required for Class.forName().newInstance()  }}</code></pre><ul><li>在执行<code>Class.forName</code>的时候，首先是使得JVM查找并加载指定的Driver类，</li><li>其次是执行该类的静态代码<ul><li>实例变量需要在类实例化以后才能存在</li><li>静态变量是该类素有对象公有的，不需要实例化就已经存在了</li><li>静态代码会在类被加载的时候自动执行</li></ul></li></ul><pre><code>public class DriverManager {  private final static CopyOnWriteArrayList&lt;DriverInfo&gt; registeredDrivers = new CopyOnWriteArrayList&lt;DriverInfo&gt;();  //...  static {    loadInitialDrivers();    println(&quot;JDBC DriverManager initialized&quot;);  }  //...  public static synchronized void registerDriver(java.sql.Driver driver) throws SQLException {    if (driver != null) {      registeredDrivers.addIfAbsent(new DriverInfo(driver));    } else {      throw new NullPointerException();    }  }  public static Connection getConnection(String url, String user, String password) throws SQLException {    java.util.Properties info = new java.util.Properties();    if (user != null) {      info.put(&quot;user&quot;, user);    }    if (password != null) {      info.put(&quot;password&quot;, password);    }    return (getConnection(url, info, Reflection.getCallerClass()));  }  //...}</code></pre><ul><li>JDBC本身相当于抽象，即和具体的数据库无关的被抽象出来的一套类库</li><li>具体的Driver相当于实现</li></ul><h2 id="1-2-实例"><a href="#1-2-实例" class="headerlink" title="1.2 实例"></a>1.2 实例</h2><p>设计一个根据不同的告警规则，触发不同的类型的告警。</p><ul><li><p>紧急程度</p><ul><li>SEVERE</li><li>URGENCY</li><li>NORMAL</li><li>TRIVIAL</li></ul></li><li><p>通知渠道</p><ul><li>邮件</li><li>短信</li><li>微信</li><li>自动语音通话</li></ul></li><li><p>下述代码实质上就是在实现一个解耦，希望避免复杂的if else逻辑，让代码更易懂，修改更方便。</p></li></ul><pre><code>public interface MsgSender {  void send(String message);}public class TelephoneMsgSender implements MsgSender {  private List&lt;String&gt; telephones;  public TelephoneMsgSender(List&lt;String&gt; telephones) {    this.telephones = telephones;  }  @Override  public void send(String message) {    //...  }}public class EmailMsgSender implements MsgSender {  // 与TelephoneMsgSender代码结构类似，所以省略...}public class WechatMsgSender implements MsgSender {  // 与TelephoneMsgSender代码结构类似，所以省略...}public abstract class Notification {  protected MsgSender msgSender;  public Notification(MsgSender msgSender) {    this.msgSender = msgSender;  }  public abstract void notify(String message);}public class SevereNotification extends Notification {  public SevereNotification(MsgSender msgSender) {    super(msgSender);  }  @Override  public void notify(String message) {    msgSender.send(message);  }}public class UrgencyNotification extends Notification {  // 与SevereNotification代码结构类似，所以省略...}public class NormalNotification extends Notification {  // 与SevereNotification代码结构类似，所以省略...}public class TrivialNotification extends Notification {  // 与SevereNotification代码结构类似，所以省略...}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-原理解析&quot;&gt;&lt;a href=&quot;#1-原理解析&quot; class=&quot;headerlink&quot; title=&quot;1. 原理解析&quot;&gt;&lt;/a&gt;1. 原理解析&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;桥接模式 Bridge Design Pattern&lt;ul&gt;
-&lt;li&gt;将抽象和实现解耦，使之
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="桥接模式" scheme="https://www.llchen60.com/tags/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
