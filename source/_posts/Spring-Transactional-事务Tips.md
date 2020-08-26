@@ -131,3 +131,5 @@ public void createUserRight2(String name) throws IOException {
 }
 
 ```
+
++ 有时我们会遇到嵌套逻辑，分别需要实现事务的问题，而子逻辑事务的回滚不希望影响到父逻辑，可以使用`@Transactional(propagation = Propagation.REQUIRES_NEW)`, 以此来设置事务传播策略，即执行到这个方法的时候需要开启新的事务，并挂起当前事务。
