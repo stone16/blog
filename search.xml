@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java 判等问题</title>
+      <link href="/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/"/>
+      <url>/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-equals-vs"><a href="#1-equals-vs" class="headerlink" title="1. equals vs =="></a>1. equals vs <code>==</code></h1><ul><li>对于基本类型，应使用==，比较的是值 </li><li>对于引用类型，需要使用equals，进行内容判等。使用<code>==</code>判断的是指针 –&gt; 代表的是两个对象在内存中的地址</li></ul><p>这里要注意的是Java是有字符串常量池机制的，当代码中出现双引号形式创建字符串对象的时候，JVM会先对字符串进行检查，如果字符串常量池存在相同内容的字符串对象的引用，就将这个引用返回；否则就创建新的字符串对象，然后将这个引用放入字符串常量池当中，并返回该引用</p><p>另外一个小坑是Integer在[-128,127]之间的数值是会做缓存的，即对于这中间的数值，即便你直接用<code>==</code>进行判断，有可能是直接会过的…</p><pre><code>public static Integer valueOf(int i) {    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)        return IntegerCache.cache[i + (-IntegerCache.low)];    return new Integer(i);}</code></pre><h2 id="1-1-equals方法的实现"><a href="#1-1-equals方法的实现" class="headerlink" title="1.1 equals方法的实现"></a>1.1 equals方法的实现</h2><ul><li>equals在Object类当中的定义比较的是对象的引用</li></ul><pre><code>public boolean equals(Object obj) {    return (this == obj);}</code></pre><ul><li>而Integer，String类都重写了这个方法</li></ul><pre><code>public boolean equals(Object anObject) {    if (this == anObject) {        return true;    }    if (anObject instanceof String) {        String anotherString = (String)anObject;        int n = value.length;        if (n == anotherString.value.length) {            char v1[] = value;            char v2[] = anotherString.value;            int i = 0;            while (n-- != 0) {                if (v1[i] != v2[i])                    return false;                i++;            }            return true;        }    }    return false;}</code></pre><p>上述代码是先比较了引用，如果引用的地址一致，那么久可以直接返回true了。如果不一致，那就首先判断类的类型，如果是String类，再进行长度判断，如果长度一致，就逐个比较字符</p><ul><li>实现一个equals方法，需要注意<ul><li>首先进行指针判断，如果对象相同直接返回true</li><li>需要对另一方进行判空，空对象和自身的比较结果一定是false</li><li>需要判断两个对象的类型，如果类型都不同，那么直接返回false</li><li>在确保类型相同的情况下进行类型的强制转换，然后逐一判断所有字段<ul><li>需要进行类型强制转换是因为我们override的equals方法默认的输入参数是Object</li></ul></li></ul></li></ul><h2 id="1-2-使用Lombok的小坑"><a href="#1-2-使用Lombok的小坑" class="headerlink" title="1.2 使用Lombok的小坑"></a>1.2 使用Lombok的小坑</h2><p>Lombok的@Data注解会帮助我们实现equals和hashcode方法，但是有继承关系的时候，Lombok自动生成的方法是不会考虑到父类的</p><ul><li><p>对于不想进行equals和hashCode判断的参数，可以使用：</p><ul><li><code>@EqualsAndHashCode.Exclude</code></li></ul></li><li><p>对于想要使用父类属性的场景，可以使用</p><ul><li><code>@EqualsAndHashCode(callSuper = true)</code></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring @Transactional 事务Tips</title>
       <link href="/Spring-Transactional-%E4%BA%8B%E5%8A%A1Tips/"/>
       <url>/Spring-Transactional-%E4%BA%8B%E5%8A%A1Tips/</url>
