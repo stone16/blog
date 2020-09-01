@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java数值计算精度问题</title>
+      <link href="/Java%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/"/>
+      <url>/Java%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Double"><a href="#1-Double" class="headerlink" title="1. Double"></a>1. Double</h1><pre><code>System.out.println(0.1+0.2);System.out.println(1.0-0.8);System.out.println(4.015*100);System.out.println(123.3/100);double amount1 = 2.15;double amount2 = 1.10;if (amount1 - amount2 == 1.05)    System.out.println(&quot;OK&quot;);// Output 0.300000000000000040.19999999999999996401.499999999999941.2329999999999999</code></pre><p>上述问题出现的原因是因为计算机是以二进制存储数值的，浮点数也是如此。 Java采用的是IEEE754标准来实现浮点数的表达和运算，当将一个10进制的数值转化成浮点数的时候，会出现无限循环的结果。当使用二进制表示是无限循环的时候，转换成10进制就会造成精度的缺失了。</p><h1 id="2-BigDecimal"><a href="#2-BigDecimal" class="headerlink" title="2. BigDecimal"></a>2. BigDecimal</h1><p>BigDecimal可以用于浮点数精确表达的场景，但是使用BigDecimal的时候，一定要注意使用字符串的构造方法来初始化</p><pre><code>System.out.println(new BigDecimal(&quot;0.1&quot;).add(new BigDecimal(&quot;0.2&quot;)));System.out.println(new BigDecimal(&quot;1.0&quot;).subtract(new BigDecimal(&quot;0.8&quot;)));System.out.println(new BigDecimal(&quot;4.015&quot;).multiply(new BigDecimal(&quot;100&quot;)));System.out.println(new BigDecimal(&quot;123.3&quot;).divide(new BigDecimal(&quot;100&quot;)));0.30.2401.5001.233</code></pre><ul><li><p>BigDecimal </p><ul><li>有scale, Precision的概念</li><li>scale 表示小数点右边的位数</li><li>precision 表示精度，即有效数字的长度</li></ul></li><li><p>BigDecimal的equals判等</p><ul><li>比较的是value和scale 两个值的！</li></ul></li></ul><pre><code>System.out.println(new BigDecimal(&quot;1.0&quot;).equals(new BigDecimal(&quot;1&quot;)))false</code></pre><pre><code>/** * Compares this {@code BigDecimal} with the specified * {@code Object} for equality.  Unlike {@link * #compareTo(BigDecimal) compareTo}, this method considers two * {@code BigDecimal} objects equal only if they are equal in * value and scale (thus 2.0 is not equal to 2.00 when compared by * this method). * * @param  x {@code Object} to which this {@code BigDecimal} is *         to be compared. * @return {@code true} if and only if the specified {@code Object} is a *         {@code BigDecimal} whose value and scale are equal to this *         {@code BigDecimal}&#39;s. * @see    #compareTo(java.math.BigDecimal) * @see    #hashCode */@Overridepublic boolean equals(Object x)</code></pre><h1 id="3-数值溢出问题"><a href="#3-数值溢出问题" class="headerlink" title="3. 数值溢出问题"></a>3. 数值溢出问题</h1><p>所有的基本数值类型都有超出表达范围的可能性，而且是没有任何异常的默默的溢出</p><ul><li>可以使用Math类的addExact, substractExact等方法进行数值运算，在溢出的时候主动抛出异常</li><li>也可以使用BigInteger，也会主动抛出异常</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java 判等问题</title>
       <link href="/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/"/>
       <url>/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/</url>
