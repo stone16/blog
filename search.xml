@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java 集合处理 和 空值处理</title>
+      <link href="/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/"/>
+      <url>/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Arrays-asList"><a href="#1-Arrays-asList" class="headerlink" title="1. Arrays.asList"></a>1. <code>Arrays.asList</code></h1><p>业务开发当中，我们常常会将原始的数组转换为List类数据结构，来继续展开各种Stream操作</p><ul><li><p>Arrays.asList无法转换基本类型的数组，可以使用Arrays.stream来进行转换</p></li><li><p>Arrays.asList返回的list是不支持增删操作的，其返回的List是Arrays的内部类ArrayList。内部继承自AbstractList，没有覆写父类的add方法</p></li><li><p>对原始数组的修改会影响到我们获得的那个List</p><ul><li>ArrayList实际上是使用了原始的数组，因此在使用的时候，最好再使用New ArrayList来实现解耦</li></ul></li></ul><h1 id="2-空值处理"><a href="#2-空值处理" class="headerlink" title="2. 空值处理"></a>2. 空值处理</h1><h2 id="2-1-NullPointerException"><a href="#2-1-NullPointerException" class="headerlink" title="2.1 NullPointerException"></a>2.1 NullPointerException</h2><ul><li>可能出现的场景<ul><li>参数值是Integer等包装类型，使用时因为自动拆箱出现了空指针异常</li><li>字符串比较</li><li>ConcurrentHashMap这种容器不支持Key和Value为null，强行put null的key或Value会出现空指针异常</li><li>方法或远程服务返回的list是null，没做判空就直接调用，出现空指针异常</li><li>联级调用的null check</li></ul></li></ul><ul><li>best practice<ul><li><code>string.equalsTo(variableName)</code></li><li><code>Optional.ofNullable()</code></li><li><code>orElse()</code></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java数值计算精度问题</title>
       <link href="/Java%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/"/>
       <url>/Java%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/</url>
