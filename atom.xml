@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-09-04T03:48:38.103Z</updated>
+  <updated>2020-09-07T04:37:36.593Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《你早该这么玩Excel》</title>
+    <link href="https://www.llchen60.com/%E3%80%8A%E4%BD%A0%E6%97%A9%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9Excel%E3%80%8B/"/>
+    <id>https://www.llchen60.com/%E3%80%8A%E4%BD%A0%E6%97%A9%E8%AF%A5%E8%BF%99%E4%B9%88%E7%8E%A9Excel%E3%80%8B/</id>
+    <published>2020-09-05T20:06:45.000Z</published>
+    <updated>2020-09-07T04:37:36.593Z</updated>
+    
+    <content type="html"><![CDATA[<p>一次对Excel的了解和正视之旅。相较于编程实现与通过Excel进行数据分析，编程在Scalability上胜出的，但是对于操作的便捷性，以及验证假设的速度上，确确实实Excel要胜出一筹。尤其是学到了三表的操作，VLookUp这种函数之后，开始理解Excel在数据分析上的巨大的作用。</p><ul><li><p>Highlights</p><ul><li>三表<ul><li>参数表</li><li>源数据表</li><li>分类汇总表</li></ul></li><li>巧用各种函数</li></ul></li><li><p>源数据表</p><ul><li>应当只有一张，对于每一个你想要研究的领域</li><li>应当为一维数据格式</li><li>标题内容不要写在表格当中，因为我们很可能需要索引的，<ul><li>可以对工作簿， 工作表进行命名来做区分</li></ul></li><li>源数据顺序<ul><li>应该按照工作当中的逻辑顺序来对列进行排序</li><li>列数据位置调整，shift + 拖动</li></ul></li><li>凡是同一种属性的数据都应该记录在同一列当中的</li><li>多个单元格批量录入<ul><li>选定多个单元格</li><li>在一个单元格当中输入内容</li><li>Ctrl + enter 输入一次的内容会被加载到你选中的所有单元格上</li></ul></li><li>源数据表当中不应该使用合并居中这种操作<ul><li>明细数据应当有一条记录一条</li><li>所有单元格应该被填满</li><li>每一行数据必须完整且整齐</li><li>合并单元格会导致只有首个单元格有数据，其他的都是空白单元格</li></ul></li><li>元数据只保留在一张表当中，放在多张表当中的话合并会非常非常麻烦</li><li>源数据表是为了商业上的use case服务的，需要理清楚需要什么数据<ul><li>按照逻辑顺序来分清各个column</li><li>在这之后可以按照可能的手动输入，复制粘贴来做cluster</li></ul></li></ul></li><li><p>三张表的定义</p><ul><li>参数表<ul><li>系统的配置参数，供源数据表和分类汇总表来调用</li><li>表示数据匹配关系或者某属性明细不会经常变更的数据</li></ul></li><li>源数据表<ul><li>数据的录入</li><li>一切与数据录入相关的工作都应该在源数据表当中进行</li><li>应满足一下条件<ul><li>一维数据</li><li>一个标题行</li><li>字段分类清晰</li><li>数据属性完整</li><li>数据连续</li><li>无合并单元格</li><li>无合计行</li><li>无分隔行/ 列</li><li>无空白单元格</li><li>单元格内容禁用短语句子</li></ul></li><li>分类汇总表<ul><li>希望是通过函数关联等从数据表当中获取一切所需的数据</li></ul></li><li>Thoughts <ul><li>企业信息化是必须的，需要有ERP, CRM, WMS, OA等企业系统</li><li>但是对于信息的个性化处理上来说，Excel会更占上风，可以更快速的给出各类数据</li></ul></li></ul></li></ul></li><li><p>数据透视表</p><ul><li>在源数据表当中选中想要做分析的数据，然后来生成Pivot table</li><li>步骤<ul><li>确认数据来源和待创建的报表类型</li><li>确认选定的数据区域</li><li>标题行需要被包含在内</li></ul></li><li>Tips<ul><li>分类多的字段尽量作为航字段</li></ul></li></ul></li><li><p>录入安全</p><ul><li>设置有关于数据有效性的限制，比如规定必须输入某种日期格式</li><li>对于包含公式的部分，可以直接进行锁定，这样其他人就无法对其进行修改了</li><li>手工录入，复制粘贴，公式链接的数据区域要用不同的填充色区分，来告知使用者什么地方需要填写，什么地方需要复制粘贴</li></ul></li><li><p>Vlookup</p><ul><li>查找引用函数<ul><li>查找某单元格数据在源数据库中是否存在，如果存在，就返回源数据库中同行指定列的单元格内容</li></ul></li><li>四个参数<ul><li>用什么找</li><li>在哪个表找</li><li>找到了返回什么值</li><li>精确找还是模糊找</li></ul></li></ul></li><li><p>图表</p><ul><li>做图表的目的是为了能够更加准确直观的诠释数据</li><li>饼状图<ul><li>说明比例关系</li></ul></li><li>柱状图<ul><li>比较数值</li></ul></li><li>折线图<ul><li>关注趋势</li></ul></li><li>概念图<ul><li>左右对比，适合男女</li><li>生成图标的源数据当中制造负数，来生成这种向两边延伸的效</li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一次对Excel的了解和正视之旅。相较于编程实现与通过Excel进行数据分析，编程在Scalability上胜出的，但是对于操作的便捷性，以及验证假设的速度上，确确实实Excel要胜出一筹。尤其是学到了三表的操作，VLookUp这种函数之后，开始理解Excel在数据分析上的
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
+    
+    
+      <category term="Excel" scheme="https://www.llchen60.com/tags/Excel/"/>
+    
+  </entry>
   
   <entry>
     <title>Java 集合处理 和 空值处理</title>
@@ -541,34 +567,6 @@ System.
     
       <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-结构型-享元模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-06-28T03:14:26.000Z</published>
-    <updated>2020-06-28T03:14:52.407Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li><p>享元模式 Flyweight Design Pattern </p><ul><li><p>用来复用对象，节省内存，</p></li><li><p>前提条件，享元对象是不可变对象</p><ul><li>不可以暴露任何set（）等修改内部状态的方法</li></ul></li><li><p>当一个系统中存在大量重复对象的时候，如果重复对象都是不可变对象，我们就可以利用享元模式将对象设计成享元，在内存中只保留一份实例，供多处代码来引用。</p></li></ul></li></ul><ul><li>是通过工厂模式，在工厂类当中，通过一个Map来缓存已经创建过的享元对象，来达到复用的目的</li></ul><ul><li>文本文件对于字体格式进行享元操作</li></ul><pre><code>public class CharacterStyle {  private Font font;  private int size;  private int colorRGB;  public CharacterStyle(Font font, int size, int colorRGB) {    this.font = font;    this.size = size;    this.colorRGB = colorRGB;  }  @Override  public boolean equals(Object o) {    CharacterStyle otherStyle = (CharacterStyle) o;    return font.equals(otherStyle.font)            &amp;&amp; size == otherStyle.size            &amp;&amp; colorRGB == otherStyle.colorRGB;  }}public class CharacterStyleFactory {  private static final List&lt;CharacterStyle&gt; styles = new ArrayList&lt;&gt;();  public static CharacterStyle getStyle(Font font, int size, int colorRGB) {    CharacterStyle newStyle = new CharacterStyle(font, size, colorRGB);    for (CharacterStyle style : styles) {      if (style.equals(newStyle)) {        return style;      }    }    styles.add(newStyle);    return newStyle;  }}public class Character {  private char c;  private CharacterStyle style;  public Character(char c, CharacterStyle style) {    this.c = c;    this.style = style;  }}public class Editor {  private List&lt;Character&gt; chars = new ArrayList&lt;&gt;();  public void appendCharacter(char c, Font font, int size, int colorRGB) {    Character character = new Character(c, CharacterStyleFactory.getStyle(font, size, colorRGB));    chars.add(character);  }}</code></pre><h1 id="2-享元模式在Java-Integer以及String当中的应用"><a href="#2-享元模式在Java-Integer以及String当中的应用" class="headerlink" title="2. 享元模式在Java Integer以及String当中的应用"></a>2. 享元模式在Java Integer以及String当中的应用</h1><pre><code>/** * Cache to support the object identity semantics of autoboxing for values between * -128 and 127 (inclusive) as required by JLS. * * The cache is initialized on first usage.  The size of the cache * may be controlled by the {@code -XX:AutoBoxCacheMax=&lt;size&gt;} option. * During VM initialization, java.lang.Integer.IntegerCache.high property * may be set and saved in the private system properties in the * sun.misc.VM class. */private static class IntegerCache {    static final int low = -128;    static final int high;    static final Integer cache[];    static {        // high value may be configured by property        int h = 127;        String integerCacheHighPropValue =            sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);        if (integerCacheHighPropValue != null) {            try {                int i = parseInt(integerCacheHighPropValue);                i = Math.max(i, 127);                // Maximum array size is Integer.MAX_VALUE                h = Math.min(i, Integer.MAX_VALUE - (-low) -1);            } catch( NumberFormatException nfe) {                // If the property cannot be parsed into an int, ignore it.            }        }        high = h;        cache = new Integer[(high - low) + 1];        int j = low;        for(int k = 0; k &lt; cache.length; k++)            cache[k] = new Integer(j++);        // range [-128, 127] must be interned (JLS7 5.1.7)        assert IntegerCache.high &gt;= 127;    }    private IntegerCache() {}}</code></pre><p>IntegerCache 缓存在-128到127之间的内容，即指向的是同样的内存地址的</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;享元模式 Flyweight Design Pattern &lt;/p&gt;
-&lt;ul&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="享元模式" scheme="https://www.llchen60.com/tags/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
