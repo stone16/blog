@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java 集合处理 和 空值处理 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <title>Java 集合处理/ 空值处理/ 异常处理 | Leilei&#39;s Blog | 磊磊的博客</title>
   <meta name="keywords" content=" Java ">
-  <meta name="description" content="Java 集合处理 和 空值处理 | Leilei&#39;s Blog | 磊磊的博客">
+  <meta name="description" content="Java 集合处理/ 空值处理/ 异常处理 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts信息 vs 观点身处信息爆炸的时代，有效率的获取高质信息，变成了一个不可或缺的技能。 很多时候，哪怕带着问题去搜索，也会发现需要一些时间去分辨信息和观点，需要切开揉碎，放到自己的逻辑架子里面捋一捋，才能大概拎清这是对是错。 在努力学习，分清信息和观点。 信息源因为信息充斥、挤压、塞满生活，因为工作、家庭疲于奔命，感觉自己需要更好的整合时间，整合信息的方式。 兜兜转转，开始使用">
 <meta property="og:type" content="website">
@@ -228,7 +228,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="261">
-<input type="hidden" id="yelog_site_word_count" value="440.3k">
+<input type="hidden" id="yelog_site_word_count" value="441.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -1147,7 +1147,7 @@
            href="/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/"
            data-tag="Java"
            data-author="" >
-            <span class="post-title" title="Java 集合处理 和 空值处理">Java 集合处理 和 空值处理</span>
+            <span class="post-title" title="Java 集合处理/ 空值处理/ 异常处理">Java 集合处理/ 空值处理/ 异常处理</span>
             <span class="post-date" title="2020-09-03 20:48:11">2020/09/03</span>
         </a>
         
@@ -3213,7 +3213,7 @@
     <div class="pjax">
         <article id="post-Java-集合处理-和-空值处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java 集合处理 和 空值处理</h1>
+        <h1 class="article-title">Java 集合处理/ 空值处理/ 异常处理</h1>
     
     <div class="article-meta">
         
@@ -3235,12 +3235,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-09-03 20:48:38'>2020-09-03 20:48</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-07 10:15:59'>2020-09-03 20:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:270</span>
+        <span>字数:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3270,7 +3270,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Arrays-asList"><span class="toc-text">1. Arrays.asList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-空值处理"><span class="toc-text">2. 空值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-NullPointerException"><span class="toc-text">2.1 NullPointerException</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Arrays-asList"><span class="toc-text">1. Arrays.asList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-空值处理"><span class="toc-text">2. 空值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-NullPointerException"><span class="toc-text">2.1 NullPointerException</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-异常处理"><span class="toc-text">3. 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-在业务代码层面考虑异常处理"><span class="toc-text">3.1 在业务代码层面考虑异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-不要直接生吞异常"><span class="toc-text">3.2 不要直接生吞异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-保留原始的信息"><span class="toc-text">3.3 保留原始的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-小心finally中的异常-try-with-resources"><span class="toc-text">3.4 小心finally中的异常 + try with resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-线程池任务的异常处理"><span class="toc-text">3.5 线程池任务的异常处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3316,6 +3316,99 @@
 </ul>
 </li>
 </ul>
+<h1 id="3-异常处理"><a href="#3-异常处理" class="headerlink" title="3. 异常处理"></a>3. 异常处理</h1><h2 id="3-1-在业务代码层面考虑异常处理"><a href="#3-1-在业务代码层面考虑异常处理" class="headerlink" title="3.1 在业务代码层面考虑异常处理"></a>3.1 在业务代码层面考虑异常处理</h2><ul>
+<li><p>大多数业务应用都采用三层架构</p>
+<ul>
+<li><p>Controller层</p>
+<ul>
+<li>负责信息收集，参数校验，转换服务层处理的数据适配前端，轻业务逻辑</li>
+<li>Controller 捕获异常，然后需要给用户友好用户的提示</li>
+</ul>
+</li>
+<li><p>Service层</p>
+<ul>
+<li>负责核心业务逻辑，包括外部服务调用，访问数据库，缓存处理，消息处理等</li>
+<li>一般会涉及到数据库事务，出现异常不适合捕获，否则事务无法自动回滚</li>
+</ul>
+</li>
+<li><p>Repository层</p>
+<ul>
+<li>负责数据访问实现，一般没有业务逻辑</li>
+<li>根据情况来做忽略，降级，或者转化为一个友好的异常</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>框架层面的异常处理</p>
+<ul>
+<li>尽量不要在框架层面做异常的自动，统一的处理</li>
+<li>框架应当来做兜底工作，如果异常上升到最上层逻辑还是无法处理的话，可以用统一的方式进行异常转换<ul>
+<li><code>@RestControllerAdvice</code></li>
+<li><code>@ExceptionHandler</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-不要直接生吞异常"><a href="#3-2-不要直接生吞异常" class="headerlink" title="3.2 不要直接生吞异常"></a>3.2 不要直接生吞异常</h2><p>捕获了异常以后不应该生吞，因为吞掉的异常如果没有正常处理的话，出现Bug会很难发现。</p>
+<p>需要有合适的转化成用户友好的异常，或者至少在warn， error级别来做log</p>
+<h2 id="3-3-保留原始的信息"><a href="#3-3-保留原始的信息" class="headerlink" title="3.3 保留原始的信息"></a>3.3 保留原始的信息</h2><p>在捕捉了异常之后，一定要记得在log 或者在向外扔出的异常之中记录原始异常信息</p>
+<pre><code>catch (IOException e) {
+    //只保留了异常消息，栈没有记录
+    log.error(&quot;文件读取错误, {}&quot;, e.getMessage());
+    throw new RuntimeException(&quot;系统忙请稍后再试&quot;);
+}
+
+
+catch (IOException e) {
+    throw new RuntimeException(&quot;系统忙请稍后再试&quot;, e);
+}</code></pre><h2 id="3-4-小心finally中的异常-try-with-resources"><a href="#3-4-小心finally中的异常-try-with-resources" class="headerlink" title="3.4 小心finally中的异常 + try with resources"></a>3.4 小心finally中的异常 + try with resources</h2><p>注意在资源释放处理等收尾操作的时候也可能会出现异常，这种时候，如果try block逻辑和finnally逻辑都有异常抛出的话，try当中的异常会被finnally中的异常覆盖掉，这会让问题变得非常不明显</p>
+<pre><code>@GetMapping(&quot;wrong&quot;)
+public void wrong() {
+    try {
+        log.info(&quot;try&quot;);
+        //异常丢失
+        throw new RuntimeException(&quot;try&quot;);
+    } finally {
+        log.info(&quot;finally&quot;);
+        throw new RuntimeException(&quot;finally&quot;);
+    }
+}</code></pre><p>对于实现了AutoCloseable接口的资源，可以使用try-with-resources来释放资源，就是在try中带资源的声明</p>
+<ul>
+<li>try catch finally vs try with resources </li>
+</ul>
+<pre><code>Scanner scanner = null;
+try {
+    scanner = new Scanner(new File(&quot;test.txt&quot;));
+    while (scanner.hasNext()) {
+        System.out.println(scanner.nextLine());
+    }
+} catch (FileNotFoundException e) {
+    e.printStackTrace();
+} finally {
+    if (scanner != null) {
+        scanner.close();
+    }
+}
+
+try (Scanner scanner = new Scanner(new File(&quot;test.txt&quot;))) {
+    while (scanner.hasNext()) {
+        System.out.println(scanner.nextLine());
+    }
+} catch (FileNotFoundException fnfe) {
+    fnfe.printStackTrace();
+}
+</code></pre><h2 id="3-5-线程池任务的异常处理"><a href="#3-5-线程池任务的异常处理" class="headerlink" title="3.5 线程池任务的异常处理"></a>3.5 线程池任务的异常处理</h2><ul>
+<li>设置自定义的异常处理程序作为保底，比如在声明线程池时自定义线程池的未捕获异常处理程序</li>
+</ul>
+<pre><code>
+new ThreadFactoryBuilder()
+  .setNameFormat(prefix+&quot;%d&quot;)
+  .setUncaughtExceptionHandler((thread, throwable)-&gt; log.error(&quot;ThreadPool {} got exception&quot;, thread, throwable))
+  .get()</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://www.baeldung.com/java-try-with-resources" target="_blank" rel="noopener">https://www.baeldung.com/java-try-with-resources</a> </li>
+<li><a href="https://time.geekbang.org/column/article/220230" target="_blank" rel="noopener">https://time.geekbang.org/column/article/220230</a> </li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -3329,12 +3422,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Java 集合处理 和 空值处理</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">270</span></p>
+    <p><span class="copy-title">文章标题:</span>Java 集合处理/ 空值处理/ 异常处理</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-09-03, 20:48:11</p>
-    <p><span class="copy-title">最后更新:</span>2020-09-03, 20:48:38</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/" title="Java 集合处理 和 空值处理">https://www.llchen60.com/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/</a>
+    <p><span class="copy-title">最后更新:</span>2020-09-07, 10:15:59</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/" title="Java 集合处理/ 空值处理/ 异常处理">https://www.llchen60.com/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
