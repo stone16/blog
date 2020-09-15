@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java日志记录Tips</title>
+      <link href="/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/"/>
+      <url>/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/</url>
+      
+        <content type="html"><![CDATA[<p>使用Java来记录日志有几个需要注意的地方的</p><ul><li>首先日志框架很多，不同的类库有可能会使用不同的日志框架，如何兼容是一个问题</li><li>配置文件的复杂性</li></ul><p>Java体系的日志框架有：</p><ul><li>Logback</li><li>Log4j</li><li>Log4j2</li><li>commons-logging </li><li>JDK 自带的Java.util.logging</li></ul><p>如果不同的包使用不同的日志框架的话，那管理就会变得非常麻烦。为了解决这个问题，就有了SLF4J – Simple Logging Facade For Java </p><ul><li>提供了统一的日志门面API，实现了中立的日志记录API</li><li>桥接功能<ul><li>可以将各种日志框架的API桥接到SLF4J API上。这样一来，即便你的程序试用了各种日志API记录日志，最终都可以桥接到Slf4j门面API上</li></ul></li><li>适配功能<ul><li>实现slf4j和实际日志框架的绑定</li><li>slf4j知识日志标准，还是需要一个实际的日志框架</li></ul></li></ul><p>下面一起梳理下常见的日志记录中的错误</p><h1 id="1-理解Logback配置，避免重复记录"><a href="#1-理解Logback配置，避免重复记录" class="headerlink" title="1. 理解Logback配置，避免重复记录"></a>1. 理解Logback配置，避免重复记录</h1><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;            &lt;pattern&gt;[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n&lt;/pattern&gt;        &lt;/layout&gt;    &lt;/appender&gt;    &lt;logger name=&quot;org.geekbang.time.commonmistakes.logging&quot; level=&quot;DEBUG&quot;&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/logger&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;</code></pre><p>要注意在使用appender的时候，appender是如何挂载的，上述代码将appender挂载在了两个不同的地方，而且两个都定义在了root下，所以会造成重复。 </p><p>对于需要将不同的日志放到不同的文件的应用场景，可以通过设置Logger的additivity属性来实现这个操作</p><pre><code> &lt;logger name=&quot;org.geekbang.time.commonmistakes.logging&quot; level=&quot;DEBUG&quot; additivity=&quot;false&quot;&gt;            &lt;appender-ref ref=&quot;FILE&quot;/&gt;     &lt;/logger&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《网易一千零一夜》读书笔记</title>
       <link href="/%E3%80%8A%E7%BD%91%E6%98%93%E4%B8%80%E5%8D%83%E9%9B%B6%E4%B8%80%E5%A4%9C%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
       <url>/%E3%80%8A%E7%BD%91%E6%98%93%E4%B8%80%E5%8D%83%E9%9B%B6%E4%B8%80%E5%A4%9C%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
