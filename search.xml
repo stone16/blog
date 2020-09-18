@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>前端请求的timeout设置</title>
+      <link href="/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84timeout%E8%AE%BE%E7%BD%AE/"/>
+      <url>/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84timeout%E8%AE%BE%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<p>当我们发出一个网络请求，但是没有做超时设置，一个隐含的假设是我们认为这个请求一定会成功。然而，我们无法做出请求一定会成功的保证的。</p><ul><li>当你发出的同步请求从没有返回的时候，线程会一直被占用的</li><li>异步请求未返回的线程也无法继续复用，因为sockets会有泄露，socket池的容量是有限的，未返回结果的线程会一直开着连接，最终可能会导致连接的短缺</li></ul><p>因此best practice应当是对于ajax请求，做好timeout的设置，因为XMLHttpRequest的默认timeout是0，即没有超时设置。</p><p>Client端的timeout设置和server端一样重要，浏览器可以开的socket的数量也是有限的，我们应该通过设置timeout来充分利用socket pool。Fetch API是当前比较流行的XMLHttpRequest API的替代品，然而现在还没有一个直接的设置timeout的方法，最近刚刚推出了abort API，可以用来支持timeout。</p><p>用法比如： </p><pre><code>const controller = new AbortController();const signal = controller.signal;const fetchPromise = fetch(url, {signal});  // No timeout by default!setTimeout(() =&gt; controller.abort(), 10000); </code></pre><p>而对于Jquery的ajax call，我们可以使用： </p><pre><code>$.ajax({    url: &quot;test.html&quot;,    error: function(){        // will fire when timeout is reached    },    success: function(){        //do something    },    timeout: 3000 // sets timeout to 3 seconds});</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://robertovitillo.com/default-timeouts/" target="_blank" rel="noopener">https://robertovitillo.com/default-timeouts/</a> </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FrontEnd </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java日志记录Tips</title>
       <link href="/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/"/>
       <url>/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/</url>
