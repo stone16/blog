@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java8 日期时间类</title>
+      <link href="/Java8-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB/"/>
+      <url>/Java8-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB/</url>
+      
+        <content type="html"><![CDATA[<p>在Java8之前，处理日期时间需求的时候需要使用Data, Calendar, SimpleDateFormat来声明时间戳，使用日历处理日期和格式化解析日期时间，Java8之后有了新的日期时间类，定义的比原来要清晰很多，且支持线程安全。</p><p>这篇文章看看时间错乱问题背后的原因，看看使用遗留的日期时间类，来处理日期时间初始化，格式化，解析，计算等可能会遇到的问题，以及如何使用新日期时间类来解决。</p><h1 id="初始化日期时间"><a href="#初始化日期时间" class="headerlink" title="初始化日期时间"></a>初始化日期时间</h1><h2 id="使用Date初始化日期时间"><a href="#使用Date初始化日期时间" class="headerlink" title="使用Date初始化日期时间"></a>使用Date初始化日期时间</h2><pre><code>Date date = new Date(2019, 12, 31, 11, 12, 13);System.out.println(date);// Output Sat Jan 31 11:12:13 CST 3920</code></pre><p>这是因为Date初始化时间的时候是用的和1970的差值，月的值是从0- 11 的</p><p>我们可以使用Calendar来定义时区的信息 </p><h1 id="时区问题"><a href="#时区问题" class="headerlink" title="时区问题"></a>时区问题</h1><pre><code>Calendar calendar = Calendar.getInstance();calendar.set(2019, 11, 31, 11, 12, 13);System.out.println(calendar.getTime());Calendar calendar2 = Calendar.getInstance(TimeZone.getTimeZone(&quot;America/New_York&quot;));calendar2.set(2019, Calendar.DECEMBER, 31, 11, 12, 13);System.out.println(calendar2.getTime());</code></pre><ul><li>Date类<ul><li>Date本身没有时区的问题，都是保存的UTC时间</li><li>Date当中保存的是一个时间戳，是从1970-1-1 0点到现在的毫秒数</li><li>保存方法<ul><li>以UTC保存</li><li>以字面量保存<ul><li>年月日 时分秒  时区信息</li></ul></li></ul></li></ul></li></ul><ul><li><p>ZoneId </p><ul><li><code>ZoneId.of</code>用来初始化一个标准的时区</li><li><code>ZoneOffset.ofHours</code> 通过offset来初始化具有指定的时间差的时区</li></ul></li><li><p>LocalDateTime</p><ul><li>不带有时区属性，是本地时区的日期时间</li></ul></li><li><p>ZonedDateTime </p><ul><li>= LocalDateTime + ZoneId </li></ul></li><li><p>DateTimeFormatter</p><ul><li>可以通过withZone方法直接设置需要使用的时区</li></ul></li><li><p>因此对于国际化时间的处理，应当使用Java8的日期时间类，通过ZonedDateTime来保存时间</p></li></ul><h1 id="日期时间格式化和解析"><a href="#日期时间格式化和解析" class="headerlink" title="日期时间格式化和解析"></a>日期时间格式化和解析</h1><ul><li>SimpleDateFormat的问题<ul><li>注意使用SimpleDateFormat的时候，大写的YYYY表示的是week year，即所在的周属于哪一年，yyyy表示的是年</li><li>static 的SimpleDateFormat可能会出现线程安全的问题，其解析和格式化操作是非线程安全的</li><li>SimpleDateFormat对于格式不匹配表现的非常宽容，可能会隐藏一些错误，要注意格式上的不同</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java文件读写Tips</title>
       <link href="/Java%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99Tips/"/>
       <url>/Java%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99Tips/</url>

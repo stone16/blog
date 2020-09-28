@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-09-22T04:12:02.059Z</updated>
+  <updated>2020-09-28T21:20:43.184Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java8 日期时间类</title>
+    <link href="https://www.llchen60.com/Java8-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB/"/>
+    <id>https://www.llchen60.com/Java8-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB/</id>
+    <published>2020-09-28T21:20:22.000Z</published>
+    <updated>2020-09-28T21:20:43.184Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Java8之前，处理日期时间需求的时候需要使用Data, Calendar, SimpleDateFormat来声明时间戳，使用日历处理日期和格式化解析日期时间，Java8之后有了新的日期时间类，定义的比原来要清晰很多，且支持线程安全。</p><p>这篇文章看看时间错乱问题背后的原因，看看使用遗留的日期时间类，来处理日期时间初始化，格式化，解析，计算等可能会遇到的问题，以及如何使用新日期时间类来解决。</p><h1 id="初始化日期时间"><a href="#初始化日期时间" class="headerlink" title="初始化日期时间"></a>初始化日期时间</h1><h2 id="使用Date初始化日期时间"><a href="#使用Date初始化日期时间" class="headerlink" title="使用Date初始化日期时间"></a>使用Date初始化日期时间</h2><pre><code>Date date = new Date(2019, 12, 31, 11, 12, 13);System.out.println(date);// Output Sat Jan 31 11:12:13 CST 3920</code></pre><p>这是因为Date初始化时间的时候是用的和1970的差值，月的值是从0- 11 的</p><p>我们可以使用Calendar来定义时区的信息 </p><h1 id="时区问题"><a href="#时区问题" class="headerlink" title="时区问题"></a>时区问题</h1><pre><code>Calendar calendar = Calendar.getInstance();calendar.set(2019, 11, 31, 11, 12, 13);System.out.println(calendar.getTime());Calendar calendar2 = Calendar.getInstance(TimeZone.getTimeZone(&quot;America/New_York&quot;));calendar2.set(2019, Calendar.DECEMBER, 31, 11, 12, 13);System.out.println(calendar2.getTime());</code></pre><ul><li>Date类<ul><li>Date本身没有时区的问题，都是保存的UTC时间</li><li>Date当中保存的是一个时间戳，是从1970-1-1 0点到现在的毫秒数</li><li>保存方法<ul><li>以UTC保存</li><li>以字面量保存<ul><li>年月日 时分秒  时区信息</li></ul></li></ul></li></ul></li></ul><ul><li><p>ZoneId </p><ul><li><code>ZoneId.of</code>用来初始化一个标准的时区</li><li><code>ZoneOffset.ofHours</code> 通过offset来初始化具有指定的时间差的时区</li></ul></li><li><p>LocalDateTime</p><ul><li>不带有时区属性，是本地时区的日期时间</li></ul></li><li><p>ZonedDateTime </p><ul><li>= LocalDateTime + ZoneId </li></ul></li><li><p>DateTimeFormatter</p><ul><li>可以通过withZone方法直接设置需要使用的时区</li></ul></li><li><p>因此对于国际化时间的处理，应当使用Java8的日期时间类，通过ZonedDateTime来保存时间</p></li></ul><h1 id="日期时间格式化和解析"><a href="#日期时间格式化和解析" class="headerlink" title="日期时间格式化和解析"></a>日期时间格式化和解析</h1><ul><li>SimpleDateFormat的问题<ul><li>注意使用SimpleDateFormat的时候，大写的YYYY表示的是week year，即所在的周属于哪一年，yyyy表示的是年</li><li>static 的SimpleDateFormat可能会出现线程安全的问题，其解析和格式化操作是非线程安全的</li><li>SimpleDateFormat对于格式不匹配表现的非常宽容，可能会隐藏一些错误，要注意格式上的不同</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在Java8之前，处理日期时间需求的时候需要使用Data, Calendar, SimpleDateFormat来声明时间戳，使用日历处理日期和格式化解析日期时间，Java8之后有了新的日期时间类，定义的比原来要清晰很多，且支持线程安全。&lt;/p&gt;
+&lt;p&gt;这篇文章看看时间错乱
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Java文件读写Tips</title>
@@ -529,33 +554,6 @@ System.
     
     
       <category term="职责链模式" scheme="https://www.llchen60.com/tags/%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-行为型-策略模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-07-10T05:19:17.000Z</published>
-    <updated>2020-07-10T22:10:09.405Z</updated>
-    
-    <content type="html"><![CDATA[<p>策略模式，用于避免冗长的if else或者switch分支判断，并且可以像模板模式那样提供框架的扩展点。</p><h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><ul><li>策略模式<ul><li>Strategy Design Pattern </li><li>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. </li><li>对策略的定义，创建和使用进行解耦</li></ul></li></ul><h2 id="1-1-策略的定义"><a href="#1-1-策略的定义" class="headerlink" title="1.1 策略的定义"></a>1.1 策略的定义</h2><ul><li>策略接口</li><li>一组实现了这个接口的策略类</li></ul><pre><code>public interface Strategy {  void algorithmInterface();}public class ConcreteStrategyA implements Strategy {  @Override  public void  algorithmInterface() {    //具体的算法...  }}public class ConcreteStrategyB implements Strategy {  @Override  public void  algorithmInterface() {    //具体的算法...  }}</code></pre><h2 id="1-2-策略的创建"><a href="#1-2-策略的创建" class="headerlink" title="1.2 策略的创建"></a>1.2 策略的创建</h2><ul><li><p>策略在使用的时候需要根据类型来判断创建哪个策略来使用</p></li><li><p>因此，为了封装创建逻辑，需要对客户端代码屏蔽创建细节</p><p>  public class StrategyFactory {</p><pre><code>private static final Map&lt;String, Strategy&gt; strategies = new HashMap&lt;&gt;();static {  strategies.put(&quot;A&quot;, new ConcreteStrategyA());  strategies.put(&quot;B&quot;, new ConcreteStrategyB());}public static Strategy getStrategy(String type) {  if (type == null || type.isEmpty()) {    throw new IllegalArgumentException(&quot;type should not be empty.&quot;);  }  return strategies.get(type);}</code></pre><p>  }</p></li></ul><p>这里是需要根据策略是否是有状态的，根据业务场景的需要，来看是否需要返回新创建的对象，或者来复用已经创建好的对象。</p><pre><code>// 返回新创建好的对象的范例public class StrategyFactory {  public static Strategy getStrategy(String type) {    if (type == null || type.isEmpty()) {      throw new IllegalArgumentException(&quot;type should not be empty.&quot;);    }    if (type.equals(&quot;A&quot;)) {      return new ConcreteStrategyA();    } else if (type.equals(&quot;B&quot;)) {      return new ConcreteStrategyB();    }    return null;  }}</code></pre><h2 id="1-3-策略的使用"><a href="#1-3-策略的使用" class="headerlink" title="1.3 策略的使用"></a>1.3 策略的使用</h2><p>使用的时候一般是运行时动态来决定使用哪一种策略。即根据配置，用户的输入，计算结果等因素，来决定 </p><pre><code>// 策略接口：EvictionStrategy// 策略类：LruEvictionStrategy、FifoEvictionStrategy、LfuEvictionStrategy...// 策略工厂：EvictionStrategyFactorypublic class UserCache {  private Map&lt;String, User&gt; cacheData = new HashMap&lt;&gt;();  private EvictionStrategy eviction;  public UserCache(EvictionStrategy eviction) {    this.eviction = eviction;  }  //...}// 运行时动态确定，根据配置文件的配置决定使用哪种策略public class Application {  public static void main(String[] args) throws Exception {    EvictionStrategy evictionStrategy = null;    Properties props = new Properties();    props.load(new FileInputStream(&quot;./config.properties&quot;));    String type = props.getProperty(&quot;eviction_type&quot;);    evictionStrategy = EvictionStrategyFactory.getEvictionStrategy(type);    UserCache userCache = new UserCache(evictionStrategy);    //...  }}// 非运行时动态确定，在代码中指定使用哪种策略public class Application {  public static void main(String[] args) {    //...    EvictionStrategy evictionStrategy = new LruEvictionStrategy();    UserCache userCache = new UserCache(evictionStrategy);    //...  }}</code></pre><h1 id="2-实例"><a href="#2-实例" class="headerlink" title="2. 实例"></a>2. 实例</h1><h2 id="2-1-策略模式避免分支判断"><a href="#2-1-策略模式避免分支判断" class="headerlink" title="2.1 策略模式避免分支判断"></a>2.1 策略模式避免分支判断</h2><pre><code>public class OrderService {  public double discount(Order order) {    double discount = 0.0;    OrderType type = order.getType();    if (type.equals(OrderType.NORMAL)) { // 普通订单      //...省略折扣计算算法代码    } else if (type.equals(OrderType.GROUPON)) { // 团购订单      //...省略折扣计算算法代码    } else if (type.equals(OrderType.PROMOTION)) { // 促销订单      //...省略折扣计算算法代码    }    return discount;  }}// 策略的定义public interface DiscountStrategy {  double calDiscount(Order order);}// 省略NormalDiscountStrategy、GrouponDiscountStrategy、PromotionDiscountStrategy类代码...// 策略的创建public class DiscountStrategyFactory {  private static final Map&lt;OrderType, DiscountStrategy&gt; strategies = new HashMap&lt;&gt;();  static {    strategies.put(OrderType.NORMAL, new NormalDiscountStrategy());    strategies.put(OrderType.GROUPON, new GrouponDiscountStrategy());    strategies.put(OrderType.PROMOTION, new PromotionDiscountStrategy());  }  public static DiscountStrategy getDiscountStrategy(OrderType type) {    return strategies.get(type);  }}// 策略的使用public class OrderService {  public double discount(Order order) {    OrderType type = order.getType();    DiscountStrategy discountStrategy = DiscountStrategyFactory.getDiscountStrategy(type);    return discountStrategy.calDiscount(order);  }}</code></pre><h2 id="2-2-根据大小对文件排序"><a href="#2-2-根据大小对文件排序" class="headerlink" title="2.2 根据大小对文件排序"></a>2.2 根据大小对文件排序</h2><ul><li><p>对文件进行排序</p><ul><li>整型数</li><li>逗号间隔</li></ul></li><li><p>100GB大小的话</p><ul><li>利用外部排序算法  – MapReduce框架</li></ul></li></ul><pre><code>public class SortAlgFactory {  private static final Map&lt;String, ISortAlg&gt; algs = new HashMap&lt;&gt;();  static {    algs.put(&quot;QuickSort&quot;, new QuickSort());    algs.put(&quot;ExternalSort&quot;, new ExternalSort());    algs.put(&quot;ConcurrentExternalSort&quot;, new ConcurrentExternalSort());    algs.put(&quot;MapReduceSort&quot;, new MapReduceSort());  }  public static ISortAlg getSortAlg(String type) {    if (type == null || type.isEmpty()) {      throw new IllegalArgumentException(&quot;type should not be empty.&quot;);    }    return algs.get(type);  }}public class Sorter {  private static final long GB = 1000 * 1000 * 1000;  public void sortFile(String filePath) {    // 省略校验逻辑    File file = new File(filePath);    long fileSize = file.length();    ISortAlg sortAlg;    if (fileSize &lt; 6 * GB) { // [0, 6GB)      sortAlg = SortAlgFactory.getSortAlg(&quot;QuickSort&quot;);    } else if (fileSize &lt; 10 * GB) { // [6GB, 10GB)      sortAlg = SortAlgFactory.getSortAlg(&quot;ExternalSort&quot;);    } else if (fileSize &lt; 100 * GB) { // [10GB, 100GB)      sortAlg = SortAlgFactory.getSortAlg(&quot;ConcurrentExternalSort&quot;);    } else { // [100GB, ~)      sortAlg = SortAlgFactory.getSortAlg(&quot;MapReduceSort&quot;);    }    sortAlg.sort(filePath);  }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;策略模式，用于避免冗长的if else或者switch分支判断，并且可以像模板模式那样提供框架的扩展点。&lt;/p&gt;
-&lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="策略模式" scheme="https://www.llchen60.com/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
