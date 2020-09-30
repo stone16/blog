@@ -16,6 +16,10 @@ Java反射机制是在运行时用来判定或者修改方法，类，接口的�
 
 + 通过反射，我们就可以在运行的时候赋予类一个新的对象
 
++ 有用的连接
+    + [Reflection API](https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/index.html)
+    + [Reflection Tutorial](https://docs.oracle.com/javase/tutorial/reflect/index.html)
+    + [Class类的方法](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html)
 # 2. 使用范例
 反射可以用来获取关于类，构造器和方法的信息：
 
@@ -136,6 +140,8 @@ Java反射机制是在运行时用来判定或者修改方法，类，接口的�
 从代码本身的角度来讲，是指一部分代码有能力去观察/检查另一部分代码。用已知的部分合理推断出未知的部分，这未知的部分其实是指还不知道的信息。
 
 一般来说在Java里我们都是和注解一起来使用反射的，
+
+值得注意的一个点是反射是通过方法签名来确定方法的，`getClass().getDeclaredMethod("age", Integer.class).invoke(this, 36);` 方法签名指的是`getDeclaredMethod()`
 
 
 # 4. 优劣势
