@@ -3285,12 +3285,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-05 19:02:58'>2020-02-05 19:02</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-30 14:31:07'>2020-02-05 19:02</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:1.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3342,9 +3342,13 @@
 </li>
 <li><p>通过反射，我们就可以在运行的时候赋予类一个新的对象</p>
 </li>
-</ul>
-<h1 id="2-使用范例"><a href="#2-使用范例" class="headerlink" title="2. 使用范例"></a>2. 使用范例</h1><p>反射可以用来获取关于类，构造器和方法的信息：</p>
+<li><p>有用的连接</p>
 <ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/index.html" target="_blank" rel="noopener">Reflection API</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="noopener">Reflection Tutorial</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class类的方法</a><h1 id="2-使用范例"><a href="#2-使用范例" class="headerlink" title="2. 使用范例"></a>2. 使用范例</h1>反射可以用来获取关于类，构造器和方法的信息：</li>
+</ul>
+</li>
 <li><p>class: getClass()方法可以用来获取对象属于的类的名字</p>
 </li>
 <li><p>Constructors: getConstructor()可以用来获取对象属于的类的public的构造器</p>
@@ -3450,6 +3454,7 @@
 <h1 id="3-详细分析"><a href="#3-详细分析" class="headerlink" title="3. 详细分析"></a>3. 详细分析</h1><p>反射一言以蔽之，即在运行时拿到class，并创建类对应的对象的方式。这种好处是更具灵活性，劣势是会慢很多，代码会相对难理解些。</p>
 <p>从代码本身的角度来讲，是指一部分代码有能力去观察/检查另一部分代码。用已知的部分合理推断出未知的部分，这未知的部分其实是指还不知道的信息。</p>
 <p>一般来说在Java里我们都是和注解一起来使用反射的，</p>
+<p>值得注意的一个点是反射是通过方法签名来确定方法的，<code>getClass().getDeclaredMethod(&quot;age&quot;, Integer.class).invoke(this, 36);</code> 方法签名指的是<code>getDeclaredMethod()</code></p>
 <h1 id="4-优劣势"><a href="#4-优劣势" class="headerlink" title="4. 优劣势"></a>4. 优劣势</h1><ul>
 <li>好处<ul>
 <li>反射是什么呢？当我们的程序在运行时，需要动态的加载一些类这些类可能之前用不到所以不用加载到jvm，而是在运行时根据需要才加载，这样的好处对于服务器来说不言而喻，举个例子我们的项目底层有时是用mysql，有时用oracle，<strong>需要动态地根据实际情况加载驱动类，这个时候反射就有用了</strong>，假设 <code>com.java.dbtest.myqlConnection</code>，<code>com.java.dbtest.oracleConnection</code>这两个类我们要用，这时候我们的程序就写得比较动态化，通过<code>Class tc = Class.forName(&quot;com.java.dbtest.TestConnection&quot;);</code>通过类的全类名让jvm在服务器中找到并加载这个类，而如果是oracle则传入的参数就变成另一个了。这时候就可以看到反射的好处了，这个动态性就体现出java的特性了！</li>
@@ -3483,10 +3488,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Java 反射机制</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-02-05, 19:02:35</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-05, 19:02:58</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-30, 14:31:07</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" title="Java 反射机制">https://www.llchen60.com/Java-%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
