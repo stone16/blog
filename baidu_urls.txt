@@ -1,1 +1,1 @@
-https://www.llchen60.com/Java8-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB/
+https://www.llchen60.com/Spring-IoC-AOP%E6%B5%85%E6%9E%90/
