@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-10-02T02:43:41.325Z</updated>
+  <updated>2020-10-04T00:38:18.211Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用注解 + 反射消除重复代码</title>
+    <link href="https://www.llchen60.com/%E5%88%A9%E7%94%A8%E6%B3%A8%E8%A7%A3-%E5%8F%8D%E5%B0%84%E6%B6%88%E9%99%A4%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81/"/>
+    <id>https://www.llchen60.com/%E5%88%A9%E7%94%A8%E6%B3%A8%E8%A7%A3-%E5%8F%8D%E5%B0%84%E6%B6%88%E9%99%A4%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81/</id>
+    <published>2020-10-04T00:37:32.000Z</published>
+    <updated>2020-10-04T00:38:18.211Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-案例分析"><a href="#1-案例分析" class="headerlink" title="1. 案例分析"></a>1. 案例分析</h1><h2 id="1-1-案例场景"><a href="#1-1-案例场景" class="headerlink" title="1.1 案例场景"></a>1.1 案例场景</h2><p>假设银行提供了一些 API 接口，对参数的序列化有点特殊，不使用 JSON，而是需要我们把参数依次拼在一起构成一个大字符串</p><ul><li>按照银行提供的API文档顺序，将所有的参数构成定长的数据，并且拼接在一起作为一整个字符串</li><li>因为每一种参数都有固定长度，未达到长度需要进行填充处理<ul><li>字符串类型参数不满长度部分要以下划线右填充，即字符串内容靠左</li><li>数字类型的参数不满长度部分以0左填充，即实际数字靠右</li><li>货币类型的表示需要把金额向下舍入2位到分，以分为单位，作为数字类型同样进行左填充</li><li>参数做MD5 操作作为签名</li></ul></li></ul><h2 id="1-2-初步代码实现"><a href="#1-2-初步代码实现" class="headerlink" title="1.2 初步代码实现"></a>1.2 初步代码实现</h2><pre><code>public class BankService {    //创建用户方法    public static String createUser(String name, String identity, String mobile, int age) throws IOException {        StringBuilder stringBuilder = new StringBuilder();        //字符串靠左，多余的地方填充_        stringBuilder.append(String.format(&quot;%-10s&quot;, name).replace(&#39; &#39;, &#39;_&#39;));        //字符串靠左，多余的地方填充_        stringBuilder.append(String.format(&quot;%-18s&quot;, identity).replace(&#39; &#39;, &#39;_&#39;));        //数字靠右，多余的地方用0填充        stringBuilder.append(String.format(&quot;%05d&quot;, age));        //字符串靠左，多余的地方用_填充        stringBuilder.append(String.format(&quot;%-11s&quot;, mobile).replace(&#39; &#39;, &#39;_&#39;));        //最后加上MD5作为签名        stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));        return Request.Post(&quot;http://localhost:45678/reflection/bank/createUser&quot;)                .bodyString(stringBuilder.toString(), ContentType.APPLICATION_JSON)                .execute().returnContent().asString();    }    //支付方法    public static String pay(long userId, BigDecimal amount) throws IOException {        StringBuilder stringBuilder = new StringBuilder();        //数字靠右，多余的地方用0填充        stringBuilder.append(String.format(&quot;%020d&quot;, userId));        //金额向下舍入2位到分，以分为单位，作为数字靠右，多余的地方用0填充        stringBuilder.append(String.format(&quot;%010d&quot;, amount.setScale(2, RoundingMode.DOWN).multiply(new BigDecimal(&quot;100&quot;)).longValue()));        //最后加上MD5作为签名        stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));        return Request.Post(&quot;http://localhost:45678/reflection/bank/pay&quot;)                .bodyString(stringBuilder.toString(), ContentType.APPLICATION_JSON)                .execute().returnContent().asString();    }}</code></pre><ul><li>这样做能够基本满足需求，但是存在一些问题：<ul><li>处理逻辑互相之间有重复，稍有不慎就会出现Bug</li><li>处理流程中字符串拼接、加签和发请求的逻辑，在所有方法重复</li><li>实际方法的入参的参数类型和顺序，不一定和接口要求一致，容易出错</li><li>代码层面参数硬编码，无法清晰进行核对</li></ul></li></ul><h2 id="1-3-使用接口和反射优化代码"><a href="#1-3-使用接口和反射优化代码" class="headerlink" title="1.3 使用接口和反射优化代码"></a>1.3 使用接口和反射优化代码</h2><h3 id="1-3-1-实现定义了所有接口参数的POJO类"><a href="#1-3-1-实现定义了所有接口参数的POJO类" class="headerlink" title="1.3.1 实现定义了所有接口参数的POJO类"></a>1.3.1 实现定义了所有接口参数的POJO类</h3><pre><code>@Datapublic class CreateUserAPI {    private String name;    private String identity;    private String mobile;    private int age;}</code></pre><h3 id="1-3-2-定义注解本身"><a href="#1-3-2-定义注解本身" class="headerlink" title="1.3.2 定义注解本身"></a>1.3.2 定义注解本身</h3><pre><code>@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.TYPE)@Documented@Inheritedpublic @interface BankAPI {    String desc() default &quot;&quot;;    String url() default &quot;&quot;;}@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.FIELD)@Documented@Inheritedpublic @interface BankAPIField {    int order() default -1;    int length() default -1;    String type() default &quot;&quot;;}</code></pre><h3 id="1-3-3-反射配合注解实现动态的接口参数组装"><a href="#1-3-3-反射配合注解实现动态的接口参数组装" class="headerlink" title="1.3.3 反射配合注解实现动态的接口参数组装"></a>1.3.3 反射配合注解实现动态的接口参数组装</h3><pre><code>private static String remoteCall(AbstractAPI api) throws IOException {    //从BankAPI注解获取请求地址    BankAPI bankAPI = api.getClass().getAnnotation(BankAPI.class);    bankAPI.url();    StringBuilder stringBuilder = new StringBuilder();    Arrays.stream(api.getClass().getDeclaredFields()) //获得所有字段            .filter(field -&gt; field.isAnnotationPresent(BankAPIField.class)) //查找标记了注解的字段            .sorted(Comparator.comparingInt(a -&gt; a.getAnnotation(BankAPIField.class).order())) //根据注解中的order对字段排序            .peek(field -&gt; field.setAccessible(true)) //设置可以访问私有字段            .forEach(field -&gt; {                //获得注解                BankAPIField bankAPIField = field.getAnnotation(BankAPIField.class);                Object value = &quot;&quot;;                try {                    //反射获取字段值                    value = field.get(api);                } catch (IllegalAccessException e) {                    e.printStackTrace();                }                //根据字段类型以正确的填充方式格式化字符串                switch (bankAPIField.type()) {                    case &quot;S&quot;: {                        stringBuilder.append(String.format(&quot;%-&quot; + bankAPIField.length() + &quot;s&quot;, value.toString()).replace(&#39; &#39;, &#39;_&#39;));                        break;                    }                    case &quot;N&quot;: {                        stringBuilder.append(String.format(&quot;%&quot; + bankAPIField.length() + &quot;s&quot;, value.toString()).replace(&#39; &#39;, &#39;0&#39;));                        break;                    }                    case &quot;M&quot;: {                        if (!(value instanceof BigDecimal))                            throw new RuntimeException(String.format(&quot;{} 的 {} 必须是BigDecimal&quot;, api, field));                        stringBuilder.append(String.format(&quot;%0&quot; + bankAPIField.length() + &quot;d&quot;, ((BigDecimal) value).setScale(2, RoundingMode.DOWN).multiply(new BigDecimal(&quot;100&quot;)).longValue()));                        break;                    }                    default:                        break;                }            });    //签名逻辑   stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));    String param = stringBuilder.toString();    long begin = System.currentTimeMillis();    //发请求    String result = Request.Post(&quot;http://localhost:45678/reflection&quot; + bankAPI.url())            .bodyString(param, ContentType.APPLICATION_JSON)            .execute().returnContent().asString();    log.info(&quot;调用银行API {} url:{} 参数:{} 耗时:{}ms&quot;, bankAPI.desc(), bankAPI.url(), param, System.currentTimeMillis() - begin);    return result;}</code></pre><p>通过反射来动态获得class的信息，并在runtime的时候完成组装过程。这样做的好处是开发的时候会方便直观很多，然后将逻辑与细节隐藏起来，并且集中放到了一个方法当中，减少了重复，以及维护当中bug的出现。</p><h3 id="1-3-4-在代码中的应用"><a href="#1-3-4-在代码中的应用" class="headerlink" title="1.3.4 在代码中的应用"></a>1.3.4 在代码中的应用</h3><pre><code>@BankAPI(url = &quot;/bank/createUser&quot;, desc = &quot;创建用户接口&quot;)@Datapublic class CreateUserAPI extends AbstractAPI {    @BankAPIField(order = 1, type = &quot;S&quot;, length = 10)    private String name;    @BankAPIField(order = 2, type = &quot;S&quot;, length = 18)    private String identity;    @BankAPIField(order = 4, type = &quot;S&quot;, length = 11) //注意这里的order需要按照API表格中的顺序    private String mobile;    @BankAPIField(order = 3, type = &quot;N&quot;, length = 5)    private int age;}@BankAPI(url = &quot;/bank/pay&quot;, desc = &quot;支付接口&quot;)@Datapublic class PayAPI extends AbstractAPI {    @BankAPIField(order = 1, type = &quot;N&quot;, length = 20)    private long userId;    @BankAPIField(order = 2, type = &quot;M&quot;, length = 10)    private BigDecimal amount;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-案例分析&quot;&gt;&lt;a href=&quot;#1-案例分析&quot; class=&quot;headerlink&quot; title=&quot;1. 案例分析&quot;&gt;&lt;/a&gt;1. 案例分析&lt;/h1&gt;&lt;h2 id=&quot;1-1-案例场景&quot;&gt;&lt;a href=&quot;#1-1-案例场景&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="Annotations" scheme="https://www.llchen60.com/tags/Annotations/"/>
+    
+      <category term="Reflection" scheme="https://www.llchen60.com/tags/Reflection/"/>
+    
+      <category term="注解" scheme="https://www.llchen60.com/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+      <category term="反射" scheme="https://www.llchen60.com/tags/%E5%8F%8D%E5%B0%84/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring IoC, AOP浅析</title>
@@ -525,33 +559,6 @@ System.
     
     
       <category term="迭代器模式" scheme="https://www.llchen60.com/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-行为型-状态模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-07-21T05:14:07.000Z</published>
-    <updated>2020-07-21T05:14:46.840Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-原理与实现"><a href="#1-原理与实现" class="headerlink" title="1. 原理与实现"></a>1. 原理与实现</h1><p>状态模式一般用来实现状态机，常常用在游戏，工作流引擎等系统开发当中。</p><p>做法是将状态，事件，以及动作都放置到不同的类当中，通过接口与继承，来实现各个方法，其中共享变量可以作为输入传入。 </p><h1 id="2-以有限状态机的实现为例"><a href="#2-以有限状态机的实现为例" class="headerlink" title="2. 以有限状态机的实现为例"></a>2. 以有限状态机的实现为例</h1><ul><li>有限状态机<ul><li>Finite State Machine</li><li>组成部分<ul><li>状态</li><li>事件/ 转移条件<ul><li>触发状态的转移</li><li>动作的执行</li></ul></li><li>动作</li></ul></li></ul></li></ul><p>以下面的状态转移图为例： </p><p><img src="https://i.loli.net/2020/07/21/jzSQHTRxkybDBYE.png" alt="状态转移图"></p><h2 id="2-1-分支逻辑法实现"><a href="#2-1-分支逻辑法实现" class="headerlink" title="2.1 分支逻辑法实现"></a>2.1 分支逻辑法实现</h2><p>会包含大量的if-else语句</p><pre><code>public class MarioStateMachine {  private int score;  private State currentState;  public MarioStateMachine() {    this.score = 0;    this.currentState = State.SMALL;  }  public void obtainMushRoom() {    if (currentState.equals(State.SMALL)) {      this.currentState = State.SUPER;      this.score += 100;    }  }  public void obtainCape() {    if (currentState.equals(State.SMALL) || currentState.equals(State.SUPER) ) {      this.currentState = State.CAPE;      this.score += 200;    }  }  public void obtainFireFlower() {    if (currentState.equals(State.SMALL) || currentState.equals(State.SUPER) ) {      this.currentState = State.FIRE;      this.score += 300;    }  }  public void meetMonster() {    if (currentState.equals(State.SUPER)) {      this.currentState = State.SMALL;      this.score -= 100;      return;    }    if (currentState.equals(State.CAPE)) {      this.currentState = State.SMALL;      this.score -= 200;      return;    }    if (currentState.equals(State.FIRE)) {      this.currentState = State.SMALL;      this.score -= 300;      return;    }  }  public int getScore() {    return this.score;  }  public State getCurrentState() {    return this.currentState;  }}</code></pre><h2 id="2-2-查表法"><a href="#2-2-查表法" class="headerlink" title="2.2 查表法"></a>2.2 查表法</h2><p><img src="https://i.loli.net/2020/07/21/127jeqv5CwsIWKP.png" alt="查表法.png"></p><p>使用一张二维表来表示状态机，纵向表示当前状态，横向表示事件，值表示当前状态经过事件以后，转移到的新状态和其执行的动作</p><pre><code>public enum Event {  GOT_MUSHROOM(0),  GOT_CAPE(1),  GOT_FIRE(2),  MET_MONSTER(3);  private int value;  private Event(int value) {    this.value = value;  }  public int getValue() {    return this.value;  }}public class MarioStateMachine {  private int score;  private State currentState;  private static final State[][] transitionTable = {          {SUPER, CAPE, FIRE, SMALL},          {SUPER, CAPE, FIRE, SMALL},          {CAPE, CAPE, CAPE, SMALL},          {FIRE, FIRE, FIRE, SMALL}  };  private static final int[][] actionTable = {          {+100, +200, +300, +0},          {+0, +200, +300, -100},          {+0, +0, +0, -200},          {+0, +0, +0, -300}  };  public MarioStateMachine() {    this.score = 0;    this.currentState = State.SMALL;  }  public void obtainMushRoom() {    executeEvent(Event.GOT_MUSHROOM);  }  public void obtainCape() {    executeEvent(Event.GOT_CAPE);  }  public void obtainFireFlower() {    executeEvent(Event.GOT_FIRE);  }  public void meetMonster() {    executeEvent(Event.MET_MONSTER);  }  private void executeEvent(Event event) {    int stateValue = currentState.getValue();    int eventValue = event.getValue();    this.currentState = transitionTable[stateValue][eventValue];    this.score = actionTable[stateValue][eventValue];  }  public int getScore() {    return this.score;  }  public State getCurrentState() {    return this.currentState;  }}</code></pre><h2 id="2-3-状态模式"><a href="#2-3-状态模式" class="headerlink" title="2.3 状态模式"></a>2.3 状态模式</h2><p>当要执行的动作是比较复杂的一系列逻辑操作的时候，我们就无法使用二维数组来表示了。状态模式是将事件触发的状态转移和动作执行来拆分到不同的状态类当中，来避免分支判断逻辑。</p><pre><code>public interface IMario {  State getName();  void obtainMushRoom(MarioStateMachine stateMachine);  void obtainCape(MarioStateMachine stateMachine);  void obtainFireFlower(MarioStateMachine stateMachine);  void meetMonster(MarioStateMachine stateMachine);}public class SmallMario implements IMario {  private static final SmallMario instance = new SmallMario();  private SmallMario() {}  public static SmallMario getInstance() {    return instance;  }  @Override  public State getName() {    return State.SMALL;  }  @Override  public void obtainMushRoom(MarioStateMachine stateMachine) {    stateMachine.setCurrentState(SuperMario.getInstance());    stateMachine.setScore(stateMachine.getScore() + 100);  }  @Override  public void obtainCape(MarioStateMachine stateMachine) {    stateMachine.setCurrentState(CapeMario.getInstance());    stateMachine.setScore(stateMachine.getScore() + 200);  }  @Override  public void obtainFireFlower(MarioStateMachine stateMachine) {    stateMachine.setCurrentState(FireMario.getInstance());    stateMachine.setScore(stateMachine.getScore() + 300);  }  @Override  public void meetMonster(MarioStateMachine stateMachine) {    // do nothing...  }}// 省略SuperMario、CapeMario、FireMario类...public class MarioStateMachine {  private int score;  private IMario currentState;  public MarioStateMachine() {    this.score = 0;    this.currentState = SmallMario.getInstance();  }  public void obtainMushRoom() {    this.currentState.obtainMushRoom(this);  }  public void obtainCape() {    this.currentState.obtainCape(this);  }  public void obtainFireFlower() {    this.currentState.obtainFireFlower(this);  }  public void meetMonster() {    this.currentState.meetMonster(this);  }  public int getScore() {    return this.score;  }  public State getCurrentState() {    return this.currentState.getName();  }  public void setScore(int score) {    this.score = score;  }  public void setCurrentState(IMario currentState) {    this.currentState = currentState;  }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-原理与实现&quot;&gt;&lt;a href=&quot;#1-原理与实现&quot; class=&quot;headerlink&quot; title=&quot;1. 原理与实现&quot;&gt;&lt;/a&gt;1. 原理与实现&lt;/h1&gt;&lt;p&gt;状态模式一般用来实现状态机，常常用在游戏，工作流引擎等系统开发当中。&lt;/p&gt;
-&lt;p&gt;做法是将状态
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="状态模式" scheme="https://www.llchen60.com/tags/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
