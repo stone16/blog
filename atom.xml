@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-10-04T00:38:18.211Z</updated>
+  <updated>2020-10-06T22:55:54.435Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>缓存的常见问题</title>
+    <link href="https://www.llchen60.com/%E7%BC%93%E5%AD%98%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    <id>https://www.llchen60.com/%E7%BC%93%E5%AD%98%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</id>
+    <published>2020-10-06T22:55:09.000Z</published>
+    <updated>2020-10-06T22:55:54.435Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1. 缓存雪崩"></a>1. 缓存雪崩</h1><p>缓存系统的IOPS比数据库高很多，因此需要注意短时间内的大量缓存失效的情况。这种情况一旦发生，可能就会在瞬间有大量的数据需要回源到数据库查询，对数据库造成极大的压力，极限情况下甚至导致后端数据库直接崩溃。这就是我们说的缓存雪崩。</p><p>产生雪崩的原因有两种：</p><ul><li>缓存系统本身不可用，导致大量请求直接回源到数据库</li><li>应用设计层面大量的Key在同一时间过期，导致大量的数据回源<ul><li>解决方法<ul><li>差异化缓存过期时间<ul><li>不让大量的Key在同一时间过期</li><li>初始化缓存的时候，设置缓存的过期时间为30秒 + 10秒以内的随机延迟（扰动值）。这样key就不会集中在30秒这个时刻过期，而是会分散在30 - 40秒之间</li></ul></li><li>让缓存不主动过期<ul><li>初始化缓存数据的时候设置缓存永不过期，然后启动一个后台线程30秒一次定时将所有数据更新到缓存，通过适当的休眠，控制从数据库更新数据的频率，降低数据库的压力</li><li>如果无法全量缓存所有的数据，那么就无法使用该种方案</li></ul></li></ul></li></ul></li></ul><pre><code>// 差异化缓存过期时间@PostConstructpublic void rightInit1() {    //这次缓存的过期时间是30秒+10秒内的随机延迟    IntStream.rangeClosed(1, 1000).forEach(i -&gt; stringRedisTemplate.opsForValue().set(&quot;city&quot; + i, getCityFromDb(i), 30 + ThreadLocalRandom.current().nextInt(10), TimeUnit.SECONDS));    log.info(&quot;Cache init finished&quot;);    //同样1秒一次输出数据库QPS：   Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        log.info(&quot;DB QPS : {}&quot;, atomicInteger.getAndSet(0));    }, 0, 1, TimeUnit.SECONDS);}// 让缓存不主动过期@PostConstructpublic void rightInit2() throws InterruptedException {    CountDownLatch countDownLatch = new CountDownLatch(1);    //每隔30秒全量更新一次缓存     Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        IntStream.rangeClosed(1, 1000).forEach(i -&gt; {            String data = getCityFromDb(i);            //模拟更新缓存需要一定的时间            try {                TimeUnit.MILLISECONDS.sleep(20);            } catch (InterruptedException e) { }            if (!StringUtils.isEmpty(data)) {                //缓存永不过期，被动更新                stringRedisTemplate.opsForValue().set(&quot;city&quot; + i, data);            }        });        log.info(&quot;Cache update finished&quot;);        //启动程序的时候需要等待首次更新缓存完成        countDownLatch.countDown();    }, 0, 30, TimeUnit.SECONDS);    Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        log.info(&quot;DB QPS : {}&quot;, atomicInteger.getAndSet(0));    }, 0, 1, TimeUnit.SECONDS);    countDownLatch.await();}</code></pre><h1 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2. 缓存击穿"></a>2. 缓存击穿</h1><p>在某些Key属于极端热点数据并且并发量很大的情况下，如果这个Key过期，可能会在某个瞬间出现大量的并发请求同时回源，相当于大量的并发请求直接打到了数据库。这就是我们所说的缓存击穿或缓存并发问题。</p><p>如果说回源操作比较昂贵的话，那么这种并发就不能忽略不计了。可以考虑使用锁机制来限制回源的并发，或者可以使用类似Semaphore的工具来限制并发数，比如限制为10.这样子既限制了回源并发数不至于太大，又能够使得一定量的线程可以同时回源。</p><h1 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3. 缓存穿透"></a>3. 缓存穿透</h1><p>缓存穿透指的是实际上缓存里有key 和value，但是其value可能为空，如果没做正确处理，那我们的逻辑可能会认为没有对当前的key做好缓存，会对所有的请求都回源到数据库上，这就会给数据库造成压力了。</p><p>针对这种问题，可以用以下方案解决：</p><ul><li><p>对于不存在的数据，同样设置一个特殊的Value到缓存当中，比如NODATA，这样子就不会有缓存穿透的问题</p><ul><li>可能会将大量无效的数据加入到缓存当中</li></ul></li><li><p>使用布隆过滤器</p><ul><li>放在缓存数据读取前先进行过滤操作</li><li>Google Guava BloomFilter </li></ul></li></ul><pre><code>private BloomFilter&lt;Integer&gt; bloomFilter;@PostConstructpublic void init() {    //创建布隆过滤器，元素数量10000，期望误判率1%    bloomFilter = BloomFilter.create(Funnels.integerFunnel(), 10000, 0.01);    //填充布隆过滤器    IntStream.rangeClosed(1, 10000).forEach(bloomFilter::put);}@GetMapping(&quot;right2&quot;)public String right2(@RequestParam(&quot;id&quot;) int id) {    String data = &quot;&quot;;    //通过布隆过滤器先判断    if (bloomFilter.mightContain(id)) {        String key = &quot;user&quot; + id;        //走缓存查询        data = stringRedisTemplate.opsForValue().get(key);        if (StringUtils.isEmpty(data)) {            //走数据库查询            data = getCityFromDb(id);            stringRedisTemplate.opsForValue().set(key, data, 30, TimeUnit.SECONDS);        }    }    return data;}</code></pre><h1 id="4-缓存数据同步策略"><a href="#4-缓存数据同步策略" class="headerlink" title="4. 缓存数据同步策略"></a>4. 缓存数据同步策略</h1><ul><li>当原始数据被修改了以后，我们很可能会采用主动更新缓存的策略<ul><li>可能的策略有<ul><li>先更新缓存，再更新数据库<ul><li>不可行</li><li>数据库操作失败是有可能的，会导致缓存和数据库当中的数据不一致</li></ul></li><li>先更新数据库，再更新缓存<ul><li>不可行</li><li>多线程情况下数据库中更新的顺序和缓存更新的顺序会不同，可能会导致旧数据最后到，导致问题的出现</li></ul></li><li>先删除缓存，再更新数据库，访问的时候按需加载数据到缓存当中<ul><li>很可能删除缓存以后还没来得及更新数据库，就有另外一个线程先读取了旧值到缓存中</li></ul></li><li>先更新数据库，再删除缓存，访问的时候按需加载数据到缓存当中<ul><li>出现缓存不一致的概率很低</li></ul></li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-缓存雪崩&quot;&gt;&lt;a href=&quot;#1-缓存雪崩&quot; class=&quot;headerlink&quot; title=&quot;1. 缓存雪崩&quot;&gt;&lt;/a&gt;1. 缓存雪崩&lt;/h1&gt;&lt;p&gt;缓存系统的IOPS比数据库高很多，因此需要注意短时间内的大量缓存失效的情况。这种情况一旦发生，可能就会在
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>利用注解 + 反射消除重复代码</title>
@@ -531,34 +555,6 @@ System.
     
       <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式-行为型-迭代器模式</title>
-    <link href="https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A1%8C%E4%B8%BA%E5%9E%8B-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</id>
-    <published>2020-07-24T06:30:04.000Z</published>
-    <updated>2020-08-23T21:50:46.226Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-迭代器模式的原理和实现"><a href="#1-迭代器模式的原理和实现" class="headerlink" title="1. 迭代器模式的原理和实现"></a>1. 迭代器模式的原理和实现</h1><ul><li>迭代器模式<ul><li>Iterator Design Pattern / Cursor Design Patten </li><li>用来遍历集合对象</li><li>编程语言基本上都将迭代器作为一个基础类库来提供了</li><li>集合对象指的是一个容器，而迭代器需要迭代的对象实际上是一组对象的对象</li><li>迭代器模式将集合对象的遍历操作从集合类当中拆分出来，放到迭代器类当中，使得二者的职责更加单一</li></ul></li></ul><ul><li>涉及部分<ul><li>容器<ul><li>接口</li><li>实现类</li></ul></li><li>容器迭代器<ul><li>接口</li><li>实现类</li></ul></li></ul></li></ul><h2 id="1-1-实现一个线性结构容器的迭代器"><a href="#1-1-实现一个线性结构容器的迭代器" class="headerlink" title="1.1 实现一个线性结构容器的迭代器"></a>1.1 实现一个线性结构容器的迭代器</h2><pre><code>// 接口定义方式一public interface Iterator&lt;E&gt; {  boolean hasNext();  void next();  E currentItem();}// 接口定义方式二public interface Iterator&lt;E&gt; {  boolean hasNext();  E next();}</code></pre><ul><li>定义方式一的好处在可以多次获得当前的对象，会更加灵活</li></ul><pre><code>public class ArrayIterator&lt;E&gt; implements Iterator&lt;E&gt; {  private int cursor;  private ArrayList&lt;E&gt; arrayList;  public ArrayIterator(ArrayList&lt;E&gt; arrayList) {    this.cursor = 0;    this.arrayList = arrayList;  }  @Override  public boolean hasNext() {    return cursor != arrayList.size(); //注意这里，cursor在指向最后一个元素的时候，hasNext()仍旧返回true。  }  @Override  public void next() {    cursor++;  }  @Override  public E currentItem() {    if (cursor &gt;= arrayList.size()) {      throw new NoSuchElementException();    }    return arrayList.get(cursor);  }}public class Demo {  public static void main(String[] args) {    ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();    names.add(&quot;xzg&quot;);    names.add(&quot;wang&quot;);    names.add(&quot;zheng&quot;);    Iterator&lt;String&gt; iterator = new ArrayIterator(names);    while (iterator.hasNext()) {      System.out.println(iterator.currentItem());      iterator.next();    }  }}</code></pre><ul><li>这里一个问题是还需要<code>new ArrayIterator()</code>，我们可以通过在List的接口当中定义迭代器，然后再ArrayList的类当中定义一个iterator()方法。然后在使用的时候，我们就可以通过实例化以后的容器，比如ArrayList，直接来调用iterator()方法了</li></ul><pre><code>public interface List&lt;E&gt; {  Iterator iterator();  //...省略其他接口函数...}public class ArrayList&lt;E&gt; implements List&lt;E&gt; {  //...  public Iterator iterator() {    return new ArrayIterator(this);  }  //...省略其他代码}public class Demo {  public static void main(String[] args) {    List&lt;String&gt; names = new ArrayList&lt;&gt;();    names.add(&quot;xzg&quot;);    names.add(&quot;wang&quot;);    names.add(&quot;zheng&quot;);    Iterator&lt;String&gt; iterator = names.iterator();    while (iterator.hasNext()) {      System.out.println(iterator.currentItem());      iterator.next();    }  }}</code></pre><ul><li><p>实现方式/ 设计思路</p><ul><li><p>迭代器当中实现</p><ul><li>hasNext()</li><li>currentItem()</li><li>next()</li></ul></li><li><p>待遍历的容器</p><ul><li>通过依赖注入传递到迭代器当中</li><li>容器通过iterator()方法来创建迭代器</li></ul></li></ul></li></ul><h2 id="1-2-为什么需要迭代器模式来遍历集合？"><a href="#1-2-为什么需要迭代器模式来遍历集合？" class="headerlink" title="1.2 为什么需要迭代器模式来遍历集合？"></a>1.2 为什么需要迭代器模式来遍历集合？</h2><ol><li>复杂数据结构遍历方式也会非常复杂，比如对于树，对于图来说。我们将遍历的方式定义到迭代器当中，这样就避免了要自己实现这样复杂的操作了。</li><li>通过迭代器模式，可以同时创建多个不同的迭代器，对同一个容器进行遍历而不互相影响</li><li>容器和迭代器都提供了抽象的接口，当我们需要改变遍历算法的时候，对代码的影响会很小，只在依赖注入处使用新的迭代器类所提供的算法即可</li></ol><h2 id="1-3-遍历时的增删"><a href="#1-3-遍历时的增删" class="headerlink" title="1.3 遍历时的增删"></a>1.3 遍历时的增删</h2><p>遍历时进行增删很大的一个问题是数组在做了增删以后，其他元素的位置会随之改变的。这样就会出现在迭代器当中有些元素无法迭代到的问题了</p><p>遍历时增删是会产生不可预期的遍历错误的，可以通过对遍历时候增删元素的限制来解决这个问题</p><ul><li>遍历的时候不允许增删元素<ul><li>比较难以实现</li></ul></li><li>增删元素之后让遍历报错<ul><li>在ArrayList当中定义一个成员变量modCount<ul><li>记录集合被修改的次数</li><li>集合每调用一次增加或删除元素的函数，就会加1 </li><li>当调用集合上的iterator()函数创建迭代器的时候，将modCount值传递给迭代器的expectedModCount成员变量</li><li>然后在每次调用迭代器上的函数的时候，都会检查一下modCount是否改变过</li></ul></li></ul></li></ul><pre><code>public class ArrayIterator implements Iterator {  private int cursor;  private ArrayList arrayList;  private int expectedModCount;  public ArrayIterator(ArrayList arrayList) {    this.cursor = 0;    this.arrayList = arrayList;    this.expectedModCount = arrayList.modCount;  }  @Override  public boolean hasNext() {    checkForComodification();    return cursor &lt; arrayList.size();  }  @Override  public void next() {    checkForComodification();    cursor++;  }  @Override  public Object currentItem() {    checkForComodification();    return arrayList.get(cursor);  }  private void checkForComodification() {    if (arrayList.modCount != expectedModCount)        throw new ConcurrentModificationException();  }}//代码示例public class Demo {  public static void main(String[] args) {    List&lt;String&gt; names = new ArrayList&lt;&gt;();    names.add(&quot;a&quot;);    names.add(&quot;b&quot;);    names.add(&quot;c&quot;);    names.add(&quot;d&quot;);    Iterator&lt;String&gt; iterator = names.iterator();    iterator.next();    names.remove(&quot;a&quot;);    iterator.next();//抛出ConcurrentModificationException异常  }}</code></pre><h1 id="2-实现支持快照功能的iterator"><a href="#2-实现支持快照功能的iterator" class="headerlink" title="2. 实现支持快照功能的iterator"></a>2. 实现支持快照功能的iterator</h1><ul><li>快照<ul><li>为容器创建迭代器的时候，给容器拍的快照</li><li>使得即便我们之后增删容器中的元素，快照中的元素并不会做相应的变动</li><li>这样迭代器使用的对象是快照，而不是容器，这样就避免了在使用迭代器遍历的过程中，因为增删容器中的元素而导致的不可预期的结果或报错。</li></ul></li></ul><ul><li>可以在迭代器类当中定义一个成员变量snapshot来存储快照<ul><li>每当迭代器需要被创建的时候，都拷贝一份容器中的元素到快照当中，后续的遍历操作都基于这个迭代器自己持有的快照来进行</li><li>问题<ul><li>代价高，每次创建迭代器的时候，都要拷贝一份数据到快照当中，会增加内存的消耗</li></ul></li></ul></li></ul><pre><code>public class SnapshotArrayIterator&lt;E&gt; implements Iterator&lt;E&gt; {  private int cursor;  private ArrayList&lt;E&gt; snapshot;  public SnapshotArrayIterator(ArrayList&lt;E&gt; arrayList) {    this.cursor = 0;    this.snapshot = new ArrayList&lt;&gt;();    this.snapshot.addAll(arrayList);  }  @Override  public boolean hasNext() {    return cursor &lt; snapshot.size();  }  @Override  public E next() {    E currentItem = snapshot.get(cursor);    cursor++;    return currentItem;  }}</code></pre><ul><li>可以在容器当中为每个元素保存两个时间戳<ul><li>addTimestamp</li><li>delTimestamp</li><li>当元素被加入到集合当中的时候，addTimestamp设置为当前时间，将delTimestamp设置成最大长整形值。当元素被删除时，将delTimestamp更新为当前时间，表示已经被删除</li><li>每个迭代器也保存一个迭代器创建时间戳 snapshotTimestamp<ul><li>只有满足addTimestamp &lt; snapshotTimestamp &lt; delTimestamp，才是属于这个迭代器的快照</li></ul></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-迭代器模式的原理和实现&quot;&gt;&lt;a href=&quot;#1-迭代器模式的原理和实现&quot; class=&quot;headerlink&quot; title=&quot;1. 迭代器模式的原理和实现&quot;&gt;&lt;/a&gt;1. 迭代器模式的原理和实现&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;迭代器模式&lt;ul&gt;
-&lt;li&gt;Iter
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-      <category term="迭代器模式" scheme="https://www.llchen60.com/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
