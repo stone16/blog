@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>System Design Basics</title>
+      <link href="/System-Design-Basics/"/>
+      <url>/System-Design-Basics/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Key-Characteristics-of-Distributed-Systems"><a href="#1-Key-Characteristics-of-Distributed-Systems" class="headerlink" title="1. Key Characteristics of Distributed Systems"></a>1. Key Characteristics of Distributed Systems</h1><h2 id="1-1-Scalability"><a href="#1-1-Scalability" class="headerlink" title="1.1 Scalability"></a>1.1 Scalability</h2><ul><li><p>Capability of a system, process, or a network to grow and manage increased demand. Achieve the scaling without performance loss </p></li><li><p>Why need to scale?</p><ul><li>Increased data volume </li><li>Increased amount of work <ul><li>number of transactions </li></ul></li></ul></li><li><p>Performance curve </p><ul><li>Usually performance of a system would decline with the system size due to the management or environment cost <ul><li>network speed come to be slower because machines tend to be far apart from one another </li><li>some tasks may not be distributed, either because of their inherent atomic nature or because of some flaw in the system design </li></ul></li></ul></li></ul><ul><li><p>Horizontal vs Vertical Scaling </p><ul><li><p>Horizontal Scaling </p><ul><li>Scale by adding more servers into your pool of resources </li><li>Easier to scale dynamically by adding more machines into the existing pool </li></ul></li><li><p>Vertical scaling </p><ul><li><p>Scale by adding more power to an existing server </p><ul><li>CPU</li><li>RAM</li><li>Storage </li></ul></li><li><p>limited to the capacity of a single server, and scaling beyond that capacity often <strong>involves downtime</strong> and comes with an upper limit </p></li></ul></li></ul></li></ul><h2 id="1-2-Reliability"><a href="#1-2-Reliability" class="headerlink" title="1.2 Reliability"></a>1.2 Reliability</h2><ul><li>Probability a system will fail in a given period</li><li>A distributed system is considered reliable if it keeps delivering its services even when one or more software or hardware components fail </li><li>A reliable distributed system achieves this through redundancy of both the software components and data <ul><li>Eliminate every single point of failure</li></ul></li></ul><h2 id="1-3-Availability"><a href="#1-3-Availability" class="headerlink" title="1.3 Availability"></a>1.3 Availability</h2><ul><li>The time a system remains operational to perform its required function in s specific period </li><li>Percentage of time that a system, service, or a machine remains operational under normal conditions </li><li>Reliability  is availability over time considering the full range of possible real world conditions that can occur</li><li>If a system is reliable, it is available. However, if it is available, it is not necessarily reliable. In other words, high reliability contributes to high availability, but it is possible to achieve a high availability even with an unreliable product by minimizing repair time and ensuring that spares are always available when they are needed</li></ul><h2 id="1-4-Efficiency"><a href="#1-4-Efficiency" class="headerlink" title="1.4 Efficiency"></a>1.4 Efficiency</h2><ul><li><p>Standard measures of its efficiency </p><ul><li><p>Response time/ latency </p><ul><li>denotes the delay to obtain the first item </li></ul></li><li><p>Throughput / bandwidth</p><ul><li>number of items delivered in a given time unit </li></ul></li></ul></li><li><p>two measures above correspond to the following unit costs </p><ul><li>number of messages globally sent by the nodes of the system regardless of the message size </li><li>size of messages representing the volume of data exchanges </li></ul></li></ul><h2 id="1-5-Serviceability-Manageability"><a href="#1-5-Serviceability-Manageability" class="headerlink" title="1.5 Serviceability / Manageability"></a>1.5 Serviceability / Manageability</h2><ul><li>How easy it is to operate and maintain </li><li>Simplicity and speed with which a system can be repared or maintained </li><li>Ease of diagnosing and understanding problems when they occur, ease of making updates or modifications, </li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>System Design General Guides - from Grokking SDI</title>
       <link href="/System-Design-General-Guides-from-Grokking-SDI/"/>
       <url>/System-Design-General-Guides-from-Grokking-SDI/</url>
