@@ -69,3 +69,67 @@ top:
 + How easy it is to operate and maintain 
 + Simplicity and speed with which a system can be repared or maintained 
 + Ease of diagnosing and understanding problems when they occur, ease of making updates or modifications, 
+
+# 2. Load Balancing 
+
+## 2.1 What is Load Balancer? 
+
++ A critical component of any distributed system
+    + help to spread the traffic across a cluster of servers to improve responsiveness and availability of applications/ websites/ databases 
+    + also keep track of the status of all the resources while distributing requests 
+        + if one server is not available to take new requests, not responding, has elevated error rate 
+        + LB will stop sending traffic to such server 
+
+    + sit between client and the server accepting incoming network and application traffic, distribute traffic across multiple backend servers using various algorithm
+    + could prevents any one application server from becoming a single point of failure 
+
++ where to add LB?
+    + between the user and the web server 
+    + between web servers and an internal platform layer, like application servers or cache servers 
+    + between internal platform layer and database 
+## 2.2 Benefits 
+
++ from user side 
+    + faster, uninterrupted service; their requests could be immediately passed on to a more readily available resource 
+
++ from service provider side 
+    + experience less downtime and higher throughput 
+
++ long term benefits
+    + smart load balancers provide benefits like predictive analytics that determine traffic bottlenecks before they happen 
+
+## 2.3 Load Balancing Algorithms
+
++ How does the load balancer choose the backend server?
+    + 1. Make sure servers could respond appropriately to requests 
+        + routinely do health check 
+            + regularly attempt to connect to backend servers to ensure that servers are listening 
+    + 2. Use pre configured algorithm to select one from the set of healthy servers 
+        + Least connection Method 
+            + direct traffic to the server with fewest active connections 
+            + useful when there are a large number of persistent client connections which are unevenly distributed between the servers
+
+        + Least Response Time Method 
+            + direct traffic to the server with the fewest active connections and the lowest average response time 
+
+        + Least Bandwidth Method 
+            + selects the server that is currently serving the least amount of traffic measured in megabits per second (Mbps)
+
+        + Round Robin Method 
+            + cycles through a list of servers and sends each new request to the next server 
+            + most useful when the servers are of equal specification and there are not many persistent connections
+
+        + weighted round robin 
+            + desifned to better handle servers with different processing capacities 
+            + each server is assigned a weight which indicates the processing capacity 
+
+        + IP Hash 
+            + A hash of the IP address of the client is calculated to redirect the request to a server 
+
+
+## 2.4 Redundant Load Balancers 
+
++ Load Balancer can be a single point of failure 
+    + thus we need a second load balancer, to form a cluster 
+    + each LB monitors the health of the other
+    + passive one could be switched to be active anytime since they keep monitoring same 
