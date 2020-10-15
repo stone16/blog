@@ -133,3 +133,55 @@ top:
     + thus we need a second load balancer, to form a cluster 
     + each LB monitors the health of the other
     + passive one could be switched to be active anytime since they keep monitoring same 
+
+# 3. Caching 
+
+Caching enable you to make vastly better use of the resources you already have as well as make otherwise unattainable product requirements feasible。 
+
+It takes advantage of the locality of reference principle: recently requested data is likely to be requested again, could be used in almost every layer of computing 
+
+## 3.1 Application Server Cache 
+
++ place a cache directly on a request layer node 
++ cache could be located both in memory and on the node's local disk 
+
++ One note here 
+    + if expand this to many nodes, depends on your load balancer behavior, if it randomly distributes requests across the nodes, the same request will go to different nodes, thus increasing cache misses. 
+        + could use either global caches or distributed caches for it 
+
+## 3.2 Content Distribution Network 
+
++ For sites serving large amounts of static media 
++ A typical workflow 
+    + A request first ask the CDN for a piece of static media 
+    + CDN will serve the content if it has it locally available 
+    + If not, CDN will query the back end servers for the file 
+    + Then cache it locally, and serve it to the requesting user 
+## 3.3 Cache Invalidation 
+
++ Cache needs maintenance for keeping cache coherent with the source of truth
+    + if data is modified in db, should be invalidated in the cache 
+
++ Write Through Cache 
+    + Data is written into the cache and the corresponding database at the same time 
+    + It could minimize the risk of data loss, but since every write operation mush be done twice before returning success to the client, latency would be higher 
+
++ Write Around Cache 
+    + Data is written directly to permanent storage, bypassing the cache 
+    + Could reduce the cache being flooded with write operations that will not subsequently be re-read
+    + But a read request for recently written data will create a cache miss 
+
++ Write Back Cache 
+    + Data is written to cache alone
+    + Write to permanent storage is done after specified intervals or under certain conditions 
+    + Low latency and high throughput for write intensive applications 
+    + However this speed up could cause issue of data loss in case of a crash or other adverse event because the only copy of the written data is in the cache 
+    
+## 3.4 Cache Eviction Policies 
+
++ First In First Out 
++ Last In First Out 
++ Least Recently Used 
++ Most Recently Used 
++ Least Frequently Used 
++ Randowm Replacement 
