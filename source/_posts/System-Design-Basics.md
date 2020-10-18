@@ -185,3 +185,61 @@ It takes advantage of the locality of reference principle: recently requested da
 + Most Recently Used 
 + Least Frequently Used 
 + Randowm Replacement 
+
+# 4. Data Partitioning 
+
+It aims to break up a big database into many smaller parts. It's a process of splitting up a DB/ table across multiple machines to improve the manageability, performance, availability, and load balancing of an application. 
+
+The justification for data partitioning is after a certain scale point, it's cheaper and more feasible to scale horizontally by adding more machines that to grow it vertically by adding beefier servers 
+
+## 4.1 Partitioning Methods 
+
+### 4.1.1 Horizontal Partitioning/ Sharding 
+
++ Put different rows into different tables 
++ range based partitioning as we store different ranges of data in separate tables 
++ Probelm here
+    + is the range value isn't chosen carefully, the partitioning scheme will lead to unbalanced servers 
+### 4.1.2 Vertical Partitioning 
+
++ store data related to a specific feature in their own server 
+    + like photo in one server, video in another, people they follow in another 
+
++ not quite scalable, if our app experience some high traffic, then the single server will not be enough to handle such traffic 
+
+### 4.1.3 Directory Based Partitioning 
+
++ Create a lookup service which knows your current partitioning scheme and abstracts it away from the DB access code 
++ To find a particular data entity, query the directory server that holds the mapping between each tuple key to its DB server
+
+## 4.2 Partitioning Criteria 
+
++ Key or hash based partitioning 
+    + apply a hash function to some key attributes of the entity we are storing 
+    + need to ensure a uniform allocation of data among servers 
+    + it will change the hash function when every time you add / remove some servers, the workaround is to use consistent hashing 
+
++ List Partitioning 
+    + each partition is assigned a list of values 
+
++ Round robind partitioning 
++ Composite Partitioning 
+    + combination of criteria above
+
+## 4.3 Common Problems of Data Partitioning 
+
++ Joins and Denormalization 
+    + Performing joins on a database that runs on several different servers 
+    + will not be performance efficient 
+    + Workaround is to denormalize database so queries perviously requiring joins can be performed from a single table 
+        + but need to deal with data inconsistency issue 
+
++ Referential Integrity 
+    + nforce data integrity constraints such as foreign keys in a partitioned database can be extremely difficult
+
++ Rebalancing 
+    + need to do that due to 
+        + data distribution is not uniform 
+        + could be a lot of load on one partition 
+
+    + In such cases, either we have to create more DB partitions or have to rebalance existing partitions, which means the partitioning scheme changed and all existing data moved to new locations. Doing this without incurring downtime is extremely difficult. Using a scheme like directory based partitioning does make rebalancing a more palatable experience at the cost of increasing the complexity of the system and creating a new single point of failure 
