@@ -243,3 +243,15 @@ The justification for data partitioning is after a certain scale point, it's che
         + could be a lot of load on one partition 
 
     + In such cases, either we have to create more DB partitions or have to rebalance existing partitions, which means the partitioning scheme changed and all existing data moved to new locations. Doing this without incurring downtime is extremely difficult. Using a scheme like directory based partitioning does make rebalancing a more palatable experience at the cost of increasing the complexity of the system and creating a new single point of failure 
+
+# 5. Indexes 
+
+Leverage on indexes when current database performance is no longer satisfactory. Indexing could help make search faster, it could be created using one or more columns of a ddb table, providing the basis for both rapid random lookups and efficient access of ordered records. 
+
+Index can dramatically speed up data retrieval but may itself be large due to the additional keys, which will slow down data insertion and update. 
+
+When adding rows or making updates to existing rows for a table with an active index, we not only have to write the data but also have to update the index. This will decrease the write performance. 
+
+This performance degradation applies to all insert, update, and delete operations for the table. For this reason, adding unnecessary indexes on tables should be avoided and indexes that are no longer used should be removed.
+
+If the goal of ddb is often written to and rarely read from, in that case, decreasing the performance of the more common operation, which is writing, is probably not worth the increase in performance we get from reading.
