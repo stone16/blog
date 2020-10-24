@@ -255,3 +255,39 @@ When adding rows or making updates to existing rows for a table with an active i
 This performance degradation applies to all insert, update, and delete operations for the table. For this reason, adding unnecessary indexes on tables should be avoided and indexes that are no longer used should be removed.
 
 If the goal of ddb is often written to and rarely read from, in that case, decreasing the performance of the more common operation, which is writing, is probably not worth the increase in performance we get from reading.
+
+# 6. Proxies
+
+## 6.1 What is Proxy Server? 
+
++ Intermediate server between the client and the backend server 
++ Clients connect to proxy servers to make a request for a service like
+    + web page
+    + file connection 
+
++ Proxy server is a piece of software or hardware that acts as an intermediary for requests from clients seeking resources from other servers 
++ Proxy are used to 
+    + filter requests 
+    + transform requests 
+        + add/ remove headers 
+        + encrypt and decrypt
+        + compress a resource 
+
+    + caching 
+        + if multiple clients access a particular resource, the proxy server can cache it and serve it to all clients without going to the remote server 
+
+## 6.2 Types 
+
++ Open Proxy 
+    + A proxy server that is accessible by any internet user 
+    + type
+        + anonymous proxy 
+            + reveals its identity as a server but does not disclose the initial IP address 
+        + transparent proxy 
+            + Identify itself and with the suppot of HTTP headers 
+            + IP address could be viewed 
+            + main benefit of using this sort of server is its ability to cache the websites 
+
++ reverse proxy 
+    + retrieve resources on behalf of a client from one or more servers 
+    + these resources are then returned to the client, appearing as if they originated from the proxy server itself 
