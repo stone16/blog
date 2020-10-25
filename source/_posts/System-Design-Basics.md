@@ -291,3 +291,23 @@ If the goal of ddb is often written to and rarely read from, in that case, decre
 + reverse proxy 
     + retrieve resources on behalf of a client from one or more servers 
     + these resources are then returned to the client, appearing as if they originated from the proxy server itself 
+
+# 7. Redundancy and Replication 
+
++ redundancy 
+    + duplication of critical components or functions of a system with the intention of increasing the reliability of the system 
+        + backup
+        + fail saft 
+        + direct improvement on actual system performance 
+
+
++ replication 
+    + shareing information to ensure consistency between redundant resources
+        + to improve reliability
+        + fault tolerance
+        + accessibility 
+
+    + primary replica relationship 
+        + primary server gets all the updates 
+        + then ripple through to the replica servers 
+        + each replica outputs a message stating that it has received the update successfully 
