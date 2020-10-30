@@ -311,3 +311,125 @@ If the goal of ddb is often written to and rarely read from, in that case, decre
         + primary server gets all the updates 
         + then ripple through to the replica servers 
         + each replica outputs a message stating that it has received the update successfully 
+# 8. SQL vs NoSQL
+
+## 8.1 Concepts
++ Relational databases 
+    + structured 
+    + predefiend schemas 
+
++ Non-relational database 
+    + unstrutured 
+    + distributed
+    + dynamic schema 
+
+
++ SQL
+    + store data in rows and columns 
+    + each row contains:
+        + all the info about one entity 
+
+    + each column contains:
+        + all separate data points 
+
++ NoSQL
+    + Key-Value Stores 
+        + store in an arry of key value pairs
+        + key is an attribute name which is linked to a vlue 
+            + redis
+            + voldemort
+            + dynamo
+
+    + document database
+        + data is stored in documents (instead of rows and columns in a table)
+        + documents are grouped together in collections 
+        + each document can have an entirely different structure
+
+    + wide column databases
+        + have column families, which are containers for rows 
+        + no need to know all the columns up front and each row doesn't have to have the same number of columns
+        + best suited for analyzing large datasets 
+        + type 
+            + HBase
+            + Cassandra
+
+    + Graph Database
+        + used to store data whose relations are best represented in a graph 
+        + data is saved in graph structures with:
+            + nodes 
+                + entities
+            + properties
+                + information about the entities 
+            + lines 
+                + connections between the entities
+
+
+## 8.2 Differences between SQL and NoSQL
+
++ Storage
+    + SQL 
+        + each row represents an entity 
+        + each column represents a data point about the entity 
+
+    + NoSQL
+        + could be key value
+        + document
+        + graph 
+
++ Schema
+    + SQL
+        + each record conforms to a fixed schema 
+            + columns must be decided and chosen before data entry 
+            + each row must have data for each column 
+        + schema modification need to involve modifying the whole database and go offline 
+
+    + NoSQL
+        + schemas are dynamic 
+        + columns can be added on the fly, and each row doesn't have to contain data for each column
+
++ Query 
+    + SQL 
+        + Structured query language for defining and manipulating the data 
+
+    + NoSQL 
+        + Query focus on a collection of documents 
+        + UnQL - unstructured query language 
+
+
++ Scalability
+    + SQL
+        + vetically scalable 
+            + by increase the horsepower (memory, CPU, etc.) of the hardware 
+
+    + NoSQL
+        + horizontally scalable 
+            + we could add more servers easily in database infrastructure to handle more traffic 
+            + any cheap hardware could host NoSQL database
+
++ Reliability or ACID comliancy
+    + ACID
+        + atomocity
+        + consistency
+        + isolation
+        + durability 
+
+    + most NoSQL solutions sacrifice ACID compliance for performance and scalability 
+
+
+## 8.3 Choose which one? 
+
++ Reasons for use SQL
+    + Need ACID compliance 
+        + ACID reduces anomalies and protects the integrity of your db by prescribing exactly how transactions interact with the database 
+    + Data is structured and unchanging 
+ 
+
++ Reasons for use NoSQL 
+    + Store large volumens of data that often have little to no structure 
+        + NoSQL allows use to add new types 
+        + with document based databases, you can store data in one place without having to define what types of data those are in advance 
+
+    + Making the most of cloud computing and storage 
+        + cloud based storage requires data to be easily spread across multiple servers to scale up 
+
+    + Rapid development 
