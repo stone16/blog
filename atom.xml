@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-11-01T18:53:41.564Z</updated>
+  <updated>2020-11-01T19:04:53.993Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LC - Tree</title>
+    <link href="https://www.llchen60.com/LC-Tree/"/>
+    <id>https://www.llchen60.com/LC-Tree/</id>
+    <published>2020-11-01T18:54:24.000Z</published>
+    <updated>2020-11-01T19:04:53.993Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="LC-543-Diameter-of-Binary-Tree"><a href="#LC-543-Diameter-of-Binary-Tree" class="headerlink" title="LC 543. Diameter of Binary Tree"></a>LC 543. Diameter of Binary Tree</h1><ul><li><p>Diameter – length of the longest path between any two nodes in a tre </p></li><li><p>Binary Tree </p><pre><code>public class Solution {  int max = 0;  public int diameterOfBinaryTree(TreeNode root) {      maxDepth(root);      return max;  }  private int maxDepth(TreeNode root) {      if (root == null) return 0;      int left = maxDepth(root.left);      int right = maxDepth(root.right);      max = Math.max(max, left + right);      return Math.max(left, right) + 1;  }}</code></pre></li></ul><h1 id="LC-938-Range-Sum-of-BST"><a href="#LC-938-Range-Sum-of-BST" class="headerlink" title="LC 938. Range Sum of BST"></a>LC 938. Range Sum of BST</h1><ul><li><p>二叉查找树</p><ul><li>左子树的值会小于根节点的值</li><li>右子树的值都大于根节点的值</li></ul></li><li><p>二叉查找树当中找区间，一定是需要用到二叉查找树本身的性质的</p></li></ul><h2 id="Solution-1-Brute-Force"><a href="#Solution-1-Brute-Force" class="headerlink" title="Solution 1: Brute Force"></a>Solution 1: Brute Force</h2><ul><li>遍历整个树，对于每个节点，对其进行判断，若值在区间内，则累加到一个全局变量上</li></ul><pre><code>class Solution {    int sum = 0;    public int rangeSumBST(TreeNode root, int L, int R) {        addToSum(root, L, R);        return sum;    }    void addToSum(TreeNode node, int L, int R) {        if (node == null) return;        if (node.val &gt;= L &amp;&amp; node.val &lt;= R) {            sum += node.val;        }        addToSum(node.left, L, R);        addToSum(node.right, L, R);    }}</code></pre><h2 id="Solution-2-Leverage-on-BST"><a href="#Solution-2-Leverage-on-BST" class="headerlink" title="Solution 2: Leverage on BST"></a>Solution 2: Leverage on BST</h2><ul><li><p>逻辑是如果node.val &lt; L, 那么只有右子树是有可能获取在区间内的值的</p><pre><code>class Solution {  int ans;  public int rangeSumBST(TreeNode root, int L, int R) {      ans = 0;      dfs(root, L, R);      return ans;  }  public void dfs(TreeNode node, int L, int R) {      if (node != null) {          if (L &lt;= node.val &amp;&amp; node.val &lt;= R)              ans += node.val;          if (L &lt; node.val)              dfs(node.left, L, R);          if (node.val &lt; R)              dfs(node.right, L, R);      }  }}</code></pre></li><li><p>Q: L13 – L16, 为什么不能写成</p><ul><li><code>node.val &gt; R</code></li><li><code>node.val &lt; L</code></li></ul></li></ul><h1 id="LC-199-Binary-Tree-Right-Side-View"><a href="#LC-199-Binary-Tree-Right-Side-View" class="headerlink" title="LC 199: Binary Tree Right Side View"></a>LC 199: Binary Tree Right Side View</h1><ul><li>对树的分层操作<ul><li>使用BFS算法</li></ul></li></ul><h2 id="Solution-1-使用两个队列"><a href="#Solution-1-使用两个队列" class="headerlink" title="Solution 1: 使用两个队列"></a>Solution 1: 使用两个队列</h2><ul><li>两个队列，一个为当前层，一个为下一层</li></ul><pre><code>class Solution {    public List&lt;Integer&gt; rightSideView(TreeNode root) {        if (root == null) {            return new ArrayList&lt;&gt;();        }        ArrayDeque&lt;TreeNode&gt; currentQueue = new ArrayDeque&lt;&gt;();        ArrayDeque&lt;TreeNode&gt; nextQueue = new ArrayDeque&lt;&gt;();        nextQueue.add(root);        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();        TreeNode node = null;        while(!nextQueue.isEmpty()) {            currentQueue = nextQueue.clone();            nextQueue.clear();            while (!currentQueue.isEmpty()) {                node = currentQueue.poll();                if (node.left != null) {                    nextQueue.add(node.left);                }                if (node.right != null) {                    nextQueue.add(node.right);                }            }            if (currentQueue.isEmpty()) {                result.add(node.val);            }        }        return result;    }}</code></pre><h2 id="Solution-2-一个队列-Sentinel"><a href="#Solution-2-一个队列-Sentinel" class="headerlink" title="Solution 2: 一个队列 + Sentinel"></a>Solution 2: 一个队列 + Sentinel</h2><ul><li>使用null作为卫兵节点来区分不同层</li></ul><pre><code>class Solution {    public List&lt;Integer&gt; rightSideView(TreeNode root) {        if (root == null) {            return new ArrayList&lt;&gt;();        }        Queue&lt;TreeNode&gt; queue = new LinkedList() {            {offer(root);            offer(null);}        };        TreeNode prev, cur = root;        List&lt;Integer&gt; result = new ArrayList();        while (!queue.isEmpty()) {            prev = cur;            cur = queue.poll();            while(cur != null) {                if (cur.left != null) {                    queue.offer(cur.left);                }                if (cur.right != null) {                    queue.offer(cur.right);                }                prev = cur;                cur = queue.poll();            }            result.add(prev.val);            if (!queue.isEmpty()) queue.offer(null);        }        return result;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;LC-543-Diameter-of-Binary-Tree&quot;&gt;&lt;a href=&quot;#LC-543-Diameter-of-Binary-Tree&quot; class=&quot;headerlink&quot; title=&quot;LC 543. Diameter of Binary Tree&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="Tree" scheme="https://www.llchen60.com/tags/Tree/"/>
+    
+  </entry>
   
   <entry>
     <title>LC - Linked List</title>
@@ -522,33 +548,6 @@ System.
     
       <category term="Cloud" scheme="https://www.llchen60.com/categories/Cloud/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Git 流程</title>
-    <link href="https://www.llchen60.com/Git-%E6%B5%81%E7%A8%8B/"/>
-    <id>https://www.llchen60.com/Git-%E6%B5%81%E7%A8%8B/</id>
-    <published>2020-08-12T00:41:26.000Z</published>
-    <updated>2020-08-12T00:41:52.187Z</updated>
-    
-    <content type="html"><![CDATA[<p>解决git conflict永远都是件很让人头疼的事情，为了让生活更简单，还是需要设定正确的git流程的。现在有如下几种git 流程</p><h1 id="1-基本的Git-流程"><a href="#1-基本的Git-流程" class="headerlink" title="1. 基本的Git 流程"></a>1. 基本的Git 流程</h1><p>只有一个branch – master. 开发者直接commit进去，然后会进入到alpha，beta, gamma, prod等不同的生产状态当中。</p><p>一般来说，除非你在自己单独完成某项小任务，是很不推荐这样做的。</p><p>缺陷在于：</p><ul><li>代码上的合作变得很困难，可能会有多次冲突，需要逐次进行解决</li></ul><h1 id="2-Git-feature分支流程"><a href="#2-Git-feature分支流程" class="headerlink" title="2. Git feature分支流程"></a>2. Git feature分支流程</h1><p>当在同一个codebase我们有多个工程师共同工作的时候，使用feature分治就变成了必不可少的事情了。</p><p>如果现在有两个工程师在同一个branch上工作，来提交自己的代码，那最终一定是冲突不断的，很容易出现各种问题。</p><p>为了避免出现这种情况，两个开发者可以创建两个不同的分支，分别在自己的分治上来开发自己的项目。</p><p>这样做的好处是不用担心大量需要解决的冲突了。</p><h1 id="3-Git-feature分支流程与Develop分支"><a href="#3-Git-feature分支流程与Develop分支" class="headerlink" title="3. Git feature分支流程与Develop分支"></a>3. Git feature分支流程与Develop分支</h1><p>和上述的feature分支流程很类似，只是又加了一个Develop分支，在这个流程下，master 分支永远反映一个prod ready的状态。</p><p>无论何时，当小组想要将代码部署到prod的时候，他们从master分支来进行部署</p><p>develop branch反映的是带着最新的为了下次发布准备的所有改动。开发者fork develop 分支的代码，来做独立开发。一旦项目做好，经过了测试，就合并到develop分支当中，在develop分支来做充分的测试，然后再merge到master分支当中去。</p><p>这样做的好处是能够允许小组持续merge新的功能，做持续集成。不过过程相对比较麻烦。个人观点是在小规模的前提下，使用特征分支就足够了，再加上持续集成的工具，譬如Jerkins，很安全，效率也很不错。</p><p><a href="https://zepel.io/blog/5-git-workflows-to-improve-development/" target="_blank" rel="noopener">https://zepel.io/blog/5-git-workflows-to-improve-development/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;解决git conflict永远都是件很让人头疼的事情，为了让生活更简单，还是需要设定正确的git流程的。现在有如下几种git 流程&lt;/p&gt;
-&lt;h1 id=&quot;1-基本的Git-流程&quot;&gt;&lt;a href=&quot;#1-基本的Git-流程&quot; class=&quot;headerlink&quot; tit
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="git" scheme="https://www.llchen60.com/tags/git/"/>
     
   </entry>
   
