@@ -228,7 +228,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="272">
-<input type="hidden" id="yelog_site_word_count" value="454.5k">
+<input type="hidden" id="yelog_site_word_count" value="454.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3339,12 +3339,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-10-24 20:34:35'>2020-10-24 20:33</time>
+        创建时间:<time class="date" title='更新时间: 2020-11-01 10:53:41'>2020-10-24 20:33</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:825</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3374,7 +3374,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-23-Merge-K-Sorted-Lists"><span class="toc-text">LC-23 Merge K Sorted Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution1-Brute-Force"><span class="toc-text">Solution1: Brute Force</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2"><span class="toc-text">Solution 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-3-使用Priority-Queue"><span class="toc-text">Solution 3: 使用Priority Queue</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-24-Swap-Nodes-in-Pairs"><span class="toc-text">LC-24 Swap Nodes in Pairs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-1474-Delete-N-nodes-after-M-nodes-of-a-linked-list"><span class="toc-text">LC-1474 Delete N nodes after M nodes of a linked list</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-23-Merge-K-Sorted-Lists"><span class="toc-text">LC-23 Merge K Sorted Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution1-Brute-Force"><span class="toc-text">Solution1: Brute Force</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2"><span class="toc-text">Solution 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-3-使用Priority-Queue"><span class="toc-text">Solution 3: 使用Priority Queue</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-24-Swap-Nodes-in-Pairs"><span class="toc-text">LC-24 Swap Nodes in Pairs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-234-Palindrome-Linked-List"><span class="toc-text">LC-234 Palindrome Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-递归"><span class="toc-text">Solution 1: 递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-反向后半链表来做比较"><span class="toc-text">Solution 2: 反向后半链表来做比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-1474-Delete-N-nodes-after-M-nodes-of-a-linked-list"><span class="toc-text">LC-1474 Delete N nodes after M nodes of a linked list</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3543,6 +3543,81 @@ class Solution {
         }
         return dummy.next;
     }
+}</code></pre><h1 id="LC-234-Palindrome-Linked-List"><a href="#LC-234-Palindrome-Linked-List" class="headerlink" title="LC-234 Palindrome Linked List"></a>LC-234 Palindrome Linked List</h1><h2 id="Solution-1-递归"><a href="#Solution-1-递归" class="headerlink" title="Solution 1: 递归"></a>Solution 1: 递归</h2><ul>
+<li><p>反向输出链表的递归逻辑</p>
+<pre><code>function print_values_in_reverse(ListNode head)
+  if head is NOT null
+      print_values_in_reverse(head.next)
+      print head.val</code></pre></li>
+<li><p>题解</p>
+</li>
+</ul>
+<pre><code>class Solution {
+
+    private ListNode front;
+
+    private boolean recursiveCheck(ListNode cur) {
+
+        if (cur != null) {
+            if (!recursiveCheck(cur.next)) return false;
+            if (cur.val != front.val) return false;
+            front = front.next;
+        }
+        return true;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        front = head;
+        return recursiveCheck(head);
+    }
+}
+</code></pre><h2 id="Solution-2-反向后半链表来做比较"><a href="#Solution-2-反向后半链表来做比较" class="headerlink" title="Solution 2: 反向后半链表来做比较"></a>Solution 2: 反向后半链表来做比较</h2><pre><code>class Solution {
+
+    public boolean isPalindrome(ListNode head) {
+
+        if (head == null) return true;
+
+        // Find the end of first half and reverse second half.
+        ListNode firstHalfEnd = endOfFirstHalf(head);
+        ListNode secondHalfStart = reverseList(firstHalfEnd.next);
+
+        // Check whether or not there is a palindrome.
+        ListNode p1 = head;
+        ListNode p2 = secondHalfStart;
+        boolean result = true;
+        while (result &amp;&amp; p2 != null) {
+            if (p1.val != p2.val) result = false;
+            p1 = p1.next;
+            p2 = p2.next;
+        }        
+
+        // Restore the list and return the result.
+        firstHalfEnd.next = reverseList(secondHalfStart);
+        return result;
+    }
+
+    // Taken from https://leetcode.com/problems/reverse-linked-list/solution/
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+    private ListNode endOfFirstHalf(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next != null &amp;&amp; fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 }</code></pre><h1 id="LC-1474-Delete-N-nodes-after-M-nodes-of-a-linked-list"><a href="#LC-1474-Delete-N-nodes-after-M-nodes-of-a-linked-list" class="headerlink" title="LC-1474 Delete N nodes after M nodes of a linked list"></a>LC-1474 Delete N nodes after M nodes of a linked list</h1><ul>
 <li><p>链表热身题</p>
 </li>
@@ -3591,10 +3666,10 @@ class Solution {
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>LC - Linked List</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">825</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-10-24, 20:33:44</p>
-    <p><span class="copy-title">最后更新:</span>2020-10-24, 20:34:35</p>
+    <p><span class="copy-title">最后更新:</span>2020-11-01, 10:53:41</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/LC-Linked-List/" title="LC - Linked List">https://www.llchen60.com/LC-Linked-List/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
