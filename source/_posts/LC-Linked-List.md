@@ -164,6 +164,95 @@ class Solution {
 }
 ```
 
+# LC-234 Palindrome Linked List 
+
+## Solution 1: 递归
+
++ 反向输出链表的递归逻辑
+```
+function print_values_in_reverse(ListNode head)
+    if head is NOT null
+        print_values_in_reverse(head.next)
+        print head.val
+```
+
++ 题解
+
+```
+class Solution {
+    
+    private ListNode front;
+    
+    private boolean recursiveCheck(ListNode cur) {
+        
+        if (cur != null) {
+            if (!recursiveCheck(cur.next)) return false;
+            if (cur.val != front.val) return false;
+            front = front.next;
+        }
+        return true;
+    }
+    
+    public boolean isPalindrome(ListNode head) {
+        front = head;
+        return recursiveCheck(head);
+    }
+}
+
+```
+
+## Solution 2: 反向后半链表来做比较
+
+```
+class Solution {
+
+    public boolean isPalindrome(ListNode head) {
+
+        if (head == null) return true;
+
+        // Find the end of first half and reverse second half.
+        ListNode firstHalfEnd = endOfFirstHalf(head);
+        ListNode secondHalfStart = reverseList(firstHalfEnd.next);
+
+        // Check whether or not there is a palindrome.
+        ListNode p1 = head;
+        ListNode p2 = secondHalfStart;
+        boolean result = true;
+        while (result && p2 != null) {
+            if (p1.val != p2.val) result = false;
+            p1 = p1.next;
+            p2 = p2.next;
+        }        
+
+        // Restore the list and return the result.
+        firstHalfEnd.next = reverseList(secondHalfStart);
+        return result;
+    }
+
+    // Taken from https://leetcode.com/problems/reverse-linked-list/solution/
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+    private ListNode endOfFirstHalf(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
+```
 
 # LC-1474 Delete N nodes after M nodes of a linked list 
 
