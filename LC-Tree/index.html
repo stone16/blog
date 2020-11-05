@@ -228,7 +228,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="273">
-<input type="hidden" id="yelog_site_word_count" value="455.3k">
+<input type="hidden" id="yelog_site_word_count" value="456.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3351,12 +3351,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-11-01 11:04:53'>2020-11-01 10:54</time>
+        创建时间:<time class="date" title='更新时间: 2020-11-04 20:20:50'>2020-11-01 10:54</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:585</span>
+        <span>字数:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3386,7 +3386,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-543-Diameter-of-Binary-Tree"><span class="toc-text">LC 543. Diameter of Binary Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-938-Range-Sum-of-BST"><span class="toc-text">LC 938. Range Sum of BST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-Brute-Force"><span class="toc-text">Solution 1: Brute Force</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-Leverage-on-BST"><span class="toc-text">Solution 2: Leverage on BST</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-199-Binary-Tree-Right-Side-View"><span class="toc-text">LC 199: Binary Tree Right Side View</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-使用两个队列"><span class="toc-text">Solution 1: 使用两个队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-一个队列-Sentinel"><span class="toc-text">Solution 2: 一个队列 + Sentinel</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lc-98-Validate-Binary-Search-Tree"><span class="toc-text">Lc 98. Validate Binary Search Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-Recursion"><span class="toc-text">Solution 1: Recursion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-Inorder-Traversal"><span class="toc-text">Solution 2: Inorder Traversal</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><span class="toc-text">LC 105. Construct Binary Tree from Preorder and Inorder Traversal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-226-Invert-Binary-Tree"><span class="toc-text">LC 226. Invert Binary Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-Recursion-1"><span class="toc-text">Solution 1: Recursion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-Iteration"><span class="toc-text">Solution 2: Iteration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-Iterative"><span class="toc-text">Solution 2: Iterative</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-543-Diameter-of-Binary-Tree"><span class="toc-text">LC 543. Diameter of Binary Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-938-Range-Sum-of-BST"><span class="toc-text">LC 938. Range Sum of BST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-Brute-Force"><span class="toc-text">Solution 1: Brute Force</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-Leverage-on-BST"><span class="toc-text">Solution 2: Leverage on BST</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LC-199-Binary-Tree-Right-Side-View"><span class="toc-text">LC 199: Binary Tree Right Side View</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-1-使用两个队列"><span class="toc-text">Solution 1: 使用两个队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution-2-一个队列-Sentinel"><span class="toc-text">Solution 2: 一个队列 + Sentinel</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3402,7 +3402,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="LC-543-Diameter-of-Binary-Tree"><a href="#LC-543-Diameter-of-Binary-Tree" class="headerlink" title="LC 543. Diameter of Binary Tree"></a>LC 543. Diameter of Binary Tree</h1><ul>
+        <h1 id="Lc-98-Validate-Binary-Search-Tree"><a href="#Lc-98-Validate-Binary-Search-Tree" class="headerlink" title="Lc 98. Validate Binary Search Tree"></a>Lc 98. Validate Binary Search Tree</h1><h2 id="Solution-1-Recursion"><a href="#Solution-1-Recursion" class="headerlink" title="Solution 1: Recursion"></a>Solution 1: Recursion</h2><pre><code>class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValidSubTree(root, null, null);
+    }
+
+    boolean isValidSubTree(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) {
+            return true;
+        }
+
+        int val = node.val;
+        if (lower != null &amp;&amp; val &lt;= lower) return false;
+        if (upper != null &amp;&amp; val &gt;= upper) return false;
+
+        if (!isValidSubTree(node.right, val, upper)) return false;
+        if (!isValidSubTree(node.left, lower, val)) return false;
+        return true;
+    }
+}
+</code></pre><h2 id="Solution-2-Inorder-Traversal"><a href="#Solution-2-Inorder-Traversal" class="headerlink" title="Solution 2: Inorder Traversal"></a>Solution 2: Inorder Traversal</h2><ul>
+<li>这样遍历前一个比后一个小才是BST</li>
+</ul>
+<pre><code>class Solution {
+  public boolean isValidBST(TreeNode root) {
+    Stack&lt;TreeNode&gt; stack = new Stack();
+    double inorder = - Double.MAX_VALUE;
+
+    while (!stack.isEmpty() || root != null) {
+      while (root != null) {
+        stack.push(root);
+        root = root.left;
+      }
+      root = stack.pop();
+      // If next element in inorder traversal
+      // is smaller than the previous one
+      // that&#39;s not BST.
+      if (root.val &lt;= inorder) return false;
+      inorder = root.val;
+      root = root.right;
+    }
+    return true;
+  }
+}
+</code></pre><h1 id="LC-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><a href="#LC-105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" class="headerlink" title="LC 105. Construct Binary Tree from Preorder and Inorder Traversal"></a>LC 105. Construct Binary Tree from Preorder and Inorder Traversal</h1><ul>
+<li>前序遍历  根节点，左子节点，右子节点</li>
+<li>中序遍历  左子节点，根节点，右子节点</li>
+<li>没有重复数字</li>
+<li>前序遍历的第一个节点是根节点，其在中序遍历当中出现的位置，其之前是左子树，其之后是右子树，可以用这个逻辑来递归进行判断</li>
+</ul>
+<h1 id="LC-226-Invert-Binary-Tree"><a href="#LC-226-Invert-Binary-Tree" class="headerlink" title="LC 226. Invert Binary Tree"></a>LC 226. Invert Binary Tree</h1><h2 id="Solution-1-Recursion-1"><a href="#Solution-1-Recursion-1" class="headerlink" title="Solution 1: Recursion"></a>Solution 1: Recursion</h2><ul>
+<li>逻辑是每个根节点的左子树是其右子树的翻转，即层层都翻转过了  用递归完成这个逻辑就好</li>
+</ul>
+<pre><code>class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode right = invertTree(root.right);
+        TreeNode left = invertTree(root.left);
+
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+}
+</code></pre><h2 id="Solution-2-Iteration"><a href="#Solution-2-Iteration" class="headerlink" title="Solution 2: Iteration"></a>Solution 2: Iteration</h2><pre><code>class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;TreeNode&gt;();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            TreeNode temp = current.left;
+            current.left = current.right;
+            current.right = temp;
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        return root;
+    }
+}</code></pre><h2 id="Solution-2-Iterative"><a href="#Solution-2-Iterative" class="headerlink" title="Solution 2: Iterative"></a>Solution 2: Iterative</h2><h1 id="LC-543-Diameter-of-Binary-Tree"><a href="#LC-543-Diameter-of-Binary-Tree" class="headerlink" title="LC 543. Diameter of Binary Tree"></a>LC 543. Diameter of Binary Tree</h1><ul>
 <li><p>Diameter – length of the longest path between any two nodes in a tre </p>
 </li>
 <li><p>Binary Tree </p>
@@ -3485,6 +3567,8 @@
 <li><code>node.val &gt; R</code></li>
 <li><code>node.val &lt; L</code></li>
 </ul>
+</li>
+<li><p>因为其实第10行的if判断只是为了加进去ans，没有做其他的逻辑运算的</p>
 </li>
 </ul>
 <h1 id="LC-199-Binary-Tree-Right-Side-View"><a href="#LC-199-Binary-Tree-Right-Side-View" class="headerlink" title="LC 199: Binary Tree Right Side View"></a>LC 199: Binary Tree Right Side View</h1><ul>
@@ -3587,10 +3671,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>LC - Tree</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">585</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-11-01, 10:54:24</p>
-    <p><span class="copy-title">最后更新:</span>2020-11-01, 11:04:53</p>
+    <p><span class="copy-title">最后更新:</span>2020-11-04, 20:20:50</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/LC-Tree/" title="LC - Tree">https://www.llchen60.com/LC-Tree/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
