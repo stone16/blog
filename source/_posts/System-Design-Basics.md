@@ -433,3 +433,111 @@ If the goal of ddb is often written to and rarely read from, in that case, decre
         + cloud based storage requires data to be easily spread across multiple servers to scale up 
 
     + Rapid development 
+
+
+
+# 9. CAP Theorem 
+
+CAP states it's impossible for a distributed software system to simultaneously provide more than two out of three of the following gurantees:
++ consistency 
++ availability 
++ partition tolerance 
+
+CAP say when designing a distributed system we could only pick two of them: 
+
++ consistency 
+    + all nodes see the same data at the same time 
+    + consistency is achieved by updating several nodes before allowing further reads 
+
++ availability 
+    + every requests get a response on success/ failure 
+    + availability is achieved by replicating the data across different servers 
+
++ partition tolerance 
+    + system continues to work despite msg loss or partial failure 
+    + data is sufficiently replicated across combinations of nodes and networks to keep the system up through intermittent outages 
+
+
+
+We cannot build a general data store that is continually available, sequentially consistent, and tolerant to any partition failures. We can only build a system that has any two of these three properties. Because, to be consistent, all nodes should see the same set of updates in the same order. But if the network loses a partition, updates in one partition might not make it to the other partitions before a client reads from the out-of-date partition after having read from the up-to-date one. The only thing that can be done to cope with this possibility is to stop serving requests from the out-of-date partition, but then the service is no longer 100% available.
+
+
+# 10. Consistent Hashing 
+
+## 10.1 Existing Hash Funciton 
+Distributed Hash Table is super important in distributed scalable systems. Hash Tables need a key, a value, and a hash function where hash function maps the key to a location where the value is stored. 
+
+A common thought of hash function would be key%n, but it has several drawbacks:
+
+1. Not horizontally scalable 
+    1. whenever a new cache host is added to the system, all existing mappings are broken 
+
+2. Not load balanced 
+    1. expecially for non-uniformly distributed data 
+    2. some caches would come to be hot and saturated while the others idel and are almost empty 
+
+## 10.2 Consistent Hashing 
+
++ want to minimize reorganization when nodes are added or removed 
++ when the hash table is resized  only k/n keys need to be remapped where k is the total number of keys and n is the total number of servers 
++ objects are mapped to the same host if possible 
+
+
++ how it works 
+    + map a key to an integer
+    + all integers are placed on a ring such that the values are wrapped around 
+    + each object is assigned to the next server that appears o nthe circle in clockwise order  --> provide an even distribution of objects to servers 
+    + if a server fails and is removed from the circle, only the objects that were mapped to the failed server need to be reassigned to the next server in clockwise order 
+
+# 11. Long-Polling, WebSockets, Server-Sent Events 
+
+Long Polling, WebSockets and Server Sent events are popular communication protocols between a client like web browser and a web server 
+
+## 11.1 Ajax Polling 
+
++ Client repeatedly polls a server for data
++ Client make a request and wait for the server to respond with data. If no data available, an empty response is returned 
+
++ whole workflow
+    + client opens a connection and requests data from the server using regular HTTP 
+    + the requested webpage sends requests to the server at regular intervals 
+    + the server calculates the response and sends it back, like regular HTTP traffic 
+    + the client repeats the above three steps periodically to get updates from the server 
+
+
++ pitfall
+    + Polling let client continue to ask server for any new data, as a result, a lot of responses are empty, creating HTTP overhead 
+
+## 11.2 HTTP Long-Polling 
+
++ Workflow 
+    + If the server does not have any data available for the client, instead of sending an empty response, the server holds the request and waits until some data becomes available 
+    + once available, a full response is sent to the client. Client then immediately request information from the server so that the server will almost always have an available waiting request that it can use to deliver data in response to an event 
+
+
++ The client makes an initial request using regular HTTP and then waits for a response.
++ The server delays its response until an update is available or a timeout has occurred.
++ When an update is available, the server sends a full response to the client.
++ The client typically sends a new long-poll request, either immediately upon receiving a response or after a pause to allow an acceptable latency period.
++ Each Long-Poll request has a timeout. The client has to reconnect periodically after the connection is closed due to timeouts.
+
+
+## 11.3 WebSockets
+
++ Provides Full duplex communication channels over a single TCP connection. 
++ Provides a persistent connection between a client and a server that both parties can use to start sending data at any time. 
++ lower overhead, real time data transfer 
+    + it provides a standardized way for the server to send content to the browser without being asked by the client and allowing for messages to be passed back and forth while keeping the connection open 
++ Workflow 
+    + Client establish a websocket connection through a process known as the WebSocket handshake
+    + if the process succeeds server and client can exchange data in both directions at any time 
+
+## 11.4 Server Sent Events - SSEs
+
++ Client establish a persistent and long term connection with the server 
++ Server use this connection to send data to a client 
++ But client would need another tech/ protocol to send data to the server 
+
+# Reference 
+
+1. https://en.wikipedia.org/wiki/Consistent_hashing#:~:text=In%20computer%20science%2C%20consistent%20hashing,is%20the%20number%20of%20slots. 
