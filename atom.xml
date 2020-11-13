@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-11-09T00:04:36.117Z</updated>
+  <updated>2020-11-13T04:47:05.219Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Designing Pastebin</title>
+    <link href="https://www.llchen60.com/Designing-Pastebin/"/>
+    <id>https://www.llchen60.com/Designing-Pastebin/</id>
+    <published>2020-11-13T04:46:26.000Z</published>
+    <updated>2020-11-13T04:47:05.219Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Intro-and-requirements"><a href="#1-Intro-and-requirements" class="headerlink" title="1. Intro and requirements"></a>1. Intro and requirements</h1><ul><li>Pastebin<ul><li>service enable users to store plain text or images over the network and generate unique urls to access the uploaded data </li></ul></li></ul><ul><li><p>requirements</p><ul><li><p>functional </p><ul><li>users could upload/ paste their data and get a unique URL to access it </li><li>users only able to upload text </li><li>data and links will expire after a specific timespan, user should be able to specify expeiration time </li><li>users should optionally be able to pick a custom alias for their paste </li></ul></li><li><p>non functional </p><ul><li>system should be highly reliable, no data loss any time </li><li>system should be highly available</li><li>small latency </li><li>paste links should not be guessable </li></ul></li></ul></li></ul><h1 id="2-thoughts"><a href="#2-thoughts" class="headerlink" title="2. thoughts"></a>2. thoughts</h1><ul><li><p>requirement clarification </p><ul><li>what’s the accept types of the file? </li><li>what’s the maximum size of the file? <ul><li>10MB</li></ul></li></ul></li><li><p>hardware requirement </p><ul><li>read write request number </li><li>average request size </li><li>storage size <ul><li>we probably don’t want to use more than 70% of our total storage capacity at any point </li></ul></li><li>cache size </li></ul></li><li><p>how to achieve highly reliable, and highly available </p><ul><li>duplicate host </li></ul></li><li><p>how you want to store those file </p><ul><li>of course key value<ul><li>then question come to be what’s the overall number of key we need to store </li></ul></li></ul></li><li><p>high level design </p><ul><li>besides normal client, application server, and object storage </li><li>we could have another db to store metadata, like paste id, user </li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Intro-and-requirements&quot;&gt;&lt;a href=&quot;#1-Intro-and-requirements&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and requirements&quot;&gt;&lt;/a&gt;1. Intro and 
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Designing a URL Shortening service like TinyURL</title>
@@ -517,34 +541,6 @@ System.
     
     
       <category term="HTTP" scheme="https://www.llchen60.com/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线程池创建: Executors  vs ThreadPoolExecutor</title>
-    <link href="https://www.llchen60.com/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9B%E5%BB%BA-Executors-vs-ThreadPoolExecutor/"/>
-    <id>https://www.llchen60.com/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%88%9B%E5%BB%BA-Executors-vs-ThreadPoolExecutor/</id>
-    <published>2020-08-16T22:17:49.000Z</published>
-    <updated>2020-08-16T22:18:46.296Z</updated>
-    
-    <content type="html"><![CDATA[<p>工程上对于线程池的使用必不可少，很多人会选择使用Executors class定义的<code>newCachedThreadPool</code>以及<code>newFixedThreadPool</code>。这篇博文就稍微分析一下二者适用的场景，以及我们应该使用Executors的方法还是直接调用ThreadPoolExecutor来创建线程池。</p><p>首先让我们一起看看二者的源码</p><pre><code>   /**     * Creates a thread pool that reuses a fixed number of threads     * operating off a shared unbounded queue.  At any point, at most     * {@code nThreads} threads will be active processing tasks.     * If additional tasks are submitted when all threads are active,     * they will wait in the queue until a thread is available.     * If any thread terminates due to a failure during execution     * prior to shutdown, a new one will take its place if needed to     * execute subsequent tasks.  The threads in the pool will exist     * until it is explicitly {@link ExecutorService#shutdown shutdown}.     *     * @param nThreads the number of threads in the pool     * @return the newly created thread pool     * @throws IllegalArgumentException if {@code nThreads &lt;= 0}     */    public static ExecutorService newFixedThreadPool(int nThreads) {        return new ThreadPoolExecutor(nThreads, nThreads,                                      0L, TimeUnit.MILLISECONDS,                                      new LinkedBlockingQueue&lt;Runnable&gt;());    }    /**     * Creates a thread pool that creates new threads as needed, but     * will reuse previously constructed threads when they are     * available.  These pools will typically improve the performance     * of programs that execute many short-lived asynchronous tasks.     * Calls to {@code execute} will reuse previously constructed     * threads if available. If no existing thread is available, a new     * thread will be created and added to the pool. Threads that have     * not been used for sixty seconds are terminated and removed from     * the cache. Thus, a pool that remains idle for long enough will     * not consume any resources. Note that pools with similar     * properties but different details (for example, timeout parameters)     * may be created using {@link ThreadPoolExecutor} constructors.     *     * @return the newly created thread pool     */    public static ExecutorService newCachedThreadPool() {        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,                                      60L, TimeUnit.SECONDS,                                      new SynchronousQueue&lt;Runnable&gt;());    } </code></pre><p>二者对比，你会发现实际上他们都是调用的ThreadPoolExecutor,只是参数是不一样的。那让我们看看ThreadPoolExecutor的源码</p><pre><code>    /**     * Creates a new {@code ThreadPoolExecutor} with the given initial     * parameters and default thread factory and rejected execution handler.     * It may be more convenient to use one of the {@link Executors} factory     * methods instead of this general purpose constructor.     *     * @param corePoolSize the number of threads to keep in the pool, even     *        if they are idle, unless {@code allowCoreThreadTimeOut} is set     * @param maximumPoolSize the maximum number of threads to allow in the     *        pool     * @param keepAliveTime when the number of threads is greater than     *        the core, this is the maximum time that excess idle threads     *        will wait for new tasks before terminating.     * @param unit the time unit for the {@code keepAliveTime} argument     * @param workQueue the queue to use for holding tasks before they are     *        executed.  This queue will hold only the {@code Runnable}     *        tasks submitted by the {@code execute} method.     * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;     *         {@code corePoolSize &lt; 0}&lt;br&gt;     *         {@code keepAliveTime &lt; 0}&lt;br&gt;     *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;     *         {@code maximumPoolSize &lt; corePoolSize}     * @throws NullPointerException if {@code workQueue} is null     */    public ThreadPoolExecutor(int corePoolSize,                              int maximumPoolSize,                              long keepAliveTime,                              TimeUnit unit,                              BlockingQueue&lt;Runnable&gt; workQueue) {        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,             Executors.defaultThreadFactory(), defaultHandler);    }</code></pre><p>看一下其中需要的几个参数：</p><ul><li><p>corePoolSize</p><ul><li>在线程池中最少要保持的线程数量，哪怕已经超过了定义的keepAliveTime </li></ul></li><li><p>maximumPoolSize</p><ul><li>线程池允许的最大线程数量</li></ul></li><li><p>keepAliveTime</p><ul><li>当当前线程数超过核心线程数量的时候，就会检查闲置的线程，如果在这段时间没有新的任务，就暂停当前线程</li></ul></li><li><p>unit</p><ul><li>定义事件单位</li></ul></li><li><p>workQueue</p><ul><li>在任务还没有执行之前，被用来持有这些任务的</li><li>queue之后持有execute方法提交的Runnable任务</li></ul></li></ul><p>带着这些信息我们再来看Executors.newFixedThreadPool的定义，方法传入了线程数量，然后核心线程数和最大线程数被设为一样的数值，让我们来看看在不同情况下他的表现：</p><ul><li><p>任务数小于等于设定的线程数</p><ul><li>一切运行正常</li><li>限制的线程不会被关闭</li></ul></li><li><p>任务数大于设定的线程数</p><ul><li>任务会加入到队列当中，进行等待</li><li>值得注意的是在实例化LinkedBlockingQueue的时候，传入的参数是<code>this(Integer.MAX_VALUE);</code><ul><li>这意味着如果任务在线程中执行的时间非常长，任务可以在队列中堆积到无限大，最终结果会是内存被占满..程序崩溃</li></ul></li></ul></li></ul><p>而对于Executors.newCachedThreadPool来说，其定义的核心线程数量为0，最大线程数是<code>Integer.MAX_VALUE</code>,即理论上是可以有无限多的线程，keepAliveTime是60秒，使用的是SynchrounousQueue。</p><ul><li>当任务进来的时候<ul><li>会增加线程</li><li>有多少任务进来，就会使用ThreadFactory开多少线程，因为允许的最大线程数时无限大，所以可以一直这么开下去</li><li>而其workqueue是SynchrounousQueue,其大小始终为0，在这里我们可以直接任务当任务进来的时候，如果没有空闲的线程，会直接让ThreadFactory来构建新的线程了</li><li>那么当任务无限多的时候，就会创建无数多的线程，直接撑爆内存了</li></ul></li></ul><p>由此可以看出来使用Executors的两个方法直接构建线程池因为设定的参数是无界的，可能会导致OOM的错误，更好的方式是自己根据当前线程池的应用场景，来设定参数。</p><p>根据应用场景的不同，根据doc，我们有三大类的queue可以选择，分别为：</p><ul><li><p><code>Synchronous queue</code></p><ul><li>直接讲任务交给线程</li><li>自己本身不持有任何任务的</li><li>针对的应用场景可以是各个线程之间任务的执行有某些内在的联系，阻碍一个的执行可能会影响另外一个</li><li>为了不拒绝新的线程的创建，就必须设定线程池的大小为Integer.MAX_VALUE</li><li>这样如果处理速度低于新任务的提交速度的话，可能会导致非常非常大的线程池</li></ul></li><li><p><code>LinkedBlockingQueue</code></p><ul><li>使用没有边界的queue</li><li>这样当所有核心线程都忙碌的时候，任务就都会在队列当中排队</li><li>这种方式可以环节突发性的峰值，但是如果处理速度慢于任务堆积的速度，queue会变得很大</li></ul></li><li><p><code>ArrayBlockingQueue</code></p><ul><li>有限长的queue</li><li>这样可以防止资源耗尽，但是也很难做调整和优化</li><li>队列的大小和最大线程数相互影响，很难做到优化</li><li>使用大队列，小线程池可以减少对于CPU的使用，线程切换的损耗，但是单位时间处理速度不会太高</li><li>使用小队列，大线程池可以让CPU更忙碌，但是切换线程会有不小的损耗</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.ibm.com/developerworks/library/j-jtp0730/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/library/j-jtp0730/index.html</a> </li><li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;工程上对于线程池的使用必不可少，很多人会选择使用Executors class定义的&lt;code&gt;newCachedThreadPool&lt;/code&gt;以及&lt;code&gt;newFixedThreadPool&lt;/code&gt;。这篇博文就稍微分析一下二者适用的场景，以及我们应该使用Ex
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Executors" scheme="https://www.llchen60.com/tags/Executors/"/>
-    
-      <category term="ThreadPoolExecutor" scheme="https://www.llchen60.com/tags/ThreadPoolExecutor/"/>
     
   </entry>
   

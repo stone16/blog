@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Designing Pastebin</title>
+      <link href="/Designing-Pastebin/"/>
+      <url>/Designing-Pastebin/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro-and-requirements"><a href="#1-Intro-and-requirements" class="headerlink" title="1. Intro and requirements"></a>1. Intro and requirements</h1><ul><li>Pastebin<ul><li>service enable users to store plain text or images over the network and generate unique urls to access the uploaded data </li></ul></li></ul><ul><li><p>requirements</p><ul><li><p>functional </p><ul><li>users could upload/ paste their data and get a unique URL to access it </li><li>users only able to upload text </li><li>data and links will expire after a specific timespan, user should be able to specify expeiration time </li><li>users should optionally be able to pick a custom alias for their paste </li></ul></li><li><p>non functional </p><ul><li>system should be highly reliable, no data loss any time </li><li>system should be highly available</li><li>small latency </li><li>paste links should not be guessable </li></ul></li></ul></li></ul><h1 id="2-thoughts"><a href="#2-thoughts" class="headerlink" title="2. thoughts"></a>2. thoughts</h1><ul><li><p>requirement clarification </p><ul><li>what’s the accept types of the file? </li><li>what’s the maximum size of the file? <ul><li>10MB</li></ul></li></ul></li><li><p>hardware requirement </p><ul><li>read write request number </li><li>average request size </li><li>storage size <ul><li>we probably don’t want to use more than 70% of our total storage capacity at any point </li></ul></li><li>cache size </li></ul></li><li><p>how to achieve highly reliable, and highly available </p><ul><li>duplicate host </li></ul></li><li><p>how you want to store those file </p><ul><li>of course key value<ul><li>then question come to be what’s the overall number of key we need to store </li></ul></li></ul></li><li><p>high level design </p><ul><li>besides normal client, application server, and object storage </li><li>we could have another db to store metadata, like paste id, user </li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Designing a URL Shortening service like TinyURL</title>
       <link href="/Designing-a-URL-Shortening-service-like-TinyURL/"/>
       <url>/Designing-a-URL-Shortening-service-like-TinyURL/</url>
