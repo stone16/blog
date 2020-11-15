@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Instagram Design Scratch</title>
+      <link href="/Instagram-Design-Scratch/"/>
+      <url>/Instagram-Design-Scratch/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Intro-and-Instagram"><a href="#1-Intro-and-Instagram" class="headerlink" title="1. Intro and Instagram"></a>1. Intro and Instagram</h1><ul><li>social networking service </li><li>upload and share photos and videos </li><li>share info either publicly or privately </li><li>share through other social networking platforms <ul><li>facebook</li><li>twitter</li><li>flickr</li><li>tumblr</li></ul></li></ul><ul><li><p>requirement </p><ul><li><p>functional </p><ul><li>users should be able to upload/ download/ view photos </li><li>search based on photo/ video titles </li><li>users can follow other users </li><li>system will generate and display a user’s News Feed consisting of top photos from all the people the user follows </li></ul></li><li><p>non-functional </p><ul><li>services need to be highly available </li><li>latency come to be 200ms for News Feed Generation </li></ul></li></ul></li></ul><h1 id="2-Design"><a href="#2-Design" class="headerlink" title="2. Design"></a>2. Design</h1><ul><li>patterns<ul><li>read heavy system <ul><li>need to effectively manage storage </li><li>100% reliable of data </li><li>low latency </li></ul></li></ul></li></ul><ul><li><p>system design </p><ul><li><p>we need to support two scenarios</p><ul><li>upload photos </li><li>view/ search photos</li></ul></li><li><p>db </p><ul><li>image storage </li><li>image metadata storage </li></ul></li></ul></li></ul><ul><li><p>Separate read and write servers </p><ul><li>web servers have a connection limit </li><li>assume max is 500 connections, that means server cannot have more than 500 concurrent uploads or reads </li></ul></li><li><p>reliability </p><ul><li>run a redundant secondary copy of the service that is not serving any traffic if only one instance of a service is required to run at any point </li></ul></li><li><p>data sharding </p><ul><li><p>partition based on UserID?</p><ul><li>hot user </li><li>non-uniform storage as some users may upload a lot of images </li><li>what if one shard is full? </li><li>unavailability – all users data come to be unavailable all of sudden </li></ul></li><li><p>use photoId as partition key </p></li></ul></li><li><p>news feeds - e.g 100 feeds </p><ul><li><p>real time generation </p><ul><li>need to go to user follow table to get all of its following people </li><li>then query with user id to get their 100 updates </li><li>combine them, go through our ranking algo </li><li>then generate the output </li></ul></li><li><p>should choose pre-generating way as it will save a lot of times </p><ul><li>have dedicated servers that are continuously generating users’ News Feeds and storing them in a UserNewsFeed table</li></ul></li></ul></li><li><p>approaches for seanding news feed contents to users </p><ul><li><p>pull</p><ul><li><p>clients can pull the News Feed contents from the server on a regular basis or manually whenever they need it </p><ul><li><p>problems</p><ul><li>new data might not be shown to the users until clients issue a pull request </li><li>most of time, pull requests response could be empty </li></ul></li><li><p>push </p><ul><li>servers can push new data to the users as soon as it is available </li><li>users then need to maintain a long poll request with the server for receiving the updates </li><li>issue <ul><li>user has follow a lot of people </li><li>celebrity user who has meillions of followers </li><li>server then have to push updates quite frequently </li></ul></li></ul></li><li><p>hybrid </p><ul><li>move all the users who have a high number of follows to a pull based model and only push data to those users who have a few hundred follows </li></ul></li></ul></li></ul></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Designing Pastebin</title>
       <link href="/Designing-Pastebin/"/>
       <url>/Designing-Pastebin/</url>
