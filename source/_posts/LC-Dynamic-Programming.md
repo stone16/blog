@@ -49,6 +49,124 @@ top:
 
 ## 2.1 硬币找零问题
 
++ 问题描述
+    + 给定n种不同面值的硬币 分别记为c[0], c[1], c[2]...c[n]
+    + 总数额k
+    + 编写一个函数计算出最少需要几枚硬币凑出这个金额K
+    + 若无可能的组合，返回-1 
+
++ 思路
+    + 这是个求最值的问题
+    + 求最值问题的核心原理就是穷举，将所有可能的凑硬币的方法做穷举，看看最少需要多少枚硬币
++ 贪心算法
+    + 每一步计算做出的都是在当前看起来最好的选择
+        + 即局部最优解，并不从整体来考虑
+    + 基本思路
+        + 建立数学模型
+        + 将待求解的问题划分为若干子问题，对每个子问题进行求解，得到子问题的局部最优解
+        + 将子问题的局部最优解进行合并，最终得到基于局部最优解的一个解 
+
++ 用贪心算法来解决上述问题的时候，会遇到“过于贪心”导致最终无解的问题，所以需要引入回溯来解决过于贪心的问题
+
+
++ 贪心算法的实现
+```
+
+int getMinCoinCountHelper(int total, int[] values, int valueCount) {
+    int rest = total;
+    int count = 0;
+
+    // 从大到小遍历所有面值
+    for (int i = 0; i < valueCount; ++ i) {
+        int currentCount = rest / values[i]; // 计算当前面值最多能用多少个
+        rest -= currentCount * values[i]; // 计算使用完当前面值后的余额
+        count += currentCount; // 增加当前面额用量
+
+        if (rest == 0) {
+            return count;
+        }
+    }
+
+    return -1; // 如果到这里说明无法凑出总价，返回-1
+}
+
+int getMinCoinCount() {
+    int[] values = { 5, 3 }; // 硬币面值
+    int total = 11; // 总价
+    return getMinCoinCountHelper(total, values, 2); // 输出结果
+}
+```
+
++ 贪心算法 + 回溯的实现
+
+```
+
+int getMinCoinCountOfValue(int total, int[] values, int valueIndex) {
+    int valueCount = values.length;
+    if (valueIndex == valueCount) { return Integer.MAX_VALUE; }
+
+    int minResult = Integer.MAX_VALUE;
+    int currentValue = values[valueIndex];
+    int maxCount = total / currentValue;
+
+    for (int count = maxCount; count >= 0; count --) {
+        int rest = total - count * currentValue;
+
+        // 如果rest为0，表示余额已除尽，组合完成
+        if (rest == 0) {
+            minResult = Math.min(minResult, count);
+            break;
+        }
+
+        // 否则尝试用剩余面值求当前余额的硬币总数
+        int restCount = getMinCoinCountOfValue(rest, values, valueIndex + 1);
+
+        // 如果后续没有可用组合
+        if (restCount == Integer.MAX_VALUE) {
+            // 如果当前面值已经为0，返回-1表示尝试失败
+            if (count == 0) { break; }
+            // 否则尝试把当前面值-1
+            continue;
+        }
+
+        minResult = Math.min(minResult, count + restCount);
+    }
+
+    return minResult;
+}
+
+int getMinCoinCountLoop(int total, int[] values, int k) {
+    int minCount = Integer.MAX_VALUE;
+    int valueCount = values.length;
+    
+    if (k == valueCount) {
+        return Math.min(minCount, getMinCoinCountOfValue(total, values, 0));
+    }
+
+    for (int i = k; i <= valueCount - 1; i++) {
+        // k位置已经排列好
+        int t = values[k];
+        values[k] = values[i];
+        values[i]=t;
+        minCount = Math.min(minCount, getMinCoinCountLoop(total, values, k + 1)); // 考虑后一位
+
+        // 回溯
+        t = values[k];
+        values[k] = values[i];
+        values[i]=t;
+    }
+
+    return minCount;
+}
+
+int getMinCoinCountOfValue() {
+    int[] values = { 5, 3 }; // 硬币面值
+    int total = 11; // 总价
+    int minCoin = getMinCoinCountLoop(total, values, 0);
+    
+    return (minCoin == Integer.MAX_VALUE) ? -1 : minCoin;  // 输出答案
+}
+```
 # 91. Decode Ways 
 
 ## Solution 1: DP 
