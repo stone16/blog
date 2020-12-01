@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-12-01T01:47:28.996Z</updated>
+  <updated>2020-12-01T02:54:37.861Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Dropbox Design Scratch</title>
+    <link href="https://www.llchen60.com/Dropbox-Design-Scratch/"/>
+    <id>https://www.llchen60.com/Dropbox-Design-Scratch/</id>
+    <published>2020-12-01T02:54:17.000Z</published>
+    <updated>2020-12-01T02:54:37.861Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Intro-and-requirement"><a href="#1-Intro-and-requirement" class="headerlink" title="1. Intro and requirement"></a>1. Intro and requirement</h1><ul><li><p>cloud file storage services </p><ul><li>simplify the storage and exchange of digital resources among multiple devices </li><li>benefits <ul><li>availability </li><li>reliability and durability </li><li>scalability </li></ul></li></ul></li><li><p>requirements and goals </p><ul><li>users should be able to upload and download their files/ photos from any device </li><li>users should be able to share files or folders with other users </li><li>service should support automatic synchronization between devices </li><li>support storing large files </li><li>ACID support </li><li>Offline editing, CURD offline, and get synced when online </li><li>snapshotting of the data </li></ul></li></ul><h1 id="2-Thoughts"><a href="#2-Thoughts" class="headerlink" title="2. Thoughts"></a>2. Thoughts</h1><ul><li><p>size, limit , pattern </p><ul><li>read heavy </li><li>write huge file </li></ul></li><li><p>synchronize among different devices</p><ul><li>all devices make call to backend to grab newest status </li></ul></li><li><p>file/ folder share </p><ul><li>permission management </li></ul></li><li><p>Offline editing </p><ul><li>Use queue to store the data locally? </li></ul></li></ul><h1 id="3-Design"><a href="#3-Design" class="headerlink" title="3. Design"></a>3. Design</h1><h2 id="3-1-considerations"><a href="#3-1-considerations" class="headerlink" title="3.1  considerations"></a>3.1  considerations</h2><pre><code>+ huge read and write volumes    + read write almost equal + files can be stored in &lt;u&gt;**small parts or chunks (4MB)**&lt;/u&gt;, when fails, only the failed chunk should be retried + reduce the amount of data exchange by transfering updated chunks only + keep a local copy of metadata (file name, size, etc.) with the client can save us a lot of round trips to the server </code></pre><ul><li>high level design <ul><li>need to store files and metadata information like File name, file size, directory, who this file is shared with </li><li>need some servers that can help the clients to upload/ download files to cloud storage and some servers that can facilitate updating metadata about files and users</li><li>need some mechanism to notify all clients whenever an updates happens so they can synchronize their files </li></ul></li></ul><h2 id="3-2-high-level-design"><a href="#3-2-high-level-design" class="headerlink" title="3.2 high level design"></a>3.2 high level design</h2><pre><code>+ user specify folder as the workspace on the device     + file in the folder will be uploaded to the cloud     + updater/ delete will be reflected in the same way + modification on one device should be freely synced across others + systems we need based on requirements     + a storage server to store all real files     + a metadata service store file metadata, thus we could quickly get info about it     + a synchronizer service, to notify all clients whenever an update happens so they can synchronize files </code></pre><h2 id="3-3-Component-Design"><a href="#3-3-Component-Design" class="headerlink" title="3.3 Component Design"></a>3.3 Component Design</h2><h3 id="3-3-1-Client"><a href="#3-3-1-Client" class="headerlink" title="3.3.1 Client"></a>3.3.1 Client</h3><ul><li><p>responsibility </p><ul><li>need to monitor the workspace folder on user’s machine </li><li>sync files/ folders with remote cloud storage </li><li>interact with the remote synchronization service to handle file metadata updates </li></ul></li><li><p>how to handle file transfer efficiently</p><ul><li><p>break each file into smaller chunks so that we transfer only those chunks that are modified and not the whole file </p></li><li><p>calculate chunk size based on:</p><ul><li>storage devices we use in the cloud </li><li>network bandwidth </li><li>average file size in the storage </li></ul></li><li><p>need to keep a record of each file and the chunks in metadata </p></li></ul></li><li><p>shall we keep a copy of metadata with client? </p><ul><li>yes, it then allows us to do offline updates </li></ul></li><li><p>how can clients efficiently listen to changes happening with other clients? </p><ul><li><p>Solution 1</p><ul><li>clients periodically check with the server if there are any changes </li><li>issues <ul><li>have a delay in reflecting changes locally as clients will be checking for changes periodically compared to server notifying whever there is some change </li></ul></li></ul></li><li><p>Solution 2</p><ul><li>HTTP long polling </li><li>client requests information from the server with the expectation that the server may not respond immediately </li><li>servers hold the request open and waits for response information to become available </li></ul></li></ul></li><li><p>components </p><ul><li><p>inernal metadata db </p><ul><li>keep track of all the files, chunks, versions and location </li></ul></li><li><p>chunker </p><ul><li>split files into smaller pieces </li><li>reconstruct a file from its chunks </li></ul></li><li><p>watcher </p><ul><li>monitor the local workspace folders and notify the indexer of any action performed by the users </li></ul></li><li><p>indexer </p><ul><li>process the events received from the watcher and update the internal metadata database with information about the chunks of the modified files </li><li>once confirm chunks are successfully uploaded to the cloud storage, the indexer will communicate with the remote synchronization service to broadcast changes to other clients and update remote metadata database </li></ul></li></ul></li><li><p>for phone users, probably should sync on demand to save bandwidth and capacity </p></li></ul><h3 id="3-3-2-Metadata-Database"><a href="#3-3-2-Metadata-Database" class="headerlink" title="3.3.2 Metadata Database"></a>3.3.2 Metadata Database</h3><ul><li>responsible for maintaing the versioning and metadata information about files/ chunks, users and workspaces </li><li>store info like <ul><li>chunks </li><li>files </li><li>users</li><li>devices</li><li>workspace </li></ul></li></ul><h3 id="3-3-3-Synchronization-Service"><a href="#3-3-3-Synchronization-Service" class="headerlink" title="3.3.3 Synchronization Service"></a>3.3.3 Synchronization Service</h3><ul><li><p>component that processes file updates made by a client and apply these changes to other subscribed clients </p></li><li><p>also synchronizes clients local databases with the information stored in the remote metadata db </p></li><li><p>Implement a differenciation algo to reduce the amount of the data that needs to be synchronized </p><ul><li>just transmit the difference between two versions instead of the whole file </li></ul></li><li><p>to support a scalable synchronization protocol</p><ul><li>use a communication middleware </li><li>messaging system <ul><li>push or pull strategies </li></ul></li></ul></li></ul><h3 id="3-3-4-Message-Queuing-Service"><a href="#3-3-4-Message-Queuing-Service" class="headerlink" title="3.3.4 Message Queuing Service"></a>3.3.4 Message Queuing Service</h3><ul><li>Message queue service <ul><li>supports asynchronous message based communication between clients and the synchronization service </li></ul></li></ul><h3 id="3-3-5-Cloud-Storage"><a href="#3-3-5-Cloud-Storage" class="headerlink" title="3.3.5 Cloud Storage"></a>3.3.5 Cloud Storage</h3><p>Cloud/Block Storage stores chunks of files uploaded by the users. Clients directly interact with the storage to send and receive objects from it. Separation of the metadata from storage enables us to use any storage either in the cloud or in-house.</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.educative.io/courses/grokking-the-system-design-interview/m22Gymjp4mG" target="_blank" rel="noopener">Grokking the system design</a></li><li><a href="https://www.youtube.com/watch?v=U0xTu6E2CT8&t=9s&ab_channel=TechDummiesNarendraL" target="_blank" rel="noopener">Tech Dummies</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Intro-and-requirement&quot;&gt;&lt;a href=&quot;#1-Intro-and-requirement&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and requirement&quot;&gt;&lt;/a&gt;1. Intro and req
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>LC-Dynamic Programming</title>
@@ -500,33 +524,6 @@
       
         &lt;h1 id=&quot;1-Double&quot;&gt;&lt;a href=&quot;#1-Double&quot; class=&quot;headerlink&quot; title=&quot;1. Double&quot;&gt;&lt;/a&gt;1. Double&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;System.out.println(0.1+0.2);
 System.
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 判等问题</title>
-    <link href="https://www.llchen60.com/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/"/>
-    <id>https://www.llchen60.com/Java-%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98/</id>
-    <published>2020-08-26T20:16:43.000Z</published>
-    <updated>2020-08-26T20:17:17.758Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-equals-vs"><a href="#1-equals-vs" class="headerlink" title="1. equals vs =="></a>1. equals vs <code>==</code></h1><ul><li>对于基本类型，应使用==，比较的是值 </li><li>对于引用类型，需要使用equals，进行内容判等。使用<code>==</code>判断的是指针 –&gt; 代表的是两个对象在内存中的地址</li></ul><p>这里要注意的是Java是有字符串常量池机制的，当代码中出现双引号形式创建字符串对象的时候，JVM会先对字符串进行检查，如果字符串常量池存在相同内容的字符串对象的引用，就将这个引用返回；否则就创建新的字符串对象，然后将这个引用放入字符串常量池当中，并返回该引用</p><p>另外一个小坑是Integer在[-128,127]之间的数值是会做缓存的，即对于这中间的数值，即便你直接用<code>==</code>进行判断，有可能是直接会过的…</p><pre><code>public static Integer valueOf(int i) {    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)        return IntegerCache.cache[i + (-IntegerCache.low)];    return new Integer(i);}</code></pre><h2 id="1-1-equals方法的实现"><a href="#1-1-equals方法的实现" class="headerlink" title="1.1 equals方法的实现"></a>1.1 equals方法的实现</h2><ul><li>equals在Object类当中的定义比较的是对象的引用</li></ul><pre><code>public boolean equals(Object obj) {    return (this == obj);}</code></pre><ul><li>而Integer，String类都重写了这个方法</li></ul><pre><code>public boolean equals(Object anObject) {    if (this == anObject) {        return true;    }    if (anObject instanceof String) {        String anotherString = (String)anObject;        int n = value.length;        if (n == anotherString.value.length) {            char v1[] = value;            char v2[] = anotherString.value;            int i = 0;            while (n-- != 0) {                if (v1[i] != v2[i])                    return false;                i++;            }            return true;        }    }    return false;}</code></pre><p>上述代码是先比较了引用，如果引用的地址一致，那么久可以直接返回true了。如果不一致，那就首先判断类的类型，如果是String类，再进行长度判断，如果长度一致，就逐个比较字符</p><ul><li>实现一个equals方法，需要注意<ul><li>首先进行指针判断，如果对象相同直接返回true</li><li>需要对另一方进行判空，空对象和自身的比较结果一定是false</li><li>需要判断两个对象的类型，如果类型都不同，那么直接返回false</li><li>在确保类型相同的情况下进行类型的强制转换，然后逐一判断所有字段<ul><li>需要进行类型强制转换是因为我们override的equals方法默认的输入参数是Object</li></ul></li></ul></li></ul><h2 id="1-2-使用Lombok的小坑"><a href="#1-2-使用Lombok的小坑" class="headerlink" title="1.2 使用Lombok的小坑"></a>1.2 使用Lombok的小坑</h2><p>Lombok的@Data注解会帮助我们实现equals和hashcode方法，但是有继承关系的时候，Lombok自动生成的方法是不会考虑到父类的</p><ul><li><p>对于不想进行equals和hashCode判断的参数，可以使用：</p><ul><li><code>@EqualsAndHashCode.Exclude</code></li></ul></li><li><p>对于想要使用父类属性的场景，可以使用</p><ul><li><code>@EqualsAndHashCode(callSuper = true)</code></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-equals-vs&quot;&gt;&lt;a href=&quot;#1-equals-vs&quot; class=&quot;headerlink&quot; title=&quot;1. equals vs ==&quot;&gt;&lt;/a&gt;1. equals vs &lt;code&gt;==&lt;/code&gt;&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;对于基本类型，
       
     
     </summary>
