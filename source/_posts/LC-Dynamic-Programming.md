@@ -72,6 +72,25 @@ top:
 
 ## 1.4 备忘录
 
++ 前面说过我们可以通过枚举来获得满足条件的所有组合，然后再来求需要的极值，但是在这中间是很有可能有重叠子问题的
++ 可用的前提条件
+    + 无后效性
+        + 即在通过 A 阶段的子问题推导 B 阶段的子问题的时候，我们不需要回过头去再根据 B 阶段的子问题重新推导 A 阶段的子问题
+        + 即子问题之间的依赖是单向性的
++ 以斐波那契数列为例
+    + 我们在疯狂的重复计算子函数，大部分的递归树都是重复的
+    + 举个例子 
+        + f(9) = f(8) + f(7)
+        + 在计算f(8)的时候，又需要计算一遍f(7)
+        + 如此反复
+
++ 因此我们需要使用备忘录来解决重复计算的问题
+    + 在每次计算出一个子问题的答案以后，将这个临时的中间结果记录到备忘录当中，然后再返回
+
++ 常见的可用数据结构
+    + 数组
+    + 哈希表
+
 ## 1.5 动归的应用场景
 
 # 2. 动态规划的写法分析
@@ -200,6 +219,92 @@ int getMinCoinCountOfValue() {
     return (minCoin == Integer.MAX_VALUE) ? -1 : minCoin;  // 输出答案
 }
 ```
+# 62. Unique Paths 
+
+## Solution 1: Recursion 
+
+```
+class Solution {
+    int result = 0;
+    Map<int[], Integer> map = new HashMap<>();
+    
+    public int uniquePaths(int m, int n) {
+        // direction is either right or down 
+        helper(1, 1, m, n);
+        return result;
+    }
+    
+    private void helper(int x, int y, int m, int n) {
+        if (x < 1 || x > m || y < 1 || y > n) {
+            return;
+        }
+        
+        if (x == m && y == n) {
+            result ++;
+        }
+        helper(x + 1, y, m, n);
+        helper(x, y + 1, m, n);
+    }
+}
+```
+
+## Solution 2: DP
+
++ 注意的点
+    + 状态转移方程
+        + `dp[m][n] = dp[m-1][n] + dp[m][n-1];`
+
+    + 因为只有两个方向，实际上第一行第一列能到达的方法都只有一种，所以我们在做初始化的时候可以都初始化为1，具体的迭代从col = 1, row = 1开始，即第二行和第二列  这样来做就okay了
+
+```
+class Solution { 
+    public int uniquePaths(int m, int n) {
+        // 二维DP 
+        // dp[m][n] = dp[m-1][n] + dp[m][n-1];
+        int[][] dp = new int[m][n];
+        
+        for (int[] arr: dp) {
+            Arrays.fill(arr, 1);
+        }
+        
+        for (int col = 1; col < n; col ++) {
+            for(int row = 1; row < m; row ++) {
+                dp[row][col] = dp[row-1][col] + dp[row][col-1];
+            }
+        }
+        
+        return dp[m-1][n-1];
+    }
+}
+
+```
+
+# 70. Climbing Stairs 
+
+## Solution 1: DP
+
++ `dp[n] = dp[n-1] + dp[n-2]`
+
+```
+class Solution {
+    public int climbStairs(int n) {
+        // dp[n] = dp[n-1] + dp[n-2]
+        if (n <= 0) {
+            return 0;
+        }
+        
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+}
+
+```
+
 # 91. Decode Ways 
 
 ## Solution 1: DP 
