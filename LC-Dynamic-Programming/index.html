@@ -228,7 +228,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="278">
-<input type="hidden" id="yelog_site_word_count" value="461.6k">
+<input type="hidden" id="yelog_site_word_count" value="462.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3395,12 +3395,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-11-30 17:47:28'>2020-11-24 21:53</time>
+        创建时间:<time class="date" title='更新时间: 2020-12-01 18:31:45'>2020-11-24 21:53</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.3k</span>
+        <span>字数:2.9k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3546,7 +3546,42 @@
 </ul>
 </li>
 </ul>
-<h2 id="1-4-备忘录"><a href="#1-4-备忘录" class="headerlink" title="1.4 备忘录"></a>1.4 备忘录</h2><h2 id="1-5-动归的应用场景"><a href="#1-5-动归的应用场景" class="headerlink" title="1.5 动归的应用场景"></a>1.5 动归的应用场景</h2><h1 id="2-动态规划的写法分析"><a href="#2-动态规划的写法分析" class="headerlink" title="2. 动态规划的写法分析"></a>2. 动态规划的写法分析</h1><h1 id="3-案例分析"><a href="#3-案例分析" class="headerlink" title="3. 案例分析"></a>3. 案例分析</h1><h2 id="3-1-硬币找零问题"><a href="#3-1-硬币找零问题" class="headerlink" title="3.1 硬币找零问题"></a>3.1 硬币找零问题</h2><ul>
+<h2 id="1-4-备忘录"><a href="#1-4-备忘录" class="headerlink" title="1.4 备忘录"></a>1.4 备忘录</h2><ul>
+<li><p>前面说过我们可以通过枚举来获得满足条件的所有组合，然后再来求需要的极值，但是在这中间是很有可能有重叠子问题的</p>
+</li>
+<li><p>可用的前提条件</p>
+<ul>
+<li>无后效性<ul>
+<li>即在通过 A 阶段的子问题推导 B 阶段的子问题的时候，我们不需要回过头去再根据 B 阶段的子问题重新推导 A 阶段的子问题</li>
+<li>即子问题之间的依赖是单向性的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>以斐波那契数列为例</p>
+<ul>
+<li>我们在疯狂的重复计算子函数，大部分的递归树都是重复的</li>
+<li>举个例子 <ul>
+<li>f(9) = f(8) + f(7)</li>
+<li>在计算f(8)的时候，又需要计算一遍f(7)</li>
+<li>如此反复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>因此我们需要使用备忘录来解决重复计算的问题</p>
+<ul>
+<li>在每次计算出一个子问题的答案以后，将这个临时的中间结果记录到备忘录当中，然后再返回</li>
+</ul>
+</li>
+<li><p>常见的可用数据结构</p>
+<ul>
+<li>数组</li>
+<li>哈希表</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-动归的应用场景"><a href="#1-5-动归的应用场景" class="headerlink" title="1.5 动归的应用场景"></a>1.5 动归的应用场景</h2><h1 id="2-动态规划的写法分析"><a href="#2-动态规划的写法分析" class="headerlink" title="2. 动态规划的写法分析"></a>2. 动态规划的写法分析</h1><h1 id="3-案例分析"><a href="#3-案例分析" class="headerlink" title="3. 案例分析"></a>3. 案例分析</h1><h2 id="3-1-硬币找零问题"><a href="#3-1-硬币找零问题" class="headerlink" title="3.1 硬币找零问题"></a>3.1 硬币找零问题</h2><ul>
 <li><p>问题描述</p>
 <ul>
 <li>给定n种不同面值的硬币 分别记为c[0], c[1], c[2]…c[n]</li>
@@ -3647,7 +3682,65 @@ for (int i = k; i &lt;= valueCount - 1; i++) {
 return minCount;</code></pre><p>}</p>
 <p>int getMinCoinCountOfValue() {<br>    int[] values = { 5, 3 }; // 硬币面值<br>    int total = 11; // 总价<br>    int minCoin = getMinCoinCountLoop(total, values, 0);</p>
 <pre><code>return (minCoin == Integer.MAX_VALUE) ? -1 : minCoin;  // 输出答案</code></pre><p>}</p>
-<pre><code># 91. Decode Ways 
+<pre><code># 62. Unique Paths 
+
+## Solution 1: Recursion 
+</code></pre><p>class Solution {<br>    int result = 0;<br>    Map&lt;int[], Integer&gt; map = new HashMap&lt;&gt;();</p>
+<pre><code>public int uniquePaths(int m, int n) {
+    // direction is either right or down 
+    helper(1, 1, m, n);
+    return result;
+}
+
+private void helper(int x, int y, int m, int n) {
+    if (x &lt; 1 || x &gt; m || y &lt; 1 || y &gt; n) {
+        return;
+    }
+
+    if (x == m &amp;&amp; y == n) {
+        result ++;
+    }
+    helper(x + 1, y, m, n);
+    helper(x, y + 1, m, n);
+}</code></pre><p>}</p>
+<pre><code>
+## Solution 2: DP
+
++ 注意的点
+    + 状态转移方程
+        + `dp[m][n] = dp[m-1][n] + dp[m][n-1];`
+
+    + 因为只有两个方向，实际上第一行第一列能到达的方法都只有一种，所以我们在做初始化的时候可以都初始化为1，具体的迭代从col = 1, row = 1开始，即第二行和第二列  这样来做就okay了
+</code></pre><p>class Solution {<br>    public int uniquePaths(int m, int n) {<br>        // 二维DP<br>        // dp[m][n] = dp[m-1][n] + dp[m][n-1];<br>        int[][] dp = new int[m][n];</p>
+<pre><code>    for (int[] arr: dp) {
+        Arrays.fill(arr, 1);
+    }
+
+    for (int col = 1; col &lt; n; col ++) {
+        for(int row = 1; row &lt; m; row ++) {
+            dp[row][col] = dp[row-1][col] + dp[row][col-1];
+        }
+    }
+
+    return dp[m-1][n-1];
+}</code></pre><p>}</p>
+<pre><code>
+# 70. Climbing Stairs 
+
+## Solution 1: DP
+
++ `dp[n] = dp[n-1] + dp[n-2]`
+</code></pre><p>class Solution {<br>    public int climbStairs(int n) {<br>        // dp[n] = dp[n-1] + dp[n-2]<br>        if (n &lt;= 0) {<br>            return 0;<br>        }</p>
+<pre><code>    int[] dp = new int[n + 1];
+    dp[0] = 1;
+    dp[1] = 1;
+    for (int i = 2; i &lt;= n; i++) {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    return dp[n];
+}</code></pre><p>}</p>
+<pre><code>
+# 91. Decode Ways 
 
 ## Solution 1: DP 
 
@@ -3832,10 +3925,10 @@ private boolean subString(String testStr, Set&lt;String&gt; wordDict, int positi
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>LC-Dynamic Programming</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.3k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.9k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-11-24, 21:53:50</p>
-    <p><span class="copy-title">最后更新:</span>2020-11-30, 17:47:28</p>
+    <p><span class="copy-title">最后更新:</span>2020-12-01, 18:31:45</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/LC-Dynamic-Programming/" title="LC-Dynamic Programming">https://www.llchen60.com/LC-Dynamic-Programming/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
