@@ -51,4 +51,4 @@ Halo域名的配置与访问
 ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses
 ```
 
-[Connect to an Amazon EC3 instance on HTTP or HTTPS ports](https://aws.amazon.com/premiumsupport/knowledge-center/connect-http-https-ec2/)
+[Connect to an Amazon EC2 instance on HTTP or HTTPS ports](https://aws.amazon.com/premiumsupport/knowledge-center/connect-http-https-ec2/)
