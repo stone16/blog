@@ -33,7 +33,7 @@ top:
 
 Halo域名的配置与访问
 
-# 5. Troubleshooting
+# 4. Troubleshooting
 
 1. 服务器上启动了服务，port开了但是Public Ip还是无法访问到
 
