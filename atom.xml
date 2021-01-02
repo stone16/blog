@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2020-12-28T18:50:55.562Z</updated>
+  <updated>2021-01-02T21:29:47.029Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis内存快照</title>
+    <link href="https://www.llchen60.com/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/"/>
+    <id>https://www.llchen60.com/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/</id>
+    <published>2021-01-02T21:27:09.000Z</published>
+    <updated>2021-01-02T21:29:47.029Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Redis内存快照"><a href="#Redis内存快照" class="headerlink" title="Redis内存快照"></a>Redis内存快照</h1><h1 id="1-AOF数据恢复存在的问题"><a href="#1-AOF数据恢复存在的问题" class="headerlink" title="1. AOF数据恢复存在的问题"></a>1. AOF数据恢复存在的问题</h1><ul><li>AOF方法每次执行记录的是操作命令，需要持久化的数据量不大</li><li>但是也因为记录的是操作命令，而不是实际数据，所以用AOF方法进行故障恢复的时候，需要逐一把操作日志都执行一遍<ul><li>如果操作日志很多，Redis的恢复就会很缓慢，可能影响到正常</li></ul></li></ul><h1 id="2-内存快照Overview"><a href="#2-内存快照Overview" class="headerlink" title="2. 内存快照Overview"></a>2. 内存快照Overview</h1><ul><li><p>内存快照可以解决上述的问题</p><ul><li>内存快照指的是记录下内存中的数据在某一时刻的状态</li><li>将某一时刻的状态以文件的形式写到磁盘上  这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证</li><li>快照文件成为RDB文件，RDB — Redis DataBase</li></ul></li><li><p>RDB特征</p><ul><li>记录的是某一个时刻的数据，并不是操作</li><li>因此在数据恢复的时候，我们可以将RDB文件直接读入内存，很快完成恢复</li></ul></li></ul><h2 id="2-1-给哪些数据做快照？"><a href="#2-1-给哪些数据做快照？" class="headerlink" title="2.1 给哪些数据做快照？"></a>2.1 给哪些数据做快照？</h2><ul><li>Redis的数据都在内存当中，为了提供所有数据的可靠性保证，其执行的是<strong>全量快照</strong><ul><li>即将内存中的所有数据都记录到磁盘当中</li><li>与之一起来的问题就是，当需要对内存的全量数据做快照的时候，将其全部写入磁盘会花费很多时间</li><li>而且全量数据越多，RDB文件就越大，往磁盘上写数据的时间开销就越大</li><li>而Redis的单线程模型决定了我们要尽量避免阻塞主线程的操作</li></ul></li><li>Redis生成RDB文件的命令<ul><li>save<ul><li>在主线程中执行，会导致阻塞</li></ul></li><li>bgsave<ul><li>创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞</li></ul></li></ul></li></ul><h2 id="2-2-做快照的时候数据是否能够被增删改？"><a href="#2-2-做快照的时候数据是否能够被增删改？" class="headerlink" title="2.2 做快照的时候数据是否能够被增删改？"></a>2.2 做快照的时候数据是否能够被增删改？</h2><ul><li><p>我们需要使系统在进行快照的时候仍然能够接受修改请求，要不然会严重影响系统的执行效率</p></li><li><p>Redis会借助操作系统提供的写时复制技术 — copy on write，在执行快照的同时，正常处理写操作</p><ul><li><p>copy on write</p><ul><li><p>copy operation is deferred until the first write,</p></li><li><p>could significantly reduce the resource consumption of unmodified copies, while adding a small overhead to resource-modifying operations</p><p><a href="https://en.wikipedia.org/wiki/Copy-on-write" target="_blank" rel="noopener">Copy-on-write</a></p><p><img src="https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png" alt="Copy on Write实现"></p></li></ul></li></ul></li></ul><h2 id="2-3-多久做一次快照？"><a href="#2-3-多久做一次快照？" class="headerlink" title="2.3 多久做一次快照？"></a>2.3 多久做一次快照？</h2><ul><li>尽管bgsave执行时不阻塞主线程，但是频繁的执行全量快照，会带来两方面的开销<ul><li>磁盘带宽压力<ul><li>频繁将全量数据写入磁盘，会给磁盘带来很大的压力</li><li>多个快照竞争有限的磁盘贷款，前一个快照还没有做完，后一个又开始做了，容易造成恶性循环</li></ul></li><li>fork操作的阻塞<ul><li>bgsave子进程需要通过fork操作从主线程创建出来</li><li>fork创建过程本身会阻塞主线程，而且主线程的内存越大，阻塞时间就越长</li></ul></li></ul></li></ul><h1 id="3-AOF和RDB混用模式"><a href="#3-AOF和RDB混用模式" class="headerlink" title="3.  AOF和RDB混用模式"></a>3.  AOF和RDB混用模式</h1><ul><li>为什么要混用<ul><li>AOF执行速度会比较慢</li><li>RDB的全量复制频率难以把控，太低，会容易丢失数据；太高，系统开销会很大</li></ul></li><li>如何实现的<ul><li>RDB以一定的频率来执行</li><li>在两次快照之间，使用AOF日志记录这期间所有的命令操作</li></ul></li></ul><p><img src="https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png" alt="AOF &amp; RDB Mix"></p><ul><li>如上图所示，到了第二次做全量快照的时候，就可以清空AOF日志，因为所有的操作都已经保存到了第二次的全量快照当中了</li></ul><h1 id="4-实际场景探究"><a href="#4-实际场景探究" class="headerlink" title="4. 实际场景探究"></a>4. 实际场景探究</h1><blockquote><p>我们使用一个 2 核 CPU、4GB 内存、500GB 磁盘的云主机运行 Redis，Redis 数据库的数据量大小差不多是 2GB，我们使用了 RDB 做持久化保证。当时 Redis 的运行负载以修改操作为主，写读比例差不多在 8:2 左右，也就是说，如果有 100 个请求，80 个请求执行的是修改操作。你觉得，在这个场景下，用 RDB 做持久化有什么风险吗？</p></blockquote><ul><li><p>内存资源风险</p><ul><li><p>Redis fork子进程做RDB持久化，由于写的比例为80%，那么在持久化过程中，“写实复制”会重新分配整个实例80%的内存副本，大约需要重新分配1.6GB内存空间，这样整个系统的内存使用接近饱和，</p></li><li><p>如果此时父进程又有大量新key写入，很快机器内存就会被吃光，如果机器开启了Swap机制，那么Redis会有一部分数据被换到磁盘上，当Redis访问这部分在磁盘上的数据时，性能会急剧下降，已经达不到高性能的标准（可以理解为武功被废）。如果机器没有开启Swap，会直接触发OOM，父子进程会面临被系统kill掉的风险。</p><ul><li><p>swap 机制</p><ul><li><p>将一块磁盘或者一个本地文件当做内存来使用</p><ul><li><p>换入</p><ul><li>当进程再次访问内存的时候，从磁盘读取数据到内存当中</li></ul></li><li><p>换出</p><ul><li><p>将进程暂时不用的内存数据保存到磁盘上，再释放内存给其他进程使用</p></li><li><p>当进程再次访问内存的时候，从磁盘读取数据到内存中</p><p><a href="https://blog.csdn.net/qq_24436765/article/details/103822548" target="_blank" rel="noopener">Linux系统的swap机制_囚牢-峰子的博客-CSDN博客</a></p></li></ul></li></ul></li></ul></li></ul></li></ul></li><li><p>CPU资源风险</p><ul><li>虽然子进程在做RDB持久化，但生成RDB快照过程会消耗大量的CPU资源，</li><li>虽然Redis处理处理请求是单线程的，但Redis Server还有其他线程在后台工作，例如AOF每秒刷盘、异步关闭文件描述符这些操作。</li><li>由于机器只有2核CPU，这也就意味着父进程占用了超过一半的CPU资源，此时子进程做RDB持久化，可能会产生CPU竞争，导致的结果就是父进程处理请求延迟增大，子进程生成RDB快照的时间也会变长，整个Redis Server性能下降。</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Redis内存快照&quot;&gt;&lt;a href=&quot;#Redis内存快照&quot; class=&quot;headerlink&quot; title=&quot;Redis内存快照&quot;&gt;&lt;/a&gt;Redis内存快照&lt;/h1&gt;&lt;h1 id=&quot;1-AOF数据恢复存在的问题&quot;&gt;&lt;a href=&quot;#1-AOF数据恢复存在
+      
+    
+    </summary>
+    
+    
+      <category term="数据存储" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Redis AOF 日志</title>
@@ -495,37 +519,6 @@
     
     
       <category term="FrontEnd" scheme="https://www.llchen60.com/categories/FrontEnd/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Java日志记录Tips</title>
-    <link href="https://www.llchen60.com/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/"/>
-    <id>https://www.llchen60.com/Java%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95Tips/</id>
-    <published>2020-09-15T03:03:32.000Z</published>
-    <updated>2020-09-15T03:04:02.755Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用Java来记录日志有几个需要注意的地方的</p><ul><li>首先日志框架很多，不同的类库有可能会使用不同的日志框架，如何兼容是一个问题</li><li>配置文件的复杂性</li></ul><p>Java体系的日志框架有：</p><ul><li>Logback</li><li>Log4j</li><li>Log4j2</li><li>commons-logging </li><li>JDK 自带的Java.util.logging</li></ul><p>如果不同的包使用不同的日志框架的话，那管理就会变得非常麻烦。为了解决这个问题，就有了SLF4J – Simple Logging Facade For Java </p><ul><li>提供了统一的日志门面API，实现了中立的日志记录API</li><li>桥接功能<ul><li>可以将各种日志框架的API桥接到SLF4J API上。这样一来，即便你的程序试用了各种日志API记录日志，最终都可以桥接到Slf4j门面API上</li></ul></li><li>适配功能<ul><li>实现slf4j和实际日志框架的绑定</li><li>slf4j知识日志标准，还是需要一个实际的日志框架</li></ul></li></ul><p>下面一起梳理下常见的日志记录中的错误</p><h1 id="1-理解Logback配置，避免重复记录"><a href="#1-理解Logback配置，避免重复记录" class="headerlink" title="1. 理解Logback配置，避免重复记录"></a>1. 理解Logback配置，避免重复记录</h1><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;configuration&gt;    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;        &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;            &lt;pattern&gt;[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n&lt;/pattern&gt;        &lt;/layout&gt;    &lt;/appender&gt;    &lt;logger name=&quot;org.geekbang.time.commonmistakes.logging&quot; level=&quot;DEBUG&quot;&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/logger&gt;    &lt;root level=&quot;INFO&quot;&gt;        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;    &lt;/root&gt;&lt;/configuration&gt;</code></pre><p>要注意在使用appender的时候，appender是如何挂载的，上述代码将appender挂载在了两个不同的地方，而且两个都定义在了root下，所以会造成重复。 </p><p>对于需要将不同的日志放到不同的文件的应用场景，可以通过设置Logger的additivity属性来实现这个操作</p><pre><code> &lt;logger name=&quot;org.geekbang.time.commonmistakes.logging&quot; level=&quot;DEBUG&quot; additivity=&quot;false&quot;&gt;            &lt;appender-ref ref=&quot;FILE&quot;/&gt;     &lt;/logger&gt;</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;使用Java来记录日志有几个需要注意的地方的&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;首先日志框架很多，不同的类库有可能会使用不同的日志框架，如何兼容是一个问题&lt;/li&gt;
-&lt;li&gt;配置文件的复杂性&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Java体系的日志框架有：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Logb
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
     
     
   </entry>
