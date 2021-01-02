@@ -1,7 +1,7 @@
 ---
 title: Redis AOF 日志
 date: 2020-12-28 10:32:59
-categories:
+categories: 数据存储
 tags:
 top:
 ---

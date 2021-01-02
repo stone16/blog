@@ -1,7 +1,7 @@
 ---
 title: Redis基础
 date: 2020-12-20 11:39:32
-categories:
+categories: 数据存储
 tags:
 top:
 ---
