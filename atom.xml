@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-01-14T06:04:54.739Z</updated>
+  <updated>2021-01-15T03:53:09.305Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Distributed Locks with the DynamoDB Lock Client </title>
+    <link href="https://www.llchen60.com/Distributed-Locks-with-the-DynamoDB-Lock-Client/"/>
+    <id>https://www.llchen60.com/Distributed-Locks-with-the-DynamoDB-Lock-Client/</id>
+    <published>2021-01-15T03:51:14.000Z</published>
+    <updated>2021-01-15T03:53:09.305Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Distributed-Locks-with-the-DynamoDB-Lock-Client"><a href="#Distributed-Locks-with-the-DynamoDB-Lock-Client" class="headerlink" title="Distributed Locks with the DynamoDB Lock Client"></a>Distributed Locks with the DynamoDB Lock Client</h1><h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul><li><p>DynamoDB Lock Client</p><ul><li>enable you to solve distributed computing problems like leader election and distributed locking with client only code and a DDB table</li></ul></li><li><p>Why we need it</p><ul><li>Distributed Locking is complicated<ul><li>you need to <strong>atomically ensure</strong> only one actor is modifying a <strong>stateful resource</strong> at any given time</li></ul></li></ul></li></ul><h1 id="2-Practical-Example"><a href="#2-Practical-Example" class="headerlink" title="2. Practical Example"></a>2. Practical Example</h1><ul><li>Background<ul><li>A retail bank that want to ensure at most one customer service representative change customer details at a time</li><li>solution<ul><li>temporarily lock customer records during an update</li><li>suppose there are bunch different tables to contain all customer information, as the tables are independent, so we cannot just wrap the changes we need in a relational transaction</li><li>we need to lock customer id at a high level</li><li>You’d do so with a locking API action for a certain duration in your application before making any changes.</li></ul></li></ul></li></ul><h2 id="2-1-Locking-Protocol"><a href="#2-1-Locking-Protocol" class="headerlink" title="2.1 Locking Protocol"></a>2.1 Locking Protocol</h2><ul><li>For a new lock, the lock clients store a lock item in the lock table<ul><li>it stores<ul><li>the host name of the owner</li><li>the lease duration in milliseconds</li><li>a UUID unique to the host</li><li>the host system clock time when the lock was initially created</li></ul></li></ul></li></ul><p><img src="https://i.loli.net/2021/01/15/gk6qico4zUw1YXK.png" alt="Whole Workflow"></p><ol><li>Host A acquires a lock on Moe by writing an item to the lock table on the condition that no item keyed at “Moe” exists yet. Host A<br>acquires the lock with a revision version number (RVN) of UUID.</li><li>Host B tries to get a lock on Moe with a RVN UUID.</li><li>Host B checks to see if a lock already exists with a GetItem call.</li><li>In this case, host B finds that host A holds a lock on Moe with a record version number (RVN) of UUID. The same application runs on hosts A and B. That being so, host B<br>expects host A to heartbeat and renew the lock on Moe in less than 10 seconds, if host A intends to keep the lock on Moe. Host A heartbeats once, and uses a conditional update on the lock keyed at Moe to update the RVN of the lock to UUID.</li><li>Host B checks 10 seconds after the first AcquireLock call to see if the RVN in A’s lock on Moe changed with a conditional UpdateItem call and a RVN of UUID.</li><li>Host A successfully updates the lock. Thus, host B finds the new RVN equal to UUID and waited 10 more seconds. Host A died after the first heartbeat, so it never changes the RVN past UUID. When host B calls tries to acquire a lock on Moe for the third time, it finds that the RVN was still UUID, the same RVN retrieved on the second lock attempt.</li><li>In this case, hosts A and B run the same application. Because host B expects host A to heartbeat if host A is healthy and intends to keep the lock, host B considers the lock on Moe expired. Host B’s conditional update to acquire the lock on Moe succeeds, and your application makes progress!</li></ol><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://aws.amazon.com/blogs/database/building-distributed-locks-with-the-dynamodb-lock-client/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/database/building-distributed-locks-with-the-dynamodb-lock-client/</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Distributed-Locks-with-the-DynamoDB-Lock-Client&quot;&gt;&lt;a href=&quot;#Distributed-Locks-with-the-DynamoDB-Lock-Client&quot; class=&quot;headerlink&quot; title
+      
+    
+    </summary>
+    
+    
+      <category term="Cloud" scheme="https://www.llchen60.com/categories/Cloud/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>序列化和反序列化</title>
@@ -492,32 +516,6 @@
       <category term="注解" scheme="https://www.llchen60.com/tags/%E6%B3%A8%E8%A7%A3/"/>
     
       <category term="反射" scheme="https://www.llchen60.com/tags/%E5%8F%8D%E5%B0%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring IoC, AOP浅析</title>
-    <link href="https://www.llchen60.com/Spring-IoC-AOP%E6%B5%85%E6%9E%90/"/>
-    <id>https://www.llchen60.com/Spring-IoC-AOP%E6%B5%85%E6%9E%90/</id>
-    <published>2020-10-02T02:43:05.000Z</published>
-    <updated>2020-10-02T02:43:41.325Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-IoC"><a href="#1-IoC" class="headerlink" title="1. IoC"></a>1. IoC</h1><h2 id="1-1-Overview"><a href="#1-1-Overview" class="headerlink" title="1.1 Overview"></a>1.1 Overview</h2><ul><li><p>Inversion of control </p><ul><li>控制反转</li><li>将设计好的对象交给Spring容器来控制，而不是在对象内部控制</li></ul></li><li><p>好处</p><ul><li>可以无侵入的调整对象的关系</li><li>同时可以无侵入的调整对象的属性，甚至实现对象的替换</li></ul></li></ul><h2 id="1-2-单例Bean注入Prototype的Bean"><a href="#1-2-单例Bean注入Prototype的Bean" class="headerlink" title="1.2 单例Bean注入Prototype的Bean"></a>1.2 单例Bean注入Prototype的Bean</h2><p>Spring创建的Bean默认是单例的，但是当Bean遇到继承的时候，是会忽略这一点的。</p><pre><code>@Slf4jpublic abstract class SayService {    List&lt;String&gt; data = new ArrayList&lt;&gt;();    public void say() {        data.add(IntStream.rangeClosed(1, 1000000)                .mapToObj(__ -&gt; &quot;a&quot;)                .collect(Collectors.joining(&quot;&quot;)) + UUID.randomUUID().toString());        log.info(&quot;I&#39;m {} size:{}&quot;, this, data.size());    }}@Service@Slf4jpublic class SayHello extends SayService {    @Override    public void say() {        super.say();        log.info(&quot;hello&quot;);    }}@Service@Slf4jpublic class SayBye extends SayService {    @Override    public void say() {        super.say();        log.info(&quot;bye&quot;);    }}</code></pre><p>上述代码中，基类SayService是有状态的，dataList一直在增加。当SayHello类继承基类，并且声明为Service的时候，将其注册为Bean。这时候有状态的基类就很有可能造成内存泄露或者线程安全的问题了。</p><p>正确做法是在将类标记为<code>@Service</code>并交给容器进行管理之前，需要首先评估一下类是否有状态，然后为Bean设置合适的Scope。</p><pre><code>@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)</code></pre><p>让其以代理的方式注入，这样虽然controller还是单例的，但是每次都从代理那里获得Service，这样prototype范围的配置才会真正生效。</p><h1 id="2-AOP"><a href="#2-AOP" class="headerlink" title="2. AOP"></a>2. AOP</h1><ul><li><p>体现了松耦合，高内聚</p></li><li><p>在切面集中实现横切关注点</p><ul><li>缓存</li><li>权限</li><li>日志</li></ul></li><li><p>然后通过切点配置将代码注入到合适的地方</p></li><li><p>关键点</p><ul><li><p>连接点 Join Point </p><ul><li>实现AOP的地方</li><li>方法执行</li></ul></li><li><p>切点 PointCut</p><ul><li>告诉程序在哪里做切入</li><li>Spring中默认使用AspectJ查询表达式，通过在连接点运行查询表达式来匹配切入点</li></ul></li><li><p>增强 Advice</p><ul><li>定义了切入切点后增强的方式<ul><li>前</li><li>后</li><li>环绕</li></ul></li></ul></li><li><p>切面 Aspect</p><ul><li>切面 = 切点 + 增强 </li><li>实现整个AOP操作</li></ul></li></ul></li></ul><h2 id="2-1-实现整个日志记录，异常处理，方法耗时的统一切面"><a href="#2-1-实现整个日志记录，异常处理，方法耗时的统一切面" class="headerlink" title="2.1 实现整个日志记录，异常处理，方法耗时的统一切面"></a>2.1 实现整个日志记录，异常处理，方法耗时的统一切面</h2><pre><code>// 定义一个自定义注解Metrics @Retention(RetentionPolicy.RUNTIME)@Target({ElementType.METHOD, ElementType.TYPE})public @interface Metrics {    /**     * 在方法成功执行后打点，记录方法的执行时间发送到指标系统，默认开启     *     * @return     */    boolean recordSuccessMetrics() default true;    /**     * 在方法成功失败后打点，记录方法的执行时间发送到指标系统，默认开启     *     * @return     */    boolean recordFailMetrics() default true;    /**     * 通过日志记录请求参数，默认开启     *     * @return     */    boolean logParameters() default true;    /**     * 通过日志记录方法返回值，默认开启     *     * @return     */    boolean logReturn() default true;    /**     * 出现异常后通过日志记录异常信息，默认开启     *     * @return     */    boolean logException() default true;    /**     * 出现异常后忽略异常返回默认值，默认关闭     *     * @return     */    boolean ignoreException() default false;}</code></pre><pre><code>// 实现一个切面完成Metrics注解提供的功能@Aspect@Component@Slf4jpublic class MetricsAspect {    @Autowired    private ObjectMapper ObjectMapper;    //实现一个返回Java基本类型默认值的工具。其实，你也可以逐一写很多if-else判断类型，然后手动设置其默认值。    //这里为了减少代码量用了一个小技巧，即通过初始化一个具有1个元素的数组，然后通过获取这个数组的值来获取基本类型默认值     //Array.newInstance(Class&lt;?&gt; componentType, int length) 创建一个有特定的类的类型和长度的对象    private static final Map&lt;Class&lt;?&gt;, Object&gt; DEFAULT_VALUES =         Stream.of(boolean.class, byte.class, char.class, double.class, float.class, int.class, long.class, short.class)             .collect(toMap(clazz -&gt; (Class) clazz, clazz -&gt; Array.get(Array.newInstance(clazz, 1), 0)));     public static T getDefaultValue(Class clazz) {         return (T) DEFAULT_VALUES.get(clazz);     }    // 实现了对标记了Metrics注解的方法进行匹配    @PointCut(&quot;within(@org.cleilei.commonmistakes.springpart1.aopmetrics.Metrics *)&quot;)    public void withMetricsAnnotation() {    }    // 实现了匹配类型上标记了@RestController注解的方法    @PointCut(&quot;within(@org.springframework.web.bind.annotation.RestController *)&quot;)    public void controllerBean() {    }    @Around(&quot;controllerBean() || withMetricsAnnotation()&quot;)    public Object metrics(ProceedingJoinPoint pjp) throws Throwable {        // 通过连接点获取方法签名和方法上Metrics的注解，并根据方法签名生成日志中要输出的方法定义描述        MethodSignature signature = (MethodSignature)pjp.getSignature();        Metrics metrics = signature.getMethod().getAnnotation(Metrics.class);        String name = String.format(&quot;%s %s&quot;, signature.getDeclaringType().toString(), signature.toLongString());        if (metrics == null) {            @Metrics            final class c {}             metrics = c.class.getAnnotation(Metrics.class);        }        // 尝试从上下文获取请求的URL，来方便定位问题        RequestAttributes RequestAttributes = RequestContextHolder.getRequestAttributes();        if (requestAttributes != null) {            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();            if (request != null) {                name += String.format(&quot; %s &quot;, request.getRequestURL().toString());            }        }        // 记录参数        if (metrics.logParameters()) {            log.info(String.format(&quot;Call method %s with parameters %s&quot;, name. objectMapper.writeValueAsString(pjp.getArgs())));        }        // 记录方法的执行，break points, 异常时记录        Object returnValue;        Instant start = Instant.now();        try {            returnValue = pjp.proceed();            if (metrics.recordSuccessMetrics())                //在生产级代码中，我们应考虑使用类似Micrometer的指标框架，把打点信息记录到时间序列数据库中，实现通过图表来查看方法的调用次数和执行时间                log.info(String.format(&quot;Call method %s succeed，time used：%d ms&quot;, name, Duration.between(start, Instant.now()).toMillis()));        } catch (Exception ex) {            if (metrics.recordFailMetrics())                log.info(String.format(&quot;Call method %s fail，time used：%d ms&quot;, name, Duration.between(start, Instant.now()).toMillis()));            if (metrics.logException())                log.error(String.format(&quot;Call method %s with exceptions&quot;, name), ex);            //忽略异常的时候，使用一开始定义的getDefaultValue方法，来获取基本类型的默认值            if (metrics.ignoreException())                returnValue = getDefaultValue(signature.getReturnType());            else                throw ex;        }        //实现了返回值的日志输出        if (metrics.logReturn())            log.info(String.format(&quot;Call method %s with result: %s&quot;, name, returnValue));        return returnValue;    }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-IoC&quot;&gt;&lt;a href=&quot;#1-IoC&quot; class=&quot;headerlink&quot; title=&quot;1. IoC&quot;&gt;&lt;/a&gt;1. IoC&lt;/h1&gt;&lt;h2 id=&quot;1-1-Overview&quot;&gt;&lt;a href=&quot;#1-1-Overview&quot; class=&quot;header
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
-    
-    
-      <category term="Spring" scheme="https://www.llchen60.com/tags/Spring/"/>
     
   </entry>
   

@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Distributed Locks with the DynamoDB Lock Client </title>
+      <link href="/Distributed-Locks-with-the-DynamoDB-Lock-Client/"/>
+      <url>/Distributed-Locks-with-the-DynamoDB-Lock-Client/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Distributed-Locks-with-the-DynamoDB-Lock-Client"><a href="#Distributed-Locks-with-the-DynamoDB-Lock-Client" class="headerlink" title="Distributed Locks with the DynamoDB Lock Client"></a>Distributed Locks with the DynamoDB Lock Client</h1><h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul><li><p>DynamoDB Lock Client</p><ul><li>enable you to solve distributed computing problems like leader election and distributed locking with client only code and a DDB table</li></ul></li><li><p>Why we need it</p><ul><li>Distributed Locking is complicated<ul><li>you need to <strong>atomically ensure</strong> only one actor is modifying a <strong>stateful resource</strong> at any given time</li></ul></li></ul></li></ul><h1 id="2-Practical-Example"><a href="#2-Practical-Example" class="headerlink" title="2. Practical Example"></a>2. Practical Example</h1><ul><li>Background<ul><li>A retail bank that want to ensure at most one customer service representative change customer details at a time</li><li>solution<ul><li>temporarily lock customer records during an update</li><li>suppose there are bunch different tables to contain all customer information, as the tables are independent, so we cannot just wrap the changes we need in a relational transaction</li><li>we need to lock customer id at a high level</li><li>You’d do so with a locking API action for a certain duration in your application before making any changes.</li></ul></li></ul></li></ul><h2 id="2-1-Locking-Protocol"><a href="#2-1-Locking-Protocol" class="headerlink" title="2.1 Locking Protocol"></a>2.1 Locking Protocol</h2><ul><li>For a new lock, the lock clients store a lock item in the lock table<ul><li>it stores<ul><li>the host name of the owner</li><li>the lease duration in milliseconds</li><li>a UUID unique to the host</li><li>the host system clock time when the lock was initially created</li></ul></li></ul></li></ul><p><img src="https://i.loli.net/2021/01/15/gk6qico4zUw1YXK.png" alt="Whole Workflow"></p><ol><li>Host A acquires a lock on Moe by writing an item to the lock table on the condition that no item keyed at “Moe” exists yet. Host A<br>acquires the lock with a revision version number (RVN) of UUID.</li><li>Host B tries to get a lock on Moe with a RVN UUID.</li><li>Host B checks to see if a lock already exists with a GetItem call.</li><li>In this case, host B finds that host A holds a lock on Moe with a record version number (RVN) of UUID. The same application runs on hosts A and B. That being so, host B<br>expects host A to heartbeat and renew the lock on Moe in less than 10 seconds, if host A intends to keep the lock on Moe. Host A heartbeats once, and uses a conditional update on the lock keyed at Moe to update the RVN of the lock to UUID.</li><li>Host B checks 10 seconds after the first AcquireLock call to see if the RVN in A’s lock on Moe changed with a conditional UpdateItem call and a RVN of UUID.</li><li>Host A successfully updates the lock. Thus, host B finds the new RVN equal to UUID and waited 10 more seconds. Host A died after the first heartbeat, so it never changes the RVN past UUID. When host B calls tries to acquire a lock on Moe for the third time, it finds that the RVN was still UUID, the same RVN retrieved on the second lock attempt.</li><li>In this case, hosts A and B run the same application. Because host B expects host A to heartbeat if host A is healthy and intends to keep the lock, host B considers the lock on Moe expired. Host B’s conditional update to acquire the lock on Moe succeeds, and your application makes progress!</li></ol><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://aws.amazon.com/blogs/database/building-distributed-locks-with-the-dynamodb-lock-client/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/database/building-distributed-locks-with-the-dynamodb-lock-client/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>序列化和反序列化</title>
       <link href="/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
       <url>/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
