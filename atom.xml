@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-01-24T18:18:34.009Z</updated>
+  <updated>2021-02-02T04:38:23.432Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis集群</title>
+    <link href="https://www.llchen60.com/Redis%E9%9B%86%E7%BE%A4/"/>
+    <id>https://www.llchen60.com/Redis%E9%9B%86%E7%BE%A4/</id>
+    <published>2021-02-02T04:36:06.000Z</published>
+    <updated>2021-02-02T04:38:23.432Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Redis-切片集群"><a href="#Redis-切片集群" class="headerlink" title="Redis 切片集群"></a>Redis 切片集群</h1><h1 id="1-实际场景"><a href="#1-实际场景" class="headerlink" title="1. 实际场景"></a>1. 实际场景</h1><ul><li>用Redis保存5000万个键值对，每个键值对约为512B</li><li>当我们选用32GB内存的主机来进行部署的时候，发现会很慢 （数据大小应当在25GB左右）</li><li>这和Redis的持久化机制有关<ul><li>在使用RDB进行持久化的时候，Redis会fork子进程来完成，fork操作的用时和Redis的数据量是呈正相关的，fork在执行时会阻塞主线程</li><li>数据量越大，fork操作造成的主线程阻塞的时间也会越长</li><li>于是当使用RDB对25GB的数据进行持久化的时候，数据量比较大，后台运行的子进程在fork创建时阻塞了主线程，于是就导致Redis响应比较慢了</li></ul></li></ul><h1 id="2-分片集群"><a href="#2-分片集群" class="headerlink" title="2. 分片集群"></a>2. 分片集群</h1><ul><li><p>指启动多个Redis实例组成一个集群，然后按照一定的规则，将收集到的数据划分成多份，每一份用一个实例来保存</p><p>  <img src="https://i.loli.net/2021/02/02/A4IUmfapqlx3ZyD.png" alt="单实例 vs 集群"></p></li></ul><h2 id="2-1-如何处理数据在多实例之间的分布？"><a href="#2-1-如何处理数据在多实例之间的分布？" class="headerlink" title="2.1 如何处理数据在多实例之间的分布？"></a>2.1 如何处理数据在多实例之间的分布？</h2><p>实际上，切片集群是一种保存大量数据的通用机制，这个机制可以有不同的实现方案。在 Redis 3.0 之前，官方并没有针对切片集群提供具体的方案。从 3.0 开始，官方提供了一个名为 Redis Cluster 的方案，用于实现切片集群。<strong>Redis Cluster 方案中就规定了数据和实例的对应规则</strong>。</p><ul><li>Redis Cluster<ul><li>采用哈希槽 Hash Slot 来处理数据和实例之间的映射关系</li><li>每个键值对都会根据它的key，被映射到一个哈希槽当中</li></ul></li><li>映射过程<ul><li>根据键值对的key，按照CRC16算法计算一个16bit的值</li><li>再用这个16bit的值对16384取模，得到模数，每个数字都代表一个相应编号的哈希槽</li></ul></li><li>在创建Redis Cluster的方案的时候，在创建集群的时候Redis会自动将这些槽平均分布在集群实例上</li></ul><h2 id="2-2-客户端如何确定想要访问的数据在哪个实例上？"><a href="#2-2-客户端如何确定想要访问的数据在哪个实例上？" class="headerlink" title="2.2 客户端如何确定想要访问的数据在哪个实例上？"></a>2.2 客户端如何确定想要访问的数据在哪个实例上？</h2><ul><li><p>定位键值对数据的时候，还是有两步</p><ul><li>关于所在哈希槽，是可以通过计算得到的，可以在客户端发送请求的时候执行</li><li>进一步定位到实例，就需要知道哈希槽的分布了</li></ul></li><li><p>客户端如何定位数据？</p><ul><li>客户端和集群实例建立连接之后，实例就会将哈希槽的信息发给客户端</li><li>当客户端收到了哈希槽的信息后，就会将哈希槽信息缓存在本地</li><li>当客户端请求键值对的时候，会先计算键所对应的哈希槽，然后给相对应的实例发送请求</li></ul></li><li><p>实例和哈希槽对应关系的变更</p><ul><li><p>Redis Cluster 重定向机制 — MOVED指令</p><ul><li><p>就是指，客户端给一个实例发送数据读写操作时，这个实例上并没有相应的数据，客户端要再给一个新实例发送操作命令。</p></li><li><p>因为实例之间发生了数据的转移，而客户端这个时候还不知道，访问到了没有这个数据的实例</p></li><li><p>因为实例是共享和哈希槽对应关系的信息表的，就可以返回给Client端正确的包含所需信息的实例的地址</p></li><li><p>client可以根据地址继续去访问</p><p><img src="https://i.loli.net/2021/02/02/qm6zospHEfcPULS.png" alt="MOVED 过程"></p></li></ul></li></ul></li><li><p>ASK指令 — 访问到了正在迁移的实例</p><pre><code class="java">  GET hello:key  (error) ASK 13320 172.16.19.5:6379</code></pre><ul><li>ASK表示客户端请求的键值对在13320这个哈希槽当中，在172.16.19.5这个实例上，但是这个哈希槽正在迁移</li><li>客户端需要先给 172.16.19.5 这个实例发送一个 ASKING 命令。这个命令的意思是，让这个实例允许执行客户端接下来发送的命令。</li><li>然后，客户端再向这个实例发送 GET 命令，以读取数据</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Redis-切片集群&quot;&gt;&lt;a href=&quot;#Redis-切片集群&quot; class=&quot;headerlink&quot; title=&quot;Redis 切片集群&quot;&gt;&lt;/a&gt;Redis 切片集群&lt;/h1&gt;&lt;h1 id=&quot;1-实际场景&quot;&gt;&lt;a href=&quot;#1-实际场景&quot; class=&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>lsof/ ulimit/ ps</title>
@@ -479,30 +501,6 @@
     
     
       <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>缓存的常见问题</title>
-    <link href="https://www.llchen60.com/%E7%BC%93%E5%AD%98%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
-    <id>https://www.llchen60.com/%E7%BC%93%E5%AD%98%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</id>
-    <published>2020-10-06T22:55:09.000Z</published>
-    <updated>2020-10-06T22:55:54.435Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1. 缓存雪崩"></a>1. 缓存雪崩</h1><p>缓存系统的IOPS比数据库高很多，因此需要注意短时间内的大量缓存失效的情况。这种情况一旦发生，可能就会在瞬间有大量的数据需要回源到数据库查询，对数据库造成极大的压力，极限情况下甚至导致后端数据库直接崩溃。这就是我们说的缓存雪崩。</p><p>产生雪崩的原因有两种：</p><ul><li>缓存系统本身不可用，导致大量请求直接回源到数据库</li><li>应用设计层面大量的Key在同一时间过期，导致大量的数据回源<ul><li>解决方法<ul><li>差异化缓存过期时间<ul><li>不让大量的Key在同一时间过期</li><li>初始化缓存的时候，设置缓存的过期时间为30秒 + 10秒以内的随机延迟（扰动值）。这样key就不会集中在30秒这个时刻过期，而是会分散在30 - 40秒之间</li></ul></li><li>让缓存不主动过期<ul><li>初始化缓存数据的时候设置缓存永不过期，然后启动一个后台线程30秒一次定时将所有数据更新到缓存，通过适当的休眠，控制从数据库更新数据的频率，降低数据库的压力</li><li>如果无法全量缓存所有的数据，那么就无法使用该种方案</li></ul></li></ul></li></ul></li></ul><pre><code>// 差异化缓存过期时间@PostConstructpublic void rightInit1() {    //这次缓存的过期时间是30秒+10秒内的随机延迟    IntStream.rangeClosed(1, 1000).forEach(i -&gt; stringRedisTemplate.opsForValue().set(&quot;city&quot; + i, getCityFromDb(i), 30 + ThreadLocalRandom.current().nextInt(10), TimeUnit.SECONDS));    log.info(&quot;Cache init finished&quot;);    //同样1秒一次输出数据库QPS：   Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        log.info(&quot;DB QPS : {}&quot;, atomicInteger.getAndSet(0));    }, 0, 1, TimeUnit.SECONDS);}// 让缓存不主动过期@PostConstructpublic void rightInit2() throws InterruptedException {    CountDownLatch countDownLatch = new CountDownLatch(1);    //每隔30秒全量更新一次缓存     Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        IntStream.rangeClosed(1, 1000).forEach(i -&gt; {            String data = getCityFromDb(i);            //模拟更新缓存需要一定的时间            try {                TimeUnit.MILLISECONDS.sleep(20);            } catch (InterruptedException e) { }            if (!StringUtils.isEmpty(data)) {                //缓存永不过期，被动更新                stringRedisTemplate.opsForValue().set(&quot;city&quot; + i, data);            }        });        log.info(&quot;Cache update finished&quot;);        //启动程序的时候需要等待首次更新缓存完成        countDownLatch.countDown();    }, 0, 30, TimeUnit.SECONDS);    Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {        log.info(&quot;DB QPS : {}&quot;, atomicInteger.getAndSet(0));    }, 0, 1, TimeUnit.SECONDS);    countDownLatch.await();}</code></pre><h1 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2. 缓存击穿"></a>2. 缓存击穿</h1><p>在某些Key属于极端热点数据并且并发量很大的情况下，如果这个Key过期，可能会在某个瞬间出现大量的并发请求同时回源，相当于大量的并发请求直接打到了数据库。这就是我们所说的缓存击穿或缓存并发问题。</p><p>如果说回源操作比较昂贵的话，那么这种并发就不能忽略不计了。可以考虑使用锁机制来限制回源的并发，或者可以使用类似Semaphore的工具来限制并发数，比如限制为10.这样子既限制了回源并发数不至于太大，又能够使得一定量的线程可以同时回源。</p><h1 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3. 缓存穿透"></a>3. 缓存穿透</h1><p>缓存穿透指的是实际上缓存里有key 和value，但是其value可能为空，如果没做正确处理，那我们的逻辑可能会认为没有对当前的key做好缓存，会对所有的请求都回源到数据库上，这就会给数据库造成压力了。</p><p>针对这种问题，可以用以下方案解决：</p><ul><li><p>对于不存在的数据，同样设置一个特殊的Value到缓存当中，比如NODATA，这样子就不会有缓存穿透的问题</p><ul><li>可能会将大量无效的数据加入到缓存当中</li></ul></li><li><p>使用布隆过滤器</p><ul><li>放在缓存数据读取前先进行过滤操作</li><li>Google Guava BloomFilter </li></ul></li></ul><pre><code>private BloomFilter&lt;Integer&gt; bloomFilter;@PostConstructpublic void init() {    //创建布隆过滤器，元素数量10000，期望误判率1%    bloomFilter = BloomFilter.create(Funnels.integerFunnel(), 10000, 0.01);    //填充布隆过滤器    IntStream.rangeClosed(1, 10000).forEach(bloomFilter::put);}@GetMapping(&quot;right2&quot;)public String right2(@RequestParam(&quot;id&quot;) int id) {    String data = &quot;&quot;;    //通过布隆过滤器先判断    if (bloomFilter.mightContain(id)) {        String key = &quot;user&quot; + id;        //走缓存查询        data = stringRedisTemplate.opsForValue().get(key);        if (StringUtils.isEmpty(data)) {            //走数据库查询            data = getCityFromDb(id);            stringRedisTemplate.opsForValue().set(key, data, 30, TimeUnit.SECONDS);        }    }    return data;}</code></pre><h1 id="4-缓存数据同步策略"><a href="#4-缓存数据同步策略" class="headerlink" title="4. 缓存数据同步策略"></a>4. 缓存数据同步策略</h1><ul><li>当原始数据被修改了以后，我们很可能会采用主动更新缓存的策略<ul><li>可能的策略有<ul><li>先更新缓存，再更新数据库<ul><li>不可行</li><li>数据库操作失败是有可能的，会导致缓存和数据库当中的数据不一致</li></ul></li><li>先更新数据库，再更新缓存<ul><li>不可行</li><li>多线程情况下数据库中更新的顺序和缓存更新的顺序会不同，可能会导致旧数据最后到，导致问题的出现</li></ul></li><li>先删除缓存，再更新数据库，访问的时候按需加载数据到缓存当中<ul><li>很可能删除缓存以后还没来得及更新数据库，就有另外一个线程先读取了旧值到缓存中</li></ul></li><li>先更新数据库，再删除缓存，访问的时候按需加载数据到缓存当中<ul><li>出现缓存不一致的概率很低</li></ul></li></ul></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-缓存雪崩&quot;&gt;&lt;a href=&quot;#1-缓存雪崩&quot; class=&quot;headerlink&quot; title=&quot;1. 缓存雪崩&quot;&gt;&lt;/a&gt;1. 缓存雪崩&lt;/h1&gt;&lt;p&gt;缓存系统的IOPS比数据库高很多，因此需要注意短时间内的大量缓存失效的情况。这种情况一旦发生，可能就会在
-      
-    
-    </summary>
-    
-    
-      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
     
     
   </entry>
