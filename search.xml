@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>互联网广告竞价策略</title>
+      <link href="/%E4%BA%92%E8%81%94%E7%BD%91%E5%B9%BF%E5%91%8A%E7%AB%9E%E4%BB%B7%E7%AD%96%E7%95%A5/"/>
+      <url>/%E4%BA%92%E8%81%94%E7%BD%91%E5%B9%BF%E5%91%8A%E7%AB%9E%E4%BB%B7%E7%AD%96%E7%95%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="互联网广告竞价策略"><a href="#互联网广告竞价策略" class="headerlink" title="互联网广告竞价策略"></a>互联网广告竞价策略</h1><h1 id="1-传统竞价策略"><a href="#1-传统竞价策略" class="headerlink" title="1. 传统竞价策略"></a>1. 传统竞价策略</h1><h2 id="1-1-英式拍卖-公开增价拍卖OAB"><a href="#1-1-英式拍卖-公开增价拍卖OAB" class="headerlink" title="1.1 英式拍卖/ 公开增价拍卖OAB"></a>1.1 英式拍卖/ 公开增价拍卖OAB</h2><ul><li>OAB<ul><li>Open Ascending Bid</li></ul></li><li>卖家提供物品，在物品拍卖过程中，买家按照竞价阶梯由低至高喊价，出价最高者成为竞买的赢家</li><li>一般会为竞价设定一个终止时间</li></ul><h2 id="1-2-荷兰式拍卖-Sealed-Bid-Auction"><a href="#1-2-荷兰式拍卖-Sealed-Bid-Auction" class="headerlink" title="1.2 荷兰式拍卖 Sealed Bid Auction"></a>1.2 荷兰式拍卖 Sealed Bid Auction</h2><ul><li>竞价由高到低</li><li>递减直到第一个买家应价成交</li></ul><h2 id="1-3-第一价格密封拍卖-FPSB"><a href="#1-3-第一价格密封拍卖-FPSB" class="headerlink" title="1.3 第一价格密封拍卖 FPSB"></a>1.3 第一价格密封拍卖 FPSB</h2><ul><li>FPSB<ul><li>The first price sealed auction</li></ul></li><li>买方将自己的出价写在一个信封里面，众多买方进行投标，同一时间揭晓信封价格，出价最高者竞价成功</li></ul><h2 id="1-4-第二价格密封拍卖-SPSB"><a href="#1-4-第二价格密封拍卖-SPSB" class="headerlink" title="1.4 第二价格密封拍卖 SPSB"></a>1.4 第二价格密封拍卖 SPSB</h2><ul><li>SPSB<ul><li>The Second Price Sealed Auction</li></ul></li><li>买方将自己的出价写在一个信封里面，众多买方进行投标，同一时间揭晓信封价格，呦出价最高的买家获得物品，但他只需要支付<strong>所有投标者中的第二高价</strong></li></ul><h1 id="2-互联网广告竞价策略"><a href="#2-互联网广告竞价策略" class="headerlink" title="2. 互联网广告竞价策略"></a>2. 互联网广告竞价策略</h1><h2 id="2-1-广义第一价格GFP-Generalized-First-Price"><a href="#2-1-广义第一价格GFP-Generalized-First-Price" class="headerlink" title="2.1 广义第一价格GFP - Generalized First Price"></a>2.1 广义第一价格GFP - Generalized First Price</h2><ul><li>出价高者得，需要支付自己提出的报价</li><li>搜索广告竞价往往按照这种形式，缺点是<ul><li>平台方收益不稳定</li><li>竞价效率不高</li></ul></li><li>只考虑到出价没考虑到点击率，</li><li>价格上会因为相互广告商之间的比较，在一定范围内形成波动</li></ul><h2 id="2-2-广义第二价格GSP-Generalized-Second-Price"><a href="#2-2-广义第二价格GSP-Generalized-Second-Price" class="headerlink" title="2.2 广义第二价格GSP - Generalized Second Price"></a>2.2 广义第二价格GSP - Generalized Second Price</h2><ul><li>出价高者得到广告位，需要支付的是第二高者提出的报价加上一个最小值</li><li>不足之处在于不是一种鼓励讲真话的方式，大家有可能都会写一个很大的数字，认为会用到其他人标识的价格，所以整个解不一定是全局最优化的</li><li>这里的排序可以通过广告的出价排序，也可以通过期望收益最大来排序，即CTR x bid</li></ul><h2 id="2-3-VCG-Vickrey-Clarke-Groves"><a href="#2-3-VCG-Vickrey-Clarke-Groves" class="headerlink" title="2.3 VCG - Vickrey Clarke Groves"></a>2.3 VCG - Vickrey Clarke Groves</h2><ul><li>广告主为网民的一次点击支付他对其他广告主造成的效用损失</li><li>但是这种效用损失在实际场景中会非常难以计算</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.geek-share.com/detail/2606975685.html" target="_blank" rel="noopener">https://www.geek-share.com/detail/2606975685.html</a> </li><li><a href="https://www.wandouip.com/t5i229763/" target="_blank" rel="noopener">https://www.wandouip.com/t5i229763/</a></li><li><a href="https://en.wikipedia.org/wiki/Vickrey%E2%80%93Clarke%E2%80%93Groves_auction" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Vickrey–Clarke–Groves_auction</a>  </li><li><a href="https://en.wikipedia.org/wiki/Vickrey%E2%80%93Clarke%E2%80%93Groves_auction" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Vickrey–Clarke–Groves_auction</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Notes </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis 数据结构使用</title>
       <link href="/Redis-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%BF%E7%94%A8/"/>
       <url>/Redis-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%BF%E7%94%A8/</url>
