@@ -43,3 +43,31 @@ top:
 - 在计算总共消耗的内存的时候，值得注意的是除了使用RedisObject本身，Redis还维护了一个全局哈希表来保存所有键值对，这个结构体有三个8字节的指针，共24字节。Redis使用的是jemalloc内存分配库，会根据申请的字节数N，找一个比N大，但是最接近N的2的幂次数作为分配的空间，来减少频繁分配的次数
 
 ![RedisObject Entity](https://i.loli.net/2021/02/09/xO2vECGYoRdl4jB.png)
+
+# 2. 压缩列表
+
+- 压缩列表的构成
+
+    ![压缩列表构成](https://i.loli.net/2021/02/18/ALm8GYT2r7cRXqW.png)
+
+    - 表头
+        - zlbytes — 列表长度
+        - zltail — 列表尾
+        - zllen — 列表entry个数
+    - 表尾
+        - zlend — 列表结束
+    - 表entry
+        - 是连续的entry
+            - 因为是挨着来进行放置的，所以不需要再使用额外的指针进行连接，就可以节省指针所占用的空间了
+        - 包括以下几部分：
+            - prev_len — 前一个entry的长度
+            - len — 自身长度  4字节
+            - encoding — 编码方式 1字节
+            - content — 保存实际数据
+
+    - Redis Hash类型底层有两种实现结构
+        - 压缩列表
+        - 哈希表
+    - 通过阈值确定应该使用哪一种来保存数据
+        - hash-max-ziplist-entries：表示用压缩列表保存时哈希集合中的最大元素个数。
+        - hash-max-ziplist-value：表示用压缩列表保存时哈希集合中单个元素的最大长度。
