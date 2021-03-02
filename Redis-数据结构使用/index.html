@@ -236,7 +236,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="291">
-<input type="hidden" id="yelog_site_word_count" value="484.8k">
+<input type="hidden" id="yelog_site_word_count" value="485.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3505,12 +3505,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-02-17 21:21:45'>2021-02-08 20:30</time>
+        创建时间:<time class="date" title='更新时间: 2021-03-01 20:46:14'>2021-02-08 20:30</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:875</span>
+        <span>字数:2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3540,7 +3540,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-数据结构使用"><span class="toc-text">Redis 数据结构使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-String的内存空间消耗问题"><span class="toc-text">1. String的内存空间消耗问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-String在保存数据时内存空间消耗较多"><span class="toc-text">1.1 String在保存数据时内存空间消耗较多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-RedisObject-的结构"><span class="toc-text">1.2 RedisObject 的结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-压缩列表"><span class="toc-text">2. 压缩列表</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-数据结构使用"><span class="toc-text">Redis 数据结构使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-String的内存空间消耗问题"><span class="toc-text">1. String的内存空间消耗问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-String在保存数据时内存空间消耗较多"><span class="toc-text">1.1 String在保存数据时内存空间消耗较多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-RedisObject-的结构"><span class="toc-text">1.2 RedisObject 的结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-压缩列表"><span class="toc-text">2. 压缩列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-集合的使用"><span class="toc-text">3. 集合的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-聚合统计"><span class="toc-text">3.1 聚合统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-排序统计"><span class="toc-text">3.2 排序统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-二值状态统计"><span class="toc-text">3.3 二值状态统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-基数统计"><span class="toc-text">3.4 基数统计</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3655,6 +3655,90 @@
 </ul>
 </li>
 </ul>
+<h1 id="3-集合的使用"><a href="#3-集合的使用" class="headerlink" title="3. 集合的使用"></a>3. 集合的使用</h1><ul>
+<li>使用场景<ul>
+<li>一个key对应一个数据集合<ul>
+<li>比如手机app的用户登录信息 — 一天对应一系列用户ID或者移动设备ID</li>
+<li>电商商品用户评价列表 — 一个商品对应一系列评论</li>
+</ul>
+</li>
+<li>在这样子的场景当中，除了记录信息，我们还需要对集合当中的数据进行统计，而我们选用的数据类型必须能够高效的统计这些数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-聚合统计"><a href="#3-1-聚合统计" class="headerlink" title="3.1 聚合统计"></a>3.1 聚合统计</h2><ul>
+<li><p>定义</p>
+<ul>
+<li>指统计多个集合元素的聚合结果</li>
+</ul>
+</li>
+<li><p>例子</p>
+<ul>
+<li>统计多个集合的共有元素</li>
+<li>将两个集合相比，统计其中一个集合独有的元素</li>
+<li>统计多个集合的所有元素</li>
+</ul>
+</li>
+<li><p>当你需要对多个集合进行聚合计算时，Set 类型会是一个非常不错的选择。</p>
+</li>
+<li><p>这里有一个潜在的风险。Set 的差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致 Redis 实例阻塞。</p>
+<ul>
+<li>你可以从主从集群中选择一个从库，让它专门负责聚合计算</li>
+<li>或者是把数据读取到客户端，在客户端来完成聚合统计，这样就可以规避阻塞主库实例和其他从库实例的风险了。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-排序统计"><a href="#3-2-排序统计" class="headerlink" title="3.2 排序统计"></a>3.2 排序统计</h2><ul>
+<li>E.G<ul>
+<li>电商网站提供最新评论列表，需要使得集合当中的元素可以按序排列<ul>
+<li>List和Sorted Set属于有序集合</li>
+<li>List按照元素进入List的顺序进行排序，而Sorted Set根据元素的权重来排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用list来做排序的问题在于是通过元素在List当中的位置来排序，新元素插入会改变原有的顺序，都会顺次后移</li>
+<li>Sorted Set相对应的是根据元素的实际权重来排序和获取数据<ul>
+<li>Sorted Set 的 ZRANGEBYSCORE 命令就可以按权重排序后返回元素。这样的话，即使集合中的元素频繁更新，Sorted Set 也能通过 ZRANGEBYSCORE 命令准确地获取到按序排列的数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-二值状态统计"><a href="#3-3-二值状态统计" class="headerlink" title="3.3 二值状态统计"></a>3.3 二值状态统计</h2><ul>
+<li>集合元素的取值只有0和1两种<ul>
+<li>可以对于数据结构进行优化，使用Bitmap</li>
+<li>Bitmap本身是使用String类型作为底层数据结构来实现的一种统计二值状态的数据类型，可以将其理解为一个bit数组</li>
+</ul>
+</li>
+<li>查看签到情况的基本操作</li>
+</ul>
+<pre><code class="jsx">// 记录8.3 签到
+SETBIT uid:sign:3000:202008 2 1
+// 查询8.3是否签到
+GETBIT uid:sign:3000:202008 2
+// 统计该用户20年8月份的签到次数
+BITCOUNT uid:sign:3000:202008</code></pre>
+<ul>
+<li>统计应用当中10天连续签到的用户数量<ul>
+<li>Bitmap支持使用BITOP命令来对多个Bitmap按位做与，或，异或，的操作，操作结果会保存到一个新的bitmap当中</li>
+<li>在统计 1 亿个用户连续 10 天的签到情况时，你可以把每天的日期作为 key，每个 key 对应一个 1 亿位的 Bitmap，每一个 bit 对应一个用户当天的签到情况。接下来，我们对 10 个 Bitmap 做“与”操作，得到的结果也是一个 Bitmap。在这个 Bitmap 中，只有 10 天都签到的用户对应的 bit 位上的值才会是 1。最后，我们可以用 BITCOUNT 统计下 Bitmap 中的 1 的个数，这就是连续签到 10 天的用户总数了。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4-基数统计"><a href="#3-4-基数统计" class="headerlink" title="3.4 基数统计"></a>3.4 基数统计</h2><ul>
+<li>统计一个集合中不重复的元素个数 — 统计网页的UV<ul>
+<li>需要去重 — 一个用户一天内的多次访问只能算一次</li>
+<li>使用set 或者hash的话都会需要将不同的id记录下来，最后看整个数据结构内元素的数量，会很大程度上占用内存</li>
+</ul>
+</li>
+<li>HyperLogLog<ul>
+<li>用于统计基数的数据集合<ul>
+<li>当集合元素数量非常多的时候，计算基数所需的空间是固定的，而且比较小</li>
+<li>有一点需要你注意一下，HyperLogLog 的统计规则是基于概率完成的，所以它给出的统计结果是有一定误差的，标准误算率是 0.81%。这也就意味着，你使用 HyperLogLog 统计的 UV 是 100 万，但实际的 UV 可能是 101 万。虽然误差率不算大，但是，如果你需要精确统计结果的话，最好还是继续用 Set 或 Hash 类型。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -3669,10 +3753,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Redis 数据结构使用</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">875</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2021-02-08, 20:30:04</p>
-    <p><span class="copy-title">最后更新:</span>2021-02-17, 21:21:45</p>
+    <p><span class="copy-title">最后更新:</span>2021-03-01, 20:46:14</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Redis-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%BF%E7%94%A8/" title="Redis 数据结构使用">https://www.llchen60.com/Redis-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%BF%E7%94%A8/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
