@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Elastic Load Balancing </title>
+      <link href="/Elastic-Load-Balancing/"/>
+      <url>/Elastic-Load-Balancing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Elastic-Load-Balancing"><a href="#Elastic-Load-Balancing" class="headerlink" title="Elastic Load Balancing"></a>Elastic Load Balancing</h1><h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul><li><p>What is ELB?</p><ul><li>ELB distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more AZs</li><li>It monitors the health of its registered targets, and routes traffic to the healthy targets</li><li>Elastic Load Balancing help scale your load balancer as your incoming traffic change over time — automatically scale to the vast majority of workloads</li></ul></li><li><p>Benefits</p><ul><li>Increase the availability and fault tolerance</li><li>You could configure health checks, thus ELB monitor the health of the compute resources, LB only send requests to the healthy ones</li></ul></li><li><p>How it works</p><ul><li>Listener<ul><li>configure your LB to accept incoming traffic by specifying one or more listeners</li><li>a process that checks for connection requests<ul><li>with a protocol</li><li>port number</li></ul></li></ul></li><li>cross zone load balancing<ul><li>we should enable it cause it could make sure traffic is well distributed</li><li>when client send request, it will first go through route 53, and route 53 will distribute traffic thus each lb node receives 50% of traffic (2 LB nodes in total )</li></ul></li><li>request routing<ul><li>client — amazon dns service — return IP address to client side — client use the ip address to make call to LB</li><li>dns entry specify the TTL to 60 seconds, this ensure that the IP addresses can be remapped quickly in response to changing traffic</li></ul></li></ul></li></ul><h1 id="2-ELB-Types"><a href="#2-ELB-Types" class="headerlink" title="2. ELB Types"></a>2. ELB Types</h1><p><a href="https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons" target="_blank" rel="noopener">https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons</a>  </p><h1 id="3-Network-Load-Balancer"><a href="#3-Network-Load-Balancer" class="headerlink" title="3. Network Load Balancer"></a>3. Network Load Balancer</h1><h2 id="3-1-NLB-Overview"><a href="#3-1-NLB-Overview" class="headerlink" title="3.1 NLB Overview"></a>3.1 NLB Overview</h2><ul><li>Similar to ELB overview, NLB has listener<ul><li>a listener checks for connection requests from clients, using the protocol and port number you configure, and then forwards requests to a target group</li></ul></li><li>you can configure your health checks on a per target group basis</li><li>Health checks are performed on all targets registered to a target group that is specified in a listener rule for your load balancer.</li><li>functions at 4th layer of OSI, capable of handling millions of requests per second<ul><li>when receives a connection request, it <strong>selects a target from the target group</strong> for the default rule</li><li>attempts to <strong>open a TCP connection</strong> to the selected target <strong>on the port specified</strong> in the listener configuration</li></ul></li></ul><h2 id="3-2-How-to-create-one-NLB-via-Console"><a href="#3-2-How-to-create-one-NLB-via-Console" class="headerlink" title="3.2 How to create one NLB via Console?"></a>3.2 How to create one NLB via Console?</h2><ul><li>Create a target group<ul><li>set target type, name, protocol, port number, health check method</li></ul></li><li>Configure load balancer and listener<ul><li>Network mapping<ul><li>select the VPC that you used for your EC2 instances</li><li>select AZ and then select public subnet for the AZ</li></ul></li></ul></li></ul><h2 id="3-3-Concepts"><a href="#3-3-Concepts" class="headerlink" title="3.3 Concepts"></a>3.3 Concepts</h2><ul><li>Listener<ul><li>A listener is a process that checks for connection requests, using the protocol and port that you configure. The rules that you define for a listener determine how the load balancer routes requests to the targets in one or more target groups.</li></ul></li><li>Target Groups<ul><li>Each target group is used to route requests to one or more registered targets. When you create a listener, you specify a target group for its default action. Traffic is forwarded to the target group specified in the listener rule. You can create different target groups for different types of requests</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Cloud </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Load Balancer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VPC General</title>
       <link href="/VPC-General/"/>
       <url>/VPC-General/</url>
