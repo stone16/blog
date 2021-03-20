@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-03-09T05:00:46.137Z</updated>
+  <updated>2021-03-20T20:11:01.960Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Route53</title>
+    <link href="https://www.llchen60.com/Route53/"/>
+    <id>https://www.llchen60.com/Route53/</id>
+    <published>2021-03-20T20:10:21.000Z</published>
+    <updated>2021-03-20T20:11:01.960Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Route-53"><a href="#Route-53" class="headerlink" title="Route 53"></a>Route 53</h1><h1 id="1-How-Route53-works"><a href="#1-How-Route53-works" class="headerlink" title="1. How Route53 works?"></a>1. How Route53 works?</h1><ul><li>Intro<ul><li>DNS webservice</li><li>functionalities<ul><li>domain registration</li><li>DNS routing</li><li>health checking</li></ul></li></ul></li><li>Domain Registration<ul><li>You choose a domain name and confirm that it’s available</li><li>You provide names and contact information for the domain owner and other contacts</li><li>Route 53 automatically makes itself the DNS service for the domain by doing:<ul><li>create a hosted zone that has the same name as your domain</li><li>Assigns a set of <strong>four name servers to the hosted zone</strong>. When someone uses a browser to access your website, such as <a href="http://www.example.com/" target="_blank" rel="noopener">www.example.com</a>, these name servers tell the browser where to find your resources, such as a web server or an Amazon S3 bucket.</li><li>Gets the name servers from the hosted zone and adds them to the domain.</li></ul></li></ul></li></ul><h1 id="2-Concepts"><a href="#2-Concepts" class="headerlink" title="2. Concepts"></a>2. Concepts</h1><ul><li>Hosted Zone<ul><li>A container for records<ul><li>include info about how you want to route traffic for a domain and all of its subdomains</li><li>It has the same name as domain</li><li></li></ul></li></ul></li><li>Records<ul><li>Created in your hosted zone</li><li>For routing traffic to your resources</li><li>Each record includes information about how you want to route traffic for your domain<ul><li>Name</li><li>Type</li><li>Value</li></ul></li></ul></li><li>Name server<ul><li>Route53 will assign a set of 4 name servers to the hosted zone</li><li>name server tell the accessor (browser) where to find your resources</li></ul></li><li>Domain Name System Concepts<ul><li>Alias Record<ul><li>Record you create to route traffic to AWS resources</li></ul></li><li>subdomain<ul><li>A domain name that has one or more labels prepended to the registered domain name. For example, if you register the domain name <a href="http://example.com/" target="_blank" rel="noopener">example.com</a>, then <a href="http://www.example.com/" target="_blank" rel="noopener">www.example.com</a> is a subdomain. If you create the hosted zone <a href="http://accounting.example.com/" target="_blank" rel="noopener">accounting.example.com</a> for the <a href="http://example.com/" target="_blank" rel="noopener">example.com</a> domain, then <a href="http://seattle.accounting.example.com/" target="_blank" rel="noopener">seattle.accounting.example.com</a> is a subdomain.</li></ul></li></ul></li></ul><h1 id="3-Working-with-Hosted-Zones"><a href="#3-Working-with-Hosted-Zones" class="headerlink" title="3. Working with Hosted Zones"></a>3. Working with Hosted Zones</h1><p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html</a> </p><h1 id="4-Routing-Traffic-for-subdomains"><a href="#4-Routing-Traffic-for-subdomains" class="headerlink" title="4. Routing Traffic for subdomains"></a>4. Routing Traffic for subdomains</h1><p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-routing-traffic-for-subdomains.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-routing-traffic-for-subdomains.html</a> </p><ul><li>Option 1:<ul><li>Create records in the hosted zone for the doamin</li><li>we could create a record named <a href="http://test.example.com" target="_blank" rel="noopener">test.example.com</a> in the example.com hosted zone</li></ul></li><li>Option 2:<ul><li>Create a hosted zone for the subdomain, and create records in the new hosted zone</li></ul></li></ul><h1 id="5-Routing-Traffic-to-AWS-Resources"><a href="#5-Routing-Traffic-to-AWS-Resources" class="headerlink" title="5. Routing Traffic to AWS Resources"></a>5. Routing Traffic to AWS Resources</h1><p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-aws-resources.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-aws-resources.html</a> </p><ul><li>The logic is to leverage on AWS PrivateLink for cross vpc connection, create the interface endpoint in your service, and build connection between your VPC and Route53</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Route-53&quot;&gt;&lt;a href=&quot;#Route-53&quot; class=&quot;headerlink&quot; title=&quot;Route 53&quot;&gt;&lt;/a&gt;Route 53&lt;/h1&gt;&lt;h1 id=&quot;1-How-Route53-works&quot;&gt;&lt;a href=&quot;#1-How-Rout
+      
+    
+    </summary>
+    
+    
+      <category term="Cloud" scheme="https://www.llchen60.com/categories/Cloud/"/>
+    
+    
+      <category term="DNS" scheme="https://www.llchen60.com/tags/DNS/"/>
+    
+  </entry>
   
   <entry>
     <title>Elastic Load Balancing </title>
@@ -471,30 +497,6 @@
       
       
         &lt;h1 id=&quot;1-Intro-and-requirements&quot;&gt;&lt;a href=&quot;#1-Intro-and-requirements&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and requirements&quot;&gt;&lt;/a&gt;1. Intro and 
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Designing a URL Shortening service like TinyURL</title>
-    <link href="https://www.llchen60.com/Designing-a-URL-Shortening-service-like-TinyURL/"/>
-    <id>https://www.llchen60.com/Designing-a-URL-Shortening-service-like-TinyURL/</id>
-    <published>2020-11-09T00:03:55.000Z</published>
-    <updated>2020-11-09T00:04:36.117Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Thoughts"><a href="#1-Thoughts" class="headerlink" title="1. Thoughts"></a>1. Thoughts</h1><p>Based on System Design Guide, our thoughts could follow the framework described <a href="https://llchen60.com/System-Design-General-Guides-from-Grokking-SDI/" target="_blank" rel="noopener">here</a></p><p>Based on that: </p><ul><li><p>Requirement Clarification </p><ul><li>what feature we need<ul><li>create new tinyUrl </li><li>read existing tinyUrl, parse it to websites url </li></ul></li></ul></li><li><p>Envelope estimation </p><ul><li>what traffic amount it would be? Read/ Write Ratio? </li><li>Compute storage size we need</li><li>Network bandwidth usage </li></ul></li><li><p>System Interface Design </p><ul><li>generateNewTinyUrl<ul><li>original url </li><li>output parsed url </li></ul></li><li>parseTinyUrl()<ul><li>input tiny url </li><li>output - mapped original url </li></ul></li></ul></li><li><p>Data Model </p><ul><li>how data will flow between different components of the system </li></ul></li><li><p>High level design and detailed design </p></li><li><p>bottle neck resolving </p></li></ul><h1 id="2-Detail"><a href="#2-Detail" class="headerlink" title="2. Detail"></a>2. Detail</h1><h2 id="2-1-Requirements"><a href="#2-1-Requirements" class="headerlink" title="2.1 Requirements"></a>2.1 Requirements</h2><ul><li><p>Functional </p><ul><li>shorten given url </li><li>access a short url, user will be redirected to original link </li><li>users should optionally be able to pick a custom short link for their url </li><li>links will expire after a standard timespan, users should be able to specify the expiration time </li></ul></li><li><p>Non-Functional Requirements </p><ul><li>System should be highly available </li><li>Url redirection should happen in real time with minimal latency </li><li>Shortened links should not be guessable </li></ul></li><li><p>Extended Requirements</p><ul><li>analytics - how many times a redirection happen</li><li>should also be accessible through REST APIs by other services </li></ul></li></ul><h2 id="2-2-Capacity-Estimation-and-Constraints"><a href="#2-2-Capacity-Estimation-and-Constraints" class="headerlink" title="2.2 Capacity Estimation and Constraints"></a>2.2 Capacity Estimation and Constraints</h2><ul><li><p>read heavy system </p><ul><li>estimate read write ratio 100:1 </li></ul></li><li><p>traffic estimates </p><ul><li>suppose 500M new URL shortening request </li><li>then based on ratio, could be 50B read request </li><li>QPS<ul><li>for write <ul><li>500MM/ (30days * 24 hours * 3600 seconds) = ~ 200 URL/s</li></ul></li><li>for read <ul><li>200 * 100 = 20K/s</li></ul></li></ul></li></ul></li><li><p>storage estimate </p><ul><li>how long do we want to store them? <ul><li>what’s the total number of objects we want to store? <ul><li>suppose 5 years </li><li>500MM * 5 years * 12 months = 30 billion </li><li>suppose every object is about 500 bytes, then in total <ul><li>30B * 500 bytes = 15 TB</li></ul></li></ul></li></ul></li></ul></li><li><p>bandwidth estimate </p><ul><li><p>for write </p><ul><li>200 * 500 bytes/ s = ~100KB/s</li></ul></li><li><p>for read </p><ul><li>20K * 500 bytes = ~ 10MB/s </li></ul></li></ul></li><li><p>memory estimates </p><ul><li>we may want to cache some hot URLs that are frequently accessed, 20/ 80 rule </li><li>cache 20% hot URLs for a day </li><li>memory usage <ul><li>0.2 * 1.7 B * 500 bytes = ~170GB </li></ul></li></ul></li></ul><h2 id="2-3-System-APIs"><a href="#2-3-System-APIs" class="headerlink" title="2.3 System APIs"></a>2.3 System APIs</h2><ul><li><p>createURL (clientId, originalUrl, userName, customAlias, expireDate)</p><ul><li>clientId could be used for throttling based on allocated quota </li><li>return <ul><li>shortened url </li></ul></li></ul></li><li><p>deleteURL (clientId, urlKey)</p></li></ul><h2 id="2-4-DB-design"><a href="#2-4-DB-design" class="headerlink" title="2.4 DB design"></a>2.4 DB design</h2><ul><li>need two table, one store info for the URL mappings; one for the user’s data about who created the short link </li></ul><h2 id="2-5-System-Design-and-Algorithm"><a href="#2-5-System-Design-and-Algorithm" class="headerlink" title="2.5 System Design and Algorithm"></a>2.5 System Design and Algorithm</h2><ul><li><p>How to generate a short and unique key for a given URL </p><ul><li><p>Encoding actual URL </p><ul><li>compute a unique hash of the given URL </li><li>hash could be encoded for display </li><li>If we use MD5 algorithm as our hash function, it’ll produce a 128 bit hash value</li><li>After base64 encoding, we’ll get a string having more than 21 characters<ul><li>take the first 8 letters for the key <ul><li>for duplication, choose some other characters out of the encoding string or swap some characters </li></ul></li></ul></li></ul></li><li><p>generate keys offline </p><ul><li>have a standalon key generation service that generates random six letter strings beforehand and stores them in a database</li><li>whenever we want to shorten a URL, we will take one of the already generated keys and use it </li></ul></li></ul></li></ul><h2 id="2-6-Deta-Partitioning-and-Replication"><a href="#2-6-Deta-Partitioning-and-Replication" class="headerlink" title="2.6 Deta Partitioning and Replication"></a>2.6 Deta Partitioning and Replication</h2><ul><li>Range based partitioning<ul><li>Store URLs in separate partitions based on the hash key’s first letter</li><li>could lead to unbalanced DB servers  </li></ul></li><li>Hash Based Partitioning <ul><li>use hash, and calculate which partition to use based on that </li></ul></li></ul><h2 id="2-7-Cache"><a href="#2-7-Cache" class="headerlink" title="2.7 Cache"></a>2.7 Cache</h2><ul><li><p>could use memcache or other similar in memory cache solution </p></li><li><p>how muach cache memory should we have?</p><ul><li>20% of daily traffic </li></ul></li><li><p>what cache eviction policy should we use?</p><ul><li>LRU </li></ul></li></ul><h2 id="2-8-Load-Balancer"><a href="#2-8-Load-Balancer" class="headerlink" title="2.8 Load Balancer"></a>2.8 Load Balancer</h2><ul><li>We could choose to add LB at: <ul><li>between clients and application servers</li><li>between application servers and database servers</li><li>between apllication servers and cache servers </li></ul></li></ul><h2 id="2-9-Purging-DB-cleanup"><a href="#2-9-Purging-DB-cleanup" class="headerlink" title="2.9 Purging / DB cleanup"></a>2.9 Purging / DB cleanup</h2><ul><li>We should not actively search for expired links to remove them, as it would put a lot of pressure on our db <ul><li>slowlyremove and do a lazy cleanup</li></ul></li></ul><h2 id="2-10-Metrics-and-Security"><a href="#2-10-Metrics-and-Security" class="headerlink" title="2.10 Metrics and Security"></a>2.10 Metrics and Security</h2><ul><li><p>Record metrics </p><ul><li>country of visitor</li><li>data and time </li><li>web page that referred the click </li><li>browser </li><li>platform</li><li>etc. </li></ul></li><li><p>security and permissions </p><ul><li>store the permission level with each URL in the database </li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Thoughts&quot;&gt;&lt;a href=&quot;#1-Thoughts&quot; class=&quot;headerlink&quot; title=&quot;1. Thoughts&quot;&gt;&lt;/a&gt;1. Thoughts&lt;/h1&gt;&lt;p&gt;Based on System Design Guide, our th
       
     
     </summary>
