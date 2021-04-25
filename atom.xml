@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-03-20T20:11:01.960Z</updated>
+  <updated>2021-04-25T01:16:48.594Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Log4j 是如何工作的？ </title>
+    <link href="https://www.llchen60.com/Log4j-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F/"/>
+    <id>https://www.llchen60.com/Log4j-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F/</id>
+    <published>2021-04-25T01:15:48.000Z</published>
+    <updated>2021-04-25T01:16:48.594Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Log4j-是如何工作的？"><a href="#Log4j-是如何工作的？" class="headerlink" title="Log4j 是如何工作的？"></a>Log4j 是如何工作的？</h1><p>Created: Apr 24, 2021 5:02 PM<br>Tags: backend, tech<br>status: In Progress</p><h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul><li>组件化设计的日志系统</li></ul><pre><code>log.info(&quot;User signed in.&quot;); │ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐ ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│ Console  │ │   └──────────┘    └──────────┘    └──────────┘    └──────────┘ │ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐ ├──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│   File   │ │   └──────────┘    └──────────┘    └──────────┘    └──────────┘ │ │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐ └──&gt;│ Appender │───&gt;│  Filter  │───&gt;│  Layout  │───&gt;│  Socket  │     └──────────┘    └──────────┘    └──────────┘    └──────────┘</code></pre><ul><li>通过appender将同一条日志输出到不同的目的地</li></ul><h2 id="1-1-Logger组件"><a href="#1-1-Logger组件" class="headerlink" title="1.1 Logger组件"></a>1.1 Logger组件</h2><ul><li>负责产生日志，</li><li>级别<ul><li>DEBUG</li><li>INFO</li><li>WARN</li><li>ERROR</li><li>FATAL</li></ul></li></ul><h2 id="1-2-Appenders-组件"><a href="#1-2-Appenders-组件" class="headerlink" title="1.2 Appenders 组件"></a>1.2 Appenders 组件</h2><ul><li>负责将日志输出到不同的地方<ul><li>控制台 Console</li><li>文件 Files<ul><li>根据天数或者文件大小来产生新的文件</li></ul></li></ul></li></ul><h2 id="1-3-Layout"><a href="#1-3-Layout" class="headerlink" title="1.3 Layout"></a>1.3 Layout</h2><ul><li>完整文档<ul><li><a href="https://logging.apache.org/log4j/2.x/manual/layouts.html" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/manual/layouts.html</a></li></ul></li><li>说明你的日志要以何种格式来进行输出</li></ul><pre><code class="jsx">－X号: X信息输出时左对齐；%p: 输出日志信息优先级，即DEBUG，INFO，WARN，ERROR，FATAL,%d: 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}输出类似：2002年10月18日 22：10：28，921%r: 输出自应用启动到输出该log信息耗费的毫秒数%c: 输出日志信息所属的类目，通常就是所在类的全名%t: 输出产生该日志事件的线程名%l: 输出日志事件的发生位置，相当于%C.%M(%F:%L)的组合,包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)%x: 输出和当前线程相关联的NDC(嵌套诊断环境),尤其用到像java servlets这样的多客户多线程的应用中。%%: 输出一个&quot;%&quot;字符%F: 输出日志消息产生时所在的文件名称%L: 输出代码中的行号%m: 输出代码中指定的消息,产生的日志具体信息%n: 输出一个回车换行符，Windows平台为&quot;/r/n&quot;，Unix平台为&quot;/n&quot;输出日志信息换行</code></pre><h1 id="2-XML-配置文件格式"><a href="#2-XML-配置文件格式" class="headerlink" title="2. XML 配置文件格式"></a>2. XML 配置文件格式</h1><ul><li>通过Filter来过滤哪些需要输出，哪些不需要</li><li>通过Layout来格式化日志信息</li></ul><pre><code class="jsx">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;Configuration&gt;    &lt;Properties&gt;        &lt;!-- 定义日志格式 --&gt;        &lt;Property name=&quot;log.pattern&quot;&gt;%d{MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}%n%msg%n%n&lt;/Property&gt;        &lt;!-- 定义文件名变量 --&gt;        &lt;Property name=&quot;file.err.filename&quot;&gt;log/err.log&lt;/Property&gt;        &lt;Property name=&quot;file.err.pattern&quot;&gt;log/err.%i.log.gz&lt;/Property&gt;    &lt;/Properties&gt;    &lt;!-- 定义Appender，即目的地 --&gt;    &lt;Appenders&gt;        &lt;!-- 定义输出到屏幕 --&gt;        &lt;Console name=&quot;console&quot; target=&quot;SYSTEM_OUT&quot;&gt;            &lt;!-- 日志格式引用上面定义的log.pattern --&gt;            &lt;PatternLayout pattern=&quot;${log.pattern}&quot; /&gt;        &lt;/Console&gt;        &lt;!-- 定义输出到文件,文件名引用上面定义的file.err.filename --&gt;        &lt;RollingFile name=&quot;err&quot; bufferedIO=&quot;true&quot; fileName=&quot;${file.err.filename}&quot; filePattern=&quot;${file.err.pattern}&quot;&gt;            &lt;PatternLayout pattern=&quot;${log.pattern}&quot; /&gt;            &lt;Policies&gt;                &lt;!-- 根据文件大小自动切割日志 --&gt;                &lt;SizeBasedTriggeringPolicy size=&quot;1 MB&quot; /&gt;            &lt;/Policies&gt;            &lt;!-- 保留最近10份 --&gt;            &lt;DefaultRolloverStrategy max=&quot;10&quot; /&gt;        &lt;/RollingFile&gt;    &lt;/Appenders&gt;    &lt;Loggers&gt;        &lt;Root level=&quot;info&quot;&gt;            &lt;!-- 对info级别的日志，输出到console --&gt;            &lt;AppenderRef ref=&quot;console&quot; level=&quot;info&quot; /&gt;            &lt;!-- 对error级别的日志，输出到err，即上面定义的RollingFile --&gt;            &lt;AppenderRef ref=&quot;err&quot; level=&quot;error&quot; /&gt;        &lt;/Root&gt;    &lt;/Loggers&gt;&lt;/Configuration&gt;</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1264739436350112" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1252599548343744/1264739436350112</a> </li><li><a href="https://blog.csdn.net/Mos_wen/article/details/50598967" target="_blank" rel="noopener">https://blog.csdn.net/Mos_wen/article/details/50598967</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Log4j-是如何工作的？&quot;&gt;&lt;a href=&quot;#Log4j-是如何工作的？&quot; class=&quot;headerlink&quot; title=&quot;Log4j 是如何工作的？&quot;&gt;&lt;/a&gt;Log4j 是如何工作的？&lt;/h1&gt;&lt;p&gt;Created: Apr 24, 2021 5:02
+      
+    
+    </summary>
+    
+    
+      <category term="Backend" scheme="https://www.llchen60.com/categories/Backend/"/>
+    
+    
+      <category term="log" scheme="https://www.llchen60.com/tags/log/"/>
+    
+      <category term="log4j" scheme="https://www.llchen60.com/tags/log4j/"/>
+    
+  </entry>
   
   <entry>
     <title>Route53</title>
@@ -473,30 +501,6 @@
       
       
         &lt;h1 id=&quot;1-Intro-and-Instagram&quot;&gt;&lt;a href=&quot;#1-Intro-and-Instagram&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and Instagram&quot;&gt;&lt;/a&gt;1. Intro and Instagram
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Designing Pastebin</title>
-    <link href="https://www.llchen60.com/Designing-Pastebin/"/>
-    <id>https://www.llchen60.com/Designing-Pastebin/</id>
-    <published>2020-11-13T04:46:26.000Z</published>
-    <updated>2020-11-13T04:47:05.219Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Intro-and-requirements"><a href="#1-Intro-and-requirements" class="headerlink" title="1. Intro and requirements"></a>1. Intro and requirements</h1><ul><li>Pastebin<ul><li>service enable users to store plain text or images over the network and generate unique urls to access the uploaded data </li></ul></li></ul><ul><li><p>requirements</p><ul><li><p>functional </p><ul><li>users could upload/ paste their data and get a unique URL to access it </li><li>users only able to upload text </li><li>data and links will expire after a specific timespan, user should be able to specify expeiration time </li><li>users should optionally be able to pick a custom alias for their paste </li></ul></li><li><p>non functional </p><ul><li>system should be highly reliable, no data loss any time </li><li>system should be highly available</li><li>small latency </li><li>paste links should not be guessable </li></ul></li></ul></li></ul><h1 id="2-thoughts"><a href="#2-thoughts" class="headerlink" title="2. thoughts"></a>2. thoughts</h1><ul><li><p>requirement clarification </p><ul><li>what’s the accept types of the file? </li><li>what’s the maximum size of the file? <ul><li>10MB</li></ul></li></ul></li><li><p>hardware requirement </p><ul><li>read write request number </li><li>average request size </li><li>storage size <ul><li>we probably don’t want to use more than 70% of our total storage capacity at any point </li></ul></li><li>cache size </li></ul></li><li><p>how to achieve highly reliable, and highly available </p><ul><li>duplicate host </li></ul></li><li><p>how you want to store those file </p><ul><li>of course key value<ul><li>then question come to be what’s the overall number of key we need to store </li></ul></li></ul></li><li><p>high level design </p><ul><li>besides normal client, application server, and object storage </li><li>we could have another db to store metadata, like paste id, user </li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Intro-and-requirements&quot;&gt;&lt;a href=&quot;#1-Intro-and-requirements&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and requirements&quot;&gt;&lt;/a&gt;1. Intro and 
       
     
     </summary>
