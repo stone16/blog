@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-04-25T01:16:48.594Z</updated>
+  <updated>2021-06-23T04:22:55.533Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java虚拟机基本原理</title>
+    <link href="https://www.llchen60.com/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"/>
+    <id>https://www.llchen60.com/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</id>
+    <published>2021-06-23T04:21:43.000Z</published>
+    <updated>2021-06-23T04:22:55.533Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java虚拟机基本原理"><a href="#Java虚拟机基本原理" class="headerlink" title="Java虚拟机基本原理"></a>Java虚拟机基本原理</h1><h1 id="1-Java-代码运行方式"><a href="#1-Java-代码运行方式" class="headerlink" title="1. Java 代码运行方式"></a>1. Java 代码运行方式</h1><h2 id="1-1-为什么需要虚拟机"><a href="#1-1-为什么需要虚拟机" class="headerlink" title="1.1 为什么需要虚拟机"></a>1.1 为什么需要虚拟机</h2><ul><li>设计一个面向Java语言特性的虚拟机<ul><li>做这个的原因是为了能够在各种机器上来实现对Java的支持</li><li>通过编译器将Java程序转换成该虚拟机所能识别的指令序列，又被称为Java字节码<ul><li>叫做Java字节码的原因是字节码指令的操作码opcode被定义成了一个字节</li></ul></li></ul></li><li>Java的虚拟机是可以由硬件实现的，也可以在各个平台上(Windows/ Linux) 提供软件的实现<ul><li>好处1： 一旦一个程序被转换成了Java字节码，那么便可以在不同平台上的虚拟机里来运行</li><li>好处2： 带来了托管环境，这个托管环境能够代替我们处理一些代码当中冗长而且容易出错的部分<ul><li>自动内存管理</li><li>垃圾回收</li><li>诸如数组越界，动态类型，安全权限等等的动态检测功能</li></ul></li></ul></li></ul><h2 id="1-2-如何运行Java字节码的？"><a href="#1-2-如何运行Java字节码的？" class="headerlink" title="1.2 如何运行Java字节码的？"></a>1.2 如何运行Java字节码的？</h2><ul><li>从虚拟机视角来看<ul><li>首先将其编译成的class文件加载到Java虚拟机当中</li><li>加载后的Java类会被存放于方法区里 Method Area</li><li>实际执行的时候，执行方法区的代码</li><li>空间分配<ul><li>线程共享的<ul><li>方法区</li><li>堆</li></ul></li><li>线程私有<ul><li>PC寄存器</li><li>Java方法栈<ul><li>当调用一个Java方法的时候，会在当前线程生成一个栈帧，用来存放局部变量以及字节码的操作数</li><li>栈帧大小是已经计算好了的，栈帧不需要连续分布</li></ul></li><li>本地方法栈</li></ul></li></ul></li></ul></li><li>从硬件视角来看<ul><li>需要虚拟机将字节码翻译成机器码</li><li>翻译方式<ul><li>解释执行<ul><li>逐条将字节码翻译成机器码并且执行</li><li>优势<ul><li>无需等待编译</li></ul></li></ul></li><li>即时编译 Just In Time Compilation<ul><li>将一个方法中包含的所有字节码编译成机器码以后再执行</li><li>优势<ul><li>实际执行速度会更快</li></ul></li></ul></li></ul></li><li>hotpot的翻译方式<ul><li>先解释执行字节码</li><li>而后将反复执行的热点代码按照方法来作为基本单元进行JIT 即时编译</li></ul></li></ul></li></ul><h2 id="1-3-Java虚拟机执行效率"><a href="#1-3-Java虚拟机执行效率" class="headerlink" title="1.3 Java虚拟机执行效率"></a>1.3 Java虚拟机执行效率</h2><ul><li>优化方式<ul><li>即时编译<ul><li>底层逻辑 — 二八定律<ul><li>认为20%代码会占据80%的计算资源</li></ul></li><li>编译器类别 — tradeoff 编译时间 vs 执行效率<ul><li>C1<ul><li>Client编译器</li><li>面向对启动性能有要求的客户端GUI程序</li></ul></li><li>C2<ul><li>Server编译器</li><li>面向对峰值性能有要求的服务器端程序</li><li>采用的优化手段相对复杂，因此编译时间较长，但同时生成代码的效率比较高</li></ul></li><li>Graal</li></ul></li></ul></li></ul></li><li>Hotpot对于各种编译器的采用方式<ul><li>分层编译<ul><li>热点方法先被C1 编译</li><li>热点方法里的热点会进一步被C2 编译器编译</li></ul></li><li>会影响应用的正常进行么？<ul><li>即时编译是在额外的编译线程当中进行的</li><li>会根据CPU的数量设置编译线程的数目，并且按照1:2的比例配置给C1 及C2 编译器</li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Java虚拟机基本原理&quot;&gt;&lt;a href=&quot;#Java虚拟机基本原理&quot; class=&quot;headerlink&quot; title=&quot;Java虚拟机基本原理&quot;&gt;&lt;/a&gt;Java虚拟机基本原理&lt;/h1&gt;&lt;h1 id=&quot;1-Java-代码运行方式&quot;&gt;&lt;a href=&quot;#1-Ja
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://www.llchen60.com/tags/Java/"/>
+    
+      <category term="JVM" scheme="https://www.llchen60.com/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>Log4j 是如何工作的？ </title>
@@ -484,30 +512,6 @@
     
     
       <category term="DP" scheme="https://www.llchen60.com/tags/DP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Instagram Design Scratch</title>
-    <link href="https://www.llchen60.com/Instagram-Design-Scratch/"/>
-    <id>https://www.llchen60.com/Instagram-Design-Scratch/</id>
-    <published>2020-11-15T17:59:24.000Z</published>
-    <updated>2020-11-15T18:00:08.339Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Intro-and-Instagram"><a href="#1-Intro-and-Instagram" class="headerlink" title="1. Intro and Instagram"></a>1. Intro and Instagram</h1><ul><li>social networking service </li><li>upload and share photos and videos </li><li>share info either publicly or privately </li><li>share through other social networking platforms <ul><li>facebook</li><li>twitter</li><li>flickr</li><li>tumblr</li></ul></li></ul><ul><li><p>requirement </p><ul><li><p>functional </p><ul><li>users should be able to upload/ download/ view photos </li><li>search based on photo/ video titles </li><li>users can follow other users </li><li>system will generate and display a user’s News Feed consisting of top photos from all the people the user follows </li></ul></li><li><p>non-functional </p><ul><li>services need to be highly available </li><li>latency come to be 200ms for News Feed Generation </li></ul></li></ul></li></ul><h1 id="2-Design"><a href="#2-Design" class="headerlink" title="2. Design"></a>2. Design</h1><ul><li>patterns<ul><li>read heavy system <ul><li>need to effectively manage storage </li><li>100% reliable of data </li><li>low latency </li></ul></li></ul></li></ul><ul><li><p>system design </p><ul><li><p>we need to support two scenarios</p><ul><li>upload photos </li><li>view/ search photos</li></ul></li><li><p>db </p><ul><li>image storage </li><li>image metadata storage </li></ul></li></ul></li></ul><ul><li><p>Separate read and write servers </p><ul><li>web servers have a connection limit </li><li>assume max is 500 connections, that means server cannot have more than 500 concurrent uploads or reads </li></ul></li><li><p>reliability </p><ul><li>run a redundant secondary copy of the service that is not serving any traffic if only one instance of a service is required to run at any point </li></ul></li><li><p>data sharding </p><ul><li><p>partition based on UserID?</p><ul><li>hot user </li><li>non-uniform storage as some users may upload a lot of images </li><li>what if one shard is full? </li><li>unavailability – all users data come to be unavailable all of sudden </li></ul></li><li><p>use photoId as partition key </p></li></ul></li><li><p>news feeds - e.g 100 feeds </p><ul><li><p>real time generation </p><ul><li>need to go to user follow table to get all of its following people </li><li>then query with user id to get their 100 updates </li><li>combine them, go through our ranking algo </li><li>then generate the output </li></ul></li><li><p>should choose pre-generating way as it will save a lot of times </p><ul><li>have dedicated servers that are continuously generating users’ News Feeds and storing them in a UserNewsFeed table</li></ul></li></ul></li><li><p>approaches for seanding news feed contents to users </p><ul><li><p>pull</p><ul><li><p>clients can pull the News Feed contents from the server on a regular basis or manually whenever they need it </p><ul><li><p>problems</p><ul><li>new data might not be shown to the users until clients issue a pull request </li><li>most of time, pull requests response could be empty </li></ul></li><li><p>push </p><ul><li>servers can push new data to the users as soon as it is available </li><li>users then need to maintain a long poll request with the server for receiving the updates </li><li>issue <ul><li>user has follow a lot of people </li><li>celebrity user who has meillions of followers </li><li>server then have to push updates quite frequently </li></ul></li></ul></li><li><p>hybrid </p><ul><li>move all the users who have a high number of follows to a pull based model and only push data to those users who have a few hundred follows </li></ul></li></ul></li></ul></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Intro-and-Instagram&quot;&gt;&lt;a href=&quot;#1-Intro-and-Instagram&quot; class=&quot;headerlink&quot; title=&quot;1. Intro and Instagram&quot;&gt;&lt;/a&gt;1. Intro and Instagram
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
     
   </entry>
   

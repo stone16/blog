@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Java虚拟机基本原理</title>
+      <link href="/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"/>
+      <url>/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java虚拟机基本原理"><a href="#Java虚拟机基本原理" class="headerlink" title="Java虚拟机基本原理"></a>Java虚拟机基本原理</h1><h1 id="1-Java-代码运行方式"><a href="#1-Java-代码运行方式" class="headerlink" title="1. Java 代码运行方式"></a>1. Java 代码运行方式</h1><h2 id="1-1-为什么需要虚拟机"><a href="#1-1-为什么需要虚拟机" class="headerlink" title="1.1 为什么需要虚拟机"></a>1.1 为什么需要虚拟机</h2><ul><li>设计一个面向Java语言特性的虚拟机<ul><li>做这个的原因是为了能够在各种机器上来实现对Java的支持</li><li>通过编译器将Java程序转换成该虚拟机所能识别的指令序列，又被称为Java字节码<ul><li>叫做Java字节码的原因是字节码指令的操作码opcode被定义成了一个字节</li></ul></li></ul></li><li>Java的虚拟机是可以由硬件实现的，也可以在各个平台上(Windows/ Linux) 提供软件的实现<ul><li>好处1： 一旦一个程序被转换成了Java字节码，那么便可以在不同平台上的虚拟机里来运行</li><li>好处2： 带来了托管环境，这个托管环境能够代替我们处理一些代码当中冗长而且容易出错的部分<ul><li>自动内存管理</li><li>垃圾回收</li><li>诸如数组越界，动态类型，安全权限等等的动态检测功能</li></ul></li></ul></li></ul><h2 id="1-2-如何运行Java字节码的？"><a href="#1-2-如何运行Java字节码的？" class="headerlink" title="1.2 如何运行Java字节码的？"></a>1.2 如何运行Java字节码的？</h2><ul><li>从虚拟机视角来看<ul><li>首先将其编译成的class文件加载到Java虚拟机当中</li><li>加载后的Java类会被存放于方法区里 Method Area</li><li>实际执行的时候，执行方法区的代码</li><li>空间分配<ul><li>线程共享的<ul><li>方法区</li><li>堆</li></ul></li><li>线程私有<ul><li>PC寄存器</li><li>Java方法栈<ul><li>当调用一个Java方法的时候，会在当前线程生成一个栈帧，用来存放局部变量以及字节码的操作数</li><li>栈帧大小是已经计算好了的，栈帧不需要连续分布</li></ul></li><li>本地方法栈</li></ul></li></ul></li></ul></li><li>从硬件视角来看<ul><li>需要虚拟机将字节码翻译成机器码</li><li>翻译方式<ul><li>解释执行<ul><li>逐条将字节码翻译成机器码并且执行</li><li>优势<ul><li>无需等待编译</li></ul></li></ul></li><li>即时编译 Just In Time Compilation<ul><li>将一个方法中包含的所有字节码编译成机器码以后再执行</li><li>优势<ul><li>实际执行速度会更快</li></ul></li></ul></li></ul></li><li>hotpot的翻译方式<ul><li>先解释执行字节码</li><li>而后将反复执行的热点代码按照方法来作为基本单元进行JIT 即时编译</li></ul></li></ul></li></ul><h2 id="1-3-Java虚拟机执行效率"><a href="#1-3-Java虚拟机执行效率" class="headerlink" title="1.3 Java虚拟机执行效率"></a>1.3 Java虚拟机执行效率</h2><ul><li>优化方式<ul><li>即时编译<ul><li>底层逻辑 — 二八定律<ul><li>认为20%代码会占据80%的计算资源</li></ul></li><li>编译器类别 — tradeoff 编译时间 vs 执行效率<ul><li>C1<ul><li>Client编译器</li><li>面向对启动性能有要求的客户端GUI程序</li></ul></li><li>C2<ul><li>Server编译器</li><li>面向对峰值性能有要求的服务器端程序</li><li>采用的优化手段相对复杂，因此编译时间较长，但同时生成代码的效率比较高</li></ul></li><li>Graal</li></ul></li></ul></li></ul></li><li>Hotpot对于各种编译器的采用方式<ul><li>分层编译<ul><li>热点方法先被C1 编译</li><li>热点方法里的热点会进一步被C2 编译器编译</li></ul></li><li>会影响应用的正常进行么？<ul><li>即时编译是在额外的编译线程当中进行的</li><li>会根据CPU的数量设置编译线程的数目，并且按照1:2的比例配置给C1 及C2 编译器</li></ul></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> JVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Log4j 是如何工作的？ </title>
       <link href="/Log4j-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F/"/>
       <url>/Log4j-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F/</url>
