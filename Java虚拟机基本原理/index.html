@@ -244,7 +244,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="296">
-<input type="hidden" id="yelog_site_word_count" value="489.4k">
+<input type="hidden" id="yelog_site_word_count" value="489.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3573,12 +3573,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-06-22 21:22:55'>2021-06-22 21:21</time>
+        创建时间:<time class="date" title='更新时间: 2021-06-23 20:01:17'>2021-06-22 21:21</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:811</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3608,7 +3608,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机基本原理"><span class="toc-text">Java虚拟机基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java-代码运行方式"><span class="toc-text">1. Java 代码运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么需要虚拟机"><span class="toc-text">1.1 为什么需要虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-如何运行Java字节码的？"><span class="toc-text">1.2 如何运行Java字节码的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java虚拟机执行效率"><span class="toc-text">1.3 Java虚拟机执行效率</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机基本原理"><span class="toc-text">Java虚拟机基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java-代码运行方式"><span class="toc-text">1. Java 代码运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么需要虚拟机"><span class="toc-text">1.1 为什么需要虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-如何运行Java字节码的？"><span class="toc-text">1.2 如何运行Java字节码的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java虚拟机执行效率"><span class="toc-text">1.3 Java虚拟机执行效率</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基本类型在虚拟机当中的实现"><span class="toc-text">2. 基本类型在虚拟机当中的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-类的加载"><span class="toc-text">3. 类的加载</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3738,7 +3738,51 @@
 </ul>
 </li>
 </ul>
-
+<h1 id="2-基本类型在虚拟机当中的实现"><a href="#2-基本类型在虚拟机当中的实现" class="headerlink" title="2. 基本类型在虚拟机当中的实现"></a>2. 基本类型在虚拟机当中的实现</h1><ul>
+<li>为什么要引入基本类型而不是全都使用对象呢？<ul>
+<li>基本类型更靠近底层，在执行效率和内存使用方面都能够提升软件的性能</li>
+</ul>
+</li>
+<li>boolean 类型<ul>
+<li>映射成int类型<ul>
+<li>true被映射为整数1</li>
+<li>false被映射为整数0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/24/6o39J4QcZEHOA8d.png" alt="Java基本类型"></p>
+<ul>
+<li>Java虚拟机在调用Java方法的时候，会创建出一个栈帧，对于其中的解释栈帧来说，有两个主要组成部分<ul>
+<li>局部变量区<ul>
+<li>局部变量</li>
+<li>this指针</li>
+<li>方法接收的参数</li>
+<li>各个基本类型在局部变量区的表现<ul>
+<li>局部变量区等价于一个数组<ul>
+<li>long double需要两个数组单元存储</li>
+<li>其他基本类型和引用类型的值均占用一个数组单元</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字节码的操作数栈</li>
+</ul>
+</li>
+<li>存储操作<ul>
+<li>如果我们将一个int类型的值放到char short 等里面，相当于做了一次掩码  只会保留低位了</li>
+</ul>
+</li>
+<li>加载<ul>
+<li>算数运算完全依赖于操作数栈</li>
+<li>堆当中的boolean, byte, char, short 加载到操作数栈当中，而后将栈上的值当成int类型来运算</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-类的加载"><a href="#3-类的加载" class="headerlink" title="3. 类的加载"></a>3. 类的加载</h1>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3752,10 +3796,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Java虚拟机基本原理</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">811</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2021-06-22, 21:21:43</p>
-    <p><span class="copy-title">最后更新:</span>2021-06-22, 21:22:55</p>
+    <p><span class="copy-title">最后更新:</span>2021-06-23, 20:01:17</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="Java虚拟机基本原理">https://www.llchen60.com/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
