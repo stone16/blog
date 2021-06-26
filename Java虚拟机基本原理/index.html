@@ -244,7 +244,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="297">
-<input type="hidden" id="yelog_site_word_count" value="491.1k">
+<input type="hidden" id="yelog_site_word_count" value="493.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3585,12 +3585,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-06-23 20:01:17'>2021-06-22 21:21</time>
+        创建时间:<time class="date" title='更新时间: 2021-06-26 15:59:31'>2021-06-22 21:21</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.1k</span>
+        <span>字数:3.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3620,7 +3620,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机基本原理"><span class="toc-text">Java虚拟机基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java-代码运行方式"><span class="toc-text">1. Java 代码运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么需要虚拟机"><span class="toc-text">1.1 为什么需要虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-如何运行Java字节码的？"><span class="toc-text">1.2 如何运行Java字节码的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java虚拟机执行效率"><span class="toc-text">1.3 Java虚拟机执行效率</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基本类型在虚拟机当中的实现"><span class="toc-text">2. 基本类型在虚拟机当中的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-类的加载"><span class="toc-text">3. 类的加载</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机基本原理"><span class="toc-text">Java虚拟机基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Java-代码运行方式"><span class="toc-text">1. Java 代码运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-为什么需要虚拟机"><span class="toc-text">1.1 为什么需要虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-如何运行Java字节码的？"><span class="toc-text">1.2 如何运行Java字节码的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java虚拟机执行效率"><span class="toc-text">1.3 Java虚拟机执行效率</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-基本类型在虚拟机当中的实现"><span class="toc-text">2. 基本类型在虚拟机当中的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-类的加载，链接，初始化过程"><span class="toc-text">3. 类的加载，链接，初始化过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-JVM执行方法调用"><span class="toc-text">4. JVM执行方法调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-重载和重写"><span class="toc-text">4.1 重载和重写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-JVM-静态和动态绑定"><span class="toc-text">4.2 JVM 静态和动态绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-调用指令的符号引用"><span class="toc-text">4.3 调用指令的符号引用</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3794,7 +3794,178 @@
 </ul>
 </li>
 </ul>
-<h1 id="3-类的加载"><a href="#3-类的加载" class="headerlink" title="3. 类的加载"></a>3. 类的加载</h1>
+<h1 id="3-类的加载，链接，初始化过程"><a href="#3-类的加载，链接，初始化过程" class="headerlink" title="3. 类的加载，链接，初始化过程"></a>3. 类的加载，链接，初始化过程</h1><ul>
+<li>从class文件到内存当中的类，需要经过：<ul>
+<li>加载<ul>
+<li>查找字节流，并且根据此来创建类的过程</li>
+<li>借助类加载器来完成查找字节流的过程<ul>
+<li>启动类加载器 — bootstrap class loader<ul>
+<li>负责加载最基础最重要的类，譬如JRE lib目录下Jar包中的类</li>
+<li>由虚拟机参数 -Xbootclasspath指定的类</li>
+</ul>
+</li>
+<li>其他类加载器 — 都是java.lang.ClassLoader的子类<ul>
+<li>需要先由启动类加载器，将其加载至Java虚拟机当中，方能执行类的加载</li>
+<li>E.G<ul>
+<li>扩展类加载器 — 父类是启动类加载器<ul>
+<li>负责加载相对次要、但又通用的类，比如存放在 JRE 的 lib/ext 目录下 jar 包中的类（以及由系统变量 java.ext.dirs 指定的类）</li>
+</ul>
+</li>
+<li>应用类加载器 — 父类是扩展类加载器<ul>
+<li>负责加载应用程序路径下的类<ul>
+<li>例如虚拟机参数 -cp/-classpath, 系统变量java.class.path或者环境变量CLASSPATH所指定的路径</li>
+<li>默认应用程序里包含的类应该由应用类加载器来进行加载</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>双亲委派模型<ul>
+<li>当一个类加载器接收到加载请求时，会先将请求转发给父类加载器</li>
+<li>在父类加载器没有找到所请求的类的情况下，该类加载器才会尝试去加载</li>
+</ul>
+</li>
+<li>类加载器 — 命名空间的作用<ul>
+<li>类的唯一性由类加载器实例和类的全名共同确定</li>
+<li>即使同一串字节流，经由不同的类加载器加载，也会得到不同的类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>链接<ul>
+<li>将创建的类合并到Java虚拟机当中，并且使其能够执行的过程</li>
+<li>过程<ul>
+<li>验证<ul>
+<li>确保被加载类能够满足Java虚拟机的约束条件</li>
+</ul>
+</li>
+<li>准备<ul>
+<li>为被加载类的静态字段分配内存</li>
+<li>也会来构造和其他类层次相关的数据结构，比如说用来实现虚方法的动态绑定的方法表</li>
+</ul>
+</li>
+<li>解析 — 对于字节码符号引用的解析<ul>
+<li>在 class 文件被加载至 Java 虚拟机之前，这个类无法知道其他类及其方法、字段所对应的具体地址，甚至不知道自己方法、字段的地址。</li>
+<li>因此，每当需要引用这些成员时，Java 编译器会生成一个符号引用。在运行阶段，这个符号引用一般都能够无歧义地定位到具体目标上。</li>
+<li>举例来说，对于一个方法调用，编译器会生成一个包含目标方法所在类的名字、目标方法的名字、接收参数类型以及返回值类型的符号引用，来指代所要调用的方法。</li>
+<li>解析阶段的目的，正是将这些符号引用解析成为实际引用。如果符号引用指向一个未被加载的类，或者未被加载类的字段或方法，那么解析将触发这个类的加载（但未必触发这个类的链接以及初始化。）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>初始化<ul>
+<li>内容<ul>
+<li>为标记为常量值的字段赋值</li>
+<li>执行clinit方法 — Java虚拟机通过加锁确定clinit方法仅仅会被执行一次<ul>
+<li>如果直接赋值的静态字段被 final 所修饰，并且它的类型是基本类型或字符串时，那么该字段便会被 Java 编译器标记成常量值（ConstantValue），其初始化直接由 Java 虚拟机完成。</li>
+<li>除此之外的直接赋值操作，以及所有静态代码块中的代码，则会被 Java 编译器置于同一方法中，并把它命名为 &lt; clinit &gt;。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>触发情况<ul>
+<li>当虚拟机启动时，初始化用户指定的主类；</li>
+<li>当遇到用以新建目标类实例的 new 指令时，初始化 new 指令的目标类；</li>
+<li>当遇到调用静态方法的指令时，初始化该静态方法所在的类；</li>
+<li>当遇到访问静态字段的指令时，初始化该静态字段所在的类；</li>
+<li>子类的初始化会触发父类的初始化；</li>
+<li>如果一个接口定义了 default 方法，那么直接实现或者间接实现该接口的类的初始化，会触发该接口的初始化；</li>
+<li>使用反射 API 对某个类进行反射调用时，初始化这个类；</li>
+<li>当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本类型是Java虚拟机已经设置好的，而另一大类引用类型，Java将其细分为四种<ul>
+<li>类<ul>
+<li>有对应的字节流 — class文件</li>
+</ul>
+</li>
+<li>接口<ul>
+<li>有对应的字节流 - class文件</li>
+</ul>
+</li>
+<li>数组类<ul>
+<li>由Java虚拟机直接生成</li>
+</ul>
+</li>
+<li>泛型参数</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-JVM执行方法调用"><a href="#4-JVM执行方法调用" class="headerlink" title="4. JVM执行方法调用"></a>4. JVM执行方法调用</h1><h2 id="4-1-重载和重写"><a href="#4-1-重载和重写" class="headerlink" title="4.1 重载和重写"></a>4.1 重载和重写</h2><ul>
+<li>重载<ul>
+<li>同一个类当中方法名称相同，但是方法的参数不相同的情况</li>
+<li>在编译过程当中就可以完成识别，Java编译器根据传入参数的声明类型，来选取重载方法<ul>
+<li>三个阶段<ul>
+<li>不考虑基本类型的自动拆箱装箱，还有可变长参数的情况下选择重载方法</li>
+<li>1阶段没有找到适配的方法，那么就在允许自动拆装箱，但不允许可变长参数的情况下选取重载方法</li>
+<li>2阶段没有找到适配的方法，那么在允许自动装拆箱以及可变长参数的情况下选取重载方法</li>
+</ul>
+</li>
+<li>如果Java编译器在同一个阶段找到了多个适配方法，那么就会选择一个最为贴切的，决定贴切程度的一个关键就是形式参数类型的继承关系<ul>
+<li>会选择那个范围更小的，比如某某的子类这样子</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重写<ul>
+<li>子类定义了和父类非私有方法同名的方法，而且这两个方法的参数类型相同</li>
+<li>如果这两个方法都是静态的，那么子类中的方法隐藏了父类中的方法</li>
+<li>如果都不是静态，也不是私有的，那么子类的方法重写了父类当中的方法</li>
+<li>方法重写 — 允许子类在继承父类部分功能的同时，拥有自己独特的行为</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-JVM-静态和动态绑定"><a href="#4-2-JVM-静态和动态绑定" class="headerlink" title="4.2 JVM 静态和动态绑定"></a>4.2 JVM 静态和动态绑定</h2><ul>
+<li>Java虚拟机识别方法<ul>
+<li>类名</li>
+<li>方法名</li>
+<li>方法描述符 — method descriptor<ul>
+<li>由方法的参数类型以及<strong>返回类型</strong>所构成的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>JVM和Java语言在这里不太一样，同一个类下同样方法名，同样参数，但是不同返回值从JVM角度来说是可以被认为是不同的方法，是可以通过的</li>
+<li>静态绑定<ul>
+<li>在解析的时候便能够识别目标方法的情况</li>
+<li>重载 — 是在编译阶段就完成了的，也可以成为static binding</li>
+</ul>
+</li>
+<li>动态绑定<ul>
+<li>在运行过程当中根据调用者的动态类型来识别目标方法的情况</li>
+<li>重写 — 在JVM当中来做识别，dynamic binding</li>
+</ul>
+</li>
+<li>Java字节码当中和调用相关的指令<ul>
+<li>invokestatic  - 用于调用静态方法</li>
+<li>invokespecial - 用于调用私有实例方法，构造器  以及使用super关键字调用父类的实例方法或者构造器</li>
+<li>invokevirtual  - 用于调用非私有实例方法</li>
+<li>invokeinterface - 用于调用接口方法</li>
+<li>invokedynamic - 用于调用动态方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-3-调用指令的符号引用"><a href="#4-3-调用指令的符号引用" class="headerlink" title="4.3 调用指令的符号引用"></a>4.3 调用指令的符号引用</h2><ul>
+<li>在编译过程当中，我们并不知道目标方法的具体内存地址<ul>
+<li>Java编译器会暂时用符号引用来表示该目标方法</li>
+<li>这一符号引用包括目标方法所在的类或接口的名字，以及目标方法的方法名和方法描述符。</li>
+</ul>
+</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
     </div>
@@ -3808,10 +3979,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Java虚拟机基本原理</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2021-06-22, 21:21:43</p>
-    <p><span class="copy-title">最后更新:</span>2021-06-23, 20:01:17</p>
+    <p><span class="copy-title">最后更新:</span>2021-06-26, 15:59:31</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="Java虚拟机基本原理">https://www.llchen60.com/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
