@@ -6,16 +6,15 @@
   <meta name="keywords" content=" Java , JVM ">
   <meta name="description" content="Java虚拟机基本原理 | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="01背包问题Created: Jun 23, 2021 8:02 PM 1. 问题描述背包问题 即有N件物品，和一个最多能装重量W的背包，第i件物品的重量是weight[i], 得到的价值是value[i], 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。 2. 暴力破解方法 每件物品只有选和不选两种途径，可以使用回溯法搜索出所有的情况，然后取最大的值 这样写非常慢，因为遍历了每个">
-<meta property="og:type" content="article">
-<meta property="og:title" content="01背包问题">
-<meta property="og:url" content="https://www.llchen60.com/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta name="description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://www.llchen60.com/about/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
-<meta property="og:description" content="01背包问题Created: Jun 23, 2021 8:02 PM 1. 问题描述背包问题 即有N件物品，和一个最多能装重量W的背包，第i件物品的重量是weight[i], 得到的价值是value[i], 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。 2. 暴力破解方法 每件物品只有选和不选两种途径，可以使用回溯法搜索出所有的情况，然后取最大的值 这样写非常慢，因为遍历了每个">
-<meta property="article:published_time" content="2021-06-25T01:20:17.000Z">
-<meta property="article:modified_time" content="2021-06-25T01:21:30.603Z">
+<meta property="og:description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
+<meta property="article:modified_time" content="2020-11-15T18:01:50.615Z">
 <meta property="article:author" content="Leilei Chen">
-<meta property="article:tag" content="01背包">
 <meta name="twitter:card" content="summary">
 
 
@@ -237,7 +236,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="297">
-<input type="hidden" id="yelog_site_word_count" value="495.1k">
+<input type="hidden" id="yelog_site_word_count" value="495.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3578,12 +3577,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-06-27 11:46:02'>2021-06-22 21:21</time>
+        创建时间:<time class="date" title='更新时间: 2021-06-27 17:53:37'>2021-06-22 21:21</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:5.1k</span>
+        <span>字数:5.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3671,6 +3670,14 @@
 <li>编译后代码</li>
 </ul>
 </li>
+<li>JDK 1.8之后，不再有方法区了，元数据会放到本地内存的Metaspace 即元空间里面<ul>
+<li>使用Metaspace的优势<ul>
+<li>元空间大小默认为Unlimited 即只受到系统内存的限制</li>
+<li>因为元数据大小不再由MaxPermSize控制，而由实际的可用空间控制，这样能加载的类就更多了</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>堆</p>
@@ -3727,20 +3734,22 @@
 </li>
 <li><p>线程私有</p>
 <ul>
-<li>PC寄存器</li>
 <li>程序计数器<ul>
 <li>完成加载工作</li>
-<li>本身是一个指针，指向程序当中下一句需要执行的命令</li>
+<li>本身是一个指针，指向程序当中下一句需要执行的命令<ul>
+<li>分支，循环，跳转，异常处理，线程恢复等功能都依赖于这个计数器来完成</li>
+</ul>
+</li>
 <li>占用空间非常非常小</li>
 <li>这个内存仅仅代表了当前线程所执行的字节码的行号指示器</li>
 <li>字节码解析器通过改变这个计数器的值来选取下一条需要执行的字节码指令</li>
 </ul>
 </li>
-<li>Java方法栈<ul>
+<li>VM 栈<ul>
 <li>当调用一个Java方法的时候，会在当前线程生成一个栈帧，用来存放局部变量以及字节码的操作数</li>
 <li>栈帧大小是已经计算好了的，栈帧不需要连续分布</li>
 <li>方法执行的内存模型<ul>
-<li>对局部变量，动态链表，方法出口，栈的操作进行存储，并且线程独享</li>
+<li>对局部变量，动态链表，方法出口，栈的操作，对象引用进行存储，并且线程独享</li>
 </ul>
 </li>
 <li>如果线程请求的栈的深度大于虚拟机栈的最大深度，就会报StackOverflowError</li>
@@ -3750,8 +3759,15 @@
 </li>
 <li>本地方法栈<ul>
 <li>由native修饰的方法</li>
+<li>和虚拟机栈所发挥的作用非常相似，区别是： 虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>直接内存</p>
+<ul>
+<li>直接内存并不是虚拟机运行时数据区的一部分，也不是虚拟机定义的内存区域</li>
+<li>是通过基于通道和缓存区的NIO，直接使用Native函数库来分配堆外内存，然后通过一个存储在Java堆当中的DirectByteBuffer对象作为这块内存的引用，进而进行操作</li>
 </ul>
 </li>
 </ul>
@@ -4199,10 +4215,10 @@ public class App {
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Java虚拟机基本原理</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">5.1k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">5.4k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2021-06-22, 21:21:43</p>
-    <p><span class="copy-title">最后更新:</span>2021-06-27, 11:46:02</p>
+    <p><span class="copy-title">最后更新:</span>2021-06-27, 17:53:37</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="Java虚拟机基本原理">https://www.llchen60.com/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
