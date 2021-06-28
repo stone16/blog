@@ -1,7 +1,7 @@
 ---
 title: 'Log4j 是如何工作的？ '
 date: 2021-04-24 18:15:48
-categories: Backend
+categories: BackEnd
 
 tags:
     - log4j
