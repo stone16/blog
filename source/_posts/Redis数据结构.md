@@ -1,8 +1,9 @@
 ---
 title: Redis数据结构
 date: 2021-07-02 11:18:24
-categories:
+categories: 数据存储
 tags:
+    - Redis
 top:
 ---
 # Redis数据结构
