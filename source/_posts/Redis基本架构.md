@@ -6,7 +6,6 @@ tags:
     - Redis
 top:
 ---
-<!-- toc --​>
 
 # Redis基本架构
 
