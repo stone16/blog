@@ -77,7 +77,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+updated_option: mtime
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -130,3 +130,15 @@ sitemap:
 
 # Google Analytics
 google_analytics: 'UA-127393934-1'            # Format: UA-xxxxxx-xx
+
+
+# table of contents 
+toc:
+  maxdepth: 3
+  class: toc
+  slugify: uslug
+  decodeEntities: false
+  anchor:
+    position: after
+    symbol: '#'
+    style: header-anchor
