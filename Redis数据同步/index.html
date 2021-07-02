@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://www.llchen60.com/about/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
 <meta property="og:description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
 <meta property="article:modified_time" content="2020-11-15T18:01:50.615Z">
 <meta property="article:author" content="Leilei Chen">
@@ -44,7 +45,7 @@
 <script src="/js/iconfont.js?v=1.0.1" ></script>
 
   <script data-ad-client="ca-pub-4131942483083140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
 </head>
 <div style="display: none">
   <input class="theme_disqus_on" value="true">
@@ -3616,7 +3617,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis数据同步"><span class="toc-text">Redis数据同步</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Redis的高可靠性"><span class="toc-text">1. Redis的高可靠性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-数据同步-—-主从库模式"><span class="toc-text">2. 数据同步 — 主从库模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-主从库之间如何进行第一个同步？"><span class="toc-text">2.1 主从库之间如何进行第一个同步？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-主从级联方式分担全量复制时的主库压力"><span class="toc-text">2.2 主从级联方式分担全量复制时的主库压力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-突发情况下的增量复制"><span class="toc-text">2.3 突发情况下的增量复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-主从全量同步-RDB-vs-AOF"><span class="toc-text">2.4 主从全量同步 RDB vs AOF</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5"><span class="toc-text">Redis数据同步</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Redis%E7%9A%84%E9%AB%98%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-text">1. Redis的高可靠性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5-%E2%80%94-%E4%B8%BB%E4%BB%8E%E5%BA%93%E6%A8%A1%E5%BC%8F"><span class="toc-text">2. 数据同步 — 主从库模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%B8%BB%E4%BB%8E%E5%BA%93%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%90%8C%E6%AD%A5%EF%BC%9F"><span class="toc-text">2.1 主从库之间如何进行第一个同步？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%B8%BB%E4%BB%8E%E7%BA%A7%E8%81%94%E6%96%B9%E5%BC%8F%E5%88%86%E6%8B%85%E5%85%A8%E9%87%8F%E5%A4%8D%E5%88%B6%E6%97%B6%E7%9A%84%E4%B8%BB%E5%BA%93%E5%8E%8B%E5%8A%9B"><span class="toc-text">2.2 主从级联方式分担全量复制时的主库压力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E7%AA%81%E5%8F%91%E6%83%85%E5%86%B5%E4%B8%8B%E7%9A%84%E5%A2%9E%E9%87%8F%E5%A4%8D%E5%88%B6"><span class="toc-text">2.3 突发情况下的增量复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E4%B8%BB%E4%BB%8E%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5-RDB-vs-AOF"><span class="toc-text">2.4 主从全量同步 RDB vs AOF</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3808,7 +3809,7 @@
     <p><span class="copy-title">最后更新:</span>2021-01-03, 19:18:02</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" title="Redis数据同步">https://www.llchen60.com/Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</a>
     <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
 </div>
 

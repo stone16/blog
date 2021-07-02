@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://www.llchen60.com/about/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
 <meta property="og:description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
 <meta property="article:modified_time" content="2020-11-15T18:01:50.615Z">
 <meta property="article:author" content="Leilei Chen">
@@ -44,7 +45,7 @@
 <script src="/js/iconfont.js?v=1.0.1" ></script>
 
   <script data-ad-client="ca-pub-4131942483083140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
 </head>
 <div style="display: none">
   <input class="theme_disqus_on" value="true">
@@ -3622,7 +3623,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-适配器模式原理和实现"><span class="toc-text">1. 适配器模式原理和实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-应用场景总结"><span class="toc-text">2. 应用场景总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-封装有缺陷的接口设计"><span class="toc-text">2.1 封装有缺陷的接口设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-统一多个类的接口设计"><span class="toc-text">2.2 统一多个类的接口设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-替换依赖的外部系统"><span class="toc-text">2.3 替换依赖的外部系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-兼容老版本的接口"><span class="toc-text">2.4 兼容老版本的接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-代理-vs-桥接-vs-装饰器-vs-适配器"><span class="toc-text">3. 代理 vs 桥接 vs 装饰器 vs 适配器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="toc-text">1. 适配器模式原理和实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E6%80%BB%E7%BB%93"><span class="toc-text">2. 应用场景总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%B0%81%E8%A3%85%E6%9C%89%E7%BC%BA%E9%99%B7%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.1 封装有缺陷的接口设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%BB%9F%E4%B8%80%E5%A4%9A%E4%B8%AA%E7%B1%BB%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.2 统一多个类的接口设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%9B%BF%E6%8D%A2%E4%BE%9D%E8%B5%96%E7%9A%84%E5%A4%96%E9%83%A8%E7%B3%BB%E7%BB%9F"><span class="toc-text">2.3 替换依赖的外部系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%85%BC%E5%AE%B9%E8%80%81%E7%89%88%E6%9C%AC%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.4 兼容老版本的接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BB%A3%E7%90%86-vs-%E6%A1%A5%E6%8E%A5-vs-%E8%A3%85%E9%A5%B0%E5%99%A8-vs-%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-text">3. 代理 vs 桥接 vs 装饰器 vs 适配器</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3934,7 +3935,7 @@ Demo d = new Demo(new BAdaptor(new B()));</code></pre><h2 id="2-4-兼容老版�
     <p><span class="copy-title">最后更新:</span>2020-06-22, 20:56:23</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="设计模式-结构型-适配器模式">https://www.llchen60.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</a>
     <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
 </div>
 

@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://www.llchen60.com/about/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
 <meta property="og:description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
 <meta property="article:modified_time" content="2020-11-15T18:01:50.615Z">
 <meta property="article:author" content="Leilei Chen">
@@ -44,7 +45,7 @@
 <script src="/js/iconfont.js?v=1.0.1" ></script>
 
   <script data-ad-client="ca-pub-4131942483083140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
 </head>
 <div style="display: none">
   <input class="theme_disqus_on" value="true">
@@ -3624,7 +3625,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-网络连接问题-–-难以达到的5个9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-有多个涵义"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-每个数据库都有不同的一致性和隔离性能力"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-当你无法完全锁住的时候，可以选择使用乐观锁"><span class="toc-text">4. 当你无法完全锁住的时候，可以选择使用乐观锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-除了dirty-reads-和data-loss-你可能遇到其他的一些问题"><span class="toc-text">5. 除了dirty reads 和data loss 你可能遇到其他的一些问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-关于事务提交顺序"><span class="toc-text">6. 关于事务提交顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-应用层面的数据库分区可以布局在应用之外"><span class="toc-text">7. 应用层面的数据库分区可以布局在应用之外</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-AUTOINCCREMENT-可能有害"><span class="toc-text">8. AUTOINCCREMENT 可能有害</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-任何时间源之间可能会有不同"><span class="toc-text">9. 任何时间源之间可能会有不同</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-评估数据库在单个事务中的表现"><span class="toc-text">10. 评估数据库在单个事务中的表现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-事务当中不应该保存应用的状态"><span class="toc-text">11. 事务当中不应该保存应用的状态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98-%E2%80%93-%E9%9A%BE%E4%BB%A5%E8%BE%BE%E5%88%B0%E7%9A%845%E4%B8%AA9"><span class="toc-text">1. 网络连接问题 – 难以达到的5个9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-ACID-%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%B6%B5%E4%B9%89"><span class="toc-text">2. ACID 有多个涵义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%AF%8F%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E9%83%BD%E6%9C%89%E4%B8%8D%E5%90%8C%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E5%92%8C%E9%9A%94%E7%A6%BB%E6%80%A7%E8%83%BD%E5%8A%9B"><span class="toc-text">3. 每个数据库都有不同的一致性和隔离性能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%BD%93%E4%BD%A0%E6%97%A0%E6%B3%95%E5%AE%8C%E5%85%A8%E9%94%81%E4%BD%8F%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-text">4. 当你无法完全锁住的时候，可以选择使用乐观锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E9%99%A4%E4%BA%86dirty-reads-%E5%92%8Cdata-loss-%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-text">5. 除了dirty reads 和data loss 你可能遇到其他的一些问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%85%B3%E4%BA%8E%E4%BA%8B%E5%8A%A1%E6%8F%90%E4%BA%A4%E9%A1%BA%E5%BA%8F"><span class="toc-text">6. 关于事务提交顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%BA%94%E7%94%A8%E5%B1%82%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%8C%BA%E5%8F%AF%E4%BB%A5%E5%B8%83%E5%B1%80%E5%9C%A8%E5%BA%94%E7%94%A8%E4%B9%8B%E5%A4%96"><span class="toc-text">7. 应用层面的数据库分区可以布局在应用之外</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-AUTOINCCREMENT-%E5%8F%AF%E8%83%BD%E6%9C%89%E5%AE%B3"><span class="toc-text">8. AUTOINCCREMENT 可能有害</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E4%BB%BB%E4%BD%95%E6%97%B6%E9%97%B4%E6%BA%90%E4%B9%8B%E9%97%B4%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%9C%89%E4%B8%8D%E5%90%8C"><span class="toc-text">9. 任何时间源之间可能会有不同</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E8%AF%84%E4%BC%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9C%A8%E5%8D%95%E4%B8%AA%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="toc-text">10. 评估数据库在单个事务中的表现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-%E4%BA%8B%E5%8A%A1%E5%BD%93%E4%B8%AD%E4%B8%8D%E5%BA%94%E8%AF%A5%E4%BF%9D%E5%AD%98%E5%BA%94%E7%94%A8%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-text">11. 事务当中不应该保存应用的状态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3748,7 +3749,7 @@ COMMIT tx1;                     COMMIT tx2;</code></pre><p>为了解决write ske
     <p><span class="copy-title">最后更新:</span>2020-04-29, 11:39:57</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/" title="工程上关于SQL数据库 - 你需要知道的事">https://www.llchen60.com/%E5%B7%A5%E7%A8%8B%E4%B8%8A%E5%85%B3%E4%BA%8ESQL%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%BA%8B/</a>
     <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
 </div>
 

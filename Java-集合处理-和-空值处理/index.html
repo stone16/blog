@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://www.llchen60.com/about/index.html">
 <meta property="og:site_name" content="Leilei&#39;s Blog | 磊磊的博客">
 <meta property="og:description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-01-28T03:31:33.000Z">
 <meta property="article:modified_time" content="2020-11-15T18:01:50.615Z">
 <meta property="article:author" content="Leilei Chen">
@@ -44,7 +45,7 @@
 <script src="/js/iconfont.js?v=1.0.1" ></script>
 
   <script data-ad-client="ca-pub-4131942483083140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Leilei's Blog | 磊磊的博客" type="application/atom+xml">
 </head>
 <div style="display: none">
   <input class="theme_disqus_on" value="true">
@@ -3622,7 +3623,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Arrays-asList"><span class="toc-text">1. Arrays.asList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-空值处理"><span class="toc-text">2. 空值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-NullPointerException"><span class="toc-text">2.1 NullPointerException</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-异常处理"><span class="toc-text">3. 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-在业务代码层面考虑异常处理"><span class="toc-text">3.1 在业务代码层面考虑异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-不要直接生吞异常"><span class="toc-text">3.2 不要直接生吞异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-保留原始的信息"><span class="toc-text">3.3 保留原始的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-小心finally中的异常-try-with-resources"><span class="toc-text">3.4 小心finally中的异常 + try with resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-线程池任务的异常处理"><span class="toc-text">3.5 线程池任务的异常处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Arrays-asList"><span class="toc-text">1. Arrays.asList</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-text">2. 空值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-NullPointerException"><span class="toc-text">2.1 NullPointerException</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">3. 异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%9C%A8%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E8%80%83%E8%99%91%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">3.1 在业务代码层面考虑异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E4%B8%8D%E8%A6%81%E7%9B%B4%E6%8E%A5%E7%94%9F%E5%90%9E%E5%BC%82%E5%B8%B8"><span class="toc-text">3.2 不要直接生吞异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E4%BF%9D%E7%95%99%E5%8E%9F%E5%A7%8B%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">3.3 保留原始的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E5%B0%8F%E5%BF%83finally%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8-try-with-resources"><span class="toc-text">3.4 小心finally中的异常 + try with resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">3.5 线程池任务的异常处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3781,7 +3782,7 @@ new ThreadFactoryBuilder()
     <p><span class="copy-title">最后更新:</span>2020-09-07, 10:15:59</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/" title="Java 集合处理/ 空值处理/ 异常处理">https://www.llchen60.com/Java-%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86-%E5%92%8C-%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86/</a>
     <p>
-        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
 </div>
 
