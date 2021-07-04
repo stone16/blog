@@ -1,8 +1,9 @@
 ---
 title: Redis IO 模型
 date: 2021-07-02 11:54:57
-categories:
+categories: 数据存储
 tags:
+    - Redis
 top:
 ---
 # Redis IO 模型
