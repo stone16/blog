@@ -1,12 +1,10 @@
 ---
-title: Redis内存快照
-date: 2021-01-02 13:27:09
-categories: 数据存储
+title: Redis持久化机制-RDB
+date: 2021-07-04 15:17:10
+categories: 数据存储 
 tags:
 top:
 ---
-# Redis内存快照
-
 # 1. AOF数据恢复存在的问题
 
 - AOF方法每次执行记录的是操作命令，需要持久化的数据量不大
@@ -17,12 +15,27 @@ top:
 
 - 内存快照可以解决上述的问题
     - 内存快照指的是记录下内存中的数据在某一时刻的状态
-    - 将某一时刻的状态以文件的形式写到磁盘上  这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证
-    - 快照文件成为RDB文件，RDB — Redis DataBase
-
+    - 将某一时刻的状态以文件的形式写到磁盘上 这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证
+    - 快照文件称为RDB文件，RDB — Redis DataBase
 - RDB特征
     - 记录的是某一个时刻的数据，并不是操作
     - 因此在数据恢复的时候，我们可以将RDB文件直接读入内存，很快完成恢复
+- 什么时候会实现RDE的载入？
+    - 只要Redis服务器在启动的时候检测到RDB文件存在，就会自动载入RDB文件
+    - 如果服务器开启了AOF持久化功能，因为AOF文件更新频率一般比RDB高很多，所以服务器会优先使用AOF文件来还原数据库状态、
+    - 只有当AOF功能处于关闭状态的时候，服务器才会使用RDB文件来还原数据库状态
+- 如何工作的
+    - 我们可以设置一系列规则，被保存在saveparams里面
+        - seconds
+        - changes
+        - —> 当在xx秒里 有超过xxx更新数量的时候会触发RDB
+    - dirty计数器
+        - 记录在上次成功执行了SAVE或者BGSAVE命令之后，服务器对数据库状态进行了多少次修改
+    - lastsave属性
+        - UNIX时间戳，记录了上次成功执行的时间
+    - Redis的serverCron函数默认每隔100ms执行一次，来维护服务器
+        - 其中一项工作就是检查save选项设置的保存条件是否满足
+        - 如果满足就执行BGSAVE命令
 
 ## 2.1 给哪些数据做快照？
 
@@ -34,20 +47,25 @@ top:
 - Redis生成RDB文件的命令
     - save
         - 在主线程中执行，会导致阻塞
+        - 在服务器进程阻塞期间，服务器不能处理任何命令请求
     - bgsave
-        - 创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞
+        - 创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞 — 是Redis RDB的文件生成的默认配置
 
 ## 2.2 做快照的时候数据是否能够被增删改？
 
 - 我们需要使系统在进行快照的时候仍然能够接受修改请求，要不然会严重影响系统的执行效率
-- Redis会借助操作系统提供的写时复制技术 — copy on write，在执行快照的同时，正常处理写操作
+- Redis会借助操作系统提供的**写时复制技术 — copy on write**，在执行快照的同时，正常处理写操作
     - copy on write
         - copy operation is deferred until the first write,
         - could significantly reduce the resource consumption of unmodified copies, while adding a small overhead to resource-modifying operations
 
         [Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
 
-        ![Copy on Write实现](https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png)
+        ![Copy On Write的实现](https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png)
+
+        Copy on Write实现
+
+- 例图当中键值对C发生了改变，那么bgsave子进程还会对原键值对C 进行snapshot，然后过程当中的写操作会被写到副本里面
 
 ## 2.3 多久做一次快照？
 
@@ -59,7 +77,23 @@ top:
         - bgsave子进程需要通过fork操作从主线程创建出来
         - fork创建过程本身会阻塞主线程，而且主线程的内存越大，阻塞时间就越长
 
-# 3.  AOF和RDB混用模式
+## 2.4 RDB文件结构
+
+- 一个RDB文件分成以下几个部分
+    - REDIS
+        - 用来检测载入的文件是否为RDB文件
+    - db_version
+        - 记录RDB文件的版本号
+    - databased
+        - 包含任意多个数据库，以及每个数据库中的键值对数据
+    - EOF
+        - 1字节
+        - 标志着RDB文件正文部分的结束
+    - check_sum
+        - 通过对上面四个部分的内容进行计算得出的
+        - 载入RDB文件的时候，会将载入数据所计算出来的校验和与check_sum所记录的进行对比
+
+# 3. AOF和RDB混用模式
 
 - 为什么要混用
     - AOF执行速度会比较慢
@@ -68,7 +102,9 @@ top:
     - RDB以一定的频率来执行
     - 在两次快照之间，使用AOF日志记录这期间所有的命令操作
 
-![AOF & RDB Mix](https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png)
+![RDB增量快照的实现](https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png)
+
+AOF & RDB Mix
 
 - 如上图所示，到了第二次做全量快照的时候，就可以清空AOF日志，因为所有的操作都已经保存到了第二次的全量快照当中了
 
@@ -84,12 +120,15 @@ top:
                 - 换入
                     - 当进程再次访问内存的时候，从磁盘读取数据到内存当中
                 - 换出
+                [Linux系统的swap机制_囚牢-峰子的博客-CSDN博客](https://blog.csdn.net/qq_24436765/article/details/103822548)
                     - 将进程暂时不用的内存数据保存到磁盘上，再释放内存给其他进程使用
                     - 当进程再次访问内存的时候，从磁盘读取数据到内存中
-
-                    [Linux系统的swap机制_囚牢-峰子的博客-CSDN博客](https://blog.csdn.net/qq_24436765/article/details/103822548)
-
 - CPU资源风险
     - 虽然子进程在做RDB持久化，但生成RDB快照过程会消耗大量的CPU资源，
     - 虽然Redis处理处理请求是单线程的，但Redis Server还有其他线程在后台工作，例如AOF每秒刷盘、异步关闭文件描述符这些操作。
     - 由于机器只有2核CPU，这也就意味着父进程占用了超过一半的CPU资源，此时子进程做RDB持久化，可能会产生CPU竞争，导致的结果就是父进程处理请求延迟增大，子进程生成RDB快照的时间也会变长，整个Redis Server性能下降。
+
+# Reference
+
+1. 极客时间
+2. Redis设计与实现
