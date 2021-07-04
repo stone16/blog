@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-07-04T19:05:05.587Z</updated>
+  <updated>2021-07-04T22:18:28.838Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis持久化机制-RDB</title>
+    <link href="https://www.llchen60.com/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/"/>
+    <id>https://www.llchen60.com/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/</id>
+    <published>2021-07-04T22:17:10.000Z</published>
+    <updated>2021-07-04T22:18:28.838Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-AOF数据恢复存在的问题"><a href="#1-AOF数据恢复存在的问题" class="headerlink" title="1. AOF数据恢复存在的问题"></a>1. AOF数据恢复存在的问题</h1><ul><li>AOF方法每次执行记录的是操作命令，需要持久化的数据量不大</li><li>但是也因为记录的是操作命令，而不是实际数据，所以用AOF方法进行故障恢复的时候，需要逐一把操作日志都执行一遍<ul><li>如果操作日志很多，Redis的恢复就会很缓慢，可能影响到正常</li></ul></li></ul><h1 id="2-内存快照Overview"><a href="#2-内存快照Overview" class="headerlink" title="2. 内存快照Overview"></a>2. 内存快照Overview</h1><ul><li>内存快照可以解决上述的问题<ul><li>内存快照指的是记录下内存中的数据在某一时刻的状态</li><li>将某一时刻的状态以文件的形式写到磁盘上 这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证</li><li>快照文件称为RDB文件，RDB — Redis DataBase</li></ul></li><li>RDB特征<ul><li>记录的是某一个时刻的数据，并不是操作</li><li>因此在数据恢复的时候，我们可以将RDB文件直接读入内存，很快完成恢复</li></ul></li><li>什么时候会实现RDE的载入？<ul><li>只要Redis服务器在启动的时候检测到RDB文件存在，就会自动载入RDB文件</li><li>如果服务器开启了AOF持久化功能，因为AOF文件更新频率一般比RDB高很多，所以服务器会优先使用AOF文件来还原数据库状态、</li><li>只有当AOF功能处于关闭状态的时候，服务器才会使用RDB文件来还原数据库状态</li></ul></li><li>如何工作的<ul><li>我们可以设置一系列规则，被保存在saveparams里面<ul><li>seconds</li><li>changes</li><li>—&gt; 当在xx秒里 有超过xxx更新数量的时候会触发RDB</li></ul></li><li>dirty计数器<ul><li>记录在上次成功执行了SAVE或者BGSAVE命令之后，服务器对数据库状态进行了多少次修改</li></ul></li><li>lastsave属性<ul><li>UNIX时间戳，记录了上次成功执行的时间</li></ul></li><li>Redis的serverCron函数默认每隔100ms执行一次，来维护服务器<ul><li>其中一项工作就是检查save选项设置的保存条件是否满足</li><li>如果满足就执行BGSAVE命令</li></ul></li></ul></li></ul><h2 id="2-1-给哪些数据做快照？"><a href="#2-1-给哪些数据做快照？" class="headerlink" title="2.1 给哪些数据做快照？"></a>2.1 给哪些数据做快照？</h2><ul><li>Redis的数据都在内存当中，为了提供所有数据的可靠性保证，其执行的是<strong>全量快照</strong><ul><li>即将内存中的所有数据都记录到磁盘当中</li><li>与之一起来的问题就是，当需要对内存的全量数据做快照的时候，将其全部写入磁盘会花费很多时间</li><li>而且全量数据越多，RDB文件就越大，往磁盘上写数据的时间开销就越大</li><li>而Redis的单线程模型决定了我们要尽量避免阻塞主线程的操作</li></ul></li><li>Redis生成RDB文件的命令<ul><li>save<ul><li>在主线程中执行，会导致阻塞</li><li>在服务器进程阻塞期间，服务器不能处理任何命令请求</li></ul></li><li>bgsave<ul><li>创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞 — 是Redis RDB的文件生成的默认配置</li></ul></li></ul></li></ul><h2 id="2-2-做快照的时候数据是否能够被增删改？"><a href="#2-2-做快照的时候数据是否能够被增删改？" class="headerlink" title="2.2 做快照的时候数据是否能够被增删改？"></a>2.2 做快照的时候数据是否能够被增删改？</h2><ul><li><p>我们需要使系统在进行快照的时候仍然能够接受修改请求，要不然会严重影响系统的执行效率</p></li><li><p>Redis会借助操作系统提供的<strong>写时复制技术 — copy on write</strong>，在执行快照的同时，正常处理写操作</p><ul><li><p>copy on write</p><ul><li><p>copy operation is deferred until the first write,</p></li><li><p>could significantly reduce the resource consumption of unmodified copies, while adding a small overhead to resource-modifying operations</p><p><a href="https://en.wikipedia.org/wiki/Copy-on-write">Copy-on-write</a></p><p><img src="https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png" alt="Copy On Write的实现"></p><p>Copy on Write实现</p></li></ul></li></ul></li><li><p>例图当中键值对C发生了改变，那么bgsave子进程还会对原键值对C 进行snapshot，然后过程当中的写操作会被写到副本里面</p></li></ul><h2 id="2-3-多久做一次快照？"><a href="#2-3-多久做一次快照？" class="headerlink" title="2.3 多久做一次快照？"></a>2.3 多久做一次快照？</h2><ul><li>尽管bgsave执行时不阻塞主线程，但是频繁的执行全量快照，会带来两方面的开销<ul><li>磁盘带宽压力<ul><li>频繁将全量数据写入磁盘，会给磁盘带来很大的压力</li><li>多个快照竞争有限的磁盘贷款，前一个快照还没有做完，后一个又开始做了，容易造成恶性循环</li></ul></li><li>fork操作的阻塞<ul><li>bgsave子进程需要通过fork操作从主线程创建出来</li><li>fork创建过程本身会阻塞主线程，而且主线程的内存越大，阻塞时间就越长</li></ul></li></ul></li></ul><h2 id="2-4-RDB文件结构"><a href="#2-4-RDB文件结构" class="headerlink" title="2.4 RDB文件结构"></a>2.4 RDB文件结构</h2><ul><li>一个RDB文件分成以下几个部分<ul><li>REDIS<ul><li>用来检测载入的文件是否为RDB文件</li></ul></li><li>db_version<ul><li>记录RDB文件的版本号</li></ul></li><li>databased<ul><li>包含任意多个数据库，以及每个数据库中的键值对数据</li></ul></li><li>EOF<ul><li>1字节</li><li>标志着RDB文件正文部分的结束</li></ul></li><li>check_sum<ul><li>通过对上面四个部分的内容进行计算得出的</li><li>载入RDB文件的时候，会将载入数据所计算出来的校验和与check_sum所记录的进行对比</li></ul></li></ul></li></ul><h1 id="3-AOF和RDB混用模式"><a href="#3-AOF和RDB混用模式" class="headerlink" title="3. AOF和RDB混用模式"></a>3. AOF和RDB混用模式</h1><ul><li>为什么要混用<ul><li>AOF执行速度会比较慢</li><li>RDB的全量复制频率难以把控，太低，会容易丢失数据；太高，系统开销会很大</li></ul></li><li>如何实现的<ul><li>RDB以一定的频率来执行</li><li>在两次快照之间，使用AOF日志记录这期间所有的命令操作</li></ul></li></ul><p><img src="https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png" alt="RDB增量快照的实现"></p><p>AOF &amp; RDB Mix</p><ul><li>如上图所示，到了第二次做全量快照的时候，就可以清空AOF日志，因为所有的操作都已经保存到了第二次的全量快照当中了</li></ul><h1 id="4-实际场景探究"><a href="#4-实际场景探究" class="headerlink" title="4. 实际场景探究"></a>4. 实际场景探究</h1><blockquote><p>我们使用一个 2 核 CPU、4GB 内存、500GB 磁盘的云主机运行 Redis，Redis 数据库的数据量大小差不多是 2GB，我们使用了 RDB 做持久化保证。当时 Redis 的运行负载以修改操作为主，写读比例差不多在 8:2 左右，也就是说，如果有 100 个请求，80 个请求执行的是修改操作。你觉得，在这个场景下，用 RDB 做持久化有什么风险吗？</p></blockquote><ul><li>内存资源风险<ul><li>Redis fork子进程做RDB持久化，由于写的比例为80%，那么在持久化过程中，“写实复制”会重新分配整个实例80%的内存副本，大约需要重新分配1.6GB内存空间，这样整个系统的内存使用接近饱和，</li><li>如果此时父进程又有大量新key写入，很快机器内存就会被吃光，如果机器开启了Swap机制，那么Redis会有一部分数据被换到磁盘上，当Redis访问这部分在磁盘上的数据时，性能会急剧下降，已经达不到高性能的标准（可以理解为武功被废）。如果机器没有开启Swap，会直接触发OOM，父子进程会面临被系统kill掉的风险。<ul><li>swap 机制<ul><li>将一块磁盘或者一个本地文件当做内存来使用<ul><li>换入<ul><li>当进程再次访问内存的时候，从磁盘读取数据到内存当中</li></ul></li><li>换出<br><a href="https://blog.csdn.net/qq_24436765/article/details/103822548">Linux系统的swap机制_囚牢-峰子的博客-CSDN博客</a><ul><li>将进程暂时不用的内存数据保存到磁盘上，再释放内存给其他进程使用</li><li>当进程再次访问内存的时候，从磁盘读取数据到内存中</li></ul></li></ul></li></ul></li></ul></li></ul></li><li>CPU资源风险<ul><li>虽然子进程在做RDB持久化，但生成RDB快照过程会消耗大量的CPU资源，</li><li>虽然Redis处理处理请求是单线程的，但Redis Server还有其他线程在后台工作，例如AOF每秒刷盘、异步关闭文件描述符这些操作。</li><li>由于机器只有2核CPU，这也就意味着父进程占用了超过一半的CPU资源，此时子进程做RDB持久化，可能会产生CPU竞争，导致的结果就是父进程处理请求延迟增大，子进程生成RDB快照的时间也会变长，整个Redis Server性能下降。</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li>极客时间</li><li>Redis设计与实现</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-AOF数据恢复存在的问题&quot;&gt;&lt;a href=&quot;#1-AOF数据恢复存在的问题&quot; class=&quot;headerlink&quot; title=&quot;1. AOF数据恢复存在的问题&quot;&gt;&lt;/a&gt;1. AOF数据恢复存在的问题&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;AOF方法每次执行记录的是操
+      
+    
+    </summary>
+    
+    
+      <category term="数据存储" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Redis持久化机制-AOF</title>
@@ -487,30 +512,6 @@
       
       
         &lt;h1 id=&quot;哨兵机制&quot;&gt;&lt;a href=&quot;#哨兵机制&quot; class=&quot;headerlink&quot; title=&quot;哨兵机制&quot;&gt;&lt;/a&gt;哨兵机制&lt;/h1&gt;&lt;p&gt;主从库的集群模式使得当从库发生故障以后，客户端可以继续向主库或者其他从库发送请求，进行相关的操作；但是如果主库发生了故障，那
-      
-    
-    </summary>
-    
-    
-      <category term="数据存储" scheme="https://www.llchen60.com/categories/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Redis数据同步</title>
-    <link href="https://www.llchen60.com/Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"/>
-    <id>https://www.llchen60.com/Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</id>
-    <published>2021-01-04T03:09:48.000Z</published>
-    <updated>2021-01-04T03:18:02.081Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Redis数据同步"><a href="#Redis数据同步" class="headerlink" title="Redis数据同步"></a>Redis数据同步</h1><h1 id="1-Redis的高可靠性"><a href="#1-Redis的高可靠性" class="headerlink" title="1. Redis的高可靠性"></a>1. Redis的高可靠性</h1><p>Redis的高可靠性体现在两个方面： </p><ul><li>数据尽量少丢失<ul><li>AOF</li><li>RDB</li></ul></li><li>服务尽量少中断<ul><li>增加副本冗余量 — 将一份数据同时保存在多个实例上</li></ul></li></ul><h1 id="2-数据同步-—-主从库模式"><a href="#2-数据同步-—-主从库模式" class="headerlink" title="2. 数据同步 — 主从库模式"></a>2. 数据同步 — 主从库模式</h1><ul><li><p>主从库之间采用的是读写分离的方式</p><ul><li><p>读操作</p><ul><li>主库，从库都可以接收</li></ul></li><li><p>写操作</p><ul><li><p>首先到主库执行</p></li><li><p>然后主库将写操作同步给从库</p><p>  <img src="https://i.loli.net/2021/01/04/8wE4dPDgFxqRX6r.png" alt="主从读写分离"></p></li></ul></li></ul></li><li><p>主从库的好处是修改操作都只会在一个库实现</p><ul><li>可以减少加锁，实例间协商这类开销</li></ul></li></ul><h2 id="2-1-主从库之间如何进行第一个同步？"><a href="#2-1-主从库之间如何进行第一个同步？" class="headerlink" title="2.1 主从库之间如何进行第一个同步？"></a>2.1 主从库之间如何进行第一个同步？</h2><ul><li><p>多个Redis实例之间通过replicaof命令形成主库和从库的关系，然后按照三个阶段完成数据的第一次同步：</p><p>  <img src="https://i.loli.net/2021/01/04/KZemoVB6CFjNlJI.png" alt="主从首次同步过程"></p></li><li><p>第一阶段</p><ul><li>主从库之间建立连接，协商同步</li><li>为全量复制做准备</li><li>从库和主库建立起连接，并告诉主库即将进行同步，主库确认回复以后，主从库间就可以开始同步了<ul><li>从库给主库发送psync命令，表示要进行数据同步</li><li>主库根据这个命令的参数来启动复制<ul><li>psync命令包含主库的runId和复制进度的offset两个参数<ul><li>runID — Redis实例启动的时候自动随机生成的ID，用来唯一标识当前实例</li><li>offset 此时设为-1，表示第一次复制</li></ul></li></ul></li><li>主库收到psync命令后，使用FULLRESYNC响应命令，包括了主库的runID还有主库目前的复制进度offset，返回给从库<ul><li>从库记录下两个参数</li></ul></li><li>FULLRESYNC表示第一次复制使用的是全量复制</li></ul></li></ul></li><li><p>第二阶段</p><ul><li>主库将所有数据同步给从库</li><li>从库收到数据后，在本地完成数据加载 — 依赖于内存快照生成的RDB文件<ul><li>主库执行 bgsave 命令，生成 RDB 文件，接着将文件发给从库。</li><li>从库接收到 RDB 文件后，会先清空当前数据库，然后加载 RDB 文件。<ul><li>这是因为从库在通过 replicaof 命令开始和主库同步前，可能保存了其他数据。为了避免之前数据的影响，从库需要先把当前数据库清空</li></ul></li></ul></li><li>在做数据同步的过程中，主库不会被阻塞。对于这个过程中接收到的正常请求，写操作会记录在主库的Replication Buffer当中</li></ul></li><li><p>第三阶段</p><ul><li>主库会将第二阶段新收到的修改命令，再发给从库</li><li>当主库完成 RDB 文件发送后，就会把此时 replication buffer 中的修改操作发给从库，从库再重新执行这些操作。这样一来，主从库就实现同步了</li></ul></li></ul><h2 id="2-2-主从级联方式分担全量复制时的主库压力"><a href="#2-2-主从级联方式分担全量复制时的主库压力" class="headerlink" title="2.2 主从级联方式分担全量复制时的主库压力"></a>2.2 主从级联方式分担全量复制时的主库压力</h2><ul><li><p>现状/ 问题</p><ul><li>一次全量复制主库需要完成两个耗时操作<ul><li>生成RDB文件和传输RDB文件</li></ul></li><li>如果从库数量很多，而且都要和主库进行全量复制的话，就会导致主库忙于 fork 子进程生成 RDB 文件，进行数据全量同步。fork 这个操作会阻塞主线程处理正常请求，从而导致主库响应应用程序的请求速度变慢。</li><li>传输 RDB 文件也会占用主库的网络带宽，同样会给主库的资源使用带来压力</li></ul></li><li><p>解决方案 — 主从从模式</p><ul><li><p>我们在部署主从集群的时候，可以手动选择一个从库（比如选择内存资源配置较高的从库），用于级联其他的从库。然后，我们可以再选择一些从库（例如三分之一的从库），在这些从库上执行如下命令，让它们和刚才所选的从库，建立起主从关系。replicaof 所选从库的IP 6379</p><p><img src="https://i.loli.net/2021/01/04/eihQpmN6FJdRxLy.png" alt="级联主从库"></p></li></ul></li></ul><h2 id="2-3-突发情况下的增量复制"><a href="#2-3-突发情况下的增量复制" class="headerlink" title="2.3 突发情况下的增量复制"></a>2.3 突发情况下的增量复制</h2><ul><li><p>网络断了以后我们需要一种开销相对合理的复制方式，即增量复制</p><ul><li>将主从库断联期间主库收到的命令，同步给从库</li></ul></li><li><p>增量复制的时候，主从库之间依靠repl_backlog_buffer这个缓冲区来做同步</p></li><li><p>整个过程如下：</p><ul><li><p>当主从库断连后，主库会把断连期间收到的写操作命令，写入 replication buffer，同时也会把这些操作命令也写入 repl_backlog_buffer 这个缓冲区。</p></li><li><p>repl_backlog_buffer 是一个环形缓冲区，主库会记录自己写到的位置，从库则会记录自己已经读到的位置。</p></li><li><p>刚开始的时候，主库和从库的写读位置在一起，这算是它们的起始位置。随着主库不断接收新的写操作，它在缓冲区中的写位置会逐步偏离起始位置，我们通常用偏移量来衡量这个偏移距离的大小，对主库来说，对应的偏移量就是 master_repl_offset。主库接收的新写操作越多，这个值就会越大。</p></li><li><p>同样，从库在复制完写操作命令后，它在缓冲区中的读位置也开始逐步偏移刚才的起始位置，此时，从库已复制的偏移量 slave_repl_offset 也在不断增加。正常情况下，这两个偏移量基本相等。</p></li><li><p>主从库的连接恢复之后，从库首先会给主库发送 psync 命令，并把自己当前的 slave_repl_offset 发给主库，主库会判断自己的 master_repl_offset 和 slave_repl_offset 之间的差距</p></li><li><p>在网络断连阶段，主库可能会收到新的写操作命令，所以，一般来说，master_repl_offset 会大于 slave_repl_offset。此时，主库只用把 master_repl_offset 和 slave_repl_offset 之间的命令操作同步给从库就行。就像刚刚示意图的中间部分，主库和从库之间相差了 put d e 和 put d f 两个操作，在增量复制时，主库只需要把它们同步给从库，就行了。</p><p><img src="https://i.loli.net/2021/01/04/w3TLhzRgOH2A65d.png" alt="增量复制过程"></p></li></ul></li></ul><blockquote><p>因为 repl_backlog_buffer 是一个环形缓冲区，所以在缓冲区写满后，主库会继续写入，此时，就会覆盖掉之前写入的操作。如果从库的读取速度比较慢，就有可能导致从库还未读取的操作被主库新写的操作覆盖了，这会导致主从库间的数据不一致。</p></blockquote><p>我们要想办法避免这一情况，一般而言，我们可以调整 repl_backlog_size 这个参数。这个参数和所需的缓冲空间大小有关。缓冲空间的计算公式是：<strong>缓冲空间大小 = 主库写入命令速度 * 操作大小 - 主从库间网络传输命令速度 * 操作大小</strong>。在实际应用中，考虑到可能存在一些突发的请求压力，我们通常需要把这个缓冲空间扩大一倍，即 repl_backlog_size = 缓冲空间大小 * 2，这也就是 repl_backlog_size 的最终值</p><ul><li>repl_backlog_buffer<ul><li>是为了从库断开之后，如何找到主从差异数据而设计的环形缓冲区，从而避免全量同步带来的性能开销</li><li>如果从库断开时间太久，repl_backlog_buffer环形缓冲区被主库的写命令覆盖了，那么从库连上主库后只能乖乖地进行一次全量同步，所以repl_backlog_buffer配置尽量大一些，可以降低主从断开后全量同步的概率</li><li>而在repl_backlog_buffer中找主从差异的数据后，如何发给从库呢？这就用到了replication buffer</li></ul></li><li>replication_buffer<ul><li>Redis和客户端通信也好，和从库通信也好，Redis都需要给分配一个 内存buffer进行数据交互</li><li>客户端是一个client，从库也是一个client，我们每个client连上Redis后，Redis都会分配一个client buffer，所有数据交互都是通过这个buffer进行的</li><li>Redis先把数据写到这个buffer中，然后再把buffer中的数据发到client socket中再通过网络发送出去，这样就完成了数据交互。</li><li>所以主从在增量同步时，从库作为一个client，也会分配一个buffer，只不过这个buffer专门用来传播用户的写命令到从库，保证主从数据一致，我们通常把它叫做replication buffer</li><li>这个buffer需要做大小的限制<ul><li>如果主从在传播命令时，因为某些原因从库处理得非常慢，那么主库上的这个buffer就会持续增长，消耗大量的内存资源，甚至OOM</li><li>所以Redis提供了<strong>client-output-buffer-limit</strong>参数限制这个buffer的大小，如果超过限制，主库会强制断开这个client的连接，也就是说从库处理慢导致主库内存buffer的积压达到限制后，主库会强制断开从库的连接，此时主从复制会中断，中断后如果从库再次发起复制请求，那么此时可能会导致恶性循环，引发复制风暴，这种情况需要格外注意。</li></ul></li></ul></li></ul><h2 id="2-4-主从全量同步-RDB-vs-AOF"><a href="#2-4-主从全量同步-RDB-vs-AOF" class="headerlink" title="2.4 主从全量同步 RDB vs AOF"></a>2.4 主从全量同步 RDB vs AOF</h2><p>1、RDB文件内容是<strong>经过压缩的二进制数据（不同数据类型数据做了针对性优化）</strong>，文件很小。而AOF文件记录的是每一次写操作的命令，写操作越多文件会变得很大，其中还包括很多对同一个key的多次冗余操作。在主从全量数据同步时，传输RDB文件可以尽量降低对主库机器网络带宽的消耗，从库在加载RDB文件时，一是文件小，读取整个文件的速度会很快，二是因为<strong>RDB文件存储的都是二进制数据</strong>，从库直接按照RDB协议解析还原数据即可，速度会非常快，而AOF需要依次重放每个写命令，这个过程会经历冗长的处理逻辑，恢复速度相比RDB会慢得多，所以使用RDB进行主从全量同步的成本最低。</p><p>2、假设要使用AOF做全量同步，意味着必须打开AOF功能，打开AOF就要选择文件刷盘的策略，选择不当会严重影响Redis性能。而RDB只有在需要定时备份和主从全量同步数据时才会触发生成一次快照。而在很多丢失数据不敏感的业务场景，其实是不需要开启AOF的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Redis数据同步&quot;&gt;&lt;a href=&quot;#Redis数据同步&quot; class=&quot;headerlink&quot; title=&quot;Redis数据同步&quot;&gt;&lt;/a&gt;Redis数据同步&lt;/h1&gt;&lt;h1 id=&quot;1-Redis的高可靠性&quot;&gt;&lt;a href=&quot;#1-Redis的高可靠性&quot;
       
     
     </summary>

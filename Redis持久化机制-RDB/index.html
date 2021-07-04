@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redis内存快照 | Leilei&#39;s Blog | 磊磊的博客</title>
+  <title>Redis持久化机制-RDB | Leilei&#39;s Blog | 磊磊的博客</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Redis内存快照 | Leilei&#39;s Blog | 磊磊的博客">
+  <meta name="description" content="Redis持久化机制-RDB | Leilei&#39;s Blog | 磊磊的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="My thoughts 有可信的信息源 分清信息和观点 持续输入，整理与输出 刷新自己的认知">
 <meta property="og:type" content="website">
@@ -229,7 +229,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="301">
-<input type="hidden" id="yelog_site_word_count" value="508.3k">
+<input type="hidden" id="yelog_site_word_count" value="508.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -1185,6 +1185,14 @@
         </a>
         
         <a  class="数据存储 "
+           href="/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redis持久化机制-RDB">Redis持久化机制-RDB</span>
+            <span class="post-date" title="2021-07-04 15:17:10">2021/07/04</span>
+        </a>
+        
+        <a  class="数据存储 "
            href="/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-AOF/"
            data-tag=""
            data-author="" >
@@ -1342,14 +1350,6 @@
            data-author="" >
             <span class="post-title" title="Redis数据同步">Redis数据同步</span>
             <span class="post-date" title="2021-01-03 19:09:48">2021/01/03</span>
-        </a>
-        
-        <a  class="数据存储 "
-           href="/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Redis内存快照">Redis内存快照</span>
-            <span class="post-date" title="2021-01-02 13:27:09">2021/01/02</span>
         </a>
         
         <a  class="Web "
@@ -3580,9 +3580,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Redis内存快照" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Redis持久化机制-RDB" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Redis内存快照</h1>
+        <h1 class="article-title">Redis持久化机制-RDB</h1>
     
     <div class="article-meta">
         
@@ -3598,12 +3598,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-01-02 13:29:47'>2021-01-02 13:27</time>
+        创建时间:<time class="date" title='更新时间: 2021-07-04 15:18:28'>2021-07-04 15:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.5k</span>
+        <span>字数:2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3633,7 +3633,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7"><span class="toc-text">Redis内存快照</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AOF%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">1. AOF数据恢复存在的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7Overview"><span class="toc-text">2. 内存快照Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%BB%99%E5%93%AA%E4%BA%9B%E6%95%B0%E6%8D%AE%E5%81%9A%E5%BF%AB%E7%85%A7%EF%BC%9F"><span class="toc-text">2.1 给哪些数据做快照？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%81%9A%E5%BF%AB%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%95%B0%E6%8D%AE%E6%98%AF%E5%90%A6%E8%83%BD%E5%A4%9F%E8%A2%AB%E5%A2%9E%E5%88%A0%E6%94%B9%EF%BC%9F"><span class="toc-text">2.2 做快照的时候数据是否能够被增删改？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%A4%9A%E4%B9%85%E5%81%9A%E4%B8%80%E6%AC%A1%E5%BF%AB%E7%85%A7%EF%BC%9F"><span class="toc-text">2.3 多久做一次快照？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AOF%E5%92%8CRDB%E6%B7%B7%E7%94%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.  AOF和RDB混用模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E6%8E%A2%E7%A9%B6"><span class="toc-text">4. 实际场景探究</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-AOF%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">1. AOF数据恢复存在的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7Overview"><span class="toc-text">2. 内存快照Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%BB%99%E5%93%AA%E4%BA%9B%E6%95%B0%E6%8D%AE%E5%81%9A%E5%BF%AB%E7%85%A7%EF%BC%9F"><span class="toc-text">2.1 给哪些数据做快照？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%81%9A%E5%BF%AB%E7%85%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%95%B0%E6%8D%AE%E6%98%AF%E5%90%A6%E8%83%BD%E5%A4%9F%E8%A2%AB%E5%A2%9E%E5%88%A0%E6%94%B9%EF%BC%9F"><span class="toc-text">2.2 做快照的时候数据是否能够被增删改？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%A4%9A%E4%B9%85%E5%81%9A%E4%B8%80%E6%AC%A1%E5%BF%AB%E7%85%A7%EF%BC%9F"><span class="toc-text">2.3 多久做一次快照？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-RDB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">2.4 RDB文件结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AOF%E5%92%8CRDB%E6%B7%B7%E7%94%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">3. AOF和RDB混用模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E6%8E%A2%E7%A9%B6"><span class="toc-text">4. 实际场景探究</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3649,7 +3649,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Redis内存快照"><a href="#Redis内存快照" class="headerlink" title="Redis内存快照"></a>Redis内存快照</h1><h1 id="1-AOF数据恢复存在的问题"><a href="#1-AOF数据恢复存在的问题" class="headerlink" title="1. AOF数据恢复存在的问题"></a>1. AOF数据恢复存在的问题</h1><ul>
+        <h1 id="1-AOF数据恢复存在的问题"><a href="#1-AOF数据恢复存在的问题" class="headerlink" title="1. AOF数据恢复存在的问题"></a>1. AOF数据恢复存在的问题</h1><ul>
 <li>AOF方法每次执行记录的是操作命令，需要持久化的数据量不大</li>
 <li>但是也因为记录的是操作命令，而不是实际数据，所以用AOF方法进行故障恢复的时候，需要逐一把操作日志都执行一遍<ul>
 <li>如果操作日志很多，Redis的恢复就会很缓慢，可能影响到正常</li>
@@ -3657,17 +3657,43 @@
 </li>
 </ul>
 <h1 id="2-内存快照Overview"><a href="#2-内存快照Overview" class="headerlink" title="2. 内存快照Overview"></a>2. 内存快照Overview</h1><ul>
-<li><p>内存快照可以解决上述的问题</p>
-<ul>
+<li>内存快照可以解决上述的问题<ul>
 <li>内存快照指的是记录下内存中的数据在某一时刻的状态</li>
-<li>将某一时刻的状态以文件的形式写到磁盘上  这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证</li>
-<li>快照文件成为RDB文件，RDB — Redis DataBase</li>
+<li>将某一时刻的状态以文件的形式写到磁盘上 这样即使宕机，快照文件也不会丢失，数据的可靠性也就有了保证</li>
+<li>快照文件称为RDB文件，RDB — Redis DataBase</li>
 </ul>
 </li>
-<li><p>RDB特征</p>
-<ul>
+<li>RDB特征<ul>
 <li>记录的是某一个时刻的数据，并不是操作</li>
 <li>因此在数据恢复的时候，我们可以将RDB文件直接读入内存，很快完成恢复</li>
+</ul>
+</li>
+<li>什么时候会实现RDE的载入？<ul>
+<li>只要Redis服务器在启动的时候检测到RDB文件存在，就会自动载入RDB文件</li>
+<li>如果服务器开启了AOF持久化功能，因为AOF文件更新频率一般比RDB高很多，所以服务器会优先使用AOF文件来还原数据库状态、</li>
+<li>只有当AOF功能处于关闭状态的时候，服务器才会使用RDB文件来还原数据库状态</li>
+</ul>
+</li>
+<li>如何工作的<ul>
+<li>我们可以设置一系列规则，被保存在saveparams里面<ul>
+<li>seconds</li>
+<li>changes</li>
+<li>—&gt; 当在xx秒里 有超过xxx更新数量的时候会触发RDB</li>
+</ul>
+</li>
+<li>dirty计数器<ul>
+<li>记录在上次成功执行了SAVE或者BGSAVE命令之后，服务器对数据库状态进行了多少次修改</li>
+</ul>
+</li>
+<li>lastsave属性<ul>
+<li>UNIX时间戳，记录了上次成功执行的时间</li>
+</ul>
+</li>
+<li>Redis的serverCron函数默认每隔100ms执行一次，来维护服务器<ul>
+<li>其中一项工作就是检查save选项设置的保存条件是否满足</li>
+<li>如果满足就执行BGSAVE命令</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3682,10 +3708,11 @@
 <li>Redis生成RDB文件的命令<ul>
 <li>save<ul>
 <li>在主线程中执行，会导致阻塞</li>
+<li>在服务器进程阻塞期间，服务器不能处理任何命令请求</li>
 </ul>
 </li>
 <li>bgsave<ul>
-<li>创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞</li>
+<li>创建一个子进程，专门用于写入RDB文件，可以避免对于主线程的阻塞 — 是Redis RDB的文件生成的默认配置</li>
 </ul>
 </li>
 </ul>
@@ -3694,19 +3721,22 @@
 <h2 id="2-2-做快照的时候数据是否能够被增删改？"><a href="#2-2-做快照的时候数据是否能够被增删改？" class="headerlink" title="2.2 做快照的时候数据是否能够被增删改？"></a>2.2 做快照的时候数据是否能够被增删改？</h2><ul>
 <li><p>我们需要使系统在进行快照的时候仍然能够接受修改请求，要不然会严重影响系统的执行效率</p>
 </li>
-<li><p>Redis会借助操作系统提供的写时复制技术 — copy on write，在执行快照的同时，正常处理写操作</p>
+<li><p>Redis会借助操作系统提供的<strong>写时复制技术 — copy on write</strong>，在执行快照的同时，正常处理写操作</p>
 <ul>
 <li><p>copy on write</p>
 <ul>
 <li><p>copy operation is deferred until the first write,</p>
 </li>
 <li><p>could significantly reduce the resource consumption of unmodified copies, while adding a small overhead to resource-modifying operations</p>
-<p><a href="https://en.wikipedia.org/wiki/Copy-on-write" target="_blank" rel="noopener">Copy-on-write</a></p>
-<p><img src="https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png" alt="Copy on Write实现"></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Copy-on-write">Copy-on-write</a></p>
+<p><img src="https://i.loli.net/2021/01/03/I8kwNqF41KlezWL.png" alt="Copy On Write的实现"></p>
+<p>Copy on Write实现</p>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+<li><p>例图当中键值对C发生了改变，那么bgsave子进程还会对原键值对C 进行snapshot，然后过程当中的写操作会被写到副本里面</p>
 </li>
 </ul>
 <h2 id="2-3-多久做一次快照？"><a href="#2-3-多久做一次快照？" class="headerlink" title="2.3 多久做一次快照？"></a>2.3 多久做一次快照？</h2><ul>
@@ -3724,7 +3754,34 @@
 </ul>
 </li>
 </ul>
-<h1 id="3-AOF和RDB混用模式"><a href="#3-AOF和RDB混用模式" class="headerlink" title="3.  AOF和RDB混用模式"></a>3.  AOF和RDB混用模式</h1><ul>
+<h2 id="2-4-RDB文件结构"><a href="#2-4-RDB文件结构" class="headerlink" title="2.4 RDB文件结构"></a>2.4 RDB文件结构</h2><ul>
+<li>一个RDB文件分成以下几个部分<ul>
+<li>REDIS<ul>
+<li>用来检测载入的文件是否为RDB文件</li>
+</ul>
+</li>
+<li>db_version<ul>
+<li>记录RDB文件的版本号</li>
+</ul>
+</li>
+<li>databased<ul>
+<li>包含任意多个数据库，以及每个数据库中的键值对数据</li>
+</ul>
+</li>
+<li>EOF<ul>
+<li>1字节</li>
+<li>标志着RDB文件正文部分的结束</li>
+</ul>
+</li>
+<li>check_sum<ul>
+<li>通过对上面四个部分的内容进行计算得出的</li>
+<li>载入RDB文件的时候，会将载入数据所计算出来的校验和与check_sum所记录的进行对比</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-AOF和RDB混用模式"><a href="#3-AOF和RDB混用模式" class="headerlink" title="3. AOF和RDB混用模式"></a>3. AOF和RDB混用模式</h1><ul>
 <li>为什么要混用<ul>
 <li>AOF执行速度会比较慢</li>
 <li>RDB的全量复制频率难以把控，太低，会容易丢失数据；太高，系统开销会很大</li>
@@ -3736,7 +3793,8 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png" alt="AOF &amp; RDB Mix"></p>
+<p><img src="https://i.loli.net/2021/01/03/C98RNZ7PanDWyUr.png" alt="RDB增量快照的实现"></p>
+<p>AOF &amp; RDB Mix</p>
 <ul>
 <li>如上图所示，到了第二次做全量快照的时候，就可以清空AOF日志，因为所有的操作都已经保存到了第二次的全量快照当中了</li>
 </ul>
@@ -3744,28 +3802,18 @@
 <p>我们使用一个 2 核 CPU、4GB 内存、500GB 磁盘的云主机运行 Redis，Redis 数据库的数据量大小差不多是 2GB，我们使用了 RDB 做持久化保证。当时 Redis 的运行负载以修改操作为主，写读比例差不多在 8:2 左右，也就是说，如果有 100 个请求，80 个请求执行的是修改操作。你觉得，在这个场景下，用 RDB 做持久化有什么风险吗？</p>
 </blockquote>
 <ul>
-<li><p>内存资源风险</p>
-<ul>
-<li><p>Redis fork子进程做RDB持久化，由于写的比例为80%，那么在持久化过程中，“写实复制”会重新分配整个实例80%的内存副本，大约需要重新分配1.6GB内存空间，这样整个系统的内存使用接近饱和，</p>
-</li>
-<li><p>如果此时父进程又有大量新key写入，很快机器内存就会被吃光，如果机器开启了Swap机制，那么Redis会有一部分数据被换到磁盘上，当Redis访问这部分在磁盘上的数据时，性能会急剧下降，已经达不到高性能的标准（可以理解为武功被废）。如果机器没有开启Swap，会直接触发OOM，父子进程会面临被系统kill掉的风险。</p>
-<ul>
-<li><p>swap 机制</p>
-<ul>
-<li><p>将一块磁盘或者一个本地文件当做内存来使用</p>
-<ul>
-<li><p>换入</p>
-<ul>
+<li>内存资源风险<ul>
+<li>Redis fork子进程做RDB持久化，由于写的比例为80%，那么在持久化过程中，“写实复制”会重新分配整个实例80%的内存副本，大约需要重新分配1.6GB内存空间，这样整个系统的内存使用接近饱和，</li>
+<li>如果此时父进程又有大量新key写入，很快机器内存就会被吃光，如果机器开启了Swap机制，那么Redis会有一部分数据被换到磁盘上，当Redis访问这部分在磁盘上的数据时，性能会急剧下降，已经达不到高性能的标准（可以理解为武功被废）。如果机器没有开启Swap，会直接触发OOM，父子进程会面临被系统kill掉的风险。<ul>
+<li>swap 机制<ul>
+<li>将一块磁盘或者一个本地文件当做内存来使用<ul>
+<li>换入<ul>
 <li>当进程再次访问内存的时候，从磁盘读取数据到内存当中</li>
 </ul>
 </li>
-<li><p>换出</p>
-<ul>
-<li><p>将进程暂时不用的内存数据保存到磁盘上，再释放内存给其他进程使用</p>
-</li>
-<li><p>当进程再次访问内存的时候，从磁盘读取数据到内存中</p>
-<p><a href="https://blog.csdn.net/qq_24436765/article/details/103822548" target="_blank" rel="noopener">Linux系统的swap机制_囚牢-峰子的博客-CSDN博客</a></p>
-</li>
+<li>换出<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_24436765/article/details/103822548">Linux系统的swap机制_囚牢-峰子的博客-CSDN博客</a><ul>
+<li>将进程暂时不用的内存数据保存到磁盘上，再释放内存给其他进程使用</li>
+<li>当进程再次访问内存的时候，从磁盘读取数据到内存中</li>
 </ul>
 </li>
 </ul>
@@ -3776,14 +3824,17 @@
 </li>
 </ul>
 </li>
-<li><p>CPU资源风险</p>
-<ul>
+<li>CPU资源风险<ul>
 <li>虽然子进程在做RDB持久化，但生成RDB快照过程会消耗大量的CPU资源，</li>
 <li>虽然Redis处理处理请求是单线程的，但Redis Server还有其他线程在后台工作，例如AOF每秒刷盘、异步关闭文件描述符这些操作。</li>
 <li>由于机器只有2核CPU，这也就意味着父进程占用了超过一半的CPU资源，此时子进程做RDB持久化，可能会产生CPU竞争，导致的结果就是父进程处理请求延迟增大，子进程生成RDB快照的时间也会变长，整个Redis Server性能下降。</li>
 </ul>
 </li>
 </ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>极客时间</li>
+<li>Redis设计与实现</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -3797,12 +3848,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Redis内存快照</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.5k</span></p>
+    <p><span class="copy-title">文章标题:</span>Redis持久化机制-RDB</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-01-02, 13:27:09</p>
-    <p><span class="copy-title">最后更新:</span>2021-01-02, 13:29:47</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/" title="Redis内存快照">https://www.llchen60.com/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/</a>
+    <p><span class="copy-title">发布时间:</span>2021-07-04, 15:17:10</p>
+    <p><span class="copy-title">最后更新:</span>2021-07-04, 15:18:28</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/" title="Redis持久化机制-RDB">https://www.llchen60.com/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -3815,8 +3866,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'https://www.llchen60.com/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/';
-            this.page.identifier = 'Redis内存快照/';
+            this.page.url = 'https://www.llchen60.com/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/';
+            this.page.identifier = 'Redis持久化机制-RDB/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -3832,8 +3883,8 @@
 </section>
 
 <!-- Add comment count-->
-<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Redis内存快照/"></span>
-<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Redis%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-identifier="Redis持久化机制-RDB/"></span>
+<span class="disqus-comment-count" style="display: none" data-disqus-url="https://www.llchen60.com/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6-RDB/"></span>
 
 
 
