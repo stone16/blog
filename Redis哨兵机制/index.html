@@ -137,7 +137,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(301)</small></div></li>
+    <li><div class="all active">全部文章<small>(302)</small></div></li>
     
         
             
@@ -213,7 +213,7 @@
     
         
             
-            <li><div data-rel="数据存储">数据存储<small>(8)</small></div>
+            <li><div data-rel="数据存储">数据存储<small>(9)</small></div>
                 
             </li>
             
@@ -228,8 +228,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="301">
-<input type="hidden" id="yelog_site_word_count" value="509.3k">
+<input type="hidden" id="yelog_site_posts_number" value="302">
+<input type="hidden" id="yelog_site_word_count" value="513.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -1185,6 +1185,14 @@
         </a>
         
         <a  class="数据存储 "
+           href="/Redis%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redis哨兵机制">Redis哨兵机制</span>
+            <span class="post-date" title="2021-07-05 20:07:59">2021/07/05</span>
+        </a>
+        
+        <a  class="数据存储 "
            href="/Redis%E5%A4%9A%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"
            data-tag=""
            data-author="" >
@@ -1345,11 +1353,11 @@
         </a>
         
         <a  class="数据存储 "
-           href="/Redis%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/"
+           href="/Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Redis哨兵机制">Redis哨兵机制</span>
-            <span class="post-date" title="2021-01-06 20:07:59">2021/01/06</span>
+            <span class="post-title" title="Redis数据同步">Redis数据同步</span>
+            <span class="post-date" title="2021-01-03 19:09:48">2021/01/03</span>
         </a>
         
         <a  class="Web "
@@ -3598,12 +3606,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2021-01-10 10:04:18'>2021-01-06 20:07</time>
+        创建时间:<time class="date" title='更新时间: 2021-07-05 12:22:25'>2021-07-05 20:07</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.6k</span>
+        <span>字数:3.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3633,7 +3641,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6"><span class="toc-text">哨兵机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">1. 哨兵机制的基本流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E4%B8%BB%E5%BA%93%E7%9A%84%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81"><span class="toc-text">2. 判断主库的下线状态</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%9B%A0"><span class="toc-text">2.1 哨兵集群使用原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%EF%BC%9F"><span class="toc-text">2.1.1 为什么需要哨兵集群？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%EF%BC%9F"><span class="toc-text">2.1.2 如何使用哨兵集群？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86-%E2%80%94-%E5%9F%BA%E4%BA%8EPubSub%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2 哨兵集群原理 — 基于PubSub机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-pubsub%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2.1  pubsub机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E9%A2%91%E9%81%93"><span class="toc-text">2.2.2 频道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E5%93%A8%E5%85%B5%E5%92%8C%E4%BB%8E%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%B2%9F%E9%80%9A"><span class="toc-text">2.2.3 哨兵和从库的连接沟通</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">2.3 客户端事件通知机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%80%89%E5%AE%9A%E6%96%B0%E4%B8%BB%E5%BA%93%EF%BC%9F"><span class="toc-text">3. 如何选定新主库？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%94%B1%E5%93%AA%E4%B8%AA%E5%93%A8%E5%85%B5%E6%9D%A5%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BB%8E%E5%88%87%E6%8D%A2%EF%BC%9F"><span class="toc-text">4. 由哪个哨兵来执行主从切换？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E4%BD%95%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B%E5%8F%AA%E8%A6%81%E8%87%AA%E8%BA%AB%E5%88%A4%E6%96%AD%E4%B8%BB%E5%BA%93%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%B0%B1%E4%BC%9A%E7%BB%99%E5%85%B6%E4%BB%96%E5%8A%BF%E5%8A%9B%E5%8F%91%E9%80%81is-master-down-by-addr%E5%91%BD%E4%BB%A4%E3%80%82%E6%8E%A5%E7%9D%80%E5%85%B6%E4%BB%96%E5%AE%9E%E4%BE%8B%E4%BC%9A%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E5%92%8C%E4%B8%BB%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%83%85%E5%86%B5%EF%BC%8C%E5%81%9A%E5%87%BAY%E6%88%96N%E7%9A%84%E5%93%8D%E5%BA%94"><span class="toc-text">任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E5%A4%9A%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6"><span class="toc-text">Redis多机数据库-哨兵机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">1. 哨兵机制的基本流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E4%B8%BB%E5%BA%93%E7%9A%84%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81"><span class="toc-text">2. 判断主库的下线状态</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%9B%A0"><span class="toc-text">2.1 哨兵集群使用原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%EF%BC%9F"><span class="toc-text">2.1.1 为什么需要哨兵集群？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%EF%BC%9F"><span class="toc-text">2.1.2 如何使用哨兵集群？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86-%E2%80%94-%E5%9F%BA%E4%BA%8EPubSub%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2 哨兵集群原理 — 基于PubSub机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-pubsub%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2.1 pubsub机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E9%A2%91%E9%81%93"><span class="toc-text">2.2.2 频道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E5%93%A8%E5%85%B5%E5%92%8C%E4%BB%8E%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%B2%9F%E9%80%9A"><span class="toc-text">2.2.3 哨兵和从库的连接沟通</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">2.3 客户端事件通知机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E9%80%89%E5%AE%9A%E6%96%B0%E4%B8%BB%E5%BA%93%EF%BC%9F"><span class="toc-text">3. 如何选定新主库？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%94%B1%E5%93%AA%E4%B8%AA%E5%93%A8%E5%85%B5%E6%9D%A5%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BB%8E%E5%88%87%E6%8D%A2%EF%BC%9F"><span class="toc-text">4. 由哪个哨兵来执行主从切换？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E4%BD%95%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B%E5%8F%AA%E8%A6%81%E8%87%AA%E8%BA%AB%E5%88%A4%E6%96%AD%E4%B8%BB%E5%BA%93%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%B0%B1%E4%BC%9A%E7%BB%99%E5%85%B6%E4%BB%96%E5%8A%BF%E5%8A%9B%E5%8F%91%E9%80%81is-master-down-by-addr%E5%91%BD%E4%BB%A4%E3%80%82%E6%8E%A5%E7%9D%80%E5%85%B6%E4%BB%96%E5%AE%9E%E4%BE%8B%E4%BC%9A%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E5%92%8C%E4%B8%BB%E5%BA%93%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%83%85%E5%86%B5%EF%BC%8C%E5%81%9A%E5%87%BAY%E6%88%96N%E7%9A%84%E5%93%8D%E5%BA%94"><span class="toc-text">任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-FAQs"><span class="toc-text">5. FAQs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E5%93%A8%E5%85%B5%E5%9C%A8%E6%93%8D%E4%BD%9C%E4%B8%BB%E4%BB%8E%E5%88%87%E6%8D%A2%E7%9A%84%E8%BF%87%E7%A8%8B%E5%BD%93%E4%B8%AD%EF%BC%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%83%BD%E5%90%A6%E6%AD%A3%E5%B8%B8%E8%BF%9B%E8%A1%8C%E8%AF%B7%E6%B1%82%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="toc-text">5.1 哨兵在操作主从切换的过程当中，客户端能否正常进行请求操作？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3649,9 +3657,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="哨兵机制"><a href="#哨兵机制" class="headerlink" title="哨兵机制"></a>哨兵机制</h1><p>主从库的集群模式使得当从库发生故障以后，客户端可以继续向主库或者其他从库发送请求，进行相关的操作；但是如果主库发生了故障，那会直接影响到从库的同步。无论是写中断还是从库无法进行数据同步都是Redis所不能接受的。因此我们需要一些机制，来能够将一个从库切换为主库，这就涉及到了Redis的哨兵机制。</p>
+        <h1 id="Redis多机数据库-哨兵机制"><a href="#Redis多机数据库-哨兵机制" class="headerlink" title="Redis多机数据库-哨兵机制"></a>Redis多机数据库-哨兵机制</h1><p>主从库的集群模式使得当从库发生故障以后，客户端可以继续向主库或者其他从库发送请求，进行相关的操作；但是如果主库发生了故障，那会直接影响到从库的同步。无论是写中断还是从库无法进行数据同步都是Redis所不能接受的。因此我们需要一些机制，来能够<strong>将一个从库切换为主库</strong>，这就涉及到了Redis的哨兵机制。</p>
 <h1 id="1-哨兵机制的基本流程"><a href="#1-哨兵机制的基本流程" class="headerlink" title="1. 哨兵机制的基本流程"></a>1. 哨兵机制的基本流程</h1><ul>
-<li>哨兵可以理解为一个运行在特殊模式下的Redis进程，其在主从库实例运行的同时也在运行</li>
+<li>哨兵可以理解为一个运行在特殊模式下的<strong>Redis进程</strong>，其在主从库实例运行的同时也在运行</li>
 <li>哨兵主要的三个任务为：<ul>
 <li>监控 — 决策：判断主库是否处于下线状态<ul>
 <li>周期性的ping主库，检测其是否仍然在线运行</li>
@@ -3660,7 +3668,7 @@
 </ul>
 </li>
 <li>选主 — 决策：决定选择哪个从库实例作为主库<ul>
-<li>主库挂了以后，哨兵就需要从很多歌从库里按照一定的规则选择一个从库实例，将其作为新的主库</li>
+<li>主库挂了以后，哨兵就需要从很多从库里按照一定的规则选择一个从库实例，将其作为新的主库</li>
 </ul>
 </li>
 <li>通知<ul>
@@ -3671,7 +3679,8 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2021/01/07/z7o6Kkdfp2IaPsx.png" alt="哨兵三大任务"></p>
+<p><img src="https://i.loli.net/2021/01/07/z7o6Kkdfp2IaPsx.png" alt="哨兵机制任务"></p>
+<p>哨兵三大任务</p>
 <h1 id="2-判断主库的下线状态"><a href="#2-判断主库的下线状态" class="headerlink" title="2. 判断主库的下线状态"></a>2. 判断主库的下线状态</h1><h2 id="2-1-哨兵集群使用原因"><a href="#2-1-哨兵集群使用原因" class="headerlink" title="2.1 哨兵集群使用原因"></a>2.1 哨兵集群使用原因</h2><h3 id="2-1-1-为什么需要哨兵集群？"><a href="#2-1-1-为什么需要哨兵集群？" class="headerlink" title="2.1.1 为什么需要哨兵集群？"></a>2.1.1 为什么需要哨兵集群？</h3><ul>
 <li>如果哨兵发生误判，后续的选主和通知操作都会带来额外的计算和通信的开销</li>
 <li>误判通常发生在<ul>
@@ -3685,7 +3694,7 @@
 <h3 id="2-1-2-如何使用哨兵集群？"><a href="#2-1-2-如何使用哨兵集群？" class="headerlink" title="2.1.2 如何使用哨兵集群？"></a>2.1.2 如何使用哨兵集群？</h3><ul>
 <li>简单来说，“客观下线”的标准就是，当有 N 个哨兵实例时，最好要有 N/2 + 1 个实例判断主库为“主观下线”，才能最终判定主库为“客观下线”。这样一来，就可以减少误判的概率，也能避免误判带来的无谓的主从库切换。（当然，有多少个实例做出“主观下线”的判断才可以，可以由 Redis 管理员自行设定）。</li>
 </ul>
-<h2 id="2-2-哨兵集群原理-—-基于PubSub机制"><a href="#2-2-哨兵集群原理-—-基于PubSub机制" class="headerlink" title="2.2 哨兵集群原理 — 基于PubSub机制"></a>2.2 哨兵集群原理 — 基于PubSub机制</h2><h3 id="2-2-1-pubsub机制"><a href="#2-2-1-pubsub机制" class="headerlink" title="2.2.1  pubsub机制"></a>2.2.1  pubsub机制</h3><p>哨兵实例之间的相互发现是基于Redis提供的pubsub机制的，哨兵只要和主库建立起连接，就可以在主库上发布消息了</p>
+<h2 id="2-2-哨兵集群原理-—-基于PubSub机制"><a href="#2-2-哨兵集群原理-—-基于PubSub机制" class="headerlink" title="2.2 哨兵集群原理 — 基于PubSub机制"></a>2.2 哨兵集群原理 — 基于PubSub机制</h2><h3 id="2-2-1-pubsub机制"><a href="#2-2-1-pubsub机制" class="headerlink" title="2.2.1 pubsub机制"></a>2.2.1 pubsub机制</h3><p>哨兵实例之间的相互发现是基于Redis提供的pubsub机制的，<strong>哨兵只要和主库建立起连接</strong>，就可以在主库上发布消息了</p>
 <ul>
 <li>可以选择发布自己的连接信息到主库上</li>
 <li>也可以从主库上订阅消息，获得其他哨兵发布的连接信息</li>
@@ -3693,11 +3702,13 @@
 </ul>
 <h3 id="2-2-2-频道"><a href="#2-2-2-频道" class="headerlink" title="2.2.2 频道"></a>2.2.2 频道</h3><ul>
 <li>Redis通过频道来区分不同应用的消息，对这些消息进行分门别类的管理。频道就是指消息的类别，当消息类别相同时，就会属于同一个频道，否则属于不同的频道。</li>
+<li>主库会构建一个叫做 <code>__sentinel__:hello</code> 的频道，来让各个哨兵互相发现</li>
 <li>只有订阅了同一个频道的应用，才能通过发布的消息进行信息交换</li>
 </ul>
-<p><img src="https://i.loli.net/2021/01/11/LIhj62iuDBbPEve.png" alt="频道订阅机制"></p>
+<p><img src="https://i.loli.net/2021/01/11/LIhj62iuDBbPEve.png" alt="pubsub机制"></p>
+<p>频道订阅机制</p>
 <ul>
-<li>哨兵1 想频道hello发送信息，因为哨兵2 哨兵3 subscribe了hello频道，他们就能从这个频道获取到哨兵1的IP地址和端口号信息</li>
+<li>哨兵1 向频道hello发送信息，因为哨兵2 哨兵3 subscribe了hello频道，他们就能从这个频道获取到哨兵1的IP地址和端口号信息</li>
 </ul>
 <h3 id="2-2-3-哨兵和从库的连接沟通"><a href="#2-2-3-哨兵和从库的连接沟通" class="headerlink" title="2.2.3 哨兵和从库的连接沟通"></a>2.2.3 哨兵和从库的连接沟通</h3><ul>
 <li><p>哨兵向主库发出INFO命令</p>
@@ -3705,7 +3716,8 @@
 <li><p>主库收到命令后，就会将从库列表返回给哨兵</p>
 </li>
 <li><p>接着哨兵就可以根据从库列表中的信息，和每个从库建立连接，并在这个连接上持续对从库进行监控</p>
-<p>  <img src="https://i.loli.net/2021/01/11/sPTRS1mkhU2lLQn.png" alt="哨兵和从库的连接"></p>
+<p>  <img src="https://i.loli.net/2021/01/11/sPTRS1mkhU2lLQn.png" alt="哨兵与从库之间的连接"></p>
+<p>  哨兵和从库的连接</p>
 </li>
 <li><p>哨兵除了上述的和主库之间的连接，获取从库列表，并和从库们建立连接之外，还承担着在发生主库更换以后，将新主库的信息告诉客户端这个任务</p>
 </li>
@@ -3716,21 +3728,31 @@
 <li><p>因此每个哨兵实例也提供pubsub机制，客户端可以从哨兵订阅消息</p>
 <ul>
 <li><p>哨兵提供了很多的消息订阅频道，不同频道包含了主从库切换过程中的不同关键事件</p>
-<p>  <img src="https://i.loli.net/2021/01/11/RAaq7KZr2LSUdVx.png" alt="常用的关键时间列表"></p>
+<p>  <img src="https://i.loli.net/2021/07/06/lBP5xJYieohTZXw.png" alt="哨兵常用的消息订阅频道"></p>
 </li>
 <li><p>客户端可以执行订阅命令，来订阅不同的频道，然后来获取不同的事件信息</p>
-</li>
+<ul>
+<li>当哨兵将新的主库选出来以后，客户端会看到switch-master事件，事件中会包含新的主库的IP地址还有端口信息</li>
+<li>此时客户端就会使用新主库地址和端口来进行通信了</li>
 </ul>
 </li>
 </ul>
-<h1 id="3-如何选定新主库？"><a href="#3-如何选定新主库？" class="headerlink" title="3. 如何选定新主库？"></a>3. 如何选定新主库？</h1><ul>
-<li>筛选<ul>
+</li>
+</ul>
+<h1 id="3-如何选定新主库？"><a href="#3-如何选定新主库？" class="headerlink" title="3. 如何选定新主库？"></a>3. 如何选定新主库？</h1><blockquote>
+<p>哨兵筛选新主库的过程称为筛选+打分</p>
+</blockquote>
+<ul>
+<li>筛选 — 按照一定条件筛选，将不符合条件的从库去掉<ul>
 <li>确保从库仍然在线运行</li>
-<li>判断其之前的网络状态 看该从库和主库之间是否经常断联，出现网络相关的问题</li>
+<li>判断其之前的网络状态 看该从库和主库之间是否经常断联，出现网络相关的问题<ul>
+<li>通过使用down-after-milliseconds属性，这是我们认为的最大主从间的连接超时，如果超过这个时间我们就认为断联了，超过一定次数就认为从库网络状况不好</li>
 </ul>
 </li>
-<li>打分 — 只要有得分最高的，那么就在当前轮停止并且认定其为主库<ul>
-<li>从库优先级<ul>
+</ul>
+</li>
+<li>打分 — <strong>只要有得分最高的，那么就在当前轮停止并且认定其为主库</strong><ul>
+<li>从库优先级 — 手动设置的<ul>
 <li>用户可以通过slave-priority配置项，给不同的从库设置不同的优先级<ul>
 <li>譬如：两个从库内存大小不一样，我们就可以手动给内存大的实例设置一个高优先级</li>
 </ul>
@@ -3738,7 +3760,7 @@
 </ul>
 </li>
 <li>从库复制进度<ul>
-<li>选择和旧主库同步最为接近的那个从库作为主库</li>
+<li>选择和旧主库<strong>同步最为接近</strong>的那个从库作为主库</li>
 <li>如何判断从库和旧主库的同步进度？<ul>
 <li>主从库之间命令传播机制里面的master_repl_offset 和slave_repl_offset</li>
 <li>看二者的接近程度</li>
@@ -3754,17 +3776,23 @@
 </li>
 </ul>
 <h1 id="4-由哪个哨兵来执行主从切换？"><a href="#4-由哪个哨兵来执行主从切换？" class="headerlink" title="4. 由哪个哨兵来执行主从切换？"></a>4. 由哪个哨兵来执行主从切换？</h1><ul>
-<li><h2 id="任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应"><a href="#任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应" class="headerlink" title="任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应"></a>任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应</h2><pre><code>  ![is master down by addr](https://i.loli.net/2021/01/11/HpT5MAdKX9fmo2S.png)</code></pre><ul>
-<li><p>一个哨兵获得了仲裁所需的赞成票数后，就可以标记主库为客观下线</p>
+<li><h2 id="任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应"><a href="#任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应" class="headerlink" title="任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应"></a>任何一个实例只要自身判断主库主观下线之后，就会给其他势力发送is-master-down-by-addr命令。接着其他实例会根据自己和主库的连接情况，做出Y或N的响应</h2><pre><code>  ![哨兵沟通，确定主库是否下线](https://i.loli.net/2021/01/11/HpT5MAdKX9fmo2S.png)
+
+  is master down by addr</code></pre><ul>
+<li><p>一个哨兵获得了<strong>仲裁所需的赞成票数后，就可以标记主库为客观下线</strong></p>
 <ul>
 <li>这个所需的赞成票数是通过哨兵配置文件中的quorum配置项设定的</li>
 </ul>
 </li>
-<li><p>当获得了所需赞成票数以后，这个哨兵会再给其他哨兵发送命令，希望由自己来执行主从切换，并让所有其他哨兵进行投票，这个过程称为Leader选举。</p>
+<li><p>当获得了所需赞成票数以后，这个哨兵会再给其他哨兵发送命令，希望由自己来执行主从切换，并让所有其他哨兵进行投票，这个过程称为<strong>Leader选举</strong>。</p>
 </li>
-<li><p>在投票过程中，任何一个想成为 Leader 的哨兵，要满足两个条件：第一，拿到半数以上的赞成票；第二，拿到的票数同时还需要大于等于哨兵配置文件中的 quorum 值。以 3 个哨兵为例，假设此时的 quorum 设置为 2，那么，任何一个想成为 Leader 的哨兵只要拿到 2 张赞成票，就可以了。</p>
-</li>
-<li><p><img src="https://i.loli.net/2021/01/11/RAaq7KZr2LSUdVx.png" alt="票选执行主从切换哨兵的过程"></p>
+<li><p>在投票过程中，任何一个想成为 Leader 的哨兵，要满足两个条件：</p>
+<ul>
+<li>第一，拿到半数以上的赞成票；</li>
+<li>第二，拿到的票数同时还需要大于等于哨兵配置文件中的 quorum 值。以 3 个哨兵为例，假设此时的 quorum 设置为 2，那么，任何一个想成为 Leader 的哨兵只要拿到 2 张赞成票，就可以了。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/01/11/RAaq7KZr2LSUdVx.png" alt="哨兵投票，选举leader"></p>
+<p>票选执行主从切换哨兵的过程</p>
 </li>
 </ul>
 <ol>
@@ -3775,8 +3803,27 @@
 <li>在 T5 时刻，S1 得到的票数是来自它自己的一票 Y 和来自 S2 的一票 N。而 S3 除了自己的赞成票 Y 以外，还收到了来自 S2 的一票 Y。此时，S3 不仅获得了半数以上的 Leader 赞成票，也达到预设的 quorum 值（quorum 为 2），所以它最终成为了 Leader。接着，S3 会开始执行选主操作，而且在选定新主库后，会给其他从库和客户端通知新主库的信息。</li>
 </ol>
 <ul>
-<li>如果 S3 没有拿到 2 票 Y，那么这轮投票就不会产生 Leader。<strong>哨兵集群会等待一段时间（也就是哨兵故障转移超时时间的 2 倍）</strong>，再重新选举。这是因为，哨兵集群能够进行成功投票，很大程度上依赖于选举命令的正常网络传播。<strong>如果网络压力较大或有短时堵塞，就可能导致没有一个哨兵能拿到半数以上的赞成票</strong>。所以，等到网络拥塞好转之后，再进行投票选举，成功的概率就会增加。需要注意的是，如果哨兵集群只有 2 个实例，此时，一个哨兵要想成为 Leader，必须获得 2 票，而不是 1 票。所以，如果有个哨兵挂掉了，那么，此时的集群是无法进行主从库切换的。因此，通常我们至少会配置 3 个哨兵实例。</li>
+<li><p>如果 S3 没有拿到 2 票 Y，那么这轮投票就不会产生 Leader。<strong>哨兵集群会等待一段时间（也就是哨兵故障转移超时时间的 2 倍）</strong>，再重新选举。这是因为，哨兵集群能够进行成功投票，很大程度上依赖于选举命令的正常网络传播。<strong>如果网络压力较大或有短时堵塞，就可能导致没有一个哨兵能拿到半数以上的赞成票</strong>。所以，等到网络拥塞好转之后，再进行投票选举，成功的概率就会增加。需要注意的是，如果哨兵集群只有 2 个实例，此时，一个哨兵要想成为 Leader，必须获得 2 票，而不是 1 票。所以，如果有个哨兵挂掉了，那么，此时的集群是无法进行主从库切换的。因此，通常我们至少会配置 3 个哨兵实例。</p>
+<h1 id="5-FAQs"><a href="#5-FAQs" class="headerlink" title="5. FAQs"></a>5. FAQs</h1><h2 id="5-1-哨兵在操作主从切换的过程当中，客户端能否正常进行请求操作？"><a href="#5-1-哨兵在操作主从切换的过程当中，客户端能否正常进行请求操作？" class="headerlink" title="5.1 哨兵在操作主从切换的过程当中，客户端能否正常进行请求操作？"></a>5.1 哨兵在操作主从切换的过程当中，客户端能否正常进行请求操作？</h2></li>
+<li><p>如果客户端使用了读写分离，那么<strong>读请求</strong>可以在从库上正常执行，不会受到影响。但是由于此时主库已经挂了，而且哨兵还没有选出新的主库，所以在这期间<strong>写请求会失败</strong>，失败持续的时间 = 哨兵切换主从的时间 + 客户端感知到新主库 的时间。</p>
+</li>
+<li><p>如果不想让业务感知到异常，客户端只能把写失败的请求先缓存起来或<strong>写入消息队列中间件</strong>中，等哨兵切换完主从后，再把这些写请求发给新的主库，但这种场景只适合对写入请求返回值不敏感的业务，而且还需要业务层做适配，另外主从切换时间过长，也会导致客户端或消息队列中间件缓存写请求过多，切换完成之后重放这些请求的时间变长。</p>
+</li>
+<li><p>哨兵检测主库多久没有响应就提升从库为新的主库，这个时间是可以配置的（down-after-milliseconds参数）。配置的时间越短，哨兵越敏感，哨兵集群认为主库在短时间内连不上就会发起主从切换，这种配置很可能因为网络拥塞但主库正常而发生不必要的切换，当然，当主库真正故障时，因为切换得及时，对业务的影响最小。如果配置的时间比较长，哨兵越保守，这种情况可以减少哨兵误判的概率，但是主库故障发生时，业务写失败的时间也会比较久，缓存写请求数据量越多。</p>
+</li>
+<li><p>应用程序不感知服务的中断，还需要哨兵和客户端做些什么？当哨兵完成主从切换后，客户端需要及时感知到主库发生了变更，然后把缓存的写请求写入到新库中，保证后续写请求不会再受到影响，具体做法如下：</p>
+<ul>
+<li>哨兵提升一个从库为新主库后，哨兵会把新主库的地址写入自己实例的pubsub（switch-master）中。客户端需要订阅这个pubsub，当这个pubsub有数据时，客户端就能感知到主库发生变更，同时可以拿到最新的主库地址，然后把写请求写到这个新主库即可，这种机制属于哨兵主动通知客户端。</li>
+<li>如果客户端因为某些原因错过了哨兵的通知，或者哨兵通知后客户端处理失败了，安全起见，客户端也需要支持主动去获取最新主从的地址进行访问。</li>
+<li>所以，客户端需要访问主从库时，不能直接写死主从库的地址了，而是需要从哨兵集群中获取最新的地址（sentinel get-master-addr-by-name命令），这样当实例异常时，哨兵切换后或者客户端断开重连，都可以从哨兵集群中拿到最新的实例地址。</li>
+<li>一般Redis的SDK都提供了通过哨兵拿到实例地址，再访问实例的方式，我们直接使用即可，不需要自己实现这些逻辑。当然，对于只有主从实例的情况，客户端需要和哨兵配合使用，而在分片集群模式下，这些逻辑都可以做在proxy层，这样客户端也不需要关心这些逻辑了，Codis就是这么做的</li>
 </ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1></li>
+</ul>
+<ol>
+<li>极客时间Redis课程</li>
+<li>Redis设计与实现</li>
+</ol>
 </li>
 </ul>
 
@@ -3793,10 +3840,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>Redis哨兵机制</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.6k</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">3.8k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
-    <p><span class="copy-title">发布时间:</span>2021-01-06, 20:07:59</p>
-    <p><span class="copy-title">最后更新:</span>2021-01-10, 10:04:18</p>
+    <p><span class="copy-title">发布时间:</span>2021-07-05, 20:07:59</p>
+    <p><span class="copy-title">最后更新:</span>2021-07-05, 12:22:25</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/Redis%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/" title="Redis哨兵机制">https://www.llchen60.com/Redis%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
