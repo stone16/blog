@@ -229,7 +229,7 @@
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="304">
-<input type="hidden" id="yelog_site_word_count" value="517.9k">
+<input type="hidden" id="yelog_site_word_count" value="518k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -3628,12 +3628,12 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-10 20:16:29'>2020-02-10 20:16</time>
+        创建时间:<time class="date" title='更新时间: 2021-07-11 09:33:46'>2020-02-10 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:752</span>
+        <span>字数:862</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -3663,7 +3663,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%9F"><span class="toc-text">1. 什么是平衡二叉查找树？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%80%E6%A3%B5%E7%BA%A2%E9%BB%91%E6%A0%91-Red-Black-Tree"><span class="toc-text">2. 如何定义一棵红黑树 Red Black Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-text">3. 如何实现一个红黑树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">红黑树的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%9F"><span class="toc-text">1. 什么是平衡二叉查找树？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%80%E6%A3%B5%E7%BA%A2%E9%BB%91%E6%A0%91-Red-Black-Tree"><span class="toc-text">2. 如何定义一棵红黑树 Red Black Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-text">3. 如何实现一个红黑树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -3679,13 +3679,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先对于我们前面看到的二叉查找树，在相对理想的情况下，它的时间负责度为O(logn).但是在频繁的动态更新的过程中，可能会出现树的高度远远大于log2(n)的情况，导致各项操作的效率下降.</p>
+        <h1 id="红黑树的实现"><a href="#红黑树的实现" class="headerlink" title="红黑树的实现"></a>红黑树的实现</h1><p>首先对于我们前面看到的二叉查找树，在相对理想的情况下，它的时间负责度为O(logn).但是在频繁的动态更新的过程中，可能会出现树的高度远远大于log2(n)的情况，导致各项操作的效率下降.</p>
 <p>在极端情况下，二叉查找树会退化为一个链表，时间复杂度会退化到O(n).为了解决这个复杂度退化的问题，我们需要设计一种平衡二叉查找树</p>
 <h1 id="1-什么是平衡二叉查找树？"><a href="#1-什么是平衡二叉查找树？" class="headerlink" title="1. 什么是平衡二叉查找树？"></a>1. 什么是平衡二叉查找树？</h1><blockquote>
-<p>平衡二叉查找树定义  二叉树中任意一个节点的左右子树的高度相差不能大于1.</p>
+<p>平衡二叉查找树定义 二叉树中任意一个节点的左右子树的高度相差不能大于1.</p>
 </blockquote>
-<p>平衡二叉查找树的初衷是解决普通二叉查找树在频繁的插入\删除等动态更新的情况下，出现时间复杂度退化的问题</p>
+<p>平衡二叉查找树的初衷是解决普通二叉查找树在频繁的插入，出现时间复杂度退化的问题</p>
+<p>红黑树并没有严格满足平衡二叉查找树的定义，即其左右子树的高度有时相差是会超过1 的。 </p>
 <p>平衡二叉查找树中平衡的意思就是让整棵树看起来比较对称，不要出现左子树很高，右子树很矮的情况。这样就能让整棵树的高度相对来说低一些。</p>
+<ul>
+<li>最开始被发明的是AVL树，严格符合平衡二叉查找树的定义<ul>
+<li>任何节点的左右子树高度相差不超过1</li>
+<li>是一种高度平衡的二叉查找树</li>
+</ul>
+</li>
+</ul>
 <h1 id="2-如何定义一棵红黑树-Red-Black-Tree"><a href="#2-如何定义一棵红黑树-Red-Black-Tree" class="headerlink" title="2. 如何定义一棵红黑树 Red Black Tree"></a>2. 如何定义一棵红黑树 Red Black Tree</h1><p>是一种不严格的平衡二叉查找树。红黑树当中的节点，一类被标记为黑色，一类被标记为红色。</p>
 <ul>
 <li>根节点是黑色的</li>
@@ -3693,23 +3701,23 @@
 <li>任何相邻的节点都不能同时为红色，即红色节点是被黑色节点分割开的</li>
 <li>每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点</li>
 </ul>
-<p>二叉查找树的很多操作的性能都跟树的高度成正比，因此为了证明红黑树近似平衡，我们需要分析的问题可以转化为其高度是否能比较稳定的趋近log2(n)</p>
+<p>二叉查找树的很多操作的性能都跟树的高度成正比，因此为了证明红黑树近似平衡，我们需要分析的问题可以转化为其高度是否能比较稳定的趋近log2(n)。红黑树的插入，删除，查找等各种操作性能都比较稳定</p>
 <p>AVL是高度平衡的二叉树，查找效率非常高，但是每次插入删除都要对应做调整，所以会比较复杂耗时。红黑树只是做到近似平衡，在维护平衡的成本上，要比AVL要低。</p>
-<h1 id="3-如何实现一个红黑树"><a href="#3-如何实现一个红黑树" class="headerlink" title="3. 如何实现一个红黑树"></a>3. 如何实现一个红黑树</h1><p>红黑树的平衡过程就是<strong>根据节点排布的特征来，遇到什么样的节点排布，我们就对应的去进行调整</strong>。 </p>
+<h1 id="3-如何实现一个红黑树"><a href="#3-如何实现一个红黑树" class="headerlink" title="3. 如何实现一个红黑树"></a>3. 如何实现一个红黑树</h1><p>红黑树的平衡过程就是<strong>根据节点排布的特征来，遇到什么样的节点排布，我们就对应的去进行调整</strong>。</p>
 <ul>
 <li>重要操作<ul>
 <li>左旋 rotate left<ul>
-<li>将基准点的右子树绕x做逆时针旋转，是的x的右子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的特性仍然能够得到满足 </li>
+<li>将基准点的右子树绕x做逆时针旋转，是的x的右子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的特性仍然能够得到满足</li>
 </ul>
 </li>
-<li>右旋 rotate right <ul>
-<li>将x的左子树绕x顺时针旋转，使得x的左子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的属性仍然能够满足 </li>
-</ul>
-</li>
+<li>右旋 rotate right<ul>
+<li>将x的左子树绕x顺时针旋转，使得x的左子树成为x的父亲，同时修改相关节点的引用。旋转之后，二叉查找树的属性仍然能够满足</li>
 </ul>
 </li>
 </ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.cnblogs.com/carpenterlee/p/5503882.html" target="_blank" rel="noopener">https://www.cnblogs.com/carpenterlee/p/5503882.html</a> </p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/carpenterlee/p/5503882.html">https://www.cnblogs.com/carpenterlee/p/5503882.html</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 stone2paul@gmail.com </span>
@@ -3724,10 +3732,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>数据结构与算法(17)-红黑树</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">752</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">862</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Leilei Chen">Leilei Chen</a></p>
     <p><span class="copy-title">发布时间:</span>2020-02-10, 20:16:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-10, 20:16:29</p>
+    <p><span class="copy-title">最后更新:</span>2021-07-11, 09:33:46</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-17-%E7%BA%A2%E9%BB%91%E6%A0%91/" title="数据结构与算法(17)-红黑树">https://www.llchen60.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-17-%E7%BA%A2%E9%BB%91%E6%A0%91/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
