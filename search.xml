@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>数据库索引</title>
+      <link href="/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/"/>
+      <url>/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>索引的实现，底层一般会依赖于哪些数据结构？</p></blockquote><h1 id="1-为什么需要索引"><a href="#1-为什么需要索引" class="headerlink" title="1. 为什么需要索引"></a>1. 为什么需要索引</h1><ul><li>为了能够尽快得到想要的数据 — 提高性能</li><li>选取高效的数据结构，在针对访问特性有比较好的访问速度的同时，减少空间上的占用<ul><li>如何节省存储空间</li><li>如何提高数据增删改查的执行效率</li></ul></li></ul><h1 id="2-功能性需求"><a href="#2-功能性需求" class="headerlink" title="2. 功能性需求"></a>2. 功能性需求</h1><ul><li>格式化数据还是非格式化数据？<ul><li>结构化数据<ul><li>比如MySQL数据</li></ul></li><li>非结构化数据<ul><li>比如搜索引擎当中的网页</li><li>一般需要进行预处理，提取出查询关键词，对关键词建立索引</li></ul></li></ul></li><li>静态数据还是动态数据？<ul><li>静态数据<ul><li>意味着没有增删改查</li><li>只需要考虑查询效率即可</li></ul></li><li>动态数据<ul><li>当原始数据更新的同时，我们还需要动态的更新索引</li></ul></li></ul></li><li>索引存储在内存还是硬盘？<ul><li>存储在内存<ul><li>访问速度快</li><li>原始数据量大的前提下，对应的索引也会非常大</li><li>因为内存有限，我们将不得不存放到内存当中</li></ul></li><li>存储在硬盘</li><li>部分存储在内存，部分在硬盘</li></ul></li><li>单值查找还是区间查找<ul><li>单值查找<ul><li>查询关键词等于某个值的数据</li></ul></li><li>区间查找<ul><li>查找关键词处于某个区间值的数据</li></ul></li></ul></li><li>单关键词还是多关键词组合的查找<ul><li>多关键词查询<ul><li>对于结构化数据的，<ul><li>实现针对多个关键词的组合建立索引</li></ul></li><li>对于非结构化数据的<ul><li>建立针对单个关键词的索引</li><li>然后通过集合操作，计算出查询结果</li></ul></li></ul></li></ul></li></ul><h1 id="3-非功能性需求"><a href="#3-非功能性需求" class="headerlink" title="3. 非功能性需求"></a>3. 非功能性需求</h1><ul><li>无论存放在内存还是磁盘当中，对于存储空间的消耗不能过大</li><li>在考虑索引查询效率的同时，还要考虑索引的维护成本</li></ul><h1 id="4-构建索引常用的数据结构"><a href="#4-构建索引常用的数据结构" class="headerlink" title="4. 构建索引常用的数据结构"></a>4. 构建索引常用的数据结构</h1><ul><li>散列表<ul><li>构建内存索引</li><li>如Redis Memcache</li></ul></li><li>红黑树<ul><li>构建内存索引</li><li>Ext文件系统中对磁盘块的索引</li></ul></li><li>B+树<ul><li>比起红黑树，更适合在磁盘当中构建索引</li><li>多叉树，比起红黑树，高度更低，IO更少</li><li>大部分关系型数据库的索引，会使用B+树来实现<ul><li>MySQL</li><li>Oracle</li></ul></li></ul></li><li>跳表<ul><li>Redis中的有序集合</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>B+树</title>
       <link href="/B-%E6%A0%91/"/>
       <url>/B-%E6%A0%91/</url>
