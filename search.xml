@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>System Design Patterns - Bloom Filters</title>
+      <link href="/System-Design-Patterns-Bloom-Filters/"/>
+      <url>/System-Design-Patterns-Bloom-Filters/</url>
+      
+        <content type="html"><![CDATA[<h1 id="System-Design-Patterns-Bloom-Filters"><a href="#System-Design-Patterns-Bloom-Filters" class="headerlink" title="System Design Patterns - Bloom Filters"></a>System Design Patterns - Bloom Filters</h1><p>Created: August 8, 2021 10:06 PM<br>Status: Finished<br>Tags: System Design<br>Type: Tech Resource</p><h1 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h1><ul><li>Suppose we have a large set of structured data(identified by record IDs) stored in a set of data files, and we want to know which file might contain our required data<ul><li>we don’t want to read each file, as it’s slow and we have to read a lot of data from the disk</li></ul></li><li>Solution 1: Build an index on each data file and store it in a separate index file, to map each record ID to its offset in the data file; each index file will be sorted on the record ID. Then we could do a binary search in index file</li><li>Solution 2: We could use Bloom Filters</li></ul><h1 id="2-How-does-Bloom-Filter-work"><a href="#2-How-does-Bloom-Filter-work" class="headerlink" title="2. How does Bloom Filter work?"></a>2. How does Bloom Filter work?</h1><ul><li>The Bloom filter data structure tells whether an element <strong>may be in a set, or definitely is not</strong><ul><li>which means the only possible errors are false positives</li></ul></li><li>How it looks<ul><li>An empty bloom filter is a bit array of m bits, all set to 0</li><li>There are also k different hash functions, each of which maps a set element to one of the m bit positions</li></ul></li><li>Workflow<ul><li>To add an element, feed it to the hash functions to get k bit positions, and set the bits at these positions to 1</li><li>To test if an element is in the set, feed it to the hash functions to get k bit positions<ul><li>if any of the bits at these positions is 0, the element is definitely not in the set</li><li>if all are 1, then the element may be in the set</li></ul></li></ul></li></ul><h1 id="3-When-will-we-use-Bloom-Filter"><a href="#3-When-will-we-use-Bloom-Filter" class="headerlink" title="3. When will we use Bloom Filter?"></a>3. When will we use Bloom Filter?</h1><ul><li>In BigTable, any read operation has to read from all SSTables that make up a tablet<ul><li>if these SSTables are not in memory, the read operation may end up doing many disk accesses</li><li>BigTable uses bloom filters to reduce the number of disk accesses</li><li>Store of BloomFilter could drastically reduces the number of disk seeks, thereby improving read performance</li></ul></li></ul><h1 id="4-How-to-use-Bloom-Filter-in-Java"><a href="#4-How-to-use-Bloom-Filter-in-Java" class="headerlink" title="4. How to use Bloom Filter in Java?"></a>4. How to use Bloom Filter in Java?</h1><ul><li>We could use BloomFilter class from the Guava library to achieve this</li></ul><pre><code class="jsx">BloomFilter&lt;Integer&gt; filter = BloomFilter.create(    Funnels.integerFunnel(),     500,     0.01);</code></pre><ul><li>How to implement from scratch   <a href="https://www.inlighting.org/archives/java-implement-bloom-filter/">https://www.inlighting.org/archives/java-implement-bloom-filter/</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> SystemDesign </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis集合统计模式</title>
       <link href="/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
       <url>/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
