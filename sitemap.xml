@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.llchen60.com/System-Design-Patterns-Quorum/</loc>
+    
+    <lastmod>2021-08-11T04:26:42.996Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.llchen60.com/System-Design-Patterns-Bloom-Filters/</loc>
     
     <lastmod>2021-08-10T02:34:11.571Z</lastmod>

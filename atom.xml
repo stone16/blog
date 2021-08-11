@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2021-08-10T02:34:11.571Z</updated>
+  <updated>2021-08-11T04:26:42.996Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>System Design Patterns - Quorum</title>
+    <link href="https://www.llchen60.com/System-Design-Patterns-Quorum/"/>
+    <id>https://www.llchen60.com/System-Design-Patterns-Quorum/</id>
+    <published>2021-08-11T04:26:01.000Z</published>
+    <updated>2021-08-11T04:26:42.996Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h1><p>In distributed system, data is replicated across multiple servers for fault tolerance and high availability.</p><p>Once system decides to maintain multiple copies of data, another problem arises: how to make sure that all replicas are consistent?? </p><h1 id="2-Dive-Deep"><a href="#2-Dive-Deep" class="headerlink" title="2. Dive Deep"></a>2. Dive Deep</h1><h2 id="2-1-Definition"><a href="#2-1-Definition" class="headerlink" title="2.1 Definition"></a>2.1 Definition</h2><ul><li>Quorum<ul><li>Minimum number of servers on which a distributed operation needs to be performed successfully before declaring the operation’s overall success</li></ul></li></ul><h2 id="2-2-How-it-works"><a href="#2-2-How-it-works" class="headerlink" title="2.2 How it works?"></a>2.2 How it works?</h2><ul><li>Suppose a database is replicated on 5 machines, then quorum refers to the minimum number of machines that perform the same action for a given transaction in order to decide the final operation for that transaction</li><li>So in a set of 5, three machines form the majority quorum, quorum <strong>enforces the consistency requirement</strong> needed for distributed operations</li><li>Quorum Number<ul><li>N / 2 + 1</li></ul></li><li>Quorum is achieved when nodes follow the below protocol R + W &gt; N<ul><li>R  minimum read nodes</li><li>W minimum write nodes</li><li>N  nodes in the quorum group</li></ul></li></ul><h2 id="2-3-Where-is-it-used"><a href="#2-3-Where-is-it-used" class="headerlink" title="2.3 Where is it used?"></a>2.3 Where is it used?</h2><ul><li>Chubby<ul><li>Use paxos for leader election, which use quorum to ensure strong consistency</li></ul></li><li>Cassandra<ul><li>Ensure data consistency, each write request can be configured to be successful only if the data has been written to at least a quorum of replica nodes</li></ul></li><li>Dynamodb<ul><li>Writes to a sloppy quorum of other nodes in the system</li><li>All read/ write operations are performed on the first N healthy nodes from the preference list, which may not always be the first N nodes encountered walking the consistent hashing ring</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Background&quot;&gt;&lt;a href=&quot;#1-Background&quot; class=&quot;headerlink&quot; title=&quot;1. Background&quot;&gt;&lt;/a&gt;1. Background&lt;/h1&gt;&lt;p&gt;In distributed system, data 
+      
+    
+    </summary>
+    
+    
+      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>System Design Patterns - Bloom Filters</title>
@@ -500,32 +524,6 @@
     
     
       <category term="DNS" scheme="https://www.llchen60.com/tags/DNS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elastic Load Balancing </title>
-    <link href="https://www.llchen60.com/Elastic-Load-Balancing/"/>
-    <id>https://www.llchen60.com/Elastic-Load-Balancing/</id>
-    <published>2021-03-09T04:59:23.000Z</published>
-    <updated>2021-03-09T05:00:46.137Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Elastic-Load-Balancing"><a href="#Elastic-Load-Balancing" class="headerlink" title="Elastic Load Balancing"></a>Elastic Load Balancing</h1><h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h1><ul><li><p>What is ELB?</p><ul><li>ELB distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more AZs</li><li>It monitors the health of its registered targets, and routes traffic to the healthy targets</li><li>Elastic Load Balancing help scale your load balancer as your incoming traffic change over time — automatically scale to the vast majority of workloads</li></ul></li><li><p>Benefits</p><ul><li>Increase the availability and fault tolerance</li><li>You could configure health checks, thus ELB monitor the health of the compute resources, LB only send requests to the healthy ones</li></ul></li><li><p>How it works</p><ul><li>Listener<ul><li>configure your LB to accept incoming traffic by specifying one or more listeners</li><li>a process that checks for connection requests<ul><li>with a protocol</li><li>port number</li></ul></li></ul></li><li>cross zone load balancing<ul><li>we should enable it cause it could make sure traffic is well distributed</li><li>when client send request, it will first go through route 53, and route 53 will distribute traffic thus each lb node receives 50% of traffic (2 LB nodes in total )</li></ul></li><li>request routing<ul><li>client — amazon dns service — return IP address to client side — client use the ip address to make call to LB</li><li>dns entry specify the TTL to 60 seconds, this ensure that the IP addresses can be remapped quickly in response to changing traffic</li></ul></li></ul></li></ul><h1 id="2-ELB-Types"><a href="#2-ELB-Types" class="headerlink" title="2. ELB Types"></a>2. ELB Types</h1><p><a href="https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons" target="_blank" rel="noopener">https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons</a>  </p><h1 id="3-Network-Load-Balancer"><a href="#3-Network-Load-Balancer" class="headerlink" title="3. Network Load Balancer"></a>3. Network Load Balancer</h1><h2 id="3-1-NLB-Overview"><a href="#3-1-NLB-Overview" class="headerlink" title="3.1 NLB Overview"></a>3.1 NLB Overview</h2><ul><li>Similar to ELB overview, NLB has listener<ul><li>a listener checks for connection requests from clients, using the protocol and port number you configure, and then forwards requests to a target group</li></ul></li><li>you can configure your health checks on a per target group basis</li><li>Health checks are performed on all targets registered to a target group that is specified in a listener rule for your load balancer.</li><li>functions at 4th layer of OSI, capable of handling millions of requests per second<ul><li>when receives a connection request, it <strong>selects a target from the target group</strong> for the default rule</li><li>attempts to <strong>open a TCP connection</strong> to the selected target <strong>on the port specified</strong> in the listener configuration</li></ul></li></ul><h2 id="3-2-How-to-create-one-NLB-via-Console"><a href="#3-2-How-to-create-one-NLB-via-Console" class="headerlink" title="3.2 How to create one NLB via Console?"></a>3.2 How to create one NLB via Console?</h2><ul><li>Create a target group<ul><li>set target type, name, protocol, port number, health check method</li></ul></li><li>Configure load balancer and listener<ul><li>Network mapping<ul><li>select the VPC that you used for your EC2 instances</li><li>select AZ and then select public subnet for the AZ</li></ul></li></ul></li></ul><h2 id="3-3-Concepts"><a href="#3-3-Concepts" class="headerlink" title="3.3 Concepts"></a>3.3 Concepts</h2><ul><li>Listener<ul><li>A listener is a process that checks for connection requests, using the protocol and port that you configure. The rules that you define for a listener determine how the load balancer routes requests to the targets in one or more target groups.</li></ul></li><li>Target Groups<ul><li>Each target group is used to route requests to one or more registered targets. When you create a listener, you specify a target group for its default action. Traffic is forwarded to the target group specified in the listener rule. You can create different target groups for different types of requests</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Elastic-Load-Balancing&quot;&gt;&lt;a href=&quot;#Elastic-Load-Balancing&quot; class=&quot;headerlink&quot; title=&quot;Elastic Load Balancing&quot;&gt;&lt;/a&gt;Elastic Load Balanci
-      
-    
-    </summary>
-    
-    
-      <category term="Cloud" scheme="https://www.llchen60.com/categories/Cloud/"/>
-    
-    
-      <category term="Load Balancer" scheme="https://www.llchen60.com/tags/Load-Balancer/"/>
     
   </entry>
   

@@ -1,1 +1,1 @@
-https://www.llchen60.com/System-Design-Patterns-Bloom-Filters/
+https://www.llchen60.com/System-Design-Patterns-Quorum/
