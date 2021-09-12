@@ -69,3 +69,17 @@ top:
 ## Disjunction Effect
 
 - inability to make decisions in advance in anticipation of future information
+
+## Magical Thinking  & Quasi Magical Thinking
+
+- Some coincidence lead you to build superstitious, but there are actually no karma (cause and effect)
+- Belief that unrelated events are causally connected despite the absence of any plausible causal link between them, particularly as a result of supernatural effects.
+- E.G
+    - For voting, though our vote actually has basically 0 possibility to influence president election, but a lot people do it
+    - For lottery, we somehow put more money if we select the number
+
+## Personality Disorders
+
+- culture and social contagion — collective memory
+    - same effect, same memory, then similar decisions
+- Antisocial Personality Disorder
