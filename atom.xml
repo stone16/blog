@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-03-28T10:14:08.401Z</updated>
+  <updated>2022-04-02T09:09:25.877Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Equity 101</title>
+    <link href="https://www.llchen60.com/Equity-101/"/>
+    <id>https://www.llchen60.com/Equity-101/</id>
+    <published>2022-04-02T09:08:11.000Z</published>
+    <updated>2022-04-02T09:09:25.877Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-What-is-equity"><a href="#1-What-is-equity" class="headerlink" title="1. What is equity?"></a>1. What is equity?</h1><ul><li>A form of compensation<ul><li>give you partial ownership in the company<ul><li>shares<ul><li>options</li><li>RSUs</li></ul></li></ul></li><li>can have seriously life changing result</li></ul></li><li>Liquidity<ul><li>the ability to sell your shares</li></ul></li></ul><h1 id="2-Cap-Table"><a href="#2-Cap-Table" class="headerlink" title="2. Cap Table"></a>2. Cap Table</h1><ul><li>A document that details who has ownership in a company</li><li>records<ul><li>how and when you’ll get your shares</li><li>how many shares you’ll get</li><li>how you’ll be paid out</li></ul></li><li>employee option pool<ul><li>investors require it, to hire talented people</li><li>let talented stay longer</li></ul></li><li>different types of equity<ul><li>preferred shares — investors</li><li>stock options — employees</li><li>advisory shares — advisors</li></ul></li></ul><h1 id="3-Equity-grants"><a href="#3-Equity-grants" class="headerlink" title="3. Equity grants"></a>3. Equity grants</h1><ul><li><p>equity grant agreements</p><ul><li>how many shares you are getting</li><li>how much each share is worth</li><li>how long it will take to vest all your shares</li></ul></li><li><p>types of equity</p><ul><li>stock option — early stage<ul><li>you have the option to buy shares, but not obligated to</li><li>only vest on a single trigger</li><li>taxed when you buy/ sell your shares</li><li>option types<ul><li>incentive stock option<ul><li>pay tax when you sell your shares</li></ul></li><li>non qualified stock option<ul><li>pay taxes when you buy and sell shares</li></ul></li></ul></li></ul></li><li>restricted stock units - large startup<ul><li>you receive shares that you own automatically</li><li>often vest on a double trigger</li><li>taxed when get vested</li></ul></li></ul></li></ul><h1 id="4-How-vesting-work"><a href="#4-How-vesting-work" class="headerlink" title="4. How vesting work"></a>4. How vesting work</h1><ul><li>Earning the right to buy your shares<ul><li>when you are taxed</li><li>when you are able to buy shares</li></ul></li><li>vesting structures<ul><li>time based vesting</li><li>event based vesting</li><li>hybrid vesting</li></ul></li><li>option outstanding<ul><li>options has not been granted</li></ul></li></ul><h1 id="5-How-exercising-equity-works"><a href="#5-How-exercising-equity-works" class="headerlink" title="5. How exercising equity works"></a>5. How exercising equity works</h1><ul><li>Being granted stock options doesn’t mean you’re automatically a shareholder in a company.</li><li>Stock option not means share, you need to buy it</li><li>exercise<ul><li>means you purchase stock at a specified price</li><li>purchase your options</li><li>then company give stock certificate</li></ul></li><li>strike price<ul><li>option price you could leverage on to buy stocks</li><li>fixed price</li></ul></li><li>409A valuation<ul><li>an analysis of your company’s financials, which determines the value of the company’s shares</li><li>usually done every 12 months</li><li>Fair Market Value - FMV<ul><li>the value of one share of common stock</li></ul></li></ul></li><li>Spread/ Gain<ul><li>the difference between stock price and strike price</li></ul></li><li>PTEP - post termination exercise period<ul><li>the amount of time you have to exercise your options after you leave the company</li></ul></li><li>early exercise<ul><li>company let you buy everything today</li><li>then you just need to pay taxes at strike price</li><li>83b election<ul><li>a form sent to IRS</li><li>you want to pay tax now</li></ul></li></ul></li></ul><h1 id="6-How-to-sell-shares"><a href="#6-How-to-sell-shares" class="headerlink" title="6. How to sell shares"></a>6. How to sell shares</h1><ul><li>How and when can you sell your shares<ul><li>think about<ul><li>any restrictions on selling?</li><li>do you need the cash?</li><li>is the value increasing?</li><li>only chance to sell?</li></ul></li></ul></li><li>ways<ul><li>public company<ul><li>public shares pretty liquid,<ul><li>as it’s easy to convert them into cash at market price</li></ul></li></ul></li><li>private company<ul><li>strongly restrict sell usually</li><li>ways<ul><li>IPO<ul><li>usually 6 month lock up period after going public</li></ul></li><li>M&amp;A<ul><li>bought or merge   acquisition</li><li>another company buys your shares<ul><li>pay for cash or other stocks</li></ul></li></ul></li><li>tender offer<ul><li>company buy from employee</li><li>could happen while the company still private</li></ul></li></ul></li></ul></li></ul></li></ul><h1 id="7-How-are-equity-grants-taxed"><a href="#7-How-are-equity-grants-taxed" class="headerlink" title="7. How are equity grants taxed?"></a>7. How are equity grants taxed?</h1><ul><li>ISO shares<ul><li>when sell it, tax rate come to be different</li></ul></li><li>qualifying disposition<ul><li>1 year after exercise</li><li>2 years after option grant date</li></ul></li><li>long term capital gains tax<ul><li>0% 0 20%</li></ul></li><li>short term capital gains<ul><li>taxed at ordinary income rates</li></ul></li><li>AMT<ul><li>alternative minimum tax</li><li>a low threshold, or floor, defining the minimum amount of taxes you are obligated to pay</li></ul></li></ul><h1 id="8-Valuations"><a href="#8-Valuations" class="headerlink" title="8. Valuations"></a>8. Valuations</h1><ul><li>dilution<ul><li>affect the percentage you have</li></ul></li><li>how valuation works<ul><li>term sheet<ul><li>a legal document defining the terms of an investment</li></ul></li><li>valuation<ul><li>an appraisal of a company’s worth</li><li>affect<ul><li>how many shares</li><li>price per shares</li><li>percentage</li></ul></li></ul></li></ul></li><li>stage<ul><li>pre money valuation<ul><li>post money matters you</li><li>the employee stock option pool—that percentage of the company that gets carved out for new hires and new employees? Well, if you think about how dilution works, when an option pool gets carved out, it reduces the ownership percentage of all of the other shareholders. So that’s why a lot of the time, when an investor puts money into a company, they’ll require that this option pool gets sliced out of the company on a pre-money basis.</li></ul></li><li>investment</li><li>post money valuation</li></ul></li><li>how valuations are calculated<ul><li>valuation for startup come to be complex,<ul><li>revenue, profit, tax, etc.</li><li>growth rate</li><li>user count</li><li>industry</li><li>founding team</li></ul></li><li>section 409A<ul><li>let 3rd party help do valuation for the startup</li><li>every 12 months</li><li>or every time do a new fund raising</li></ul></li></ul></li></ul><h1 id="9-Who-can-invest-in-startups"><a href="#9-Who-can-invest-in-startups" class="headerlink" title="9. Who can invest in startups"></a>9. Who can invest in startups</h1><ul><li>For private company<ul><li>no need to release any info to public</li><li>less info and more risk comparing with public company investment</li></ul></li><li>who can invest in a startup<ul><li>accredited investor<ul><li>more relevant to individuals</li><li>criteria (either one of them)<ul><li>net worth  over a million, not include the primary living place;</li><li>income  net income 200k per year for last 2 years. reasonable expectation in following year; for a family is 300k</li><li>passing a financial exam, hold a license</li></ul></li></ul></li><li>qualified purchaser<ul><li>more relevant for funds, institution,</li><li>all about investment, purchasing power</li><li>an entity that has a significant amount of investment capital — their purchasing power</li></ul></li></ul></li></ul><h1 id="10-How-venture-capital-works"><a href="#10-How-venture-capital-works" class="headerlink" title="10. How venture capital works"></a>10. How venture capital works</h1><ul><li>venture capital system<ul><li>equity financing<ul><li>angel investors</li><li>venture capital fund<ul><li>invest other people’s money through fund</li></ul></li></ul></li><li>debt financing</li></ul></li><li>type of fundraising instruments<ul><li>convertible instrument<ul><li>investor iou, convert the note into shares, owns equity in the future<ul><li>control - startup not lose control in this way</li></ul></li><li>used for very early stage of startups</li></ul></li><li>priced round<ul><li>used at later stages, when the company is growing</li></ul></li></ul></li><li>type of investors<ul><li>accredited investor - angel investor</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://carta.com/equity/learn/what-is-equity/">https://carta.com/equity/learn/what-is-equity/</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-What-is-equity&quot;&gt;&lt;a href=&quot;#1-What-is-equity&quot; class=&quot;headerlink&quot; title=&quot;1. What is equity?&quot;&gt;&lt;/a&gt;1. What is equity?&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;A fo
+      
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
+    
+    
+      <category term="Equity" scheme="https://www.llchen60.com/tags/Equity/"/>
+    
+      <category term="RSU" scheme="https://www.llchen60.com/tags/RSU/"/>
+    
+  </entry>
   
   <entry>
     <title>System.nanoTime vs System.currentTimeMillis</title>
@@ -513,30 +542,6 @@
       
       
         &lt;h1 id=&quot;1-Background&quot;&gt;&lt;a href=&quot;#1-Background&quot; class=&quot;headerlink&quot; title=&quot;1. Background&quot;&gt;&lt;/a&gt;1. Background&lt;/h1&gt;&lt;p&gt;In distributed system, data 
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>System Design Patterns - Bloom Filters</title>
-    <link href="https://www.llchen60.com/System-Design-Patterns-Bloom-Filters/"/>
-    <id>https://www.llchen60.com/System-Design-Patterns-Bloom-Filters/</id>
-    <published>2021-08-10T02:33:45.000Z</published>
-    <updated>2021-08-10T02:34:11.571Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="System-Design-Patterns-Bloom-Filters"><a href="#System-Design-Patterns-Bloom-Filters" class="headerlink" title="System Design Patterns - Bloom Filters"></a>System Design Patterns - Bloom Filters</h1><p>Created: August 8, 2021 10:06 PM<br>Status: Finished<br>Tags: System Design<br>Type: Tech Resource</p><h1 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h1><ul><li>Suppose we have a large set of structured data(identified by record IDs) stored in a set of data files, and we want to know which file might contain our required data<ul><li>we don’t want to read each file, as it’s slow and we have to read a lot of data from the disk</li></ul></li><li>Solution 1: Build an index on each data file and store it in a separate index file, to map each record ID to its offset in the data file; each index file will be sorted on the record ID. Then we could do a binary search in index file</li><li>Solution 2: We could use Bloom Filters</li></ul><h1 id="2-How-does-Bloom-Filter-work"><a href="#2-How-does-Bloom-Filter-work" class="headerlink" title="2. How does Bloom Filter work?"></a>2. How does Bloom Filter work?</h1><ul><li>The Bloom filter data structure tells whether an element <strong>may be in a set, or definitely is not</strong><ul><li>which means the only possible errors are false positives</li></ul></li><li>How it looks<ul><li>An empty bloom filter is a bit array of m bits, all set to 0</li><li>There are also k different hash functions, each of which maps a set element to one of the m bit positions</li></ul></li><li>Workflow<ul><li>To add an element, feed it to the hash functions to get k bit positions, and set the bits at these positions to 1</li><li>To test if an element is in the set, feed it to the hash functions to get k bit positions<ul><li>if any of the bits at these positions is 0, the element is definitely not in the set</li><li>if all are 1, then the element may be in the set</li></ul></li></ul></li></ul><h1 id="3-When-will-we-use-Bloom-Filter"><a href="#3-When-will-we-use-Bloom-Filter" class="headerlink" title="3. When will we use Bloom Filter?"></a>3. When will we use Bloom Filter?</h1><ul><li>In BigTable, any read operation has to read from all SSTables that make up a tablet<ul><li>if these SSTables are not in memory, the read operation may end up doing many disk accesses</li><li>BigTable uses bloom filters to reduce the number of disk accesses</li><li>Store of BloomFilter could drastically reduces the number of disk seeks, thereby improving read performance</li></ul></li></ul><h1 id="4-How-to-use-Bloom-Filter-in-Java"><a href="#4-How-to-use-Bloom-Filter-in-Java" class="headerlink" title="4. How to use Bloom Filter in Java?"></a>4. How to use Bloom Filter in Java?</h1><ul><li>We could use BloomFilter class from the Guava library to achieve this</li></ul><pre><code class="jsx">BloomFilter&lt;Integer&gt; filter = BloomFilter.create(    Funnels.integerFunnel(),     500,     0.01);</code></pre><ul><li>How to implement from scratch   <a href="https://www.inlighting.org/archives/java-implement-bloom-filter/">https://www.inlighting.org/archives/java-implement-bloom-filter/</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;System-Design-Patterns-Bloom-Filters&quot;&gt;&lt;a href=&quot;#System-Design-Patterns-Bloom-Filters&quot; class=&quot;headerlink&quot; title=&quot;System Design Patter
       
     
     </summary>
