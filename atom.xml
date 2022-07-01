@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-04-02T09:09:25.877Z</updated>
+  <updated>2022-07-01T14:05:31.350Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PG::DuplicatePstatement Error prepared statement axxx already exists</title>
+    <link href="https://www.llchen60.com/PG-DuplicatePstatement-Error-prepared-statement-axxx-already-exists/"/>
+    <id>https://www.llchen60.com/PG-DuplicatePstatement-Error-prepared-statement-axxx-already-exists/</id>
+    <published>2022-07-01T14:04:04.000Z</published>
+    <updated>2022-07-01T14:05:31.350Z</updated>
+    
+    <content type="html"><![CDATA[<p>That’s an interesting issue we faced in production during one deployment which only contain some frontend changes. </p><p>Upon check, this happens in such scenario: </p><pre><code class="java">A prepared statement is generated in postgresql, but never stored in rails. Since the code was interrupted before storing the statement, the @counter variable was never incremented even though it was used to generate a prepared statement.</code></pre><p>That pretty much described the issue, prepared statement on postgres side is a server side object that can be used to optimize performance. When the <code>PREPARE</code><br> statement is executed, the specified statement is parsed, analyzed, and rewritten. When an <code>EXECUTE</code>command is subsequently issued, the prepared statement is planned and executed.  </p><p>When the identifiers already bound to existing prepared statements but rails does not realize it, this issue will be happened. </p><p>here is the fix </p><p><a href="https://github.com/rails/rails/pull/41356/files">https://github.com/rails/rails/pull/41356/files</a></p><pre><code class="java">def next_key     &quot;a#&#123;@counter + 1&#125;&quot;end def next_key     &quot;a#&#123;@counter += 1&#125;&quot;end This change make the postgres prepared statement counter before makeing a prepared statementThus if the statemnt is aborted in rails side, app won&#39;t end up in perpetual crash state </code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://github.com/rails/rails/issues/1627">https://github.com/rails/rails/issues/1627</a></li><li><a href="https://github.com/rails/rails/pull/25827">https://github.com/rails/rails/pull/25827</a></li><li><a href="https://github.com/rails/rails/pull/17607">https://github.com/rails/rails/pull/17607</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;That’s an interesting issue we faced in production during one deployment which only contain some frontend changes. &lt;/p&gt;
+&lt;p&gt;Upon check, th
+      
+    
+    </summary>
+    
+    
+      <category term="Ruby" scheme="https://www.llchen60.com/categories/Ruby/"/>
+    
+    
+      <category term="Postgres" scheme="https://www.llchen60.com/tags/Postgres/"/>
+    
+  </entry>
   
   <entry>
     <title>Equity 101</title>
@@ -525,30 +552,6 @@
     
     
       <category term="货运代理" scheme="https://www.llchen60.com/tags/%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>System Design Patterns - Quorum</title>
-    <link href="https://www.llchen60.com/System-Design-Patterns-Quorum/"/>
-    <id>https://www.llchen60.com/System-Design-Patterns-Quorum/</id>
-    <published>2021-08-11T04:26:01.000Z</published>
-    <updated>2021-08-11T04:26:42.996Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h1><p>In distributed system, data is replicated across multiple servers for fault tolerance and high availability.</p><p>Once system decides to maintain multiple copies of data, another problem arises: how to make sure that all replicas are consistent?? </p><h1 id="2-Dive-Deep"><a href="#2-Dive-Deep" class="headerlink" title="2. Dive Deep"></a>2. Dive Deep</h1><h2 id="2-1-Definition"><a href="#2-1-Definition" class="headerlink" title="2.1 Definition"></a>2.1 Definition</h2><ul><li>Quorum<ul><li>Minimum number of servers on which a distributed operation needs to be performed successfully before declaring the operation’s overall success</li></ul></li></ul><h2 id="2-2-How-it-works"><a href="#2-2-How-it-works" class="headerlink" title="2.2 How it works?"></a>2.2 How it works?</h2><ul><li>Suppose a database is replicated on 5 machines, then quorum refers to the minimum number of machines that perform the same action for a given transaction in order to decide the final operation for that transaction</li><li>So in a set of 5, three machines form the majority quorum, quorum <strong>enforces the consistency requirement</strong> needed for distributed operations</li><li>Quorum Number<ul><li>N / 2 + 1</li></ul></li><li>Quorum is achieved when nodes follow the below protocol R + W &gt; N<ul><li>R  minimum read nodes</li><li>W minimum write nodes</li><li>N  nodes in the quorum group</li></ul></li></ul><h2 id="2-3-Where-is-it-used"><a href="#2-3-Where-is-it-used" class="headerlink" title="2.3 Where is it used?"></a>2.3 Where is it used?</h2><ul><li>Chubby<ul><li>Use paxos for leader election, which use quorum to ensure strong consistency</li></ul></li><li>Cassandra<ul><li>Ensure data consistency, each write request can be configured to be successful only if the data has been written to at least a quorum of replica nodes</li></ul></li><li>Dynamodb<ul><li>Writes to a sloppy quorum of other nodes in the system</li><li>All read/ write operations are performed on the first N healthy nodes from the preference list, which may not always be the first N nodes encountered walking the consistent hashing ring</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-Background&quot;&gt;&lt;a href=&quot;#1-Background&quot; class=&quot;headerlink&quot; title=&quot;1. Background&quot;&gt;&lt;/a&gt;1. Background&lt;/h1&gt;&lt;p&gt;In distributed system, data 
-      
-    
-    </summary>
-    
-    
-      <category term="SystemDesign" scheme="https://www.llchen60.com/categories/SystemDesign/"/>
-    
     
   </entry>
   
