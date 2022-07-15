@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-07-01T14:05:31.350Z</updated>
+  <updated>2022-07-15T12:59:24.908Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>How to use Sprint transactional annotation</title>
+    <link href="https://www.llchen60.com/How-to-use-Sprint-transactional-annotation/"/>
+    <id>https://www.llchen60.com/How-to-use-Sprint-transactional-annotation/</id>
+    <published>2022-07-15T12:58:18.000Z</published>
+    <updated>2022-07-15T12:59:24.908Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="How-to-use-Sprint-transactional-annotation"><a href="#How-to-use-Sprint-transactional-annotation" class="headerlink" title="How to use Sprint transactional annotation"></a>How to use Sprint transactional annotation</h1><h1 id="1-Attributes"><a href="#1-Attributes" class="headerlink" title="1. Attributes"></a>1. Attributes</h1><ul><li><code>value</code> and <code>transactionManager</code><ul><li>used to provide a TransactionManager reference to be used when handling the transaction for the annotated block</li></ul></li><li><code>propagation</code><ul><li>define how the transaction boundaries propagate to other methods that will be called either directly or indirectly from within the annotated block</li><li>default is <code>REQUIRED</code><ul><li>means a transaction is started if no transaction is already available</li><li>otherwise use the current running thread</li></ul></li></ul></li><li><code>timeout</code> and <code>timeoutString</code><ul><li>define the max number of seconds the current method is allowed to run</li></ul></li><li><code>readOnly</code><ul><li>defines if the current transaction is read-only or read-write</li></ul></li><li><code>rollbackFor</code> and <code>rollbackForClassName</code><ul><li>define one or more Throwable classes for which the current transaction will be rolled back</li><li>default is RuntimeException or an Error is thrown, but not for a checked Exception</li></ul></li><li><code>noRollbackFor</code> and <code>noRollbackForClassName</code><ul><li>used for one or more RuntimeException</li></ul></li></ul><h1 id="2-Transaction-Override"><a href="#2-Transaction-Override" class="headerlink" title="2. Transaction Override"></a>2. Transaction Override</h1><ul><li><code>addStatementReportOperation</code> is using the serializeble level, which override the class level readonly transaction</li></ul><pre><code class="java">@Service@Transactional(readOnly = true)public class OperationService &#123;    @Transactional(isolation = Isolation.SERIALIZABLE)    public boolean addStatementReportOperation(        String statementFileName,        long statementFileSize,        int statementChecksum,        OperationType reportType) &#123;        ...    &#125;&#125;</code></pre><ul><li>we use readOnly in class level because Spring could perform some read only optimization<ul><li>we could save memory when loading read only entities since the loaded state is discarded right away, and not kept for the whole duration of the currently running persistence context</li><li>also, in the cluster, read only data source could be redirected to DB replica instead of DB primary, this could also reduce the burden for primary</li></ul></li></ul><ol><li><a href="https://stackoverflow.com/questions/10394857/how-to-use-transactional-with-spring-data#:~:text=Thus%20we%20recommend%20using%20%40Transactional,re%2Ddecorated%20in%20that%20interface">https://stackoverflow.com/questions/10394857/how-to-use-transactional-with-spring-data#:~:text=Thus we recommend using %40Transactional,re-decorated in that interface</a> </li><li><a href="https://vladmihalcea.com/spring-read-only-transaction-hibernate-optimization/">https://vladmihalcea.com/spring-read-only-transaction-hibernate-optimization/</a>  </li><li><a href="https://vladmihalcea.com/spring-transactional-annotation/">https://vladmihalcea.com/spring-transactional-annotation/</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;How-to-use-Sprint-transactional-annotation&quot;&gt;&lt;a href=&quot;#How-to-use-Sprint-transactional-annotation&quot; class=&quot;headerlink&quot; title=&quot;How to u
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://www.llchen60.com/categories/BackEnd/"/>
+    
+    
+      <category term="Spring" scheme="https://www.llchen60.com/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>PG::DuplicatePstatement Error prepared statement axxx already exists</title>
@@ -517,32 +543,6 @@
       
       
         &lt;h1 id=&quot;1-货运代理法律风险基本内容&quot;&gt;&lt;a href=&quot;#1-货运代理法律风险基本内容&quot; class=&quot;headerlink&quot; title=&quot;1. 货运代理法律风险基本内容&quot;&gt;&lt;/a&gt;1. 货运代理法律风险基本内容&lt;/h1&gt;&lt;h2 id=&quot;1-1-国际货运代理人定义&quot;&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
-    
-      <category term="货运代理" scheme="https://www.llchen60.com/tags/%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>国际货运代理行业初探</title>
-    <link href="https://www.llchen60.com/%E5%9B%BD%E9%99%85%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%9A%E5%88%9D%E6%8E%A2/"/>
-    <id>https://www.llchen60.com/%E5%9B%BD%E9%99%85%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86%E8%A1%8C%E4%B8%9A%E5%88%9D%E6%8E%A2/</id>
-    <published>2021-08-15T14:52:04.000Z</published>
-    <updated>2021-08-19T23:01:51.975Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="国际货运代理行业初探"><a href="#国际货运代理行业初探" class="headerlink" title="国际货运代理行业初探"></a>国际货运代理行业初探</h1><h1 id="1-货运公司业务与工作内容"><a href="#1-货运公司业务与工作内容" class="headerlink" title="1. 货运公司业务与工作内容"></a>1. 货运公司业务与工作内容</h1><h2 id="1-1-主要业务"><a href="#1-1-主要业务" class="headerlink" title="1.1 主要业务"></a>1.1 主要业务</h2><h3 id="1-1-1-Overview"><a href="#1-1-1-Overview" class="headerlink" title="1.1.1 Overview"></a>1.1.1 Overview</h3><blockquote><p>客户委托货运代理运输货物，客户本人并不承担承运责任；货代接受发货人委托后，为发货人提供相关服务，满足发货人的具体要求，同时要求发货人根据服务来支付一定报酬的行业</p></blockquote><h3 id="1-1-2-主营业务"><a href="#1-1-2-主营业务" class="headerlink" title="1.1.2 主营业务"></a>1.1.2 主营业务</h3><ul><li>纯粹代理人的业务<ul><li>取得委托人授权</li><li>负责货物离开港口以及到达港口的公务处理工作<ul><li>报关</li><li>报检</li><li>保险</li></ul></li><li>这个清关环节主要是配合当地海关进行文件准备工作</li></ul></li><li>国际多式联运业务<ul><li>多式联运，发展自集装箱运输</li></ul></li><li>无船承运业务<ul><li>具有无船公共承运人NVOCC (Non Vessel Operating Common Carrier)资质的货代企业可以以承运人的身份接受货载委托</li><li>货物清关的时候用货代企业的提单，承担承运人的责任，完成货物离港到岸的国际海运经营业务</li><li>无船承运人只是契约承运人，而实际完成运输的承运人是货代企业所委托的其他国际船舶运输经营者</li></ul></li><li>物流业务<ul><li>可以针对不同客户提供定制化的供应链解决方案，囊括了货物从生产，出厂，转运，清仓报关，到达目标市场等各个环节</li></ul></li><li>国际快递业务</li></ul><h2 id="1-2-基本工作流程"><a href="#1-2-基本工作流程" class="headerlink" title="1.2 基本工作流程"></a>1.2 基本工作流程</h2><ul><li>海运流程<ul><li>他国买主和中国企业就贸易行为签订贸易合同</li><li>中国工厂确定货运代理企业，并与之商讨出货</li><li>中国货运代理企业和船运公司商讨订舱事宜</li><li>拿到承载货物的船的名字和达到目的地的准确信息</li><li>国内外货运代理企业共同确认货物运输信息，以及到达目的地的时间信息，并将具体信息传递给国外买家</li></ul></li><li>location / key points<ul><li>卖方，出口商地点</li><li>出口单证手续</li><li>边境/ 机场/ 码头交货</li><li>装运港</li><li>船舷</li><li>船上</li><li>船上</li><li>船舷</li><li>到达卸货港</li><li>指定目的地交货; 边境/ 机场/ 码头</li><li>进口单证手续</li><li>卖方/ 进口商地点</li></ul></li></ul><h2 id="1-3-货代企业等级"><a href="#1-3-货代企业等级" class="headerlink" title="1.3 货代企业等级"></a>1.3 货代企业等级</h2><ul><li>一级货代企业<ul><li>需要获得国际货代资格证书</li><li>商务部颁发的，一级货代企业有权从中国不同港口订舱</li></ul></li><li>小型货代公司<ul><li>依托于一级货代企业，来进行订舱的公司</li></ul></li></ul><h1 id="2-国际货运行业发展的外部环境"><a href="#2-国际货运行业发展的外部环境" class="headerlink" title="2. 国际货运行业发展的外部环境"></a>2. 国际货运行业发展的外部环境</h1><ul><li><p>PEST分析方式</p><ul><li>维度<ul><li>政治<ul><li>2010年货代标准化委员会</li><li>2015年《推动共建丝绸之路经济带和21世纪海上丝绸之路的愿景与行动》</li><li>2016年《关于加快国际货运代理物流业健康发展的指导意见》</li><li>《中华人民共和国海商法》</li></ul></li><li>经济</li><li>技术</li><li>社会文化</li></ul></li><li>外部的变化是组织无法控制的，脱离于组织内部，却环绕在组织四周，从不同方面作用在组织内部</li></ul></li><li><p>波特五力竞争理论</p><ul><li>维度<ul><li>替代者<ul><li>货代的供应商</li></ul></li><li>客户</li><li>供应商<ul><li>供应商 尤其是船舶公司航空公司有着比较强的议价能力，尤其对于中小型货代而言</li></ul></li><li>潜在竞争者<ul><li>政策壁垒整体在降低</li><li>传统业务 — 报关报检，码头物流，短途专线运输</li><li>新兴业务 — 供应链管理，非常规货物托运，多式联运</li></ul></li><li>同行业竞争者<ul><li>船舶公司旗下自己设立的货代物流公司<ul><li>有直接客户源</li><li>底价海运费和订舱费减免的优势</li><li>可以通过船公司完善的海外网络指定国内的出口供应商，可以提供更多种的贸易方式<ul><li>贸易方式<ul><li>Exxxx<ul><li>EXW<ul><li>卖方仅在自己的地点为买房备妥货物交付，出工厂以后就没有费用和安全责任了</li></ul></li></ul></li><li>Fxxx  — 卖方需要将货物交到制定的承运人处<ul><li>FCA  货交承运人</li><li>FAS  装运港 船边  交货 — 到码头</li><li>FOB 装运港 船上 交货  — 到船舷<ul><li>价格计算  = (产品含税成本 + 利润 + 国内运输费用 - 出口退税)/ 汇率</li><li>卖方的义务<ul><li>将合同规定的货物交到买房所指派的船上并及时通知买方</li><li>承担货物越过装运港船舷之前的一切风险</li><li>办理货物的出口手续</li><li>提交商业发票等所需的凭证</li></ul></li><li>买方的义务<ul><li>租船订舱，支付运费</li><li>将船名，装货地点和要求交货的时间及时通知卖方</li><li>受领货物，支付货款</li><li>承担货物越过装运港船舷之后的一切风险</li><li>办理货物的进口手续</li></ul></li></ul></li></ul></li><li>Cxxx — 卖方需要订立运输合同，但是对于货物损失的风险以及装船和启运之后发生的意外所产生的额外费用，卖方不承担责任<ul><li>CFR  成本+运费<ul><li>CFR = FOB + 海运费</li></ul></li><li>CIF  成本运费保险<ul><li>CIF = FOB + 海运费 + 海运保险费</li></ul></li><li>CIP  运费/ 保险费付到目的地</li></ul></li><li>Dxxx — 卖方承担将货物交到出口国边境或者目的国所需的全部费用和风险<ul><li>DAF  出口国边境交货</li><li>DES  目的港船上交货</li><li>DEQ  目的港码头交货</li><li>DDU  未完税交货</li><li>DDP  完税后交货</li></ul></li><li>FOB</li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li><p>SWOT 战略管理分析</p><ul><li>S - Strength<ul><li>企业内部优势</li></ul></li><li>W - Weakness<ul><li>企业面临的竞争弱势</li></ul></li><li>O - Opportunity<ul><li>发展过程当中的有利外部环境</li></ul></li><li>T  - Threat<ul><li>企业自身业务的外部威胁</li><li>当外部环境不利于企业的发展，企业为了避免外部环境带来的威胁，应当及时调整经营战略</li></ul></li></ul></li></ul><h1 id="3-内部环境分析"><a href="#3-内部环境分析" class="headerlink" title="3. 内部环境分析"></a>3. 内部环境分析</h1><ul><li>价值链分析法<ul><li>将活动分为基础活动以及辅助活动两大类<ul><li>基础活动<ul><li>内部物流活动<ul><li>各个部门和环节之间的合作，如何能直观了解到项目的进展此类问题</li></ul></li><li>生产经营活动<ul><li>生产 销售  供应 财务</li></ul></li><li>外部物流活动<ul><li>货物的周转</li><li>报关 报检 查验 清关 缴税等</li></ul></li><li>服务性活动</li></ul></li><li>辅助活动<ul><li>人力资源管理活动</li><li>改善基础设施条件的活动</li><li>原材料采购活动</li><li>新产品研发活动等</li></ul></li></ul></li><li>只有在一些特定环节，才会真的去创造价值，这些是战略环节，需要在此构建战略优势</li></ul></li></ul><h1 id="4-Other-Notes"><a href="#4-Other-Notes" class="headerlink" title="4. Other Notes"></a>4. Other Notes</h1><ul><li><p>企业战略</p><ul><li>用于整合与重新优化配置的措施及可行性方案</li><li>企业组织结构要跟随企业战略进行调整</li></ul></li><li><p>如何选择合适的竞争战略</p><ul><li>对有吸引力，高潜力的产业的正确选择</li><li>在选择的行业当中确立自己的竞争优势地位</li><li>除此以外还需要从企业内部环境，研究价值链</li></ul></li><li><p>企业内部性的深入研究 — 企业核心能力</p><ul><li>让企业构成其他企业并不具备的能力，同时资源无法在不同的企业之间进行流通</li><li>企业内部的资源的独特性，直接关系到企业利润的获得以及竞争优势的保持</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>1.<a href="https://www.52by.com/article/2584">https://www.52by.com/article/2584</a><br>2. 《小型国际货运代理X公司的发展战略研究》</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;国际货运代理行业初探&quot;&gt;&lt;a href=&quot;#国际货运代理行业初探&quot; class=&quot;headerlink&quot; title=&quot;国际货运代理行业初探&quot;&gt;&lt;/a&gt;国际货运代理行业初探&lt;/h1&gt;&lt;h1 id=&quot;1-货运公司业务与工作内容&quot;&gt;&lt;a href=&quot;#1-货运公司业务
       
     
     </summary>

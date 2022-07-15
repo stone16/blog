@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>How to use Sprint transactional annotation</title>
+      <link href="/How-to-use-Sprint-transactional-annotation/"/>
+      <url>/How-to-use-Sprint-transactional-annotation/</url>
+      
+        <content type="html"><![CDATA[<h1 id="How-to-use-Sprint-transactional-annotation"><a href="#How-to-use-Sprint-transactional-annotation" class="headerlink" title="How to use Sprint transactional annotation"></a>How to use Sprint transactional annotation</h1><h1 id="1-Attributes"><a href="#1-Attributes" class="headerlink" title="1. Attributes"></a>1. Attributes</h1><ul><li><code>value</code> and <code>transactionManager</code><ul><li>used to provide a TransactionManager reference to be used when handling the transaction for the annotated block</li></ul></li><li><code>propagation</code><ul><li>define how the transaction boundaries propagate to other methods that will be called either directly or indirectly from within the annotated block</li><li>default is <code>REQUIRED</code><ul><li>means a transaction is started if no transaction is already available</li><li>otherwise use the current running thread</li></ul></li></ul></li><li><code>timeout</code> and <code>timeoutString</code><ul><li>define the max number of seconds the current method is allowed to run</li></ul></li><li><code>readOnly</code><ul><li>defines if the current transaction is read-only or read-write</li></ul></li><li><code>rollbackFor</code> and <code>rollbackForClassName</code><ul><li>define one or more Throwable classes for which the current transaction will be rolled back</li><li>default is RuntimeException or an Error is thrown, but not for a checked Exception</li></ul></li><li><code>noRollbackFor</code> and <code>noRollbackForClassName</code><ul><li>used for one or more RuntimeException</li></ul></li></ul><h1 id="2-Transaction-Override"><a href="#2-Transaction-Override" class="headerlink" title="2. Transaction Override"></a>2. Transaction Override</h1><ul><li><code>addStatementReportOperation</code> is using the serializeble level, which override the class level readonly transaction</li></ul><pre><code class="java">@Service@Transactional(readOnly = true)public class OperationService &#123;    @Transactional(isolation = Isolation.SERIALIZABLE)    public boolean addStatementReportOperation(        String statementFileName,        long statementFileSize,        int statementChecksum,        OperationType reportType) &#123;        ...    &#125;&#125;</code></pre><ul><li>we use readOnly in class level because Spring could perform some read only optimization<ul><li>we could save memory when loading read only entities since the loaded state is discarded right away, and not kept for the whole duration of the currently running persistence context</li><li>also, in the cluster, read only data source could be redirected to DB replica instead of DB primary, this could also reduce the burden for primary</li></ul></li></ul><ol><li><a href="https://stackoverflow.com/questions/10394857/how-to-use-transactional-with-spring-data#:~:text=Thus%20we%20recommend%20using%20%40Transactional,re%2Ddecorated%20in%20that%20interface">https://stackoverflow.com/questions/10394857/how-to-use-transactional-with-spring-data#:~:text=Thus we recommend using %40Transactional,re-decorated in that interface</a> </li><li><a href="https://vladmihalcea.com/spring-read-only-transaction-hibernate-optimization/">https://vladmihalcea.com/spring-read-only-transaction-hibernate-optimization/</a>  </li><li><a href="https://vladmihalcea.com/spring-transactional-annotation/">https://vladmihalcea.com/spring-transactional-annotation/</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PG::DuplicatePstatement Error prepared statement axxx already exists</title>
       <link href="/PG-DuplicatePstatement-Error-prepared-statement-axxx-already-exists/"/>
       <url>/PG-DuplicatePstatement-Error-prepared-statement-axxx-already-exists/</url>
