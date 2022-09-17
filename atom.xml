@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-07-15T12:59:24.908Z</updated>
+  <updated>2022-09-17T03:53:15.657Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>观察者模式实现</title>
+    <link href="https://www.llchen60.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-1/"/>
+    <id>https://www.llchen60.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-1/</id>
+    <published>2022-09-17T03:49:49.000Z</published>
+    <updated>2022-09-17T03:53:15.657Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-观察者模式Overview"><a href="#1-观察者模式Overview" class="headerlink" title="1. 观察者模式Overview"></a>1. 观察者模式Overview</h1><ul><li>定义了一种一对多的交互方式，可以被观察的对象可以通知所有观察者他们期待的对象的变化，Pull vs Push.<ul><li>当一个对象改变状态的时候，它的所有依赖者都会收到通知并且会自动更新</li></ul></li><li>Subject/ Observable<ul><li>管理某些数据</li><li>当数据改变的时候，通知订阅者</li></ul></li><li>Observer<ul><li>在订阅的数据发生改变了以后，得到通知</li></ul></li></ul><h1 id="2-使用场景"><a href="#2-使用场景" class="headerlink" title="2. 使用场景"></a>2. 使用场景</h1><ul><li>出版者 + 订阅者</li><li>Check Java Observable, though deprecated</li></ul><h1 id="3-使用目的"><a href="#3-使用目的" class="headerlink" title="3. 使用目的"></a>3. 使用目的</h1><ul><li>责任的分开，只有一份数据，由Observable来进行管理，</li><li>Observer只是拿到了数据的更新，然后做自己特定的事情，observable完全不需要知道这里的细节。用这种方式实现了交互对象之间的松耦合</li></ul><h1 id="4-具体实现"><a href="#4-具体实现" class="headerlink" title="4. 具体实现"></a>4. 具体实现</h1><p><img src="https://s2.loli.net/2022/09/17/pSb5gUW3ynxAroB.png" alt="Class Diagram"></p><h2 id="4-1-接口和数据对象定义"><a href="#4-1-接口和数据对象定义" class="headerlink" title="4.1 接口和数据对象定义"></a>4.1 接口和数据对象定义</h2><pre><code class="java">/** * Observer other abilities */public interface IDisplay &#123;    void display();&#125;/*** Observable interface, used to register/remove/notify observers */public interface IObservable &#123;    ActionResult registerObserver(IObserver observer);    ActionResult removeObserver(IObserver observer);    void notifyObservers();&#125;/** * Observable will call update method for regiestered observer to update the status in observer side */public interface IObserver &#123;    void update(SharebleData data);@Data@RequiredArgsConstructor@AllArgsConstructorpublic class SharebleData &#123;    Double temperature;    Double humidity;    Double pressure;&#125;public enum Status &#123;    SUCCESS,    FAILURE&#125;@Data@AllArgsConstructorpublic class ActionResult &#123;    @NonNull    Status status;    @Nullable    List&lt;String&gt; errorReason;&#125;</code></pre><h2 id="4-2-具体实现类的定义"><a href="#4-2-具体实现类的定义" class="headerlink" title="4.2 具体实现类的定义"></a>4.2 具体实现类的定义</h2><pre><code class="java">public class ObservableImpl implements IObservable&#123;    private static List&lt;IObserver&gt; observerList;    private SharebleData data;    public ObservableImpl() &#123;        observerList = new ArrayList&lt;&gt;();        data = new SharebleData();    &#125;    public void setSharebleData(double tem, double humidity, double pressure) &#123;        data.setHumidity(humidity);        data.setTemperature(tem);        data.setPressure(pressure);        notifyObservers();    &#125;    @Override    public ActionResult registerObserver(IObserver observer) &#123;        observerList.add(observer);        return new ActionResult(Status.SUCCESS, null);    &#125;    @Override    public ActionResult removeObserver(IObserver observer) &#123;        observerList.remove(observer);        return new ActionResult(Status.SUCCESS, null);    &#125;    @Override    public void notifyObservers() &#123;        observerList.forEach(observer -&gt; &#123;observer.update(data);&#125;);    &#125;&#125;public class CurrentConditionDisplay implements IObserver, IDisplay&#123;    private double temp;    private double pressure;    private IObservable observable;    public CurrentConditionDisplay(IObservable subject) &#123;        this.observable = subject;        observable.registerObserver(this);    &#125;    @Override    public void display() &#123;        System.out.println(String.format(&quot;======= print out current tem and pressure! temp: %f, pressure: %f &quot;, temp, pressure));    &#125;    @Override    public void update(SharebleData data) &#123;        temp = data.getTemperature();        pressure = data.getPressure();        display();    &#125;&#125;</code></pre><h2 id="4-3-测试"><a href="#4-3-测试" class="headerlink" title="4.3 测试"></a>4.3 测试</h2><pre><code class="java">@RestControllerpublic class TestController &#123;    @GetMapping(&quot;/observer&quot;)    public String observer() &#123;        StringBuilder sb = new StringBuilder();        ObservableImpl observable = new ObservableImpl();        observable.setSharebleData(30, 0.7, 80);        CurrentConditionDisplay currentConditionDisplay = new CurrentConditionDisplay(observable);        observable.setSharebleData(31, 0.7, 80);        observable.setSharebleData(32, 0.7, 80);        observable.setSharebleData(33, 0.7, 80);        return &quot;Please check log&quot;;    &#125;&#125;// Output from console ======= print out current tem and pressure! temp: 31.000000, pressure: 80.000000 ======= print out current tem and pressure! temp: 32.000000, pressure: 80.000000 ======= print out current tem and pressure! temp: 33.000000, pressure: 80.000000 </code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://learning.oreilly.com/library/view/head-first-design/9781492077992/ch02.html">https://learning.oreilly.com/library/view/head-first-design/9781492077992/ch02.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-观察者模式Overview&quot;&gt;&lt;a href=&quot;#1-观察者模式Overview&quot; class=&quot;headerlink&quot; title=&quot;1. 观察者模式Overview&quot;&gt;&lt;/a&gt;1. 观察者模式Overview&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;定义了一种一对多的交
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://www.llchen60.com/categories/Design-Pattern/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>How to use Sprint transactional annotation</title>
@@ -526,32 +551,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>货运代理法律风险</title>
-    <link href="https://www.llchen60.com/%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9/"/>
-    <id>https://www.llchen60.com/%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9/</id>
-    <published>2021-08-17T04:29:17.000Z</published>
-    <updated>2021-08-19T23:01:27.883Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-货运代理法律风险基本内容"><a href="#1-货运代理法律风险基本内容" class="headerlink" title="1. 货运代理法律风险基本内容"></a>1. 货运代理法律风险基本内容</h1><h2 id="1-1-国际货运代理人定义"><a href="#1-1-国际货运代理人定义" class="headerlink" title="1.1 国际货运代理人定义"></a>1.1 国际货运代理人定义</h2><ul><li>历史视角上来看<ul><li>国际货运代理经历了由显明代理人到隐名代理人再到<strong>运输合同当事人</strong>的过程  Fright Agency —→ Freight Forwarder</li><li>研究内容从单纯的代理法律关系向运输法律关系扩展</li><li>现代货运代理的定义 1992 《货运代理》<ul><li>提供并安排货物运输以取得报酬，</li><li>或者为货物合并拼箱并承担将这些货物由收货地运至目的地的<strong>运输责任</strong></li></ul></li><li>2002 《货运代理法》  Legal Classification of Fright Forwarders<ul><li>奠定了国际货运代理制度的FIATA的立法模式下，以货物运输合同的当事人 (as principal) 和非当事人 (except as principal) 来区分国际货物代理企业作为<strong>契约承运人和纯粹代理人</strong>的情况</li></ul></li><li>FIATA (International Federation of Freight Forwarders Association)《国际货运代理业示范法》<ul><li>国际货运代理人是指与客户达成货运代理协定，为其提供各类运输相关服务及其他辅助和咨询服务，或者在前述服务之外还以使用自有运输工具或者签发自己的运输单据的方式为客户承运货物的人</li></ul></li></ul></li><li>无船承运人<ul><li>对于实际货主而言，作为公共承运人与之订立海上货物运输合同</li><li>对于实际承运人而言，又承担着托运人的义务</li></ul></li><li>国际货运代理人定义<ul><li>International Freight Forwarder</li></ul></li><li>对货代的两类界定<ul><li>代理人说<ul><li>将国际货运代理人规定为受委托人的指示为其货物在国际间的运输及其他有关事务提供合理审慎服务的自然人或经济组织，本身业务不涉及货物的承运</li><li>与货主或委托人之间是纯粹的代理关系</li></ul></li><li>双重身份说<ul><li>规定了国际货运代理人是为委托方代办国际货运事务的代理人</li><li>规定了在一定条件下可以<strong>成为运输合同的当事人并对外承担承运人的责任</strong></li></ul></li></ul></li></ul><h2 id="1-2-货运代理法律关系辨析"><a href="#1-2-货运代理法律关系辨析" class="headerlink" title="1.2 货运代理法律关系辨析"></a>1.2 货运代理法律关系辨析</h2><ul><li>法律关系<ul><li>指相关海运国际公约，各国国内法以及行业规范等在调整国际海上货运代理行为的过程中形成的各有关主体间的权利和义务关系</li><li>国际海上货运代理法律关系包括<ul><li>国际货运代理企业作为海运代理人的法律关系</li><li>作为无船承运人的法律关系</li></ul></li></ul></li><li>作为海运代理人的法律关系<ul><li>在提供海上货物运输的相关代理业务的时候，呈现出的关系</li><li>内部委托法律关系<ul><li>国际货运代理企业与托运人之间的委托代理合同法律关系</li></ul></li><li>外部代理法律关系<ul><li>国际货运代理企业为托运人的利益和承运人签订海上货物运输合同而产生的运输合同法律关系</li><li>货代企业往往会以自己的名义代替多笔散货托运人与承运人签订一个总的运输合同，自己再分别同各托运人签订货运代理协议</li></ul></li><li>我国合同法对于包括货运代理合同在内的委托合同采用过错责任原则<ul><li>货代仅在自身确实受托事项存在过错并造成托运人损失的情况下承担违约损害赔偿责任</li><li>且只要在第三方选任上能够证明已经履行了合理和谨慎的义务，对由于第三方造成的托运人损失，可以免于承担责任</li></ul></li></ul></li><li>作为无船承运人的法律关系<ul><li>契约承运人的一种，即不拥有或者不经营船舶，不进行实际的货物运输活动，以签发无船承运人提单(Non Vessel Operating Common Carrier Bill of Loading)的方式明示或者默示对运输负有责任的人，承运责任来源于和托运人签订的货物运输契约，而不是实际的运输行为</li><li>法律关系<ul><li>无船承运人和托运人之间的海上货物运输合同关系</li><li>无船承运人和船公司之间的海上货物运输合同关系<ul><li>货代以托运人的身份和船公司 — 实际承运人签订运输合同并获得海运提单的 (Master Bill of Loading MBL)</li><li><strong>根据海商法， 无船承运人所需要承担的法律责任和实际承运人的责任是一样的</strong></li><li>无船承运人不享有不完全责任制<ul><li>当免责事由发生的时候，船公司可以免于对无船承运人承担责任，而无船承运人无法以相同的事由对托运人免责</li></ul></li><li>当承运人和实际承运人需要对货损货差需要进行赔偿的时候，二者在责任范围内承担连带责任</li><li>对于除了海上运输之外实际托运人提供的其他运输服务，无船承运人均承担严格责任</li></ul></li><li>无船承运人和船公司代理人之间的海上货物运输合同关系</li></ul></li></ul></li></ul><h1 id="2-风险状况分析"><a href="#2-风险状况分析" class="headerlink" title="2. 风险状况分析"></a>2. 风险状况分析</h1><ul><li><p>风险的定义</p><ul><li>由于国际货运代理企业在开展海上业务过程中受到客观法律环境，包括自身在内的各海洋运输相关主体所实施的法律行为的影响，导致其权利义务状态发生改变，从而产生的可能由该企业承担的法律上的不利后果</li><li>法律风险由环境诱因 — 客观法律环境，行为诱因 — 实施的法律行为及二者所引发的不利后果构成<ul><li>法律的不完善和不确定性<ul><li>不完善 — 制定法因为无法避免地滞后于社会的发展而必然存在的漏洞和空白</li><li>不确定性 — 由于法律条文意义晦涩之处需要法官来阐释说明，法官对于法律的理解会有所不同，从而导致了裁判结果不总是一致的</li></ul></li><li>行为诱因<ul><li>货代的一些不规范的法律行为，</li></ul></li></ul></li></ul></li><li><p>货代纠纷案件研究 争议焦点主要在：</p><ul><li>涉案主体间货运代理合同关系的认定<ul><li>因为转委托而引发的对双方间是否存在直接法律关系的异议</li><li>因为货运代理人和无船承运人身份识别而引发的对合同关系性质是货物运输合同法律关系还是货物运输代理合同法律关系的异议</li></ul></li></ul></li><li><p>主要风险分类</p><ul><li>身份认定上的风险<ul><li>指对国际货运代理企业是涉案货物的海运代理人还是无船承运人的认定结果和企业自身对此的认识不同造成的问题</li></ul></li><li>转委托和双方代理上的风险</li><li>涉外法律适用上的风险<ul><li>譬如美国统一商法典，允许以记名提单的方式放货，如果双方在法律适用条款当中约定适用美国法，那么海外代理提单无单放货的行为就不属于过错行为</li></ul></li></ul></li></ul><h1 id="3-风险成因分析"><a href="#3-风险成因分析" class="headerlink" title="3. 风险成因分析"></a>3. 风险成因分析</h1><h2 id="3-1-身份认定上的法律风险成因"><a href="#3-1-身份认定上的法律风险成因" class="headerlink" title="3.1 身份认定上的法律风险成因"></a>3.1 身份认定上的法律风险成因</h2><ul><li>国际货运代理企业是涉案货物的海运代理人还是无船承运人的认定结果的不同，会导致企业需要承担的法律责任和风险完全不同<ul><li>立法上的小混乱<ul><li>因为很有可能货运代理企业同时担当着无船承运人还有代理人的角色</li></ul></li><li>司法裁判的不确定<ul><li>《海上货代纠纷规定》的一些判断逻辑<ul><li>双方之间是否订立了海上货运代理合同，反映出来的是代理协议还是运输协议</li><li>受托人向委托人是否签发了提单，是承运提单还是代理人的分提单</li><li>受托人收取费用的名义是佣金还是运费</li><li>双方以往的交易历史和交易习惯</li></ul></li></ul></li><li>从业者自身行为的不规范<ul><li>是否保留了重要的往来文件，发票和提单</li></ul></li></ul></li></ul><h2 id="3-2-转委托与双方代理上的法律风险成因"><a href="#3-2-转委托与双方代理上的法律风险成因" class="headerlink" title="3.2 转委托与双方代理上的法律风险成因"></a>3.2 转委托与双方代理上的法律风险成因</h2><h3 id="3-2-1-转委托行为的法律风险成因"><a href="#3-2-1-转委托行为的法律风险成因" class="headerlink" title="3.2.1 转委托行为的法律风险成因"></a>3.2.1 转委托行为的法律风险成因</h3><ul><li>什么是转委托<ul><li>受托人将委托人委托其代为处理的事务转交给第三人处理的行为</li></ul></li><li>转委托行为的法律风险成因<ul><li>合同法规定，对于委托事务，除了经过委托人同意或者出现紧急状况可以转委托之外，受托人均应当亲自处理，否则就要为第三人的行为承担责任</li><li>但是对于国际货运代理行业来说，转委托是一个常规方式<ul><li>原因在于海运货代委托人更为看重成本和效率，让货代企业去完全处理每一件委托事务是不经济也不现实的</li></ul></li><li>造成货代企业转委托风险的是是否取得了委托人的同意</li><li>当前《海上货代纠纷规定》明确排除了推定托运人默示同意货运代理人转委托的可能<ul><li>转委托具体权限约定不明的时候，委托人将负有就不明权限想委托人报告的义务</li><li>委托人在受托人指示下与第三人的通常接触行为不能认定为委托人以该行为对转委托的明确同意</li></ul></li></ul></li></ul><h3 id="3-2-2-双方代理行为上的法律风险成因"><a href="#3-2-2-双方代理行为上的法律风险成因" class="headerlink" title="3.2.2 双方代理行为上的法律风险成因"></a>3.2.2 双方代理行为上的法律风险成因</h3><ul><li>什么是双方代理？<ul><li>指在同一法律关系内，一方当事人的代理人同时又接受另一方当事人委托，并为其代理的行为</li><li>由于合同关系中双方是相对的，双方代理会使得本是冲突的合同双方意思表示被代理的个人意志予以替代，偏离了合同的本质属性</li></ul></li><li>海运货代行业需要这样做，因为效率上的提升。但会有法律上的风险</li></ul><h2 id="3-3-涉外法律适用上的风险成因"><a href="#3-3-涉外法律适用上的风险成因" class="headerlink" title="3.3 涉外法律适用上的风险成因"></a>3.3 涉外法律适用上的风险成因</h2><ul><li>作为法院裁判依据的国外法律规定可能会让国际货运代理企业在诉讼中处于不利地位</li><li>涉外商事代理法律关系，会受到途经国家的法律管辖</li><li>如果双方未约定准据法，或涉诉的国际货代企业没有准确理解和把握已约定的准据法，就会大大增加诉讼中的不稳定因素</li><li>英美法系，判例法； 成文法国家，有专门的货运代理法律</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li>《国际海上货运代理法律风险研究》  邓大鸣</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;1-货运代理法律风险基本内容&quot;&gt;&lt;a href=&quot;#1-货运代理法律风险基本内容&quot; class=&quot;headerlink&quot; title=&quot;1. 货运代理法律风险基本内容&quot;&gt;&lt;/a&gt;1. 货运代理法律风险基本内容&lt;/h1&gt;&lt;h2 id=&quot;1-1-国际货运代理人定义&quot;&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
-    
-      <category term="货运代理" scheme="https://www.llchen60.com/tags/%E8%B4%A7%E8%BF%90%E4%BB%A3%E7%90%86/"/>
     
   </entry>
   
