@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-09-19T14:49:32.984Z</updated>
+  <updated>2022-09-25T06:23:31.170Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>策略模式</title>
+    <link href="https://www.llchen60.com/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://www.llchen60.com/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</id>
+    <published>2022-09-25T06:21:58.000Z</published>
+    <updated>2022-09-25T06:23:31.170Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Strategy-Pattern-Overview"><a href="#1-Strategy-Pattern-Overview" class="headerlink" title="1. Strategy Pattern Overview"></a>1. Strategy Pattern Overview</h1><p>Using composition rather than inheritance </p><p>Strategy patten define a set of algorithms, encapsulate each of them and make then exchangable. And we could switch them at run time , decouple the algorithm with the place they are used </p><h1 id="2-Why-use-strategy-pattern"><a href="#2-Why-use-strategy-pattern" class="headerlink" title="2. Why use strategy pattern?"></a>2. Why use strategy pattern?</h1><ul><li>when we have a set of classes, they belong to same object, they should could a certain types of actions, but the detail would vary. Then we need a way to regulate they have such type of behaviors, and also differ them in a maintainable manner</li><li>literaly composition over inheritance</li><li>其实主要还是在考虑代码的可扩展性，多考虑下如何应对可能的改动，Design Pattern整个就是为了应对改动来服务的，并不太需要神化，毕竟只是对于常见的一些应用场景的抽象，想要达到的目的也就是抽象出来，以后做的时候会在范式下，更专注在业务逻辑上的问题</li></ul><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p><img src="https://s2.loli.net/2022/09/25/hvGXQ3TWYSH5gnd.png" alt="Class Diagram"></p><h2 id="3-1-Interface"><a href="#3-1-Interface" class="headerlink" title="3.1 Interface"></a>3.1 Interface</h2><pre><code class="java">public interface IFlyBehavior &#123;    void fly();&#125;public interface IQuackBehavior &#123;    void quack();&#125;</code></pre><h2 id="3-2-Implementation"><a href="#3-2-Implementation" class="headerlink" title="3.2 Implementation"></a>3.2 Implementation</h2><pre><code class="java">public class Duck &#123;    IFlyBehavior flyBehavior;    IQuackBehavior quackBehavior;    public void fly() &#123;        flyBehavior.fly();    &#125;    public void quack() &#123;        quackBehavior.quack();    &#125;&#125;public class JetFly implements IFlyBehavior &#123;    @Override    public void fly() &#123;        System.out.println(&quot;Jet Fly&quot;);    &#125;&#125;public class SimplyFly implements IFlyBehavior &#123;    @Override    public void fly() &#123;        System.out.println(&quot;Simple flying&quot;);    &#125;&#125;public class LoudQuack implements IQuackBehavior &#123;    @Override    public void quack() &#123;        System.out.println(&quot;Make noise!&quot;);    &#125;&#125;public class NoQuack implements IQuackBehavior &#123;    @Override    public void quack() &#123;        // do nothing, as no quack exist    &#125;&#125;public class ToyDuck extends Duck &#123;    public ToyDuck(IFlyBehavior flyBehavior, IQuackBehavior quackBehavior) &#123;        this.flyBehavior = flyBehavior;        this.quackBehavior = quackBehavior;    &#125;&#125;</code></pre><h2 id="3-3-Test"><a href="#3-3-Test" class="headerlink" title="3.3 Test"></a>3.3 Test</h2><pre><code class="java">@GetMapping(&quot;/strategy&quot;)    public String strategy() &#123;        Duck testDuck = new ToyDuck(new JetFly(), new LoudQuack());        testDuck.fly();        testDuck.quack();        return &quot;check the log&quot;;    &#125;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-Strategy-Pattern-Overview&quot;&gt;&lt;a href=&quot;#1-Strategy-Pattern-Overview&quot; class=&quot;headerlink&quot; title=&quot;1. Strategy Pattern Overview&quot;&gt;&lt;/a&gt;1. S
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://www.llchen60.com/categories/Design-Pattern/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>装饰者模式</title>
@@ -525,35 +549,6 @@
     
     
       <category term="积极心理学" scheme="https://www.llchen60.com/tags/%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Make Body Language Your Super Power</title>
-    <link href="https://www.llchen60.com/Make-Body-Language-Your-Super-Power/"/>
-    <id>https://www.llchen60.com/Make-Body-Language-Your-Super-Power/</id>
-    <published>2021-08-28T02:24:14.000Z</published>
-    <updated>2021-08-28T02:25:19.176Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>Stand Strong</li><li>Gesture Effectively</li><li>Mind Your Audience</li></ul><h1 id="1-Posture"><a href="#1-Posture" class="headerlink" title="1. Posture"></a>1. Posture</h1><ul><li>Communication begins before you open your mouth</li><li>How to stand<ul><li>no<ul><li>hands in the pocket  — cannot convey strong msg</li><li>hands in the hip — tend to look overwhelming and powerful</li><li>hands in front of family jewels lol</li></ul></li><li>yes<ul><li>base posture — feet should be shoulder width apart<ul><li>that’s the first impression</li></ul></li><li>movement<ul><li>give</li><li>show</li><li>chop — strong msg</li></ul></li><li>palms up has better impact! comparing with palm down and pointing</li></ul></li></ul></li><li>Where to stand<ul><li>face your audience</li><li>move around in the center box</li><li>get rid of potential distraction<ul><li>like window, by nature we are attracted by moving thing, will break the concentration</li></ul></li></ul></li></ul><h1 id="2-Audience"><a href="#2-Audience" class="headerlink" title="2. Audience"></a>2. Audience</h1><ul><li>Speaker need to understand what audience is doing , make sure we are all in the journey</li><li>How to engage with audience more<ul><li>gesture</li><li>notice<ul><li>how your audience sitting</li><li>eye contact</li></ul></li><li>surprise<ul><li>cold call, lol</li></ul></li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.youtube.com/watch?v=cFLjudWTuGQ&ab_channel=StanfordGraduateSchoolofBusiness">https://www.youtube.com/watch?v=cFLjudWTuGQ&amp;ab_channel=StanfordGraduateSchoolofBusiness</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;Stand Strong&lt;/li&gt;
-&lt;li&gt;Gesture Effectively&lt;/li&gt;
-&lt;li&gt;Mind Your Audience&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;1-Posture&quot;&gt;&lt;a href=&quot;#1-Posture&quot; class=&quot;hea
-      
-    
-    </summary>
-    
-    
-      <category term="Notes" scheme="https://www.llchen60.com/categories/Notes/"/>
-    
     
   </entry>
   

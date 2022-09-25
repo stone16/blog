@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>策略模式</title>
+      <link href="/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
+      <url>/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Strategy-Pattern-Overview"><a href="#1-Strategy-Pattern-Overview" class="headerlink" title="1. Strategy Pattern Overview"></a>1. Strategy Pattern Overview</h1><p>Using composition rather than inheritance </p><p>Strategy patten define a set of algorithms, encapsulate each of them and make then exchangable. And we could switch them at run time , decouple the algorithm with the place they are used </p><h1 id="2-Why-use-strategy-pattern"><a href="#2-Why-use-strategy-pattern" class="headerlink" title="2. Why use strategy pattern?"></a>2. Why use strategy pattern?</h1><ul><li>when we have a set of classes, they belong to same object, they should could a certain types of actions, but the detail would vary. Then we need a way to regulate they have such type of behaviors, and also differ them in a maintainable manner</li><li>literaly composition over inheritance</li><li>其实主要还是在考虑代码的可扩展性，多考虑下如何应对可能的改动，Design Pattern整个就是为了应对改动来服务的，并不太需要神化，毕竟只是对于常见的一些应用场景的抽象，想要达到的目的也就是抽象出来，以后做的时候会在范式下，更专注在业务逻辑上的问题</li></ul><h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p><img src="https://s2.loli.net/2022/09/25/hvGXQ3TWYSH5gnd.png" alt="Class Diagram"></p><h2 id="3-1-Interface"><a href="#3-1-Interface" class="headerlink" title="3.1 Interface"></a>3.1 Interface</h2><pre><code class="java">public interface IFlyBehavior &#123;    void fly();&#125;public interface IQuackBehavior &#123;    void quack();&#125;</code></pre><h2 id="3-2-Implementation"><a href="#3-2-Implementation" class="headerlink" title="3.2 Implementation"></a>3.2 Implementation</h2><pre><code class="java">public class Duck &#123;    IFlyBehavior flyBehavior;    IQuackBehavior quackBehavior;    public void fly() &#123;        flyBehavior.fly();    &#125;    public void quack() &#123;        quackBehavior.quack();    &#125;&#125;public class JetFly implements IFlyBehavior &#123;    @Override    public void fly() &#123;        System.out.println(&quot;Jet Fly&quot;);    &#125;&#125;public class SimplyFly implements IFlyBehavior &#123;    @Override    public void fly() &#123;        System.out.println(&quot;Simple flying&quot;);    &#125;&#125;public class LoudQuack implements IQuackBehavior &#123;    @Override    public void quack() &#123;        System.out.println(&quot;Make noise!&quot;);    &#125;&#125;public class NoQuack implements IQuackBehavior &#123;    @Override    public void quack() &#123;        // do nothing, as no quack exist    &#125;&#125;public class ToyDuck extends Duck &#123;    public ToyDuck(IFlyBehavior flyBehavior, IQuackBehavior quackBehavior) &#123;        this.flyBehavior = flyBehavior;        this.quackBehavior = quackBehavior;    &#125;&#125;</code></pre><h2 id="3-3-Test"><a href="#3-3-Test" class="headerlink" title="3.3 Test"></a>3.3 Test</h2><pre><code class="java">@GetMapping(&quot;/strategy&quot;)    public String strategy() &#123;        Duck testDuck = new ToyDuck(new JetFly(), new LoudQuack());        testDuck.fly();        testDuck.quack();        return &quot;check the log&quot;;    &#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Design Pattern </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>装饰者模式</title>
       <link href="/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
       <url>/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
