@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.llchen60.com/Singleton-Pattern/</loc>
+    
+    <lastmod>2022-12-07T11:19:07.324Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.llchen60.com/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2022-12-05T13:26:47.688Z</lastmod>

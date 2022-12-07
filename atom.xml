@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.llchen60.com/"/>
-  <updated>2022-12-05T13:26:47.688Z</updated>
+  <updated>2022-12-07T11:19:07.324Z</updated>
   <id>https://www.llchen60.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Singleton Pattern</title>
+    <link href="https://www.llchen60.com/Singleton-Pattern/"/>
+    <id>https://www.llchen60.com/Singleton-Pattern/</id>
+    <published>2022-12-07T11:18:26.000Z</published>
+    <updated>2022-12-07T11:19:07.324Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-why-we-need"><a href="#1-why-we-need" class="headerlink" title="1. why we need"></a>1. why we need</h1><ul><li>Registry Setting</li><li>Thread Pool / Connection Pool</li></ul><blockquote><p>The singleton Pattern ensures a class has only one instance, and provides a global point of access to it.</p></blockquote><ul><li>let a class to manage a single instance of itself<ul><li>also prevent other classes from creating a new instance on its own</li></ul></li><li>provide a global access point to the instance</li></ul><h1 id="2-Implementation"><a href="#2-Implementation" class="headerlink" title="2. Implementation"></a>2. Implementation</h1><h2 id="2-1-1st-Iteration"><a href="#2-1-1st-Iteration" class="headerlink" title="2.1 1st Iteration"></a>2.1 1st Iteration</h2><pre><code class="java">public class Singleton &#123;    private static Singleton uniqueInstance;    private Singleton() &#123;&#125;    public static Singleton getInstance() &#123;        if (uniqueInstance == null) &#123;            uniqueInstance = new Singleton();        &#125;        return uniqueInstance;    &#125;&#125;</code></pre><ul><li>Issue when multi threading</li></ul><p>Thread A </p><p>if (uniqueInstance == null) { // return true </p><p>new Singleton() </p><p>Thread B </p><p>if (uniqueInstance == null) { // return true </p><p>new Singleton() </p><ul><li>Under such case, we’ll create two new instances</li></ul><h2 id="2-2-Implementation-with-multi-threading-support"><a href="#2-2-Implementation-with-multi-threading-support" class="headerlink" title="2.2 Implementation with multi-threading support"></a>2.2 Implementation with multi-threading support</h2><pre><code class="java">public class Singleton &#123;    private static Singleton uniqueInstance;    private Singleton() &#123;&#125;    public static synchronized Singleton getInstance() &#123;        if (uniqueInstance == null) &#123;            uniqueInstance = new Singleton();        &#125;        return uniqueInstance;    &#125;&#125;</code></pre><ul><li>synchronized<ul><li>force every thread to wait its turn before it can enter the method</li><li>no two threads may enter the method at the same time</li></ul></li><li>Issue<ul><li>we only need synchronized when there is no instance, once there are, no need to use synchronized, it’s just overhead</li></ul></li></ul><h2 id="2-3-Implementation-with-multi-threading-support-—-Eagerly-created-instance"><a href="#2-3-Implementation-with-multi-threading-support-—-Eagerly-created-instance" class="headerlink" title="2.3  Implementation with multi-threading support  — Eagerly created instance"></a>2.3  Implementation with multi-threading support  — Eagerly created instance</h2><pre><code class="java">public class Singleton &#123;    private static Singleton uniqueInstance = new Singleton();    private Singleton() &#123;&#125;    public static synchronized Singleton getInstance() &#123;        return uniqueInstance;    &#125;&#125;</code></pre><ul><li>We rely on the JVM to create the unique instance of the Singleton when the class is loaded</li><li>JVM guarantees the instance will be created before any thread accesses the static unique instance variable</li></ul><h2 id="2-4-Implementation-with-multi-threading-support-—-Double-Checked-Locking"><a href="#2-4-Implementation-with-multi-threading-support-—-Double-Checked-Locking" class="headerlink" title="2.4  Implementation with multi-threading support  — Double Checked Locking"></a>2.4  Implementation with multi-threading support  — Double Checked Locking</h2><pre><code class="java">public class Singleton &#123;    private volatile static Singleton uniqueInstance;    private Singleton() &#123;&#125;    public static synchronized Singleton getInstance() &#123;        if (uniqueInstance == null) &#123;            synchronized (Singleton.class) &#123;                if (uniqueInstance == null) &#123;                    uniqueInstance = new Singleton();                &#125;            &#125;        &#125;        return uniqueInstance;        &#125;&#125;</code></pre><ul><li>volatile<ul><li>ensure multiple threads handle the unique instance variable correctly when it is initialized to the singleton instance</li></ul></li></ul><h2 id="2-5-Implementation-with-multi-threading-support-—-Using-Enum"><a href="#2-5-Implementation-with-multi-threading-support-—-Using-Enum" class="headerlink" title="2.5 Implementation with multi-threading support — Using Enum"></a>2.5 Implementation with multi-threading support — Using Enum</h2><pre><code class="java">public enum Singleton &#123;    UNIQUE_INSTANCE;&#125;public class SingletonClient &#123;    Singleton singleton = Singleton.UNIQUE_INSTANCE;&#125;</code></pre><p>ClassLoader </p><ul><li>Responsible for loading java classes dynamically to the JVM during runtime</li><li>Responsible for loading classes into memory</li></ul><p>type </p><ul><li><p>application class loader</p><ul><li><strong>An application or system class loader loads our own files in the classpath.</strong></li></ul></li><li><p>extension class loader</p><ul><li><strong>Extension class loaders load classes that are an extension of the standard core Java classes.</strong></li></ul></li><li><p>bootstrap class loader</p><ul><li><strong>A bootstrap or primordial class loader is the parent of all the others.</strong></li><li><strong>This is because the bootstrap class loader is written in native code, not Java, so it doesn’t show up as a Java class</strong></li></ul></li><li><p>how does it work</p><ul><li>JVM request a class</li><li>class loader try to locate the class and load the definition into the runtime using <strong>fully qualified class name</strong></li></ul></li><li><p>delegation model</p><ul><li>delegate the search of the class/ resource to the parent class loader</li></ul></li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.baeldung.com/java-classloaders">https://www.baeldung.com/java-classloaders</a> </li><li><a href="https://learning.oreilly.com/library/view/head-first-design/9781492077992/ch05.html">https://learning.oreilly.com/library/view/head-first-design/9781492077992/ch05.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-why-we-need&quot;&gt;&lt;a href=&quot;#1-why-we-need&quot; class=&quot;headerlink&quot; title=&quot;1. why we need&quot;&gt;&lt;/a&gt;1. why we need&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Registry Setting&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="Design Pattern" scheme="https://www.llchen60.com/categories/Design-Pattern/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>工厂模式</title>
@@ -525,28 +550,6 @@
     
     
       <category term="Cassandra" scheme="https://www.llchen60.com/tags/Cassandra/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Logical Fallacies</title>
-    <link href="https://www.llchen60.com/Logical-Fallacies/"/>
-    <id>https://www.llchen60.com/Logical-Fallacies/</id>
-    <published>2021-09-12T01:23:39.000Z</published>
-    <updated>2021-09-12T01:50:35.560Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Logical-Fallacies"><a href="#Logical-Fallacies" class="headerlink" title="Logical Fallacies"></a>Logical Fallacies</h1><h2 id="Overconfidence"><a href="#Overconfidence" class="headerlink" title="Overconfidence"></a>Overconfidence</h2><ul><li>Overconfidence — wishful thinking bias<ul><li>most people think they are above avg</li><li>overestimate possibilities that they want to happen</li><li><strong>this could explain the trade in financial market</strong></li><li>overconfidence in friends and leaders</li></ul></li></ul><h2 id="Cognitive-Dissonance"><a href="#Cognitive-Dissonance" class="headerlink" title="Cognitive Dissonance"></a>Cognitive Dissonance</h2><ul><li>Cognitive Dissonance  认知失调<ul><li>this concept used to describe the mental discomfort that results from holding two conflicting beliefs, values or attitudes</li><li>People tend to seek consistency in their attitudes and perceptions, so this conflict causes feelings of unease or discomfort</li><li>This inconsistency between <strong>what people believe and how they behave</strong> motivates people to <strong>engage in actions</strong> that will help minimize feelings of discomfort</li><li>when we made decision, most people will still look for info about it, to self prove hisself right… in a lot different aspects… to make themselves happy, and to prove they are make right decision</li><li>disposition effect — gonna avoid that</li><li>what’s the causes for that?<ul><li>Forced Compliance<ul><li>Engaging in behaviors that are opposed to your own beliefs due to external expectations, often for work, school, or a social situation</li></ul></li><li>New Information</li><li>Decisions<ul><li>People make decisions both large and small, on a daily basis</li><li>When faced with two similar choices, people often are left with feelings of dissonance because both options are equally appealing</li><li>Once they make decisions, people need to find a way to <strong>reduce feelings of discomfort</strong></li><li>Accomplish by justifying why their choice was the best option so that they can believe they made the right decision</li></ul></li></ul></li></ul></li></ul><h2 id="Mental-Compartments"><a href="#Mental-Compartments" class="headerlink" title="Mental Compartments"></a>Mental Compartments</h2><ul><li>Mental compartments<ul><li>people don’t look at whole portfolio, in fact, people has two or more portfolio<ul><li>usually they have a safe part and a risky part</li></ul></li></ul></li></ul><h2 id="Attention-Anomalies"><a href="#Attention-Anomalies" class="headerlink" title="Attention Anomalies"></a>Attention Anomalies</h2><ul><li>Attention Anomalies<ul><li>We cannot pay attention to anything</li><li>Attention is fundamental aspect of human intelligence and its limits</li><li>Social Basis for attention<ul><li>We incline to pay more attention to what other s pay attention to</li></ul></li></ul></li></ul><h2 id="Anchoring"><a href="#Anchoring" class="headerlink" title="Anchoring"></a>Anchoring</h2><ul><li>Anchoring<ul><li>A tendency in ambiguous situations to allow one’s decisions to be affected by some anchor</li><li>Our subconscious will do anchoring for us, lol</li><li>subjects unaware of their own anchoring behavior</li><li>stock prices anchored to past values, or to other stock in same market</li></ul></li></ul><h2 id="Representativeness-Heuristic"><a href="#Representativeness-Heuristic" class="headerlink" title="Representativeness Heuristic"></a>Representativeness Heuristic</h2><ul><li>Representativeness Heuristic<ul><li>People judge by similarity to familiar types, without regard to <strong>base rate probabilities</strong><ul><li>For example, we describe a person as artist, and skeptical, then what’s the highest possible occupation of him/ her?<ul><li>two choice: banker, and sculptress</li><li>should be banker, cause there are so many more bank tellers than sculptresses</li></ul></li></ul></li><li>Tendency to see patterns in what is really random walk</li><li>Stock price manipulators try to create patterns to fool investors</li></ul></li></ul><h2 id="Disjunction-Effect"><a href="#Disjunction-Effect" class="headerlink" title="Disjunction Effect"></a>Disjunction Effect</h2><ul><li>inability to make decisions in advance in anticipation of future information</li></ul><h2 id="Magical-Thinking-amp-Quasi-Magical-Thinking"><a href="#Magical-Thinking-amp-Quasi-Magical-Thinking" class="headerlink" title="Magical Thinking  &amp; Quasi Magical Thinking"></a>Magical Thinking  &amp; Quasi Magical Thinking</h2><ul><li>Some coincidence lead you to build superstitious, but there are actually no karma (cause and effect)</li><li>Belief that unrelated events are causally connected despite the absence of any plausible causal link between them, particularly as a result of supernatural effects.</li><li>E.G<ul><li>For voting, though our vote actually has basically 0 possibility to influence president election, but a lot people do it</li><li>For lottery, we somehow put more money if we select the number</li></ul></li></ul><h2 id="Personality-Disorders"><a href="#Personality-Disorders" class="headerlink" title="Personality Disorders"></a>Personality Disorders</h2><ul><li>culture and social contagion — collective memory<ul><li>same effect, same memory, then similar decisions</li></ul></li><li>Antisocial Personality Disorder</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Logical-Fallacies&quot;&gt;&lt;a href=&quot;#Logical-Fallacies&quot; class=&quot;headerlink&quot; title=&quot;Logical Fallacies&quot;&gt;&lt;/a&gt;Logical Fallacies&lt;/h1&gt;&lt;h2 id=&quot;Overc
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
