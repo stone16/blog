@@ -1,1 +1,1 @@
-https://www.llchen60.com/Singleton-Pattern/
+https://www.llchen60.com/CDK-App-with-Github-Action/
