@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>How to do bazel java_export with desired change only</title>
+      <link href="/How-to-do-bazel-java-export-with-desired-change-only/"/>
+      <url>/How-to-do-bazel-java-export-with-desired-change-only/</url>
+      
+        <content type="html"><![CDATA[<h1 id="How-to-to-bazel-java-export-with-desired-change-only"><a href="#How-to-to-bazel-java-export-with-desired-change-only" class="headerlink" title="How to to bazel java_export with desired change only"></a>How to to bazel java_export with desired change only</h1><p>Faced one interesting issue when using bazel, the background is we have multiple repository to host code — SOA. For sharing, then we need to export the library and publish to company wide artifactory. </p><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>We use bazel mainly because we have code on different languages, like RoR, Java, Kotlin, Scala, Clojure, etc. Bazel makes it easier to manage it cross different language in a monorepo. </p><p>For the export library purpose, we heavily rely on the <a href="https://github.com/bazelbuild/rules_jvm_external/blob/master/private/rules/java_export.bzl">rules_jvm_external</a> , which has built-in java_export commend we could leverage on directly. </p><pre><code class="jsx">def java_export(        name,        maven_coordinates,        deploy_env = [],        excluded_workspaces = &#123;name: None for name in DEFAULT_EXCLUDED_WORKSPACES&#125;,        pom_template = None,        visibility = None,        tags = [],        testonly = None,        **kwargs)</code></pre><p>Basically we could follow the pattern here to define our srcs, deps, maven_coordinates, and then bazel could help us export it and publish to selected artifactory. </p><h1 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h1><p>On the other end, we have a service built on kotlin with gradle. When we implement the library, we found inside the jar, besides the code in the export places, it also contain directory from <code>com.google.protobuf.*</code> , and unfortunately the protobuf package version in the lib mismatch with what we use in our own service, as the version in the lib is lower, it breaks the compilation of our code base, especially when we have couple extension functions in protobuf to enrich the conversion, whereas the old protobuf version does not support. </p><p>So basically we need to find a way to not include undesired directory inside the jar. In our case, remove those from <code>com.google.protobuf.*</code> </p><h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p><a href="https://bazel.build/reference/be/java#java_library">https://bazel.build/reference/be/java#java_library</a> </p><p>Add those into runtime_deps, then the export jar would not contain the directory from the pkg. It solves our problem perfect.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> BackEnd </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bazel </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CDK App with Github Action</title>
       <link href="/CDK-App-with-Github-Action/"/>
       <url>/CDK-App-with-Github-Action/</url>
