@@ -32,6 +32,7 @@ def java_export(
 
 Basically we could follow the pattern here to define our srcs, deps, maven_coordinates, and then bazel could help us export it and publish to selected artifactory. 
 
+
 # Issue
 
 On the other end, we have a service built on kotlin with gradle. When we implement the library, we found inside the jar, besides the code in the export places, it also contain directory from `com.google.protobuf.*` , and unfortunately the protobuf package version in the lib mismatch with what we use in our own service, as the version in the lib is lower, it breaks the compilation of our code base, especially when we have couple extension functions in protobuf to enrich the conversion, whereas the old protobuf version does not support. 
