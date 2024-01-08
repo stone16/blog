@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>时间管理</title>
+      <link href="/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/"/>
+      <url>/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>看了《时间贫困》这本书，发现对我来说很有用，确实有很多目标，很多想法，但是无法把我的年度目标，里程碑和我每天的日程统一起来，也不知道我每周的时间安排能否真的让我按时完成我的任务。或者说，我并不清楚我每天时间都花在了哪里，这样子就会导致我对于自己的以及对于自己的时间的掌控感很弱很弱。</p><h1 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h1><p>解决的行为们：</p><ul><li>创建了自己的notion模板，制定自己的年度目标，里程碑，和日记结合在一起<ul><li>日记里面包含接下来一个月的milestones， 年度的target</li><li>每个任务都和milestone结合在一起</li><li>建立每天的反思的时间</li></ul></li><li>利用google calendar<ul><li>把每天的时间划分到不同的方面，比如<ul><li>工作</li><li>生活</li><li>技能学习</li><li>读书</li><li>运动与健康</li><li>etc</li></ul></li><li>写了一个脚本来统计我的时间都花在了哪些领域，然后每周去看一看，做一些针对性的调整<ul><li><a href="https://github.com/stone16/google-calendar-analysis">https://github.com/stone16/google-calendar-analysis</a></li><li>比如这样子的</li></ul></li></ul></li></ul><p><img src="https://s2.loli.net/2024/01/08/axfZ5IRyHsLM6SE.jpg" alt="time_comsumption.jpg"></p><h1 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h1><p>时间确实是海绵，总是能调整开的。只要知道时间花在了什么方面，总是有一些可以调整的空间。无非是优先级的改变，到底在你当下的生活当中，什么更为重要呢~ </p><p>加油</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Add @MeterTag support with @Timed</title>
       <link href="/Add-MeterTag-support-with-Timed/"/>
       <url>/Add-MeterTag-support-with-Timed/</url>
